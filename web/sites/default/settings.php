@@ -295,7 +295,7 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+$settings['hash_salt'] = 'orLCv6PSOF-F2oPWvyRHgzkJDvN90C5IVNt15g4od8yTtD7N-6Py_5KOx7TRxO7r0DmR6-WnYg';
 
 /**
  * Deployment identifier.
@@ -759,7 +759,20 @@ $settings['file_scan_ignore_directories'] = [
  *
  * Keep this code block at the end of this file to take full effect.
  */
-#
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
+
+$databases['default']['default'] = array (
+  'database' => 'commerce_2_demo',
+  'username' => 'commerce_2_demo',
+  'password' => 'GjioR2SJCdmXoJDdN0cF',
+  'prefix' => '',
+  'host' => 'localhost',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+$settings['install_profile'] = 'drupalorange_profile';
+$config_directories['sync'] = 'sites/default/files/config_OvgLypdQ-Nvetzr8zsdB2Wuo81Woe0F5NIC09rBuPKDavme_3cSF6yQYeREEx9QfKfBf_QZS-Q/sync';
+
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}

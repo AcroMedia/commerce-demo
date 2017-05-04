@@ -1,0 +1,39 @@
+language: php
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+
+sudo: false
+
+env:
+  global:
+    - SIMPLETEST_DB=sqlite://tmp/site.sqlite
+    - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
+  matrix:
+    - RELEASE=stable COMPOSER_CHANNEL=stable
+    - RELEASE=dev COMPOSER_CHANNEL=stable
+    - RELEASE=stable COMPOSER_CHANNEL=snapshot
+
+before_install:
+  - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - phpenv config-rm xdebug.ini
+  - composer --verbose self-update --$COMPOSER_CHANNEL
+  - composer --version
+
+install:
+  - composer --verbose install
+
+script:
+  - if [[ $RELEASE = dev ]]; then composer --verbose require --no-update drupal/core:8.2.x-dev; fi;
+  - if [[ $RELEASE = dev ]]; then composer --verbose update; fi;
+  - cd $TRAVIS_BUILD_DIR/web
+  - ./../bin/drupal --version
+  - ./../bin/drupal init
+  - ./../bin/drupal site:install --db-type=sqlite --db-file=sites/default/files/.ht.sqlite --no-interaction
+  - ./../bin/drupal server 127.0.0.1:8080 &
+  - sleep 3
+  # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
+  # Skip core tests altogether - ./../bin/phpunit -c core --testsuite unit --exclude-group Composer,DependencyInjection,PageCache
+  # Exit if the install profile didn't default.
+  - ./../bin/drupal site:status || grep -q "DrupalOrange" || exit 1;

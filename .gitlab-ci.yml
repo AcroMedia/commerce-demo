@@ -27,8 +27,7 @@ custom_tests_d8:
   stage: test
 
   services:
-  #- theasci/docker-mysql-tmpfs:latest
-  - mysql:latest
+  - theasci/docker-mysql-tmpfs:latest
 
   script:
     #apache should be running by default, and does on my local, but gitlabci
@@ -48,13 +47,9 @@ custom_tests_d8:
 
     #install the drupal site provided by the docker image so we can use it for testing
     - cd web
+    - drush site-install standard --db-url='mysql://testrunner:@theasci__docker-mysql-tmpfs/drupal' -y
 
-    #- drush site-install standard --db-url='mysql://testrunner:@theasci__docker-mysql-tmpfs/drupal' -y
-    #- export SIMPLETEST_DB='mysql://testrunner:@theasci__docker-mysql-tmpfs/drupal'
-
-    - drush site-install standard --db-url='mysql://root:mysql_strong_password@mysql/drupal' -y
-    - export SIMPLETEST_DB='mysql://root:mysql_strong_password@mysql/drupal'
-
+    - export SIMPLETEST_DB='mysql://testrunner:@theasci__docker-mysql-tmpfs/drupal'
     - export SIMPLETEST_BASE_URL=http://localhost
     - export BROWSERTEST_OUTPUT_DIRECTORY=/tmp
     #- ../vendor/phpunit/phpunit/phpunit -c core/phpunit.xml.dist --group SITENAME

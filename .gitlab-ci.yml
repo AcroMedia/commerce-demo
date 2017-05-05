@@ -72,6 +72,8 @@ build:
   script:
     - composer install --no-interaction --no-dev
     - cd web/themes/custom/commerce_2_demo
+    - echo $PWD
+    - ls -laF ./
     - npm install
     - gulp sass
 

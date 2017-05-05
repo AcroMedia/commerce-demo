@@ -5,7 +5,8 @@ image: smmccabe/drupal:latest
 #image: smmccabe/drupal:php5.6
 
 variables:
-  MYSQL_SQL_TO_RUN: 'GRANT ALL ON \`%_test\`.* TO testrunner@"%" IDENTIFIED BY "testrunner"; create database drupal;'
+  MYSQL_DATABASE: drupal
+  MYSQL_SQL_TO_RUN: 'GRANT ALL ON *.* TO "testrunner"@"%";'
   MYSQLD_RAM_SIZE: '1024'
 
 # jobs do not need to be present for all stages, if a stage has no jobs it will just be ignored

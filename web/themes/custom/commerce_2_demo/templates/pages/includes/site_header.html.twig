@@ -37,59 +37,106 @@
 {# / Mobile overlays. #}
 
 <header class="site-header">
+  {# Header top bar. #}
+  <div class="site-header__top-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          {% if page.header_promo %}
+            {# Header promo area. #}
+            <div class="site-header__promo">
+              {{ page.header_promo }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+          {% if page.header_nav %}
+            {# Header navigation. #}
+            <div class="site-header-nav">
+              {{ page.header_nav }}
+            </div>
+          {% endif %}
+
+          {% if page.language_select %}
+            {# Language select. #}
+            <div class="site-header__language-select">
+              {{ page.language_select }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# Header main. #}
   <div class="site-header__top container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-sm-12 col-md-6">
+        {# Logo. #}
         <div class="site-header__logo">
           <a href="{{ front_page }}">
             <img src="{{ site_logo_url }}" alt="{{ site_name ? site_name }}" />
           </a>
         </div>
+      </div>
 
-        {# Mobile navigation. #}
-        {% if page.mobile_nav %}
-          <div class="mobile-control-nav visible-xs-block">
-            <ul class="menu clearfix">
-              <li class="menu__item menu__item--search">
-                <a href="#" class="menu__link" title="{{ 'Search'|t }}">
-                  <span aria-hidden="true" class="fa fa-search"></span>
-                </a>
-              </li>
-              <li class="menu__item menu__item--menu">
-                <a href="#" class="menu__link" title="{{ 'Menu'|t }}">
-                  <span aria-hidden="true" class="fa fa-bars"></span>
-                </a>
-              </li>
-            </ul>
+      <div class="col-sm-12 col-md-6">
+        <div class="row">
+          {# Contact info. #}
+          <div class="col-xs-6">
+            Contact info
           </div>
-        {% endif %}
-        {# / Mobile navigation. #}
 
-        {% if page.header_nav %}
-          <div class="site-header-nav hidden-xs">
-            {{ page.header_nav }}
+          {# Cart. #}
+          <div class="col-xs-6">
+            Cart
           </div>
-        {% endif %}
+        </div>
 
-        {% if page.site_search %}
-          <div class="site-header__search hidden-xs">
-            {{ page.site_search }}
+        <div class="row">
+          <div class="col-xs-12">
+            {# Mobile navigation. #}
+            {% if page.mobile_nav %}
+              <div class="mobile-control-nav visible-xs-block">
+                <ul class="menu clearfix">
+                  <li class="menu__item menu__item--search">
+                    <a href="#" class="menu__link" title="{{ 'Search'|t }}">
+                      <span aria-hidden="true" class="fa fa-search"></span>
+                    </a>
+                  </li>
+                  <li class="menu__item menu__item--menu">
+                    <a href="#" class="menu__link" title="{{ 'Menu'|t }}">
+                      <span aria-hidden="true" class="fa fa-bars"></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            {% endif %}
+            {# / Mobile navigation. #}
+
+            {# Site search. #}
+            {% if page.site_search %}
+              <div class="site-header__search hidden-xs">
+                {{ page.site_search }}
+              </div>
+            {% endif %}
           </div>
-        {% endif %}
+        </div>
       </div>
     </div>
   </div>
 
+  {# Header bottom. #}
   <div class="site-header__bottom">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           {% if page.primary_nav %}
-            <!-- Primary navigation -->
+           {# Primary navigation. #}
             <div class="primary-nav hidden-xs">
               {{ page.primary_nav }}
             </div>
-            <!-- / Primary navigation. -->
           {% endif %}
         </div>
       </div>

@@ -1,27 +1,90 @@
+{# Set the path for the footer logo icon. #}
+{% set site_logo_icon_url =  base_path ~ directory ~ '/gfx/logo-icon.png' %}
+
 <footer class="site-footer">
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        {% if page.social_nav %}
-          <!-- Social media navigation. -->
-          <div class="social-media-nav">
-            {{ page.social_nav }}
+    {# Footer top. #}
+    <div class="site-footer__top">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          {# Logo. #}
+          <div class="site-footer__logo">
+            <a href="{{ front_page }}">
+              <img src="{{ site_logo_icon_url }}" alt="{{ site_name ? site_name }}" />
+            </a>
           </div>
-          <!-- / Social media navigation. -->
-        {% endif %}
 
-        {% if page.footer_nav %}
-          <!-- Footer navigation. -->
-          <div class="footer-nav">
-            {{ page.footer_nav }}
+          {# Contact info. #}
+          {% if page.footer_top %}
+            <div class="site-footer__contact">
+              {{ page.footer_top }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+          {# Social media navigation. #}
+          {% if page.social_nav %}
+            <div class="social-media-nav">
+              {{ page.social_nav }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {# Footer main. #}
+    <div class="site-footer__main">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3">
+          {# Store address. #}
+          {% if page.footer %}
+            <div class="">
+              {{ page.footer }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="hidden-xs col-sm-9">
+          {% if page.primary_nav %}
+            {# Primary navigation. #}
+            <div class="primary-nav">
+              {{ page.primary_nav }}
+            </div>
+          {% endif %}
+
+          {% if page.header_nav %}
+            {# Header navigation in footer. #}
+            <div class="site-header-nav">
+              {{ page.header_nav }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {# Footer bottom. #}
+    <div class="site-footer__bottom">
+      <div class="row">
+        <div class="col-xs-12">
+          {# Footer navigation. #}
+          {% if page.footer_nav %}
+            <div class="footer-nav">
+              {{ page.footer_nav }}
+            </div>
+          {% endif %}
+
+          {# Copyright. #}
+          <div class="site-footer__copyright">
+            {{ 'Copyright &copy; @year'|t({'@year': 'now'|date('Y')}) }}
+            <a href="{{ front_page }}">{{ 'Urban Hipster Inc.'|t }}</a>.
+            {{ 'All rights reserved.'|t }}
           </div>
-          <!-- / Footer navigation. -->
-        {% endif %}
 
-        <div class="site-footer__copyright">
-          {{ 'Copyright &copy; @year'|t({'@year': 'now'|date('Y')}) }}
-          <a href="{{ front_page }}">{{ 'Acro Media Inc'|t }}</a>.
-          {{ 'All rights reserved.'|t }}
+          {# Acro Media Inc. #}
+          <div class="site-footer__acro">
+            {{ 'Website design by'|t }} <a href="https://www.acromedia.com" target="_blank">{{ 'Acro Media Inc.'|t }}</a>
+          </div>
         </div>
       </div>
     </div>

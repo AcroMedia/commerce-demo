@@ -13,7 +13,14 @@ ckeditor_stylesheets:
   - css/style.css
 
 regions:
-  header: 'Header'
+  header_promo: 'Header Top - Promo Message'
+  header_nav: 'Header Top - Navigation'
+  language_select: 'Header Top - Language Select'
+  header: 'Header Main - Left'
+  header_right: 'Header Main - Right'
+  site_search: 'Site Search'
+  primary_nav: 'Primary Navigation'
+  mobile_nav: 'Mobile Navigation'
   carousel: 'Carousel'
   highlighted: 'Highlighted'
   above_content: 'Above Content'
@@ -21,11 +28,7 @@ regions:
   below_content: 'Below Content'
   page_sidebar: 'Page - Sidebar'
   blog_sidebar: 'Blog - Sidebar'
-  site_search: 'Site Search'
-  footer: 'Footer'
-  # Navigation.
-  header_nav: 'Header Navigation'
-  primary_nav: 'Primary Navigation'
-  mobile_nav: 'Mobile Navigation'
-  footer_nav: 'Footer Navigation'
-  social_nav: 'Social Media Navigation'
+  footer_top: 'Footer Top'
+  social_nav: 'Footer Top - Social Media Navigation'
+  footer: 'Footer Main'
+  footer_nav: 'Footer Bottom - Navigation'

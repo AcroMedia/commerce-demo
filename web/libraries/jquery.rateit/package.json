@@ -1,0 +1,33 @@
+{
+  "name": "jquery.rateit",
+  "version": "1.1.1",
+  "description": "Rating plugin for jQuery.",
+  "main": "scripts/jquery.rateit.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gjunge/rateit.js.git"
+  },
+  "keywords": [
+    "rateit",
+    "npm"
+  ],
+  "author": "Gidon Junge (https://twitter.com/gjunge)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gjunge/rateit.js/issues"
+  },
+  "homepage": "https://github.com/gjunge/rateit.js#readme",
+  "dependencies": {
+    "jquery": ">=1.6"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-plumber": "~1.1.0",
+    "gulp-uglify": "~2.0.0",
+    "gulp-rename": "~1.2.2",
+    "gulp-sourcemaps": "~2.1.1"
+  }
+}

@@ -1,0 +1,23 @@
+.toggle-slide {
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  direction: ltr;
+  text-align: center;
+
+  div.disabled > & {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .toggle-on, .toggle-off, .toggle-blob {
+    float: left;
+  }
+
+  .toggle-blob {
+    position: relative;
+    z-index: 99;
+    cursor: hand;
+    cursor: grab;
+  }
+}

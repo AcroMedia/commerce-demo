@@ -64,9 +64,13 @@ build:
   # this tells the build server to save these files between jobs, this keeps them to be deployed
   artifacts:
     paths:
+      - bin
+      - vendor
+      - web
       - web/themes/custom/commerce_2_demo/css
 
   script:
+    - composer install --no-interaction --no-dev
     - cd web/themes/custom/commerce_2_demo
     - npm install
     - gulp sass

@@ -27,7 +27,8 @@ custom_tests_d8:
   stage: test
 
   services:
-  - theasci/docker-mysql-tmpfs:latest
+  #- theasci/docker-mysql-tmpfs:latest
+  - mysql:latest
 
   script:
     #apache should be running by default, and does on my local, but gitlabci
@@ -41,7 +42,7 @@ custom_tests_d8:
 
     # if you have issues with rate limiting, you'll want to setup a github key variable and uncomment the config line below
     # https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens
-    - composer config -g github-oauth.github.com $DEPLOY_GITHUB
+    #- composer config -g github-oauth.github.com $DEPLOY_GITHUB
 
     - composer install
 

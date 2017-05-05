@@ -17,6 +17,7 @@ stages:
 
 code_standards:
   stage: test
+  when: manual
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
@@ -26,6 +27,7 @@ code_standards:
 #DRUPAL 8
 custom_tests_d8:
   stage: test
+  when: manual
 
   services:
   - theasci/docker-mysql-tmpfs:latest

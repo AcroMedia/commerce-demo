@@ -19,11 +19,10 @@ code_standards:
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md wwwroot/sites/all/modules/SITENAME/
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md wwwroot/sites/all/themes/SITENAME/
+    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md web/modules/custom
+    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md web/themes/custom
     
 #DRUPAL 8
-
 custom_tests_d8:
   stage: test
   
@@ -53,7 +52,8 @@ custom_tests_d8:
     - export SIMPLETEST_DB='mysql://testrunner:@theasci__docker-mysql-tmpfs/drupal'
     - export SIMPLETEST_BASE_URL=http://localhost
     - export BROWSERTEST_OUTPUT_DIRECTORY=/tmp
-    - ../vendor/phpunit/phpunit/phpunit -c core/phpunit.xml.dist --group SITENAME
+    #- ../vendor/phpunit/phpunit/phpunit -c core/phpunit.xml.dist --group SITENAME
+    - echo 'No custom unit tests currently, edit config if they are added'
 
 # for building SASS files, remove if you don't use SASS
 # paths default to D8, but we do use SASS on a few D7 sites, so adjust accordingly

@@ -1,0 +1,98 @@
+{# Set the path for the site logo. #}
+{% set site_logo_url =  base_path ~ directory ~ '/gfx/logo.png' %}
+
+{# Mobile overlays. #}
+{% if page.mobile_nav %}
+  {% if page.site_search %}
+    <div class="mobile-search-overlay mobile-overlay">
+      <div class="mobile-search-overlay__content mobile-overlay__content">
+        <a href="#" class="mobile-search-overlay__close mobile-overlay__close">
+          <span class="fa fa-times" aria-hidden="true"></span>
+        </a>
+
+        <div class="mobile-search-form">
+          {{ page.site_search }}
+          <a class="mobile-search-form__submit" href="#" title="{{ 'Search'|t }}">
+            <span class="fa fa-search" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="mobile-nav-overlay mobile-overlay">
+    <div class="mobile-nav-overlay__content mobile-overlay__content clearfix">
+      <header class="mobile-nav-overlay__header clearfix" role="banner">
+        <a href="#" class="mobile-nav-overlay__close mobile-overlay__close">
+          <span class="fa fa-times" aria-hidden="true"></span>
+        </a>
+      </header>
+
+      <div class="mobile-nav">
+        {{ page.mobile_nav }}
+      </div>
+    </div>
+  </div>
+{% endif %}
+{# / Mobile overlays. #}
+
+<header class="site-header">
+  <div class="site-header__top container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="site-header__logo">
+          <a href="{{ front_page }}">
+            <img src="{{ site_logo_url }}" alt="{{ site_name ? site_name }}" />
+          </a>
+        </div>
+
+        {# Mobile navigation. #}
+        {% if page.mobile_nav %}
+          <div class="mobile-control-nav visible-xs-block">
+            <ul class="menu clearfix">
+              <li class="menu__item menu__item--search">
+                <a href="#" class="menu__link" title="{{ 'Search'|t }}">
+                  <span aria-hidden="true" class="fa fa-search"></span>
+                </a>
+              </li>
+              <li class="menu__item menu__item--menu">
+                <a href="#" class="menu__link" title="{{ 'Menu'|t }}">
+                  <span aria-hidden="true" class="fa fa-bars"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+        {# / Mobile navigation. #}
+
+        {% if page.header_nav %}
+          <div class="site-header-nav hidden-xs">
+            {{ page.header_nav }}
+          </div>
+        {% endif %}
+
+        {% if page.site_search %}
+          <div class="site-header__search hidden-xs">
+            {{ page.site_search }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="site-header__bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {% if page.primary_nav %}
+            <!-- Primary navigation -->
+            <div class="primary-nav hidden-xs">
+              {{ page.primary_nav }}
+            </div>
+            <!-- / Primary navigation. -->
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

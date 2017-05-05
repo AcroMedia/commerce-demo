@@ -1,0 +1,205 @@
+/**
+ * General.
+ */
+html,
+body {
+  color: $c-body;
+  background: $c-site-bg;
+  font-family: $f-body;
+}
+body {
+  font-size: 16px;
+  line-height: 1.5;
+  min-width: $screen-min;
+
+  &.cke_editable {
+    padding: 20px;
+    background: #fff;
+  }
+}
+
+/**
+ * Typography.
+ */
+h1 {
+  margin-top: 30px;
+  font-family: $f-primary;
+  font-size: 35px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 60px;
+  }
+}
+h2 {
+  margin-top: 30px;
+  font-family: $f-primary;
+  font-size: 28px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 35px;
+  }
+}
+h3 {
+  margin-top: 30px;
+  font-family: $f-primary;
+  font-size: 25px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 30px;
+  }
+}
+h4 {
+  margin-top: 25px;
+  font-family: $f-secondary;
+  font-size: 20px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 24px;
+  }
+}
+h5 {
+  margin-top: 25px;
+  font-family: $f-secondary;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+h6 {
+  margin-top: 25px;
+  font-family: $f-secondary;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/**
+ * Content.
+ */
+p {
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+blockquote {
+  padding: 0 20px;
+  border-left: 14px solid $c-primary;
+  font-family: $f-secondary;
+  font-style: italic;
+}
+
+// Border-radius styles.
+.btn,
+.form-control,
+.pager li > a,
+.pager li > span,
+.card,
+.modal-content {
+  border-radius: $border-radius;
+}
+.card .card__image img,
+.nav-tabs > li > a {
+  @include border-top-radius($border-radius);
+}
+
+/**
+ * Links.
+ */
+a {
+  color: $c-link;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: $c-link-hover;
+    text-decoration: none;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/**
+ * Buttons
+ */
+.btn {
+  font-family: $f-secondary;
+  font-size: 18px;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out;
+}
+
+// Primary button.
+.btn-primary {
+  background-color: $c-primary;
+  border-color: $c-primary;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:active:hover,
+.btn-primary:active:focus,
+.btn-primary:active.focus,
+.btn-primary.active:hover,
+.btn-primary.active:focus,
+.btn-primary.active.focus,
+.open > .btn-primary.dropdown-toggle:hover,
+.open > .btn-primary.dropdown-toggle:focus,
+.open > .btn-primary.dropdown-toggle.focus {
+  background-color: darken($c-primary, 10%);
+  border-color: darken($c-primary, 10%);
+}
+
+// Default button.
+.btn-default {
+  border-color: $gray-light;
+}
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus,
+.btn-default:active:hover,
+.btn-default:active:focus,
+.btn-default:active.focus,
+.btn-default.active:hover,
+.btn-default.active:focus,
+.btn-default.active.focus,
+.open > .btn-default.dropdown-toggle:hover,
+.open > .btn-default.dropdown-toggle:focus,
+.open > .btn-default.dropdown-toggle.focus {
+  background-color: $gray-lighter;
+  border-color: $gray-light;
+}
+
+// Link button.
+.btn-link {
+  color: $c-link;
+
+  &:hover,
+  &:focus {
+    color: $c-link-hover;
+  }
+}
+
+// Large button.
+.btn-lg,
+.btn-group-lg > .btn {
+  font-size: 24px;
+}
+
+/**
+* Site Structure.
+*/
+.site-wrapper {
+  position: relative;
+  clear: both;
+}
+
+/**
+ * Page header image.
+ */
+.page-header-image {
+  margin: 0 0 20px 0;
+  padding: 0;
+}

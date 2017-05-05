@@ -1,0 +1,18 @@
+global-styling:
+  version: 1.x
+  css:
+    theme:
+      css/style.css: { media: all }
+  js:
+    js/custom/script.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+maintenance_page:
+  version: 1.x
+  css:
+    theme:
+      css/maintenance-page.css: { media: all }
+  dependencies:
+    - system/maintenance

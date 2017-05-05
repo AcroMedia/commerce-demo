@@ -1,0 +1,72 @@
+/**
+ * Variables.
+ */
+
+/**
+ * Colors.
+ */
+$c-site-bg: #fff;
+
+$c-primary: #ff9900;
+$c-primary-hover: darken($c-primary, 10%);
+
+$c-secondary: #304772;
+$c-secondary-hover: darken($c-secondary, 10%);
+
+$c-tertiary: #7e8aa2;
+$c-tertiary-hover: darken($c-tertiary, 10%);
+
+$c-accent-1: #ccc;
+$c-accent-2: #ccc;
+$c-accent-3: #ccc;
+
+$c-body: #666;
+
+$c-link: #0594D8;
+$c-link-hover: darken($c-link, 10%);
+
+$gray-base:              #151515 !default;
+$gray-darker:            #353535;
+$gray-dark:              #545353;
+$gray:                   #807e7e;
+$gray-light:             #cccaca;
+$gray-lighter:           #f2f0f0;
+
+/**
+ * Fonts.
+ */
+$f-primary: Verdana, Geneva, sans-serif;
+$f-secondary: Georgia, Times, 'Times New Roman', serif;
+$f-body: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+$f-glyphicons: 'Glyphicons Halflings';
+
+/**
+ * Site styles.
+ */
+$border-radius: 4px;
+
+/**
+ * Responsive helpers.
+ */
+$screen-min: 320px;
+
+// Extra small screen / phone.
+$screen-xs: 480px !default;
+$screen-xs-min: $screen-xs !default;
+
+// Small screen / tablet.
+$screen-sm: 768px !default;
+$screen-sm-min: $screen-sm !default;
+
+// Medium screen / desktop.
+$screen-md: 992px !default;
+$screen-md-min: $screen-md !default;
+
+// Large screen / wide desktop.
+$screen-lg: 1200px !default;
+$screen-lg-min: $screen-lg !default;
+
+// So media queries don't overlap when required, provide a maximum.
+$screen-xs-max: ($screen-sm-min - 1) !default;
+$screen-sm-max: ($screen-md-min - 1) !default;
+$screen-md-max: ($screen-lg-min - 1) !default;

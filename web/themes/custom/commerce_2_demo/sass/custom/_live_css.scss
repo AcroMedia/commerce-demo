@@ -1,0 +1,81 @@
+/**
+ * Live CSS.
+ */
+.live-css-nav ul a:hover {
+  color: $c-link;
+  text-decoration: none;
+}
+.live-css-nav ul .active > a {
+  color: $c-link-hover;
+}
+.live-css-v-primary i {
+  background-color: $c-primary;
+
+  &:after {
+    background: $c-primary-hover;
+  }
+}
+.live-css-v-secondary i {
+  background-color: $c-secondary;
+
+  &:after {
+    background: $c-secondary-hover;
+  }
+}
+.live-css-v-tertiary i {
+  background-color: $c-tertiary;
+
+  &:after {
+    background: $c-tertiary-hover;
+  }
+}
+.live-css-v-accent-1 i {
+  background-color: $c-accent-1;
+}
+.live-css-v-accent-2 i {
+  background-color: $c-accent-2;
+}
+.live-css-v-accent-3 i {
+  background-color: $c-accent-3;
+}
+.live-css-v-body i {
+  background-color: $c-body;
+}
+.live-css-v-link i {
+  background-color: $c-link;
+
+  &:after {
+    background: $c-link-hover;
+  }
+}
+.live-css-v-gray-base i {
+  background-color: $gray-base;
+}
+.live-css-v-gray-darker i {
+  background-color: $gray-darker;
+}
+.live-css-v-gray-dark i {
+  background-color: $gray-dark;
+}
+.live-css-v-gray i {
+  background-color: $gray;
+}
+.live-css-v-gray-light i {
+  background-color: $gray-light;
+}
+.live-css-v-gray-lighter i {
+  background-color: $gray-lighter;
+}
+.live-css-v-f-primary {
+  font-family: $f-primary;
+}
+.live-css-v-f-secondary {
+  font-family: $f-secondary;
+}
+.live-css-v-f-body {
+  font-family: $f-body;
+}
+.live-css-v-o-border-radius i {
+  background: $gray-light;
+  border-radius: $border-radius;
+}

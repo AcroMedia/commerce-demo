@@ -1,0 +1,46 @@
+/**
+ * Site footer.
+ */
+.site-footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: #333;
+
+  @media (max-width: 767px) {
+    text-align: center;
+  }
+}
+
+/**
+ * Footer navigation.
+ */
+.footer-nav {
+  margin: 0 0 50px 0;
+}
+
+/**
+ * Footer copyright.
+ */
+.site-footer__copyright {
+  clear: both;
+  font-size: 10px;
+}
+
+/**
+ * Sticky footer.
+ */
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.site-header,
+.site-footer {
+  flex: none;
+}
+.site-content {
+  flex: 1 0 auto;
+}

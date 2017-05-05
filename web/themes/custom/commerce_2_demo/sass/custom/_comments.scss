@@ -1,0 +1,120 @@
+/**
+ * Comments.
+ */
+.comment-form-wrapper {
+  clear: both;
+  margin: 30px 0 30px 0;
+  padding: 20px;
+  background: #efefef;
+  border: 1px solid #dfdfdf;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 40px;
+  }
+
+  // Comment message textarea.
+  .form-textarea-wrapper textarea {
+    width: 100%;
+  }
+}
+.field--name-comment-body {
+
+  // Hide text format markup.
+  .filter-wrapper {
+    display: none;
+  }
+}
+.comment {
+  position: relative;
+  clear: both;
+  margin: 0 0 30px 0;
+  padding: 0 0 30px 60px;
+  border-bottom: 1px solid #ccc;
+
+  // Comment bubble icon.
+  &:before {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    content: $fa-var-comment;
+    @include fa-icon();
+    @include fa-icon-flip(-1,1,0);
+    font-size: 43px;
+    line-height: 43px;
+    color: $c-accent-1;
+  }
+
+  ul.links {
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: right;
+
+    li {
+      position: relative;
+      display: inline-block;
+      margin: 0 0 0 10px;
+      padding: 0;
+      background: none;
+      vertical-align: top;
+
+      a {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      &:first-child {
+
+        a {
+          padding-left: 30px;
+
+          // Reply icon.
+          &:before {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            content: $fa-var-reply;
+            @include fa-icon();
+            @include fa-icon-flip(-1,-1,0);
+            font-size: 21px;
+            line-height: 21px;
+            color: $c-accent-1;
+          }
+        }
+      }
+    }
+  }
+}
+.comment-wrapper > .comment:first-child {
+  margin-top: 30px;
+}
+// Comment Reply.
+.indented {
+
+  .comment {
+    padding-left: 35px;
+
+    // Reply icon.
+    &:before {
+      top: -1px;
+      content: $fa-var-reply;
+      @include fa-icon-flip(-1,-1,0);
+      font-size: 21px;
+      line-height: 21px;
+    }
+  }
+}
+.comment__date-created {
+  margin: 0 0 15px 0;
+  padding: 0;
+  font-size: 12px;
+}
+.comment-form__title {
+  margin-top: 0;
+}
+.comment__author {
+  font-weight: bold;
+}

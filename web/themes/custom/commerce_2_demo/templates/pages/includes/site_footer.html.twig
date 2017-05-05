@@ -1,0 +1,29 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% if page.social_nav %}
+          <!-- Social media navigation. -->
+          <div class="social-media-nav">
+            {{ page.social_nav }}
+          </div>
+          <!-- / Social media navigation. -->
+        {% endif %}
+
+        {% if page.footer_nav %}
+          <!-- Footer navigation. -->
+          <div class="footer-nav">
+            {{ page.footer_nav }}
+          </div>
+          <!-- / Footer navigation. -->
+        {% endif %}
+
+        <div class="site-footer__copyright">
+          {{ 'Copyright &copy; @year'|t({'@year': 'now'|date('Y')}) }}
+          <a href="{{ front_page }}">{{ 'Acro Media Inc'|t }}</a>.
+          {{ 'All rights reserved.'|t }}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

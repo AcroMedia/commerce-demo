@@ -1,0 +1,61 @@
+{#
+/**
+ * @file
+ * Theme implementation for a Homepage Rich Media Banner node.
+ *
+ * Available variables:
+ * - slide_image_url: The image style url from "field_carousel_image".
+ * - slide_mobile_image_url: The image style url from
+ *   "field_carousel_mobile_image".
+ * - slide_link_url: The formatted url from "field_carousel_slide_link".
+ *
+ * @see template_preprocess_node()
+ */
+#}
+<div class="homepage-carousel-slide">
+  {% if slide_link_url and not node.field_carousel_slide_link.title %}
+    <a href="{{ slide_link_url }}" class="homepage-carousel-slide__link-wrapper">
+  {% endif %}
+
+  {% if slide_image_url %}
+    <div class="homepage-carousel-slide__image hidden-xs">
+      <img src="{{ slide_image_url }}" alt="{{ node.field_carousel_image.alt.value }}">
+    </div>
+  {% endif %}
+
+  <div class="homepage-carousel-slide__mobile-image visible-xs-block">
+    {% if slide_mobile_image_url %}
+      <img src="{{ slide_mobile_image_url }}" alt="{{ node.field_carousel_mobile_image.alt.value }}">
+    {% elseif slide_image_url %}
+      <img src="{{ slide_image_url }}" alt="{{ node.field_carousel_image.alt.value }}">
+    {% endif %}
+  </div>
+
+  {% if node.field_carousel_slide_title.value or node.field_carousel_slide_body.value or node.field_carousel_slide_link.title %}
+    <div class="homepage-carousel-slide__content-wrapper">
+      <div class="homepage-carousel-slide__content">
+        {% if node.field_carousel_slide_title.value %}
+          <div class="homepage-carousel-slide__title">
+            <h2>{{ node.field_carousel_slide_title.value }}</h2>
+          </div>
+        {% endif %}
+
+        {% if node.field_carousel_slide_body.value %}
+          <div class="homepage-carousel-slide__body">
+            {{ node.field_carousel_slide_body.value }}
+          </div>
+        {% endif %}
+
+        {% if slide_link_url and node.field_carousel_slide_link.title %}
+          <div class="homepage-carousel-slide__link">
+            <a href="{{ slide_link_url }}" class="btn btn-primary">{{ node.field_carousel_slide_link.title  }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if slide_link_url and not node.field_carousel_slide_link.title %}
+    </a>
+  {% endif %}
+</div>

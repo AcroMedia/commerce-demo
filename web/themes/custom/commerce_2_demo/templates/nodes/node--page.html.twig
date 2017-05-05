@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Theme implementation for a page node.
+ *
+ * Available variables:
+ * - page_header_image_url: The header image's image style url for the field,
+ *   "field_page_header_image".
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  <header>
+    {% if page_header_image_url %}
+      <div class="page-header-image">
+        <img src="{{ page_header_image_url }}" alt="{{ node.field_page_header_image.alt.value }}" />
+      </div>
+    {% endif %}
+
+    {{ title_prefix }}
+    {% if not page %}
+      <h2{{ title_attributes.addClass('node__title') }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% else %}
+      <h1{{ title_attributes.addClass('page-title') }}>
+        {{ label }}
+      </h1>
+    {% endif %}
+    {{ title_suffix }}
+
+    {% if display_submitted %}
+      <div class="node__meta">
+        {{ author_picture }}
+        <span{{ author_attributes }}>
+          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        </span>
+        {{ metadata }}
+      </div>
+    {% endif %}
+  </header>
+
+  <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
+    {{ content }}
+  </div>
+</article>

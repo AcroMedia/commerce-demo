@@ -1,0 +1,31 @@
+name: Commerce 2 Demo
+type: theme
+description: 'Commerce 2 demo theme.'
+package: Core
+version: '1.0.0'
+core: '8.x'
+base theme: orange_framework
+
+libraries:
+  - commerce_2_demo/global-styling
+
+ckeditor_stylesheets:
+  - css/style.css
+
+regions:
+  header: 'Header'
+  carousel: 'Carousel'
+  highlighted: 'Highlighted'
+  above_content: 'Above Content'
+  content: 'Content'
+  below_content: 'Below Content'
+  page_sidebar: 'Page - Sidebar'
+  blog_sidebar: 'Blog - Sidebar'
+  site_search: 'Site Search'
+  footer: 'Footer'
+  # Navigation.
+  header_nav: 'Header Navigation'
+  primary_nav: 'Primary Navigation'
+  mobile_nav: 'Mobile Navigation'
+  footer_nav: 'Footer Navigation'
+  social_nav: 'Social Media Navigation'

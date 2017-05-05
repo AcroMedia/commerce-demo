@@ -1,0 +1,144 @@
+{#
+/**
+ * @file
+ * Theme implementation for a Blog Post node.
+ *
+ * Available variables:
+ * - blog_image_url: The Blog Post image's image style url for the field,
+ *   "field_blog_image".
+ * - blog_post_date: The formatted date from the field, "field_post_date".
+ * - blog_author_id: The Blog Post author's id.
+ * - blog_author_name: The Blog Post author's name.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+{% if view_mode == 'teaser' %}
+
+  <div class="blog-listing-item blog-listing-item--teaser">
+    <div class="blog-listing-item__image">
+      <a href="{{ url }}"><img src="{{ blog_image_url }}" alt="{{ node.field_blog_image.alt }}" /></a>
+    </div>
+    <h3 class="blog-listing-item__title">
+      <a href="{{ url }}">{{ label }}</a>
+    </h3>
+  </div>
+
+{% elseif view_mode == 'listing' %}
+
+  <div class="blog-listing-item">
+    <div class="blog-listing-item__image">
+      <a href="{{ url }}"><img src="{{ blog_image_url }}" alt="{{ node.field_blog_image.alt }}" /></a>
+    </div>
+    <h3 class="blog-listing-item__title">
+      <a href="{{ url }}">{{ label }}</a>
+    </h3>
+    <div class="blog-post-meta">
+      <div class="blog-post-meta__date">
+        {{ blog_post_date }}
+      </div>
+      {% if blog_author_name %}
+        <i>|</i>
+         <div class="blog-post-meta__author">
+          {{ 'By'|t }} <a href="{{ base_path }}blog/author/{{ blog_author_id }}">{{ blog_author_name }}</a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="blog-listing-item__body">
+      {% set teaser_text = content.body|render|striptags %}
+      {{ teaser_text|length > 300 ? teaser_text|slice(0, 300) ~ '...' : teaser_text }}
+    </div>
+    <div class="blog-listing-item__footer clearfix">
+      <a class="btn btn-primary" href="{{ url }}">{{ 'Read More'|t }}</a>
+
+      {% if node.field_blog_category.target_id %}
+        <div class="blog-listing-item__tags blog-post-tags">
+          <span class="blog-post-tags--label">{{ 'Posted in'|t }}</span>
+          <ul class="blog-post-tags__list clearfix">
+            {% for category in node.field_blog_category %}
+              <li>
+                <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': category.entity.tid.value}) }}">{{ category.entity.name.value }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+{% else %}
+
+  <article{{ attributes.addClass(classes) }}>
+    {% if blog_image_url %}
+      <div class="blog-post-image">
+        <img src="{{ blog_image_url }}" alt="{{ node.field_blog_image.alt }}" />
+      </div>
+    {% endif %}
+
+    <div class="social-media-sharing-nav">
+      <ul class="social-media-sharing-menu clearfix">
+        <li class="social-media-sharing-menu__item">
+          <a class="social-media-sharing-menu__link social-media-sharing-menu__link--facebook" href="https://facebook.com/sharer/sharer.php?u={{ absolute_encoded_path }}" target="_blank" aria-label="" title="{{ 'Share on Facebook'|t }}"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        </li>
+        <li class="social-media-sharing-menu__item">
+          <a class="social-media-sharing-menu__link social-media-sharing-menu__link--twitter" href="https://twitter.com/intent/tweet/?text={{ encoded_title }}&amp;url={{ absolute_encoded_path }}" target="_blank" aria-label="" title="{{ 'Share on Twitter'|t }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </li>
+        <li class="social-media-sharing-menu__item">
+          <a class="social-media-sharing-menu__link social-media-sharing-menu__link--google-plus" href="https://plus.google.com/share?url={{ absolute_encoded_path }}" target="_blank" aria-label="" title="{{ 'Share on Google+'|t }}"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+        </li>
+        <li class="social-media-sharing-menu__item">
+          <a class="social-media-sharing-menu__link social-media-sharing-menu__link--linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ absolute_encoded_path }}&amp;title={{ encoded_title }}&amp;summary={{ encoded_title }}&amp;source={{ absolute_encoded_path }}" target="_blank" aria-label="" title="{{ 'Share on LinkedIn'|t }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+
+    {{ title_prefix }}
+    <h1 {{ title_attributes.addClass('page-title--blog-post') }}>{{ label }}</h1>
+    {{ title_suffix }}
+
+    <div class="blog-post-meta blog-post-meta-node">
+      {{ blog_post_date }}
+      {% if blog_author_name %}
+        <i>|</i>
+        {{ 'By'|t }} <a href="{{ base_path }}blog/author/{{ blog_author_id }}">{{ blog_author_name }}</a>
+      {% endif %}
+    </div>
+
+    <div{{ content_attributes }}>
+      {{ content.body }}
+    </div>
+
+    {% if node.field_blog_category.target_id %}
+      <div class="blog-post-footer">
+        <div class="blog-post-tags">
+          {{ 'Posted in'|t }}
+          <ul class="blog-post-tags__list clearfix">
+            {% for category in node.field_blog_category %}
+              <li>
+                <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': category.entity.tid.value}) }}">{{ category.entity.name.value }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if content.field_blog_comments %}
+      <div class="blog-post-comments">
+        {{ content.field_blog_comments }}
+      </div>
+    {% endif %}
+  </article>
+
+{% endif %}

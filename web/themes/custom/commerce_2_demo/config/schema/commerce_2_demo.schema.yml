@@ -1,0 +1,5 @@
+# Schema for the configuration files of the theme.
+
+commerce_2_demo.settings:
+  type: theme_settings
+  label: 'Commerce 2 Demo Theme Settings'

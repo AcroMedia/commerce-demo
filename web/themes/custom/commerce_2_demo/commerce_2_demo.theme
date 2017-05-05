@@ -1,0 +1,236 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+use Drupal\Core\Template\Attribute;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Adds template suggestions.
+ */
+function commerce_2_demo_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // Add content type suggestions.
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    array_splice($suggestions, 1, 0, 'page__type__' . $node->getType());
+  }
+
+  // Add taxonomy vocabulary suggestions.
+  if ($term = \Drupal::request()->attributes->get('taxonomy_term')) {
+    $vocabulary_id = $term->getVocabularyId();
+    array_splice($suggestions, 1, 0, 'page__taxonomy__' . $term->getVocabularyId());
+  }
+
+  // Add page path alias suggestions.
+  $page_current_path = \Drupal::service('path.current')->getPath();
+
+  if (!empty($page_current_path)) {
+    $page_current_alias = \Drupal::service('path.alias_manager')->getAliasByPath($page_current_path);
+  }
+  if (!empty($page_current_alias)) {
+    $search_for = '/';
+    $page_current_alias = str_replace('-', '_', $page_current_alias);
+    $pos_page_current_alias = strpos($page_current_alias, $search_for);
+
+    if ($pos_page_current_alias !== false) {
+      $page_current_alias_formatted = substr_replace($page_current_alias, '', $pos_page_current_alias, strlen($search_for));
+      $page_current_alias_formatted = str_replace('/', '__', $page_current_alias_formatted);
+    }
+    if ($page_current_alias_formatted) {
+      array_splice($suggestions, 1, 0, 'page__' . $page_current_alias_formatted);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Add body classes if certain regions have content.
+ */
+function commerce_2_demo_preprocess_html(&$variables) {
+  // Page title variable.
+  $request = \Drupal::request();
+  $route_match = \Drupal::routeMatch();
+  $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+  if ($title && is_string($title)) {
+    $variables['page_title'] = $title;
+  }
+
+  // Current path variable.
+  $current_path = \Drupal::service('path.current')->getPath();
+  $variables['current_path'] = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+
+  // Taxonomy term variables.
+  if ($term = \Drupal::request()->attributes->get('taxonomy_term')) {
+    // Set variable for taxonomy term's vocabulary.
+    $variables['term_vocabulary'] = $term->getVocabularyId();
+
+    // Set variable for taxonomy term's name.
+    $variables['term_name'] = $term->getName();
+  }
+}
+
+/**
+ * Implements hook__preprocess_comment_HOOK() for Comments.
+ */
+function commerce_2_demo_preprocess_comment(&$variables) {
+  $comment = $variables['elements']['#comment'];
+
+  $variables['created'] = t('@comment_date at @comment_time', array(
+    '@comment_date' => \Drupal::service('date.formatter')->format($comment->getCreatedTime(), 'custom', 'F j, Y'),
+    '@comment_time' => \Drupal::service('date.formatter')->format($comment->getCreatedTime(), 'custom', 'g:i a')
+  ));
+}
+
+/**
+ * Implements hook_preprocess_node(&$variables).
+ */
+function commerce_2_demo_preprocess_node(&$variables) {
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+
+    // Base path variable.
+    $variables['base_path'] = base_path();
+
+    // Absolute path variable.
+    $node_absolute_url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
+    $variables['absolute_path'] = $node_absolute_url;
+
+    // Encoded fields for social media sharing.
+    $node_absolute_encoded_url = urlencode($node_absolute_url);
+    $variables['absolute_encoded_path'] = $node_absolute_encoded_url;
+
+    $encoded_title = rawurlencode($node->title->value);
+    $variables['encoded_title'] = $encoded_title;
+
+    // Page.
+    if ($node->getType() === 'page') {
+      // Page Header Image.
+      if (isset($node->field_page_header_image->entity)) {
+        $variables['page_header_image_url'] = ImageStyle::load('banner')->buildUrl($node->field_page_header_image->entity->getFileUri());
+      }
+    }
+
+    // Homepage Carousel Slide.
+    if ($node->getType() === 'homepage_carousel_slide') {
+      // Image.
+      if (isset($node->field_carousel_slide_image->entity)) {
+        $variables['slide_image_url'] = ImageStyle::load('homepage_carousel_slide_image')->buildUrl($node->field_carousel_slide_image->entity->getFileUri());
+        $variables['slide_mobile_image_url'] = ImageStyle::load('homepage_carousel_slide_image_mobile')->buildUrl($node->field_carousel_slide_image->entity->getFileUri());
+      }
+      // Mobile image.
+      if (isset($node->field_carousel_slide_image_sml->entity)) {
+        $variables['slide_mobile_image_url'] = ImageStyle::load('homepage_carousel_slide_image_mobile')->buildUrl($node->field_carousel_slide_image_sml->entity->getFileUri());
+      }
+      // Link URL.
+      if (isset($node->field_carousel_slide_link->uri)) {
+        $carousel_link = $node->field_carousel_slide_link->uri;
+        $variables['slide_link_url'] = Url::fromUri($carousel_link);
+      }
+    }
+
+    // Blog Post.
+    if ($node->getType() === 'blog_post') {
+      // User.
+      if (isset($node->get('uid')->entity)) {
+        $blog_author_id = $node->get('uid')->entity->id();
+        $blog_author_name = $node->get('uid')->entity->getUsername();
+
+        $variables['blog_author_id'] = $blog_author_id;
+        $variables['blog_author_name'] = $blog_author_name;
+      }
+
+      // Date.
+      if (!empty($node->field_post_date)) {
+        $post_date = strtotime($node->field_post_date->value);
+        $variables['blog_post_date'] = \Drupal::service('date.formatter')->format($post_date, 'custom', 'M j, Y');
+      }
+
+      // Image.
+      if (isset($node->field_blog_image->entity)) {
+        $variables['blog_image_url'] = ImageStyle::load('banner')->buildUrl($node->field_blog_image->entity->getFileUri());
+      }
+    }
+
+    // Image Gallery.
+    if ($node->getType() === 'image_gallery') {
+      if (isset($node->field_gallery_image->entity)) {
+        $field_gallery_image = $node->field_gallery_image;
+
+        // Create array to push field data into.
+        $image_gallery_images = [];
+
+        foreach ($field_gallery_image as $key => $image) {
+          // Image.
+          $image_gallery_images[$key]['image_gallery_image_url'] = ImageStyle::load('image_gallery_image')->buildUrl($image->entity->getFileUri());
+          // Image thumbnail.
+          $image_gallery_images[$key]['image_gallery_thumb_url'] = ImageStyle::load('image_gallery_thumb')->buildUrl($image->entity->getFileUri());
+          // Image title.
+          if (!empty($image->title)) {
+            $image_gallery_images[$key]['title'] = $image->title;
+          }
+          // Image alt.
+          $image_gallery_images[$key]['alt'] = $image->alt;
+        }
+
+        $variables['image_gallery'] = $image_gallery_images;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page(&$variables).
+ */
+function commerce_2_demo_preprocess_page(&$variables) {
+  // Load the site name out of configuration.
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
+  // Homepage.
+  if ($is_front_page = \Drupal::service('path.matcher')->isFrontPage()) {
+    // Homepage carousel view.
+    $homepage_carousel_view_name = 'homepage_carousel';
+    $homepage_carousel_view_display = 'default';
+    $homepage_carousel_view_results = views_get_view_result($homepage_carousel_view_name, $homepage_carousel_view_display);
+    $result = count($homepage_carousel_view_results);
+    // Set variable if the view has results.
+    if ($result) {
+      $variables['homepage_carousel_view'] = views_embed_view($homepage_carousel_view_name, $homepage_carousel_view_display);
+    }
+  }
+
+  // Node.
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_taxonomy_term(&$variables).
+ */
+function commerce_2_demo_preprocess_taxonomy_term(&$variables) {
+  if (isset($variables['term'])) {
+    $term = $variables['term'];
+
+    // Set base path variable.
+    $variables['base_path'] = base_path();
+  }
+}
+
+/**
+ * Implements hook_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id).
+ */
+function commerce_2_demo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+  // Comment form.
+  if ($form_id == 'comment_node_comment_form') {
+    // Update submit button text.
+    $form['actions']['submit']['#value'] = t('Post Comment');
+  }
+}

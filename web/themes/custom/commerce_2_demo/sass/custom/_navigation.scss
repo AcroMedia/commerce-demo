@@ -1,0 +1,509 @@
+/**
+ * Navigation styles.
+ *
+ * NOTE:
+ * This file is for base navigation, mobile navigation, and social media navigation styles.
+ * Any styles for a specific menu should go in the partial that makes most
+ * sense for that menu. Example: Footer navigation styles go in _footer.scss,
+ * sidebar navigation styles go in _content.scss, etc.
+ *
+ */
+
+/**
+ * Menus.
+ */
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu__item {
+  position: relative;
+  display: inline-block;
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+.menu__link {
+  display: block;
+  margin: 0;
+  padding: 15px;
+  font-size: 16px;
+
+  &:hover {
+    text-decoration: none;
+  }
+  // Active state for menu links.
+  &.is-active {
+    color: $c-primary;
+  }
+  // Active-trail state for menu links.
+  &.menu__link--active-trail {
+    color: $c-primary;
+  }
+}
+
+/**
+ * Primary navigation dropdowns.
+ * Remove if you don't need dropdowns or re-use for other menus/sections.
+ */
+@media (min-width: $screen-sm-min) {
+  .region-primary-nav {
+    .menu--main > .menu__item--expanded > .menu--child {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      padding: 5px 0;
+      float: left;
+      min-width: 160px;
+      list-style: none;
+      background: #333;
+      background-clip: padding-box;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+      z-index: 1000;
+
+      .menu__item .menu__link {
+        clear: both;
+        display: block;
+        padding: 5px 20px;
+        font-weight: normal;
+        white-space: nowrap;
+      }
+    }
+    .menu--main > .menu__item--expanded:hover > .menu--child {
+      display: block;
+    }
+    // Down arrow.
+    .menu--main > .menu__item--expanded > .menu__link:after {
+      content: "\e114";
+      display: inline-block;
+      margin: 0 0 0 6px;
+      padding: 0;
+      font-family: $f-glyphicons;
+      font-size: 12px;
+      color: $gray;
+    }
+  }
+}
+
+/**
+ * Social media navigation.
+ */
+.social-media-nav {
+  @media (min-width: 768px) {
+    float: right;
+  }
+}
+.menu--social-media {
+  padding: 15px 0;
+  // To offset margin of li a below.
+  margin: 0 -5px;
+
+  li a {
+    padding: 0;
+    margin: 0 5px;
+    font-size: 0;
+  }
+  li a:before {
+    font-family: FontAwesome;
+    font-size: 18px;
+  }
+  .menu__item--facebook a:before { content: "\f09a"; }
+  .menu__item--twitter a:before { content: "\f099"; }
+  .menu__item--instagram a:before { content: "\f16d"; }
+  .menu__item--google-plus a:before { content: "\f0d5"; }
+  .menu__item--pinterest a:before { content: "\f0d2"; }
+  .menu__item--linkedin a:before { content: "\f0e1"; }
+  .menu__item--youtube a:before { content: "\f16a"; }
+  .menu__item--vimeo a:before { content: "\f27d"; }
+  .menu__item--snapchat a:before { content: "\f2ab"; }
+  .menu__item--vine a:before { content: "\f1ca"; }
+  .menu__item--yelp a:before { content: "\f1e9"; }
+  .menu__item--trip-advisor a:before { content: "\f262"; }
+}
+
+/**
+ * Bootstrap overrides.
+ */
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: $gray-lighter;
+}
+
+/**
+ * Mobile navigation styles.
+ */
+
+// Mobile Control Navigation.
+.mobile-control-nav {
+  float: right;
+  margin: 0;
+  padding: 64px 0 0 0;
+  text-align: right;
+
+  .menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .menu__item {
+    display: inline-block;
+    margin: 0 15px 0 0;
+    padding: 0;
+    vertical-align: top;
+    background: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+    &.menu__item--menu .menu__link {
+      position: relative;
+      top: -1px;
+      font-size: 32px;
+    }
+  }
+  .menu__link {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-family: $f-secondary;
+    font-size: 26px;
+    line-height: 26px;
+    color: #fff;
+    text-decoration: none;
+    vertical-align: top;
+
+    &:hover,
+    &:focus {
+      color: $c-primary;
+      outline: none;
+    }
+  }
+}
+
+// Mobile overlay.
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  height: 100%;
+  width: 100%;
+  @include background-opacity(#fff, 1);
+  z-index: 9999;
+  overflow-x: hidden;
+}
+
+// Mobile search.
+.mobile-search-overlay__content {
+  margin: 0;
+  padding: 66px 15px 0 15px;
+  height: 120px;
+  background: $gray-darker;
+}
+.mobile-search-overlay__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 15px 0 15px;
+  font-size: 28px;
+  line-height: 28px;
+  color: #818181;
+  text-decoration: none;
+  vertical-align: top;
+  outline: none;
+  z-index: 10;
+
+  &:hover,
+  &:focus {
+    color: darken(#818181, 10%);
+    text-decoration: none;
+  }
+  span {
+    vertical-align: top;
+  }
+}
+.mobile-search-form {
+  position: relative;
+  margin: 0;
+  padding: 0 34px 5px 0;
+  border-bottom: 2px solid #818181;
+
+  .block-search .form-search-submit-trigger {
+    display: none;
+  }
+  .form-item,
+  .form-actions {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  label,
+  .form-submit,
+  .form-optional,
+  .search-block-form .form-search-submit-trigger {
+    display: none;
+  }
+  .container-inline div,
+  .container-inline label {
+    display: block;
+  }
+  .form-search {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    font-size: 22px;
+    color: #fff;
+    text-align: left;
+    border: none;
+    background: none;
+    outline: none;
+    box-shadow: none;
+  }
+  .form-search:focus {
+    background: none;
+    outline: none;
+    box-shadow: none;
+  }
+}
+.mobile-search-form__submit {
+  position: absolute;
+  bottom: 11px;
+  right: 0;
+  font-size: 25px;
+  line-height: 25px;
+  color: #fff;
+  text-decoration: none;
+  vertical-align: top;
+
+  &:hover,
+  &:focus {
+    color: $c-primary;
+    text-decoration: none;
+  }
+  span {
+    vertical-align: top;
+  }
+}
+
+// Mobile navigation overlay.
+.mobile-nav-overlay {
+
+}
+.mobile-nav-overlay__content {
+  position: relative;
+  margin: 0 0 25px 0;
+  padding: 0;
+  text-align: left;
+
+  @media (min-width: $screen-sm-min) {
+    text-align: center;
+  }
+}
+.mobile-nav-overlay__header {
+  clear: both;
+  margin: 0 0 10px 0;
+  padding: 0;
+  min-height: 16px;
+  text-align: right;
+  background: none;
+}
+.mobile-nav-overlay__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 15px 0 15px;
+  font-size: 28px;
+  line-height: 28px;
+  color: $c-body;
+  vertical-align: top;
+  outline: none;
+  z-index: 10;
+
+  @media (min-width: $screen-sm-min) {
+    color: #818181;
+  }
+  &:hover,
+  &:focus {
+    color: lighten(#818181, 20%);
+  }
+  span {
+    vertical-align: top;
+  }
+}
+
+// Mobile navigation.
+.mobile-nav {
+
+  .menu {
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  // Make the main menu stand out more than the other menus.
+  .menu--main.menu--level-0 {
+    margin: 0 0 25px 0;
+
+    > .menu__item > .menu__link {
+      font-size: 26px;
+      line-height: 1.3;
+    }
+  }
+  .menu__item {
+    clear: both;
+    float: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid #eee;
+  }
+  .menu--level-1 .menu__item:last-child {
+    border-bottom: none;
+  }
+  .menu__link {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 9px 15px;
+    font-family: $f-primary;
+    font-size: 18px;
+    line-height: 1.3;
+    color: $c-body;
+    text-decoration: none;
+    vertical-align: top;
+    outline: none;
+
+    &:hover,
+    &:focus {
+      color: $c-primary;
+    }
+    &.menu__link--active-trail,
+    &.is-active {
+      color: $c-primary;
+    }
+  }
+  // Only change overview link if active on current page and not active trail.
+  .menu__item--parent-overview > .menu__link--active-trail {
+    color: $c-body;
+  }
+  .menu__item--parent-overview > .menu__link--active-trail:hover,
+  .menu__item--parent-overview > .menu__link--active-trail:focus {
+    color: $c-primary;
+  }
+  .menu__item--parent-overview > .menu__link--active-trail.is-active {
+    color: $c-primary;
+  }
+  // Hide 2nd level by default.
+  .menu--level-1 {
+    display: none;
+  }
+  // Show 2nd level if parent is active.
+  .menu--level-0 > .menu__item--active-trail > .menu--level-1 {
+    display: block;
+  }
+  // Sub level menus.
+  .menu .menu {
+    clear: both;
+    margin: 0 0 10px 15px;
+    padding: 0;
+  }
+  .menu--level-2 {
+    .menu__item {
+      border: none;
+    }
+    .menu__link {
+      margin: 0;
+      padding: 3px 10px 3px 15px;
+      font-size: 17px;
+
+      // Sub item icon.
+      &:before {
+        @include fa-icon();
+        content: $fa-var-chevron-right;
+        position: absolute;
+        top: 10px;
+        left: 0px;
+        font-size: 12px;
+        line-height: 12px;
+        color: $gray-light;
+      }
+    }
+  }
+}
+
+/**
+ * Social media sharing navigation.
+ */
+.social-media-sharing-nav {
+  clear: both;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+.social-media-sharing-menu {
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  list-style: none;
+}
+.social-media-sharing-menu__item {
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  padding: 0;
+  vertical-align: top;
+  background: none;
+}
+.social-media-sharing-menu__link {
+  display: inline-block;
+  margin: 0;
+  padding: 5px 0 0 0;
+  width: 33px;
+  height: 30px;
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: top;
+  border-radius: 4px;
+  background: #3b5998;
+
+  &:hover {
+    color: #fff;
+    background: darken(#3b5998, 10%);
+  }
+}
+.social-media-sharing-menu__link--facebook {
+  background-color: #3b5998;
+
+  &:hover {
+    background: darken(#3b5998, 10%);
+  }
+}
+.social-media-sharing-menu__link--twitter {
+  background-color: #55acee;
+
+  &:hover {
+    background: darken(#55acee, 10%);
+  }
+}
+.social-media-sharing-menu__link--google-plus {
+  background-color: #dd4b39;
+
+  &:hover {
+    background: darken(#dd4b39, 10%);
+  }
+}
+.social-media-sharing-menu__link--linkedin {
+  background-color: #0077b5;
+
+  &:hover {
+    background: darken(#0077b5, 10%);
+  }
+}

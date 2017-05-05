@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Theme implementation to display the homepage.
+ *
+ * Available variables:
+ * - homepage_carousel_view: Homepage Carousel embedded view.
+ *
+ * @see template_preprocess_page()
+ */
+#}
+{# Site Header. #}
+{% include base_path ~ directory ~ '/templates/pages/includes/site_header.html.twig' %}
+{# / Site Header. #}
+
+{% if homepage_carousel_view %}
+  {{ homepage_carousel_view }}
+{% endif %}
+
+{# Main Content. #}
+<div class="site-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <main class="content__main-content clearfix" role="main">
+          <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
+          {% if page.highlighted %}
+            {{ page.highlighted }}
+          {% endif %}
+          {% if page.above_content %}
+            {{ page.above_content }}
+          {% endif %}
+          {% if page.content %}
+            {{ page.content }}
+          {% endif %}
+          {% if page.below_content %}
+            {{ page.below_content }}
+          {% endif %}
+        </main>
+      </div>
+    </div>
+  </div>
+</div>
+{# / Main Content. #}
+
+{# Site Footer. #}
+{% include base_path ~ directory ~ '/templates/pages/includes/site_footer.html.twig' %}
+{# / Site Footer. #}

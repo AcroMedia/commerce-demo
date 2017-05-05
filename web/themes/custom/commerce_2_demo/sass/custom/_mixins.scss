@@ -1,0 +1,31 @@
+/**
+ * Mixins.
+ */
+@mixin button-hide-text() {
+  text-align: left;
+  text-indent: -99999px;
+  outline: none;
+}
+@mixin border-top-radius($radius) {
+  border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin linear-gradient($top, $bottom){
+  background: linear-gradient(to bottom, $top 0%, $bottom 100%);
+}
+@mixin background-opacity($color, $opacity: 0.3) {
+  background: $color; /* Fallback. */
+  background: rgba($color, $opacity);
+}

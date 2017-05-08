@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "99ba18688f79d2a2a673b6d7ef22a435",
+    "content-hash": "c3cf7d23afc5316ce6acdf7b22a480ad",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1813,16 +1813,16 @@
         },
         {
             "name": "drupal/console",
-            "version": "1.0.0-rc18",
+            "version": "1.0.0-rc19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hechoendrupal/drupal-console.git",
-                "reference": "fb23cb5c6a13043c26288fc92ac6548ce987379f"
+                "reference": "98ad4c0362146689f3d4f895394ef35a4f95443d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hechoendrupal/drupal-console/zipball/fb23cb5c6a13043c26288fc92ac6548ce987379f",
-                "reference": "fb23cb5c6a13043c26288fc92ac6548ce987379f",
+                "url": "https://api.github.com/repos/hechoendrupal/drupal-console/zipball/98ad4c0362146689f3d4f895394ef35a4f95443d",
+                "reference": "98ad4c0362146689f3d4f895394ef35a4f95443d",
                 "shasum": ""
             },
             "require": {
@@ -1830,7 +1830,7 @@
                 "composer/installers": "~1.0",
                 "doctrine/annotations": "1.2.*",
                 "doctrine/collections": "~1.3",
-                "drupal/console-core": "1.0.0-rc18",
+                "drupal/console-core": "1.0.0-rc19",
                 "drupal/console-extend-plugin": "~0",
                 "gabordemooij/redbean": "~4.3",
                 "guzzlehttp/guzzle": "~6.1",
@@ -1887,25 +1887,25 @@
                 "drupal",
                 "symfony"
             ],
-            "time": "2017-05-02T19:15:12+00:00"
+            "time": "2017-05-08T16:49:07+00:00"
         },
         {
             "name": "drupal/console-core",
-            "version": "1.0.0-rc18",
+            "version": "1.0.0-rc19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hechoendrupal/drupal-console-core.git",
-                "reference": "fce93515cef0847cbba81617c74a58c57fc30c9a"
+                "reference": "c5be69f660727b38ce6c904dcb0e061e03de7aeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hechoendrupal/drupal-console-core/zipball/fce93515cef0847cbba81617c74a58c57fc30c9a",
-                "reference": "fce93515cef0847cbba81617c74a58c57fc30c9a",
+                "url": "https://api.github.com/repos/hechoendrupal/drupal-console-core/zipball/c5be69f660727b38ce6c904dcb0e061e03de7aeb",
+                "reference": "c5be69f660727b38ce6c904dcb0e061e03de7aeb",
                 "shasum": ""
             },
             "require": {
                 "dflydev/dot-access-configuration": "1.0.1",
-                "drupal/console-en": "1.0.0-rc18",
+                "drupal/console-en": "1.0.0-rc19",
                 "php": "^5.5.9 || ^7.0",
                 "stecman/symfony-console-completion": "~0.7",
                 "symfony/config": ">=2.7 <3.0",
@@ -1924,7 +1924,6 @@
             "type": "project",
             "autoload": {
                 "files": [
-                    "src/constants.php",
                     "src/functions.php"
                 ],
                 "psr-4": {
@@ -1968,20 +1967,20 @@
                 "drupal",
                 "symfony"
             ],
-            "time": "2017-05-02T19:06:38+00:00"
+            "time": "2017-05-08T16:08:29+00:00"
         },
         {
             "name": "drupal/console-en",
-            "version": "1.0.0-rc18",
+            "version": "1.0.0-rc19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hechoendrupal/drupal-console-en.git",
-                "reference": "7617bd20baf9ee20db0fd8bcfefaaa4e9878316d"
+                "reference": "df4da4011500496fc9c1d611cd36343006079915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hechoendrupal/drupal-console-en/zipball/7617bd20baf9ee20db0fd8bcfefaaa4e9878316d",
-                "reference": "7617bd20baf9ee20db0fd8bcfefaaa4e9878316d",
+                "url": "https://api.github.com/repos/hechoendrupal/drupal-console-en/zipball/df4da4011500496fc9c1d611cd36343006079915",
+                "reference": "df4da4011500496fc9c1d611cd36343006079915",
                 "shasum": ""
             },
             "type": "drupal-console-language",
@@ -2022,7 +2021,7 @@
                 "drupal",
                 "symfony"
             ],
-            "time": "2017-04-29T20:32:05+00:00"
+            "time": "2017-05-05T21:51:49+00:00"
         },
         {
             "name": "drupal/console-extend-plugin",
@@ -2936,7 +2935,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/metatag",
-                "reference": "d0df16ee44477309b12de98906e382c86795770b"
+                "reference": "efeed46b2c46bf6bbcf336e65d910f06c6c8a0fb"
             },
             "require": {
                 "drupal/core": "*",
@@ -2952,8 +2951,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0+15-dev",
-                    "datestamp": "1494257585"
+                    "version": "8.x-1.0+17-dev",
+                    "datestamp": "1494263285"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2981,7 +2980,7 @@
                 "source": "http://cgit.drupalcode.org/metatag",
                 "issues": "http://drupal.org/project/issues/metatag"
             },
-            "time": "2017-05-08 15:50:50"
+            "time": "2017-05-08 17:09:34"
         },
         {
             "name": "drupal/pathauto",
@@ -3201,22 +3200,26 @@
         },
         {
             "name": "drupal/search_api_solr",
-            "version": "1.0.0-beta3",
+            "version": "1.0.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/search_api_solr",
-                "reference": "8.x-1.0-beta3"
+                "reference": "8.x-1.0-rc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.0-beta3.zip",
+                "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.0-rc1.zip",
                 "reference": null,
-                "shasum": "f07e99c7ea0701f66c7bc0f193bc67eafa069223"
+                "shasum": "4139728b9f33acac7fdf68e1258c249fba11dd1e"
             },
             "require": {
                 "drupal/core": "~8.0",
-                "drupal/search_api": "*",
+                "drupal/search_api": "~1.0",
                 "solarium/solarium": "3.8.*"
+            },
+            "suggest": {
+                "drupal/facets": "Provides facetted search.",
+                "drupal/search_api_solr_multilingual": "Highly recommended if installation is multilingual or uses a language different than English."
             },
             "type": "drupal-module",
             "extra": {
@@ -3224,8 +3227,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta3",
-                    "datestamp": "1493403543"
+                    "version": "8.x-1.0-rc1",
+                    "datestamp": "1494259085"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3234,12 +3237,12 @@
             ],
             "authors": [
                 {
-                    "name": "Berdir",
-                    "homepage": "https://www.drupal.org/user/214652"
+                    "name": "Markus Kalkbrenner",
+                    "homepage": "https://www.drupal.org/u/mkalkbrenner"
                 },
                 {
-                    "name": "Nick_vh",
-                    "homepage": "https://www.drupal.org/user/122682"
+                    "name": "Other contributors",
+                    "homepage": "https://www.drupal.org/node/982682/committers"
                 },
                 {
                     "name": "amateescu",
@@ -3261,7 +3264,7 @@
             "description": "Offers an implementation of the Search API that uses an Apache Solr server for indexing content.",
             "homepage": "https://www.drupal.org/project/search_api_solr",
             "support": {
-                "source": "http://cgit.drupalcode.org/search_api_solr",
+                "source": "http://git.drupal.org/project/search_api_solr.git",
                 "issues": "https://www.drupal.org/project/issues/search_api_solr",
                 "irc": "irc://irc.freenode.org/drupal-search-api"
             }
@@ -3685,7 +3688,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/webform",
-                "reference": "9105f49316336d8bc44a5965a923f3c205fc34c2"
+                "reference": "334f517c26547bd39de5d154452652197f8d3099"
             },
             "require": {
                 "drupal/core": "*"
@@ -3696,8 +3699,8 @@
                     "dev-5.x": "5.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-5.0-beta12+32-dev",
-                    "datestamp": "1494010385"
+                    "version": "8.x-5.0-beta12+33-dev",
+                    "datestamp": "1494013385"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3749,7 +3752,7 @@
                 "source": "http://cgit.drupalcode.org/webform",
                 "issues": "https://drupal.org/project/issues/webform"
             },
-            "time": "2017-05-05 19:42:59"
+            "time": "2017-05-08 16:21:06"
         },
         {
             "name": "easyrdf/easyrdf",
@@ -8263,7 +8266,6 @@
         "drupal/webform": 20,
         "drupal/field_group": 20,
         "drupal/field_collection": 20,
-        "drupal/search_api_solr": 10,
         "drupal/devel": 20
     },
     "prefer-stable": true,

@@ -9,6 +9,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -38,7 +39,7 @@ function commerce_2_demo_theme_suggestions_page_alter(array &$suggestions, array
     $page_current_alias = str_replace('-', '_', $page_current_alias);
     $pos_page_current_alias = strpos($page_current_alias, $search_for);
 
-    if ($pos_page_current_alias !== false) {
+    if ($pos_page_current_alias !== FALSE) {
       $page_current_alias_formatted = substr_replace($page_current_alias, '', $pos_page_current_alias, strlen($search_for));
       $page_current_alias_formatted = str_replace('/', '__', $page_current_alias_formatted);
     }
@@ -82,10 +83,10 @@ function commerce_2_demo_preprocess_html(&$variables) {
 function commerce_2_demo_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
 
-  $variables['created'] = t('@comment_date at @comment_time', array(
+  $variables['created'] = t('@comment_date at @comment_time', [
     '@comment_date' => \Drupal::service('date.formatter')->format($comment->getCreatedTime(), 'custom', 'F j, Y'),
     '@comment_time' => \Drupal::service('date.formatter')->format($comment->getCreatedTime(), 'custom', 'g:i a')
-  ));
+  ]);
 }
 
 /**
@@ -99,7 +100,7 @@ function commerce_2_demo_preprocess_node(&$variables) {
     $variables['base_path'] = base_path();
 
     // Absolute path variable.
-    $node_absolute_url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
+    $node_absolute_url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
     $variables['absolute_path'] = $node_absolute_url;
 
     // Encoded fields for social media sharing.
@@ -227,7 +228,7 @@ function commerce_2_demo_preprocess_taxonomy_term(&$variables) {
 /**
  * Implements hook_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id).
  */
-function commerce_2_demo_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Comment form.
   if ($form_id == 'comment_node_comment_form') {
     // Update submit button text.

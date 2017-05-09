@@ -41,8 +41,7 @@
         "drupal/search_api_solr": "^1.0-beta3",
         "drupal/search_api_page": "^1.0-alpha11",
         "drupal/facets": "^1.0-alpha9",
-        "drupal/physical": "^1.0@RC",
-        "drupal/commerce_fedex": "^1.0@alpha"
+        "drupal/physical": "^1.0@RC"
     },
     "require-dev": {
         "behat/mink": "~1.7",

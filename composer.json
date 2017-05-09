@@ -36,10 +36,13 @@
         "drupal/field_collection": "dev-3.x",
         "drupal/commerce_paypal": "~1.0",
         "drupal/commerce_authnet": "~1.0",
+        "drupal/commerce_shipping": "2.0-beta2",
         "drupal/search_api": "^1.0",
         "drupal/search_api_solr": "^1.0-beta3",
         "drupal/search_api_page": "^1.0-alpha11",
-        "drupal/facets": "^1.0-alpha9"
+        "drupal/facets": "^1.0-alpha9",
+        "drupal/physical": "^1.0@RC",
+        "drupal/commerce_fedex": "^1.0@alpha"
     },
     "require-dev": {
         "behat/mink": "~1.7",

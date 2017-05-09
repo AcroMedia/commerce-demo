@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3cf7d23afc5316ce6acdf7b22a480ad",
+    "content-hash": "9fe18328ee9cc3cae2b1d8928961c447",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1526,6 +1526,70 @@
             }
         },
         {
+            "name": "drupal/commerce_fedex",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/commerce_fedex",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_fedex-8.x-1.0-alpha1.zip",
+                "reference": null,
+                "shasum": "3ae59cdc7acab6e4d43393d1b6525aee7bc7e068"
+            },
+            "require": {
+                "drupal/commerce": "~2",
+                "drupal/commerce_shipping": "~2",
+                "drupal/core": "~8.0",
+                "ext-soap": "*",
+                "nicholascreativemedia/fedexphp": "~1",
+                "php": ">=5.6"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1492665244"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "andyg5000",
+                    "homepage": "https://www.drupal.org/user/808668"
+                },
+                {
+                    "name": "bmcclure",
+                    "homepage": "https://www.drupal.org/user/278485"
+                },
+                {
+                    "name": "fakingfantastic",
+                    "homepage": "https://www.drupal.org/user/834502"
+                },
+                {
+                    "name": "mikeNCM",
+                    "homepage": "https://www.drupal.org/user/2972409"
+                },
+                {
+                    "name": "nvahalik",
+                    "homepage": "https://www.drupal.org/user/21689"
+                }
+            ],
+            "description": "Provides FedEx integration with Commerce Shipping.",
+            "homepage": "https://www.drupal.org/project/commerce_fedex",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_fedex"
+            }
+        },
+        {
             "name": "drupal/commerce_order",
             "version": "dev-2.x",
             "require": {
@@ -1713,6 +1777,61 @@
             "homepage": "https://www.drupal.org/project/commerce",
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_shipping",
+            "version": "2.0.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/commerce_shipping",
+                "reference": "8.x-2.0-beta2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_shipping-8.x-2.0-beta2.zip",
+                "reference": "8.x-2.0-beta2",
+                "shasum": "2549c079f275bccaaff7e7f8d6b504de951c9940"
+            },
+            "require": {
+                "drupal/commerce": "*",
+                "drupal/commerce_order": "*",
+                "drupal/commerce_price": "*",
+                "drupal/core": "~8.0",
+                "drupal/physical": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.0-beta2",
+                    "datestamp": "1489767784"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "googletorp",
+                    "homepage": "https://www.drupal.org/user/386230"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Provides core shipping functionality.",
+            "homepage": "https://www.drupal.org/project/commerce_shipping",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_shipping"
             }
         },
         {
@@ -2485,7 +2604,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/facets-8.x-1.0-alpha9.zip",
-                "reference": null,
+                "reference": "8.x-1.0-alpha9",
                 "shasum": "b0b1e1cc57bc2586cf1afb67c3a8ed24771f4738"
             },
             "require": {
@@ -3067,6 +3186,65 @@
             }
         },
         {
+            "name": "drupal/physical",
+            "version": "1.0.0-rc3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/physical",
+                "reference": "8.x-1.0-rc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/physical-8.x-1.0-rc3.zip",
+                "reference": "8.x-1.0-rc3",
+                "shasum": "5d2e4325b72d66ed8671b4a72fd1a731d4548143"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-rc3",
+                    "datestamp": "1491902043"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "czigor",
+                    "homepage": "https://www.drupal.org/user/826222"
+                },
+                {
+                    "name": "joelpittet",
+                    "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Physical supplies such fields as physical weight and dimensions.",
+            "homepage": "http://drupal.org/project/physical",
+            "support": {
+                "source": "http://cgit.drupalcode.org/physical"
+            }
+        },
+        {
             "name": "drupal/profile",
             "version": "dev-1.x",
             "source": {
@@ -3188,7 +3366,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/search_api_page-8.x-1.0-alpha11.zip",
-                "reference": null,
+                "reference": "8.x-1.0-alpha11",
                 "shasum": "021baad1b03d2b3dc4be659043d6471569dfffb7"
             },
             "require": {
@@ -3236,7 +3414,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.0-rc1.zip",
-                "reference": null,
+                "reference": "8.x-1.0-rc1",
                 "shasum": "4139728b9f33acac7fdf68e1258c249fba11dd1e"
             },
             "require": {
@@ -4344,6 +4522,39 @@
                 "xml"
             ],
             "time": "2016-09-22T11:01:11+00:00"
+        },
+        {
+            "name": "nicholascreativemedia/fedexphp",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/NicholasCreativeMedia/FedExPHP.git",
+                "reference": "c2a503cb74b91e128c9bfbf3e353f316f1473b34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/NicholasCreativeMedia/FedExPHP/zipball/c2a503cb74b91e128c9bfbf3e353f316f1473b34",
+                "reference": "c2a503cb74b91e128c9bfbf3e353f316f1473b34",
+                "shasum": ""
+            },
+            "require": {
+                "ext-soap": "*",
+                "php": ">=5.3.3",
+                "wsdltophp/packagebase": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NicholasCreativeMedia\\FedExPHP\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "description": "FedEx PHP package. Classes generated using wsdltophp/packagegenerator",
+            "homepage": "https://github.com/NicholasCreativeMedia/FedExPHP",
+            "time": "2017-03-09T17:25:45+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -6509,6 +6720,58 @@
             "time": "2017-05-04T08:54:02+00:00"
         },
         {
+            "name": "wsdltophp/packagebase",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WsdlToPhp/PackageBase.git",
+                "reference": "f9cb4bdd3c61bfa21597776a780702a007d488ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WsdlToPhp/PackageBase/zipball/f9cb4bdd3c61bfa21597776a780702a007d488ac",
+                "reference": "f9cb4bdd3c61bfa21597776a780702a007d488ac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WsdlToPhp\\PackageBase\\": "src",
+                    "WsdlToPhp\\PackageBase\\Tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mikaël DELSOL",
+                    "email": "contact@wsdltophp.com",
+                    "role": "Owner"
+                },
+                {
+                    "name": "Luke Rodgers",
+                    "email": "lukerodgers90@gmail.com",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Contains the base classes to be used by classes generated by wsdltophp/packagegenerator",
+            "homepage": "https://github.com/WsdlToPhp/PackageBase",
+            "keywords": [
+                "models",
+                "php"
+            ],
+            "time": "2017-04-07 13:23:52"
+        },
+        {
             "name": "zendframework/zend-diactoros",
             "version": "1.4.0",
             "source": {
@@ -8293,6 +8556,8 @@
         "drupal/webform": 20,
         "drupal/field_group": 20,
         "drupal/field_collection": 20,
+        "drupal/physical": 5,
+        "drupal/commerce_fedex": 15,
         "drupal/devel": 20
     },
     "prefer-stable": true,

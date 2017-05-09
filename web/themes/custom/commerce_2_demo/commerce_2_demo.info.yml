@@ -28,6 +28,7 @@ regions:
   below_content: 'Below Content'
   page_sidebar: 'Page - Sidebar'
   blog_sidebar: 'Blog - Sidebar'
+  special_nav: 'Special Navigation'
   footer_top: 'Footer Top'
   social_nav: 'Footer Top - Social Media Navigation'
   footer: 'Footer Main'

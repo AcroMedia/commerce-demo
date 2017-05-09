@@ -47,15 +47,22 @@
 
         <div class="hidden-xs col-sm-9">
           {% if page.primary_nav %}
-            {# Primary navigation. #}
-            <div class="primary-nav">
+            {# Primary navigation in footer. #}
+            <div class="footer-main-nav">
               {{ page.primary_nav }}
+            </div>
+          {% endif %}
+
+          {% if page.special_nav %}
+            {# Special navigation in footer. #}
+            <div class="footer-main-nav">
+              {{ page.special_nav }}
             </div>
           {% endif %}
 
           {% if page.header_nav %}
             {# Header navigation in footer. #}
-            <div class="site-header-nav">
+            <div class="footer-main-nav">
               {{ page.header_nav }}
             </div>
           {% endif %}

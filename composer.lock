@@ -2226,6 +2226,33 @@
                 "symfony/css-selector": "~2.8"
             },
             "type": "drupal-core",
+            "extra": {
+                "installer-paths": {
+                    "web/core": [
+                        "type:drupal-core"
+                    ],
+                    "web/libraries/{$name}": [
+                        "type:drupal-library"
+                    ],
+                    "web/modules/contrib/{$name}": [
+                        "type:drupal-module"
+                    ],
+                    "web/profiles/contrib/{$name}": [
+                        "type:drupal-profile"
+                    ],
+                    "web/themes/contrib/{$name}": [
+                        "type:drupal-theme"
+                    ],
+                    "drush/contrib/{$name}": [
+                        "type:drupal-drush"
+                    ]
+                },
+                "patches": {
+                    "drupal/core": {
+                        "#2541480: Allow SVG files in the image widget": "https://www.drupal.org/files/issues/allow_svg_files_in_the-2541480-6.patch"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Drupal\\Core\\": "lib/Drupal/Core",
@@ -2935,7 +2962,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/metatag",
-                "reference": "efeed46b2c46bf6bbcf336e65d910f06c6c8a0fb"
+                "reference": "b082f9b0d8962873fd9b8971aab927eb8c9f7e85"
             },
             "require": {
                 "drupal/core": "*",
@@ -2951,8 +2978,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0+17-dev",
-                    "datestamp": "1494263285"
+                    "version": "8.x-1.0+19-dev",
+                    "datestamp": "1494269584"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2980,7 +3007,7 @@
                 "source": "http://cgit.drupalcode.org/metatag",
                 "issues": "http://drupal.org/project/issues/metatag"
             },
-            "time": "2017-05-08 17:09:34"
+            "time": "2017-05-08 19:37:11"
         },
         {
             "name": "drupal/pathauto",
@@ -3688,7 +3715,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/webform",
-                "reference": "334f517c26547bd39de5d154452652197f8d3099"
+                "reference": "e84a326629ee332d5bb7fc8e1ec1ee8949854bf6"
             },
             "require": {
                 "drupal/core": "*"
@@ -3699,8 +3726,8 @@
                     "dev-5.x": "5.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-5.0-beta12+33-dev",
-                    "datestamp": "1494013385"
+                    "version": "8.x-5.0-beta12+34-dev",
+                    "datestamp": "1494260587"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3752,7 +3779,7 @@
                 "source": "http://cgit.drupalcode.org/webform",
                 "issues": "https://drupal.org/project/issues/webform"
             },
-            "time": "2017-05-08 16:21:06"
+            "time": "2017-05-08 22:28:47"
         },
         {
             "name": "easyrdf/easyrdf",

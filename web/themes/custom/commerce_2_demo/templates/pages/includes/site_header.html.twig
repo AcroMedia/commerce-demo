@@ -1,5 +1,5 @@
 {# Set the path for the site logo. #}
-{% set site_logo_url =  base_path ~ directory ~ '/gfx/logo.png' %}
+{% set site_logo_url =  base_path ~ directory ~ '/gfx/logo.svg' %}
 
 {# Mobile overlays. #}
 {% if page.mobile_nav %}
@@ -83,14 +83,22 @@
 
       <div class="col-sm-12 col-md-6">
         <div class="row">
-          {# Contact info. #}
           <div class="col-xs-6">
-            Contact info
+            {# Contact info. #}
+            {% if page.header %}
+              <div class="site-header__mail-left hidden-xs">
+                {{ page.header }}
+              </div>
+            {% endif %}
           </div>
 
-          {# Cart. #}
           <div class="col-xs-6">
-            Cart
+            {# Cart. #}
+            {% if page.header_right %}
+              <div class="site-header__main-right hidden-xs">
+                {{ page.header_right }}
+              </div>
+            {% endif %}
           </div>
         </div>
 

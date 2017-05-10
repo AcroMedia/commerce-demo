@@ -7,37 +7,40 @@
  */
 $c-site-bg: #fff;
 
-$c-primary: #ff9900;
+$c-primary: #cc0000;
 $c-primary-hover: darken($c-primary, 10%);
 
-$c-secondary: #304772;
+$c-secondary: #993333;
 $c-secondary-hover: darken($c-secondary, 10%);
 
-$c-tertiary: #7e8aa2;
+$c-tertiary: #000;
 $c-tertiary-hover: darken($c-tertiary, 10%);
 
 $c-accent-1: #ccc;
 $c-accent-2: #ccc;
 $c-accent-3: #ccc;
 
-$c-body: #666;
+$c-body: #333;
 
-$c-link: #0594D8;
+$c-link: #cc0000;
 $c-link-hover: darken($c-link, 10%);
 
-$gray-base:              #151515 !default;
-$gray-darker:            #353535;
-$gray-dark:              #545353;
-$gray:                   #807e7e;
-$gray-light:             #cccaca;
-$gray-lighter:           #f2f0f0;
+$gray-base:              #ccc !default;
+$gray-darker:            #666;
+$gray-dark:              #333;
+$gray:                   #ccc;
+$gray-light:             #efefef;
+$gray-lighter:           #fff;
 
 /**
  * Fonts.
  */
-$f-primary: Verdana, Geneva, sans-serif;
-$f-secondary: Georgia, Times, 'Times New Roman', serif;
-$f-body: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+$f-primary: 'Open Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+$f-primary-condensed: 'Open Sans Condensed', 'Open Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+$f-secondary: 'Roboto Slab', Georgia, Times, 'Times New Roman', serif;
+$f-secondary-alternate: 'Calligraffitti', cursive;
+$f-body: 'Open Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+$f-fontawesome: FontAwesome;
 $f-glyphicons: 'Glyphicons Halflings';
 
 /**

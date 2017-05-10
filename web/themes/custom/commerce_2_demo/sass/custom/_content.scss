@@ -205,19 +205,19 @@ input.form-search {
   .base-accordion__header {
     position: relative;
     padding-left: 15px;
-    font-family: $f-secondary;
+    font-family: $f-primary;
     transition: all .2s ease-in-out;
 
     &::before {
       content: "\f105";
       font-family: FontAwesome;
-      color: lighten($gray-light, 10%);
+      color: $gray;
       position: absolute;
       left: 0;
       transition: all .2s ease-in-out;
     }
     &:hover::before {
-      color: $gray-light;
+      color: $gray-darker;
     }
   }
   .base-accordion__content {

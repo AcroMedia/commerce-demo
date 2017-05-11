@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff27667a45016416aa1bd9e50b599509",
+    "content-hash": "da8fe8651e599dabd0f6792dcab2a4c7",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -3749,6 +3749,48 @@
                 "issues": "http://drupal.org/project/taxonomy_menu"
             },
             "time": "2016-11-23 16:21:11"
+        },
+        {
+            "name": "drupal/taxonomy_term_depth",
+            "version": "dev-2.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/taxonomy_term_depth",
+                "reference": "b8e0d594a949640384750c39702e346435f00fdf"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.x-dev",
+                    "datestamp": "1492603442"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Cadila",
+                    "homepage": "https://www.drupal.org/user/2669241"
+                },
+                {
+                    "name": "miteshmap",
+                    "homepage": "https://www.drupal.org/user/1404966"
+                }
+            ],
+            "description": "Provides field for storing taxonomy depth value and some wrappers integration with modules",
+            "homepage": "https://www.drupal.org/project/taxonomy_term_depth",
+            "support": {
+                "source": "http://cgit.drupalcode.org/taxonomy_term_depth"
+            },
+            "time": "2017-04-28 12:16:17"
         },
         {
             "name": "drupal/token",
@@ -8451,6 +8493,7 @@
         "drupal/field_collection": 20,
         "drupal/physical": 5,
         "drupal/facets_pretty_paths": 20,
+        "drupal/taxonomy_term_depth": 20,
         "drupal/devel": 20
     },
     "prefer-stable": true,

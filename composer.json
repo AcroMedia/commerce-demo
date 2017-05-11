@@ -42,7 +42,8 @@
         "drupal/search_api_page": "^1.0-alpha11",
         "drupal/facets": "^1.0-alpha9",
         "drupal/physical": "^1.0@RC",
-        "drupal/facets_pretty_paths": "1.x-dev"
+        "drupal/facets_pretty_paths": "1.x-dev",
+        "drupal/taxonomy_term_depth": "2.x-dev"
     },
     "require-dev": {
         "behat/mink": "~1.7",

@@ -50,7 +50,15 @@
     display: inline-block;
 
     a {
+      position: relative;
       color: #fff;
+
+      &:after {
+        position: relative;
+        display: inline-block;
+        margin-left: 3px;
+        content:">";
+      }
 
       &:hover, &:focus {
         color: $c-primary;

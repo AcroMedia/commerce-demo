@@ -68,7 +68,7 @@
   $('#block-solr-product-search input.form-text').attr('placeholder', Drupal.t('Site Search...'));
 
   // Add search button icon.
-  $('#block-solr-product-search input.form-submit').after('<i class="fa fa-search"></i>');
+  $('.site-header__top #block-solr-product-search input.form-submit').after('<i class="fa fa-search"></i>');
 
   // Site search submit trigger.
   if ($('.form-search-submit-trigger').length) {

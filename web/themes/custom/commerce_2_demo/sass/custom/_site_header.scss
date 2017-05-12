@@ -197,12 +197,16 @@
   min-height: 120px;
   background: #fff;
 
+  @media (max-width: $screen-xs-max) {
+    border-bottom: 5px solid $gray;
+  }
+
   .site-header__logo {
     margin: 28px 0 24px;
     padding: 0;
 
     img {
-      display: block;
+      display: inline-block;
       width: 100%;
       max-width: 362px;
       height: auto;

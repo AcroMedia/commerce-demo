@@ -4,7 +4,7 @@
 {# Mobile overlays. #}
 {% if page.mobile_nav %}
   {% if page.site_search %}
-    <div class="mobile-search-overlay mobile-overlay">
+    <div class="mobile-overlay mobile-search-overlay">
       <div class="mobile-search-overlay__content mobile-overlay__content">
         <a href="#" class="mobile-search-overlay__close mobile-overlay__close">
           <span class="fa fa-times" aria-hidden="true"></span>
@@ -20,7 +20,7 @@
     </div>
   {% endif %}
 
-  <div class="mobile-nav-overlay mobile-overlay">
+  <div class="mobile-overlay mobile-nav-overlay">
     <div class="mobile-nav-overlay__content mobile-overlay__content clearfix">
       <header class="mobile-nav-overlay__header clearfix" role="banner">
         <a href="#" class="mobile-nav-overlay__close mobile-overlay__close">
@@ -72,7 +72,7 @@
   {# Header main. #}
   <div class="site-header__top container">
     <div class="row">
-      <div class="col-xs-12 col-sm-5 col-md-6">
+      <div class="col-xs-8 col-sm-5 col-md-6">
         {# Logo. #}
         <div class="site-header__logo">
           <a href="{{ front_page }}">
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-7 col-md-6 site-header__main">
+      <div class="col-xs-4 col-sm-7 col-md-6 site-header__main">
         <div class="hidden-xs site-header__main-left">
           {# Contact info. #}
           {% if page.header %}
@@ -117,7 +117,7 @@
 
         {# Site search. #}
         {% if page.site_search %}
-          <div class="site-header__search">
+          <div class="hidden-xs site-header__search">
             {{ page.site_search }}
           </div>
         {% endif %}

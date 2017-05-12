@@ -7,7 +7,7 @@
   background: #efefef;
   border-top: 1px solid $gray;
 
-  @media (max-width: 767px) {
+  @media (max-width: $screen-sm-max) {
     text-align: center;
   }
 
@@ -33,6 +33,11 @@
   display: inline-block;
   vertical-align: top;
 
+  @media (max-width: 360px) {
+    display: block;
+    padding-bottom: 20px;
+  }
+
   img {
     width: 65px;
     height: 65px;
@@ -52,6 +57,10 @@
   margin: 0;
   border: 0;
   text-align: left;
+
+  @media (max-width: 360px) {
+    text-align: center;
+  }
 
   .field--name-field-link .field__item a:before {
     margin: 0 8px 0 3px;
@@ -73,6 +82,7 @@
 
   p {
     line-height: 1.7;
+    margin-bottom: 10px;
   }
 }
 
@@ -124,11 +134,19 @@
  */
 .footer-nav {
   .menu__item {
+    @media (max-width: 360px) {
+      display: block;
+    }
+
     &:after {
       display: inline-block;
       padding: 0 7px;
       content: '|';
       color: $gray;
+
+      @media (max-width: 360px) {
+        display: none;
+      }
     }
 
     &:last-of-type:after {

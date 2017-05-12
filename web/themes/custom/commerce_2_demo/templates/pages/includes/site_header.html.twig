@@ -41,7 +41,7 @@
   <div class="site-header__top-bar">
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-md-12 col-lg-6 site-header__top-bar--left">
           {% if page.header_promo %}
             {# Header promo area. #}
             <div class="site-header__promo">
@@ -50,7 +50,7 @@
           {% endif %}
         </div>
 
-        <div class="col-sm-12 col-md-6">
+        <div class="hidden-xs col-md-12 col-lg-6 site-header__top-bar--right">
           {% if page.header_nav %}
             {# Header navigation. #}
             <div class="site-header-nav">
@@ -72,7 +72,7 @@
   {# Header main. #}
   <div class="site-header__top container">
     <div class="row">
-      <div class="col-sm-12 col-md-6">
+      <div class="col-xs-12 col-sm-5 col-md-6">
         {# Logo. #}
         <div class="site-header__logo">
           <a href="{{ front_page }}">
@@ -81,56 +81,46 @@
         </div>
       </div>
 
-      <div class="col-sm-12 col-md-6">
-        <div class="row">
-          <div class="col-xs-6">
-            {# Contact info. #}
-            {% if page.header %}
-              <div class="site-header__mail-left hidden-xs">
-                {{ page.header }}
-              </div>
-            {% endif %}
-          </div>
-
-          <div class="col-xs-6">
-            {# Cart. #}
-            {% if page.header_right %}
-              <div class="site-header__main-right hidden-xs">
-                {{ page.header_right }}
-              </div>
-            {% endif %}
-          </div>
+      <div class="col-xs-12 col-sm-7 col-md-6 site-header__main">
+        <div class="hidden-xs site-header__main-left">
+          {# Contact info. #}
+          {% if page.header %}
+            {{ page.header }}
+          {% endif %}
         </div>
 
-        <div class="row">
-          <div class="col-xs-12">
-            {# Mobile navigation. #}
-            {% if page.mobile_nav %}
-              <div class="mobile-control-nav visible-xs-block">
-                <ul class="menu clearfix">
-                  <li class="menu__item menu__item--search">
-                    <a href="#" class="menu__link" title="{{ 'Search'|t }}">
-                      <span aria-hidden="true" class="fa fa-search"></span>
-                    </a>
-                  </li>
-                  <li class="menu__item menu__item--menu">
-                    <a href="#" class="menu__link" title="{{ 'Menu'|t }}">
-                      <span aria-hidden="true" class="fa fa-bars"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            {% endif %}
-            {# / Mobile navigation. #}
-
-            {# Site search. #}
-            {% if page.site_search %}
-              <div class="site-header__search hidden-xs">
-                {{ page.site_search }}
-              </div>
-            {% endif %}
-          </div>
+        <div class="hidden-xs site-header__main-right">
+          {# Cart. #}
+          {% if page.header_right %}
+            {{ page.header_right }}
+          {% endif %}
         </div>
+
+        {# Mobile navigation. #}
+        {% if page.mobile_nav %}
+          <div class="mobile-control-nav visible-xs-block">
+            <ul class="menu clearfix">
+              <li class="menu__item menu__item--search">
+                <a href="#" class="menu__link" title="{{ 'Search'|t }}">
+                  <span aria-hidden="true" class="fa fa-search"></span>
+                </a>
+              </li>
+              <li class="menu__item menu__item--menu">
+                <a href="#" class="menu__link" title="{{ 'Menu'|t }}">
+                  <span aria-hidden="true" class="fa fa-bars"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+        {# / Mobile navigation. #}
+
+        {# Site search. #}
+        {% if page.site_search %}
+          <div class="site-header__search">
+            {{ page.site_search }}
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

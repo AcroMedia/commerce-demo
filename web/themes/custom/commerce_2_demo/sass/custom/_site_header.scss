@@ -1,57 +1,354 @@
 /**
- * Header Styles
+ * Top bar.
  */
+.site-header__top-bar {
+  background-color: #000;
 
-.site-header {
-  min-height: 120px;
-  background: $gray-darker;
-}
+  .site-header__top-bar--right {
+    text-align: right;
 
-/**
- * Site logo.
- */
-.site-header__logo {
-  float: left;
-  margin: 15px 0;
-  padding: 0;
-
-  img {
-    display: block;
-    width: 80px;
-    height: 89px;
+    @media (max-width: $screen-md-max) {
+      text-align: center;
+    }
   }
 }
 
-/**
- * Site header navigation.
- */
-.site-header-nav {
-  float: right;
+// Promo Block
+.site-header__promo {
+  padding: 6px 0;
+  font-size: 14px;
+  color: #fff;
 
-  .menu__item:last-child {
-    .menu__link {
-      padding-right: 0;
+  @media (max-width: $screen-md-max) {
+    text-align: center;
+  }
+
+  .field--name-field-icon {
+    display: inline-block;
+    padding-right: 2px;
+
+    img {
+      height: 18px;
+      width: auto;
+    }
+  }
+
+  .field--name-field-title {
+    display: inline-block;
+    padding-right: 2px;
+    font-weight: 700;
+  }
+
+  .field--name-field-short-promo {
+    display: inline-block;
+    padding-right: 2px;
+    font-weight: 600;
+    color: $c-primary;
+  }
+
+  .field--name-field-promo-link {
+    display: inline-block;
+
+    a {
+      color: #fff;
+
+      &:hover, &:focus {
+        color: $c-primary;
+      }
     }
   }
 }
 
 /**
- * Site header bottom.
+ * Top bar navigation.
  */
-.site-header__bottom {
-  background-color: $gray-base;
+.site-header-nav {
+  display: inline-block;
+  text-align: right;
+
+  .menu__item {
+    margin-right: 13px;
+
+    &:before {
+      content: '|';
+      font-size: 14px;
+      color: #464646;
+    }
+
+    &:first-of-type {
+      margin-left: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    .menu__link {
+      display: inline-block;
+      padding: 0;
+      margin-left: 13px;
+      font-size: 14px;
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      color: #fff;
+
+      &:hover, &:focus {
+        color: $c-primary;
+      }
+    }
+  }
 }
 
 /**
- * Primary navigation.
+ * Top bar language switcher.
  */
-.primary-nav {
-  display: block;
-  //display: inline-block;
+.site-header__language-select {
+  display: inline-block;
+  position: relative;
+
+  #block-currentlanguage {
+    padding: 5px 10px;
+    background-color: #1a1a1a;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: none;
+        margin: 0;
+        padding: 0;
+
+        &.is-active {
+          display: block;
+
+          a {
+            padding: 0;
+            color: #999;
+            font-size: 14px;
+            text-transform: uppercase;
+
+            &:after {
+              display: inline-block;
+              position: relative;
+              bottom: 3px;
+              padding-left: 5px;
+              font-size: 12px;
+              font-family: FontAwesome;
+              content: '\f078';
+            }
+
+            a {
+              color: #999;
+
+              &:hover, &:focus {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #block-languageswitcher {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 999;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      background-color: $gray-dark;
+
+      li {
+        margin: 0;
+        padding: 0;
+
+        a {
+          display: block;
+          padding: 4px 18px 0;
+          background-color: $gray-dark;
+          color: #999;
+          font-size: 14px;
+          text-transform: uppercase;
+
+          &:hover, &:focus {
+            color: #fff;
+          }
+        }
+
+        &:last-of-type a {
+          padding-bottom: 6px;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Site header main.
+ */
+.site-header {
+  min-height: 120px;
+  background: #fff;
+
+  .site-header__logo {
+    margin: 28px 0 24px;
+    padding: 0;
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 362px;
+      height: auto;
+    }
+  }
+
+  .site-header__main {
+    text-align: right;
+  }
+}
+
+/**
+ * Site header main left.
+ */
+.site-header__main-left {
+  display: inline-block;
   vertical-align: top;
 
-  .menu--child-menu {
-    background-color: $gray-base;
+  #block-headerfootercontactinformation {
+    padding-right: 20px;
+    margin-top: 20px;
+    border-right: 1px solid $gray;
+    text-align: right;
+
+    .field--name-field-link {
+      .field__item {
+        display: inline-block;
+
+        a {
+          font-weight: 300;
+          color: #000;
+
+          &:before {
+            margin: 0 10px 0 6px;
+            content: '|';
+            font-size: 16px;
+            color: $gray;
+          }
+
+          &:hover, &:focus {
+            color: $c-primary-hover;
+          }
+        }
+
+        &:first-of-type {
+          a:before {
+            display: none;
+          }
+        }
+
+        &:last-of-type {
+          a:after {
+            display: inline-block;
+            position: relative;
+            bottom: -3px;
+            height: 18px;
+            width: 21px;
+            margin-left: 8px;
+            background: url(../gfx/icon-chat.svg) center center no-repeat;
+            background-size: 21px 18px;
+            content: '';
+          }
+        }
+      }
+    }
+
+    .field--name-field-phone-number {
+      font-size: 34px;
+      line-height: 44px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 28px;
+        letter-spacing: 0;
+      }
+    }
+  }
+}
+
+/**
+ * Site header main right.
+ */
+.site-header__main-right {
+  display: inline-block;
+  vertical-align: top;
+
+  nav {
+    padding-left: 12px;
+    margin-top: 20px;
+
+    ul.menu--account {
+      li {
+        margin: 0;
+        padding: 0;
+
+        a {
+          margin: 0;
+          padding: 0;
+        }
+
+        a:after {
+          margin: 0 6px 0 10px;
+          content: '|';
+          font-size: 16px;
+          color: $gray;
+        }
+
+        &:last-of-type {
+          a:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Commerce cart block.
+ */
+.cart-block--summary  {
+  margin: 8px 0 0;
+
+  .cart-block--summary__icon {
+    display: inline-block;
+    margin-right: 8px;
+    height: 29px;
+    width: 34px;
+    vertical-align: middle;
+    background: url(../gfx/icon-cart.svg) center center no-repeat;
+    background-size: 34px 29px;
+  }
+
+  .cart-block--summary__count {
+    display: inline-block;
+    width: calc(100% - 60px);
+    height: 30px;
+    vertical-align: middle;
+    margin: 0;
+    background-color: #eaeaea;
+    border-radius: $border-radius;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #333;
   }
 }
 
@@ -59,10 +356,78 @@
  * Site header search.
  */
 .site-header__search {
-  float: right;
-  clear: right;
+  margin: 13px 0;
 
-  .form-optional {
-    display: none;
+  .form--inline {
+    .form-item {
+      float: none;
+      display: inline-block;
+      margin: 0;
+
+      .form-control {
+        width: auto;
+        max-width: 180px;
+        height: 30px;
+      }
+    }
+
+    .form-actions {
+      position: relative;
+      display: inline-block;
+      margin: 0;
+
+      .button {
+        width: 26px;
+        height: 28px;
+        padding: 0;
+        background-color: #fff;
+        border-color: transparent;
+        font-size: 0;
+      }
+
+      i {
+        position: absolute;
+        top: 3px;
+        left: 6px;
+        font-size: 19px;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+/**
+ * Primary navigation.
+ */
+.primary-nav {
+  display: block;
+  padding: 16px 0;
+  border-top: 1px solid $gray;
+  border-bottom: 5px solid $gray;
+  text-align: center;
+
+  .view-content {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .views-row {
+    display: inline-block;
+
+    a {
+      font-size: 18px;
+      font-weight: 800;
+      color: #333;
+      text-transform: uppercase;
+      padding: 10px;
+
+      &:hover, &:focus {
+        color: $c-primary-hover;
+      }
+
+      &.is-active, &:active {
+        color: $c-primary;
+      }
+    }
   }
 }

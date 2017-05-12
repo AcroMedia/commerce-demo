@@ -29,6 +29,8 @@
   margin: 0;
   padding: 15px;
   font-size: 16px;
+  font-weight: 300;
+  color: #000;
 
   &:hover {
     text-decoration: none;
@@ -44,7 +46,7 @@
 }
 
 /**
- * Primary navigation dropdowns.
+ * Primary navigation dropdowns - Not used in this site.
  * Remove if you don't need dropdowns or re-use for other menus/sections.
  */
 @media (min-width: $screen-sm-min) {

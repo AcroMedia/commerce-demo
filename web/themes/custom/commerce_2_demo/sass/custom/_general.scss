@@ -117,14 +117,12 @@ blockquote {
 a {
   color: $c-link;
   text-decoration: none;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
 
   &:hover,
   &:focus {
     color: $c-link-hover;
     text-decoration: none;
-  }
-  &:hover {
-    text-decoration: underline;
   }
 }
 

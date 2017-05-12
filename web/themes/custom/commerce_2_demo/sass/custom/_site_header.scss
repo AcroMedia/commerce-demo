@@ -220,65 +220,67 @@
 .site-header__main-left {
   display: inline-block;
   vertical-align: top;
+}
 
-  #block-headerfootercontactinformation {
-    padding-right: 20px;
-    margin-top: 20px;
-    border-right: 1px solid $gray;
-    text-align: right;
+// Styles header and footer contact info. Footer fine tuning in site_footer.scss.
+#block-headerfootercontactinformation,
+#block-headerfootercontactinformation-2 {
+  padding-right: 20px;
+  margin-top: 20px;
+  border-right: 1px solid $gray;
+  text-align: right;
 
-    .field--name-field-link {
-      .field__item {
-        display: inline-block;
+  .field--name-field-link {
+    .field__item {
+      display: inline-block;
 
-        a {
-          font-weight: 300;
-          color: #000;
+      a {
+        font-weight: 300;
+        color: #000;
 
-          &:before {
-            margin: 0 10px 0 6px;
-            content: '|';
-            font-size: 16px;
-            color: $gray;
-          }
-
-          &:hover, &:focus {
-            color: $c-primary-hover;
-          }
+        &:before {
+          margin: 0 10px 0 6px;
+          content: '|';
+          font-size: 16px;
+          color: $gray;
         }
 
-        &:first-of-type {
-          a:before {
-            display: none;
-          }
+        &:hover, &:focus {
+          color: $c-primary-hover;
         }
+      }
 
-        &:last-of-type {
-          a:after {
-            display: inline-block;
-            position: relative;
-            bottom: -3px;
-            height: 18px;
-            width: 21px;
-            margin-left: 8px;
-            background: url(../gfx/icon-chat.svg) center center no-repeat;
-            background-size: 21px 18px;
-            content: '';
-          }
+      &:first-of-type {
+        a:before {
+          display: none;
+        }
+      }
+
+      &:last-of-type {
+        a:after {
+          display: inline-block;
+          position: relative;
+          bottom: -3px;
+          height: 18px;
+          width: 21px;
+          margin-left: 8px;
+          background: url(../gfx/icon-chat.svg) center center no-repeat;
+          background-size: 21px 18px;
+          content: '';
         }
       }
     }
+  }
 
-    .field--name-field-phone-number {
-      font-size: 34px;
-      line-height: 44px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+  .field--name-field-phone-number {
+    font-size: 34px;
+    line-height: 44px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
 
-      @media (max-width: $screen-sm-max) {
-        font-size: 28px;
-        letter-spacing: 0;
-      }
+    @media (max-width: $screen-sm-max) {
+      font-size: 28px;
+      letter-spacing: 0;
     }
   }
 }
@@ -422,7 +424,7 @@
       padding: 10px;
 
       &:hover, &:focus {
-        color: $c-primary-hover;
+        color: $c-primary;
       }
 
       &.is-active, &:active {

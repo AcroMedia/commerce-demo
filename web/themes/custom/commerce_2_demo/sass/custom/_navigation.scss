@@ -32,7 +32,8 @@
   font-weight: 300;
   color: #000;
 
-  &:hover {
+  &:hover, &:focus {
+    color: $c-primary-hover;
     text-decoration: none;
   }
   // Active state for menu links.
@@ -93,31 +94,46 @@
  * Social media navigation.
  */
 .social-media-nav {
-  @media (min-width: 768px) {
-    float: right;
-  }
+  text-align: right;
 }
-.menu--social-media {
-  padding: 15px 0;
+
+ul.menu--social-media {
+  padding: 17px 0;
   // To offset margin of li a below.
   margin: 0 -5px;
 
   li a {
+    position: relative;
+    width: 28px;
+    height: 28px;
     padding: 0;
-    margin: 0 5px;
+    margin: 0 4px;
+    border-radius: 50%;
+    background-color: #000;
     font-size: 0;
+
+    &:hover, &:focus {
+      background-color: $c-primary-hover;
+    }
   }
+
   li a:before {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 28px;
     font-family: FontAwesome;
-    font-size: 18px;
+    font-size: 17px;
+    text-align: center;
+    color: #efefef;
   }
   .menu__item--facebook a:before { content: "\f09a"; }
   .menu__item--twitter a:before { content: "\f099"; }
   .menu__item--instagram a:before { content: "\f16d"; }
   .menu__item--google-plus a:before { content: "\f0d5"; }
-  .menu__item--pinterest a:before { content: "\f0d2"; }
+  .menu__item--pinterest a:before { content: "\f231"; font-size: 20px; }
   .menu__item--linkedin a:before { content: "\f0e1"; }
-  .menu__item--youtube a:before { content: "\f16a"; }
+  .menu__item--youtube a:before { content: "\f167"; }
   .menu__item--vimeo a:before { content: "\f27d"; }
   .menu__item--snapchat a:before { content: "\f2ab"; }
   .menu__item--vine a:before { content: "\f1ca"; }

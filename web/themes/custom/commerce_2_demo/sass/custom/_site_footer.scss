@@ -1,29 +1,183 @@
 /**
- * Site footer.
+ * Site footer general.
  */
 .site-footer {
-  padding-top: 40px;
+  padding-top: 18px;
   padding-bottom: 40px;
-  background: #333;
+  background: #efefef;
+  border-top: 1px solid $gray;
 
   @media (max-width: 767px) {
     text-align: center;
+  }
+
+  .site-footer__top {
+    padding-bottom: 2px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .site-footer__main {
+    padding: 25px 0 18px;
+  }
+
+  .site-footer__bottom {
+    padding-top: 22px;
+    border-top: 1px solid #ccc;
+  }
+}
+
+/**
+ * Logo.
+ */
+.site-footer__logo {
+  display: inline-block;
+  vertical-align: top;
+
+  img {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+/**
+ * Contact info.
+ */
+.site-footer__contact {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#block-headerfootercontactinformation-2 {
+  padding: 0 0 0 10px;
+  margin: 0;
+  border: 0;
+  text-align: left;
+
+  .field--name-field-link .field__item a:before {
+    margin: 0 8px 0 3px;
+  }
+
+  .field--name-field-phone-number {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
+/**
+ * Company address.
+ */
+#block-companyaddress {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+
+  p {
+    line-height: 1.7;
   }
 }
 
 /**
  * Footer navigation.
  */
-.footer-nav {
-  margin: 0 0 50px 0;
+.footer-main-nav {
+  display: inline-block;
+  width: 25%;
+  vertical-align: top;
+
+  &:first-of-type {
+    width: 48%;
+  }
+
+  a {
+    padding: 0;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #333;
+
+    &:hover, &:focus {
+      color: $c-primary-hover;
+    }
+
+    &.is-active {
+      color: $c-primary;
+    }
+  }
+
+  // 50% width category menu
+  .block-views-blockfacet-menus-block-1 {
+    .views-row {
+      display: inline-block;
+      width: 49%;
+      vertical-align: top;
+    }
+  }
+
+  // Header nav in footer.
+  .menu__item {
+    width: 100%;
+  }
 }
 
 /**
- * Footer copyright.
+ * Footer nav.
+ */
+.footer-nav {
+  .menu__item {
+    &:after {
+      display: inline-block;
+      padding: 0 7px;
+      content: '|';
+      color: $gray;
+    }
+
+    &:last-of-type:after {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #333;
+
+      &:hover, &:focus {
+        color: $c-primary-hover;
+      }
+
+      &.is-active {
+        color: $c-primary;
+      }
+    }
+  }
+}
+
+/**
+ * Copyright.
  */
 .site-footer__copyright {
-  clear: both;
-  font-size: 10px;
+  padding-top: 16px;
+  font-size: 13px;
+  color: #666;
+}
+
+/**
+ * Acro.
+ */
+.site-footer__acro {
+  padding-top: 9px;
+  font-size: 11px;
+  color: #999;
+
+  a {
+    color: #999;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 
 /**

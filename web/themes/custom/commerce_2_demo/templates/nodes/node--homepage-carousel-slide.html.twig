@@ -36,7 +36,7 @@
       <div class="homepage-carousel-slide__content">
         {% if node.field_carousel_slide_title.value %}
           <div class="homepage-carousel-slide__title">
-            <h2>{{ node.field_carousel_slide_title.value }}</h2>
+            <span>{{ node.field_carousel_slide_title.value }}</span>
           </div>
         {% endif %}
 
@@ -48,7 +48,7 @@
 
         {% if slide_link_url and node.field_carousel_slide_link.title %}
           <div class="homepage-carousel-slide__link">
-            <a href="{{ slide_link_url }}" class="btn btn-primary">{{ node.field_carousel_slide_link.title  }}</a>
+            <a href="{{ slide_link_url }}" class="btn btn-secondary">{{ node.field_carousel_slide_link.title  }}</a>
           </div>
         {% endif %}
       </div>

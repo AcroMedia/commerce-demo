@@ -117,7 +117,7 @@ blockquote {
 a {
   color: $c-link;
   text-decoration: none;
-  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+  transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out, opacity .1s ease-in-out;
 
   &:hover,
   &:focus {
@@ -133,7 +133,7 @@ a {
   padding: 6px 20px;
   font-family: $f-primary;
   font-size: 16px;
-  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+  transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out, opacity .1s ease-in-out;
 }
 
 // Primary button.
@@ -176,6 +176,42 @@ a {
   background-color: $gray-lighter;
   border-color: $gray;
   color: $c-primary;
+}
+
+// Secondary button.
+.btn-secondary {
+  height: 50px;
+  padding: 9px 25px;
+  border:2px solid #fff;
+  border-radius: 0;
+  background: #000;
+  background: rgba(#000, 0.3);
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+
+  @media (max-width: $screen-sm-max) {
+    height: 40px;
+    padding: 6px 20px;
+    font-size: 16px;
+  }
+}
+.btn-secondary:hover,
+.btn-secondary:active,
+.btn-secondary:focus,
+.btn-secondary:active:hover,
+.btn-secondary:active:focus,
+.btn-secondary:active.focus,
+.btn-secondary.active:hover,
+.btn-secondary.active:focus,
+.btn-secondary.active.focus,
+.open > .btn-secondary.dropdown-toggle:hover,
+.open > .btn-secondary.dropdown-toggle:focus,
+.open > .btn-secondary.dropdown-toggle.focus {
+  background: rgba(#000, 0.9);
+  color: #fff;
 }
 
 // Link button.

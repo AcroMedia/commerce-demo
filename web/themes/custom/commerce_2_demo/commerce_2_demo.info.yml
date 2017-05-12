@@ -21,7 +21,6 @@ regions:
   site_search: 'Site Search'
   primary_nav: 'Primary Navigation'
   mobile_nav: 'Mobile Navigation'
-  carousel: 'Carousel'
   highlighted: 'Highlighted'
   above_content: 'Above Content'
   content: 'Content'

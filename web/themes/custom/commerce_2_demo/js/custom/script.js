@@ -85,7 +85,7 @@
       animation: 'fade',
       slideshow: true,
       controlNav: true,
-      directionNav: false,
+      directionNav: true,
       smoothHeight: true,
       prevText: '',
       nextText: ''

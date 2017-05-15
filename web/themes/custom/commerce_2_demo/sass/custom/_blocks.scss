@@ -89,7 +89,6 @@
 
     img {
       opacity: 1;
-      transition: opacity .1s ease-in-out;
     }
 
     &:hover, &:focus {
@@ -98,6 +97,50 @@
       }
     }
   }
+}
 
+/**
+ * 1 CTA block.
+ */
+.block-type-1-cta {
+  display: inline-block;
+  text-align: center;
+  vertical-align: text-top;
 
+  a {
+    display: inline-block;
+    position: relative;
+
+    .block-type-1-cta__content-wrapper {
+      position: absolute;
+      z-index: 5;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+
+    .field--name-field-icon img {
+      width: 100%;
+      max-width: 83px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .field--name-field-title {
+      font-family: $f-primary-condensed;
+      font-size: 48px;
+      font-weight: 300;
+      color: #fff;
+    }
+
+    .field--name-field-cta-image-large img {
+      opacity: 1;
+    }
+
+    &:hover, &:focus {
+      .field--name-field-cta-image-large img {
+        opacity: 0.85;
+      }
+    }
+  }
 }

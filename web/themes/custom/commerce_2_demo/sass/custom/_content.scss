@@ -3,6 +3,7 @@
  */
 .site-content {
   padding: 20px 0;
+  margin-bottom: 40px;
 
   @media (min-width: 768px) {
     padding: 50px 0;
@@ -14,6 +15,14 @@
     display: block;
     max-width: 100%;
     height: auto;
+  }
+
+  .region-above-content {
+    margin-bottom: 15px;
+  }
+
+  .region-below-content {
+    margin-top: 15px;
   }
 }
 

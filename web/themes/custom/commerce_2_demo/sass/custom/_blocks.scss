@@ -104,8 +104,14 @@
  */
 .block-type-1-cta {
   display: inline-block;
+  width: 68%;
   text-align: center;
-  vertical-align: text-top;
+  vertical-align: top;
+
+  @media (max-width: $screen-sm-max) {
+    width: 100%;
+    margin-bottom: 40px;
+  }
 
   a {
     display: inline-block;
@@ -113,10 +119,10 @@
 
     .block-type-1-cta__content-wrapper {
       position: absolute;
+      top: 47%;
       z-index: 5;
-      top: 50%;
-      left: 50%;
-      transform: translateY(-50%) translateX(-50%);
+      width: 100%;
+      transform: translateY(-50%);
     }
 
     .field--name-field-icon img {
@@ -124,13 +130,24 @@
       max-width: 83px;
       height: auto;
       margin: 0 auto;
+
+      @media (max-width: $screen-xs-max) {
+        max-width: 50px;
+      }
     }
 
     .field--name-field-title {
+      margin: 10px 0 16px;
       font-family: $f-primary-condensed;
       font-size: 48px;
       font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1em;
       color: #fff;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 40px;
+      }
     }
 
     .field--name-field-cta-image-large img {
@@ -140,6 +157,144 @@
     &:hover, &:focus {
       .field--name-field-cta-image-large img {
         opacity: 0.85;
+      }
+    }
+  }
+}
+
+/**
+ * Customer Service menu block.
+ */
+.block-customer-service-content-block {
+  display: inline-block;
+  width: 29%;
+  margin-left: 2%;
+  vertical-align: top;
+
+  @media (max-width: $screen-sm-max) {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  h2 {
+    display: block;
+    padding: 33px 30px 21px;
+    margin: 0;
+    background: #000;
+    font-size: 26px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+
+    @media (max-width: $screen-md-max) {
+      padding: 20px;
+      font-size: 22px;
+    }
+  }
+
+  ul {
+    width: 100%;
+
+    li {
+      display: block;
+      border-bottom: 1px solid #ccc;
+
+      a {
+        position: relative;
+        padding: 25px 10px 22px 90px;
+        font-size: 18px;
+        letter-spacing: 0.06em;
+        color: $gray-darker;
+
+        @media (max-width: $screen-md-max) {
+          padding: 17px 10px 17px 75px;
+          letter-spacing: 0;
+        }
+
+        &.is-active {
+          color: $gray-darker;
+        }
+
+        &:before {
+          display: inline-block;
+          position: absolute;
+          content: '';
+        }
+
+        &:hover, &:focus {
+          color: #000;
+        }
+      }
+
+      // Icons.
+      &.menu__item--shipping-information a:before {
+        top: 22px;
+        left: 33px;
+        width: 45px;
+        height: 35px;
+        background: url(../gfx/icon-shipping-box.svg) center center no-repeat;
+        background-size: 45px 35px;
+
+        @media (max-width: $screen-md-max) {
+          top: 14px;
+          left: 20px;
+        }
+      }
+
+      &.menu__item--returns--exchanges a:before {
+        top: 22px;
+        left: 35px;
+        width: 37px;
+        height: 31px;
+        background: url(../gfx/icon-circle-arrows.svg) center center no-repeat;
+        background-size: 37px 31px;
+
+        @media (max-width: $screen-md-max) {
+          top: 14px;
+          left: 22px;
+        }
+      }
+
+      &.menu__item--faq a:before {
+        top: 21px;
+        left: 37px;
+        width: 34px;
+        height: 34px;
+        background: url(../gfx/icon-question.svg) center center no-repeat;
+        background-size: 34px 34px;
+
+        @media (max-width: $screen-md-max) {
+          top: 13px;
+          left: 24px;
+        }
+      }
+
+      &.menu__item--contact-us a:before {
+        top: 22px;
+        left: 37px;
+        width: 36px;
+        height: 28px;
+        background: url(../gfx/icon-headset.svg) center center no-repeat;
+        background-size: 36px 28px;
+
+        @media (max-width: $screen-md-max) {
+          top: 14px;
+          left: 24px;
+        }
+      }
+
+      &.menu__item--live-chat a:before {
+        top: 20px;
+        left: 36px;
+        width: 38px;
+        height: 37px;
+        background: url(../gfx/icon-chat-2.svg) center center no-repeat;
+        background-size: 38px 37px;
+
+        @media (max-width: $screen-md-max) {
+          top: 12px;
+          left: 23px;
+        }
       }
     }
   }

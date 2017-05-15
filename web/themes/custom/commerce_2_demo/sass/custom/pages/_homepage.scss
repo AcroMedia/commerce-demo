@@ -233,6 +233,9 @@
     font-size: 60px;
   }
 }
-.homepage-carousel-slide__link-wrapper {
-  display: block;
+.homepage-carousel-slide__link {
+  .btn-secondary {
+    border: 2px solid #fff;
+    font-size: 20px;
+  }
 }

@@ -13,55 +13,61 @@
   }
 }
 
-// Promo Block
+// Promo Block - modifies Basic Promotion block default styles
 .site-header__promo {
-  padding: 6px 0;
-  font-size: 14px;
-  color: #fff;
+  padding: 5px 0;
 
-  @media (max-width: $screen-md-max) {
-    text-align: center;
-  }
+  .block-type-basic-promotion {
+    padding: 0;
+    margin: 0;
+    background: none;
+    text-align: left;
 
-  .field--name-field-icon {
-    display: inline-block;
-    padding-right: 2px;
-
-    img {
-      height: 18px;
-      width: auto;
+    @media (max-width: $screen-md-max) {
+      text-align: center;
     }
-  }
 
-  .field--name-field-title {
-    display: inline-block;
-    padding-right: 2px;
-    font-weight: 700;
-  }
+    .field--name-field-icon {
+      padding-right: 2px;
 
-  .field--name-field-short-promo {
-    display: inline-block;
-    padding-right: 2px;
-    font-weight: 600;
-    color: $c-primary;
-  }
-
-  .field--name-field-promo-link {
-    display: inline-block;
-
-    a {
-      position: relative;
-      color: #fff;
-
-      &:after {
-        position: relative;
-        display: inline-block;
-        margin-left: 3px;
-        content:">";
+      img {
+        height: 18px;
+        width: auto;
       }
+    }
 
-      &:hover, &:focus {
-        color: $c-primary;
+    .field--name-field-title {
+      padding: 0 2px 0 0;
+      font-size: 14px;
+    }
+
+    .field--name-field-short-promo {
+      padding: 0 2px 0 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .field--name-field-promo-link {
+      margin: 0;
+
+      a {
+        padding: 0;
+        background: none;
+        border: none;
+        font-weight: normal;
+        text-transform: lowercase;
+
+        &:after {
+          position: relative;
+          display: inline-block;
+          margin-left: 3px;
+          font-family: $f-primary;
+          content:">";
+        }
+
+        &:hover, &:focus {
+          color: $c-primary;
+        }
       }
     }
   }

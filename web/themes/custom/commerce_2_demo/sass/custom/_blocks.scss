@@ -299,3 +299,96 @@
     }
   }
 }
+
+/**
+ * Newsletter Sign-up webform block.
+ * @TODO - If another webform block is added, need to find a better way to add this icon.
+ */
+.block-webform-block {
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  background: #000 url(../gfx/icon-heart-big.svg) 11% 20% no-repeat;
+  background-size: 368px 234px;
+
+  @media (max-width: $screen-sm-max) {
+    background-position: 49% center;
+  }
+
+  &:before {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin-right: 5px;
+    width: 128px;
+    height: 81px;
+    background: url(../gfx/icon-heart.svg) center center no-repeat;
+    background-size: 128px 81px;
+    content: '';
+
+    @media (max-width: $screen-sm-max) {
+      margin-right: 0;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+form.webform-submission-newsletter-sing-up-node-1-form {
+  display: inline-block;
+  vertical-align: top;
+
+  h2 {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 10px 5px 0;
+    margin: 0;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  h3 {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 12px 5px 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  // H6 only used to break to a new line.
+  h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+  }
+
+  .form-optional {
+    display: none;
+  }
+
+  .form-item {
+    display: inline-block;
+    max-width: 290px;
+    margin: 3px 6px 10px 0;
+
+    .form-control {
+      font-size: 16px;
+    }
+  }
+
+  .form-actions {
+    display: inline-block;
+    margin: 0;
+
+    .btn-primary {
+      background-color: darken($c-primary, 10%);
+      border-color: darken($c-primary, 10%);
+
+      &:hover, &:focus {
+        background-color: $c-primary;
+        border-color: $c-primary;
+      }
+    }
+  }
+}

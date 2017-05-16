@@ -31,7 +31,7 @@
             {{ page.above_content }}
           {% endif %}
           {% if page.content %}
-            {{ page.content }}
+            {{ page.content|without('system_main') }}
           {% endif %}
           {% if page.below_content %}
             {{ page.below_content }}

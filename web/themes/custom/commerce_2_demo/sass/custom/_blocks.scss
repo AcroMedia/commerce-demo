@@ -1,4 +1,17 @@
 /**
+ * Block general.
+ */
+.block-views {
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+}
+
+/**
  * Basic Promotion block.
  */
 .block-type-basic-promotion {

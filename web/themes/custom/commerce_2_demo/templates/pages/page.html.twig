@@ -51,7 +51,7 @@
 #}
 {% set page_sidebar_rendered = render_var(page.page_sidebar) %}
 {# Set column class based on sidebar. #}
-{% set col_class = page_sidebar_rendered ? 'col-sm-8 col-md-9' : 'col-sm-12' %}
+{% set col_class = page_sidebar_rendered ? 'col-sm-8 col-md-10' : 'col-sm-12' %}
 
 {# Site Header. #}
 {% include base_path ~ directory ~ '/templates/pages/includes/site_header.html.twig' %}
@@ -62,7 +62,7 @@
   <div class="container">
     <div class="row">
       {% if page_sidebar_rendered %}
-        <div class="col-sm-4 col-md-3 hidden-xs">
+        <div class="col-sm-4 col-md-2 hidden-xs">
           <aside class="site-sidebar" role="complementary">
             {{ page.page_sidebar }}
           </aside>

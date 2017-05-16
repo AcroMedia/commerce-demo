@@ -1,0 +1,190 @@
+/**
+ * Product teaser.
+ */
+
+.view-products,
+.view-featured-products {
+  margin-bottom: 30px;
+
+  .view-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+
+    .views-row {
+      display: inline-block;
+      vertical-align: top;
+      width: 18%;
+      margin: 0 2% 20px 0;
+
+      @media (max-width: $screen-sm-max) {
+        width: 30%;
+        margin: 0 3% 20px 0;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        width: 30%;
+      }
+
+      @media (max-width: 485px) {
+        width: 47%;
+      }
+
+      a.product--teaser {
+        display: block;
+        line-height: 1.3em;
+        color: #000;
+
+        .product--thumbnail {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+          max-width: 170px;
+          height: 218px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          overflow: hidden;
+
+          @media (max-width: $screen-md-max) {
+            height: 180px;
+          }
+
+          @media (max-width: $screen-sm-max) {
+            height: 180px;
+          }
+
+          @media (max-width: $screen-xs-max) {
+            height: 165px;
+          }
+
+          @media (max-width: 485px) {
+            height: 175px;
+          }
+
+          img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+
+            &.no-product-thumbnail {
+              opacity: 0.15;
+            }
+          }
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+
+        .field--name-price {
+          margin-bottom: 8px;
+          font-size: 24px;
+          font-weight: 300;
+          color: $c-primary;
+
+          .field__label {
+            display: none;
+          }
+        }
+
+        .field--name-title {
+          margin-bottom: 2px;
+
+          &:hover {
+            color: $c-primary;
+          }
+        }
+
+        .field--name-field-brand {
+          .field__item {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+
+            &:after {
+              content: ',';
+              margin-right: 2px;
+            }
+
+            &:last-of-type:after {
+              content: '';
+            }
+          }
+        }
+
+        &:focus {
+          .product--thumbnail {
+            opacity: 0.8;
+          }
+
+          .field--name-title {
+            color: $c-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Homepage full width teaser blocks.
+.view-featured-products {
+  border-bottom: 1px solid $gray;
+
+  .view-content {
+    justify-content: space-between;
+
+    .views-row {
+      width: 15%;
+      margin: 0 0 20px 0;
+
+      @media (max-width: $screen-sm-max) {
+        width: 22%;
+
+        &:nth-of-type(5),
+        &:nth-of-type(6) {
+          display: none;
+        }
+      }
+
+      @media (max-width: $screen-xs-max) {
+        width: 30%;
+
+        &:nth-of-type(4),
+        &:nth-of-type(5),
+        &:nth-of-type(6) {
+          display: none;
+        }
+      }
+
+      @media (max-width: 485px) {
+        width: 100%;
+        text-align: center;
+      }
+
+      a.product--teaser {
+        .product--thumbnail {
+          @media (max-width: $screen-md-max) {
+            height: 180px;
+          }
+
+          @media (max-width: $screen-sm-max) {
+            height: 200px;
+          }
+
+          @media (max-width: $screen-xs-max) {
+            height: 175px;
+          }
+
+          @media (max-width: 485px) {
+            height: 218px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Product full.
+ */

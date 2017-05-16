@@ -10,6 +10,7 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\commerce_product\Entity\Product;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -253,5 +254,35 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
   if ($form_id == 'comment_node_comment_form') {
     // Update submit button text.
     $form['actions']['submit']['#value'] = t('Post Comment');
+  }
+}
+
+/**
+ * Implements hook_preprocess(&$variables, $hook).
+ */
+function commerce_2_demo_preprocess(&$variables, $hook) {
+  // Commerce Product.
+  if (isset($variables['elements']['#entity_type']) && $hook == 'commerce_product') {
+    if (isset($variables['elements']['#commerce_product'])) {
+      // Set base path variable.
+      $variables['base_path'] = base_path();
+
+      // Get view mode & assign variable.
+      $view_mode = $variables['elements']['#view_mode'];
+      $variables['view_mode'] = $view_mode;
+
+      // Get product and variations.
+      $product = $variables['elements']['#commerce_product'];
+      $product_variations = $product->getVariations();
+
+      if (isset($product_variations[0]->field_image->entity)) {
+        $field_image = $product_variations[0]->field_image->entity;
+
+        // Image.
+        $variables['product_image_full_url'] = ImageStyle::load('product_large')->buildUrl($field_image->getFileUri());
+        // Image thumbnail.
+        $variables['product_image_thumb_url'] = ImageStyle::load('product_thumb')->buildUrl($field_image->getFileUri());
+      }
+    }
   }
 }

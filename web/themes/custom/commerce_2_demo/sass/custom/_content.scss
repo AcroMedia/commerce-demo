@@ -17,10 +17,6 @@
     height: auto;
   }
 
-  > .container > .equal-height {
-    display: flex;
-  }
-
   .region-above-content {
     margin-bottom: 15px;
   }
@@ -39,6 +35,10 @@
  * Sidebar.
  */
 .site-sidebar {
+  height: 100%;
+  padding: 18px 10px 18px 15px;
+  background-color: $gray-light;
+
   .menu {
     margin: 0;
   }

@@ -51,7 +51,7 @@
 #}
 {% set page_sidebar_rendered = render_var(page.blog_sidebar) %}
 {# Set row and column class based on sidebar. #}
-{% set row_class = page_sidebar_rendered ? 'equal-height' %}
+{% set row_class = page_sidebar_rendered ? 'row-eq-height' %}
 {% set col_class = page_sidebar_rendered ? 'col-sm-8 col-md-9' : 'col-md-12' %}
 
 {# Site Header. #}

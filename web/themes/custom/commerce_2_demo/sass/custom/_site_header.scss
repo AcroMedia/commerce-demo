@@ -153,6 +153,10 @@
               content: '\f078';
             }
 
+            &:hover, &:focus {
+              color: #fff ;
+            }
+
             a {
               color: #999;
 
@@ -355,6 +359,7 @@
     vertical-align: middle;
     background: url(../gfx/icon-cart.svg) center center no-repeat;
     background-size: 34px 29px;
+    transition: all .2s ease-in-out;
   }
 
   .cart-block--summary__count {
@@ -364,11 +369,81 @@
     vertical-align: middle;
     margin: 0;
     background-color: #eaeaea;
+    border: 1px solid #eaeaea;
     border-radius: $border-radius;
     font-size: 20px;
     font-weight: 600;
     text-align: center;
     color: #333;
+    transition: border .2s ease-in-out;
+  }
+
+  &:hover, &:focus {
+    .cart-block--summary__icon {
+      margin-right: 6px;
+    }
+
+    .cart-block--summary__count {
+      border: 1px solid $gray;
+    }
+  }
+}
+
+/**
+ * Commerce cart block expanded.
+ */
+.cart-block--contents {
+  width: 250px;
+  margin-top: 5px;
+  border: 1px solid $gray;
+  border-radius: $border-radius;
+
+  .cart-block--contents__items {
+    overflow: visible;
+    max-height: none;
+
+    table {
+      tr {
+        vertical-align: top;
+        border-bottom: 1px solid $gray-light;
+
+        td {
+          padding: 5px;
+          font-size: 13px;
+          line-height: 1.1em;
+          text-align: left;
+
+          &.views-field-title {
+            font-weight: 600;
+          }
+
+          &.views-field-total-price__number {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  .cart-block--contents__links {
+    a {
+      display: inline-block;
+      padding: 5px 15px;
+      margin-top: 10px;
+      background-color: $c-primary;
+      border-radius: $border-radius;
+      font-family: $f-primary;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #fff;
+      transition: background-color .1s ease-in-out;
+
+
+      &:hover, &:focus {
+        background-color: darken($c-primary, 10%);
+      }
+    }
   }
 }
 
@@ -396,6 +471,16 @@
       display: inline-block;
       margin: 0;
 
+      i {
+        position: absolute;
+        top: 3px;
+        left: 6px;
+        font-size: 19px;
+        color: #000;
+        pointer-events: none;
+        transition: color .2s ease-in-out;
+      }
+
       .button {
         width: 26px;
         height: 28px;
@@ -403,15 +488,15 @@
         background-color: #fff;
         border-color: transparent;
         font-size: 0;
+
+        &:hover, &:focus {
+          + i {
+            color: $c-primary;
+          }
+        }
       }
 
-      i {
-        position: absolute;
-        top: 3px;
-        left: 6px;
-        font-size: 19px;
-        pointer-events: none;
-      }
+
     }
   }
 }

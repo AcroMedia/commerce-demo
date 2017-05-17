@@ -26,6 +26,7 @@ h1 {
   font-family: $f-primary;
   font-size: 50px;
   font-weight: 300;
+  line-height: 1.1;
   color: #333;
 
   @media (max-width: $screen-xs-max) {

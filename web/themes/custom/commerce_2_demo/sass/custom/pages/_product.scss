@@ -40,25 +40,25 @@
           display: inline-block;
           width: 100%;
           max-width: 170px;
-          height: 218px;
+          height: 170px;
           margin-bottom: 15px;
           border: 1px solid #ccc;
           overflow: hidden;
 
           @media (max-width: $screen-md-max) {
-            height: 180px;
+            height: 140px;
           }
 
           @media (max-width: $screen-sm-max) {
-            height: 180px;
+            height: 140px;
           }
 
           @media (max-width: $screen-xs-max) {
-            height: 165px;
+            height: 135px;
           }
 
           @media (max-width: 485px) {
-            height: 175px;
+            height: 170px;
           }
 
           img {
@@ -127,7 +127,7 @@
   }
 }
 
-// Homepage full width teaser blocks.
+// Full page width teaser blocks.
 .view-featured-products {
   border-bottom: 1px solid $gray;
 
@@ -158,26 +158,29 @@
       }
 
       @media (max-width: 485px) {
-        width: 100%;
-        text-align: center;
+        width: 47%;
+
+        &:nth-of-type(4) {
+          display: inline-block;
+        }
       }
 
       a.product--teaser {
         .product--thumbnail {
           @media (max-width: $screen-md-max) {
-            height: 180px;
+            height: 140px;
           }
 
           @media (max-width: $screen-sm-max) {
-            height: 200px;
+            height: 156px;
           }
 
           @media (max-width: $screen-xs-max) {
-            height: 175px;
+            height: 135px;
           }
 
           @media (max-width: 485px) {
-            height: 218px;
+            height: 170px;
           }
         }
       }
@@ -185,6 +188,122 @@
   }
 }
 
+// Product page teaser block.
+.path-product .view-featured-products {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
 /**
  * Product full.
  */
+.product--full {
+  // Back button.
+  .back-and-share {
+    @media (max-width: 420px) {
+      text-align: center;
+    }
+  }
+
+  a.back-to-products {
+    float: left;
+    display: inline-block;
+    position: relative;
+    padding: 3px 17px 4px 11px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom: 3px solid #ccc;
+    font-size: 14px;
+    color: #000;
+
+    @media (max-width: 420px) {
+      float: none;
+    }
+
+    &:before {
+      position: relative;
+      display: inline-block;
+      margin-right: 12px;
+      font-size: 12px;
+      font-family: FontAwesome;
+      content: '\f053';
+      color: #666;
+    }
+
+    &:hover, &:focus {
+      color: $c-primary;
+
+      &:before {
+        color: $c-primary;
+      }
+    }
+  }
+
+  // ShareThis.
+  .sharethis-inline-share-buttons {
+    display: inline-block !important;
+    width: 200px;
+    float: right;
+    margin-bottom: 20px;
+
+    @media (max-width: 420px) {
+      display: block !important;
+      width: 100%;
+      float: none;
+      text-align: center !important;
+    }
+  }
+
+  // Product images.
+  .field--name-field-image {
+    border: 1px solid #ccc;
+  }
+
+  // Product intro.
+  .product--intro {
+    padding-left: 30px;
+
+    .field--name-field-brand {
+      .field__item {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+
+    .page-title {
+      margin-bottom: 0;
+    }
+
+    .field--name-price {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+      color: $c-primary;
+    }
+
+    .field--name-field-short-description {
+      margin-bottom: 18px;
+    }
+
+    .field--name-variations {
+      label {
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $c-primary;
+      }
+
+      .form-required {
+        display: none;
+      }
+
+      select {
+        max-width: 370px;
+        height: 40px;
+        padding: 7px 12px;
+        border-radius: 0;
+      }
+    }
+  }
+}

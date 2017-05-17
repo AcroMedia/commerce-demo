@@ -6,7 +6,7 @@
   margin-bottom: 40px;
 
   @media (min-width: 768px) {
-    padding: 50px 0;
+    padding: 20px 0 50px;
   }
   .page-title {
     margin-top: 0;
@@ -116,6 +116,9 @@ textarea,
 textarea.resize-vertical {
   // Remove browser resizer in bottom right.
   resize: none;
+}
+.select-wrapper {
+  margin-bottom: -4px;
 }
 
 /**

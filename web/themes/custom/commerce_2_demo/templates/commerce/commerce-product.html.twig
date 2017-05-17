@@ -40,7 +40,41 @@
 
   {# Product full page. #}
   <article{{ attributes }} class="product product--full">
-    {{- product|without('variation_attributes') -}}
+    <div class="row">
+      <div class="col-xs-12 back-and-share">
+        {# Back button. #}
+        <a href="/products" class="back-to-products">{{ 'Back to Products'|t }}</a>
+
+        {# Share. #}
+        <div class="sharethis-inline-share-buttons"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      {# Product images. #}
+      <div class="col-sm-12 col-md-6">
+        {{ product.variation_field_image }}
+      </div>
+
+      {# Product intro. #}
+      <div class="col-sm-12 col-md-6">
+        <div class="product--intro">
+          {{ product.field_brand }}
+          <h1 class="page-title">{{ product_entity.title.value }}</h1>
+          {{ product.variation_price }}
+          {{ product.field_short_description }}
+          {{ product.variations }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      {# Product details. #}
+      <div class="col-sm-12">
+        {{ product.body }}
+        {{ product.field_specifications }}
+      </div>
+    </div>
   </article>
 
 {% endif %}

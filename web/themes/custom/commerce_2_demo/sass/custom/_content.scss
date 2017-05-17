@@ -17,6 +17,10 @@
     height: auto;
   }
 
+  > .container > .equal-height {
+    display: flex;
+  }
+
   .region-above-content {
     margin-bottom: 15px;
   }

@@ -50,8 +50,9 @@
   Issue: https://www.drupal.org/node/953034.
 #}
 {% set page_sidebar_rendered = render_var(page.page_sidebar) %}
-{# Set column class based on sidebar. #}
-{% set col_class = page_sidebar_rendered ? 'col-sm-8 col-md-10' : 'col-sm-12' %}
+{# Set row and column class based on sidebar. #}
+{% set row_class = page_sidebar_rendered ? 'equal-height' %}
+{% set col_class = page_sidebar_rendered ? 'col-sm-9 col-md-10' : 'col-sm-12' %}
 
 {# Site Header. #}
 {% include base_path ~ directory ~ '/templates/pages/includes/site_header.html.twig' %}
@@ -60,9 +61,9 @@
 {# Main Content. #}
 <div class="site-content">
   <div class="container">
-    <div class="row">
+    <div class="row {{ row_class }}">
       {% if page_sidebar_rendered %}
-        <div class="col-sm-4 col-md-2 hidden-xs">
+        <div class="col-sm-3 col-md-2 hidden-xs">
           <aside class="site-sidebar" role="complementary">
             {{ page.page_sidebar }}
           </aside>

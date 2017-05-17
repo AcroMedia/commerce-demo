@@ -50,7 +50,8 @@
   Issue: https://www.drupal.org/node/953034.
 #}
 {% set page_sidebar_rendered = render_var(page.blog_sidebar) %}
-{# Set column class based on sidebar. #}
+{# Set row and column class based on sidebar. #}
+{% set row_class = page_sidebar_rendered ? 'equal-height' %}
 {% set col_class = page_sidebar_rendered ? 'col-sm-8 col-md-9' : 'col-md-12' %}
 
 {# Site Header. #}
@@ -64,7 +65,7 @@
       <h3>{{ title }}</h3>
     {% endif %}
 
-    <div class="row">
+    <div class="row {{ row_class }}">
       <div class="{{ col_class }}">
         <main class="content__main-content blog_content__main-content clearfix" role="main">
           <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>

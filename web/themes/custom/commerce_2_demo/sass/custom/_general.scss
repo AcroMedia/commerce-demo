@@ -239,10 +239,15 @@ a {
 
   & > li {
     margin-bottom: -1px;
-    margin-right: 10px;
+    margin-right: 8px;
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      margin-right: 0;
+    }
 
     & > a {
-      padding: 12px 30px 10px;
+      padding: 9px 36px 7px;
       border: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
       font-weight: 600;
@@ -254,10 +259,16 @@ a {
         border-bottom: 1px solid #ccc;
         background-color: $gray-light !important;
       }
+
+      @media (max-width: $screen-xs-max) {
+        width: 100%;
+        background-color: $gray-light;
+      }
     }
 
     &.active {
       > a {
+        position: relative;
         border: 1px solid #ccc;
         border-bottom: 1px solid #fff;
         color: $c-primary;
@@ -267,7 +278,45 @@ a {
           border-bottom: 1px solid #fff;
           color: $c-primary;
         }
+
+        @media (max-width: $screen-xs-max) {
+          border-bottom: 1px solid #ccc;
+          background-color: #fff;
+
+          &:before {
+            position: relative;
+            display: inline-block;
+            margin-right: 5px;
+            font-size: 12px;
+            font-family: FontAwesome;
+            content: '\f054';
+            color: #ccc;
+          }
+
+          &:hover, &:focus, &:active {
+            border-bottom: 1px solid #ccc;
+            background-color: #fff;
+          }
+        }
       }
+    }
+  }
+}
+
+.tab-content {
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-top: none;
+
+  // Removes top margin if heading is the first element in content.
+  .field--name-body {
+    &>h1:first-child,
+    &>h2:first-child,
+    &>h3:first-child,
+    &>h4:first-child,
+    &>h5:first-child,
+    &>h6:first-child {
+      margin-top: 0;
     }
   }
 }

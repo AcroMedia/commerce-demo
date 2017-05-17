@@ -69,10 +69,58 @@
     </div>
 
     <div class="row">
-      {# Product details. #}
       <div class="col-sm-12">
-        {{ product.body }}
-        {{ product.field_specifications }}
+        {# Additional details. #}
+        <div class="additional-details">
+          {# Tabs. #}
+          <ul id="product-tabs" class="nav nav-tabs" role="tablist">
+            {% if product.body|render|trim is not empty %}
+              <li role="presentation">
+                <a href="#description" aria-controls="description" role="tab" data-toggle="tab">
+                  {{ 'Description'|t }}
+                </a>
+              </li>
+            {% endif %}
+
+            {% if product.field_specifications|render|trim is not empty %}
+              <li role="presentation">
+                <a href="#specifications" aria-controls="specifications" role="tab" data-toggle="tab">
+                  {{ 'Specifications'|t }}
+                </a>
+              </li>
+            {% endif %}
+
+            {% if reviews|render|trim is not empty %}
+              <li role="presentation">
+                <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">
+                  {{ 'Reviews'|t }}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+
+          {# Tab content. #}
+          <div class="tab-content">
+            {% if product.body|render|trim is not empty %}
+              <div role="tabpanel" class="tab-pane fade" id="description">
+                {{ product.body }}
+              </div>
+            {% endif %}
+
+            {% if product.field_specifications|render|trim is not empty %}
+              <div role="tabpanel" class="tab-pane fade" id="specifications">
+                {{ product.field_specifications }}
+              </div>
+            {% endif %}
+
+            {% if reviews|render|trim is not empty %}
+              <div role="tabpanel" class="tab-pane fade" id="reviews">
+                reviews
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        {# / Additional details. #}
       </div>
     </div>
   </article>

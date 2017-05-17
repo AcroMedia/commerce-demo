@@ -104,6 +104,14 @@
     }
   });
 
+  // Product page tabs
+  $('#product-tabs a:first').tab('show'); // Show first tab initially
+
+  $('#product-tabs a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  });
+
   // Run scripts after window fully loads.
   $(window).load(function(){
     // Language switcher.

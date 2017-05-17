@@ -3247,7 +3247,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/profile",
-                "reference": "e6034a130b3df0d360fadb6d83fbf18d986df44b"
+                "reference": "f2e3054ad2277fa2ac0e5ed0deeb781c19ead159"
             },
             "require": {
                 "drupal/core": "~8.1",
@@ -3294,7 +3294,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/profile"
             },
-            "time": "2017-05-04 12:43:06"
+            "time": "2017-05-09 02:35:27"
         },
         {
             "name": "drupal/search_api",

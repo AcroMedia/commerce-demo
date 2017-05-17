@@ -257,12 +257,17 @@
 
   // Product images.
   .field--name-field-image {
+    margin: 0 auto 40px;
     border: 1px solid #ccc;
   }
 
   // Product intro.
   .product--intro {
     padding-left: 30px;
+
+    @media (max-width: $screen-sm-max) {
+      padding: 0;
+    }
 
     .field--name-field-brand {
       .field__item {
@@ -273,7 +278,13 @@
     }
 
     .page-title {
-      margin-bottom: 0;
+      @media (max-width: $screen-md-max) {
+        font-size: 44px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 36px;
+      }
     }
 
     .field--name-price {
@@ -299,11 +310,33 @@
       }
 
       select {
+        position: relative;
         max-width: 370px;
         height: 40px;
-        padding: 7px 12px;
+        padding: 7px 40px 7px 19px;
         border-radius: 0;
+        background: url(../gfx/select-arrow.svg) calc(100% - 9px) center no-repeat;
+        background-size: 21px 10px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
       }
     }
+
+    .form-actions {
+      margin-top: 35px;
+
+      input {
+        padding: 8px 27px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+    }
+  }
+
+  // Additional details tabs.
+  .additional-details {
+    margin: 38px 0 10px;
   }
 }

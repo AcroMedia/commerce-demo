@@ -1,0 +1,118 @@
+/**
+ * Cart.
+ */
+.view-commerce-cart-form {
+  .cart-mobile-message {
+    padding-bottom: 10px;
+
+    @media (min-width: 630px) {
+      display: none;
+    }
+  }
+
+  table {
+
+    // Table head.
+    thead {
+      th.views-field-edit-quantity {
+        text-align: center;
+      }
+
+      th.views-field-unit-price__number,
+      th.views-field-total-price__number {
+        text-align: right;
+      }
+    }
+
+    // Table body.
+    tbody {
+      tr {
+        td.views-field-remove-button {
+          position: relative;
+
+          input {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            padding: 0;
+            font-size: 0;
+          }
+
+          &:after {
+            position: absolute;
+            top: calc(50% - 17px);
+            left: 17px;
+            font-size: 23px;
+            font-family: FontAwesome;
+            content: '\f014';
+            color: #fff;
+            pointer-events: none;
+          }
+        }
+
+        td.views-field-purchased-entity {
+          img {
+            width: 80px;
+            height: 80px;
+            border: 1px solid $gray;
+          }
+
+          div.field {
+            display: none;
+          }
+
+          div.field--name-field-image {
+            display: block;
+          }
+        }
+
+        td.views-field-edit-quantity {
+          text-align: center;
+
+          input {
+            text-align: center;
+          }
+
+          .form-optional {
+            display: none;
+          }
+        }
+
+        td.views-field-unit-price__number,
+        td.views-field-total-price__number {
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .order-total-line {
+    padding: 0 5px;
+    text-align: right;
+
+    .order-total-line-label,
+    .order-total-line-value {
+      width: 150px;
+    }
+  }
+
+  .form-actions {
+    text-align: right;
+
+    .btn {
+      margin-right: 0;
+    }
+
+    #edit-submit {
+      background-color: $gray-lighter;
+      border-color: $gray-light;
+      color: #000;
+
+      &:hover, &:focus {
+        background-color: $gray-lighter;
+        border-color: $gray;
+        color: $c-primary;
+      }
+    }
+  }
+}

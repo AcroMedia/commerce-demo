@@ -104,13 +104,16 @@
     }
   });
 
-  // Product page tabs
+  // Product page tabs.
   $('#product-tabs a:first').tab('show'); // Show first tab initially
 
   $('#product-tabs a').click(function (e) {
     e.preventDefault()
     $(this).tab('show')
   });
+
+  // Add responsive table class around tables.
+  $('table').wrap( "<div class='table-responsive'></div>" );
 
   // Run scripts after window fully loads.
   $(window).load(function(){

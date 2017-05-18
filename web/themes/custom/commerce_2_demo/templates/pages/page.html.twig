@@ -47,6 +47,7 @@
 #}
 {#
   Render sidebar to be able to check if it is truly empty.
+  IMPORTANT: Only works when debug is OFF.
   Issue: https://www.drupal.org/node/953034.
 #}
 {% set page_sidebar_rendered = render_var(page.page_sidebar) %}

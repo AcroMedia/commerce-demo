@@ -10,6 +10,7 @@
   }
   .page-title {
     margin-top: 0;
+    margin-bottom: 30px;
   }
   img {
     display: block;
@@ -322,6 +323,38 @@ a.card:hover {
 /**
  * Tables.
  */
+table {
+  width: 100%;
+  min-width: 600px;
+  margin-bottom: 20px;
+
+  // Table head.
+  thead {
+    background-color: $gray-light;
+    border-bottom: 1px solid $gray;
+    font-size: 14px;
+
+    th {
+      padding: 5px;
+    }
+  }
+
+  // Table body.
+  tbody {
+    tr {
+      border-bottom: 1px solid $gray;
+
+      td {
+        padding: 5px;
+      }
+    }
+  }
+}
+
+.table-responsive {
+  border: 0;
+}
+
 .table-bordered thead {
   background: $c-secondary;
   color: #fff;

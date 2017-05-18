@@ -11,6 +11,8 @@
   }
 
   table {
+    min-width: 600px;
+    margin-bottom: 20px;
 
     // Table head.
     thead {
@@ -113,6 +115,52 @@
         border-color: $gray;
         color: $c-primary;
       }
+    }
+  }
+}
+
+/**
+ * Login.
+ */
+.form-wrapper__returning-customer .form-optional {
+  display: none;
+}
+
+.form-wrapper__login-option input.button,
+#edit-actions-next {
+  margin-right: 10px;
+}
+
+/**
+ * Order info.
+ */
+
+// Summary.
+.view-commerce-checkout-order-summary {
+  padding: 15px;
+  border: 1px solid $gray;
+  border-radius: $border-radius;
+
+  table {
+    margin-bottom: 20px;
+
+    // Table body.
+    tbody {
+      tr {
+        td.views-field-total-price__number {
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .order-total-line {
+    padding: 0 5px;
+    text-align: right;
+
+    .order-total-line-label,
+    .order-total-line-value {
+      width: 150px;
     }
   }
 }

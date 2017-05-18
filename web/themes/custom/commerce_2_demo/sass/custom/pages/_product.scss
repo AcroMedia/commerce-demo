@@ -271,9 +271,19 @@
 
     .field--name-field-brand {
       .field__item {
+        display: inline-block;
         font-size: 18px;
         font-weight: 600;
         color: #333;
+
+        &:after {
+          content: ',';
+          margin-right: 2px;
+        }
+
+        &:last-of-type:after {
+          content: '';
+        }
       }
     }
 

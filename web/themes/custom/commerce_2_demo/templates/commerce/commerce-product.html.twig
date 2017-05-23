@@ -123,6 +123,17 @@
         {# / Additional details. #}
       </div>
     </div>
+
+    {# Recommended products. #}
+    {% if product.field_recommended_products|render|trim is not empty %}
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="recommended-products">
+            {{ product.field_recommended_products }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
   </article>
 
 {% endif %}

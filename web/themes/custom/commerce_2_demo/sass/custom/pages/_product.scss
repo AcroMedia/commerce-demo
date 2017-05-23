@@ -2,15 +2,18 @@
  * Product teaser.
  */
 
+.recommended-products,
 .view-products,
 .view-featured-products {
   margin-bottom: 30px;
 
+  .field__items,
   .view-content {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
 
+    .field__item,
     .views-row {
       display: inline-block;
       vertical-align: top;
@@ -30,6 +33,18 @@
         width: 47%;
       }
 
+      // Resets.
+      .field__items {
+        display: inline-block;
+        width: 100%;
+      }
+
+      .field__item {
+        width: auto;
+        margin: 0;
+      }
+
+      // Fields.
       a.product--teaser {
         display: block;
         line-height: 1.3em;
@@ -78,6 +93,7 @@
         }
 
         .field--name-price {
+          width: 100%;
           margin-bottom: 8px;
           font-size: 24px;
           font-weight: 300;
@@ -89,6 +105,7 @@
         }
 
         .field--name-title {
+          width: 100%;
           margin-bottom: 2px;
 
           &:hover {
@@ -128,12 +145,15 @@
 }
 
 // Full page width teaser blocks.
+.recommended-products,
 .view-featured-products {
   border-bottom: 1px solid $gray;
 
+  .field__items,
   .view-content {
     justify-content: space-between;
 
+    .field__item,
     .views-row {
       width: 15%;
       margin: 0 0 20px 0;
@@ -165,6 +185,18 @@
         }
       }
 
+      // Resets.
+      .field__items {
+        display: inline-block;
+        width: 100%;
+      }
+
+      .field__item {
+        width: auto;
+        margin: 0;
+      }
+
+      // Fields.
       a.product--teaser {
         .product--thumbnail {
           @media (max-width: $screen-md-max) {
@@ -188,10 +220,34 @@
   }
 }
 
-// Product page teaser block.
-.path-product .view-featured-products {
+// Product page recommended products.
+.recommended-products {
   border-bottom: none;
   margin-bottom: 0;
+
+  .field__label {
+    margin-top: 30px;
+    margin-bottom: 12px;
+    font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    color: #cc0000;
+  }
+
+  .field__items .field__item {
+    .field__items {
+      display: inline-block;
+      width: 100%;
+    }
+
+    .field__item {
+      width: auto;
+      margin: 0;
+    }
+  }
 }
 
 /**

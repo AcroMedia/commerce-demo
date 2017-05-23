@@ -283,6 +283,43 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
         // Image thumbnail.
         $variables['product_image_thumb_url'] = ImageStyle::load('product_thumb')->buildUrl($field_image->getFileUri());
       }
+
+      // Product reviews.
+      if (isset($product->field_product_reviews)) {
+        $field_product_reviews = $product->field_product_reviews->getValue();
+
+        // Number of reviews (if there are reviews).
+        $variables['product_reviews_count'] = $field_product_reviews[0]['comment_count'];
+
+        // If a product has reviews, we average out the review ratings.
+        $comments = $variables['elements']['field_product_reviews'][0]['comments'];
+        $ratingSum = 0;
+        $ratingCount = 0;
+        $ratingAverage = 0;
+
+        foreach($comments as $comment) {
+          if (is_array($comment) && isset($comment['#comment'])) {
+            $rating = $comment['#comment']->field_review_rating->value;
+            $ratingSum += floatval($rating);
+            $ratingCount++;
+          }
+        }
+
+        if($ratingCount !== 0) {
+          $ratingAverage = $ratingSum / $ratingCount;
+
+          // Round to nearest half integer (ie 2, 2.5, 3, 3.5 etc).
+          $ratingAverage = round($ratingAverage * 2) / 2;
+        }
+
+        // Set the variable for the product.
+        $variables['rating_average'] = $ratingAverage;
+      }
+
+      else {
+        // Number of reviews (if none).
+        $variables['product_reviews_count'] = 0;
+      }
     }
   }
 }

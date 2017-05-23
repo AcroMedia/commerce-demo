@@ -90,13 +90,11 @@
               </li>
             {% endif %}
 
-            {% if reviews|render|trim is not empty %}
-              <li role="presentation">
-                <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">
-                  {{ 'Reviews'|t }}
-                </a>
-              </li>
-            {% endif %}
+            <li role="presentation">
+              <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">
+                {{ 'Reviews'|t }} <span class="badge">{{ product_reviews_count }}</span>
+              </a>
+            </li>
           </ul>
 
           {# Tab content. #}
@@ -113,11 +111,23 @@
               </div>
             {% endif %}
 
-            {% if reviews|render|trim is not empty %}
-              <div role="tabpanel" class="tab-pane fade" id="reviews">
-                reviews
+            <div role="tabpanel" class="tab-pane fade" id="reviews">
+              <input type="checkbox" id="submit-review">
+              <label class="btn btn-primary btn-sm" for="submit-review">Submit a Review</label>
+              <div class="review-rating">
+                <p>Overall Rating</p>
+                <span class="{{ rating_average >= 1 ? 'filled' : ''}}"></span>
+                <span class="half {{ rating_average >= 1.5 ? 'filled' : ''}}"></span>
+                <span class="{{ rating_average >= 2 ? 'filled' : ''}}"></span>
+                <span class="half {{ rating_average >= 2.5 ? 'filled' : ''}}"></span>
+                <span class="{{ rating_average >= 3 ? 'filled' : ''}}"></span>
+                <span class="half {{ rating_average >= 3.5 ? 'filled' : ''}}"></span>
+                <span class="{{ rating_average >= 4 ? 'filled' : ''}}"></span>
+                <span class="half {{ rating_average >= 4.5 ? 'filled' : ''}}"></span>
+                <span class="{{ rating_average == 5 ? 'filled' : ''}}"></span>
               </div>
-            {% endif %}
+              {{ product.field_product_reviews }}
+            </div>
           </div>
         </div>
         {# / Additional details. #}

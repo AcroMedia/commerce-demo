@@ -1,0 +1,17 @@
+{% for item in items %}
+  {% set rating_average = item.content['#markup'] * 1 %}
+
+  <div class="review-rating">
+    <span class="{{ rating_average >= 1 ? 'filled' : ''}}"></span>
+    <span class="half {{ rating_average >= 1.5 ? 'filled' : ''}}"></span>
+    <span class="{{ rating_average >= 2 ? 'filled' : ''}}"></span>
+    <span class="half {{ rating_average >= 2.5 ? 'filled' : ''}}"></span>
+    <span class="{{ rating_average >= 3 ? 'filled' : ''}}"></span>
+    <span class="half {{ rating_average >= 3.5 ? 'filled' : ''}}"></span>
+    <span class="{{ rating_average >= 4 ? 'filled' : ''}}"></span>
+    <span class="half {{ rating_average >= 4.5 ? 'filled' : ''}}"></span>
+    <span class="{{ rating_average == 5 ? 'filled' : ''}}"></span>
+  </div>
+{% endfor %}
+
+

@@ -112,6 +112,14 @@
     $(this).tab('show')
   });
 
+  // Make reviews tab active if it is the only tab.
+  var $tabCount = $('.product-tabs li').length;
+
+  if ($tabCount == 1) {
+    $('.product-tabs li').addClass('active');
+    $('.product-tabs .tab-pane').addClass('in active');
+  }
+
   // Add responsive table class around tables.
   $('table').wrap( "<div class='table-responsive'></div>" );
 

@@ -68,7 +68,12 @@
     description_display == 'invisible' ? 'visually-hidden',
   ]
 %}
+
+{# Check to see if it's review rating, and if so, don't place this div #}
+{% if name|clean_class != 'field-review-rating' %}
 <div{{ attributes.addClass(classes) }}>
+  {% endif %}
+
   {% if label_display in ['before', 'invisible'] %}
     {{ label }}
   {% endif %}
@@ -98,4 +103,7 @@
       {{ description.content }}
     </div>
   {% endif %}
+
+  {% if name|clean_class != 'field-review-rating' %}
 </div>
+{% endif %}

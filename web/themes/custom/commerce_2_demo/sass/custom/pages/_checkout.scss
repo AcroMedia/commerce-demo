@@ -163,4 +163,74 @@
       width: 150px;
     }
   }
+
+  .field--name-weight {
+    display: none;
+  }
+}
+
+// Contact information.
+.path-checkout #edit-contact-information,
+.path-checkout #edit-review-contact-information {
+  > legend {
+    padding: 6px 0 10px;
+    font-size: 26px;
+    font-weight: 300;
+    color: #cc0000;
+
+    a {
+      color: #000;
+      font-size: 18px;
+
+      &:hover, &:focus {
+        color: $c-primary-hover;
+      }
+    }
+  }
+}
+
+// Shipping information.
+.path-checkout #edit-shipping-information,
+.path-checkout #edit-review-shipping-information {
+  > legend,
+  #edit-shipping-information-shipments legend {
+    padding: 6px 0 10px;
+    font-size: 26px;
+    font-weight: 300;
+    color: #cc0000;
+
+    a {
+      color: #000;
+      font-size: 18px;
+
+      &:hover, &:focus {
+        color: $c-primary-hover;
+      }
+    }
+  }
+
+  .form-submit {
+    display: none;
+  }
+
+}
+
+// Payment information.
+.path-checkout #edit-payment-information,
+.path-checkout #edit-review-payment-information {
+  > legend {
+    padding: 6px 0 10px;
+    font-size: 26px;
+    font-weight: 300;
+    color: #cc0000;
+
+    a {
+      color: #000;
+      font-size: 18px;
+
+      &:hover, &:focus {
+        color: $c-primary-hover;
+      }
+    }
+  }
 }

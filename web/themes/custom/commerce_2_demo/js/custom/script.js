@@ -123,6 +123,12 @@
   // Add responsive table class around tables.
   $('table').wrap( "<div class='table-responsive'></div>" );
 
+  // Checkout form - Remove screenreader class from all labels.
+  $('.path-checkout form label').removeClass('sr-only');
+
+  // Checkout form - Remove recalculate shipping button (since we only have flat rate)
+  // $('#shipping-information-wrapper .form-submit').hide();
+
   // Run scripts after window fully loads.
   $(window).load(function(){
     // Language switcher.

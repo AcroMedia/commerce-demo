@@ -255,6 +255,13 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
     // Update submit button text.
     $form['actions']['submit']['#value'] = t('Post Comment');
   }
+
+  // Checkout shipping form
+  if ($form_id == 'commerce_checkout_flow_multistep_default') {
+    // Show street 2 field label.
+//    $form['shipping_information']
+    $boobs= $form;
+  }
 }
 
 /**
@@ -289,36 +296,39 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
         $field_product_reviews = $product->field_product_reviews->getValue();
 
         // Number of reviews (if there are reviews).
-        $variables['product_reviews_count'] = $field_product_reviews[0]['comment_count'];
+        if (isset($field_product_reviews[0]['comment_count'])) {
+          $variables['product_reviews_count'] = $field_product_reviews[0]['comment_count'];
+        }
+        else {
+          // Number of reviews (if none).
+          $variables['product_reviews_count'] = 0;
+        }
 
         // If a product has reviews, we average out the review ratings.
-        $comments = $variables['elements']['field_product_reviews'][0]['comments'];
-        $ratingSum = 0;
-        $ratingCount = 0;
-        $ratingAverage = 0;
+        if (isset($variables['elements']['field_product_reviews'][0]['comments'])) {
+          $comments = $variables['elements']['field_product_reviews'][0]['comments'];
+          $ratingSum = 0;
+          $ratingCount = 0;
+          $ratingAverage = 0;
 
-        foreach($comments as $comment) {
-          if (is_array($comment) && isset($comment['#comment'])) {
-            $rating = $comment['#comment']->field_review_rating->value;
-            $ratingSum += floatval($rating);
-            $ratingCount++;
+          foreach($comments as $comment) {
+            if (is_array($comment) && isset($comment['#comment'])) {
+              $rating = $comment['#comment']->field_review_rating->value;
+              $ratingSum += floatval($rating);
+              $ratingCount++;
+            }
           }
+
+          if ($ratingCount !== 0) {
+            $ratingAverage = $ratingSum / $ratingCount;
+
+            // Round to nearest half integer (ie 2, 2.5, 3, 3.5 etc).
+            $ratingAverage = round($ratingAverage * 2) / 2;
+          }
+
+          // Set the variable for the product.
+          $variables['rating_average'] = $ratingAverage;
         }
-
-        if($ratingCount !== 0) {
-          $ratingAverage = $ratingSum / $ratingCount;
-
-          // Round to nearest half integer (ie 2, 2.5, 3, 3.5 etc).
-          $ratingAverage = round($ratingAverage * 2) / 2;
-        }
-
-        // Set the variable for the product.
-        $variables['rating_average'] = $ratingAverage;
-      }
-
-      else {
-        // Number of reviews (if none).
-        $variables['product_reviews_count'] = 0;
       }
     }
   }

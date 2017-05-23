@@ -395,7 +395,7 @@
  * Commerce cart block expanded.
  */
 .cart-block--contents {
-  width: 250px;
+  width: 350px;
   margin-top: 5px;
   border: 1px solid $gray;
   border-radius: $border-radius;
@@ -406,7 +406,6 @@
 
     table {
       tr {
-        vertical-align: top;
         border-bottom: 1px solid $gray-light;
 
         td {
@@ -423,7 +422,50 @@
             text-align: right;
           }
         }
+
+        td.views-field-remove-button {
+          position: relative;
+
+          input {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            padding: 0;
+            font-size: 0;
+          }
+
+          &:after {
+            position: absolute;
+            top: calc(50% - 7px);
+            left: 13px;
+            font-size: 19px;
+            font-family: FontAwesome;
+            content: '\f014';
+            color: #fff;
+            pointer-events: none;
+          }
+        }
+
+        td.views-field-purchased-entity {
+          img {
+            width: 40px;
+            height: 40px;
+            border: 1px solid $gray;
+          }
+
+          div.field {
+            display: none;
+          }
+
+          div.field--name-field-image {
+            display: block;
+          }
+        }
       }
+    }
+
+    .form-actions {
+      display: none;
     }
   }
 
@@ -440,7 +482,6 @@
       text-transform: uppercase;
       color: #fff;
       transition: background-color .1s ease-in-out;
-
 
       &:hover, &:focus {
         background-color: darken($c-primary, 10%);

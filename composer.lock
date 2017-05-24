@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1f408a38b40a351a699ddd832a61eec",
+    "content-hash": "40828877434395c5f975ee5cce1db0f1",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1524,70 +1524,6 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce_authnet"
             }
-        },
-        {
-            "name": "drupal/commerce_avatax",
-            "version": "dev-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/commerce_avatax",
-                "reference": "76a7983bcac42e8ce77fa91fd06966bb998bad01"
-            },
-            "require": {
-                "drupal/commerce": "~2.0",
-                "drupal/commerce_order": "*",
-                "drupal/commerce_store": "*",
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.x-dev",
-                    "datestamp": "1487334183"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "bojanz",
-                    "homepage": "https://www.drupal.org/user/86106"
-                },
-                {
-                    "name": "jsacksick",
-                    "homepage": "https://www.drupal.org/user/972218"
-                },
-                {
-                    "name": "mglaman",
-                    "homepage": "https://www.drupal.org/user/2416470"
-                },
-                {
-                    "name": "rszrama",
-                    "homepage": "https://www.drupal.org/user/49344"
-                },
-                {
-                    "name": "steveoliver",
-                    "homepage": "https://www.drupal.org/user/42327"
-                }
-            ],
-            "description": "Provides integration between Drupal Commerce and Avalara AvaTax.",
-            "homepage": "https://www.drupal.org/project/commerce_avatax",
-            "keywords": [
-                "AvaTax",
-                "Avalara",
-                "Commerce",
-                "Drupal"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/commerce_avatax",
-                "issues": "http://drupal.org/project/issues/commerce_avatax"
-            },
-            "time": "2017-04-12 23:20:30"
         },
         {
             "name": "drupal/commerce_order",
@@ -8576,7 +8512,6 @@
         "drupal/physical": 5,
         "drupal/facets_pretty_paths": 20,
         "drupal/taxonomy_term_depth": 20,
-        "drupal/commerce_avatax": 20,
         "drupal/devel": 20
     },
     "prefer-stable": true,

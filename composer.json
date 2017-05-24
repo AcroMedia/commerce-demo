@@ -43,8 +43,7 @@
         "drupal/physical": "^1.0@RC",
         "drupal/facets_pretty_paths": "1.x-dev",
         "drupal/taxonomy_term_depth": "2.x-dev",
-        "drupal/paragraphs": "^1.1",
-        "drupal/commerce_avatax": "1.x-dev"
+        "drupal/paragraphs": "^1.1"
     },
     "require-dev": {
         "behat/mink": "~1.7",

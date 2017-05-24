@@ -304,7 +304,7 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
           $ratingCount = 0;
           $ratingAverage = 0;
 
-          foreach($comments as $comment) {
+          foreach ($comments as $comment) {
             if (is_array($comment) && isset($comment['#comment'])) {
               $rating = $comment['#comment']->field_review_rating->value;
               $ratingSum += floatval($rating);

@@ -126,8 +126,66 @@
   // Checkout form - Remove screenreader class from all labels.
   $('.path-checkout form label').removeClass('sr-only');
 
-  // Checkout form - Remove recalculate shipping button (since we only have flat rate)
-  // $('#shipping-information-wrapper .form-submit').hide();
+  // Checkout form - pre-populate fields for quick checkout.
+  $('input#edit-contact-information-email').val('demo@acromediainc.com');
+  $('select#edit-shipping-information-shipping-profile-address-0-address-country-code').val('US');
+  $('input#edit-shipping-information-shipping-profile-address-0-address-given-name').val('Charles');
+  $('input#edit-shipping-information-shipping-profile-address-0-address-family-name').val('Mound');
+  $('input#edit-shipping-information-shipping-profile-address-0-address-organization').val('');
+  $('input#edit-shipping-information-shipping-profile-address-0-address-address-line1').val('688 W Charles Mound Rd');
+  $('input#edit-shipping-information-shipping-profile-address-0-address-locality').val('Scales Mound');
+  $('select#edit-shipping-information-shipping-profile-address-0-address-administrative-area').val('IL');
+  $('input#edit-shipping-information-shipping-profile-address-0-address-postal-code').val('61075');
+
+  // Checkout form - Create checkbox to let user use shipping info for payment.
+  var useShippingLabel = Drupal.t('Use my shipping information.');
+
+  $('#payment-information-wrapper .fieldset-wrapper').prepend('<div class="fieldset-wrapper">' +
+    ' <div id="use-shipping-information" class="webform-options-display-one-column js-webform-radios form-checkbox"> ' +
+      ' <div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-use-shipping-information js-form-item-use-shipping-information">' +
+      ' <input data-drupal-selector="use-shipping-information-input" type="checkbox" id="use-shipping-information-input" name="Use Shipping Information" value="use-shipping-information" class="form-radio"> ' +
+      ' <label for="use-shipping-information-label" class="control-label option">' +
+          useShippingLabel  +
+      ' </label><span class="form-optional use-shipping-information-label"> - Optional</span> ' +
+    ' </div>' +
+  ' </div>');
+
+  // Checkout form - Use the checkbox above.
+  $('#use-shipping-information-input').click(function () {
+    if ( $(this).is(':checked') ) {
+      // Get current shipping field values.
+      var $shippingCountry = $('select#edit-shipping-information-shipping-profile-address-0-address-country-code').val();
+      var $shippingFirst = $('input#edit-shipping-information-shipping-profile-address-0-address-given-name').val();
+      var $shippingLast = $('input#edit-shipping-information-shipping-profile-address-0-address-family-name').val();
+      var $shippingCompany = $('input#edit-shipping-information-shipping-profile-address-0-address-organization').val();
+      var $shippingStreet = $('input#edit-shipping-information-shipping-profile-address-0-address-address-line1').val();
+      var $shippingStreet2 = $('input#edit-shipping-information-shipping-profile-address-0-address-address-line2').val();
+      var $shippingCity = $('input#edit-shipping-information-shipping-profile-address-0-address-locality').val();
+      var $shippingState = $('select#edit-shipping-information-shipping-profile-address-0-address-administrative-area').val();
+      var $shippingPostal = $('input#edit-shipping-information-shipping-profile-address-0-address-postal-code').val();
+
+      // Set the payment field values.
+      $('select#edit-payment-information-billing-information-address-0-address-country-code').val($shippingCountry);
+      $('input#edit-payment-information-billing-information-address-0-address-given-name').val($shippingFirst);
+      $('input#edit-payment-information-billing-information-address-0-address-family-name').val($shippingLast);
+      $('input#edit-payment-information-billing-information-address-0-address-organization').val($shippingCompany);
+      $('input#edit-payment-information-billing-information-address-0-address-address-line1').val($shippingStreet);
+      $('input#edit-payment-information-billing-information-address-0-address-address-line2').val($shippingStreet2);
+      $('input#edit-payment-information-billing-information-address-0-address-locality').val($shippingCity);
+      $('select#edit-payment-information-billing-information-address-0-address-administrative-area').val($shippingState);
+      $('input#edit-payment-information-billing-information-address-0-address-postal-code').val($shippingPostal);
+    }
+    else {
+      // Remove payment field values.
+      $('input#edit-payment-information-billing-information-address-0-address-given-name').val('');
+      $('input#edit-payment-information-billing-information-address-0-address-family-name').val('');
+      $('input#edit-payment-information-billing-information-address-0-address-organization').val('');
+      $('input#edit-payment-information-billing-information-address-0-address-address-line1').val('');
+      $('input#edit-payment-information-billing-information-address-0-address-address-line2').val('');
+      $('input#edit-payment-information-billing-information-address-0-address-locality').val('');
+      $('input#edit-payment-information-billing-information-address-0-address-postal-code').val('');
+    }
+  });
 
   // Run scripts after window fully loads.
   $(window).load(function(){

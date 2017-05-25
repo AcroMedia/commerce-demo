@@ -93,11 +93,11 @@
     text-align: right;
 
     .order-total-line-label {
-      width: 55%;
+      width: calc(100% - 155px);
     }
 
     .order-total-line-value {
-      width: 40%;
+      width: 150px;
     }
   }
 
@@ -161,9 +161,12 @@
     padding: 0 5px;
     text-align: right;
 
-    .order-total-line-label,
+    .order-total-line-label {
+      width: calc(100% - 100px);
+    }
+
     .order-total-line-value {
-      width: 150px;
+      width: 90px;
     }
   }
 

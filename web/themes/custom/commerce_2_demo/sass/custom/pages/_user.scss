@@ -1,0 +1,21 @@
+/**
+ * User.
+ */
+.path-user {
+  // Orders.
+  .field--type-email,
+  .field--name-shipping-method {
+    padding-bottom: 20px;
+  }
+
+  // Address book.
+  .view-profiles {
+    padding-top: 20px;
+
+    .views-col {
+      padding-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+  }
+}

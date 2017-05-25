@@ -92,9 +92,12 @@
     padding: 0 5px;
     text-align: right;
 
-    .order-total-line-label,
+    .order-total-line-label {
+      width: 55%;
+    }
+
     .order-total-line-value {
-      width: 150px;
+      width: 40%;
     }
   }
 

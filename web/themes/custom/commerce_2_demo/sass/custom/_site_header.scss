@@ -262,11 +262,19 @@
         font-weight: 300;
         color: #000;
 
+        @media (max-width: $screen-sm-max) {
+          font-size: 14px;
+        }
+
         &:before {
           margin: 0 10px 0 6px;
           content: '|';
           font-size: 16px;
           color: $gray;
+
+          @media (max-width: $screen-sm-max) {
+            margin: 0 4px 0 0;
+          }
         }
 
         &:hover, &:focus {
@@ -297,14 +305,14 @@
   }
 
   .field--name-field-phone-number {
+    font-family: $f-primary-condensed;
     font-size: 34px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
     line-height: 44px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
 
     @media (max-width: $screen-sm-max) {
-      font-size: 28px;
-      letter-spacing: 0;
+      letter-spacing: 0.02em;
     }
   }
 }
@@ -328,6 +336,11 @@
         a {
           margin: 0;
           padding: 0;
+          text-transform: capitalize;
+
+          @media (max-width: $screen-sm-max) {
+            font-size: 14px;
+          }
         }
 
         a:after {
@@ -335,6 +348,10 @@
           content: '|';
           font-size: 16px;
           color: $gray;
+
+          @media (max-width: $screen-sm-max) {
+            margin: 0 1px 0 3px;
+          }
         }
 
         &:last-of-type {

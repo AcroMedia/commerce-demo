@@ -25,6 +25,10 @@
   .region-below-content {
     margin-top: 15px;
   }
+
+  #block-commerce-2-demo-mainpagecontent {
+    padding-bottom: 40px;
+  }
 }
 
 // Hide page title block on pages.
@@ -80,6 +84,17 @@
     // Sub item icon.
     &:before {
       left: 25px;
+    }
+  }
+
+  // Right sidebar.
+  &.site-sidebar--blog {
+    border-left: 1px solid $gray;
+    background-color: transparent;
+
+    .block h2 {
+      margin-bottom: 20px;
+      font-size: 16px;
     }
   }
 }

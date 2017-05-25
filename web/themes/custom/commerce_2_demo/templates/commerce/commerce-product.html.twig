@@ -20,7 +20,6 @@
  */
 #}
 {% if view_mode == 'teaser' %}
-
   {# Product teaser. #}
   <a href="{{ product_url }}" class="product product--teaser" aria-label="{{ product_entity.title.value }}">
     <div class="product--thumbnail">
@@ -31,6 +30,9 @@
       {% endif %}
     </div>
 
+    {% if product.variation_field_original_price[0]['#markup'] %}
+      {{ product.variation_field_original_price }}
+    {% endif %}
     {{ product.variation_price }}
     {{ product.title }}
     {{ product.field_brand }}
@@ -62,7 +64,6 @@
           {{ product.field_brand }}
           <h1 class="page-title">{{ product_entity.title.value }}</h1>
           {{ product.variation_price }}
-          {{ product.variation_sale_price }}
           {{ product.field_short_description }}
           {{ product.variations }}
         </div>

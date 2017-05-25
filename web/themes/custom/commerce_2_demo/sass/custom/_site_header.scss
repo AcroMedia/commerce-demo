@@ -497,7 +497,7 @@
   margin: 13px 0;
 
   .form--inline {
-    .form-item {
+    .form-item-filter {
       float: none;
       display: inline-block;
       margin: 0;
@@ -538,8 +538,13 @@
           }
         }
       }
+    }
 
-
+    // Hide some elements.
+    .form-item-sort-by,
+    .form-item-sort-order,
+    .form-item-items-per-page {
+      display: none;
     }
   }
 }

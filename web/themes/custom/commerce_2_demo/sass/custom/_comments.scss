@@ -27,14 +27,14 @@
 .comment {
   position: relative;
   clear: both;
-  margin: 0 0 30px 0;
-  padding: 0 0 30px 60px;
-  border-bottom: 1px solid #ccc;
+  margin: 0;
+  padding: 10px 0 10px 60px;
+  border-bottom: none;
 
   // Comment bubble icon.
   &:before {
     position: absolute;
-    top: -3px;
+    top: 18px;
     left: 0;
     content: $fa-var-comment;
     @include fa-icon();

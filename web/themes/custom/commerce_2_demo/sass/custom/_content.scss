@@ -377,19 +377,28 @@ table {
 /**
  * Pagination.
  */
-.pager li > a:hover,
-.pager li > a:focus {
-  background-color: $gray-lighter;
-}
-.pager__item.is-active {
-  a {
-    color: #fff;
-    background: $c-link;
-    border-color: $c-link-hover;
+.pager {
+  margin: 30px 0 0;
 
-    &:hover,
-    &:focus {
-      background: $c-link-hover;
+  ul {
+    margin-bottom: 0;
+
+    li > a:hover,
+    .pager li > a:focus {
+      background-color: $gray-lighter;
+    }
+
+    .pager__item.is-active {
+      a {
+        color: #fff;
+        background: $c-link;
+        border-color: $c-link-hover;
+
+        &:hover,
+        &:focus {
+          background: $c-link-hover;
+        }
+      }
     }
   }
 }

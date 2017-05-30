@@ -137,14 +137,19 @@
 
   // Checkout form - pre-populate fields for quick checkout.
   $('input#edit-contact-information-email').val('demo@acromediainc.com');
-  $('select#edit-shipping-information-shipping-profile-address-0-address-country-code').val('US');
-  $('input#edit-shipping-information-shipping-profile-address-0-address-given-name').val('Charles');
-  $('input#edit-shipping-information-shipping-profile-address-0-address-family-name').val('Mound');
-  $('input#edit-shipping-information-shipping-profile-address-0-address-organization').val('');
-  $('input#edit-shipping-information-shipping-profile-address-0-address-address-line1').val('688 W Charles Mound Rd');
-  $('input#edit-shipping-information-shipping-profile-address-0-address-locality').val('Scales Mound');
-  $('select#edit-shipping-information-shipping-profile-address-0-address-administrative-area').val('IL');
-  $('input#edit-shipping-information-shipping-profile-address-0-address-postal-code').val('61075');
+  $('#edit-shipping-information-shipping-profile select.country').val('US');
+  $('#edit-shipping-information-shipping-profile input.given-name').val('Charles');
+  $('#edit-shipping-information-shipping-profile input.family-name').val('Mound');
+  $('#edit-shipping-information-shipping-profile input.organization').val('');
+  $('#edit-shipping-information-shipping-profile input.address-line1').val('688 W Charles Mound Rd');
+  $('#edit-shipping-information-shipping-profile input.address-line2').val('');
+  $('#edit-shipping-information-shipping-profile input.locality').val('Scales Mound');
+  $('#edit-shipping-information-shipping-profile select.administrative-area').val('IL');
+  $('#edit-shipping-information-shipping-profile input.postal-code').val('61075');
+  $('input#edit-payment-information-add-payment-method-payment-details-number').val('4111111111111111');
+  $('select#edit-payment-information-add-payment-method-payment-details-expiration-month').val('10');
+  $('select#edit-payment-information-add-payment-method-payment-details-expiration-year').val('2022');
+  $('input#edit-payment-information-add-payment-method-payment-details-security-code').val('123');
 
   // Checkout form - Create checkbox to let user use shipping info for payment.
   var useShippingLabel = Drupal.t('Use my shipping information.');
@@ -163,36 +168,38 @@
   $('#use-shipping-information-input').click(function () {
     if ( $(this).is(':checked') ) {
       // Get current shipping field values.
-      var $shippingCountry = $('select#edit-shipping-information-shipping-profile-address-0-address-country-code').val();
-      var $shippingFirst = $('input#edit-shipping-information-shipping-profile-address-0-address-given-name').val();
-      var $shippingLast = $('input#edit-shipping-information-shipping-profile-address-0-address-family-name').val();
-      var $shippingCompany = $('input#edit-shipping-information-shipping-profile-address-0-address-organization').val();
-      var $shippingStreet = $('input#edit-shipping-information-shipping-profile-address-0-address-address-line1').val();
-      var $shippingStreet2 = $('input#edit-shipping-information-shipping-profile-address-0-address-address-line2').val();
-      var $shippingCity = $('input#edit-shipping-information-shipping-profile-address-0-address-locality').val();
-      var $shippingState = $('select#edit-shipping-information-shipping-profile-address-0-address-administrative-area').val();
-      var $shippingPostal = $('input#edit-shipping-information-shipping-profile-address-0-address-postal-code').val();
+      var $shippingCountry = $('#edit-shipping-information-shipping-profile select.country').val();
+      var $shippingFirst = $('#edit-shipping-information-shipping-profile input.given-name').val();
+      var $shippingLast = $('#edit-shipping-information-shipping-profile input.family-name').val();
+      var $shippingCompany = $('#edit-shipping-information-shipping-profile input.organization').val();
+      var $shippingStreet = $('#edit-shipping-information-shipping-profile input.address-line1').val();
+      var $shippingStreet2 = $('#edit-shipping-information-shipping-profile input.address-line2').val();
+      var $shippingCity = $('#edit-shipping-information-shipping-profile input.locality').val();
+      var $shippingState = $('#edit-shipping-information-shipping-profile select.administrative-area').val();
+      var $shippingPostal = $('#edit-shipping-information-shipping-profile input.postal-code').val();
 
       // Set the payment field values.
-      $('select#edit-payment-information-billing-information-address-0-address-country-code').val($shippingCountry);
-      $('input#edit-payment-information-billing-information-address-0-address-given-name').val($shippingFirst);
-      $('input#edit-payment-information-billing-information-address-0-address-family-name').val($shippingLast);
-      $('input#edit-payment-information-billing-information-address-0-address-organization').val($shippingCompany);
-      $('input#edit-payment-information-billing-information-address-0-address-address-line1').val($shippingStreet);
-      $('input#edit-payment-information-billing-information-address-0-address-address-line2').val($shippingStreet2);
-      $('input#edit-payment-information-billing-information-address-0-address-locality').val($shippingCity);
-      $('select#edit-payment-information-billing-information-address-0-address-administrative-area').val($shippingState);
-      $('input#edit-payment-information-billing-information-address-0-address-postal-code').val($shippingPostal);
+      $('#edit-payment-information-add-payment-method select.country').val($shippingCountry);
+      $('#edit-payment-information-add-payment-method input.given-name').val($shippingFirst);
+      $('#edit-payment-information-add-payment-method input.family-name').val($shippingLast);
+      $('#edit-payment-information-add-payment-method input.organization').val($shippingCompany);
+      $('#edit-payment-information-add-payment-method input.address-line1').val($shippingStreet);
+      $('#edit-payment-information-add-payment-method input.address-line2').val($shippingStreet2);
+      $('#edit-payment-information-add-payment-method input.locality').val($shippingCity);
+      $('#edit-payment-information-add-payment-method select.administrative-area').val($shippingState);
+      $('#edit-payment-information-add-payment-method input.postal-code').val($shippingPostal);
     }
     else {
       // Remove payment field values.
-      $('input#edit-payment-information-billing-information-address-0-address-given-name').val('');
-      $('input#edit-payment-information-billing-information-address-0-address-family-name').val('');
-      $('input#edit-payment-information-billing-information-address-0-address-organization').val('');
-      $('input#edit-payment-information-billing-information-address-0-address-address-line1').val('');
-      $('input#edit-payment-information-billing-information-address-0-address-address-line2').val('');
-      $('input#edit-payment-information-billing-information-address-0-address-locality').val('');
-      $('input#edit-payment-information-billing-information-address-0-address-postal-code').val('');
+      $('#edit-payment-information-add-payment-method select.country').val('');
+      $('#edit-payment-information-add-payment-method input.given-name').val('');
+      $('#edit-payment-information-add-payment-method input.family-name').val('');
+      $('#edit-payment-information-add-payment-method input.organization').val('');
+      $('#edit-payment-information-add-payment-method input.address-line1').val('');
+      $('#edit-payment-information-add-payment-method input.address-line2').val('');
+      $('#edit-payment-information-add-payment-method input.locality').val('');
+      $('#edit-payment-information-add-payment-method select.administrative-area').val('');
+      $('#edit-payment-information-add-payment-method input.postal-code').val('');
     }
   });
 

@@ -219,6 +219,18 @@
     display: none;
   }
 
+  // Field widths.
+  select.country,
+  input.family-name,
+  input.given-name,
+  input.organization,
+  input.locality {
+    max-width: 240px;
+  }
+
+  input.postal-code {
+    max-width: 100px;
+  }
 }
 
 // Payment information.
@@ -238,5 +250,23 @@
         color: $c-primary-hover;
       }
     }
+  }
+
+  // Field widths.
+  input#edit-payment-information-add-payment-method-payment-details-security-code {
+    max-width: 65px;
+  }
+
+  input#edit-payment-information-add-payment-method-payment-details-number,
+  select.country,
+  input.family-name,
+  input.given-name,
+  input.organization,
+  input.locality {
+    max-width: 240px;
+  }
+
+  input.postal-code {
+    max-width: 100px;
   }
 }

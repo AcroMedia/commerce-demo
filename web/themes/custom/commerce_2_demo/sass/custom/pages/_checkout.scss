@@ -201,6 +201,7 @@
   > legend,
   #edit-shipping-information-shipments legend {
     padding: 6px 0 10px;
+    margin-bottom: 10px;
     font-size: 26px;
     font-weight: 300;
     color: #cc0000;
@@ -212,6 +213,16 @@
       &:hover, &:focus {
         color: $c-primary-hover;
       }
+    }
+  }
+
+  #edit-shipping-information-shipments {
+    legend {
+      margin-bottom: 20px;
+    }
+
+    .form-optional {
+      display: none;
     }
   }
 
@@ -234,39 +245,52 @@
 }
 
 // Payment information.
-.path-checkout #edit-payment-information,
-.path-checkout #edit-review-payment-information {
-  > legend {
-    padding: 6px 0 10px;
-    font-size: 26px;
-    font-weight: 300;
-    color: #cc0000;
+.path-checkout {
+  fieldset[id^='edit-payment-information'],
+  #edit-review-payment-information {
+    > legend {
+      padding: 6px 0 10px;
+      margin-bottom: 10px;
+      font-size: 26px;
+      font-weight: 300;
+      color: #cc0000;
 
-    a {
-      color: #000;
-      font-size: 18px;
+      a {
+        color: #000;
+        font-size: 18px;
 
-      &:hover, &:focus {
-        color: $c-primary-hover;
+        &:hover, &:focus {
+          color: $c-primary-hover;
+        }
       }
+    }
+
+    // Field widths.
+    input[id^='edit-payment-information-add-payment-method-payment-details-security-code'] {
+      max-width: 65px;
+    }
+
+    input[id^='edit-payment-information-add-payment-method-payment-details-number'],
+    select.country,
+    input.family-name,
+    input.given-name,
+    input.organization,
+    input.locality {
+      max-width: 240px;
+    }
+
+    input.postal-code {
+      max-width: 100px;
     }
   }
 
-  // Field widths.
-  input#edit-payment-information-add-payment-method-payment-details-security-code {
-    max-width: 65px;
-  }
+  fieldset[id^='edit-payment-information-payment-method'] {
+    legend {
+      display: none;
+    }
 
-  input#edit-payment-information-add-payment-method-payment-details-number,
-  select.country,
-  input.family-name,
-  input.given-name,
-  input.organization,
-  input.locality {
-    max-width: 240px;
-  }
-
-  input.postal-code {
-    max-width: 100px;
+    .form-optional {
+      display: none;
+    }
   }
 }

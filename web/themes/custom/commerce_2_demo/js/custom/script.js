@@ -153,10 +153,10 @@
 
   // Checkout form - Guest Checkout
   // Create checkbox to let user use shipping info for payment.
-  if ( !$('.form-item-payment-information-payment-method').length ) {
+  if ( $("fieldset[id^='edit-payment-information-payment-method'] input").is(':checked') ) {
     var useShippingLabel = Drupal.t('Use my shipping information.');
 
-    $('#payment-information-wrapper .fieldset-wrapper:first').prepend('<div class="fieldset-wrapper">' +
+    $("fieldset[id^='edit-payment-information-payment-method']").after('<div class="fieldset-wrapper">' +
       ' <div id="use-shipping-information" class="webform-options-display-one-column js-webform-radios form-checkbox"> ' +
       ' <div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-use-shipping-information js-form-item-use-shipping-information">' +
       ' <input data-drupal-selector="use-shipping-information-input" type="checkbox" id="use-shipping-information-input" name="Use Shipping Information" value="use-shipping-information" class="form-radio"> ' +
@@ -207,9 +207,9 @@
     }
   });
 
-  // Checkout form - Customer w/ saved card.
+  // Checkout form - Other payment options.
   // This basically does the same as above but for AJAX.
-  $(document).on('click', "input[id^='edit-payment-information-payment-method-new-credit-card-example-payment']", function() {
+  $(document).on('click', "fieldset[id^='edit-payment-information-payment-method'] input", "div[id^='edit-payment-information-payment-method'] input", function() {
     var checked = $(this).is(':checked');
 
     $.ajax( this.href, {
@@ -227,7 +227,7 @@
           // Create checkbox to let user use shipping info for new card.
           var useShippingLabel = Drupal.t('Use my shipping information.');
 
-          $('.form-item-payment-information-add-payment-method-payment-details-number').prepend('<div class="fieldset-wrapper">' +
+          $("fieldset[id^='edit-payment-information-payment-method']").after('<div class="fieldset-wrapper">' +
             ' <div id="use-shipping-information" class="webform-options-display-one-column js-webform-radios form-checkbox"> ' +
             ' <div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-use-shipping-information js-form-item-use-shipping-information">' +
             ' <input data-drupal-selector="use-shipping-information-input" type="checkbox" id="use-shipping-information-input" name="Use Shipping Information" value="use-shipping-information" class="form-radio"> ' +

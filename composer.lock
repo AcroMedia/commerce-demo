@@ -1287,11 +1287,17 @@
         },
         {
             "name": "drupal/address",
-            "version": "dev-1.x",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/address",
-                "reference": "115bea5eaff536c4f28a83c0142282801feb4ee6"
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/address-8.x-1.0.zip",
+                "reference": null,
+                "shasum": "2be22f841f8e4af2ba23b6bc9983e013c167c520"
             },
             "require": {
                 "commerceguys/addressing": "~1.0",
@@ -1304,8 +1310,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0+0-dev",
-                    "datestamp": "1495109587"
+                    "version": "8.x-1.0",
+                    "datestamp": "1495109886"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -1330,8 +1336,7 @@
             "homepage": "http://drupal.org/project/address",
             "support": {
                 "source": "http://cgit.drupalcode.org/address"
-            },
-            "time": "2017-05-18 12:08:26"
+            }
         },
         {
             "name": "drupal/admin_toolbar",
@@ -1399,7 +1404,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce",
-                "reference": "178702a59749ff4698d2e8b5ca122606bb4b0059"
+                "reference": "4c798e9bea60a75d943b3f161a942cc99dd050ba"
             },
             "require": {
                 "commerceguys/intl": "~0.7",
@@ -1430,8 +1435,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta7+15-dev",
-                    "datestamp": "1495537984"
+                    "version": "8.x-2.0-beta7+19-dev",
+                    "datestamp": "1496231342"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -1461,7 +1466,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
             },
-            "time": "2017-05-23 12:10:56"
+            "time": "2017-05-31 11:51:49"
         },
         {
             "name": "drupal/commerce_authnet",
@@ -2477,17 +2482,17 @@
         },
         {
             "name": "drupal/entity_reference_revisions",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/entity_reference_revisions",
-                "reference": "8.x-1.2"
+                "reference": "8.x-1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "15261a4237cc2a743522a7bd81e9f34e01d12843"
+                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.3.zip",
+                "reference": null,
+                "shasum": "78aebb58efbbfcbb2faa40a1afc0830312b32631"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -2501,8 +2506,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1485790085"
+                    "version": "8.x-1.3",
+                    "datestamp": "1495814284"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2744,7 +2749,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/honeypot-8.x-1.25.zip",
-                "reference": null,
+                "reference": "8.x-1.25",
                 "shasum": "9dfe6677c5b4a19e87fae143755949b79168b9d1"
             },
             "require": {
@@ -3243,11 +3248,17 @@
         },
         {
             "name": "drupal/profile",
-            "version": "dev-1.x",
+            "version": "1.0.0-alpha7",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/profile",
-                "reference": "f2e3054ad2277fa2ac0e5ed0deeb781c19ead159"
+                "reference": "8.x-1.0-alpha7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/profile-8.x-1.0-alpha7.zip",
+                "reference": null,
+                "shasum": "8fe1cea29dd88215d0cf886b3bca9eccb025f531"
             },
             "require": {
                 "drupal/core": "~8.1",
@@ -3259,7 +3270,7 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-alpha7+0-dev",
+                    "version": "8.x-1.0-alpha7",
                     "datestamp": "1493902084"
                 }
             },
@@ -3293,8 +3304,7 @@
             "homepage": "http://drupal.org/project/profile",
             "support": {
                 "source": "http://cgit.drupalcode.org/profile"
-            },
-            "time": "2017-05-09 02:35:27"
+            }
         },
         {
             "name": "drupal/search_api",
@@ -3307,7 +3317,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.1.zip",
-                "reference": null,
+                "reference": "8.x-1.1",
                 "shasum": "896d21a8b0dee0bea6e49fb0b2ac38315f4b52fe"
             },
             "require": {
@@ -3411,7 +3421,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.0-rc3.zip",
-                "reference": null,
+                "reference": "8.x-1.0-rc3",
                 "shasum": "0b4f7cbe4e5f43cea6399a180e7366b109f68e6b"
             },
             "require": {
@@ -7222,7 +7232,8 @@
                 "source": "http://cgit.drupalcode.org/devel",
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
+            },
+            "time": "2017-05-24 13:48:01"
         },
         {
             "name": "fabpot/goutte",

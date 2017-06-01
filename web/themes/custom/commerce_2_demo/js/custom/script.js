@@ -152,8 +152,8 @@
   $('input#edit-payment-information-add-payment-method-payment-details-security-code').val('123');
 
   // Checkout form - Guest Checkout
-  // Create checkbox to let user use shipping info for payment.
-  if ( $("fieldset[id^='edit-payment-information-payment-method'] input").is(':checked') ) {
+  // Create checkbox to let user use shipping info for payment (when no stored cards).
+  if ( (!$("fieldset[id^='edit-payment-information-payment-method'] input[id^='edit-payment-information-payment-method-stored']").is(':checked')) ) {
     var useShippingLabel = Drupal.t('Use my shipping information.');
 
     $("fieldset[id^='edit-payment-information-payment-method']").after('<div class="fieldset-wrapper">' +
@@ -209,12 +209,12 @@
 
   // Checkout form - Other payment options.
   // This basically does the same as above but for AJAX.
-  $(document).on('click', "fieldset[id^='edit-payment-information-payment-method'] input", "div[id^='edit-payment-information-payment-method'] input", function() {
-    var checked = $(this).is(':checked');
+  $(document).on('click', "div[id^='edit-payment-information-payment-method'] input", function() {
+    var notStoredCard = !$("input[id^='edit-payment-information-payment-method-stored']").is(':checked');
 
     $.ajax( this.href, {
       complete: function(data) {
-        if (checked) {
+        if ( notStoredCard ) {
           // Checkout form - Remove screenreader class from all labels.
           $('.path-checkout form label').removeClass('sr-only');
 

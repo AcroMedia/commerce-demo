@@ -3468,7 +3468,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/simple_gmap-8.x-1.3.zip",
-                "reference": null,
+                "reference": "8.x-1.3",
                 "shasum": "c14c6f8eb6f546370424a3ee962448c513ec9712"
             },
             "require": {

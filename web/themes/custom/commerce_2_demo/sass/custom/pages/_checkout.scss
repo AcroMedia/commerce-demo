@@ -123,6 +123,53 @@
 }
 
 /**
+ * Checkout progress.
+ */
+.checkout-progress {
+  display: inline-block;
+  width: 100%;
+  margin: 10px 0 30px;
+  padding: 10px 15px;
+  background-color: $gray-light;
+  border-radius: $border-radius;
+
+  .checkout-progress--step {
+    position: relative;
+    padding-right: 50px;
+
+    @media (max-width: $screen-sm) {
+      padding-right: 25px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 560px) {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    &:last-of-type {
+      padding-right: 0;
+      margin-bottom: 0;
+    }
+
+    &:before {
+      display: inline-block;
+      height: 25px;
+      width: 25px;
+      margin-right: 8px;
+      border: 1px solid $gray;
+      border-radius: 50%;
+      background-color: #fff;
+      font-size: 15px;
+      font-weight: 300;
+      text-align: center;
+      content: counter(checkout-progress) "";
+    }
+  }
+}
+
+/**
  * Login.
  */
 .form-wrapper__returning-customer .form-optional {

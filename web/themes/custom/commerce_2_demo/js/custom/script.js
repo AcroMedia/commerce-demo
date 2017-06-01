@@ -123,6 +123,13 @@
   // Add responsive table class around tables.
   $('table').wrap( "<div class='table-responsive'></div>" );
 
+  // Cart - If quantity input is focused, set enter key to update button.
+  $('.views-field-edit-quantity input').keypress(function(event){
+    if(event.keyCode == 13){
+      $('input#edit-submit').click();
+    }
+  });
+
   // Checkout form - Change line adjustment labels - Super janky.
   $('.order-total-line__adjustment .order-total-line-label').each(function () {
     var $adjustmentLabel = $(this).text();

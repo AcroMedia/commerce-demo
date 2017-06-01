@@ -45,6 +45,15 @@
   padding: 18px 10px 18px 15px;
   background-color: $gray-light;
 
+  &.site-sidebar--contact {
+    background-color: #fff;
+    padding-top: 165px;
+
+    @media (max-width: $screen-sm-max) {
+      padding-top: 0;
+    }
+  }
+
   .menu {
     margin: 0;
   }

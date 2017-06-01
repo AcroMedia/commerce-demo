@@ -465,3 +465,20 @@ form.newsletter-signup-form {
     }
   }
 }
+
+/**
+ * Google maps.
+ */
+.block-type-google-map {
+  iframe {
+    width: 100%;
+  }
+}
+
+.site-sidebar .block-type-google-map h2 {
+  margin-bottom: 18px;
+  font-size: 26px;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: initial;
+}

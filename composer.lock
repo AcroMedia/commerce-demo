@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "43812e73b3537405ab6cc0fa9e51e543",
+    "content-hash": "d61a08a1670970654dac7d5a1f4fcc37",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -3455,6 +3455,53 @@
                 "source": "http://git.drupal.org/project/search_api_solr.git",
                 "issues": "https://www.drupal.org/project/issues/search_api_solr",
                 "irc": "irc://irc.freenode.org/drupal-search-api"
+            }
+        },
+        {
+            "name": "drupal/simple_gmap",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/simple_gmap",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/simple_gmap-8.x-1.3.zip",
+                "reference": null,
+                "shasum": "c14c6f8eb6f546370424a3ee962448c513ec9712"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1494362585"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "jhodgdon",
+                    "homepage": "https://www.drupal.org/user/155601"
+                },
+                {
+                    "name": "martin107",
+                    "homepage": "https://www.drupal.org/user/2659379"
+                }
+            ],
+            "description": "Provides a Google Maps link/map formatter for simple Text fields.",
+            "homepage": "https://www.drupal.org/project/simple_gmap",
+            "support": {
+                "source": "http://cgit.drupalcode.org/simple_gmap"
             }
         },
         {

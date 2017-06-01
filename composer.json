@@ -100,6 +100,12 @@
             "drush/contrib/{$name}": [
                 "type:drupal-drush"
             ]
+        },
+        "patches": {
+            "drupal/commerce": {
+                "#2882905: Adds unique identifier for stored payment methods":
+                "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch"
+            }
         }
     }
 }

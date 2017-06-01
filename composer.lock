@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "40828877434395c5f975ee5cce1db0f1",
+    "content-hash": "43812e73b3537405ab6cc0fa9e51e543",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1296,7 +1296,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/address-8.x-1.0.zip",
-                "reference": null,
+                "reference": "8.x-1.0",
                 "shasum": "2be22f841f8e4af2ba23b6bc9983e013c167c520"
             },
             "require": {
@@ -1437,6 +1437,9 @@
                 "drupal": {
                     "version": "8.x-2.0-beta7+19-dev",
                     "datestamp": "1496231342"
+                },
+                "patches_applied": {
+                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2286,33 +2289,6 @@
                 "symfony/css-selector": "~2.8"
             },
             "type": "drupal-core",
-            "extra": {
-                "installer-paths": {
-                    "web/core": [
-                        "type:drupal-core"
-                    ],
-                    "web/libraries/{$name}": [
-                        "type:drupal-library"
-                    ],
-                    "web/modules/contrib/{$name}": [
-                        "type:drupal-module"
-                    ],
-                    "web/profiles/contrib/{$name}": [
-                        "type:drupal-profile"
-                    ],
-                    "web/themes/contrib/{$name}": [
-                        "type:drupal-theme"
-                    ],
-                    "drush/contrib/{$name}": [
-                        "type:drupal-drush"
-                    ]
-                },
-                "patches": {
-                    "drupal/core": {
-                        "#2541480: Allow SVG files in the image widget": "https://www.drupal.org/files/issues/allow_svg_files_in_the-2541480-6.patch"
-                    }
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Drupal\\Core\\": "lib/Drupal/Core",
@@ -2491,7 +2467,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.3.zip",
-                "reference": null,
+                "reference": "8.x-1.3",
                 "shasum": "78aebb58efbbfcbb2faa40a1afc0830312b32631"
             },
             "require": {
@@ -3257,7 +3233,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/profile-8.x-1.0-alpha7.zip",
-                "reference": null,
+                "reference": "8.x-1.0-alpha7",
                 "shasum": "8fe1cea29dd88215d0cf886b3bca9eccb025f531"
             },
             "require": {

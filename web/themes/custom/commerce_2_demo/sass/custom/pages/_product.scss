@@ -448,14 +448,45 @@
     }
 
     .field--name-variations {
+      legend {
+        border-bottom: none;
+      }
+
       label {
         font-weight: 600;
         text-transform: uppercase;
         color: $c-primary;
       }
 
-      .form-required {
+      .form-optional {
         display: none;
+      }
+
+      .form-required {
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $c-primary;
+      }
+
+      .form-item {
+        margin-bottom: 0;
+
+        .ajax-progress {
+          display: none;
+        }
+      }
+
+      .form-item-purchased-entity-0-attributes-attribute-straw-color .form-required {
+        display: none;
+      }
+
+      .color_field__swatch--square {
+        border: 2px solid #fff;
+        border-radius: $border-radius;
+      }
+
+      .select-wrapper {
+        margin-bottom: 24px;
       }
 
       select {

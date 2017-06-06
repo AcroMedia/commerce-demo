@@ -288,6 +288,24 @@
     });
   });
 
+  // Facet Brand filter - Show more.
+  // Get number of options.
+  var listSize = $("#block-brands li").size();
+
+  // Only show first 15 options.
+  $('#block-brands li').slice(15).hide();
+
+  // If too many options, show button.
+  if (listSize > 16) {
+    $("#block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
+  }
+
+  // When button clicked, show all options and hide button.
+  $('.show-more-options').click(function () {
+    $('#block-brands li').fadeIn();
+    $(this).hide();
+  });
+
   // Run scripts after window fully loads.
   $(window).load(function(){
     // Language switcher.

@@ -466,6 +466,28 @@ form.newsletter-signup-form {
   }
 }
 
+.show-more-options {
+  display: block;
+  position: relative;
+  bottom: 12px;
+  padding: 2px 7px;
+  margin-bottom: 12px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out;
+
+  &:hover, &:focus {
+    background-color: #f7f7f7;
+    border: 1px solid #bbb;
+    color: #333;
+  }
+}
+
 /**
  * Google maps.
  */

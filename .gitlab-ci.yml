@@ -75,14 +75,17 @@ build:
     - npm install
     - gulp sass
 
+# Deploy INTERNAL demo.
 deploy-uat:
   stage: deploy
 
-  #add any other tags or branches you want here
+  # add any other tags or branches you want here
   only:
     - master
 
-  environment: uat
+  environment:
+    name: uat
+    url: https://commerce-2-demo.aws1.acrobuild.com
 
   script:
     # Install ssh-agent if not already installed, it is required by Docker
@@ -106,3 +109,38 @@ deploy-uat:
 
     # log into the site and flush cache
     - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo && composer install'
+
+# Deploy CLIENT demo.
+deploy-client:
+  stage: deploy
+
+  # add any other tags or branches you want here
+  only:
+    - master
+
+  environment:
+    name: uat
+    url: https://urbanhipster.aws1.acrobuild.com
+
+  script:
+    # Install ssh-agent if not already installed, it is required by Docker
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
+
+    # For Docker builds disable host key checking. Be aware that by adding that
+    # you are susceptible to man-in-the-middle attacks.
+    # WARNING: Use this only with the Docker executor, if you use it with shell
+    # you will overwrite your user's SSH config.
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    #move updated files up to deployment server, exclude .git since it's not needed
+    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/urbanharvest/ urbanharvest@aws1.acrobuild.com:/home/urbanharvest/www/urbanharvest/
+
+    # log into the site and flush cache
+    - ssh urbanharvest@aws1.acrobuild.com 'cd www/urbanharvest && composer install'

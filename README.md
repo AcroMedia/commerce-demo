@@ -1,8 +1,20 @@
-# Drupal Orange Project Template
+# Commerce 2.x Demo (Urban Harvest) Project Template
 
 [![Build Status](https://travis-ci.org/AcroMedia/drupalorange-project-template.svg?branch=8.x)](https://travis-ci.org/AcroMedia/drupalorange-project-template)
 
-Use [Composer](https://getcomposer.org/) to get Drupal + Commerce 2.x with all dependencies.
+This site is used for demoing a full Drupal 8 Commerce 2.x site. There are 2 versions of this site running simultaneously, and GitLab deploys 'master' automatically to both.
+
+__Internal demo:__ https://commerce-2-demo.aws1.acrobuild.com/
+
+* Used by Acro staff to demo Commerce 2.x on location (i.e. at tradeshows)
+
+__Client demo:__ https://urbanharvest.aws1.acrobuild.com/
+
+* Demo specifically setup to allow clients/prospects admin access so that they can login and mess around with the site configuration. 
+* This version of the site automatically resets it's database at midnight. 
+
+
+## Origin
 
 Fork of [drupalcommerce/project-base](https://github.com/drupalcommerce/project-base). Which is based on 
 [drupal-composer/drupal-project](https://github.com/drupal-composer/drupal-project).

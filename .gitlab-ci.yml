@@ -141,7 +141,7 @@ deploy-client:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
     #move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ urbanharvest@aws1.acrobuild.com:/home/urbanharvest/www/urbanharvest/
+    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ urbanhipster@aws1.acrobuild.com:/home/urbanhipster/www/urbanhipster/
 
     # log into the site and flush cache
-    - ssh urbanharvest@aws1.acrobuild.com 'cd www/urbanharvest && composer install'
+    - ssh urbanhipster@aws1.acrobuild.com 'cd www/urbanhipster && composer install'

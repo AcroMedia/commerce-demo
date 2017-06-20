@@ -110,9 +110,10 @@ deploy-uat:
     # log into the site and flush cache
     - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo && composer install'
 
-# Deploy CLIENT demo.
+# Deploy CLIENT demo (manual deploy only).
 deploy-client:
   stage: deploy
+  when: manual
 
   # add any other tags or branches you want here
   only:
@@ -140,7 +141,7 @@ deploy-client:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
     #move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/urbanharvest/ urbanharvest@aws1.acrobuild.com:/home/urbanharvest/www/urbanharvest/
+    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ urbanharvest@aws1.acrobuild.com:/home/urbanharvest/www/urbanharvest/
 
     # log into the site and flush cache
     - ssh urbanharvest@aws1.acrobuild.com 'cd www/urbanharvest && composer install'

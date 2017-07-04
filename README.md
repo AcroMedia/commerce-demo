@@ -2,16 +2,17 @@
 
 [![Build Status](https://travis-ci.org/AcroMedia/drupalorange-project-template.svg?branch=8.x)](https://travis-ci.org/AcroMedia/drupalorange-project-template)
 
-This site is used for demoing a full Drupal 8 Commerce 2.x site. There are 2 versions of this site running simultaneously, and GitLab deploys 'master' automatically to both.
+This site is used for demoing a full Drupal 8 Commerce 2.x site. There are 2 versions of this site running simultaneously, and GitLab deploys 'master' to both. Staging is automatic. Client facing is manual.
 
-__Internal demo:__ https://commerce-2-demo.aws1.acrobuild.com/
+__Dev/staging site:__ https://commerce-2-demo.aws1.acrobuild.com/
 
+* Used as a development/staging environment for the live demo.
 * Used by Acro staff to demo Commerce 2.x on location (i.e. at tradeshows)
 
 __Client demo:__ https://urbanharvest.aws1.acrobuild.com/
 
 * Demo specifically setup to allow clients/prospects admin access so that they can login and mess around with the site configuration. 
-* This version of the site automatically resets it's database at midnight. 
+* This version of the site automatically resets it's database at 2AM every morning. 
 
 
 ## Origin

@@ -145,7 +145,7 @@ deploy-cloud4:
     - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
 
     # log into the site and flush cache
-    - ssh drupalcommerce@cloud4.acromedia.comm 'cd www/demo && composer install'
+    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demo && composer install'
 
 # This will be removed once setup on cloud4 instead.
 # Deploy CLIENT demo (manual deploy only).

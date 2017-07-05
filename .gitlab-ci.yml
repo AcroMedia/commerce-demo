@@ -110,7 +110,6 @@ deploy-uat:
     # log into the site and flush cache
     - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo && composer install'
 
-# This will be removed once setup on cloud4 instead.
 # Deploy CLIENT demo (CLOUD4 - manual deploy only).
 deploy-cloud4:
   stage: deploy
@@ -141,11 +140,12 @@ deploy-cloud4:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-    #move updated files up to deployment server, exclude .git since it's not needed
+    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - composer install --no-interaction
     - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
 
     # log into the site and flush cache
-    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demo && composer install'
+    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demo && composer cache-rebuild'
 
 # This will be removed once setup on cloud4 instead.
 # Deploy CLIENT demo (manual deploy only).

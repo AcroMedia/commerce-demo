@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9537635986eb35ee4762faa9e3994842",
+    "content-hash": "624d546a9fd845ef61e6a907fb648f35",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1284,48 +1284,6 @@
             ],
             "description": "Composer Plugin for updating the Drupal scaffold files when using drupal/core",
             "time": "2017-05-05T21:26:28+00:00"
-        },
-        {
-            "name": "drupal/add_to_head",
-            "version": "dev-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/add_to_head",
-                "reference": "39f8613be397955708ab87c6b5348b876db66154"
-            },
-            "require": {
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.x-dev",
-                    "datestamp": "1483121583"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "colan",
-                    "homepage": "https://www.drupal.org/user/58704"
-                },
-                {
-                    "name": "nicholasThompson",
-                    "homepage": "https://www.drupal.org/user/59351"
-                }
-            ],
-            "description": "Allows arbitrary insertion of code into the head of specific pages",
-            "homepage": "https://www.drupal.org/project/add_to_head",
-            "support": {
-                "source": "http://cgit.drupalcode.org/add_to_head"
-            },
-            "time": "2016-12-30 18:11:10"
         },
         {
             "name": "drupal/address",
@@ -8638,7 +8596,6 @@
         "drupal/physical": 5,
         "drupal/facets_pretty_paths": 20,
         "drupal/taxonomy_term_depth": 20,
-        "drupal/add_to_head": 20,
         "drupal/devel": 20
     },
     "prefer-stable": true,

@@ -8,11 +8,14 @@ __Dev/staging site:__ https://commerce-2-demo.aws1.acrobuild.com/
 
 * Used as a development/staging environment for the live demo.
 * Used by Acro staff to demo Commerce 2.x on location (i.e. at tradeshows)
+* This has a separate solr core and database from the live client site.
 
-__Client demo:__ https://urbanharvest.aws1.acrobuild.com/
+__Client demo:__ https://demo.drupalcommerce.com/
 
+* PUBLIC FACING LIVE SITE - Treat with care.
 * Demo specifically setup to allow clients/prospects admin access so that they can login and mess around with the site configuration. 
 * This version of the site automatically resets it's database at 2AM every morning. 
+* This has a separate solr core and database from the dev/staging site.
 
 
 ## Origin

@@ -2715,7 +2715,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/field_group",
-                "reference": "db5594cfad662203d7f2c082cfec2096137aa58e"
+                "reference": "8d3bdce51c5d0a35ab88a08383ccac9f5efc9794"
             },
             "require": {
                 "drupal/core": "*"
@@ -2726,8 +2726,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-rc6+12-dev",
-                    "datestamp": "1495146484"
+                    "version": "8.x-1.0-rc6+13-dev",
+                    "datestamp": "1499981942"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2761,7 +2761,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
             },
-            "time": "2017-05-18 22:27:19"
+            "time": "2017-07-13 21:36:25"
         },
         {
             "name": "drupal/google_analytics",
@@ -3092,14 +3092,14 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/metatag",
-                "reference": "e79a075c9c574c7e9faa1d07139fe027d5132920"
+                "reference": "cf42d847c29d1ab5c59baf39add9359b6a6554da"
             },
             "require": {
                 "drupal/core": "*",
-                "drupal/token": "*"
+                "drupal/token": "^1.0"
             },
             "require-dev": {
-                "drupal/devel": "*",
+                "drupal/devel": "^1.0",
                 "drupal/metatag_dc": "*",
                 "drupal/metatag_open_graph": "*"
             },
@@ -3109,8 +3109,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.1+2-dev",
-                    "datestamp": "1496417043"
+                    "version": "8.x-1.1+7-dev",
+                    "datestamp": "1499957342"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3138,7 +3138,7 @@
                 "source": "http://cgit.drupalcode.org/metatag",
                 "issues": "http://drupal.org/project/issues/metatag"
             },
-            "time": "2017-06-02 18:35:43"
+            "time": "2017-07-13 17:03:13"
         },
         {
             "name": "drupal/paragraphs",
@@ -7619,7 +7619,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/devel",
-                "reference": "4819ea5dcff61f89c78ad27f9bf5abdf110282c3"
+                "reference": "5f4a6c16ac60fcb53bc176c7cf6371c109baf74c"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -7633,8 +7633,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-rc2+11-dev",
-                    "datestamp": "1495218783"
+                    "version": "8.x-1.0-rc2+31-dev",
+                    "datestamp": "1500916443"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -7684,7 +7684,7 @@
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2017-05-24 13:48:01"
+            "time": "2017-07-24 23:09:34"
         },
         {
             "name": "fabpot/goutte",

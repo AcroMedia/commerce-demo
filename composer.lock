@@ -2767,17 +2767,17 @@
         },
         {
             "name": "drupal/honeypot",
-            "version": "1.25.0",
+            "version": "1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/honeypot",
-                "reference": "8.x-1.25"
+                "reference": "8.x-1.27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/honeypot-8.x-1.25.zip",
-                "reference": "8.x-1.25",
-                "shasum": "9dfe6677c5b4a19e87fae143755949b79168b9d1"
+                "url": "https://ftp.drupal.org/files/projects/honeypot-8.x-1.27.zip",
+                "reference": null,
+                "shasum": "b40f86ef45a7f4325343e8aa455ecbdceab51ffe"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -2788,8 +2788,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.25",
-                    "datestamp": "1494742085"
+                    "version": "8.x-1.27",
+                    "datestamp": "1499867343"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2819,17 +2819,17 @@
         },
         {
             "name": "drupal/imce",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/imce",
-                "reference": "8.x-1.5"
+                "reference": "8.x-1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/imce-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "b6ea0b74e9f1d37bf7acab10fdf0c1d1b3441464"
+                "url": "https://ftp.drupal.org/files/projects/imce-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "973fc92959dc31b16e33114852b8c26ec050ba7c"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -2840,8 +2840,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1486506784"
+                    "version": "8.x-1.6",
+                    "datestamp": "1499898842"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3449,7 +3449,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.0.zip",
-                "reference": null,
+                "reference": "8.x-1.0",
                 "shasum": "2559a2d54867632b2b0fac12e634da3eb820993d"
             },
             "require": {

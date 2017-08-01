@@ -11,6 +11,8 @@
  * @ingroup themeable
  */
 #}
+{{ form|without('coupons') }}
+
 {% if form.coupons|length %}
   {% if form['#cardinality'] == 1 %}
     <div class="coupon-redemption-form__coupons coupon-redemption-form__coupons--single">
@@ -33,5 +35,3 @@
     </div>
   {% endif %}
 {% endif %}
-
-{{ form|without('coupons') }}

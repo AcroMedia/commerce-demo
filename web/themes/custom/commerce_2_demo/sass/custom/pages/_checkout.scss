@@ -1,4 +1,121 @@
 /**
+ * Coupon redemption.
+ */
+#coupon_redemption-ajax-wrapper,
+#sidebar-coupon_redemption-form-ajax-wrapper {
+  position: relative;
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+  padding: 15px 20px;
+  margin: 10px 0 30px;
+
+  @media (max-width: $screen-sm) {
+    float: right;
+    margin-bottom: 40px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    padding: 15px 0;
+  }
+}
+
+#sidebar-coupon_redemption-form-ajax-wrapper {
+  float: none;
+
+  @media (max-width: $screen-sm) {
+    float: none;
+  }
+}
+
+#coupon_redemption-ajax-wrapper,
+#sidebar-coupon_redemption-form-ajax-wrapper {
+
+  // Fixes module issue where this ID is used within one of same name.
+  #coupon_redemption-ajax-wrapper,
+  #sidebar-coupon_redemption-form-ajax-wrapper {
+    position: initial;
+    float: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .form-item {
+    display: inline-block;
+    width: 155px;
+    margin-top: 0;
+    margin-right: 15px;
+
+    @media (max-width: $screen-sm) {
+      margin-right: 5px;
+    }
+
+    .form-optional {
+      display: none;
+    }
+  }
+
+  input[type="submit"] {
+    margin: 0;
+
+    @media (max-width: $screen-sm) {
+      padding: 6px;
+    }
+  }
+
+  .coupon-redemption-form__coupons {
+    h3 {
+      margin-top: 10px;
+      font-size: 22px;
+    }
+
+    table {
+      min-width: 290px;
+      margin-bottom: 0;
+
+      tr {
+        border: none;
+      }
+
+      td:last-of-type {
+        text-align: right;
+        padding: 5px 0;
+      }
+
+      input {
+        background-color: #fff;
+        border-color: #efefef;
+        color: #000;
+
+        &:hover, &:focus {
+          background-color: #fff;
+          border-color: #ccc;
+          color: #cc0000;
+        }
+
+        @media (max-width: $screen-sm) {
+          padding: 6px;
+        }
+      }
+    }
+  }
+
+  .ajax-progress {
+    position: absolute;
+    top: 14px;
+    right: 4px;
+    width: 138px;
+  }
+}
+
+#sidebar-coupon_redemption-form-ajax-wrapper {
+  .form-item {
+    width: 190px;
+  }
+}
+
+/**
  * Cart.
  */
 .view-commerce-cart-form {
@@ -88,6 +205,14 @@
     }
   }
 
+  .order-total {
+    float: right;
+
+    @media (max-width: $screen-sm) {
+      clear: both;
+    }
+  }
+
   .order-total-line {
     padding: 0 5px;
     text-align: right;
@@ -102,6 +227,8 @@
   }
 
   .form-actions {
+    float: right;
+    clear: right;
     text-align: right;
 
     .btn {

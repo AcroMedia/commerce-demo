@@ -18,7 +18,7 @@
  */
 #}
 {{ attach_library('commerce_order/total_summary') }}
-<div{{ attributes }}>
+<div{{ attributes }} class="order-total">
   <div class="order-total-line order-total-line__subtotal">
     <span class="order-total-line-label">{{ 'Subtotal'|t }} </span><span class="order-total-line-value">{{ totals.subtotal|commerce_price_format }}</span>
   </div>

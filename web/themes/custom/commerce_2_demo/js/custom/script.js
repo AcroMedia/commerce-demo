@@ -130,15 +130,6 @@
     }
   });
 
-  // Checkout form - Change line adjustment labels - Super janky.
-  $('.order-total-line__adjustment .order-total-line-label').each(function () {
-    var $adjustmentLabel = $(this).text();
-
-    if ($adjustmentLabel == 'Discount ') {
-      $(this).text('20% Off Storewide Sale ');
-    }
-  });
-
   // Checkout form - Remove screenreader class from all labels.
   $('.path-checkout form label').removeClass('sr-only');
 

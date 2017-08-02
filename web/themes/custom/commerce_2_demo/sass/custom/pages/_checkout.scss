@@ -1,41 +1,16 @@
 /**
  * Coupon redemption.
  */
-#coupon_redemption-ajax-wrapper,
 #sidebar-coupon_redemption-form-ajax-wrapper {
   position: relative;
-  float: left;
   border: 1px solid #ccc;
   border-radius: $border-radius;
   padding: 15px 20px;
-  margin: 10px 0 30px;
-
-  @media (max-width: $screen-sm) {
-    float: right;
-    margin-bottom: 40px;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0;
-    padding: 15px 0;
-  }
-}
-
-#sidebar-coupon_redemption-form-ajax-wrapper {
-  float: none;
-
-  @media (max-width: $screen-sm) {
-    float: none;
-  }
-}
-
-#coupon_redemption-ajax-wrapper,
-#sidebar-coupon_redemption-form-ajax-wrapper {
+  margin: 30px 0;
 
   // Fixes module issue where this ID is used within one of same name.
-  #coupon_redemption-ajax-wrapper,
   #sidebar-coupon_redemption-form-ajax-wrapper {
     position: initial;
-    float: none;
     border: none;
     padding: 0;
     margin: 0;
@@ -43,7 +18,7 @@
 
   .form-item {
     display: inline-block;
-    width: 155px;
+    width: 190px;
     margin-top: 0;
     margin-right: 15px;
 
@@ -71,7 +46,6 @@
     }
 
     table {
-      min-width: 290px;
       margin-bottom: 0;
 
       tr {
@@ -87,6 +61,7 @@
         background-color: #fff;
         border-color: #efefef;
         color: #000;
+        padding: 6px 10px;
 
         &:hover, &:focus {
           background-color: #fff;
@@ -106,12 +81,6 @@
     top: 14px;
     right: 4px;
     width: 138px;
-  }
-}
-
-#sidebar-coupon_redemption-form-ajax-wrapper {
-  .form-item {
-    width: 190px;
   }
 }
 

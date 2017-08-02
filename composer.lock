@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdcd736ac81d751d8b063abcc96c5f82",
+    "content-hash": "8e8e8a21000c3aa20bdcef819adbf325",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1536,8 +1536,7 @@
                     "datestamp": "1501497843"
                 },
                 "patches_applied": {
-                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch",
-                    "#2872455: Allow coupons to be redeemed on the cart page": "https://www.drupal.org/files/issues/coupon_redemption_from_cart--2872455-8.patch"
+                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

@@ -56,7 +56,9 @@
       {% if product_image_full_url %}
         {# Product images. #}
         <div class="col-sm-12 col-md-6">
-          {{ product.variation_field_image }}
+          <div class="product--images">
+            {{ product.variation_field_image }}
+          </div>
         </div>
         {# Product intro (w/ product image). #}
         <div class="col-sm-12 col-md-6">

@@ -73,7 +73,7 @@
     {# Footer bottom. #}
     <div class="site-footer__bottom">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-10">
           {# Footer navigation. #}
           {% if page.footer_nav %}
             <div class="footer-nav">
@@ -93,7 +93,33 @@
             {{ 'Website design by'|t }} <a href="https://www.acromedia.com" target="_blank">{{ 'Acro Media Inc.'|t }}</a>
           </div>
         </div>
+
+        <div class="col-xs-12 col-sm-2">
+          {# Button trigger modal #}
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#siteTours">
+            Tours
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </footer>
+
+
+{# Tour Modal #}
+<div class="modal fade" id="siteTours" tabindex="-1" role="dialog" aria-labelledby="siteToursLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="siteToursLabel">Commerce Demo Tours</h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-primary" id="tourExample">Intro.js Tour Example</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

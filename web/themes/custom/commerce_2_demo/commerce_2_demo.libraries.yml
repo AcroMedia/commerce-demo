@@ -3,8 +3,12 @@ global-styling:
   css:
     theme:
       css/style.css: { media: all }
+      css/contrib/introjs.min.css: { media: all }
+      css/tours.css: { media: all }
   js:
     js/custom/script.js: {}
+    js/contrib/intro.min.js: {}
+    js/custom/tours.js: {}
   dependencies:
     - core/jquery
     - core/drupal

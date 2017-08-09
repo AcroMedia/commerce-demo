@@ -83,6 +83,7 @@ deploy-uat:
   # add any other tags or branches you want here
   only:
     - master
+    - guided_tours
 
   environment:
     name: uat

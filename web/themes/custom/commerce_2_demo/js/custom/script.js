@@ -304,58 +304,6 @@
       event.preventDefault();
       $('#block-languageswitcher').slideToggle('fast');
     });
-
-    // Triggers search facet when page has loaded, based on menu url.
-    // Define regex patter to filter out facet category.
-    var regexPattern = /((cat-)\d+)/g;
-    var regexPatternSpecial = /((special-)\d+)/g;
-
-    // Run current page url through regex and check if successful.
-    var currentUrl = window.location.href; // Returns full url
-    // Normal categories.
-    if (regexPattern.test(currentUrl) === true) {
-      // Filter out category.
-      var regexUrl = currentUrl.match(regexPattern);
-      var filteredCategory = regexUrl[0];
-
-      // Simulate click on facet matching filter.
-      $('.site-sidebar .block-facets').find('input#' + filteredCategory).trigger('click');
-    }
-    // Special categories.
-    else if (regexPatternSpecial.test(currentUrl) === true) {
-      // Filter out category.
-      var regexUrl = currentUrl.match(regexPatternSpecial);
-      var filteredCategory = regexUrl[0];
-
-      // Simulate click on facet matching filter.
-      $('.site-sidebar .block-facets').find('input#' + filteredCategory).trigger('click');
-    }
-
-    // Trigger search facet on product pages when main menu is clicked.
-    $('.path-products .view-facet-menus a').click(function(event) {
-      event.preventDefault();
-
-      // Run nav item url through regex and check if successful.
-      var navUrl = $(this).attr('href');
-      // Normal categories.
-      if (regexPattern.test(navUrl) === true) {
-        // Filter out category.
-        var regexNavUrl = navUrl.match(regexPattern);
-        var filteredNavCategory = regexNavUrl[0];
-
-        // Simulate click on facet matching filter only if it's not already checked.
-        $('.site-sidebar .block-facets').find('input#' + filteredNavCategory).not(':checked').trigger('click');
-      }
-      // Special categories.
-      else if (regexPatternSpecial.test(navUrl) === true) {
-        // Filter out category.
-        var regexNavUrl = navUrl.match(regexPatternSpecial);
-        var filteredNavCategory = regexNavUrl[0];
-
-        // Simulate click on facet matching filter only if it's not already checked.
-        $('.site-sidebar .block-facets').find('input#' + filteredNavCategory).not(':checked').trigger('click');
-      }
-    });
   });
 
 })(jQuery, Drupal);

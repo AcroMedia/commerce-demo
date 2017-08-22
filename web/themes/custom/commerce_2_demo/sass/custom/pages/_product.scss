@@ -314,17 +314,49 @@
     letter-spacing: 0.08em;
     line-height: 1.2;
     color: #cc0000;
+
+    @media (max-width: 485px) {
+      text-align: center;
+    }
   }
 
-  .field__items .field__item {
-    .field__items {
-      display: inline-block;
-      width: 100%;
+  .field__items {
+    display: inline-block;
+    width: 100%;
+
+    @media (max-width: 485px) {
+      text-align: center;
     }
 
     .field__item {
-      width: auto;
-      margin: 0;
+      margin: 0 18px 20px 0;
+
+      @media (max-width: $screen-md-max) {
+        margin-right: 14px;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        margin-right: 18px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        margin-right: 12px;
+      }
+
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      .field__items {
+        display: inline-block;
+        width: 100%;
+      }
+
+      .field__item {
+        width: auto;
+        margin: 0;
+      }
     }
   }
 }

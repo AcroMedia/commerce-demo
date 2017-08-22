@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ */
+function commerce_tour_uninstall() {
+  Drupal::configFactory()->getEditable('tour.tour.commerce_promotion')->delete();
+}

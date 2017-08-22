@@ -1,0 +1,9 @@
+name:  Commerce Tour
+type: module
+description:  'Provides tours for the Drupal Commerce module.'
+package: Commerce (contrib)
+core:  8.x
+dependencies:
+  - tour
+  - commerce
+  - commerce_promotion

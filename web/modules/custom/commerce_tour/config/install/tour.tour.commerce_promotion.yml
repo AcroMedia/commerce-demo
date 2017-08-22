@@ -1,0 +1,119 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_promotion
+id: commerce_promotion
+label: 'Commerce Promotions'
+module: commerce_promotion
+routes:
+  -
+    route_name: entity.commerce_promotion.add_form
+
+tips:
+  overview:
+    id: overview
+    plugin: text
+    label: 'Overview'
+    body: 'This guide will walk you through adding a basic promotion to you website!'
+    weight: -100
+  add-title:
+    id: add-title
+    plugin: text
+    label: 'Promotion title'
+    body: 'Enter the title of your promotion.'
+    weight: -99
+    attributes:
+      data-id: edit-name-wrapper
+    location: bottom
+  add-description:
+    id: add-description
+    plugin: text
+    label: 'Promotion description'
+    body: 'Optionally enter a short description of your promotion.'
+    weight: -98
+    attributes:
+      data-id: edit-description-wrapper
+    location: top
+  select-offer-type:
+    id: select-offer-type
+    plugin: text
+    label: 'Offer type'
+    body: 'Select the type of offer you would like to create.'
+    weight: -97
+    attributes:
+      data-id: edit-offer-wrapper
+    location: top
+  set-amount:
+    id: set-amount
+    plugin: text
+    label: 'Offer amount'
+    body: 'Set the amount or percentage off. Amount or percentage is determined by the offer type option selected.'
+    weight: -96
+    attributes:
+      data-class: form-type-commerce-number
+    location: top
+  set-contitions:
+    id: set-contitions
+    plugin: text
+    label: 'Offer conditions'
+    body: 'Optionally set any special conditions for this offer.'
+    weight: -95
+    attributes:
+      data-id: edit-conditions-wrapper
+    location: top
+  set-coupons:
+    id: set-coupons
+    plugin: text
+    label: 'Coupon codes'
+    body: 'Optionally set coupons codes that will activate this promotion.'
+    weight: -94
+    attributes:
+      data-id: edit-coupons-wrapper
+    location: top
+  set-status:
+    id: set-status
+    plugin: text
+    label: 'Confirm status'
+    body: 'Promotions are enabled by default. Optionally disable the promotion here.'
+    weight: -93
+    attributes:
+      data-id: edit-option-details
+    location: left
+  set-dates:
+    id: set-dates
+    plugin: text
+    label: 'Start & end dates'
+    body: 'Set the start date (and optional end date) when this promotion is usable by your customers.'
+    weight: -92
+    attributes:
+      data-id: edit-date-details
+    location: left
+  set-usage-limits:
+    id: set-usage-limits
+    plugin: text
+    label: 'Usage limits'
+    body: 'Promotions can be used an unlimited number of times by default. Optionally change that here.'
+    weight: -91
+    attributes:
+      data-id: edit-usage-details
+    location: left
+  set-compatibility:
+    id: set-compatibility
+    plugin: text
+    label: 'Compatibility'
+    body: 'Promotions can be combined with other promotions by default. Optionally change that here.'
+    weight: -90
+    attributes:
+      data-id: edit-compatibility-details
+    location: left
+  save-promotion:
+    id: save-promotion
+    plugin: text
+    label: 'Save your promotion'
+    body: 'When you are happy with this promotion, click to save it.'
+    weight: -89
+    attributes:
+      data-id: edit-actions-submit
+      data-class: button--primary
+    location: right

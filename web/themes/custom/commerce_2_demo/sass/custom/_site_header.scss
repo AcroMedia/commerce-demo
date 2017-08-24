@@ -435,13 +435,19 @@
             font-weight: 600;
           }
 
+          &.views-field-quantity {
+            width: 36px;
+          }
+
           &.views-field-total-price__number {
+            width: 60px;
             text-align: right;
           }
         }
 
         td.views-field-remove-button {
           position: relative;
+          width: 40px;
 
           input {
             display: inline-block;
@@ -449,6 +455,15 @@
             width: 30px;
             padding: 0;
             font-size: 0;
+            background-color: $gray-lighter;
+            border-color: $gray-light;
+            color: #000;
+
+            &:hover, &:focus {
+              background-color: $gray-lighter;
+              border-color: $gray;
+              color: $c-primary;
+            }
           }
 
           &:after {
@@ -458,12 +473,14 @@
             font-size: 19px;
             font-family: FontAwesome;
             content: '\f014';
-            color: #fff;
             pointer-events: none;
+            transition: color .1s ease-in-out;
           }
         }
 
         td.views-field-purchased-entity {
+          width: 50px;
+
           img {
             width: 40px;
             height: 40px;

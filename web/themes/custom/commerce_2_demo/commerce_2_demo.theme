@@ -11,6 +11,8 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\commerce_product\Entity\Product;
+use Drupal\commerce_order\Entity;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -325,4 +327,15 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
       }
     }
   }
+}
+
+/**
+ * Implements hook_preprocess_commerce_checkout_completion_message().
+ */
+function commerce_2_demo_preprocess_commerce_checkout_completion_message(&$variables) {
+  /** @var Drupal\commerce_order\Entity\OrderInterface $order */
+  $order_entity = $variables['order_entity'];
+  $order_items = $order_entity->getItems();
+  $variables['order_items'] = $order_items;
+  $variables['order_type'] = $order_entity->type;;
 }

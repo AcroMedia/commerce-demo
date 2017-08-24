@@ -192,7 +192,8 @@
           }
         }
 
-        .field--name-field-brand {
+        .field--name-field-brand,
+        .field--name-field-artist {
           .field__item {
             display: inline-block;
             font-size: 12px;
@@ -440,7 +441,8 @@
       padding: 0;
     }
 
-    .field--name-field-brand {
+    .field--name-field-brand,
+    .field--name-field-artist {
       .field__item {
         display: inline-block;
         font-size: 18px;

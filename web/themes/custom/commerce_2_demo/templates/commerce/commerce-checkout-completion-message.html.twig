@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the completion message.
+ *
+ * Available variables:
+ * - order_entity: The order entity.
+ * - payment_instructions: The payment instructions, if provided.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="checkout-complete">
+  {{ 'Your order number is '|t }} <strong>{{ order_entity.getOrderNumber }}</strong>.<br>
+  {{ 'You can view your order on your account page when logged in.'|t }} <br>
+
+  {% if payment_instructions %}
+    <div class="checkout-complete__payment-instructions">
+      <h2>{{ 'Payment instructions'|t }}</h2>
+      {{ payment_instructions }}
+    </div>
+  {% endif %}
+
+  {# Show files for digital order types #}
+  {% if order_type.entity.id == 'digital' %}
+    <h2>{{ 'Your downloads'|t }}</h2>
+    <div class="checkout-complete__digital">
+      {% for order_item in order_items %}
+        {% for file in order_item.purchased_entity %}
+          <a href="{{ file_url(file.entity.field_file.entity.fileuri) }}" class="checkout-complete__file" title="{{ file.entity.title.value }}">
+            {{ file.entity.title.value }}
+          </a>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

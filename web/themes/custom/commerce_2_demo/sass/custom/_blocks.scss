@@ -345,7 +345,7 @@
   &:before {
     display: inline-block;
     position: relative;
-    vertical-align: top;
+    vertical-align: middle;
     margin-right: 5px;
     width: 128px;
     height: 81px;
@@ -356,13 +356,23 @@
     @media (max-width: $screen-sm-max) {
       margin-right: 0;
       margin-bottom: 5px;
+      width: 100%;
     }
   }
 }
 
 form.newsletter-signup-form {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
+  width: calc(100% - 460px);
+
+  @media (max-width: $screen-md-max) {
+    width: calc(100% - 410px);
+  }
+
+  @media (max-width: $screen-sm-max) {
+    width: 100%;
+  }
 
   h2 {
     display: inline-block;
@@ -396,11 +406,14 @@ form.newsletter-signup-form {
 
   .form-item {
     display: inline-block;
-    max-width: 290px;
     margin: 3px 6px 10px 0;
 
     .form-control {
       font-size: 16px;
+    }
+
+    &.form-item-email-address {
+      max-width: 290px;
     }
   }
 

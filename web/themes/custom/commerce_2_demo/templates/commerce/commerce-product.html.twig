@@ -36,6 +36,7 @@
     {{ product.variation_price }}
     {{ product.title }}
     {{ product.field_brand }}
+    {{ product.field_artist }}
   </a>
 
 {% else %}
@@ -67,12 +68,19 @@
           <div class="product--intro product--intro__full-width">
       {% endif %}
 
-          {{ product.field_brand }}
-          <h1 class="page-title">{{ product_entity.title.value }}</h1>
-          {{ product.variation_price }}
-          {{ product.field_short_description }}
-          {{ product.variations }}
-        </div>
+            {{ product.field_brand }}
+            {{ product.field_artist }}
+            <h1 class="page-title">{{ product_entity.title.value }}</h1>
+            {{ product.variation_price }}
+            {{ product.field_short_description }}
+
+            {# Download only alert #}
+            {% if product_entity.bundle == 'audio_download' %}
+              <strong>{{ 'Format:'|t }}</strong> {{ 'Digital'|t }}
+            {% endif %}
+
+            {{ product.variations }}
+          </div>
       </div>
     </div>
 

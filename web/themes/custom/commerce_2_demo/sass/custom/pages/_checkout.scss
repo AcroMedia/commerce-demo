@@ -87,6 +87,17 @@
 /**
  * Cart.
  */
+.cart-form {
+  clear: both;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 40px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
 .view-commerce-cart-form {
   .cart-mobile-message {
     padding-bottom: 10px;
@@ -115,30 +126,17 @@
     // Table body.
     tbody {
       tr {
-        td.views-field-remove-button {
-          position: relative;
-
-          input {
-            display: inline-block;
-            height: 40px;
-            width: 40px;
-            padding: 0;
-            font-size: 0;
-          }
-
-          &:after {
-            position: absolute;
-            top: calc(50% - 17px);
-            left: 17px;
-            font-size: 23px;
-            font-family: FontAwesome;
-            content: '\f014';
-            color: #fff;
-            pointer-events: none;
-          }
+        td {
+          padding: 15px 5px;
         }
 
         td.views-field-purchased-entity {
+          width: 120px;
+
+          @media (max-width: $screen-sm-max) {
+            width: 100px;
+          }
+
           img {
             width: 80px;
             height: 80px;
@@ -155,7 +153,12 @@
         }
 
         td.views-field-edit-quantity {
+          width: 140px;
           text-align: center;
+
+          @media (max-width: $screen-sm-max) {
+            width: auto;
+          }
 
           input {
             text-align: center;
@@ -166,9 +169,51 @@
           }
         }
 
+        td.views-field-remove-button {
+          position: relative;
+          width: 60px;
+
+          @media (max-width: $screen-sm-max) {
+            width: 50px;
+          }
+
+          input {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            padding: 0;
+            font-size: 0;
+            background-color: $gray-lighter;
+            border-color: $gray-light;
+            color: #000;
+
+            &:hover, &:focus {
+              background-color: $gray-lighter;
+              border-color: $gray;
+              color: $c-primary;
+            }
+          }
+
+          &:after {
+            position: absolute;
+            top: calc(50% - 17px);
+            left: 16px;
+            font-size: 23px;
+            font-family: FontAwesome;
+            content: '\f014';
+            pointer-events: none;
+            transition: color .1s ease-in-out;
+          }
+        }
+
         td.views-field-unit-price__number,
         td.views-field-total-price__number {
+          width: 140px;
           text-align: right;
+
+          @media (max-width: $screen-sm-max) {
+            width: auto;
+          }
         }
       }
     }
@@ -204,7 +249,7 @@
       margin-right: 0;
     }
 
-    #edit-submit {
+    input[id^="edit-submit"] {
       background-color: $gray-lighter;
       border-color: $gray-light;
       color: #000;
@@ -435,5 +480,22 @@
     .form-optional {
       display: none;
     }
+  }
+}
+
+// Checkout complete.
+.checkout-complete__file {
+  display: block;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 5px;
+
+  &:before {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    padding-right: 5px;
+    font-family: FontAwesome;
+    content: '\f15b';
+    color: $c-body;
   }
 }

@@ -213,7 +213,7 @@ ul.menu--social-media {
   height: 100%;
   width: 100%;
   @include background-opacity(#fff, 0.95);
-  z-index: 9999;
+  z-index: 99999999;
   overflow-x: hidden;
 }
 
@@ -259,6 +259,10 @@ ul.menu--social-media {
   }
   .form-item{
     width: 100%;
+
+    &.form-type-select {
+      display: none;
+    }
 
     .form-control {
       max-width: 100%;

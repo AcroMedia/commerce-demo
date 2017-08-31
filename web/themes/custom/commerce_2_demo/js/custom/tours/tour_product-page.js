@@ -32,7 +32,7 @@
 
     // Start tour and set page/trigger for page 2.
     productPageTour.start().oncomplete(function() {
-      window.location.href = 'product/custom-mason-jar?productPageTourPage2=true';
+      window.location.href = 'product/custom-mason-jar?productPageTourPage2';
     });
   }
 
@@ -98,7 +98,7 @@
   // Otherwise, close modal and start tour.
   $('#productPageTour').click(function () {
     if (window.location.pathname !== '/') {
-      window.location.href = '/?startProductPageTour=true';
+      window.location.href = '/?startProductPageTour';
     }
     else {
       $('#siteTours').modal('hide');

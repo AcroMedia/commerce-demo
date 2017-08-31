@@ -14,7 +14,7 @@ function tourDefaults(tour) {
   tour.setOption('tooltipClass', 'introjs-tooltip__custom');
   tour.setOption('highlightClass', 'introjs--helperLayer__custom');
   tour.setOption('tooltipPosition', 'auto');
-  tour.setOption('positionPrecedence', ['left', 'right', 'bottom', 'top']);
+  tour.setOption('positionPrecedence', ['left', 'right', 'bottom-middle-aligned', 'top']);
   tour.setOption('showBullets', true);
   tour.setOption('showProgress', false);
   tour.setOption('scrollToElement', true);
@@ -31,6 +31,7 @@ function tourDefaults(tour) {
 
   $.getScript(sitePath + 'tour_homepage.js');
   $.getScript(sitePath + 'tour_product-page.js');
+  $.getScript(sitePath + 'tour_catalog-filters.js');
   $.getScript(sitePath + 'tour_why-drupal.js');
   $.getScript(sitePath + 'tour_why-open-source.js');
 

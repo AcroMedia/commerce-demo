@@ -85,6 +85,7 @@
         },
         {
           element: '.site-footer',
+          position: 'top',
           intro: '<span class="introjs-tooltip__title">A Place for Everything Else</span>' +
           "The footer, as always, can be customized to display anything else required on the page. Social media links, contact information, legal jargon, etc."
         },
@@ -110,7 +111,7 @@
   // Otherwise, close modal and start tour.
   $('#homepageTour').click(function () {
     if (window.location.pathname !== '/') {
-      window.location.href = '/?startHomepageTour=true';
+      window.location.href = '/?startHomepageTour';
     }
     else {
       $('#siteTours').modal('hide');

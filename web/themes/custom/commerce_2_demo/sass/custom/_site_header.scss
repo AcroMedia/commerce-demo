@@ -16,6 +16,7 @@
 // Promo Block - modifies Basic Promotion block default styles
 .site-header__promo {
   padding: 5px 0;
+  background-color: #000;
 
   .block-type-basic-promotion {
     padding: 0;
@@ -528,6 +529,7 @@
  * Site header search.
  */
 .site-header__search {
+  display: inline-block;
   margin: 13px 0;
 
   .form--inline {

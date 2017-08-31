@@ -2,6 +2,12 @@
  * Intro.js custom site tours.
  */
 
+#siteTours-start i,
+#siteTours i {
+  margin-right: 5px;
+}
+
+/* Intro.js overrides */
 .introjs-tooltip__custom {
   padding: 25px;
   min-width: 300px;

@@ -1,13 +1,35 @@
 /**
- * Intro.js custom site tours.
+ * Custom site tours.
  */
 
 #siteTours-start i,
 #siteTours i {
-  margin-right: 5px;
+  margin-right: 6px;
+}
+
+#siteTours {
+  z-index: 16000005;
+}
+
+#siteTours .modal-body {
+  text-align: center;
+}
+
+#siteTours .modal-body button {
+  display: inline-block;
+  width: 45%;
+  min-width: 210px;
+  padding: 10px;
+  margin: 0 20px 20px 0;
+  text-align: left;
 }
 
 /* Intro.js overrides */
+
+.introjs-overlay {
+  opacity: 1;
+}
+
 .introjs-tooltip__custom {
   padding: 25px;
   min-width: 300px;

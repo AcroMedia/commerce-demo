@@ -529,8 +529,11 @@
  * Site header search.
  */
 .site-header__search {
-  display: inline-block;
   margin: 13px 0;
+
+  .region-site-search {
+    display: inline-block;
+  }
 
   .form--inline {
     .form-item-filter {

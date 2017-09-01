@@ -12,7 +12,7 @@
     tourDefaults(productPageTour);
 
     // Override default.
-    productPageTour.setOption('doneLabel', 'Next page');
+    productPageTour.setOption('doneLabel', 'Go to Product Page');
 
     // Tour steps.
     productPageTour.setOptions({

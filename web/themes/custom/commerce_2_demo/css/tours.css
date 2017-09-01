@@ -2,6 +2,17 @@
  * Custom site tours.
  */
 
+.site-tours-wrapper {
+  text-align: right;
+}
+
+@media (max-width: 991px) {
+  .site-tours-wrapper {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
 #siteTours-start i,
 #siteTours i {
   margin-right: 6px;

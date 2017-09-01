@@ -49,7 +49,7 @@
           "A quick-view cart lets them quickly see what they have in their cart at any time."
         },
         {
-          element: '.site-header__search',
+          element: '.site-header__search .region-site-search',
           intro: '<span class="introjs-tooltip__title">SOLR Powered Site Search</span>' +
           "SOLR has become the standard for generating search results. From products or blog posts, Drupal Commerce leverages SOLR heavily."
         },

@@ -1,5 +1,5 @@
 /**
- * Search tour.
+ * SOLR Search tour.
  */
 
 (function ($, Drupal) {
@@ -49,7 +49,7 @@
           "Our search for Mason Jar has been completed and we can see some of the results. We'll now go through some of the features that make up the search results."
         },
         {
-          element: '.site-header__search',
+          element: '.site-header__search .region-site-search',
           intro: '<span class="introjs-tooltip__title">Search Input</span>' +
           "It's easy not to think much about your site search, but with SOLR there is a lot of customization behind the scenes. SOLR lets us customize exactly what fields are being search for. If we only want product titles to be searchable, we can do that. If we want everything but the title, we can do that too."
         },

@@ -73,7 +73,14 @@
     {# Footer bottom. #}
     <div class="site-footer__bottom">
       <div class="row">
-        <div class="col-xs-12 col-sm-10">
+        <div class="hidden-xs col-sm-12 col-md-2 pull-right site-tours-wrapper">
+          {# Button trigger modal #}
+          <button type="button" id="siteTours-start" class="btn btn-primary" data-toggle="modal" data-target="#siteTours">
+            <i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}
+          </button>
+        </div>
+
+        <div class="col-xs-12 col-md-10">
           {# Footer navigation. #}
           {% if page.footer_nav %}
             <div class="footer-nav">
@@ -92,13 +99,6 @@
           <div class="site-footer__acro">
             {{ 'Website design by'|t }} <a href="https://www.acromedia.com" target="_blank">{{ 'Acro Media Inc.'|t }}</a>
           </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-2 text-right">
-          {# Button trigger modal #}
-          <button type="button" id="siteTours-start" class="btn btn-primary" data-toggle="modal" data-target="#siteTours">
-            <i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}
-          </button>
         </div>
       </div>
     </div>

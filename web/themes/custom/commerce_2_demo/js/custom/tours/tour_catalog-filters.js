@@ -24,7 +24,7 @@
           position: 'top',
           scrollTo: 'tooltip',
           intro: '<span class="introjs-tooltip__title">SOLR Search Results</span>' +
-          "Apache Solr's open source enterprise site search powers many of the largest internet websites on the planet. Its scalable, reliable and extremely flexible, making sure your customers get exactly what they expect."
+          "Apache SOLR's open source enterprise site search powers many of the largest websites on the planet. Its scalable, reliable and extremely flexible, making sure your customers get exactly what they expect."
         },
         {
           element: '.product--teaser',

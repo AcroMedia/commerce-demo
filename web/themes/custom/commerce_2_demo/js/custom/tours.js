@@ -32,6 +32,7 @@ function tourDefaults(tour) {
   $.getScript(sitePath + 'tour_homepage.js');
   $.getScript(sitePath + 'tour_product-page.js');
   $.getScript(sitePath + 'tour_catalog-filters.js');
+  $.getScript(sitePath + 'tour_solr-search.js');
   $.getScript(sitePath + 'tour_why-drupal.js');
   $.getScript(sitePath + 'tour_why-open-source.js');
 

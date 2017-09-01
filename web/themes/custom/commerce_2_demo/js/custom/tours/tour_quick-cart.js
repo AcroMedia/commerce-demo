@@ -1,5 +1,6 @@
 /**
  * Quick Cart tour.
+ * http://introjs.com/docs/
  */
 
 (function ($, Drupal) {
@@ -129,8 +130,10 @@
     // Load defaults.
     tourDefaults(quickCartTourPage2);
 
-    // Start tour.
-    quickCartTourPage2.start();
+    // Start tour and trigger tour select modal when completed.
+    quickCartTourPage2.start().oncomplete(function() {
+      $('#siteTours').modal('show');
+    });
   }
 
 

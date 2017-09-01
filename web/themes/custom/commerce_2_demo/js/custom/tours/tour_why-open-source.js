@@ -1,19 +1,15 @@
 /**
  * Why Open Source? tour.
+ * http://introjs.com/docs/
  */
 
 (function ($, Drupal) {
 
   // Page 1.
   function whyOpenSourceTour(){
-    var whyOpenSourceTour = introJs();
+    var whyOpenSourceTour = introJs(),
 
-    // Load defaults.
-    tourDefaults(whyOpenSourceTour);
-
-    // Tour steps.
-    whyOpenSourceTour.setOptions({
-      steps: [
+      steps = [
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">Why Open Source?</span>' +
@@ -68,11 +64,17 @@
           '<a href="https://www.acromedia.com/drupal-commerce" class="btn btn-primary" target="_blank">Learn more</a> &nbsp; or &nbsp; ' +
           '<a href="https://www.acromedia.com/contact-us" class="btn btn-primary" target="_blank">Talk to us!</a>'
         }
-      ]
-    });
+      ];
 
-    // Start tour.
-    whyOpenSourceTour.start();
+    whyOpenSourceTour.setOptions({steps: steps});
+
+    // Load defaults.
+    tourDefaults(whyOpenSourceTour);
+
+    // Start tour and trigger tour select modal when completed.
+    whyOpenSourceTour.start().oncomplete(function() {
+      $('#siteTours').modal('show');
+    });
   }
 
 
@@ -80,7 +82,6 @@
   // Start tours from #siteTours modal.
   //////////////////////////////////////
 
-  // whyOpenSourceTour.
   // Close modal and start tour.
   $('#whyOpenSourceTour').click(function () {
     $('#siteTours').modal('hide');

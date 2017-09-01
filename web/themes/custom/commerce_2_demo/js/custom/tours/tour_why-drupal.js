@@ -1,19 +1,15 @@
 /**
  * Why Drupal? tour.
+ * http://introjs.com/docs/
  */
 
 (function ($, Drupal) {
 
   // Page 1.
   function whyDrupalTour(){
-    var whyDrupalTour = introJs();
+    var whyDrupalTour = introJs(),
 
-    // Load defaults.
-    tourDefaults(whyDrupalTour);
-
-    // Tour steps.
-    whyDrupalTour.setOptions({
-      steps: [
+      steps = [
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">Why Drupal?</span>' +
@@ -44,11 +40,17 @@
           '<a href="https://www.acromedia.com/drupal-commerce" class="btn btn-primary" target="_blank">Learn more</a> &nbsp; or &nbsp; ' +
           '<a href="https://www.acromedia.com/contact-us" class="btn btn-primary" target="_blank">Talk to us!</a>'
         }
-      ]
-    });
+      ];
 
-    // Start tour.
-    whyDrupalTour.start();
+    whyDrupalTour.setOptions({steps: steps});
+
+    // Load defaults.
+    tourDefaults(whyDrupalTour);
+
+    // Start tour and trigger tour select modal when completed.
+    whyDrupalTour.start().oncomplete(function() {
+      $('#siteTours').modal('show');
+    });
   }
 
 
@@ -56,7 +58,6 @@
   // Start tours from #siteTours modal.
   //////////////////////////////////////
 
-  // whyDrupalTour.
   // Close modal and start tour.
   $('#whyDrupalTour').click(function () {
     $('#siteTours').modal('hide');

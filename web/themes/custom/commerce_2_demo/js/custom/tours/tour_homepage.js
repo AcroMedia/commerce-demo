@@ -1,19 +1,15 @@
 /**
  * Homepage tour.
+ * http://introjs.com/docs/
  */
 
 (function ($, Drupal) {
 
   // Page 1.
   function homepageTour(){
-    var homepageTour = introJs();
+    var homepageTour = introJs(),
 
-    // Load defaults.
-    tourDefaults(homepageTour);
-
-    // Tour steps.
-    homepageTour.setOptions({
-      steps: [
+      steps = [
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">Homepage Features Tour</span>' +
@@ -94,11 +90,17 @@
           intro: '<span class="introjs-tooltip__title">Done!</span>' +
           "As you can see, there are a lot of interesting elements that can make up an ecommerce homepage. Whatever type of homepage layout you would like, Drupal Commerce can adapt! You're only limited by your imagination (and developer resources of course). This completes the Homepage Feature Tour."
         }
-      ]
-    });
+      ];
 
-    // Start tour.
-    homepageTour.start();
+    homepageTour.setOptions({steps: steps});
+
+    // Load defaults.
+    tourDefaults(homepageTour);
+
+    // Start tour and trigger tour select modal when completed.
+    homepageTour.start().oncomplete(function() {
+      $('#siteTours').modal('show');
+    });
   }
 
 
@@ -106,7 +108,6 @@
   // Start tours from #siteTours modal.
   //////////////////////////////////////
 
-  // homepageTour.
   // If not on desired start page, go to that page and append trigger.
   // Otherwise, close modal and start tour.
   $('#homepageTour').click(function () {

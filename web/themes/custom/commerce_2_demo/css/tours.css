@@ -1,5 +1,6 @@
 /**
  * Custom site tours.
+ * http://introjs.com/docs/
  */
 
 .site-tours-wrapper {
@@ -31,7 +32,7 @@
   width: 45%;
   min-width: 210px;
   padding: 10px;
-  margin: 0 20px 20px 0;
+  margin: 0 10px 20px 10px;
   text-align: left;
 }
 

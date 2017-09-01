@@ -1,22 +1,15 @@
 /**
  * SOLR Search tour.
+ * http://introjs.com/docs/
  */
 
 (function ($, Drupal) {
 
   // Page 1.
   function solrSearchTour(){
-    var solrSearchTour = introJs();
+    var solrSearchTour = introJs(),
 
-    // Load defaults.
-    tourDefaults(solrSearchTour);
-
-    // Override default.
-    solrSearchTour.setOption('doneLabel', 'Start search');
-
-    // Tour steps.
-    solrSearchTour.setOptions({
-      steps: [
+      steps = [
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">SOLR Search Tour</span> ' +
@@ -24,8 +17,15 @@
           + '<br><br>' +
           "Click the Start search button below to get started. We'll search for 'mason jar'."
         }
-      ]
-    });
+      ];
+
+    solrSearchTour.setOptions({steps: steps});
+
+    // Load defaults.
+    tourDefaults(solrSearchTour);
+
+    // Override default.
+    solrSearchTour.setOption('doneLabel', 'Start search');
 
     // Start tour and set page/trigger for page 2.
     solrSearchTour.start().oncomplete(function() {
@@ -35,14 +35,9 @@
 
   // Page 2.
   function solrSearchTourPage2(){
-    var solrSearchTourPage2 = introJs();
+    var solrSearchTourPage2 = introJs(),
 
-    // Load defaults.
-    tourDefaults(solrSearchTourPage2);
-
-    // Tour steps.
-    solrSearchTourPage2.setOptions({
-      steps: [
+      steps = [
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">Search Results</span>' +
@@ -82,14 +77,20 @@
           + '<br><br>' +
           "If you're interested in learning more about Apache SOLR, visit their website at " + '<a href="http://lucene.apache.org/solr/" target="_blank">lucene.apache.org/solr</a>.'
         }
-      ]
-    });
+      ];
+
+    solrSearchTourPage2.setOptions({steps: steps});
+
+    // Load defaults.
+    tourDefaults(solrSearchTourPage2);
 
     // Change search term value.
     $('.region-site-search #edit-filter').val('mason jar');
 
-    // Start tour.
-    solrSearchTourPage2.start();
+    // Start tour and trigger tour select modal when completed.
+    solrSearchTourPage2.start().oncomplete(function() {
+      $('#siteTours').modal('show');
+    });
   }
 
 

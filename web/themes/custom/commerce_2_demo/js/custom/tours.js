@@ -1,5 +1,6 @@
 /**
  * Intro.js custom site tours.
+ * http://introjs.com/docs/
  */
 
 ///////////////////////////////////

@@ -6,14 +6,9 @@
 
   // Page 1.
   function catalogFiltersTour(){
-    var catalogFiltersTour = introJs();
+    var catalogFiltersTour = introJs(),
 
-    // Load defaults.
-    tourDefaults(catalogFiltersTour);
-
-    // Tour steps.
-    catalogFiltersTour.setOptions({
-      steps: [
+      steps = [
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">Catalog & Filters Tour</span> ' +
@@ -54,10 +49,17 @@
           intro: '<span class="introjs-tooltip__title">Done!</span>' +
           "This completes the category and filters tour. What you see here is just one possibility, but how your Drupal Commerce catalog is setup is really only limited by your imagination."
         }
-      ]
-    });
+      ];
 
-    catalogFiltersTour.start();
+    catalogFiltersTour.setOptions({steps: steps});
+
+    // Load defaults.
+    tourDefaults(catalogFiltersTour);
+
+    // Start tour and trigger tour select modal when completed.
+    catalogFiltersTour.start().oncomplete(function() {
+      $('#siteTours').modal('show');
+    });
   }
 
 
@@ -65,7 +67,6 @@
   // Start tours from #siteTours modal.
   //////////////////////////////////////
 
-  // catalogFiltersTour.
   // If not on desired start page, go to that page and append trigger.
   // Otherwise, close modal and start tour.
   $('#catalogFiltersTour').click(function () {

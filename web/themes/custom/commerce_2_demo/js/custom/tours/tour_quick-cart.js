@@ -67,7 +67,7 @@
         if ($(targetElement).is(step.element)) {
           switch (index) {
             case 2:
-              $('.cart-block--contents').addClass('cart-block--contents__expanded').css("display","block");
+              $('.cart-block--contents').addClass('cart-block--contents__expanded').fadeIn("fast");
               break;
           }
           return false;

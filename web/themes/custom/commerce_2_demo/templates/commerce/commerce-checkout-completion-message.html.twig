@@ -11,7 +11,7 @@
  */
 #}
 <div class="checkout-complete">
-  {{ 'Your order number is '|t }} <strong>{{ order_entity.getOrderNumber }}</strong>.<br>
+  <span class="checkout-complete__order-number">{{ 'Your order number is '|t }} <strong>{{ order_entity.getOrderNumber }}</strong>.</span><br>
   {{ 'You can view your order on your account page when logged in.'|t }} <br>
 
   {% if payment_instructions %}

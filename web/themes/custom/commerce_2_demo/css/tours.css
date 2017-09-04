@@ -36,6 +36,11 @@
   text-align: left;
 }
 
+#siteTours .modal-body button.disabled {
+  background-color: #aaa;
+  border: none;
+}
+
 /* Intro.js overrides */
 
 .introjs-overlay {

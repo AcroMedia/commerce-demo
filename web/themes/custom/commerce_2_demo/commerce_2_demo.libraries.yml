@@ -3,10 +3,20 @@ global-styling:
   css:
     theme:
       css/style.css: { media: all }
+  js:
+    js/custom/script.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+tours:
+  version: 1.x
+  css:
+    theme:
       css/contrib/introjs.min.css: { media: all }
       css/tours.css: { media: all }
   js:
-    js/custom/script.js: {}
+    js/contrib/js.cookie.js: {}
     js/contrib/intro.min.js: {}
     js/custom/tours.js: {}
   dependencies:

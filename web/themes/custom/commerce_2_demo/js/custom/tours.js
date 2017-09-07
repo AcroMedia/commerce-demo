@@ -1,6 +1,9 @@
 /**
  * Intro.js custom site tours.
  * http://introjs.com/docs/
+ *
+ * Also uses js.Cookie.js.
+ * https://github.com/js-cookie/js-cookie
  */
 
 ///////////////////////////////////
@@ -20,6 +23,14 @@ function tourDefaults(tour) {
   tour.setOption('showProgress', false);
   tour.setOption('scrollToElement', true);
   tour.setOption('disableInteraction', true);
+}
+
+// Helper function to check if cookies are enabled.
+function cookiesEnabled() {
+  Cookies.set('tour_cookies_check', 'enabled');
+  if (Cookies.get('tour_cookies_check') == 'enabled') {
+    return true;
+  }
 }
 
 (function ($, Drupal) {

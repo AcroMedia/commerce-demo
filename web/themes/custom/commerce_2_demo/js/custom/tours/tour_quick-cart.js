@@ -114,7 +114,7 @@
           "The current subtotal and total, as well as any discounts that have been applies, can be seen here. Things like taxes and shipping estimates (if we already know where the customer is) can be included here, too."
         },
         {
-          element: '#edit-actions',
+          element: '.view-commerce-cart-form .form-actions',
           intro: '<span class="introjs-tooltip__title">Update & Checkout</span>' +
           "These action buttons let customers update their cart if they've adjusted quantities, or, if ready to proceed, the customer can start the checkout."
         },

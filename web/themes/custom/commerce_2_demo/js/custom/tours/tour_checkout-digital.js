@@ -14,6 +14,8 @@
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">Your Cart is Empty</span> ' +
           "This tour requires at least one <strong>digital</strong> product to be in your cart. Restart the tour when this has been done."
+          + '<br><br>' +
+          "Note: If you aren't able to add a product it's probably because you don't have cookies enabled."
         }
       ];
 
@@ -60,11 +62,13 @@
     // Override default.
     checkoutDigitalTour.setOption('doneLabel', 'Start Checkout');
 
-    // Get order number from cart form.
-    // Start tour and set page/trigger for page 2.
+    // Get order number from cart form and set in cookie for session.
+    // Start tour and continue checkout on complete.
     checkoutDigitalTour.start().oncomplete(function() {
-      var $orderNumber = $('.cart-block form').attr('id').replace(/[^0-9]/g, '');
-      window.location.href = '/checkout/' + $orderNumber + '/order_information?checkoutDigitalTourPage2';
+      // TODO: Need to get this order ID from correct order type (digital vs physical)
+      var $tourOrderNumber = $('.cart-form form').attr('id').replace(/[^0-9]/g, '');
+      Cookies.set('tourOrderNumber', $tourOrderNumber);
+      $("#edit-checkout").trigger('click');
     });
   }
 
@@ -111,14 +115,11 @@
     tourDefaults(checkoutDigitalTourPage2);
 
     // Override default.
-    checkoutDigitalTourPage2.setOption('doneLabel', 'Go to Checkout Review');
+    checkoutDigitalTourPage2.setOption('doneLabel', 'Go to Review');
 
-    // Get order number from cart form.
-    // Start tour and set page/trigger for page 3.
-    // TODO: Change below so that the order number is set in a cookie, then use jQuery to click continue.
+    // Start tour and continue checkout on complete.
     checkoutDigitalTourPage2.start().oncomplete(function() {
-      var $orderNumber = $('.cart-block form').attr('id').replace(/[^0-9]/g, '');
-      // window.location.href = '/checkout/' + $orderNumber + '/review?checkoutDigitalTourPage3';
+      $("#edit-actions-next").trigger('click');
     });
   }
 
@@ -161,12 +162,9 @@
     // Override default.
     checkoutDigitalTourPage3.setOption('doneLabel', 'Complete Checkout');
 
-    // Get order number from cart form.
-    // Start tour and set page/trigger for page 4.
-    // TODO: Use jQuery to click continue.
+    // Start tour and continue checkout on complete.
     checkoutDigitalTourPage3.start().oncomplete(function() {
-      var $orderNumber = $('.cart-block form').attr('id').replace(/[^0-9]/g, '');
-      window.location.href = '/checkout/' + $orderNumber + '/complete?checkoutDigitalTourPage4';
+      $("#edit-actions-next").trigger('click');
     });
   }
 
@@ -205,7 +203,9 @@
     tourDefaults(checkoutDigitalTourPage4);
 
     // Start tour and trigger tour select modal when completed.
+    // Also remove cookie when complete.
     checkoutDigitalTourPage4.start().oncomplete(function() {
+      Cookies.remove('tourOrderNumber');
       $('#siteTours').modal('show');
     });
   }
@@ -242,18 +242,20 @@
   if (RegExp('startCheckoutDigitalTour', 'gi').test(window.location.search)) {
     checkoutDigitalTour();
   }
+
+  // Get order number from cookie set in tour.
+  var $orderNumber = Cookies.get('tourOrderNumber');
+
   // Checkout - Order Information.
-  if (RegExp('checkoutDigitalTourPage2', 'gi').test(window.location.search)) {
+  if (window.location.pathname == '/checkout/' + $orderNumber + '/order_information') {
     checkoutDigitalTourPage2();
   }
-  // Checkout - Order Review
-  // TODO: Use cookie to generate trigger below.
-  if (RegExp('checkoutDigitalTourPage3', 'gi').test(window.location.search)) {
+  // Checkout - Review.
+  if (window.location.pathname == '/checkout/' + $orderNumber + '/review') {
     checkoutDigitalTourPage3();
   }
   // Checkout - Complete
-  // TODO: Use cookie to generate trigger below.
-  if (RegExp('checkoutDigitalTourPage4', 'gi').test(window.location.search)) {
+  if (window.location.pathname == '/checkout/' + $orderNumber + '/complete') {
     checkoutDigitalTourPage4();
   }
 

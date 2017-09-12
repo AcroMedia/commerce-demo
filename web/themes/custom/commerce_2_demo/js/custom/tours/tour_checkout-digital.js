@@ -117,8 +117,15 @@
     // Override default.
     checkoutDigitalTourPage2.setOption('doneLabel', 'Go to Review');
 
+    // Remove cookie in case user closes tour early.
+    Cookies.remove('tourOrderNumber');
+
+    // Get order number from cart form and set in cookie for session.
     // Start tour and continue checkout on complete.
     checkoutDigitalTourPage2.start().oncomplete(function() {
+      // TODO: Need to get this order ID from correct order type (digital vs physical)
+      var $tourOrderNumber = $('.cart-form form').attr('id').replace(/[^0-9]/g, '');
+      Cookies.set('tourOrderNumber', $tourOrderNumber);
       $("#edit-actions-next").trigger('click');
     });
   }
@@ -162,8 +169,15 @@
     // Override default.
     checkoutDigitalTourPage3.setOption('doneLabel', 'Complete Checkout');
 
+    // Remove cookie in case user closes tour early.
+    Cookies.remove('tourOrderNumber');
+
+    // Get order number from cart form and set in cookie for session.
     // Start tour and continue checkout on complete.
     checkoutDigitalTourPage3.start().oncomplete(function() {
+      // TODO: Need to get this order ID from correct order type (digital vs physical)
+      var $tourOrderNumber = $('.cart-form form').attr('id').replace(/[^0-9]/g, '');
+      Cookies.set('tourOrderNumber', $tourOrderNumber);
       $("#edit-actions-next").trigger('click');
     });
   }
@@ -201,6 +215,9 @@
 
     // Load defaults.
     tourDefaults(checkoutDigitalTourPage4);
+
+    // Remove cookie in case user closes tour early.
+    Cookies.remove('tourOrderNumber');
 
     // Start tour and trigger tour select modal when completed.
     // Also remove cookie when complete.

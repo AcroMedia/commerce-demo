@@ -257,6 +257,25 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
     // Update submit button text.
     $form['actions']['submit']['#value'] = t('Post Comment');
   }
+
+  // Commerce Cart Block form.
+  if ((strpos($form_id, 'views_form_commerce_cart_block_default_') === 0)) {
+
+    // Check for results.
+    if (isset($form['output'][0]['#rows'][0])) {
+      // Get order id.
+      $order_id = $form['output'][0]['#rows'][0]->order_id;
+      // Set data attribute for the order id.
+      $form['#attributes']['data-order-id'] = $order_id;
+
+      if (isset($form['output'][0]['#rows'][0]->_entity)) {
+        // Get order type entity.
+        $order_type = $form['output'][0]['#rows'][0]->_entity->type->getValue();
+        // Set data attribute for the order type.
+        $form['#attributes']['data-order-type'] = $order_type[0]['target_id'];
+      }
+    }
+  }
 }
 
 /**

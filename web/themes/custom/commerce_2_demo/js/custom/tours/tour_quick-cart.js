@@ -104,7 +104,7 @@
           "The quantity filed lets customers quickly update how many of a product they would like to purchase."
         },
         {
-          element: '.view-commerce-cart-form td.btn-default',
+          element: '.view-commerce-cart-form td.views-field.views-field-remove-button',
           intro: '<span class="introjs-tooltip__title">Remove</span>' +
           "Like in the quick view, customers can easily remove a product by clicking this button."
         },

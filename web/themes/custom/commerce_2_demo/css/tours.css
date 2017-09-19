@@ -3,6 +3,9 @@
  * http://introjs.com/docs/
  */
 
+
+/* Tour selection modal */
+
 .site-tours-wrapper {
   text-align: right;
 }
@@ -66,4 +69,72 @@
 
 .introjs-helperNumberLayer {
   background: #cc0000;
+}
+
+.introjs-bullets {
+  margin-bottom: 10px;
+}
+
+a.introjs-button {
+  padding: 6px 15px;
+  margin: 5px 2px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  background-image: none;
+  color: #333;
+  font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857;
+  text-shadow: none;
+  transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out, opacity .1s ease-in-out;
+  display: inline-block;
+  font-weight: normal;
+  vertical-align: middle;
+  touch-action: manipulation;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none;
+}
+a.introjs-button:hover,
+a.introjs-button:focus,
+a.introjs-button:active {
+  color: #cc0000;
+  background-image: none;
+  outline: none;
+}
+
+a.introjs-nextbutton,
+a.introjs-donebutton {
+  background-color: #cc0000;
+  border-color: #cc0000;
+  color: #fff;
+}
+a.introjs-nextbutton:hover,
+a.introjs-nextbutton:focus,
+a.introjs-nextbutton:active,
+a.introjs-donebutton:hover,
+a.introjs-donebutton:focus,
+a.introjs-donebutton:active {
+  background-color: #990000;
+  border-color: #990000;
+  color: #fff;
+}
+
+a.introjs-disabled {
+  color: #9a9a9a;
+  border-color: #d4d4d4;
+  box-shadow: none;
+  cursor: default;
+  background-color: #f4f4f4;
+  background-image: none;
+  text-decoration: none;
+}
+a.introjs-disabled:hover,
+a.introjs-disabled:focus,
+a.introjs-disabled:active {
+  border-color: #d4d4d4;
+  background-color: #f4f4f4;
+  color: #9a9a9a;
 }

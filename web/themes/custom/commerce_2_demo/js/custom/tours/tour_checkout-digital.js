@@ -82,7 +82,82 @@
     });
   }
 
-  // TODO: Add guest checkout step.
+  // Page 1B - Login.
+  function checkoutDigitalTourLogin(){
+    var checkoutDigitalTourLogin = introJs(),
+
+      steps = [
+        {
+          // No element makes this tip float on center of page.
+          intro: '<span class="introjs-tooltip__title">Login Page</span> ' +
+          "Because we're not logged in, the first page of checkout is a login page."
+          + "<br><br>" +
+          "Drupal Commerce has an intuitive checkout flow builder that lets you easily customize what customers can do during checkout."
+        },
+        {
+          element: '#block-checkoutprogress',
+          position: 'bottom-middle-aligned',
+          intro: '<span class="introjs-tooltip__title">Checkout Progress</span>' +
+          "This checkout progress indicator lets customers know what step they're on throughout the entire checkout flow."
+        },
+        {
+          element: '#edit-login-returning-customer',
+          intro: '<span class="introjs-tooltip__title">Returning Customer</span>' +
+          "Customers who already have an account can log in right away."
+          + "<br><br>" +
+          "Customer accounts lets your customers see past orders, save shipping addresses, add payment methods, etc."
+        },
+        {
+          element: '#edit-login-register',
+          intro: '<span class="introjs-tooltip__title">New Customer</span>' +
+          "Optionally allow your customers to create a new account on the site."
+          + "<br><br>" +
+          "Turning the new customer creation functionality on or off is as simple as checking a box for this checkout flow. This is something administrators can access and configure."
+        },
+        {
+          // No element makes this tip float on center of page.
+          scrollTo: 'tooltip',
+          intro: '<span class="introjs-tooltip__title">Guest Checkout</span> ' +
+          "This checkout flow has Guest Checkout disabled. If we were to enable it, a third option would appear here letting customers checkout without requiring an account to do so."
+        },
+        {
+          // No element makes this tip float on center of page.
+          intro: '<span class="introjs-tooltip__title">Continue</span> ' +
+          "Let's continue checkout as if we are a returning customer. Click 'Continue' below to proceed. This tour will automatically log us in and proceed."
+        }
+      ];
+
+    checkoutDigitalTourLogin.setOptions({steps: steps});
+
+    // Load defaults.
+    tourDefaults(checkoutDigitalTourLogin);
+
+    // Override default.
+    checkoutDigitalTourLogin.setOption('doneLabel', 'Continue');
+
+    // Set example returning customer username and password login values.
+    $('#edit-login-returning-customer-name').val('customer');
+    $('#edit-login-returning-customer-password').val('customer');
+
+    // Remove any existing tour cookies.
+    Cookies.remove('tourOrderNumber');
+    Cookies.remove('tourOrderType');
+
+    // Start tour and continue checkout on complete.
+    checkoutDigitalTourLogin.start().oncomplete(function() {
+      // Get order number and type from quick cart form and set in cookie for session.
+      $('.cart-block form').each(function() {
+        var $orderType = $(this).data('order-type');
+
+        if ($orderType === 'digital')  {
+          Cookies.set('tourOrderType', $(this).data('order-type'));
+          Cookies.set('tourOrderNumber', $(this).data('order-id'));
+        }
+      });
+
+      $('#edit-login-returning-customer-submit').trigger('click');
+    });
+  }
 
   // Page 2 - Order Information.
   function checkoutDigitalTourPage2(){
@@ -307,6 +382,10 @@
   var $orderNumber = Cookies.get('tourOrderNumber');
 
   if ($orderType === 'digital') {
+    // Checkout - Login.
+    if (window.location.pathname == '/checkout/' + $orderNumber + '/login') {
+      checkoutDigitalTourLogin();
+    }
     // Checkout - Order Information.
     if (window.location.pathname == '/checkout/' + $orderNumber + '/order_information') {
       checkoutDigitalTourPage2();
@@ -320,6 +399,5 @@
       checkoutDigitalTourPage4();
     }
   }
-
 
 })(jQuery, Drupal);

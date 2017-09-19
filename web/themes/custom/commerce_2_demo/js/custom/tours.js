@@ -33,6 +33,11 @@ function cookiesEnabled() {
   }
 }
 
+// Set cookie that disables automatic tour selection modal popup.
+function disableAutoTourSelection() {
+  Cookies.set('showSiteTours', 'false', { expires: 60 });
+}
+
 (function ($, Drupal) {
 
   //////////////////////////
@@ -50,5 +55,15 @@ function cookiesEnabled() {
   $.getScript(sitePath + 'tour_checkout-digital.js');
   $.getScript(sitePath + 'tour_why-drupal.js');
   $.getScript(sitePath + 'tour_why-open-source.js');
+
+  // If user closes tour selection modal OR starts a tour, set cookie to keep modal hidden.
+  $('#siteTours, #headerCloseTours, #footerCloseTours, #siteTours .modal-body .btn').click(function () {
+    disableAutoTourSelection();
+  });
+
+  // Show tour selection modal for first time visitors.
+  if (Cookies.get('showSiteTours') !== 'false') {
+    $('#siteTours').modal('show');
+  }
 
 })(jQuery, Drupal);

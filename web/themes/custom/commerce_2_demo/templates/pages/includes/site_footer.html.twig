@@ -111,11 +111,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" id="headerCloseTours" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="siteToursLabel"><i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}</h4>
       </div>
       <div class="modal-body">
-        <p>{{ 'Select a Drupal Commerce guided feature tour below!'|t }}</p>
+        <p>
+          <strong>{{ 'Welcome to the Drupal Commerce 2 demo site!'|t }}</strong>
+          <br>
+          {{ 'Select a guided feature tour below OR close the window and look around.'|t }}
+        </p>
 
         <button type="button" class="btn btn-primary" id="homepageTour">
           <i class="fa fa-home fa-lg"></i> {{ 'Homepage Features'|t }}
@@ -145,9 +149,11 @@
           <i class="fa fa-cart-arrow-down fa-lg"></i> {{ 'Checkout - Digital'|t }}
         </button>
 
+        {#
         <button type="button" class="btn btn-primary disabled" id="customerAccountTour">
           <i class="fa fa-address-book fa-lg"></i> {{ 'Customer Account'|t }}
         </button>
+        #}
 
         <button type="button" class="btn btn-primary" id="whyDrupalTour">
           <i class="fa fa-drupal fa-lg"></i> {{ 'Why Drupal?'|t }}
@@ -156,9 +162,33 @@
         <button type="button" class="btn btn-primary" id="whyOpenSourceTour">
           <i class="fa fa-code fa-lg"></i> {{ 'Why Open Source?'|t }}
         </button>
+
+        <div class="help-form text-left">
+          <h3>Need a Hand?</h3>
+          Fill out the form to have one of our Drupal Commerce experts contact you.<br>
+          <span class="small">All fields marked with * are required.</span>
+
+          <!--[if lte IE 8]>
+          <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+          <![endif]-->
+          <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+          <script>
+            hbspt.forms.create({
+              css: '',
+              portalId: '1659229',
+              formId: '4c37690f-26db-47d5-8e95-d9561e6f9594'
+            });
+          </script>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'close'|t }}</button>
+        <div class="modal-credits">
+          {% trans %}
+            Tours built by <a href="https://www.acromedia.com" target="_blank" title="Visit Acro Media's website">Acro Media Inc.</a>
+          {% endtrans %}
+        </div>
+
+        <button type="button" id="footerCloseTours" class="btn btn-default" data-dismiss="modal">{{ 'close'|t }}</button>
       </div>
     </div>
   </div>

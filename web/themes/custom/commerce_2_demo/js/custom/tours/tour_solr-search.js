@@ -50,6 +50,7 @@
         },
         {
           element: '.view-products .view-content',
+          position: 'top',
           scrollTo: 'tooltip',
           intro: '<span class="introjs-tooltip__title">SOLR Search Results</span>' +
           "The results of a customized search can be seen here. As you can see, all of the results are mason jar related, exactly what we would expect. "

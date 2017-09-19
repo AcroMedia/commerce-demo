@@ -258,8 +258,34 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
     $form['actions']['submit']['#value'] = t('Post Comment');
   }
 
-  // Commerce Cart Block form.
+  // Commerce Cart page form.
+  if ((strpos($form_id, 'views_form_commerce_cart_form_default_') === 0)) {
+
+    // Check for results.
+    if (isset($form['output'][0]['#rows'][0])) {
+      // Get order id.
+      $order_id = $form['output'][0]['#rows'][0]->order_id;
+      // Set data attribute for the order id.
+      $form['#attributes']['data-order-id'] = $order_id;
+
+      if (isset($form['output'][0]['#rows'][0]->_entity)) {
+        // Get order type entity.
+        $order_type = $form['output'][0]['#rows'][0]->_entity->type->getValue();
+        // Set data attribute and class for the order type.
+        $form['#attributes']['data-order-type'] = $order_type[0]['target_id'];
+        $form['#attributes']['class'] = "order-type-" . $order_type[0]['target_id'];
+      }
+    }
+  }
+
+  // Commerce Cart block form.
   if ((strpos($form_id, 'views_form_commerce_cart_block_default_') === 0)) {
+
+    // Check for results.
+    if (isset($order_type[0]['target_id'])) {
+      // Get order id.
+      $order_id = $order_type[0]['target_id'];
+    }
 
     // Check for results.
     if (isset($form['output'][0]['#rows'][0])) {
@@ -356,5 +382,5 @@ function commerce_2_demo_preprocess_commerce_checkout_completion_message(&$varia
   $order_entity = $variables['order_entity'];
   $order_items = $order_entity->getItems();
   $variables['order_items'] = $order_items;
-  $variables['order_type'] = $order_entity->type;;
+  $variables['order_type'] = $order_entity->type;
 }

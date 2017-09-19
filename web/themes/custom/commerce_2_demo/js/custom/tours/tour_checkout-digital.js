@@ -12,7 +12,7 @@
       steps = [
         {
           // No element makes this tip float on center of page.
-          intro: '<span class="introjs-tooltip__title">Your Cart is Empty</span> ' +
+          intro: '<span class="introjs-tooltip__title">Your Cart has no Digital Products</span> ' +
           "This tour requires at least one <strong>digital</strong> product to be in your cart. Restart the tour when this has been done."
           + '<br><br>' +
           "Note: If you aren't able to add a product it's probably because you don't have cookies enabled."
@@ -46,7 +46,7 @@
           "This tour will show you a digital product checkout flow."
         },
         {
-          element: '.view-commerce-cart-form .form-actions',
+          element: '.order-type-digital .form-actions',
           intro: '<span class="introjs-tooltip__title">Start Checkout</span>' +
           "All online stores have some sort of cart page similar to this one. It's one place where customers know they can start their checkout. "
           + "<br><br>" +
@@ -62,13 +62,23 @@
     // Override default.
     checkoutDigitalTour.setOption('doneLabel', 'Start Checkout');
 
-    // Get order number from cart form and set in cookie for session.
+    // Remove any existing tour cookies.
+    Cookies.remove('tourOrderNumber');
+    Cookies.remove('tourOrderType');
+
     // Start tour and continue checkout on complete.
     checkoutDigitalTour.start().oncomplete(function() {
-      // TODO: Need to get this order ID from correct order type (digital vs physical)
-      var $tourOrderNumber = $('.cart-form form').attr('id').replace(/[^0-9]/g, '');
-      Cookies.set('tourOrderNumber', $tourOrderNumber);
-      $("#edit-checkout").trigger('click');
+      // Get order number and type from quick cart form and set in cookie for session.
+      $('.cart-block form').each(function() {
+        var $orderType = $(this).data('order-type');
+
+        if ($orderType === 'digital')  {
+          Cookies.set('tourOrderType', $(this).data('order-type'));
+          Cookies.set('tourOrderNumber', $(this).data('order-id'));
+        }
+      });
+
+      $('form.order-type-digital').find('input[id^="edit-checkout"]').trigger('click');
     });
   }
 
@@ -119,13 +129,20 @@
 
     // Remove cookie in case user closes tour early.
     Cookies.remove('tourOrderNumber');
+    Cookies.remove('tourOrderType');
 
-    // Get order number from cart form and set in cookie for session.
     // Start tour and continue checkout on complete.
     checkoutDigitalTourPage2.start().oncomplete(function() {
-      // TODO: Need to get this order ID from correct order type (digital vs physical)
-      var $tourOrderNumber = $('.cart-form form').attr('id').replace(/[^0-9]/g, '');
-      Cookies.set('tourOrderNumber', $tourOrderNumber);
+      // Get order number and type from quick cart form and set in cookie for session.
+      $('.cart-block form').each(function() {
+        var $orderType = $(this).data('order-type');
+
+        if ($orderType === 'digital')  {
+          Cookies.set('tourOrderType', $(this).data('order-type'));
+          Cookies.set('tourOrderNumber', $(this).data('order-id'));
+        }
+      });
+
       $("#edit-actions-next").trigger('click');
     });
   }
@@ -171,13 +188,20 @@
 
     // Remove cookie in case user closes tour early.
     Cookies.remove('tourOrderNumber');
+    Cookies.remove('tourOrderType');
 
-    // Get order number from cart form and set in cookie for session.
     // Start tour and continue checkout on complete.
     checkoutDigitalTourPage3.start().oncomplete(function() {
-      // TODO: Need to get this order ID from correct order type (digital vs physical)
-      var $tourOrderNumber = $('.cart-form form').attr('id').replace(/[^0-9]/g, '');
-      Cookies.set('tourOrderNumber', $tourOrderNumber);
+      // Get order number and type from quick cart form and set in cookie for session.
+      $('.cart-block form').each(function() {
+        var $orderType = $(this).data('order-type');
+
+        if ($orderType === 'digital')  {
+          Cookies.set('tourOrderType', $(this).data('order-type'));
+          Cookies.set('tourOrderNumber', $(this).data('order-id'));
+        }
+      });
+
       $("#edit-actions-next").trigger('click');
     });
   }
@@ -218,11 +242,13 @@
 
     // Remove cookie in case user closes tour early.
     Cookies.remove('tourOrderNumber');
+    Cookies.remove('tourOrderType');
 
     // Start tour and trigger tour select modal when completed.
     // Also remove cookie when complete.
     checkoutDigitalTourPage4.start().oncomplete(function() {
       Cookies.remove('tourOrderNumber');
+      Cookies.remove('tourOrderType');
       $('#siteTours').modal('show');
     });
   }
@@ -232,21 +258,37 @@
   // Start tours from #siteTours modal.
   //////////////////////////////////////
 
-  // If no product is in cart, alert user.
-  // If not on desired start page, go to that page and append trigger.
-  // Otherwise, close modal and start tour.
   $('#checkoutDigitalTour').click(function () {
-    if ($('.cart-block--summary__count').text() === '0') {
+    // If no product is in cart, alert user.
+    if ($('.cart-block--summary__count').text() === '0')  {
       $('#siteTours').modal('hide');
       setTimeout(checkoutDigitalTourAlert, 1000);
     }
-    else if (window.location.pathname !== '/cart') {
-      window.location.href = '/cart?startCheckoutDigitalTour';
-    }
-    else
-    {
-      $('#siteTours').modal('hide');
-      setTimeout(checkoutDigitalTour, 1000);
+    // Else, continue.
+    else {
+      // Loop through cart forms and set order type variable.
+      $('.cart-block form').each(function() {
+        var $orderType = $(this).data('order-type');
+
+        // If order type is what we want.
+        if ($orderType === 'digital')  {
+          // But we're not on desired start page, go to that page and append trigger.
+          if (window.location.pathname !== '/cart') {
+            window.location.href = '/cart?startCheckoutDigitalTour';
+          }
+          // Or, if we are on desired start page, close modal and start tour.
+          else
+          {
+            $('#siteTours').modal('hide');
+            setTimeout(checkoutDigitalTour, 1000);
+          }
+        }
+        // If order type is not what we want, alert user.
+        else {
+          $('#siteTours').modal('hide');
+          setTimeout(checkoutDigitalTourAlert, 1000);
+        }
+      });
     }
   });
 
@@ -260,20 +302,24 @@
     checkoutDigitalTour();
   }
 
-  // Get order number from cookie set in tour.
+  // Get order number and type from cookies set in tour.
+  var $orderType = Cookies.get('tourOrderType');
   var $orderNumber = Cookies.get('tourOrderNumber');
 
-  // Checkout - Order Information.
-  if (window.location.pathname == '/checkout/' + $orderNumber + '/order_information') {
-    checkoutDigitalTourPage2();
+  if ($orderType === 'digital') {
+    // Checkout - Order Information.
+    if (window.location.pathname == '/checkout/' + $orderNumber + '/order_information') {
+      checkoutDigitalTourPage2();
+    }
+    // Checkout - Review.
+    if (window.location.pathname == '/checkout/' + $orderNumber + '/review') {
+      checkoutDigitalTourPage3();
+    }
+    // Checkout - Complete
+    if (window.location.pathname == '/checkout/' + $orderNumber + '/complete') {
+      checkoutDigitalTourPage4();
+    }
   }
-  // Checkout - Review.
-  if (window.location.pathname == '/checkout/' + $orderNumber + '/review') {
-    checkoutDigitalTourPage3();
-  }
-  // Checkout - Complete
-  if (window.location.pathname == '/checkout/' + $orderNumber + '/complete') {
-    checkoutDigitalTourPage4();
-  }
+
 
 })(jQuery, Drupal);

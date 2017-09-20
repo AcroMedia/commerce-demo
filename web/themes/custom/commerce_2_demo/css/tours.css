@@ -17,6 +17,8 @@
   }
 }
 
+/* Tour selection modal - Modal buttons */
+
 #siteTours-start i,
 #siteTours i {
   margin-right: 6px;
@@ -26,6 +28,7 @@
   position: fixed;
   top: 45%;
   right: -63px;
+  z-index: 5;
   padding-bottom: 12px;
   border-radius: 5px 5px 0 0;
   border-bottom: 5px solid #990000;
@@ -40,6 +43,8 @@
     display: none;
   }
 }
+
+/* Tour selection modal - Modal content */
 
 #siteTours {
   z-index: 16000005;
@@ -62,6 +67,8 @@
   background-color: #aaa;
   border: none;
 }
+
+/* Tour selection modal - HubSpot form */
 
 .help-form {
   display: block;
@@ -150,6 +157,8 @@
   font-weight: bold;
   font-size: 14px;
 }
+
+/* Tour selection modal - Acro credits */
 
 #siteTours .modal-credits {
   float: left;

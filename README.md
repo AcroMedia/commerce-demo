@@ -1,4 +1,4 @@
-# Commerce 2.x Demo (Urban Harvest) Project Template
+# Commerce 2.x Demo (Urban Hipster) Project Template
 
 [![Build Status](https://travis-ci.org/AcroMedia/drupalorange-project-template.svg?branch=8.x)](https://travis-ci.org/AcroMedia/drupalorange-project-template)
 

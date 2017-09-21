@@ -47,7 +47,7 @@
 
   &.site-sidebar--contact {
     background-color: #fff;
-    padding-top: 165px;
+    padding-top: 115px;
 
     @media (max-width: $screen-sm-max) {
       padding-top: 0;
@@ -99,6 +99,7 @@
 
   // Right sidebar.
   &.site-sidebar--blog {
+    padding-top: 60px;
     border-left: 1px solid $gray;
     background-color: transparent;
 

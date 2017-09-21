@@ -161,6 +161,13 @@
           }
 
           input {
+            position: relative;
+            max-width: 75px;
+            height: 40px;
+            margin-left: 5px;
+            border-radius: 0;
+            border: 1px solid #ccc;
+            appearance: none;
             text-align: center;
           }
 

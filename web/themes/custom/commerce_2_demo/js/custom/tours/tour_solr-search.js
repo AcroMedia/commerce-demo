@@ -13,7 +13,7 @@
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">SOLR Search Tour</span> ' +
-          "This tour will go through a site search using the popular, open source Apache SOLR search platform. SOLR's powerfull search is utilized by many of the largest websites on the planet."
+          "This tour will go through a site search using the popular, open source Apache SOLR search platform. SOLR's powerful search is utilized by many of the largest websites on the planet."
           + '<br><br>' +
           "Click the Start search button below to get started. We'll search for 'mason jar'."
         }
@@ -46,7 +46,7 @@
         {
           element: '.site-header__search .region-site-search',
           intro: '<span class="introjs-tooltip__title">Search Input</span>' +
-          "It's easy not to think much about your site search, but with SOLR there is a lot of customization behind the scenes. SOLR lets us customize exactly what fields are being search for. If we only want product titles to be searchable, we can do that. If we want everything but the title, we can do that too."
+          "It's easy not to think much about your site search, but with SOLR there is a lot of customization behind the scenes. SOLR lets us customize exactly what fields are being searched for. If we only want product titles to be searchable, we can do that. If we want everything but the title, we can do that too."
         },
         {
           element: '.view-products .view-content',

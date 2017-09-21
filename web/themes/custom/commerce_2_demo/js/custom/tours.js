@@ -61,8 +61,8 @@ function disableAutoTourSelection() {
     disableAutoTourSelection();
   });
 
-  // Show tour selection modal for first time visitors.
-  if (Cookies.get('showSiteTours') !== 'false') {
+  // Show tour selection modal for first time visitors, except for mobile.
+  if ((window.matchMedia('(min-width: 767px)').matches) && (Cookies.get('showSiteTours') !== 'false')) {
     $('#siteTours').modal('show');
   }
 

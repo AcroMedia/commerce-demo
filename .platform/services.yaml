@@ -1,0 +1,22 @@
+# The services of the project.
+#
+# Each service listed will be deployed
+# to power your Platform.sh project.
+
+mysqldb:
+    type: "mysql:10.2"
+    disk: 2048
+#
+#rediscache:
+#    type: "redis:3.2"
+#
+solrsearch:
+    type: "solr:6.6"
+    disk: 1024
+    configuration:
+        cores:
+            drupalcommerce_demo:
+                conf_dir: !archive "solr-conf/6.x"
+        endpoints:
+            main:
+                core: drupalcommerce_demo

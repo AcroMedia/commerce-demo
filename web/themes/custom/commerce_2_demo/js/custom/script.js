@@ -64,6 +64,19 @@
     e.preventDefault();
   });
 
+  // Mobile hide/show sidebar
+  $('#mobile-sidebar__toggle-open a').on('click', function(event){
+    event.preventDefault();
+    $(this).hide();
+    $('#mobile-sidebar__product-filters').slideDown('slow');
+  });
+
+  $('#mobile-sidebar__toggle-close a').on('click', function(event){
+    event.preventDefault();
+    $('#mobile-sidebar__product-filters').slideUp('slow');
+    $('#mobile-sidebar__toggle-open a').delay(700).fadeIn(400);
+  });
+
   // Add search input placeholder.
   $('#block-solr-product-search input.form-text').attr('placeholder', Drupal.t('Site Search...'));
 

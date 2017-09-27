@@ -115,6 +115,49 @@
   padding: 8px 0;
 }
 
+// Mobile sidebar.
+.site-sidebar--mobile {
+  padding: 15px 0 !important;
+  border-bottom: 1px solid #dedede;
+
+  #mobile-sidebar__toggle-open {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+
+    a {
+      width: calc(100% - 30px);
+      border-color: #ccc;
+    }
+  }
+
+  #mobile-sidebar__product-filters {
+    display: none;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    background-color: #efefef;
+
+    .block-facets {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+    }
+  }
+
+  #mobile-sidebar__toggle-close {
+    text-align: center;
+
+    a {
+      width: 100%;
+      border-color: #ccc;
+    }
+  }
+}
+
 /**
  * Forms.
  */

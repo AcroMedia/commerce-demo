@@ -64,7 +64,7 @@
           "A-Z, low-high, color, number of items, and more. Sorting options are fully configurable to meet whatever requirements you need for your products and content."
         },
         {
-          element: '.region-page-sidebar',
+          element: '.site-sidebar--desktop .region-page-sidebar',
           position: 'right',
           intro: '<span class="introjs-tooltip__title">Faceted Category Filters</span>' +
           "Customizable faceted category filters extend how customers can filter through product and content results. Filter by term, date, range slider (useful for prices), color and more."

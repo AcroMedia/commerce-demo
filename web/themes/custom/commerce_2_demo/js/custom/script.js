@@ -294,14 +294,17 @@
 
   // Facet Brand filter - Show more.
   // Get number of options.
-  var listSize = $("#block-brands li").size();
+  var brandsDesktop = $(".site-sidebar--desktop #block-brands li");
+  var brandsMobile = $(".site-sidebar--mobile #block-brands li");
 
   // Only show first 15 options.
-  $('#block-brands li').slice(15).hide();
+  brandsDesktop.slice(15).hide();
+  brandsMobile.slice(15).hide();
 
   // If too many options, show button.
-  if (listSize > 16) {
-    $("#block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
+  if ((brandsDesktop.size() || brandsMobile.size()) > 16) {
+    $(".site-sidebar--desktop #block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
+    $(".site-sidebar--mobile #block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
   }
 
   // When button clicked, show all options and hide button.
@@ -309,6 +312,27 @@
     $('#block-brands li').fadeIn();
     $(this).hide();
   });
+
+  // // Facet Brand filter - Show more.
+  // $('#block-brands').each(function () {
+  //   // Get number of options.
+  //   var listSize = $(this).find('li').size();
+  //   console.log(listSize);
+  //
+  //   // Only show first 15 options.
+  //   $(this).find('li').slice(15).hide();
+  //
+  //   // If too many options, show button.
+  //   if (listSize > 16) {
+  //     $(this).find('ul').after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
+  //   }
+  //
+  //   // When button clicked, show all options and hide button.
+  //   $('.show-more-options').click(function () {
+  //     $('#block-brands li').fadeIn();
+  //     $(this).hide();
+  //   });
+  // });
 
   // Run scripts after window fully loads.
   $(window).load(function(){

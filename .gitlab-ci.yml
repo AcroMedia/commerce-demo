@@ -13,7 +13,8 @@ variables:
 stages:
   - test
   - build
-  - deploy
+  - deploy-uat
+  - deploy-live
 
 code_standards:
   stage: test
@@ -75,9 +76,9 @@ build:
     - npm install
     - gulp sass
 
-# Deploy STAGING site (AWS1).
-deploy-uat:
-  stage: deploy
+# Deploy base demo to STAGING site (AWS1).
+deploy-demobase-to-uat:
+  stage: deploy-uat
   when: manual
 
   # add any other tags or branches you want here
@@ -111,10 +112,47 @@ deploy-uat:
 
     # log into the site and flush cache
     - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo && composer install'
+    
+# Deploy plus demo to STAGING site (AWS1).
+deploy-demoplus-to-uat:
+  stage: deploy-uat
+  when: manual
 
-# Deploy CLIENT demo (CLOUD4 - manual deploy only).
-deploy-cloud4:
-  stage: deploy
+  # add any other tags or branches you want here
+  only:
+    - master
+    - guided_tours
+
+  environment:
+    name: uat
+    url: https://commerceplus.aws1.acrobuild.com
+
+  script:
+    # Install ssh-agent if not already installed, it is required by Docker
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    - ssh-add <(echo "$DEPLOY_KEY_UAT")
+
+    # For Docker builds disable host key checking. Be aware that by adding that
+    # you are susceptible to man-in-the-middle attacks.
+    # WARNING: Use this only with the Docker executor, if you use it with shell
+    # you will overwrite your user's SSH config.
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    #move updated files up to deployment server, exclude .git since it's not needed
+    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
+
+    # log into the site and flush cache
+    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerceplus && composer install'    
+
+# Deploy base demo to LIVE site (CLOUD4).
+deploy-demobase-to-live:
+  stage: deploy-live
   when: manual
 
   # add any other tags or branches you want here
@@ -147,4 +185,40 @@ deploy-cloud4:
 
     # log into the site and flush cache
     - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demo/web && drush cr'
+    
+# Deploy plus demo to LIVE site (CLOUD4).
+deploy-demoplus-to-live:
+  stage: deploy-live
+  when: manual
+
+  # add any other tags or branches you want here
+  only:
+    - master
+
+  environment:
+    name: cloud4
+    url: https://commerceplus.acromedia.com
+
+  script:
+    # Install ssh-agent if not already installed, it is required by Docker
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
+
+    # For Docker builds disable host key checking. Be aware that by adding that
+    # you are susceptible to man-in-the-middle attacks.
+    # WARNING: Use this only with the Docker executor, if you use it with shell
+    # you will overwrite your user's SSH config.
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
+
+    # log into the site and flush cache
+    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demoplus/web && drush cr'    
 

@@ -77,14 +77,13 @@ build:
     - gulp sass
 
 # Deploy base demo to STAGING site (AWS1).
-deploy-demobase-to-uat:
+base-demo-to-uat:
   stage: deploy-uat
   when: manual
 
   # add any other tags or branches you want here
   only:
-    - master
-    - guided_tours
+    - UAT
 
   environment:
     name: uat
@@ -112,16 +111,15 @@ deploy-demobase-to-uat:
 
     # log into the site and flush cache
     - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo && composer install'
-    
+
 # Deploy plus demo to STAGING site (AWS1).
-deploy-demoplus-to-uat:
+plus-demo-to-uat:
   stage: deploy-uat
   when: manual
 
   # add any other tags or branches you want here
   only:
-    - master
-    - guided_tours
+    - UAT
 
   environment:
     name: uat
@@ -148,10 +146,10 @@ deploy-demoplus-to-uat:
     - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
 
     # log into the site and flush cache
-    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerceplus && composer install'    
+    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerceplus && composer install'
 
 # Deploy base demo to LIVE site (CLOUD4).
-deploy-demobase-to-live:
+base-demo-to-live:
   stage: deploy-live
   when: manual
 
@@ -161,7 +159,7 @@ deploy-demobase-to-live:
 
   environment:
     name: cloud4
-    url: https://demo.drupalcommerce.com
+    url: https://commercedemo.acromedia.com
 
   script:
     # Install ssh-agent if not already installed, it is required by Docker
@@ -185,9 +183,9 @@ deploy-demobase-to-live:
 
     # log into the site and flush cache
     - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demo/web && drush cr'
-    
+
 # Deploy plus demo to LIVE site (CLOUD4).
-deploy-demoplus-to-live:
+plus-demo-to-live:
   stage: deploy-live
   when: manual
 
@@ -197,7 +195,7 @@ deploy-demoplus-to-live:
 
   environment:
     name: cloud4
-    url: https://commerceplus.acromedia.com
+    url: https://demoplus.cloud4.acromedia.com
 
   script:
     # Install ssh-agent if not already installed, it is required by Docker
@@ -220,5 +218,5 @@ deploy-demoplus-to-live:
     - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
 
     # log into the site and flush cache
-    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demoplus/web && drush cr'    
+    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demoplus/web && drush cr'
 

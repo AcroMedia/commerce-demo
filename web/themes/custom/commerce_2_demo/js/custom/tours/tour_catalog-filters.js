@@ -12,14 +12,14 @@
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">Catalog & Filters Tour</span> ' +
-          'This tour will show you a basic SOLR catalog page complete with soriting options, category filters, etc. Click > to continue.'
+          'This tour will show you a basic catalog page with product results coming from a faceted search. Facet based catalogs have a wide variety of filtering options, which you will see. Click > to continue.'
         },
         {
           element: '.view-products .view-content',
           position: 'top',
           scrollTo: 'tooltip',
-          intro: '<span class="introjs-tooltip__title">SOLR Search Results</span>' +
-          "Apache SOLR's open source enterprise site search powers many of the largest websites on the planet. Its scalable, reliable and extremely flexible, making sure your customers get exactly what they expect."
+          intro: '<span class="introjs-tooltip__title">Search Results</span>' +
+          "The faceted search method is an enterprise solutions that powers many of the largest websites search results on the planet, including Amazon’s. Its scalable, reliable and extremely flexible, making sure your customers get exactly what they expect."
         },
         {
           element: '.product--teaser',
@@ -35,7 +35,7 @@
         {
           element: '.site-sidebar--desktop #block-categories',
           position: 'right',
-          intro: '<span class="introjs-tooltip__title">Faceted Category Filters</span>' +
+          intro: '<span class="introjs-tooltip__title">Category Filters</span>' +
           "Customizable faceted category filters extend how customers can filter through product and content results. Filter by term, date, range slider (useful for prices), color and more.  "
         },
         {

@@ -142,7 +142,7 @@ base-demo-to-uat:
 
     # log into the site and flush cache
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need to call PHP 7.1 and then run Drush.
-    - ssh commerce-2-demo@aws1.acrobuild.com < ./scripts/remote-drush-commands.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com '/bin/bash  -s' < ./scripts/remote-drush-commands.sh
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:

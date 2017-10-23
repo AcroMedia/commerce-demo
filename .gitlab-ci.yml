@@ -71,10 +71,14 @@ build:
       - web/themes/custom/commerce_2_demo/css
 
   script:
+    # Run Composer to build site (use --no-dev for production builds).
     - composer install --no-interaction --no-dev
+    # Compile Sass from theme.
     - cd web/themes/custom/commerce_2_demo
     - npm install
     - gulp sass
+    # Remove the node_modules dir generated from npm install.
+    - rm -rf node_modules
 
 # Deploy base demo to STAGING site (AWS1).
 base-demo-to-uat:
@@ -107,10 +111,10 @@ base-demo-to-uat:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
     #move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
+    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
     # log into the site and flush cache
-    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo && composer install'
+    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo/web && drush cr'
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:

@@ -59,8 +59,35 @@ custom_tests_d8:
     #- ../vendor/phpunit/phpunit/phpunit -c core/phpunit.xml.dist --group SITENAME
     - echo 'No custom unit tests currently, edit config if they are added'
 
-build:
+build-dev:
   stage: build
+
+  only:
+      - UAT
+
+  # this tells the build server to save these files between jobs, this keeps them to be deployed
+  artifacts:
+    paths:
+      - bin
+      - vendor
+      - web
+      - web/themes/custom/commerce_2_demo/css
+
+  script:
+    # Run Composer to build site (use --no-dev for production builds).
+    - composer install --no-interaction
+    # Compile Sass from theme.
+    - cd web/themes/custom/commerce_2_demo
+    - npm install
+    - gulp sass
+    # Remove the node_modules dir generated from npm install.
+    - rm -rf node_modules
+
+build-live:
+  stage: build
+
+  only:
+    - master
 
   # this tells the build server to save these files between jobs, this keeps them to be deployed
   artifacts:
@@ -115,7 +142,7 @@ base-demo-to-uat:
 
     # log into the site and flush cache
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need to call PHP 7.1 and then run Drush.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo/web && /usr/bin/php7.1 /home/commerce-2-demo/www/commerce-2-demo/vendor/drush/drush/drush cr'
+    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo/web && /usr/bin/php7.1 /home/commerce-2-demo/www/commerce-2-demo/vendor/drush/drush/drush entup -y && /usr/bin/php7.1 /home/commerce-2-demo/www/commerce-2-demo/vendor/drush/drush/drush updb -y && /usr/bin/php7.1 /home/commerce-2-demo/www/commerce-2-demo/vendor/drush/drush/drush cr'
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:

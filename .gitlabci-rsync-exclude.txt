@@ -1,0 +1,6 @@
+dumps
+data
+db_backups
+database.sql
+web/sites/default/files
+web/sites/default/settings.local.php

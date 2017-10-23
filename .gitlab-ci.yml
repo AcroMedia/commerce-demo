@@ -114,7 +114,8 @@ base-demo-to-uat:
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
     # log into the site and flush cache
-    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo/web && drush cr'
+    # IMPORTANT: Server default PHP is 7.0 so need to add '/usr/bin/php7.1 /usr/local/bin/drush' to run a Drush command using PHP 7.1.
+    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerce-2-demo/web && /usr/bin/php7.1 /usr/local/bin/drush cr'
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:

@@ -189,6 +189,7 @@ base-demo-to-live:
 
   # add any other tags or branches you want here
   only:
+    - UAT
     - master
 
   environment:
@@ -226,6 +227,7 @@ plus-demo-to-live:
 
   # add any other tags or branches you want here
   only:
+    - UAT
     - master
 
   environment:

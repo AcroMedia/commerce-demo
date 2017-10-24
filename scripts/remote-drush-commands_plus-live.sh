@@ -6,6 +6,8 @@
 
 
 function main () {
+  test -d $HOME/bin || mkdir $HOME/bin
+
   # Make sure PHP is the version we want.
   test -x $HOME/bin/php && rm $HOME/bin/php
   ln -s /usr/bin/php7.1 $HOME/bin/php

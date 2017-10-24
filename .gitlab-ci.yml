@@ -141,8 +141,8 @@ base-demo-to-uat:
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
     # log into the site and flush cache
-    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP verions and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com '/bin/bash  -s' < ./scripts/remote-drush-commands.sh
+    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
+    - ssh commerce-2-demo@aws1.acrobuild.com '/bin/bash  -s' < ./scripts/remote-drush-commands_base-uat.sh
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:
@@ -175,10 +175,12 @@ plus-demo-to-uat:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
     #move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
+    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
 
     # log into the site and flush cache
-    - ssh commerce-2-demo@aws1.acrobuild.com 'cd www/commerceplus && composer install'
+    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
+    - ssh commerce-2-demo@aws1.acrobuild.com '/bin/bash  -s' < ./scripts/remote-drush-commands_plus-uat.sh
+
 
 # Deploy base demo to LIVE site (CLOUD4).
 base-demo-to-live:
@@ -211,10 +213,11 @@ base-demo-to-live:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
+    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
 
     # log into the site and flush cache
-    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demo/web && drush cr'
+    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
+    - ssh drupalcommerce@cloud4.acromedia.com '/bin/bash  -s' < ./scripts/remote-drush-commands_base-live.sh
 
 # Deploy plus demo to LIVE site (CLOUD4).
 plus-demo-to-live:
@@ -247,8 +250,8 @@ plus-demo-to-live:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude '.git' /builds/acro/commerce-2-demo/ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
+    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
 
     # log into the site and flush cache
-    - ssh drupalcommerce@cloud4.acromedia.com 'cd www/demoplus/web && drush cr'
-
+    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
+    - ssh drupalcommerce@cloud4.acromedia.com '/bin/bash  -s' < ./scripts/remote-drush-commands_plus-live.sh

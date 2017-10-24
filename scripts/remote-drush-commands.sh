@@ -25,8 +25,8 @@ function main () {
 
   # Time to do some work.
   cd /home/commerce-2-demo/www/commerce-2-demo/web
-  drush entup -y
   drush updb -y
+  drush entup -y
   drush cr
 }
 

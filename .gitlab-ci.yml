@@ -141,7 +141,7 @@ base-demo-to-uat:
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
     # log into the site and flush cache
-    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need to call PHP 7.1 and then run Drush.
+    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP verions and use the right one.
     - ssh commerce-2-demo@aws1.acrobuild.com '/bin/bash  -s' < ./scripts/remote-drush-commands.sh
 
 # Deploy plus demo to STAGING site (AWS1).

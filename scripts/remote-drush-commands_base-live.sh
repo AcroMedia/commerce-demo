@@ -4,15 +4,19 @@
 # php 7.0 is the default on the server, and drush keeps hitting that instead of
 # the 7.1 that we need.
 
+# $HOME = /home/drupalcommerce
 
 function main () {
+  # Make sure there is a bin dir in the home directory.
+  test -d $HOME/bin || mkdir $HOME/bin
+
   # Make sure PHP is the version we want.
   test -x $HOME/bin/php && rm $HOME/bin/php
   ln -s /usr/bin/php7.1 $HOME/bin/php
 
   # Make sure Drush is the version we want.
   test -x $HOME/bin/drush && rm $HOME/bin/drush
-  ln -s /home/drupalcommerce/www/demo/vendor/drush/drush/drush $HOME/bin/drush
+  ln -s $HOME/www/demo/vendor/drush/drush/drush $HOME/bin/drush
 
   # Make sure our versions of Drush and our PHP are the first ones encountered by CLI tools.
   export PATH=$HOME/bin:$PATH
@@ -24,7 +28,7 @@ function main () {
   php -v
 
   # Time to do some work.
-  cd /home/drupalcommerce/www/demo/web
+  cd $HOME/www/demo/web
   drush updb -y
   drush entup -y
   drush cr

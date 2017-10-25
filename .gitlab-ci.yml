@@ -86,6 +86,7 @@ build-dev:
 build-live:
   stage: build
 
+  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
   only:
     - master
 
@@ -188,8 +189,8 @@ base-demo-to-live:
   when: manual
 
   # add any other tags or branches you want here
+  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
   only:
-    - UAT
     - master
 
   environment:
@@ -225,9 +226,9 @@ plus-demo-to-live:
   stage: deploy-live
   when: manual
 
-  # add any other tags or branches you want here
+  # add any other tags or branches you want here.
+  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
   only:
-    - UAT
     - master
 
   environment:

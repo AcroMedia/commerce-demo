@@ -1,142 +1,75 @@
-# Commerce 2.x Demo (Urban Hipster) Project Template
+# Urban Hipster - Commerce 2 & Drupal 8 Demo
 
-[![Build Status](https://travis-ci.org/AcroMedia/drupalorange-project-template.svg?branch=8.x)](https://travis-ci.org/AcroMedia/drupalorange-project-template)
+This is a full __Commerce 2__ demo website built on __Drupal 8__. It has been built for 3 reasons:
 
-This site is used for demoing a full Drupal 8 Commerce 2.x site. There are 2 versions of this site running simultaneously, and GitLab deploys 'master' to both. Staging is automatic. Client facing is manual.
+1. So that people can view, interact and login to an actual working demo site.
+2. So that developers can install, trial and review code and configuration.
+3. This is __NOT__ intended to be a base for building a new project, for that we recommend generating your own composer files yourself or use the [Commerce Kickstart](https://install.commercekickstart.com).
+So that the community can see and discuss what Drupal Commerce includes basically out of-the-box.
 
-__Dev/staging site:__ https://commerce-2-demo.aws1.acrobuild.com/
+## Welcome!
 
-* Used as a development/staging environment for the live demo.
-* Used by Acro staff to demo Commerce 2.x on location (i.e. at tradeshows)
-* This has a separate solr core and database from the live client site.
+The Urban Hipster demo site has been designed, built and maintained by [__Acro Media Inc.__](https://www.acromedia.com) in order to showcase a working demo of Commerce 2 on Drupal 8. Our goal is to provide an enterprise level example of what can be done out-of-the-box with general software configuration and theming. 
 
-__Client demo:__ https://demo.drupalcommerce.com/
+__Please understand that while we strive to keep the site and its components updated to the latest versions, there may be times where we lag behind a bit.__
 
-* PUBLIC FACING LIVE SITE - Treat with care.
-* Demo specifically setup to allow clients/prospects admin access so that they can login and mess around with the site configuration. 
-* This version of the site automatically resets it's database at 2AM every morning. 
-* This has a separate solr core and database from the dev/staging site.
+If you notice any bugs, please submit an issue. We’ll do our best to keep on top of things.
 
+## Where to start?
 
-## Origin
+### View the demo site
 
-Fork of [drupalcommerce/project-base](https://github.com/drupalcommerce/project-base). Which is based on 
-[drupal-composer/drupal-project](https://github.com/drupal-composer/drupal-project).
+If you still haven’t seen the demo site, [check it out!](https://commercedemo.acromedia.com).
 
-## Usage
+Click around, take the interactive guided tours, go through the checkout flow, whatever. This site is made so that you can truly experience what Commerce 2 and Drupal 8 offer as a standard.
 
-First you need to [install composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
+### Get a personalized tour
 
-> Note: The instructions below refer to the [global composer installation](https://getcomposer.org/doc/00-intro.md#globally).
-You might need to replace `composer` with `php composer.phar` (or similar)
-for your setup.
+If you’d like to have one of our experts go through the site with you and discuss how things work, use the demo site chat or [send us a message](https://www.acromedia.com/contact-us). We’ll set something up that works around your schedule. You can contact us through are website [here](https://www.acromedia.com/contact-us).
 
-After that you can create the project:
+### Developer access
 
-```
-composer create-project acromedia/drupalorange-project-template some-dir --stability dev --no-interaction
-```
+If you’d like to setup a copy of the demo yourself, follow these instructions.
 
-Alternatively, you can create the platform.sh version using this command:
+__Requirements__
+* Composer
+* PHP 7.1
+* MariaDB, MSQL, or equivalent
+* Apache, NGINX, or equivalent
+* Apache SOLR
+* General knowledge on how to setup a website server and use these tools
 
-```
-composer create-project acromedia/drupalorange-project-template:dev-8.x-platformsh some-dir --stability dev --no-interaction
-```
+__To setup the demo__
+1. Clone or download the files.
+2. Cd into the cloned repo and run `composer install`.
+3. Extract `dumps/files.tar.gz` into `web/sites/default`.
+4. Create a database and import `dumps/database.sql`.
+5. Configure your `settings.php` or `local.settings.php` to use the newly created database.
+6. Setup an Apache SOLR core for the site to use.
+7. Get your hosting setup (local or otherwise). The web root is `/web`.
+8. View the site!
+9. Use Drush from the `/web` root to get a one-time admin login. Drush 9.0 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
+10. Enter your SOLR core within ‘Configure Standard SOLR Connector’ at `yoursite.com/admin/config/search/search-api/server/solr_5/edit`.
+11. Reindex the products at `yoursite.com/admin/config/search/search-api/index/products`.
 
+## Issues
 
-Done! Use `composer require ...` to download additional modules and themes:
+### Bugs
 
-```
-cd some-dir
-composer require "drupal/devel:1.x-dev"
-```
+If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/commerce-demo/issues). We’ll do our best to keep on top of things.
 
-The `composer create-project` command passes ownership of all files to the
-project that is created. You should create a new git repository, and commit
-all files not excluded by the .gitignore file.
+### Demo setup
 
-## What does the template do?
+Please note, our team is busy completing service work for clients, and thus, we will not be able to help you with setting up the demo on your own. If you’re having trouble, some things that could cause your issue are:
 
-* Drupal is installed in the `web` directory.
-* Modules (packages of type `drupal-module`) are placed in `web/modules/contrib/`
-* Theme (packages of type `drupal-theme`) are placed in `web/themes/contrib/`
-* Profiles (packages of type `drupal-profile`) are placed in `web/profiles/contrib/`
-* Creates default writable versions of `settings.php` and `services.yml`.
-* Creates the `sites/default/files` directory.
-* Latest version of DrupalConsole is installed locally for use at `bin/drupal`.
+* Is your site running on PHP 7.1?
+* Are your Drupal file & folder permissions correct?
+* Flush caches (i.e. through Drupal UI or run `../vendor/drush/drush/drush cr` from within `/web`)
+* Update entities (i.e. run `../vendor/drush/drush/drush entup` from within `/web`)
+* Update database (i.e. run `../vendor/drush/drush/drush updb` from within `/web`)
 
-## Updating Drupal Core
+If those don’t help, Google the issue or submit an issue to our issue queue. Google will probably be your best friend :)
 
-This project will attempt to keep all of your Drupal Core files up-to-date; the
-project [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold)
-is used to ensure that your scaffold files are updated every time drupal/core is
-updated. If you customize any of the "scaffolding" files (commonly .htaccess),
-you may need to merge conflicts if any of your modified files are updated in a
-new release of Drupal core.
+### Let us set it up for you (and other stuff)
 
-Follow the steps below to update your core files.
-
-1. Run `composer update drupal/core --with-dependencies` to update Drupal Core and its dependencies.
-1. Run `git diff` to determine if any of the scaffolding files have changed.
-   Review the files for any changes and restore any customizations to
-  `.htaccess` or `robots.txt`.
-1. Commit everything all together in a single commit, so `web` will remain in
-   sync with the `core` when checking out branches or running `git bisect`.
-1. In the event that there are non-trivial conflicts in step 2, you may wish
-   to perform these steps on a branch, and use `git merge` to combine the
-   updated core files with your customized files. This facilitates the use
-   of a [three-way merge tool such as kdiff3](http://www.gitshah.com/2010/12/how-to-setup-kdiff-as-diff-tool-for-git.html). This setup is not necessary if your changes are simple;
-   keeping all of your modifications at the beginning or end of the file is a
-   good strategy to keep merges easy.
-
-## Generate composer.json from existing project
-
-With using [the "Composer Generate" drush extension](https://www.drupal.org/project/composer_generate)
-you can now generate a basic `composer.json` file from an existing project. Note
-that the generated `composer.json` might differ from this project's file.
-
-## FAQ
-
-### Should I commit the contrib modules I download?
-
-Composer recommends **no**. They provide [argumentation against but also
-workarounds if a project decides to do it anyway](https://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md).
-
-### Should I commit the scaffolding files?
-
-The [drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) plugin can download the scaffold files (like
-index.php, update.php, …) to the web/ directory of your project. If you have not customized those files you could choose
-to not check them into your version control system (e.g. git). If that is the case for your project it might be
-convenient to automatically run the drupal-scaffold plugin after every install or update of your project. You can
-achieve that by registering `@drupal-scaffold` as post-install and post-update command in your composer.json:
-
-```json
-"scripts": {
-    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-    "post-install-cmd": [
-        "@drupal-scaffold",
-        "..."
-    ],
-    "post-update-cmd": [
-        "@drupal-scaffold",
-        "..."
-    ]
-},
-```
-### How can I apply patches to downloaded modules?
-
-If you need to apply patches (depending on the project being modified, a pull
-request is often a better solution), you can do so with the
-[composer-patches](https://github.com/cweagans/composer-patches) plugin.
-
-To add a patch to drupal module foobar insert the patches section in the extra
-section of composer.json:
-```json
-"extra": {
-    "patches": {
-        "drupal/foobar": {
-            "Patch description": "URL to patch"
-        }
-    }
-}
-```
+If you’re a business and interested in having Acro Media setup the demo for you, or if you’d like to talk to us about something else, [contact us!](https://www.acromedia.com/contact-us).

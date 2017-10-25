@@ -73,14 +73,21 @@
     {# Footer bottom. #}
     <div class="site-footer__bottom">
       <div class="row">
-        <div class="hidden-xs col-sm-12 col-md-2 pull-right site-tours-wrapper">
+        <div class="hidden-xs col-sm-12 col-md-5 pull-right site-tours-wrapper">
           {# Button trigger modal #}
           <button type="button" id="siteTours-start" class="btn btn-primary" data-toggle="modal" data-target="#siteTours">
             <i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}
           </button>
+
+          {# GitHub links #}
+          <div class="github">
+            <i class="fa fa-github fa-2x"></i>
+            <a href="https://github.com/AcroMedia/commerce-demo" target="_blank" class="btn btn-default">{{ 'View source code'|t }} <i class="fa fa-angle-right"></i></a>
+            <a href="https://github.com/AcroMedia/commerce-demo/issues" target="_blank" class="btn btn-default">{{ 'Report a bug'|t }} <i class="fa fa-angle-right"></i></a>
+          </div>
         </div>
 
-        <div class="col-xs-12 col-md-10">
+        <div class="col-xs-12 col-md-7">
           {# Footer navigation. #}
           {% if page.footer_nav %}
             <div class="footer-nav">
@@ -91,7 +98,7 @@
           {# Copyright. #}
           <div class="site-footer__copyright">
             {{ 'Copyright &copy; @year'|t({'@year': 'now'|date('Y')}) }}
-            <a href="{{ front_page }}">{{ 'Urban Hipster Inc.'|t }}</a>.
+            <a href="{{ front_page }}">{{ 'Urban Hipster Inc.'|t }}</a>
             {{ 'All rights reserved.'|t }}
           </div>
 

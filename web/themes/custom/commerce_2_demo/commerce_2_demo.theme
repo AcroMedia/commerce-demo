@@ -322,6 +322,7 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
       $product = $variables['elements']['#commerce_product'];
       $product_variations = $product->getVariations();
 
+      // Variation Image
       if (isset($product_variations[0]->field_image->entity)) {
         $field_image = $product_variations[0]->field_image->entity;
 

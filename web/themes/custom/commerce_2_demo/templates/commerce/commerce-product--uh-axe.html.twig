@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ *
+ * UH Axe product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ *
+ * @ingroup themeable
+ */
+#}
+{% if view_mode == 'teaser' %}
+  {# Product teaser. #}
+  <a href="{{ product_url }}" class="product product--teaser" aria-label="{{ product_entity.title.value }}">
+    <div class="product--thumbnail">
+      {% if product_image_thumb_url %}
+        <img src="{{ product_image_thumb_url }}" alt="{{ product_entity.title.value }}" />
+      {% else %}
+        <img src="{{ base_path ~ directory }}/gfx/logo-icon.svg" class="no-product-thumbnail" alt="{{ product_entity.title.value }}" />
+      {% endif %}
+    </div>
+
+    {% if product.variation_field_original_price[0]['#markup'] %}
+      {{ product.variation_field_original_price }}
+    {% endif %}
+    {{ product.variation_price }}
+    {{ product.title }}
+    {{ product.field_brand }}
+  </a>
+
+{% else %}
+
+  {# Product full page. #}
+  <article{{ attributes }} class="product product--full">
+
+    <h1 class="page-title">{{ product_entity.title.value }}</h1>
+
+    {# Top paragraphs. #}
+    <div class="product__content product__content--top">
+      {{ product.field_paragraph }}
+    </div>
+
+    {# Product. #}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            {% if product_image_full_url %}
+              {# Product images. #}
+              <div class="col-xs-6 col-sm-8 col-md-10">
+                <div class="product--images">
+                  {{ product.variation_field_image }}
+                </div>
+              </div>
+              {# Product cart form w/ product image. #}
+              <div class="col-xs-6 col-sm-4 col-md-2">
+                <div class="product--intro">
+            {% else %}
+              {# Product cart form w/o product image. #}
+              <div class="col-sm-12">
+                <div class="product--intro product--intro__full-width">
+            {% endif %}
+
+                  {{ product.variations }}
+                  {{ product.variation_price }}
+                  <div class="product--intro__links">
+                  {{ 'SHIPPING'|t }} | {{ 'GUARANTEE'|t }}
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Bottom paragraphs. #}
+    <div class="product__content product__content--bottom">
+      {{ product.field_paragraph_bottom }}
+    </div>
+  </article>
+
+{% endif %}

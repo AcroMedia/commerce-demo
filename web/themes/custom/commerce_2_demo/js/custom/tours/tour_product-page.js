@@ -52,12 +52,12 @@
           'Share buttons let customers quickly share this product with their friends.'
         },
         {
-          element: '.product--images',
+          element: '.product__images',
           intro: '<span class="introjs-tooltip__title">Product Photos</span>' +
           'This photo changes as customizable options are selected. It can also be a gallery of image.'
         },
         {
-          element: '.product--intro',
+          element: '.product__intro',
           intro: '<span class="introjs-tooltip__title">Details & Add to Cart</span>' +
           'Basic details about the product, customization attributes, and an add to cart button are easy to configure per product type.'
         },

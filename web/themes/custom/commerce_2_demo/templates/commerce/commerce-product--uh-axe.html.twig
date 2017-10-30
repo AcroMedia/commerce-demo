@@ -22,7 +22,7 @@
 {% if view_mode == 'teaser' %}
   {# Product teaser. #}
   <a href="{{ product_url }}" class="product product--teaser" aria-label="{{ product_entity.title.value }}">
-    <div class="product--thumbnail">
+    <div class="product__thumbnail">
       {% if product_image_thumb_url %}
         <img src="{{ product_image_thumb_url }}" alt="{{ product_entity.title.value }}" />
       {% else %}
@@ -58,22 +58,22 @@
             {% if product_image_full_url %}
               {# Product images. #}
               <div class="col-xs-6 col-sm-8 col-md-10">
-                <div class="product--images">
+                <div class="product__images">
                   {{ product.variation_field_image }}
                 </div>
               </div>
               {# Product cart form w/ product image. #}
               <div class="col-xs-6 col-sm-4 col-md-2">
-                <div class="product--intro">
+                <div class="product__intro">
             {% else %}
               {# Product cart form w/o product image. #}
               <div class="col-sm-12">
-                <div class="product--intro product--intro__full-width">
+                <div class="product__intro product__intro--full-width">
             {% endif %}
 
                   {{ product.variations }}
                   {{ product.variation_price }}
-                  <div class="product--intro__links">
+                  <div class="product__intro__links">
                   {{ 'SHIPPING'|t }} | {{ 'GUARANTEE'|t }}
                   </div>
                 </div>

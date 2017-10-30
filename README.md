@@ -44,7 +44,7 @@ __To setup the demo__
 2. Cd into the cloned repo and run `composer install`.
 3. Extract `dumps/files.tar.gz` into `web/sites/default`.
 4. Create a database and import `dumps/database.sql`.
-5. Configure your `settings.php` or `local.settings.php` to use the newly created database.
+5. Configure your `settings.php` or `settings.local.php` to use the newly created database.
 6. Setup an Apache SOLR core for the site to use.
 7. Get your hosting setup (local or otherwise). The web root is `/web`.
 8. View the site!

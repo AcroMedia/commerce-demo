@@ -9,6 +9,7 @@ base theme: orange_framework
 libraries:
   - commerce_2_demo/global-styling
   - commerce_2_demo/tours
+  - commerce_2_demo/slick-slider
 
 ckeditor_stylesheets:
   - css/style.css

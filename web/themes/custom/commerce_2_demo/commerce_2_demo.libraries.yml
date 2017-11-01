@@ -5,6 +5,7 @@ global-styling:
       css/style.css: { media: all }
   js:
     js/custom/script.js: {}
+    js/custom/script-plus.js: {}
   dependencies:
     - core/jquery
     - core/drupal
@@ -19,6 +20,17 @@ tours:
     js/contrib/js.cookie.js: {}
     js/contrib/intro.min.js: {}
     js/custom/tours.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+slick-slider:
+  version: 1.x
+  css:
+    theme:
+      css/contrib/slick.css: { media: all }
+  js:
+    js/contrib/slick.min.js: {}
   dependencies:
     - core/jquery
     - core/drupal

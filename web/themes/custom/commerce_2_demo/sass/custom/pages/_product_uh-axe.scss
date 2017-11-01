@@ -1,0 +1,30 @@
+/**
+ * UH Axe product styling.
+ */
+
+/**
+ * Product full.
+ */
+.product--full.product--full--uh-axe {
+
+  // Page title hidden to start, then moved into paragraph with jQuery.
+  .page-title {
+    display: none;
+  }
+  .paragraph .page-title {
+    display: block;
+    margin-bottom: -15px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+
+  // Override default image field styles.
+  .field--name-field-image {
+    margin: 0;
+    border: none;
+  }
+
+
+}

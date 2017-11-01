@@ -21,7 +21,7 @@
 #}
 {% if view_mode == 'teaser' %}
   {# Product teaser. #}
-  <a href="{{ product_url }}" class="product product--teaser" aria-label="{{ product_entity.title.value }}">
+  <a href="{{ product_url }}" class="product product--teaser product--teaser--uh-axe" aria-label="{{ product_entity.title.value }}">
     <div class="product__thumbnail">
       {% if product_image_thumb_url %}
         <img src="{{ product_image_thumb_url }}" alt="{{ product_entity.title.value }}" />
@@ -41,14 +41,17 @@
 {% else %}
 
   {# Product full page. #}
-  <article{{ attributes }} class="product product--full">
+  <article{{ attributes }} class="product product--full product--full--uh-axe">
 
+    {# Page title rendered here but then moved with jQuery. #}
     <h1 class="page-title">{{ product_entity.title.value }}</h1>
 
     {# Top paragraphs. #}
-    <div class="product__content product__content--top">
-      {{ product.field_paragraph }}
-    </div>
+    {% if product.field_paragraph|render|trim is not empty %}
+      <div class="product__content product__content--top">
+        {{ product.field_paragraph }}
+      </div>
+    {% endif %}
 
     {# Product. #}
     <div class="container">
@@ -60,9 +63,11 @@
     </div>
 
     {# Bottom paragraphs. #}
-    <div class="product__content product__content--bottom">
-      {{ product.field_paragraph_bottom }}
-    </div>
+    {% if product.field_paragraph_bottom|render|trim is not empty %}
+      <div class="product__content product__content--bottom">
+        {{ product.field_paragraph_bottom }}
+      </div>
+    {% endif %}
   </article>
 
 {% endif %}

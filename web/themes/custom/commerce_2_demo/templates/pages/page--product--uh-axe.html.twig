@@ -62,6 +62,8 @@
           {% if page.above_content %}
             {{ page.above_content }}
           {% endif %}
+          {{ page.content.messages }}
+          {{ page.content.commerce_2_demo_tabs }}
         </aside>
       </div>
     </div>
@@ -69,7 +71,7 @@
   <main class="content__main-content clearfix" role="main">
     <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
     {% if page.content %}
-      {{ page.content }}
+      {{ page.content|without('commerce_2_demo_tabs','messages') }}
     {% endif %}
   </main>
   <div class="container">

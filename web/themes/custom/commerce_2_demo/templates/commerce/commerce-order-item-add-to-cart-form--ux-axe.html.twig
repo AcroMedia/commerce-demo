@@ -39,18 +39,20 @@
 </div>
 
 <div class="row">
-  {%  for image in form['#variation_field_image'] %}
-    <div class="col-xs-12">
-      {{ attribute.attribute_value_id.value }}
-      {{ dump(image) }}
-    </div>
-  {% endfor %}
-  {{ form['#product_image_full_url'] }}
-  {% if product_image_full_url %}
+  {% if form['#product_variation'].field_image.entity %}
   {# Product images. #}
   <div class="col-xs-6 col-sm-8 col-md-10">
     <div class="product__images">
-      {#{{ form['#variation_field_image'] }}#}
+      {%
+      set variation_field_image = {
+        '#theme':      'image_style',
+        '#style_name': 'uh_axe',
+        '#uri':        form['#product_variation'].field_image.entity.uri.value,
+        '#alt':        form['#product_variation'].field_image.alt,
+      }
+      %}
+
+      {{ variation_field_image }}
     </div>
   </div>
   {# Product cart form w/ product image. #}
@@ -62,7 +64,10 @@
     <div class="product__intro product__intro--full-width">
   {% endif %}
       {{ form|without('quantity', 'actions') }}
-      PRICE HERE
+      <div class="field--name-price">
+        {{ form['#product_variation'].price.value.0|commerce_price_format }}
+      </div>
+
       {{ form.actions }}
       <div class="product__intro__links">
         {{ 'SHIPPING'|t }} | {{ 'GUARANTEE'|t }}
@@ -70,4 +75,3 @@
     </div>
   </div>
 </div>
-{{ dump(form) }}

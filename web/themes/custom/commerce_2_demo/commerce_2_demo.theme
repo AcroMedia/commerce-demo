@@ -305,21 +305,11 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       }
       $form['#uh_axe_weight'] = $uh_axe_weight;
 
-      // Get product variation id and load variation.
+      // Get product variation id, load variation and set variation template variable.
       $product_variation_id = $form['purchased_entity']['widget'][0]['variation']['#value'];
       $entity_manager = \Drupal::entityTypeManager();
       $product_variation = $entity_manager->getStorage('commerce_product_variation')->load($product_variation_id);
-
-      // Variation Image
-      if (isset($product_variation->field_image->entity)) {
-        $field_image = $product_variation->field_image->entity;
-
-        // Image.
-        $form['#variation_field_image'] = $field_image;
-        $form['#product_image_full_url'] = ImageStyle::load('uh_axe')->buildUrl($field_image->getFileUri());
-        // Image thumbnail.
-        $form['#product_image_thumb_url'] = ImageStyle::load('product_thumb')->buildUrl($field_image->getFileUri());
-      }
+      $form['#product_variation'] = $product_variation;
     }
   }
 
@@ -392,6 +382,7 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
 
         // Image.
         $variables['product_image_full_url'] = ImageStyle::load('product_large')->buildUrl($field_image->getFileUri());
+
         // Image thumbnail.
         $variables['product_image_thumb_url'] = ImageStyle::load('product_thumb')->buildUrl($field_image->getFileUri());
       }

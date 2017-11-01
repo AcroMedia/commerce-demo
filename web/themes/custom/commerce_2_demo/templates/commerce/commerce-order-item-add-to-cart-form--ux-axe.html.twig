@@ -1,0 +1,73 @@
+{# Form twig file #}
+
+{# Function in pre_process to print price in purchase_entity. Commerce get price or something. #}
+
+{# Variables will be form.variable_name #}
+
+{# Use data-attribute using set variable #}
+
+{# Handle legth selector. #}
+<div class="row">
+  <div class="col-xs-12">
+    <h2>{{ 'Select a handle length'|t }}</h2>
+    <div class="row">
+      {%  for attribute in form['#uh_axe_length'] %}
+        <div class="col-xs-4">
+          {{ attribute.attribute_value_id.value }}
+          {{ attribute.name.value }}
+          {{ attribute.field_attribute_description.value }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{# Head weight selector. #}
+<div class="row">
+  <div class="col-xs-12">
+    <h2>{{ 'Now choose a head weight'|t }}</h2>
+    <div class="row">
+      {%  for attribute in form['#uh_axe_weight'] %}
+        <div class="col-xs-4">
+          {{ attribute.attribute_value_id.value }}
+          {{ attribute.name.value }}
+          {{ attribute.field_attribute_description.value }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  {%  for image in form['#variation_field_image'] %}
+    <div class="col-xs-12">
+      {{ attribute.attribute_value_id.value }}
+      {{ dump(image) }}
+    </div>
+  {% endfor %}
+  {{ form['#product_image_full_url'] }}
+  {% if product_image_full_url %}
+  {# Product images. #}
+  <div class="col-xs-6 col-sm-8 col-md-10">
+    <div class="product__images">
+      {#{{ form['#variation_field_image'] }}#}
+    </div>
+  </div>
+  {# Product cart form w/ product image. #}
+  <div class="col-xs-6 col-sm-4 col-md-2">
+    <div class="product__intro">
+  {% else %}
+  {# Product cart form w/o product image. #}
+  <div class="col-sm-12">
+    <div class="product__intro product__intro--full-width">
+  {% endif %}
+      {{ form|without('quantity', 'actions') }}
+      PRICE HERE
+      {{ form.actions }}
+      <div class="product__intro__links">
+        {{ 'SHIPPING'|t }} | {{ 'GUARANTEE'|t }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ dump(form) }}

@@ -35,7 +35,8 @@ function commerce_2_demo_theme_suggestions_page_alter(array &$suggestions, array
   $page_current_path = \Drupal::service('path.current')->getPath();
 
   if (!empty($page_current_path)) {
-    $page_current_alias = \Drupal::service('path.alias_manager')->getAliasByPath($page_current_path);
+    $page_current_alias = \Drupal::service('path.alias_manager')
+      ->getAliasByPath($page_current_path);
   }
   if (!empty($page_current_alias)) {
     $search_for = '/';
@@ -81,7 +82,7 @@ function commerce_2_demo_preprocess_html(&$variables) {
 }
 
 /**
- * Implements hook_theme_suggestions_block_alter() for form templates.
+ * Implements hook_theme_suggestions_block_alter(array &$suggestions, array $variables).
  */
 function commerce_2_demo_theme_suggestions_block_alter(array &$suggestions, array $variables) {
   // Block theme suggestions for custom block types.
@@ -91,7 +92,7 @@ function commerce_2_demo_theme_suggestions_block_alter(array &$suggestions, arra
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ * Implements hook_preprocess_block(&$variables).
  */
 function commerce_2_demo_preprocess_block(&$variables) {
   // Set bundle variable for custom blocks.
@@ -101,7 +102,7 @@ function commerce_2_demo_preprocess_block(&$variables) {
 }
 
 /**
- * Implements hook__preprocess_comment_HOOK() for Comments.
+ * Implements hook_preprocess_comment_HOOK() for Comments.
  */
 function commerce_2_demo_preprocess_comment(&$variables) {
   $comment = $variables['elements']['#comment'];
@@ -249,6 +250,18 @@ function commerce_2_demo_preprocess_taxonomy_term(&$variables) {
 }
 
 /**
+ * Implements hook_theme($existing, $type, $theme, $path).
+ */
+function commerce_2_demo_theme($existing, $type, $theme, $path) {
+  return [
+    'commerce_order_item_add_to_cart_form__ux_axe' => [
+      'render element' => 'form',
+      'path' => $path . '/templates/commerce',
+    ],
+  ];
+}
+
+/**
  * Implements hook_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id).
  */
 function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -258,9 +271,60 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
     $form['actions']['submit']['#value'] = t('Post Comment');
   }
 
+  // Commerce Add to Cart form.
+  if ((strpos($form_id,'commerce_order_item_add_to_cart_form_commerce_product_') === 0)) {
+    // Access form storage
+    $storage = &$form_state->getStorage();
+
+    // Get product type (bundle).
+    $product_bundle = $storage['product']->bundle();
+    $form['#product_bundle'] = $product_bundle;
+
+    // Check for specific uh_axe product type.
+    if ($product_bundle == 'uh_axe') {
+      // Set theme hook.
+      $form['#theme'][] = 'commerce_order_item_add_to_cart_form__ux_axe';
+
+      // Get length attribute and set template variable.
+      $uh_axe_length = [];
+      $uh_axe_length_key = 0;
+      foreach ($form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_length']['#options'] as $key => &$option) {
+        $attribute = \Drupal\commerce_product\Entity\ProductAttributeValue::load($key);
+        $uh_axe_length[$uh_axe_length_key] = $attribute;
+        $uh_axe_length_key++;
+      }
+      $form['#uh_axe_length'] = $uh_axe_length;
+
+      // Get weight attribute and set template variable.
+      $uh_axe_weight = [];
+      $uh_axe_weight_key = 0;
+      foreach ($form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_weight']['#options'] as $key => &$option) {
+        $attribute = \Drupal\commerce_product\Entity\ProductAttributeValue::load($key);
+        $uh_axe_weight[$uh_axe_weight_key] = $attribute;
+        $uh_axe_weight_key++;
+      }
+      $form['#uh_axe_weight'] = $uh_axe_weight;
+
+      // Get product variation id and load variation.
+      $product_variation_id = $form['purchased_entity']['widget'][0]['variation']['#value'];
+      $entity_manager = \Drupal::entityTypeManager();
+      $product_variation = $entity_manager->getStorage('commerce_product_variation')->load($product_variation_id);
+
+      // Variation Image
+      if (isset($product_variation->field_image->entity)) {
+        $field_image = $product_variation->field_image->entity;
+
+        // Image.
+        $form['#variation_field_image'] = $field_image;
+        $form['#product_image_full_url'] = ImageStyle::load('uh_axe')->buildUrl($field_image->getFileUri());
+        // Image thumbnail.
+        $form['#product_image_thumb_url'] = ImageStyle::load('product_thumb')->buildUrl($field_image->getFileUri());
+      }
+    }
+  }
+
   // Commerce Cart page form.
   if ((strpos($form_id, 'views_form_commerce_cart_form_default_') === 0)) {
-
     // Check for results.
     if (isset($form['output'][0]['#rows'][0])) {
       // Get order id.

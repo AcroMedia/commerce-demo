@@ -5,12 +5,25 @@
   font-size: 18px;
   margin-bottom: 40px;
 
+  @media (max-width: $screen-xs-max) {
+    font-size: 16px;
+
+    p {
+      line-height: 1.5;
+    }
+  }
+
   h2 {
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 30px;
     letter-spacing: normal;
     color: $gray-darker;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 19px;
+      line-height: 1.4;
+    }
   }
 }
 
@@ -31,16 +44,16 @@
   h2 {
     color: #fff;
     font-size: 29px;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 19px
+    }
   }
 
   @media (max-width: 1550px) {
     .container {
       width: 100% !important;
     }
-  }
-
-  .row {
-    display: flex;
   }
 
   // Background image.
@@ -109,11 +122,14 @@
     z-index: 2;
     padding: 55px 25px 55px 0;
   }
-  .paragraph--type--2-column-image-content__content-full .paragraph--type--2-column-image-content__content {
+  @media (max-width: $screen-xs-max) {
+    .paragraph--type--2-column-image-content__content-right .paragraph--type--2-column-image-content__content,
+    .paragraph--type--2-column-image-content__content-left .paragraph--type--2-column-image-content__content {
+      padding: 25px 10px 40px;
+    }
   }
 
   .paragraph--type--2-column-image-content__content {
-
 
     .field--name-field-unlimited-cta-links {
       .field__item {
@@ -141,6 +157,255 @@
         &:hover, &:focus {
           background: rgba(0, 0, 0, 1);
         }
+
+        @media (max-width: $screen-xs-max) {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * UH Axe slick slider.
+ */
+.paragraph.paragraph--type--uh-axe-slider {
+  background-color: $gray-light;
+
+  .paragraph {
+    margin-bottom: 0;
+  }
+
+  .col-xs-12 {
+    padding: 0;
+  }
+
+  // Hide slider until initialized.
+  .field--name-field-ux-axe-slides {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease;
+
+    &.slick-initialized {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // Select finish buttons.
+  a.btn {
+    display: inline-block;
+    margin: 20px 16px 0 0;
+    padding: 9px 26px;
+    border: 2px solid $gray-darker;
+    border-radius: 0;
+    background: #fff;
+    background: rgba(255, 255, 255, 0);
+    font-size: 21px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: $gray-darker;
+    transition: background-color .1s ease-in-out, opacity .1s ease-in-out;
+    white-space: nowrap;
+    user-select: none;
+    touch-action: manipulation;
+
+    &:hover, &:focus {
+      background: rgba(255, 255, 255, 0.75);
+      color: $gray-dark;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      margin-top: 10px;
+      padding: 9px 26px;
+      font-size: 18px;
+    }
+  }
+
+  // Slides.
+  .slick-slider__uh-axe {
+    position: relative;
+    z-index: 1;
+
+    .slick-slider__uh-axe__slide {
+
+      // Image.
+      .field--name-field-image {
+        position: relative;
+        z-index: 1;
+      }
+
+      // Overlay.
+      .slick-slider__uh-axe__slide-overlay {
+        position: absolute;
+        z-index: 2;
+        bottom: 14%;
+        width: 100%;
+        text-align: center;
+
+        @media (max-width: $screen-sm-max) {
+          bottom: 12%;
+        }
+        @media (max-width: $screen-xs-max) {
+          bottom: 8%;
+        }
+        @media (max-width: 500px) {
+          bottom: 8%;
+        }
+
+        .slick-slider__uh-axe__slide-overlay__intro {
+          color: #999;
+        }
+
+        .slick-slider__uh-axe__slide-overlay__finish-name {
+          font-size: 30px;
+          font-weight: 600;
+          line-height: normal;
+          text-transform: uppercase;
+          color: $gray-darker;
+
+          @media (max-width: $screen-sm-max) {
+            font-size: 18px;
+          }
+        }
+
+        a.btn {
+          @media (max-width: $screen-xs-max) {
+            display: none;
+          }
+        }
+      }
+    }
+
+    // Hide unwanted thumbnails.
+    .slick-slider__uh-axe__thumb {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  // Thumbnails.
+  .slick-slider__uh-axe-thumbs {
+    position: relative;
+    z-index: 2;
+    margin-top: -38px;
+    padding-bottom: 10px;
+    text-align: center;
+
+    .slick-list {
+      display: inline-block;
+      width: calc(100% - 100px);
+      vertical-align: bottom;
+    }
+
+    .slick-slide {
+      outline: none;
+    }
+
+    // Prev/Next buttons.
+    .slick-arrow {
+      display: inline-block;
+      width: 30px;
+      height: 42px;
+      padding: 0;
+      margin: 0;
+      background: none;
+      border: none;
+      font-size: 0;
+
+      &.slick-prev {
+        background: url(../gfx/arrow-prev-gray.svg) center center no-repeat;
+        margin-right: 10px;
+        background-size: 16px 42px;
+      }
+
+      &.slick-next {
+        background: url(../gfx/arrow-next-gray.svg) center center no-repeat;
+        margin-left: 10px;
+        background-size: 16px 42px;
+      }
+    }
+
+    // Thumbnail.
+    .slick-slider__uh-axe__thumb {
+      position: relative;
+      text-align: center;
+      padding: 0 3px;
+      margin-top: 48px;
+
+      &:before {
+        display: none;
+        position: absolute;
+        top: -54px;
+        width: 24px;
+        height: 40px;
+        background: url(../gfx/arrow-prev.svg) center center no-repeat;
+        background-size: 24px 40px;
+        transform: rotate(90deg) translateY(12px);
+        content: "";
+      }
+
+      .field--name-field-image-thumbnails {
+        img {
+          margin: 0 auto;
+          border: 2px solid rgba(153, 153, 153, 0);
+          cursor: pointer;
+        }
+      }
+    }
+
+    // Current slide thumbnail.
+    .slick-current {
+      .slick-slider__uh-axe__thumb {
+        &:before {
+          @media (min-width: $screen-md) {
+            display: inline-block;
+          }
+          @media (max-width: $screen-sm-max) {
+            display: inline-block;
+            top: -34px;
+            width: 12px;
+            height: 24px;
+            background-size: 12px 24px;
+            transform: rotate(90deg) translateY(6px);
+          }
+          @media (max-width: $screen-xs-max) {
+            display: none;
+          }
+        }
+
+        .field--name-field-image-thumbnails {
+          img {
+            border: 2px solid rgba(153, 153, 153, 1);
+          }
+        }
+      }
+    }
+
+    // Hide unwanted slides.
+    .slick-slider__uh-axe__slide {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  // Mobile only select button.
+  .slick-slider__uh-axe-mobile {
+    display: none;
+    visibility: hidden;
+
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      visibility: visible;
+      padding: 15px 0;
+      background-color: #d5d5d5;
+      text-align: center;
+
+      // Select finish buttons.
+      a.btn {
+        margin: 0;
+        background: rgba(255, 255, 255, 0.5);
       }
     }
   }

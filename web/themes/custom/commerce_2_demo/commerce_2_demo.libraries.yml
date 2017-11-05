@@ -5,10 +5,19 @@ global-styling:
       css/style.css: { media: all }
   js:
     js/custom/script.js: {}
-    js/custom/script-plus.js: {}
+    js/custom/plus.js: {}
   dependencies:
     - core/jquery
     - core/drupal
+
+slider:
+  version: 1.x
+  js:
+    js/custom/slider.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - commerce_2_demo/slick-slider
 
 tours:
   version: 1.x

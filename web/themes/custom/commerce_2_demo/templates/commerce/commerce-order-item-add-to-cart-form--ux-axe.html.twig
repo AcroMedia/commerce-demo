@@ -11,14 +11,19 @@
 
 {# Handle legth selector. #}
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12 text-center attribute-handle-length">
     <h2>{{ 'Select a handle length'|t }}</h2>
-    <div class="row">
+    <div class="row row-eq-height">
       {%  for attribute in form['#uh_axe_length'] %}
         <div class="col-xs-4">
-          {{ attribute.attribute_value_id.value }}
-          {{ attribute.name.value }}
-          {{ attribute.field_attribute_description.value }}
+          <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ attribute.name.value }}" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+            <div class="attribute-selector__name">
+              {{ attribute.name.value }}
+            </div>
+            <div class="attribute-selector__description">
+              {{ attribute.field_attribute_description.value }}
+            </div>
+          </a>
         </div>
       {% endfor %}
     </div>
@@ -27,14 +32,19 @@
 
 {# Head weight selector. #}
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12 text-center attribute-head-weight">
     <h2>{{ 'Now choose a head weight'|t }}</h2>
-    <div class="row">
+    <div class="row row-eq-height">
       {%  for attribute in form['#uh_axe_weight'] %}
         <div class="col-xs-4">
-          {{ attribute.attribute_value_id.value }}
-          {{ attribute.name.value }}
-          {{ attribute.field_attribute_description.value }}
+          <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ attribute.name.value }}" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+            <div class="attribute-selector__name">
+              {{ attribute.name.value }}
+            </div>
+            <div class="attribute-selector__description">
+              {{ attribute.field_attribute_description.value }}
+            </div>
+          </a>
         </div>
       {% endfor %}
     </div>

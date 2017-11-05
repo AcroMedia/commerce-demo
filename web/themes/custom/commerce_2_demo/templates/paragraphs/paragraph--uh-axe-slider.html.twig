@@ -47,7 +47,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 %}
 
 {# Attach slick slider #}
-{{ attach_library('commerce_2_demo/slick-slider') }}
+{{ attach_library('commerce_2_demo/slider') }}
 
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
@@ -57,6 +57,15 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
           <div class="col-xs-12">
             <div class="slick-slider__uh-axe">
               {{ content.field_ux_axe_slides }}
+            </div>
+            <div class="slick-slider__uh-axe-thumbs">
+              {{ content.field_ux_axe_slides }}
+            </div>
+            {# Mobile select finish button #}
+            <div class="slick-slider__uh-axe-mobile">
+              <a href="#" class="btn btn-default" title="{{ 'Select this finish'|t }}">
+                {{ 'Select this finish'|t }}
+              </a>
             </div>
           </div>
         </div>

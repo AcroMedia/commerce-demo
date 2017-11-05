@@ -49,10 +49,24 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      {{ content.field_image }}
-      {{ content.field_image_thumbnails }}
-      {{ content.field_handle_finish_name }}
-      {{ content.field_attribute_value }}
+      <div class="slick-slider__uh-axe__slide" data-attribute-value="{{ paragraph.field_attribute_value.value }}">
+        {{ content.field_image }}
+        <div class="slick-slider__uh-axe__slide-overlay">
+          <div class="slick-slider__uh-axe__slide-overlay__intro">
+            {{ 'Urban Hipster Axe in'|t }}
+          </div>
+          <div class="slick-slider__uh-axe__slide-overlay__finish-name">
+            {{ content.field_handle_finish_name }}
+          </div>
+          <a href="#" class="btn btn-default" title="{{ 'Select this finish'|t }}">
+            {{ 'Select this finish'|t }}
+          </a>
+        </div>
+      </div>
+
+      <div class="slick-slider__uh-axe__thumb" data-attribute-value="{{ paragraph.field_attribute_value.value }}">
+        {{ content.field_image_thumbnails }}
+      </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}

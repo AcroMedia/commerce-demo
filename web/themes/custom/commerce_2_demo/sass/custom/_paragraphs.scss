@@ -65,12 +65,14 @@
     background-size: cover;
     position: relative;
   }
+
   .paragraph--type--2-column-image-content__image-left {
     min-height: 535px;
   }
   .paragraph--type--2-column-image-content__image-right {
     min-height: 535px;
   }
+
   @media (min-width: 1550px) {
     .paragraph--type--2-column-image-content__image-left,
     .paragraph--type--2-column-image-content__image-right {
@@ -170,6 +172,7 @@
  * UH Axe slick slider.
  */
 .paragraph.paragraph--type--uh-axe-slider {
+  margin-bottom: 65px;
   background-color: $gray-light;
 
   .paragraph {
@@ -350,7 +353,13 @@
         img {
           margin: 0 auto;
           border: 2px solid rgba(153, 153, 153, 0);
+          opacity: 1;
           cursor: pointer;
+          transition: opacity .1s ease-in-out;
+
+          &:hover, &:focus {
+            opacity: 0.75;
+          }
         }
       }
     }
@@ -378,6 +387,11 @@
         .field--name-field-image-thumbnails {
           img {
             border: 2px solid rgba(153, 153, 153, 1);
+
+            &:hover, &:focus {
+              opacity: 1;
+              cursor: default;
+            }
           }
         }
       }

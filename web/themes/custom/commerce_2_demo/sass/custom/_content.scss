@@ -464,14 +464,58 @@ table {
 /**
  * Modals.
  */
-@media(min-width: 768px) {
-  .modal.in .modal-dialog {
-    transform: translateX(-50%) translateY(-50%);
-  }
+.modal.fade .modal-dialog {
+  transform: scale(0.1);
+  top: 50%;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+  transform: scale(1);
+  transform: translate3d(0, -50%, 0);
+  opacity: 1;
+}
+
+#videoModal {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+
   .modal-dialog {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: 0;
+    @media(min-width: 768px) {
+      width: 50%;
+    }
+  }
+
+  .modal-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .modal-header {
+    min-height: 45px;
+    border: none;
+
+    .close {
+      color: #fff;
+      text-shadow: none;
+      opacity: 1;
+
+      &:hover, &:focus {
+        color: $c-primary;
+      }
+    }
+  }
+
+  .modal-body {
+    padding: 0;
+
+    .embed-container {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .modal-footer {
+    border: none;
   }
 }

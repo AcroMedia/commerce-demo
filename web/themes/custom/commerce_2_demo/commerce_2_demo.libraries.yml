@@ -9,6 +9,7 @@ global-styling:
   dependencies:
     - core/jquery
     - core/drupal
+    - commerce_2_demo/fitVid
 
 slider:
   version: 1.x
@@ -43,6 +44,14 @@ slick-slider:
   dependencies:
     - core/jquery
     - core/drupal
+
+fitVid:
+  version: 1.x
+  js:
+    js/contrib/jquery.fitvids.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupal
 
 maintenance_page:
   version: 1.x

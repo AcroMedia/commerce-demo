@@ -33,7 +33,7 @@ If you’d like to setup a copy of the demo yourself, follow these instructions.
 
 __Requirements__
 * Composer
-* PHP 7.1
+* PHP 7.1 (or 7.0 with [this patch](https://www.drupal.org/node/2898119))
 * MariaDB, MSQL, or equivalent
 * Apache, NGINX, or equivalent
 * Apache SOLR
@@ -48,7 +48,8 @@ __To setup the demo__
 6. Setup an Apache SOLR core for the site to use.
 7. Get your hosting setup (local or otherwise). The web root is `/web`.
 8. View the site!
-9. Use Drush from the `/web` root to get a one-time admin login. Drush 9.0 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
+9. Login with username and password as `demoadmin`.
+    - NOTE: demoadmin does have some restrictions. If you'd prefer to login as a full admin, use Drush from the `/web` root to get a one-time admin login. Drush 9.0 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
 10. Enter your SOLR core within ‘Configure Standard SOLR Connector’ at `yoursite.com/admin/config/search/search-api/server/solr_5/edit`.
 11. Reindex the products at `yoursite.com/admin/config/search/search-api/index/products`.
 
@@ -63,6 +64,7 @@ If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/co
 Please note, our team is busy completing service work for clients, and thus, we will not be able to help you with setting up the demo on your own. If you’re having trouble, some things that could cause your issue are:
 
 * Is your site running on PHP 7.1?
+  * If not, you'll need [this patch](https://www.drupal.org/node/2898119).
 * Are your Drupal file & folder permissions correct?
 * Flush caches (i.e. through Drupal UI or run `../vendor/drush/drush/drush cr` from within `/web`)
 * Update entities (i.e. run `../vendor/drush/drush/drush entup` from within `/web`)

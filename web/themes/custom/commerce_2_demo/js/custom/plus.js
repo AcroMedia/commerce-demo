@@ -113,6 +113,9 @@
         // Get value of attribute selected.
         var $dataAttributeValue = $(this).data('attribute-value');
 
+        // Add to attributes a visual indicator that something is happening.
+        $('.attribute-selector').addClass('disabled');
+
         // Loop through add to cart form, match attribute values, and trigger click.
         $('.attribute-widgets input').each(function () {
           var $widgetAttributeValueString = $(this).val();

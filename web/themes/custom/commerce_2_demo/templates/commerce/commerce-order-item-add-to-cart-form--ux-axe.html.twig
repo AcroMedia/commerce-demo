@@ -52,38 +52,45 @@
 </div>
 
 <div class="row">
+  <div class="col-xs-12 text-center">
+    <h2>{{ 'Review Selection'|t }}</h2>
+  </div>
+</div>
+
+<div class="row row-eq-height">
   {% if form['#product_variation'].field_image.entity %}
   {# Product images. #}
-  <div class="col-xs-6 col-sm-8 col-md-10">
-    <div class="product__images">
-      {%
-      set variation_field_image = {
-        '#theme':      'image_style',
-        '#style_name': 'uh_axe',
-        '#uri':        form['#product_variation'].field_image.entity.uri.value,
-        '#alt':        form['#product_variation'].field_image.alt,
-      }
-      %}
+  <div class="col-xs-6 col-sm-8 col-md-9 product__images">
+    {%
+    set variation_field_image = {
+      '#theme':      'image_style',
+      '#style_name': 'uh_axe',
+      '#uri':        form['#product_variation'].field_image.entity.uri.value,
+      '#alt':        form['#product_variation'].field_image.alt,
+    }
+    %}
 
-      {{ variation_field_image }}
-    </div>
+    {{ variation_field_image }}
   </div>
   {# Product cart form w/ product image. #}
-  <div class="col-xs-6 col-sm-4 col-md-2">
-    <div class="product__intro">
+  <div class="col-xs-6 col-sm-4 col-md-3 product__intro">
   {% else %}
   {# Product cart form w/o product image. #}
-  <div class="col-sm-12">
-    <div class="product__intro product__intro--full-width">
+  <div class="col-sm-12 product__intro product__intro--full-width">
   {% endif %}
+    <div class="product__intro-top">
       {{ form|without('quantity', 'actions') }}
+    </div>
+
+    <div class="product__intro-bottom">
       <div class="field--name-price">
         {{ form['#product_variation'].price.value.0|commerce_price_format }}
       </div>
 
       {{ form.actions }}
       <div class="product__intro__links">
-        {{ 'SHIPPING'|t }} | {{ 'GUARANTEE'|t }}
+        <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
+        <a href="/placeholder-page" title="{{ 'Read our guarantee'|t }}">{{ 'GUARANTEE'|t }}</a>
       </div>
     </div>
   </div>

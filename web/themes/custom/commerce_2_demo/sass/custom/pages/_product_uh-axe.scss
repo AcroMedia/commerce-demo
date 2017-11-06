@@ -43,7 +43,7 @@
 
     .attribute-handle-length,
     .attribute-head-weight {
-      margin-bottom: 30px;
+      margin-bottom: 45px;
 
       @media (max-width: $screen-xs-max) {
         .col-xs-4 {
@@ -119,6 +119,157 @@
             box-shadow: 0 4px 15px 0 rgba(0,0,0,0.0);
             cursor: default;
           }
+        }
+      }
+    }
+  }
+
+  .product__intro {
+    padding: 0;
+    background-color: #e9e9e9;
+
+    .product__intro-top {
+      padding: 25px 35px 12px;
+      background-color: #f5f5f5;
+    }
+
+    .product__intro-bottom {
+      padding: 5px 25px 20px;
+      text-align: center;
+    }
+
+    div[id^='commerce-product-add-to-cart-form'] {
+
+      fieldset {
+        margin: 0 0 20px 0;
+
+        .form-optional {
+          display: none;
+          visibility: hidden;
+        }
+      }
+
+      legend {
+        display: block;
+        border-bottom: none;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        color: $gray-darker;
+
+        .form-required {
+          color: $gray-darker;
+        }
+      }
+
+      .form-type-radio {
+        position: relative;
+        display: inline-block;
+        margin: 6px 8px 6px 0;
+        vertical-align: top;
+        font-size: 16px;
+        color: $gray-darker;
+
+        .ajax-progress {
+          display: none;
+        }
+
+        label {
+          position: relative;
+          cursor: pointer;
+
+          &:before {
+            position: relative;
+            top: 2px;
+            display: inline-block;
+            box-sizing: border-box;
+            height: 16px;
+            width: 16px;
+            margin-right: 5px;
+            border: 1px solid $gray;
+            border-radius: 2px;
+            background-color: #fff;
+            transition: all .1s ease-in-out;
+            content: '';
+          }
+
+          &:hover, &:focus, &:active {
+            &:before {
+              border: 1px solid $gray-darker;
+            }
+          }
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+          opacity: 0;
+          width: 0;
+          height: 0;
+
+          &:checked ~ label {
+            cursor: default;
+
+            &:before {
+              background-color: $gray-dark;
+            }
+          }
+        }
+      }
+
+      // Overrides for rendered attribute.
+      fieldset.product--rendered-attribute {
+        margin-bottom: 0;
+
+        legend {
+          margin-bottom: 10px;
+        }
+
+        .form-type-radio {
+          max-width: 200px;
+          margin: 2px 8px 2px 0;
+
+          label {
+            &:before {
+              display: none;
+            }
+          }
+        }
+
+        .product--rendered-attribute__selected {
+          ~ label.option {
+            border: 2px solid #999;
+          }
+        }
+      }
+    }
+
+    .field--name-price {
+      margin-bottom: 0;
+      font-family: $f-tertiary;
+      font-size: 50px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .form-actions {
+      margin-top: 12px;
+
+      input {
+        padding: 13px 20px;
+        border-radius: 0;
+        font-size: 23px;
+        font-weight: 600;
+      }
+    }
+
+    .product__intro__links {
+      a {
+        color: $gray-darker;
+        transition: color .1s ease-in-out;
+
+        &:hover, &:focus {
+          color: $c-primary-hover;
         }
       }
     }

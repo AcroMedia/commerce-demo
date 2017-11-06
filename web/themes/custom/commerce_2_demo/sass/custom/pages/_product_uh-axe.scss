@@ -26,7 +26,7 @@
   }
 
   // Add to cart form.
-  #commerce-product-add-to-cart-form {
+  div[id^='commerce-product-add-to-cart-form'] {
 
     h2 {
       margin-top: 15px;
@@ -110,6 +110,10 @@
 
         &.selected {
           border: 1px solid $c-primary;
+
+          &:before {
+            border: 5px solid #fff2f2;
+          }
 
           &:hover, &:focus {
             box-shadow: 0 4px 15px 0 rgba(0,0,0,0.0);

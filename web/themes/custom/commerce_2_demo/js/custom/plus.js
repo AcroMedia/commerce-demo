@@ -5,7 +5,7 @@
 (function ($, Drupal) {
 
   /**
-   * Open YouTube videos in modal.
+   * Open YouTube video links in modal.
    */
 
   /**
@@ -74,7 +74,7 @@
       event.preventDefault();
       // Scroll to add to cart form.
       $('html, body').animate({
-        scrollTop: $("#edit-purchased-entity-wrapper").offset().top -25
+        scrollTop: $("div[id^='edit-purchased-entity-wrapper']").offset().top -25
       }, 700);
     }
   });
@@ -85,8 +85,67 @@
     event.preventDefault();
     // Scroll to product attributes.
     $('html, body').animate({
-      scrollTop: $("#commerce-product-add-to-cart-form").offset().top -25
+      scrollTop: $("div[id^='commerce-product-add-to-cart-form']").offset().top -25
     }, 500);
   });
+
+  // Sync all attribute selections throughout page.
+  Drupal.behaviors.uhaxe = {
+    attach: function(context, settings) {
+      // Update add to cart form selection when selection changes via handle finish slider.
+      $('.slick-slider__uh-axe-thumbs .slick-slider__uh-axe__thumb', context).once('uhaxe').click(function (event) {
+        // Get value of attribute selected.
+        var $dataAttributeValue = $(this).data('attribute-value');
+
+        // Loop through add to cart form, match attribute values, and trigger click.
+        $('.attribute-widgets input').each(function () {
+          var $widgetAttributeValueString = $(this).val();
+          var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+          if ($widgetAttributeValue === $dataAttributeValue) {
+            $(this).click();
+          }
+        });
+      });
+
+      // Update add to cart form selection when selection changes via attribute selector.
+      $('.attribute-selector', context).once('uhaxe').click(function (event) {
+        event.preventDefault();
+        // Get value of attribute selected.
+        var $dataAttributeValue = $(this).data('attribute-value');
+
+        // Loop through add to cart form, match attribute values, and trigger click.
+        $('.attribute-widgets input').each(function () {
+          var $widgetAttributeValueString = $(this).val();
+          var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+          if ($widgetAttributeValue === $dataAttributeValue) {
+            $(this).click();
+          }
+        });
+      });
+
+      // Highlight current attribute option based on add to cart form selection.
+      $('.attribute-widgets input:checked', context).once('uhaxe').each(function () {
+        // Get attribute value of selected add to cart form attribute.
+        var $widgetAttributeValueString = $(this).val();
+        var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+
+        // Loop through handle finish slides, match attribute value, and trigger click on slide.
+        $('.slick-slider__uh-axe-thumbs .slick-slider__uh-axe__thumb').each(function () {
+          var $slideDataAttributeValue = $(this).data('attribute-value');
+          if ($slideDataAttributeValue === $widgetAttributeValue) {
+            $(this).click();
+          }
+        });
+
+        // Loop through attribute selectors, match attribute values, and add selected class.
+        $('.attribute-selector').each(function () {
+          var $selectorDataAttributeValue = $(this).data('attribute-value');
+          if ($selectorDataAttributeValue === $widgetAttributeValue) {
+            $(this).addClass('selected');
+          }
+        });
+      });
+    }
+  };
 
 })(jQuery, Drupal);

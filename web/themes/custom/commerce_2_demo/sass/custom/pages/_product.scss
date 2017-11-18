@@ -130,7 +130,7 @@
         line-height: 1.3em;
         color: #000;
 
-        .product--thumbnail {
+        .product__thumbnail {
           position: relative;
           display: inline-block;
           width: 100%;
@@ -212,7 +212,7 @@
         }
 
         &:focus {
-          .product--thumbnail {
+          .product__thumbnail {
             opacity: 0.8;
           }
 
@@ -279,7 +279,7 @@
 
       // Fields.
       a.product--teaser {
-        .product--thumbnail {
+        .product__thumbnail {
           @media (max-width: $screen-md-max) {
             height: 140px;
           }
@@ -431,14 +431,14 @@
   }
 
   // Product intro.
-  .product--intro {
+  .product__intro {
     padding-left: 30px;
 
     @media (max-width: $screen-sm-max) {
       padding: 0;
     }
 
-    &.product--intro__full-width {
+    &.product__intro--full-width {
       padding: 0;
     }
 

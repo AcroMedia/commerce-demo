@@ -5,9 +5,20 @@ global-styling:
       css/style.css: { media: all }
   js:
     js/custom/script.js: {}
+    js/custom/plus.js: {}
   dependencies:
     - core/jquery
     - core/drupal
+    - commerce_2_demo/fitVid
+
+slider:
+  version: 1.x
+  js:
+    js/custom/slider.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - commerce_2_demo/slick-slider
 
 tours:
   version: 1.x
@@ -22,6 +33,25 @@ tours:
   dependencies:
     - core/jquery
     - core/drupal
+
+slick-slider:
+  version: 1.x
+  css:
+    theme:
+      css/contrib/slick.css: { media: all }
+  js:
+    js/contrib/slick.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+fitVid:
+  version: 1.x
+  js:
+    js/contrib/jquery.fitvids.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupal
 
 maintenance_page:
   version: 1.x

@@ -73,7 +73,7 @@
       event.preventDefault();
       // Scroll to add to cart form.
       $('html, body').animate({
-        scrollTop: $("div[id^='edit-purchased-entity-wrapper']").offset().top -25
+        scrollTop: $("div[id^='edit-purchased-entity-wrapper']").offset().top -120
       }, 700);
     }
   });
@@ -192,7 +192,7 @@
 
       // Review highlights - Previous and next buttons.
       // Previous.
-      $('.product__images__overlay-content__nav__prev').click(function (event) {
+      $('.product__images__overlay-content__nav__prev', context).once('uhaxe').click(function (event) {
         // Prevent link default action.
         event.preventDefault();
         // Move back and loop to the end if at first content piece.
@@ -205,7 +205,7 @@
         return false;
       });
       // Next.
-      $('.product__images__overlay-content__nav__next').click(function (event) {
+      $('.product__images__overlay-content__nav__next', context).once('uhaxe').click(function (event) {
         // Prevent link default action.
         event.preventDefault();
         // Move next and loop to beginning if at last content piece.

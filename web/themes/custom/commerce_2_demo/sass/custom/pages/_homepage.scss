@@ -145,29 +145,22 @@
   }
 }
 .homepage-carousel-slide__content-wrapper {
-  position: relative;
-  bottom: 18%;
+  position: absolute;
+  bottom: 25%;
   left: 0;
   width: 100%;
   text-align: center;
   z-index: 1;
-  background: $gray-darker;
+  background: none;
 
-  @media (min-width: $screen-xs-min) {
-    position: absolute;
+  @media (max-width: $screen-xs-min) {
     bottom: 25%;
-    left: 0;
-    background: none;
   }
 }
 .homepage-carousel-slide__content {
   margin: 0 auto;
-  padding: 20px 20px 60px 20px;
+  padding: 0 20px;
   max-width: 1200px;
-
-  @media (min-width: $screen-xs-min) {
-    padding: 0 20px;
-  }
 }
 .homepage-carousel-slide__title {
   span {
@@ -232,12 +225,22 @@
   @media (max-width: $screen-sm-max) {
     font-size: 60px;
   }
+  @media (max-width: 475px) {
+    font-size: 38px;
+  }
 }
 .homepage-carousel-slide__link {
   .btn-secondary {
-    height: 50px;
+    height: auto;
+    min-height: 50px;
     padding: 9px 25px;
     border: 2px solid #fff;
     font-size: 20px;
+    white-space: normal;
+
+    @media (max-width: $screen-xs-max) {
+      padding: 9px 15px;
+      font-size: 18px;
+    }
   }
 }

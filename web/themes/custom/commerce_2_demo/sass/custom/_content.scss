@@ -517,5 +517,14 @@ table {
 
   .modal-footer {
     border: none;
+
+    .btn-default {
+      background: transparent;
+      color: #fff;
+
+      &:hover, &:focus {
+        color: $c-primary;
+      }
+    }
   }
 }

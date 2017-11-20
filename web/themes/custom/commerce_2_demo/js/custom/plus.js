@@ -98,9 +98,24 @@
       });
 
       // Update add to cart form selection when selection changes via handle finish slider.
+      // By clicking on thumnbail.
       $('.slick-slider__uh-axe-thumbs .slick-slider__uh-axe__thumb', context).once('uhaxe').click(function (event) {
         // Get value of attribute selected.
         var $dataAttributeValue = $(this).data('attribute-value');
+
+        // Loop through add to cart form, match attribute values, and trigger click.
+        $('.attribute-widgets input').each(function () {
+          var $widgetAttributeValueString = $(this).val();
+          var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+          if ($widgetAttributeValue === $dataAttributeValue) {
+            $(this).click();
+          }
+        });
+      });
+      // By using arrow nav.
+      $('.slick-slider__uh-axe-thumbs .slick-arrow', context).once('uhaxe').click(function (event) {
+        // Get value of current attribute selected.
+        var $dataAttributeValue = $('.slick-slider__uh-axe-thumbs .slick-current .slick-slider__uh-axe__thumb').data('attribute-value');
 
         // Loop through add to cart form, match attribute values, and trigger click.
         $('.attribute-widgets input').each(function () {

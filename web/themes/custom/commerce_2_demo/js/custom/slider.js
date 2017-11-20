@@ -27,6 +27,7 @@
     slidesToShow: 7,
     slidesToScroll: 1,
     focusOnSelect: true,
+    swipe: false,
     draggable: false,
     arrows: true,
     asNavFor: '.slick-slider__uh-axe .field--name-field-ux-axe-slides',
@@ -39,7 +40,8 @@
           centerMode: true,
           centerPadding: '20px',
           adaptiveHeight: true,
-          draggable: true,
+          swipe: false,
+          draggable: false,
           arrows: true
         }
       },
@@ -51,6 +53,7 @@
           centerMode: true,
           centerPadding: '35px',
           adaptiveHeight: true,
+          swipe: false,
           draggable: false,
           arrows: true
         }

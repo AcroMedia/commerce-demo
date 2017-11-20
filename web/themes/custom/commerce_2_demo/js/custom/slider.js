@@ -49,7 +49,7 @@
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: true,
-          centerPadding: '75px',
+          centerPadding: '35px',
           adaptiveHeight: true,
           draggable: false,
           arrows: true

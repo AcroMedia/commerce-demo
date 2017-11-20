@@ -40,7 +40,7 @@
           centerMode: true,
           centerPadding: '20px',
           adaptiveHeight: true,
-          swipe: false,
+          swipe: true,
           draggable: false,
           arrows: true
         }
@@ -51,9 +51,9 @@
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: true,
-          centerPadding: '35px',
+          centerPadding: '45px',
           adaptiveHeight: true,
-          swipe: false,
+          swipe: true,
           draggable: false,
           arrows: true
         }

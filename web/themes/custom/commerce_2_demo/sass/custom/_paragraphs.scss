@@ -162,12 +162,19 @@
         text-transform: uppercase;
         letter-spacing: 0.12em;
         color: #fff;
-        transition: background-color .1s ease-in-out, opacity .1s ease-in-out;
+        transition: color .1s ease-in-out, background-color .1s ease-in-out, opacity .1s ease-in-out;
         white-space: nowrap;
         user-select: none;
         touch-action: manipulation;
 
+        &.buy-now {
+          color: $gray-dark;
+          background: #fff;
+          background: rgba(255, 255, 255, 1);
+        }
+
         &:hover, &:focus {
+          color: #fff;
           background: rgba(0, 0, 0, 1);
         }
 

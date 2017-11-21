@@ -65,6 +65,13 @@
   // Move title into first paragraph
   $('.product--full--uh-axe .page-title').prependTo('.paragraph--type--2-column-image-content__content:first');
 
+  // 2 column paragraph highlight Buy Now button.
+  $('.field--name-field-unlimited-cta-links a').each(function (event) {
+    if ($(this).text() == ('Buy Now' || 'buy now')) {
+      $(this).addClass('buy-now');
+    }
+  });
+
   // 2 column paragraph CTA click events.
   $('.field--name-field-unlimited-cta-links a').click(function (event) {
     // Buy now button scroll.

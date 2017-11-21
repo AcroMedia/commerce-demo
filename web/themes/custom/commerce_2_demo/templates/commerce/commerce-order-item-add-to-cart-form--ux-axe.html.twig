@@ -20,12 +20,23 @@
             <div class="attribute-selector__name">
               {{ attribute.name.value }}
             </div>
-            <div class="attribute-selector__description">
+            <div class="attribute-selector__description hidden-xs">
               {{ attribute.field_attribute_description.value }}
             </div>
           </a>
         </div>
       {% endfor %}
+    </div>
+
+    {# Mobile attribute description. #}
+    <div class="row hidden-sm hidden-md hidden-lg">
+      <div class="col-xs-12">
+        {%  for attribute in form['#uh_axe_length'] %}
+          <div class="attribute-selector__description attribute-selector__description--mobile" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+            {{ attribute.field_attribute_description.value }}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
@@ -41,12 +52,23 @@
             <div class="attribute-selector__name">
               {{ attribute.name.value }}
             </div>
-            <div class="attribute-selector__description">
+            <div class="attribute-selector__description hidden-xs">
               {{ attribute.field_attribute_description.value }}
             </div>
           </a>
         </div>
       {% endfor %}
+    </div>
+
+    {# Mobile attribute description. #}
+    <div class="row hidden-sm hidden-md hidden-lg">
+      <div class="col-xs-12">
+        {%  for attribute in form['#uh_axe_weight'] %}
+          <div class="attribute-selector__description attribute-selector__description--mobile" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+            {{ attribute.field_attribute_description.value }}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
@@ -64,14 +86,14 @@
     {# Left section. #}
     <div class="product__images__left text-center">
       <div class="product__images__top">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/ux-axe/uh-axe-feature-steel.jpg' }}" alt="{{ 'Hand forged folded steel head'|t }}">
+        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-steel.jpg' }}" alt="{{ 'Hand forged folded steel head'|t }}">
       </div>
       <div class="product__images__middle">
         <span class="heading">{{ 'UH Axe'|t }}</span>
         {{ 'Built for'|t }}<br>{{ 'Urban Live'|t }}
       </div>
       <div class="product__images__bottom">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/ux-axe/uh-axe-feature-authentic.jpg' }}" alt="{{ 'Authentic Urban Hipster engraving'|t }}">
+        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-authentic.jpg' }}" alt="{{ 'Authentic Urban Hipster engraving'|t }}">
       </div>
     </div>
 
@@ -91,14 +113,14 @@
     {# Right section. #}
     <div class="product__images__right text-center">
       <div class="product__images__top">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/ux-axe/uh-axe-feature-sheath.jpg' }}" alt="{{ 'Real leather axe sheath'|t }}">
+        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-sheath.jpg' }}" alt="{{ 'Real leather axe sheath'|t }}">
       </div>
       <div class="product__images__middle">
         <span class="heading">{{ 'UH Sheath'|t }}</span>
         {{ 'Optional,'|t }}<br>{{ 'but Awesome'|t }}
       </div>
       <div class="product__images__bottom">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/ux-axe/uh-axe-feature-handle.jpg' }}" alt="{{ 'Hand carved hardwood handle'|t }}">
+        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-handle.jpg' }}" alt="{{ 'Hand carved hardwood handle'|t }}">
       </div>
     </div>
 

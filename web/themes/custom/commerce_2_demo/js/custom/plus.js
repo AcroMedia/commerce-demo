@@ -167,6 +167,14 @@
             $(this).addClass('selected');
           }
         });
+
+        // Loop through mobile attribute descriptions and show the right one.
+        $('.attribute-selector__description--mobile').each(function () {
+          var $descriptionAttributeValue = $(this).data('attribute-value');
+          if ($descriptionAttributeValue === $widgetAttributeValue) {
+            $(this).fadeIn();
+          }
+        });
       });
 
       // Review highlights.

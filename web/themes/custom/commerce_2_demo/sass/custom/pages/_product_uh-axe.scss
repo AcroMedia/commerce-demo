@@ -5,6 +5,11 @@
 /**
  * Product full.
  */
+.path-product-uh-axe .site-content {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 .product--full.product--full--uh-axe {
 
   // Page title hidden to start, then moved into paragraph with jQuery.
@@ -17,6 +22,20 @@
     color: #fff;
     text-transform: uppercase;
     font-weight: 600;
+  }
+
+  // Paragraph overrides.
+  .paragraph.paragraph--type--2-column-image-content {
+    background: url(../gfx/product/uh-axe/uh-stacked-firewood-bg.jpg) repeat;
+
+    .paragraph--type--2-column-image-content__content-left:after,
+    .paragraph--type--2-column-image-content__content-right:after {
+      opacity: 0;
+
+      @media (max-width: $screen-xs-max) {
+        opacity: .75;
+      }
+    }
   }
 
   // Override default image field styles.
@@ -38,7 +57,7 @@
 
       @media (max-width: $screen-xs-max) {
         margin-bottom: 12px;
-        font-size: 20px;
+        font-size: 28px;
       }
     }
 
@@ -61,7 +80,7 @@
         height: 100%;
         width: 100%;
         padding: 5px 25px 25px;
-        box-shadow: 0 4px 15px 0 rgba(0,0,0,0.0);
+        box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.0);
         border-radius: 0;
         border: 1px solid #ccc;
         white-space: normal;
@@ -86,26 +105,6 @@
           }
         }
 
-        .attribute-selector__name {
-          font-family: $f-tertiary;
-          font-size: 60px;
-          font-weight: 700;
-          color: $c-body;
-
-          @media (max-width: $screen-xs-max) {
-            font-size: 30px;
-          }
-        }
-
-        .attribute-selector__description {
-          font-weight: 300;
-          color: $gray-darker;
-
-          @media (max-width: $screen-xs-max) {
-            display: none;
-          }
-        }
-
         &:hover, &:focus {
           box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2);
         }
@@ -121,6 +120,31 @@
             box-shadow: 0 4px 15px 0 rgba(0,0,0,0.0);
             cursor: default;
           }
+        }
+      }
+
+      .attribute-selector__name {
+        font-family: $f-tertiary;
+        font-size: 60px;
+        font-weight: 700;
+        color: $c-body;
+
+        @media (max-width: $screen-xs-max) {
+          font-size: 40px;
+        }
+
+        @media (max-width: 400px) {
+          font-size: 30px;
+        }
+      }
+
+      .attribute-selector__description {
+        font-weight: 300;
+        color: $gray-darker;
+
+        &.attribute-selector__description--mobile {
+          margin-top: 7px;
+          display: none;
         }
       }
     }

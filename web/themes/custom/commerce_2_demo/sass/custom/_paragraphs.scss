@@ -21,7 +21,7 @@
     color: $gray-darker;
 
     @media (max-width: $screen-xs-max) {
-      font-size: 19px;
+      font-size: 26px;
       line-height: 1.4;
     }
   }
@@ -44,10 +44,6 @@
   h2 {
     color: #fff;
     font-size: 29px;
-
-    @media (max-width: $screen-xs-max) {
-      font-size: 19px
-    }
   }
 
   @media (max-width: 1550px) {
@@ -76,13 +72,22 @@
   @media (min-width: 1550px) {
     .paragraph--type--2-column-image-content__image-left,
     .paragraph--type--2-column-image-content__image-right {
-      width: 65%;
+      width: 85%;
     }
     .paragraph--type--2-column-image-content__image-left {
-      margin-left: -15%;
+      margin-left: -35%;
     }
     .paragraph--type--2-column-image-content__image-right {
-      margin-right: -15%;
+      margin-right: -35%;
+    }
+  }
+
+  @media (max-width: $screen-md-max) {
+    .paragraph--type--2-column-image-content__image-left {
+      background-position-x: 63%;
+    }
+    .paragraph--type--2-column-image-content__image-right {
+      background-position-x: 37%;
     }
   }
 
@@ -117,12 +122,18 @@
   .paragraph--type--2-column-image-content__content-right .paragraph--type--2-column-image-content__content {
     position: relative;
     z-index: 2;
-    padding: 55px 25px 55px 35px;
+    padding: 55px 55px 55px 35px;
   }
   .paragraph--type--2-column-image-content__content-left .paragraph--type--2-column-image-content__content {
     position: relative;
     z-index: 2;
-    padding: 55px 25px 55px 0;
+    padding: 55px 35px 55px 35px;
+  }
+  @media (max-width: $screen-sm-max) {
+    .paragraph--type--2-column-image-content__content-right .paragraph--type--2-column-image-content__content,
+    .paragraph--type--2-column-image-content__content-left .paragraph--type--2-column-image-content__content {
+      padding: 25px 20px 40px;
+    }
   }
   @media (max-width: $screen-xs-max) {
     .paragraph--type--2-column-image-content__content-right .paragraph--type--2-column-image-content__content,
@@ -151,12 +162,19 @@
         text-transform: uppercase;
         letter-spacing: 0.12em;
         color: #fff;
-        transition: background-color .1s ease-in-out, opacity .1s ease-in-out;
+        transition: color .1s ease-in-out, background-color .1s ease-in-out, opacity .1s ease-in-out;
         white-space: nowrap;
         user-select: none;
         touch-action: manipulation;
 
+        &.buy-now {
+          color: $gray-dark;
+          background: #fff;
+          background: rgba(255, 255, 255, 1);
+        }
+
         &:hover, &:focus {
+          color: #fff;
           background: rgba(0, 0, 0, 1);
         }
 

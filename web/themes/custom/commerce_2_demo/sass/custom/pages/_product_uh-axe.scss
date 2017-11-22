@@ -5,9 +5,15 @@
 /**
  * Product full.
  */
-.path-product-uh-axe .site-content {
-  padding-bottom: 0;
-  margin-bottom: 0;
+.path-product-uh-axe {
+  .primary-nav {
+    border-bottom: none;
+  }
+
+  .site-content {
+    padding: 0;
+    margin-bottom: 0;
+  }
 }
 
 .product--full.product--full--uh-axe {

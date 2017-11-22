@@ -11,31 +11,33 @@
 
 {# Handle legth selector. #}
 <div class="row">
-  <div class="col-xs-12 text-center attribute-handle-length">
-    <h2>{{ 'Select a handle length'|t }}</h2>
-    <div class="row row-eq-height">
-      {%  for attribute in form['#uh_axe_length'] %}
-        <div class="col-xs-4">
-          <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ attribute.name.value }}" data-attribute-value="{{ attribute.attribute_value_id.value }}">
-            <div class="attribute-selector__name">
-              {{ attribute.name.value }}
-            </div>
-            <div class="attribute-selector__description hidden-xs">
-              {{ attribute.field_attribute_description.value }}
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-
-    {# Mobile attribute description. #}
-    <div class="row hidden-sm hidden-md hidden-lg">
-      <div class="col-xs-12">
+  <div class="col-xs-12 text-center attribute-handle-length-container">
+    <div class="attribute-handle-length">
+      <h2>{{ 'Select a handle length'|t }}</h2>
+      <div class="row row-eq-height">
         {%  for attribute in form['#uh_axe_length'] %}
-          <div class="attribute-selector__description attribute-selector__description--mobile" data-attribute-value="{{ attribute.attribute_value_id.value }}">
-            {{ attribute.field_attribute_description.value }}
+          <div class="col-xs-4">
+            <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ attribute.name.value }}" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+              <div class="attribute-selector__name">
+                {{ attribute.name.value }}
+              </div>
+              <div class="attribute-selector__description hidden-xs">
+                {{ attribute.field_attribute_description.value }}
+              </div>
+            </a>
           </div>
         {% endfor %}
+      </div>
+
+      {# Mobile attribute description. #}
+      <div class="row hidden-sm hidden-md hidden-lg">
+        <div class="col-xs-12">
+          {%  for attribute in form['#uh_axe_length'] %}
+            <div class="attribute-selector__description attribute-selector__description--mobile" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+              {{ attribute.field_attribute_description.value }}
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
@@ -43,203 +45,207 @@
 
 {# Head weight selector. #}
 <div class="row">
-  <div class="col-xs-12 text-center attribute-head-weight">
-    <h2>{{ 'Now choose a head weight'|t }}</h2>
-    <div class="row row-eq-height">
-      {%  for attribute in form['#uh_axe_weight'] %}
-        <div class="col-xs-4">
-          <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ attribute.name.value }}" data-attribute-value="{{ attribute.attribute_value_id.value }}">
-            <div class="attribute-selector__name">
-              {{ attribute.name.value }}
-            </div>
-            <div class="attribute-selector__description hidden-xs">
-              {{ attribute.field_attribute_description.value }}
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-
-    {# Mobile attribute description. #}
-    <div class="row hidden-sm hidden-md hidden-lg">
-      <div class="col-xs-12">
+  <div class="col-xs-12 text-center attribute-head-weight-container">
+    <div class="attribute-head-weight">
+      <h2>{{ 'Now choose a head weight'|t }}</h2>
+      <div class="row row-eq-height">
         {%  for attribute in form['#uh_axe_weight'] %}
-          <div class="attribute-selector__description attribute-selector__description--mobile" data-attribute-value="{{ attribute.attribute_value_id.value }}">
-            {{ attribute.field_attribute_description.value }}
+          <div class="col-xs-4">
+            <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ attribute.name.value }}" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+              <div class="attribute-selector__name">
+                {{ attribute.name.value }}
+              </div>
+              <div class="attribute-selector__description hidden-xs">
+                {{ attribute.field_attribute_description.value }}
+              </div>
+            </a>
           </div>
         {% endfor %}
       </div>
-    </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12 text-center">
-    <h2>{{ 'Review Selection'|t }}</h2>
-  </div>
-</div>
-
-<div class="row row-eq-height">
-  {% if form['#product_variation'].field_image.entity %}
-  {# Product images with overlay information. #}
-  <div class="col-xs-6 col-sm-8 col-md-9 product__images">
-    {# Left section. #}
-    <div class="product__images__left text-center">
-      <div class="product__images__top">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-steel.jpg' }}" alt="{{ 'Hand forged folded steel head'|t }}">
-      </div>
-      <div class="product__images__middle">
-        <span class="heading">{{ 'UH Axe'|t }}</span>
-        {{ 'Built for'|t }}<br>{{ 'Urban Live'|t }}
-      </div>
-      <div class="product__images__bottom">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-authentic.jpg' }}" alt="{{ 'Authentic Urban Hipster engraving'|t }}">
-      </div>
-    </div>
-
-    {# Main section with variation image. #}
-    <div class="product__images__main">
-      {%
-      set variation_field_image = {
-      '#theme':      'image_style',
-      '#style_name': 'uh_axe',
-      '#uri':        form['#product_variation'].field_image.entity.uri.value,
-      '#alt':        form['#product_variation'].field_image.alt,
-      }
-      %}
-      {{ variation_field_image }}
-    </div>
-
-    {# Right section. #}
-    <div class="product__images__right text-center">
-      <div class="product__images__top">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-sheath.jpg' }}" alt="{{ 'Real leather axe sheath'|t }}">
-      </div>
-      <div class="product__images__middle">
-        <span class="heading">{{ 'UH Sheath'|t }}</span>
-        {{ 'Optional,'|t }}<br>{{ 'but Awesome'|t }}
-      </div>
-      <div class="product__images__bottom">
-        <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-handle.jpg' }}" alt="{{ 'Hand carved hardwood handle'|t }}">
-      </div>
-    </div>
-
-    {# Overlay markers. #}
-    <a href="#" class="product__images__overlay-marker product__images__overlay-marker--1" title="{{ 'Hand forged heads'|t }}" role="button">+</a>
-    <a href="#" class="product__images__overlay-marker product__images__overlay-marker--2" title="{{ 'Authentic Urban Hipster engraving'|t }}" role="button">+</a>
-    <a href="#" class="product__images__overlay-marker product__images__overlay-marker--3" title="{{ 'The ultimate urban axe'|t }}" role="button">+</a>
-    <a href="#" class="product__images__overlay-marker product__images__overlay-marker--4" title="{{ 'Real leather axe sheath'|t }}" role="button">+</a>
-    <a href="#" class="product__images__overlay-marker product__images__overlay-marker--5" title="{{ 'Hand carved hardwood handle'|t }}" role="button">+</a>
-
-    {# Overlay information. #}
-    <div class="product__images__overlay">
-      {# Close. #}
-      <a href="#" class="product__images__overlay-content__close" title="{{ 'Close'|t }}" role="button">+</a>
-
-      <div class="product__images__overlay-content__nav">
-        <a href="#" class="product__images__overlay-content__nav__prev" title="{{ 'Previous'|t }}" role="button">
-          <i class="fa fa-angle-left fa-2x"></i>
-        </a>
-        <a href="#" class="product__images__overlay-content__nav__next" title="{{ 'Next'|t }}" role="button">
-          <i class="fa fa-angle-right fa-2x"></i>
-        </a>
-      </div>
-
-      <div class="product__images__overlay-content">
-        {# Overlay content - 1. #}
-        <div class="product__images__overlay-content__1">
-          <span class="heading">{{ 'Hand forged heads'|t }}</span>
-          {% trans %}
-          <p>Sustainable hot chicken street art stumptown tousled pour-over mixtape. Listicle raclette polaroid hashtag. Marfa prism hot chicken aesthetic banh mi messenger bag. Kitsch put a bird on it 3 wolf moon, flannel air plant palo santo direct trade cred.</p>
-          <p>Moon, flannel air plant palo santo direct trade cred. Jianbing art party flexitarian gastropub ethical gluten-free tumblr master cleanse locavore, helvetica health goth austin fingerstache prism pickled. Franzen sartorial next level, pug heirloom locavore deep v tilde chicharrones. </p>
-          <p>Tofu distillery poke chicharrones, poutine austin shabby chic cronut kogi XOXO. Swag seitan VHS af cray.</p>
-          {% endtrans %}
+      {# Mobile attribute description. #}
+      <div class="row hidden-sm hidden-md hidden-lg">
+        <div class="col-xs-12">
+          {%  for attribute in form['#uh_axe_weight'] %}
+            <div class="attribute-selector__description attribute-selector__description--mobile" data-attribute-value="{{ attribute.attribute_value_id.value }}">
+              {{ attribute.field_attribute_description.value }}
+            </div>
+          {% endfor %}
         </div>
-
-        {# Overlay content - 2. #}
-        <div class="product__images__overlay-content__2">
-          <span class="heading">{{ 'Authentic UH engraving'|t }}</span>
-          {% trans %}
-          <p>Organic master cleanse kogi, roof party selfies succulents VHS retro. Trust fund cliche aesthetic helvetica seitan, affogato hoodie coloring book gochujang selvage tumeric.</p>
-          <p>8-bit enamel pin yr cornhole. Sartorial helvetica cred, occupy mumblecore wolf typewriter seitan la croix tote bag brunch yr. Hella tousled retro, iPhone try-hard health goth pop-up disrupt dreamcatcher palo santo. Yr man braid kogi authentic, YOLO cornhole thundercats.</p>
-          {% endtrans %}
-        </div>
-
-        {# Overlay content - 3. #}
-        <div class="product__images__overlay-content__3">
-          <span class="heading">{{ 'The ultimate urban axe'|t }}</span>
-          {% trans %}
-          <p>Blog hashtag fixie heirloom bushwick cold-pressed PBR&B, selfies health goth palo santo pop-up forage pork belly air plant. Bespoke schlitz intelligentsia, mlkshk subway tile iPhone food truck skateboard af YOLO venmo selfies synth prism iceland.</p>
-          <p>Hashtag swag you probably haven't heard of them vice edison bulb shabby chic. Waistcoat YOLO tacos keytar. Plaid mlkshk waistcoat lyft, 3 wolf moon fingerstache lumbersexual scenester unicorn. Chia air plant narwhal skateboard. </p>
-          <p>Readymade irony direct trade la croix whatever meditation. 8-bit butcher salvia bushwick flexitarian, man bun pabst lumbersexual adaptogen.</p>
-          {% endtrans %}
-        </div>
-
-        {# Overlay content - 4. #}
-        <div class="product__images__overlay-content__4">
-          <span class="heading">{{ 'Real leather axe sheath'|t }}</span>
-          {% trans %}
-          <p>Wayfarers organic knausgaard, swag craft beer keffiyeh hell of cold-pressed palo santo kale chips letterpress mumblecore. Umami tbh fixie listicle retro jean shorts cliche narwhal photo booth succulents truffaut man braid. Typewriter vexillologist venmo, pour-over knausgaard kitsch blue bottle helvetica prism taiyaki small batch. </p>
-          <p>Tbh selvage hexagon shoreditch. Edison bulb af activated charcoal, swag selfies brooklyn master cleanse venmo. Distillery craft beer tousled pickled messenger bag trust fund iPhone. Polaroid humblebrag lomo pug austin green juice fam.</p>
-          {% endtrans %}
-        </div>
-
-        {# Overlay content - 5. #}
-        <div class="product__images__overlay-content__5">
-          <span class="heading">{{ 'Hand carved hardwood handle'|t }}</span>
-          {% trans %}
-          <p>Prism whatever air plant mumblecore 3 wolf moon. Hoodie adaptogen echo park taxidermy sustainable edison bulb.</p>
-          <p>Forage semiotics palo santo vegan. La croix messenger bag organic stumptown salvia raw denim farm-to-table prism fam swag migas occupy.</p>
-          <p>Viral stumptown semiotics hell of retro chambray. egan poutine mustache normcore humblebrag stumptown small batch. Meh yuccie taiyaki 3 wolf moon keytar. Messenger bag helvetica tumeric health goth intelligentsia try-hard hella prism. Mixtape thundercats distillery taiyaki craft beer wolf sriracha.</p>
-          {% endtrans %}
-        </div>
-      </div>
-    </div>
-  </div>
-  {# END - Product images with overlay details. #}
-
-  {# Product cart form w/ product image. #}
-  <div class="col-xs-6 col-sm-4 col-md-3 product__intro">
-  {% else %}
-  {# Product cart form w/o product image. #}
-  <div class="col-sm-12 product__intro product__intro--full-width">
-  {% endif %}
-    <div class="product__intro-top">
-      {{ form|without('quantity', 'actions') }}
-    </div>
-
-    <div class="hidden-xs hidden-sm product__intro-bottom">
-      <div class="field--name-price">
-        {{ form['#product_variation'].price.value.0|commerce_price_format }}
-      </div>
-
-      {{ form.actions }}
-      <div class="product__intro__links">
-        <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
-        <a href="/placeholder-page" title="{{ 'Read our guarantee'|t }}">{{ 'GUARANTEE'|t }}</a>
       </div>
     </div>
   </div>
 </div>
 
-{# Mobile form action #}
-<div class="row visible-xs visible-sm">
-  <div class="col-xs-12 text-center product__intro  product__intro--mobile">
-    <div class="product__intro-bottom">
-      <div class="product__intro--mobile__left">
+<div class="main-product-form-container">
+  <div class="row">
+    <div class="col-xs-12 text-center main-product-form__title">
+      <h2>{{ 'Review Selection'|t }}</h2>
+    </div>
+  </div>
+
+  <div class="row row-eq-height main-product-form">
+    {% if form['#product_variation'].field_image.entity %}
+    {# Product images with overlay information. #}
+    <div class="col-xs-6 col-sm-8 col-md-9 product__images">
+      {# Left section. #}
+      <div class="product__images__left text-center">
+        <div class="product__images__top">
+          <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-steel.jpg' }}" alt="{{ 'Hand forged folded steel head'|t }}">
+        </div>
+        <div class="product__images__middle">
+          <span class="heading">{{ 'UH Axe'|t }}</span>
+          {{ 'Built for'|t }}<br>{{ 'Urban Live'|t }}
+        </div>
+        <div class="product__images__bottom">
+          <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-authentic.jpg' }}" alt="{{ 'Authentic Urban Hipster engraving'|t }}">
+        </div>
+      </div>
+
+      {# Main section with variation image. #}
+      <div class="product__images__main">
+        {%
+        set variation_field_image = {
+        '#theme':      'image_style',
+        '#style_name': 'uh_axe',
+        '#uri':        form['#product_variation'].field_image.entity.uri.value,
+        '#alt':        form['#product_variation'].field_image.alt,
+        }
+        %}
+        {{ variation_field_image }}
+      </div>
+
+      {# Right section. #}
+      <div class="product__images__right text-center">
+        <div class="product__images__top">
+          <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-sheath.jpg' }}" alt="{{ 'Real leather axe sheath'|t }}">
+        </div>
+        <div class="product__images__middle">
+          <span class="heading">{{ 'UH Sheath'|t }}</span>
+          {{ 'Optional,'|t }}<br>{{ 'but Awesome'|t }}
+        </div>
+        <div class="product__images__bottom">
+          <img src="{{ '/' ~ base_path ~ directory ~ '/gfx/product/uh-axe/uh-axe-feature-handle.jpg' }}" alt="{{ 'Hand carved hardwood handle'|t }}">
+        </div>
+      </div>
+
+      {# Overlay markers. #}
+      <a href="#" class="product__images__overlay-marker product__images__overlay-marker--1" title="{{ 'Hand forged heads'|t }}" role="button">+</a>
+      <a href="#" class="product__images__overlay-marker product__images__overlay-marker--2" title="{{ 'Authentic Urban Hipster engraving'|t }}" role="button">+</a>
+      <a href="#" class="product__images__overlay-marker product__images__overlay-marker--3" title="{{ 'The ultimate urban axe'|t }}" role="button">+</a>
+      <a href="#" class="product__images__overlay-marker product__images__overlay-marker--4" title="{{ 'Real leather axe sheath'|t }}" role="button">+</a>
+      <a href="#" class="product__images__overlay-marker product__images__overlay-marker--5" title="{{ 'Hand carved hardwood handle'|t }}" role="button">+</a>
+
+      {# Overlay information. #}
+      <div class="product__images__overlay">
+        {# Close. #}
+        <a href="#" class="product__images__overlay-content__close" title="{{ 'Close'|t }}" role="button">+</a>
+
+        <div class="product__images__overlay-content__nav">
+          <a href="#" class="product__images__overlay-content__nav__prev" title="{{ 'Previous'|t }}" role="button">
+            <i class="fa fa-angle-left fa-2x"></i>
+          </a>
+          <a href="#" class="product__images__overlay-content__nav__next" title="{{ 'Next'|t }}" role="button">
+            <i class="fa fa-angle-right fa-2x"></i>
+          </a>
+        </div>
+
+        <div class="product__images__overlay-content">
+          {# Overlay content - 1. #}
+          <div class="product__images__overlay-content__1">
+            <span class="heading">{{ 'Hand forged heads'|t }}</span>
+            {% trans %}
+            <p>Sustainable hot chicken street art stumptown tousled pour-over mixtape. Listicle raclette polaroid hashtag. Marfa prism hot chicken aesthetic banh mi messenger bag. Kitsch put a bird on it 3 wolf moon, flannel air plant palo santo direct trade cred.</p>
+            <p>Moon, flannel air plant palo santo direct trade cred. Jianbing art party flexitarian gastropub ethical gluten-free tumblr master cleanse locavore, helvetica health goth austin fingerstache prism pickled. Franzen sartorial next level, pug heirloom locavore deep v tilde chicharrones. </p>
+            <p>Tofu distillery poke chicharrones, poutine austin shabby chic cronut kogi XOXO. Swag seitan VHS af cray.</p>
+            {% endtrans %}
+          </div>
+
+          {# Overlay content - 2. #}
+          <div class="product__images__overlay-content__2">
+            <span class="heading">{{ 'Authentic UH engraving'|t }}</span>
+            {% trans %}
+            <p>Organic master cleanse kogi, roof party selfies succulents VHS retro. Trust fund cliche aesthetic helvetica seitan, affogato hoodie coloring book gochujang selvage tumeric.</p>
+            <p>8-bit enamel pin yr cornhole. Sartorial helvetica cred, occupy mumblecore wolf typewriter seitan la croix tote bag brunch yr. Hella tousled retro, iPhone try-hard health goth pop-up disrupt dreamcatcher palo santo. Yr man braid kogi authentic, YOLO cornhole thundercats.</p>
+            {% endtrans %}
+          </div>
+
+          {# Overlay content - 3. #}
+          <div class="product__images__overlay-content__3">
+            <span class="heading">{{ 'The ultimate urban axe'|t }}</span>
+            {% trans %}
+            <p>Blog hashtag fixie heirloom bushwick cold-pressed PBR&B, selfies health goth palo santo pop-up forage pork belly air plant. Bespoke schlitz intelligentsia, mlkshk subway tile iPhone food truck skateboard af YOLO venmo selfies synth prism iceland.</p>
+            <p>Hashtag swag you probably haven't heard of them vice edison bulb shabby chic. Waistcoat YOLO tacos keytar. Plaid mlkshk waistcoat lyft, 3 wolf moon fingerstache lumbersexual scenester unicorn. Chia air plant narwhal skateboard. </p>
+            <p>Readymade irony direct trade la croix whatever meditation. 8-bit butcher salvia bushwick flexitarian, man bun pabst lumbersexual adaptogen.</p>
+            {% endtrans %}
+          </div>
+
+          {# Overlay content - 4. #}
+          <div class="product__images__overlay-content__4">
+            <span class="heading">{{ 'Real leather axe sheath'|t }}</span>
+            {% trans %}
+            <p>Wayfarers organic knausgaard, swag craft beer keffiyeh hell of cold-pressed palo santo kale chips letterpress mumblecore. Umami tbh fixie listicle retro jean shorts cliche narwhal photo booth succulents truffaut man braid. Typewriter vexillologist venmo, pour-over knausgaard kitsch blue bottle helvetica prism taiyaki small batch. </p>
+            <p>Tbh selvage hexagon shoreditch. Edison bulb af activated charcoal, swag selfies brooklyn master cleanse venmo. Distillery craft beer tousled pickled messenger bag trust fund iPhone. Polaroid humblebrag lomo pug austin green juice fam.</p>
+            {% endtrans %}
+          </div>
+
+          {# Overlay content - 5. #}
+          <div class="product__images__overlay-content__5">
+            <span class="heading">{{ 'Hand carved hardwood handle'|t }}</span>
+            {% trans %}
+            <p>Prism whatever air plant mumblecore 3 wolf moon. Hoodie adaptogen echo park taxidermy sustainable edison bulb.</p>
+            <p>Forage semiotics palo santo vegan. La croix messenger bag organic stumptown salvia raw denim farm-to-table prism fam swag migas occupy.</p>
+            <p>Viral stumptown semiotics hell of retro chambray. egan poutine mustache normcore humblebrag stumptown small batch. Meh yuccie taiyaki 3 wolf moon keytar. Messenger bag helvetica tumeric health goth intelligentsia try-hard hella prism. Mixtape thundercats distillery taiyaki craft beer wolf sriracha.</p>
+            {% endtrans %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {# END - Product images with overlay details. #}
+
+    {# Product cart form w/ product image. #}
+    <div class="col-xs-6 col-sm-4 col-md-3 product__intro">
+    {% else %}
+    {# Product cart form w/o product image. #}
+    <div class="col-sm-12 product__intro product__intro--full-width">
+    {% endif %}
+      <div class="product__intro-top">
+        {{ form|without('quantity', 'actions') }}
+      </div>
+
+      <div class="hidden-xs hidden-sm product__intro-bottom">
         <div class="field--name-price">
           {{ form['#product_variation'].price.value.0|commerce_price_format }}
         </div>
 
+        {{ form.actions }}
         <div class="product__intro__links">
           <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
           <a href="/placeholder-page" title="{{ 'Read our guarantee'|t }}">{{ 'GUARANTEE'|t }}</a>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="product__intro--mobile__right">
-        <div class="form-actions">
-          <a href="#" title="Add to cart" class="btn btn-primary add-to-cart-trigger">{{ 'Add to cart'|t }}</a>
+  {# Mobile form action #}
+  <div class="row main-product-form__mobile visible-xs visible-sm">
+    <div class="col-xs-12 text-center product__intro  product__intro--mobile">
+      <div class="product__intro-bottom">
+        <div class="product__intro--mobile__left">
+          <div class="field--name-price">
+            {{ form['#product_variation'].price.value.0|commerce_price_format }}
+          </div>
+
+          <div class="product__intro__links">
+            <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
+            <a href="/placeholder-page" title="{{ 'Read our guarantee'|t }}">{{ 'GUARANTEE'|t }}</a>
+          </div>
+        </div>
+
+        <div class="product__intro--mobile__right">
+          <div class="form-actions">
+            <a href="#" title="Add to cart" class="btn btn-primary add-to-cart-trigger">{{ 'Add to cart'|t }}</a>
+          </div>
         </div>
       </div>
     </div>

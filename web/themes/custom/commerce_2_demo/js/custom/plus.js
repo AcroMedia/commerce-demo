@@ -59,7 +59,9 @@
 
 
   /**
-   * UH Axe.
+   * UH Axe - Scripts w/o AJAX events.
+   *
+   * This section is for general scripts that no not involve any AJAX events.
    */
 
   // Move title into first paragraph
@@ -73,39 +75,162 @@
   });
 
   // 2 column paragraph CTA click events.
-  $('.field--name-field-unlimited-cta-links a').click(function (event) {
+  $('.product--full--uh-axe .field--name-field-unlimited-cta-links a').click(function (event) {
     // Buy now button scroll.
     if ($(this).text() == ('Buy Now' || 'buy now')) {
       // Prevent link default.
       event.preventDefault();
       // Scroll to add to cart form.
       $('html, body').animate({
-        scrollTop: $("div[id^='edit-purchased-entity-wrapper']").offset().top -120
+        scrollTop: $(".paragraph--type--uh-axe-slider").offset().top -40
       }, 700);
     }
   });
 
-  // Handle finish select button scroll to attribute selection.
-  $('.slick-slider__uh-axe__slide a, .slick-slider__uh-axe-mobile a').click(function (event) {
-    // Prevent link default.
-    event.preventDefault();
-    // Scroll to product attributes.
-    $('html, body').animate({
-      scrollTop: $("div[id^='commerce-product-add-to-cart-form']").offset().top -25
-    }, 500);
-  });
+
+  /**
+   * UH Axe - Product customization user flow with AJAX events.
+   *
+   * This section is specific to how the page reveals itself as the user customizes the product.
+   */
+
+  // Product customization flow checks used below. Need these to override some default Commerce functionality.
+  var uhAxeStep1Complete = null;
+  var uhAxeStep2Complete = null;
+  var uhAxeStep3Complete = null;
+  var deselectedClassApplied = null;
+
+  Drupal.behaviors.uhaxeProductFlow = {
+    attach: function(context, settings) {
+      // STEP 1 - Handle finish selection
+      $('.slick-slider__uh-axe__slide a, .slick-slider__uh-axe-mobile a', context).once('uhaxeProductFlow').click(function (event) {
+        // Prevent link default.
+        event.preventDefault();
+
+        // Scroll to handle length attribute selector.
+        $('html, body').animate({
+          scrollTop: $('.attribute-handle-length-container').offset().top -25
+        }, 600);
+
+        // Add deselected class to visually remove the default selected option. We want user to choose.
+        // This class will be removed when AJAX event fires so we don't need to remove it later.
+        $('.attribute-handle-length').addClass('deselected');
+
+        // Fade options into view and set step 1 as completed.
+        $('.attribute-handle-length').delay(650).fadeIn(function () {
+          $(this).addClass('active');
+          uhAxeStep1Complete = true;
+        });
+      });
+
+      // STEP 2 - Handle length selection.
+      $('.attribute-handle-length .attribute-selector', context).once('uhaxeProductFlow').click(function (event) {
+        // Prevent link default.
+        event.preventDefault();
+
+        // While Drupal is loading selected option, set disabled class to attributes to avoid new selection.
+        if (!$(this)) {
+          $('.attribute-selector').addClass('disabled');
+        }
+
+        // Scroll to head weight attribute selector.
+        $('html, body').animate({
+          scrollTop: $('.attribute-head-weight-container').offset().top -100
+        }, 500);
+
+        // Add deselected class to visually remove the default selected option. We want user to choose.
+        // This is different than step 1 because this addClass is only applied WHILE options are loading.
+        // *** AFTER options have loaded, we check deselectedClassApplied and apply the class again (further down).
+        $('.attribute-head-weight').addClass('deselected');
+        deselectedClassApplied = true;
+
+        // Fade options into view and set step 2 as completed.
+        $('.attribute-head-weight').fadeIn(function () {
+          $(this).addClass('active');
+          uhAxeStep2Complete = true;
+        });
+
+        // Get the value of the selected attribute.
+        // Loop through add to cart form, match attribute values, and trigger click.
+        var $dataAttributeValue = $(this).data('attribute-value');
+
+        $('.attribute-widgets input').each(function () {
+          var $widgetAttributeValueString = $(this).val();
+          var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+          if ($widgetAttributeValue === $dataAttributeValue) {
+            $(this).click();
+          }
+        });
+      });
+
+      // Add deselected class to visually remove the default handle length selected option. We want user to choose.
+      // *** This applies after options have loaded (see note above).
+      if (deselectedClassApplied) {
+        $('.attribute-head-weight').addClass('deselected');
+        deselectedClassApplied = null;
+      }
+
+      // STEP 3 - head weight selection.
+      $('.attribute-head-weight .attribute-selector', context).once('uhaxeProductFlow').click(function (event) {
+        // Prevent link default.
+        event.preventDefault();
+
+        // While Drupal is loading selected option, set disabled class to attributes to avoid new selection.
+        if (!$(this)) {
+          $('.attribute-selector').addClass('disabled');
+        }
+
+        // Scroll to main add to cart form.
+        $('html, body').animate({
+          scrollTop: $('.main-product-form-container').offset().top -100
+        }, 500);
+
+        // Fade add to cart form into view and set step 3 as completed.
+        $('.main-product-form, .main-product-form__title').fadeIn(function () {
+          $(this).addClass('active');
+          uhAxeStep3Complete = true;
+        });
+
+        // Get the value of the selected attribute.
+        // Loop through add to cart form, match attribute values, and trigger click.
+        var $dataAttributeValue = $(this).data('attribute-value');
+
+        $('.attribute-widgets input').each(function () {
+          var $widgetAttributeValueString = $(this).val();
+          var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+          if ($widgetAttributeValue === $dataAttributeValue) {
+            $(this).click();
+          }
+        });
+      });
+
+      // STEP 1-3 helpers - These keep each steps visible after AJAX has fired.
+      if (uhAxeStep1Complete) {
+        $('.attribute-handle-length').addClass('active');
+      }
+      if (uhAxeStep2Complete) {
+        $('.attribute-handle-length').addClass('active');
+        $('.attribute-head-weight').addClass('active');
+      }
+      if (uhAxeStep3Complete) {
+        $('.attribute-handle-length').addClass('active');
+        $('.attribute-head-weight').addClass('active');
+        $('.main-product-form, .main-product-form__title, .main-product-form__mobile').addClass('active');
+      }
+    }
+  };
+
+
+  /**
+   * UH Axe - Scripts w/ AJAX events.
+   *
+   * This section is for general scripts that involve AJAX events.
+   */
 
   Drupal.behaviors.uhaxe = {
     attach: function(context, settings) {
-      // Mobile add to cart button trigger.
-      $('.add-to-cart-trigger', context).once('uhaxe').click(function (event) {
-        event.preventDefault();
-        // Would the real add to cart button please be clicked.
-        $('input[data-drupal-selector="edit-submit"]').click();
-      });
-
       // Update add to cart form selection when selection changes via handle finish slider.
-      // By clicking on thumnbail.
+      // By clicking on thumbnail.
       $('.slick-slider__uh-axe-thumbs .slick-slider__uh-axe__thumb', context).once('uhaxe').click(function (event) {
         // Get value of attribute selected.
         var $dataAttributeValue = $(this).data('attribute-value');
@@ -246,6 +371,13 @@
           $(".product__images__overlay-content div:first").delay(500).fadeIn();
         }
         return false;
+      });
+
+      // Mobile add to cart button trigger.
+      $('.add-to-cart-trigger', context).once('uhaxe').click(function (event) {
+        event.preventDefault();
+        // Would the real add to cart button please be clicked.
+        $('input[data-drupal-selector="edit-submit"]').click();
       });
     }
   };

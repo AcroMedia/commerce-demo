@@ -95,151 +95,151 @@
    */
 
   // Product customization flow checks used below. Need these to override some default Commerce functionality.
-  var uhAxeStep1Complete = null;
-  var uhAxeStep2Complete = null;
-  var uhAxeStep3Complete = null;
-  var first = null;
-  var deselectedClassApplied = null;
+  // var uhAxeStep1Complete = null;
+  // var uhAxeStep2Complete = null;
+  // var uhAxeStep3Complete = null;
+  // var first = null;
+  // var deselectedClassApplied = null;
 
-  Drupal.behaviors.uhaxeProductFlow = {
-    attach: function(context, settings) {
-      // STEP 1 - Handle finish selection
-      $('.slick-slider__uh-axe__slide a, .slick-slider__uh-axe-mobile a', context).once('uhaxeProductFlow').click(function (event) {
-        // Prevent link default.
-        event.preventDefault();
-
-        // Scroll to handle length attribute selector.
-        $('html, body').animate({
-          scrollTop: $('.attribute-handle-length-container').offset().top -25
-        }, 600);
-
-        // If step 1 has not been completed.
-        if (uhAxeStep1Complete === null) {
-          // Add deselected class to visually remove the default selected option. We want user to choose.
-          $('.attribute-handle-length').addClass('deselected');
-
-          // Fade options into view and set step 1 as completed.
-          $('.attribute-handle-length').delay(650).fadeIn(function () {
-            $(this).addClass('active');
-            uhAxeStep1Complete = true;
-          });
-        }
-      });
-
-      // STEP 2 - Handle length selection.
-      $('.attribute-handle-length .attribute-selector', context).once('uhaxeProductFlow').click(function (event) {
-        // Prevent link default.
-        event.preventDefault();
-
-        // Scroll to head weight attribute selector.
-        $('html, body').animate({
-          scrollTop: $('.attribute-head-weight-container').offset().top -100
-        }, 500);
-
-        if ($(this).hasClass('selected')) {
-          // Normally this class would be removed when AJAX fires.
-          // However, if user selects the default selected attribute, we need to remove the class manually.
-          $('.attribute-handle-length').removeClass('deselected');
-        }
-        else {
-          // For the other options, use a disabled class to avoid new selection while AJAX is loading.
-          $('.attribute-selector').addClass('disabled');
-
-          // Get the value of the selected attribute.
-          // Loop through add to cart form, match attribute values, and trigger click.
-          var $dataAttributeValue = $(this).data('attribute-value');
-
-          $('.attribute-widgets input').each(function () {
-            var $widgetAttributeValueString = $(this).val();
-            var $widgetAttributeValue = parseInt($widgetAttributeValueString);
-            if ($widgetAttributeValue === $dataAttributeValue) {
-              $(this).click();
-            }
-          });
-        }
-
-        // If step 2 has not been completed.
-        if (uhAxeStep2Complete === null) {
-          // Add deselected class to visually remove the default selected option. We want user to choose.
-          // This is different than step 1 because this addClass is only applied WHILE options are loading.
-          // *** AFTER options have loaded, we check deselectedClassApplied and apply the class again (further down).
-          $('.attribute-head-weight').addClass('deselected');
-          deselectedClassApplied = true;
-
-          // Fade options into view and set step 2 as completed.
-          $('.attribute-head-weight').fadeIn(function () {
-            $(this).addClass('active');
-            uhAxeStep2Complete = true;
-          });
-        }
-      });
-
-      // If the deselected class is applied and step 3 has not been completed.
-      if (deselectedClassApplied && (uhAxeStep3Complete === null)) {
-        // Add deselected class to visually remove the default handle length selected option. We want user to choose.
-        // *** This applies after options have loaded (see note above).
-        $('.attribute-head-weight').addClass('deselected');
-        deselectedClassApplied = null;
-      }
-
-      // STEP 3 - head weight selection.
-      $('.attribute-head-weight .attribute-selector', context).once('uhaxeProductFlow').click(function (event) {
-        // Prevent link default.
-        event.preventDefault();
-
-        // Scroll to main add to cart form.
-        $('html, body').animate({
-          scrollTop: $('.main-product-form-container').offset().top -100
-        }, 500);
-
-        if ($(this).hasClass('selected')) {
-          // Normally this class would be removed when AJAX fires.
-          // However, if user selects the default selected attribute, we need to remove the class manually.
-          $('.attribute-head-weight').removeClass('deselected');
-          deselectedClassApplied = null;
-        }
-        else {
-          // For the other options, use a disabled class to avoid new selection while AJAX is loading.
-          $('.attribute-selector').addClass('disabled');
-
-          // Get the value of the selected attribute.
-          // Loop through add to cart form, match attribute values, and trigger click.
-          var $dataAttributeValue = $(this).data('attribute-value');
-
-          $('.attribute-widgets input').each(function () {
-            var $widgetAttributeValueString = $(this).val();
-            var $widgetAttributeValue = parseInt($widgetAttributeValueString);
-            if ($widgetAttributeValue === $dataAttributeValue) {
-              $(this).click();
-            }
-          });
-        }
-
-        // If step 3 has not been completed.
-        if (uhAxeStep3Complete === null) {
-          // Fade add to cart form into view and set step 3 as completed.
-          $('.main-product-form, .main-product-form__title').fadeIn(function () {
-            $(this).addClass('active');
-            uhAxeStep3Complete = true;
-          });
-        }
-      });
-
-      // STEP 1-3 helpers - These keep each steps visible after AJAX has fired.
-      if (uhAxeStep1Complete) {
-        $('.attribute-handle-length').addClass('active');
-      }
-      if (uhAxeStep2Complete) {
-        $('.attribute-handle-length').addClass('active');
-        $('.attribute-head-weight').addClass('active');
-      }
-      if (uhAxeStep3Complete) {
-        $('.attribute-handle-length').addClass('active');
-        $('.attribute-head-weight').addClass('active');
-        $('.main-product-form, .main-product-form__title, .main-product-form__mobile').addClass('active');
-      }
-    }
-  };
+  // Drupal.behaviors.uhaxeProductFlow = {
+  //   attach: function(context, settings) {
+  //     // STEP 1 - Handle finish selection
+  //     $('.slick-slider__uh-axe__slide a, .slick-slider__uh-axe-mobile a', context).once('uhaxeProductFlow').click(function (event) {
+  //       // Prevent link default.
+  //       event.preventDefault();
+  //
+  //       // Scroll to handle length attribute selector.
+  //       $('html, body').animate({
+  //         scrollTop: $('.attribute-handle-length-container').offset().top -25
+  //       }, 600);
+  //
+  //       // If step 1 has not been completed.
+  //       if (uhAxeStep1Complete === null) {
+  //         // Add deselected class to visually remove the default selected option. We want user to choose.
+  //         $('.attribute-handle-length').addClass('deselected');
+  //
+  //         // Fade options into view and set step 1 as completed.
+  //         $('.attribute-handle-length').delay(650).fadeIn(function () {
+  //           $(this).addClass('active');
+  //           uhAxeStep1Complete = true;
+  //         });
+  //       }
+  //     });
+  //
+  //     // STEP 2 - Handle length selection.
+  //     $('.attribute-handle-length .attribute-selector', context).once('uhaxeProductFlow').click(function (event) {
+  //       // Prevent link default.
+  //       event.preventDefault();
+  //
+  //       // Scroll to head weight attribute selector.
+  //       $('html, body').animate({
+  //         scrollTop: $('.attribute-head-weight-container').offset().top -100
+  //       }, 500);
+  //
+  //       if ($(this).hasClass('selected')) {
+  //         // Normally this class would be removed when AJAX fires.
+  //         // However, if user selects the default selected attribute, we need to remove the class manually.
+  //         $('.attribute-handle-length').removeClass('deselected');
+  //       }
+  //       else {
+  //         // For the other options, use a disabled class to avoid new selection while AJAX is loading.
+  //         $('.attribute-selector').addClass('disabled');
+  //
+  //         // Get the value of the selected attribute.
+  //         // Loop through add to cart form, match attribute values, and trigger click.
+  //         var $dataAttributeValue = $(this).data('attribute-value');
+  //
+  //         $('.attribute-widgets input').each(function () {
+  //           var $widgetAttributeValueString = $(this).val();
+  //           var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+  //           if ($widgetAttributeValue === $dataAttributeValue) {
+  //             $(this).click();
+  //           }
+  //         });
+  //       }
+  //
+  //       // If step 2 has not been completed.
+  //       if (uhAxeStep2Complete === null) {
+  //         // Add deselected class to visually remove the default selected option. We want user to choose.
+  //         // This is different than step 1 because this addClass is only applied WHILE options are loading.
+  //         // *** AFTER options have loaded, we check deselectedClassApplied and apply the class again (further down).
+  //         $('.attribute-head-weight').addClass('deselected');
+  //         deselectedClassApplied = true;
+  //
+  //         // Fade options into view and set step 2 as completed.
+  //         $('.attribute-head-weight').fadeIn(function () {
+  //           $(this).addClass('active');
+  //           uhAxeStep2Complete = true;
+  //         });
+  //       }
+  //     });
+  //
+  //     // If the deselected class is applied and step 3 has not been completed.
+  //     if (deselectedClassApplied && (uhAxeStep3Complete === null)) {
+  //       // Add deselected class to visually remove the default handle length selected option. We want user to choose.
+  //       // *** This applies after options have loaded (see note above).
+  //       $('.attribute-head-weight').addClass('deselected');
+  //       deselectedClassApplied = null;
+  //     }
+  //
+  //     // STEP 3 - head weight selection.
+  //     $('.attribute-head-weight .attribute-selector', context).once('uhaxeProductFlow').click(function (event) {
+  //       // Prevent link default.
+  //       event.preventDefault();
+  //
+  //       // Scroll to main add to cart form.
+  //       $('html, body').animate({
+  //         scrollTop: $('.main-product-form-container').offset().top -100
+  //       }, 500);
+  //
+  //       if ($(this).hasClass('selected')) {
+  //         // Normally this class would be removed when AJAX fires.
+  //         // However, if user selects the default selected attribute, we need to remove the class manually.
+  //         $('.attribute-head-weight').removeClass('deselected');
+  //         deselectedClassApplied = null;
+  //       }
+  //       else {
+  //         // For the other options, use a disabled class to avoid new selection while AJAX is loading.
+  //         $('.attribute-selector').addClass('disabled');
+  //
+  //         // Get the value of the selected attribute.
+  //         // Loop through add to cart form, match attribute values, and trigger click.
+  //         var $dataAttributeValue = $(this).data('attribute-value');
+  //
+  //         $('.attribute-widgets input').each(function () {
+  //           var $widgetAttributeValueString = $(this).val();
+  //           var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+  //           if ($widgetAttributeValue === $dataAttributeValue) {
+  //             $(this).click();
+  //           }
+  //         });
+  //       }
+  //
+  //       // If step 3 has not been completed.
+  //       if (uhAxeStep3Complete === null) {
+  //         // Fade add to cart form into view and set step 3 as completed.
+  //         $('.main-product-form, .main-product-form__title').fadeIn(function () {
+  //           $(this).addClass('active');
+  //           uhAxeStep3Complete = true;
+  //         });
+  //       }
+  //     });
+  //
+  //     // STEP 1-3 helpers - These keep each steps visible after AJAX has fired.
+  //     if (uhAxeStep1Complete) {
+  //       $('.attribute-handle-length').addClass('active');
+  //     }
+  //     if (uhAxeStep2Complete) {
+  //       $('.attribute-handle-length').addClass('active');
+  //       $('.attribute-head-weight').addClass('active');
+  //     }
+  //     if (uhAxeStep3Complete) {
+  //       $('.attribute-handle-length').addClass('active');
+  //       $('.attribute-head-weight').addClass('active');
+  //       $('.main-product-form, .main-product-form__title, .main-product-form__mobile').addClass('active');
+  //     }
+  //   }
+  // };
 
 
   /**
@@ -250,6 +250,17 @@
 
   Drupal.behaviors.uhaxe = {
     attach: function(context, settings) {
+      // When handle finish selected, scroll to handle length attributes.
+      $('.slick-slider__uh-axe__slide a, .slick-slider__uh-axe-mobile a', context).once('uhaxe').click(function (event) {
+        // Prevent link default.
+        event.preventDefault();
+
+        // Scroll to handle length attribute selector.
+        $('html, body').animate({
+          scrollTop: $('.attribute-handle-length').offset().top -25
+        }, 600);
+      });
+
       // Update add to cart form selection when selection changes via handle finish slider.
       // By clicking on thumbnail.
       $('.slick-slider__uh-axe-thumbs .slick-slider__uh-axe__thumb', context).once('uhaxe').click(function (event) {
@@ -282,16 +293,30 @@
 
       // Update add to cart form selection when selection changes via attribute selector.
       $('.attribute-selector', context).once('uhaxe').click(function (event) {
+        // Prevent link default.
         event.preventDefault();
-        // Get value of attribute selected.
-        var $dataAttributeValue = $(this).data('attribute-value');
+
+        // If selection is a handle length attribute, scroll to head weight attribute selector.
+        if ($(this).closest('.attribute-handle-length')) {
+          $('html, body').animate({
+            scrollTop: $('.attribute-head-weight').offset().top -100
+          }, 500);
+        }
+        // If selection is a head weight attribute, scroll to main add to cart form.
+        else if ($(this).closest('.attribute-head-weight')) {
+          $('html, body').animate({
+            scrollTop: $('.add-to-cart-form-title').offset().top -100
+          }, 500);
+        }
 
         // While Drupal is loading selected option, set disabled class to attributes to avoid new selection.
-        if (!$(this)) {
+        if (!$(this).hasClass('selected')) {
           $('.attribute-selector').addClass('disabled');
         }
 
-        // Loop through add to cart form, match attribute values, and trigger click.
+        // Get value of attribute selected.
+        // Then loop through add to cart form, match attribute values, and trigger click.
+        var $dataAttributeValue = $(this).data('attribute-value');
         $('.attribute-widgets input').each(function () {
           var $widgetAttributeValueString = $(this).val();
           var $widgetAttributeValue = parseInt($widgetAttributeValueString);

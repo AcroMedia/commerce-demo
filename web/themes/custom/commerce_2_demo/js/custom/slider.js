@@ -40,7 +40,7 @@
           centerMode: true,
           centerPadding: '20px',
           adaptiveHeight: true,
-          swipe: true,
+          swipe: false,
           draggable: false,
           arrows: true
         }
@@ -53,7 +53,7 @@
           centerMode: true,
           centerPadding: '45px',
           adaptiveHeight: true,
-          swipe: true,
+          swipe: false,
           draggable: false,
           arrows: true
         }

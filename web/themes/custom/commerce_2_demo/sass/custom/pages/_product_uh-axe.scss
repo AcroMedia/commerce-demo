@@ -70,27 +70,27 @@
     // Custom attribute selector.
     .attribute-handle-length,
     .attribute-head-weight {
-      display: none;
+      //display: none;
       margin-bottom: 35px;
 
-      &.active {
-        display: block;
-      }
-
-      &.deselected {
-        .attribute-selector.selected {
-          border: 1px solid #ccc;
-
-          &:before {
-            border: 5px solid #f6f6f6;
-          }
-
-          &:hover, &:focus {
-            box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2);
-            cursor: pointer;
-          }
-        }
-      }
+      //&.active {
+      //  display: block;
+      //}
+      //
+      //&.deselected {
+      //  .attribute-selector.selected {
+      //    border: 1px solid #ccc;
+      //
+      //    &:before {
+      //      border: 5px solid #f6f6f6;
+      //    }
+      //
+      //    &:hover, &:focus {
+      //      box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2);
+      //      cursor: pointer;
+      //    }
+      //  }
+      //}
 
       .col-xs-4 {
         margin-bottom: 10px;
@@ -179,34 +179,34 @@
   }
 
   // Main product add to cart form.
-  .main-product-form {
-    display: none;
-
-    &.active {
-      display: flex !important;
-    }
-  }
-
-  .main-product-form__title {
-    display: none;
-
-    &.active {
-      display: block;
-    }
-  }
-
-  .main-product-form__mobile {
-    display: none;
-  }
-  @media (max-width: $screen-sm-max) {
-    .main-product-form__mobile {
-      display: none;
-
-      &.active {
-        display: block;
-      }
-    }
-  }
+  //.main-product-form {
+  //  display: none;
+  //
+  //  &.active {
+  //    display: flex !important;
+  //  }
+  //}
+  //
+  //.main-product-form__title {
+  //  display: none;
+  //
+  //  &.active {
+  //    display: block;
+  //  }
+  //}
+  //
+  //.main-product-form__mobile {
+  //  display: none;
+  //}
+  //@media (max-width: $screen-sm-max) {
+  //  .main-product-form__mobile {
+  //    display: none;
+  //
+  //    &.active {
+  //      display: block;
+  //    }
+  //  }
+  //}
 
   .product__intro {
     padding: 0;

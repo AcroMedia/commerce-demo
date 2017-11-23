@@ -98,6 +98,7 @@
   var uhAxeStep1Complete = null;
   var uhAxeStep2Complete = null;
   var uhAxeStep3Complete = null;
+  var first = null;
   var deselectedClassApplied = null;
 
   Drupal.behaviors.uhaxeProductFlow = {
@@ -112,15 +113,17 @@
           scrollTop: $('.attribute-handle-length-container').offset().top -25
         }, 600);
 
-        // Add deselected class to visually remove the default selected option. We want user to choose.
-        // This class will be removed when AJAX event fires so we don't need to remove it later.
-        $('.attribute-handle-length').addClass('deselected');
+        // If step 1 has not been completed.
+        if (uhAxeStep1Complete === null) {
+          // Add deselected class to visually remove the default selected option. We want user to choose.
+          $('.attribute-handle-length').addClass('deselected');
 
-        // Fade options into view and set step 1 as completed.
-        $('.attribute-handle-length').delay(650).fadeIn(function () {
-          $(this).addClass('active');
-          uhAxeStep1Complete = true;
-        });
+          // Fade options into view and set step 1 as completed.
+          $('.attribute-handle-length').delay(650).fadeIn(function () {
+            $(this).addClass('active');
+            uhAxeStep1Complete = true;
+          });
+        }
       });
 
       // STEP 2 - Handle length selection.
@@ -128,44 +131,53 @@
         // Prevent link default.
         event.preventDefault();
 
-        // While Drupal is loading selected option, set disabled class to attributes to avoid new selection.
-        if (!$(this)) {
-          $('.attribute-selector').addClass('disabled');
-        }
-
         // Scroll to head weight attribute selector.
         $('html, body').animate({
           scrollTop: $('.attribute-head-weight-container').offset().top -100
         }, 500);
 
-        // Add deselected class to visually remove the default selected option. We want user to choose.
-        // This is different than step 1 because this addClass is only applied WHILE options are loading.
-        // *** AFTER options have loaded, we check deselectedClassApplied and apply the class again (further down).
-        $('.attribute-head-weight').addClass('deselected');
-        deselectedClassApplied = true;
+        if ($(this).hasClass('selected')) {
+          // Normally this class would be removed when AJAX fires.
+          // However, if user selects the default selected attribute, we need to remove the class manually.
+          $('.attribute-handle-length').removeClass('deselected');
+        }
+        else {
+          // For the other options, use a disabled class to avoid new selection while AJAX is loading.
+          $('.attribute-selector').addClass('disabled');
 
-        // Fade options into view and set step 2 as completed.
-        $('.attribute-head-weight').fadeIn(function () {
-          $(this).addClass('active');
-          uhAxeStep2Complete = true;
-        });
+          // Get the value of the selected attribute.
+          // Loop through add to cart form, match attribute values, and trigger click.
+          var $dataAttributeValue = $(this).data('attribute-value');
 
-        // Get the value of the selected attribute.
-        // Loop through add to cart form, match attribute values, and trigger click.
-        var $dataAttributeValue = $(this).data('attribute-value');
+          $('.attribute-widgets input').each(function () {
+            var $widgetAttributeValueString = $(this).val();
+            var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+            if ($widgetAttributeValue === $dataAttributeValue) {
+              $(this).click();
+            }
+          });
+        }
 
-        $('.attribute-widgets input').each(function () {
-          var $widgetAttributeValueString = $(this).val();
-          var $widgetAttributeValue = parseInt($widgetAttributeValueString);
-          if ($widgetAttributeValue === $dataAttributeValue) {
-            $(this).click();
-          }
-        });
+        // If step 2 has not been completed.
+        if (uhAxeStep2Complete === null) {
+          // Add deselected class to visually remove the default selected option. We want user to choose.
+          // This is different than step 1 because this addClass is only applied WHILE options are loading.
+          // *** AFTER options have loaded, we check deselectedClassApplied and apply the class again (further down).
+          $('.attribute-head-weight').addClass('deselected');
+          deselectedClassApplied = true;
+
+          // Fade options into view and set step 2 as completed.
+          $('.attribute-head-weight').fadeIn(function () {
+            $(this).addClass('active');
+            uhAxeStep2Complete = true;
+          });
+        }
       });
 
-      // Add deselected class to visually remove the default handle length selected option. We want user to choose.
-      // *** This applies after options have loaded (see note above).
-      if (deselectedClassApplied) {
+      // If the deselected class is applied and step 3 has not been completed.
+      if (deselectedClassApplied && (uhAxeStep3Complete === null)) {
+        // Add deselected class to visually remove the default handle length selected option. We want user to choose.
+        // *** This applies after options have loaded (see note above).
         $('.attribute-head-weight').addClass('deselected');
         deselectedClassApplied = null;
       }
@@ -175,33 +187,42 @@
         // Prevent link default.
         event.preventDefault();
 
-        // While Drupal is loading selected option, set disabled class to attributes to avoid new selection.
-        if (!$(this)) {
-          $('.attribute-selector').addClass('disabled');
-        }
-
         // Scroll to main add to cart form.
         $('html, body').animate({
           scrollTop: $('.main-product-form-container').offset().top -100
         }, 500);
 
-        // Fade add to cart form into view and set step 3 as completed.
-        $('.main-product-form, .main-product-form__title').fadeIn(function () {
-          $(this).addClass('active');
-          uhAxeStep3Complete = true;
-        });
+        if ($(this).hasClass('selected')) {
+          // Normally this class would be removed when AJAX fires.
+          // However, if user selects the default selected attribute, we need to remove the class manually.
+          $('.attribute-head-weight').removeClass('deselected');
+          deselectedClassApplied = null;
+        }
+        else {
+          // For the other options, use a disabled class to avoid new selection while AJAX is loading.
+          $('.attribute-selector').addClass('disabled');
 
-        // Get the value of the selected attribute.
-        // Loop through add to cart form, match attribute values, and trigger click.
-        var $dataAttributeValue = $(this).data('attribute-value');
+          // Get the value of the selected attribute.
+          // Loop through add to cart form, match attribute values, and trigger click.
+          var $dataAttributeValue = $(this).data('attribute-value');
 
-        $('.attribute-widgets input').each(function () {
-          var $widgetAttributeValueString = $(this).val();
-          var $widgetAttributeValue = parseInt($widgetAttributeValueString);
-          if ($widgetAttributeValue === $dataAttributeValue) {
-            $(this).click();
-          }
-        });
+          $('.attribute-widgets input').each(function () {
+            var $widgetAttributeValueString = $(this).val();
+            var $widgetAttributeValue = parseInt($widgetAttributeValueString);
+            if ($widgetAttributeValue === $dataAttributeValue) {
+              $(this).click();
+            }
+          });
+        }
+
+        // If step 3 has not been completed.
+        if (uhAxeStep3Complete === null) {
+          // Fade add to cart form into view and set step 3 as completed.
+          $('.main-product-form, .main-product-form__title').fadeIn(function () {
+            $(this).addClass('active');
+            uhAxeStep3Complete = true;
+          });
+        }
       });
 
       // STEP 1-3 helpers - These keep each steps visible after AJAX has fired.
@@ -265,8 +286,10 @@
         // Get value of attribute selected.
         var $dataAttributeValue = $(this).data('attribute-value');
 
-        // Add to attributes a visual indicator that something is happening.
-        $('.attribute-selector').addClass('disabled');
+        // While Drupal is loading selected option, set disabled class to attributes to avoid new selection.
+        if (!$(this)) {
+          $('.attribute-selector').addClass('disabled');
+        }
 
         // Loop through add to cart form, match attribute values, and trigger click.
         $('.attribute-widgets input').each(function () {

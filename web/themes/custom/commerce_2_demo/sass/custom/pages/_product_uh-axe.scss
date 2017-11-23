@@ -187,12 +187,24 @@
     }
   }
 
-  .main-product-form__title,
-  .main-product-form__mobile {
+  .main-product-form__title {
     display: none;
 
     &.active {
       display: block;
+    }
+  }
+
+  .main-product-form__mobile {
+    display: none;
+  }
+  @media (max-width: $screen-sm-max) {
+    .main-product-form__mobile {
+      display: none;
+
+      &.active {
+        display: block;
+      }
     }
   }
 

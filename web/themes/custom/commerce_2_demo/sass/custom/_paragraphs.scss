@@ -160,22 +160,28 @@
         font-size: 20px;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.1em;
         color: #fff;
-        transition: color .1s ease-in-out, background-color .1s ease-in-out, opacity .1s ease-in-out;
+        transition: color .1s ease-in-out, background-color .1s ease-in-out, opacity .1s ease-in-out,  border .1s ease-in-out;
         white-space: nowrap;
         user-select: none;
         touch-action: manipulation;
 
-        &.buy-now {
-          color: $gray-dark;
-          background: #fff;
-          background: rgba(255, 255, 255, 1);
+        // With highlight class added.
+        &.highlight {
+          color: #fff;
+          background: $c-primary;
+          border: 2px solid $c-primary;
         }
 
         &:hover, &:focus {
           color: #fff;
           background: rgba(0, 0, 0, 1);
+
+          &.highlight {
+            background: $c-primary-hover;
+            border: 2px solid $c-primary-hover;
+          }
         }
 
         @media (max-width: $screen-xs-max) {

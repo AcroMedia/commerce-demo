@@ -54,7 +54,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
         <div class="row">
           <div class="col-xs-12">
             {% if content.field_heading|render|trim is not empty  %}
-              <h2 class="text-center">{{ content.field_heading }}</h2>
+              <h2 class="paragraph-title text-center">{{ content.field_heading }}</h2>
             {% endif %}
             {{ content.field_formatted_text }}
           </div>

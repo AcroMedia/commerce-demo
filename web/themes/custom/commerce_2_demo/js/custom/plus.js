@@ -35,6 +35,8 @@
         // Use FitVid on modal-body for responsive video.
         // https://github.com/davatron5000/FitVids.js
         $('.modal-body').fitVids();
+        // Add a video class to the link.
+        $(this).addClass('video-link');
       }
     }
   });
@@ -67,23 +69,21 @@
   // Move title into first paragraph
   $('.product--full--uh-axe .page-title').prependTo('.paragraph--type--2-column-image-content__content:first');
 
-  // 2 column paragraph highlight Buy Now button.
-  $('.field--name-field-unlimited-cta-links a').each(function (event) {
-    if ($(this).text() == ('Buy Now' || 'buy now')) {
-      $(this).addClass('buy-now');
-    }
-  });
-
-  // 2 column paragraph CTA click events.
-  $('.product--full--uh-axe .field--name-field-unlimited-cta-links a').click(function (event) {
-    // Buy now button scroll.
-    if ($(this).text() == ('Buy Now' || 'buy now')) {
-      // Prevent link default.
-      event.preventDefault();
-      // Scroll to add to cart form.
-      $('html, body').animate({
-        scrollTop: $(".paragraph--type--uh-axe-slider").offset().top -40
-      }, 700);
+  // 2 column paragraph buttons.
+  $('.product--full--uh-axe .field--name-field-unlimited-cta-links a').each(function (event) {
+    // If Customize My Axe link.
+    if ($(this).text().toLowerCase() === 'customize my axe') {
+      // Add highlight class.
+      $(this).addClass('highlight');
+      // Add click event.
+      $(this).click(function (event) {
+        // Prevent link default.
+        event.preventDefault();
+        // Scroll to handle finish selector.
+        $('html, body').animate({
+          scrollTop: $(".paragraph--type--uh-axe-slider").offset().top -100
+        }, 700);
+      });
     }
   });
 
@@ -143,13 +143,13 @@
         event.preventDefault();
 
         // If selection is a handle length attribute, scroll to head weight attribute selector.
-        if ($(this).closest('.attribute-handle-length')) {
+        if ($(this).parents().hasClass('attribute-handle-length')) {
           $('html, body').animate({
             scrollTop: $('.attribute-head-weight').offset().top -100
           }, 500);
         }
         // If selection is a head weight attribute, scroll to main add to cart form.
-        else if ($(this).closest('.attribute-head-weight')) {
+        else if ($(this).parents().hasClass('attribute-head-weight')) {
           $('html, body').animate({
             scrollTop: $('.add-to-cart-form-title').offset().top -100
           }, 500);

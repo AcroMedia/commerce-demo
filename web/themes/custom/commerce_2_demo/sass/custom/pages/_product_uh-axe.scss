@@ -5,6 +5,8 @@
 /**
  * Product full.
  */
+
+// Layout.
 .path-product-uh-axe {
   .primary-nav {
     border-bottom: none;
@@ -13,6 +15,14 @@
   .site-content {
     padding: 0;
     margin-bottom: 0;
+  }
+
+  .product__content--top {
+    padding-bottom: 30px;
+
+    @media (max-width: $screen-md-max) {
+      padding-bottom: 0;
+    }
   }
 }
 
@@ -31,8 +41,86 @@
   }
 
   // Paragraph overrides.
+  .product__content--top .paragraph.paragraph--type--1-column-content {
+    margin-bottom: 15px;
+
+    h2.paragraph-title {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: $gray-dark;
+      font-family: $f-tertiary;
+      font-size: 45px;
+      line-height: 1.2;
+      text-transform: none;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 36px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 36px;
+      }
+    }
+
+    .uh-axe-get-started {
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: normal;
+      text-transform: uppercase;
+      text-align: center;
+      color: #666;
+
+      &:after {
+        display: block;
+        position: relative;
+        bottom: 10px;
+        padding-bottom: 25px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #ccc;
+        font-family: $f-fontawesome;
+        font-size: 44px;
+        line-height: 1em;
+        color: $c-primary;
+        content: '\f107';
+      }
+    }
+  }
+
   .paragraph.paragraph--type--2-column-image-content {
     background: url(../gfx/product/uh-axe/uh-stacked-firewood-bg.jpg) repeat;
+
+    // Button with video link class applied.
+    .paragraph--type--2-column-image-content__content {
+      .field--name-field-unlimited-cta-links {
+        a.video-link {
+          vertical-align: middle;
+          margin: 0 16px 0 0;
+          padding: 8px 0;
+          border: none;
+          background: transparent;
+          text-transform: none;
+          letter-spacing: normal;
+          color: #fff;
+
+          &:before {
+            display: inline-block;
+            position: relative;
+            top: 1px;
+            padding-right: 8px;
+            font-family: $f-fontawesome;
+            content: '\f144';
+          }
+
+          &:hover, &:focus {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
 
     .paragraph--type--2-column-image-content__content-left:after,
     .paragraph--type--2-column-image-content__content-right:after {
@@ -70,8 +158,11 @@
     // Custom attribute selector.
     .attribute-handle-length,
     .attribute-head-weight {
-      //display: none;
-      margin-bottom: 35px;
+      margin-bottom: 60px;
+
+      @media (max-width: $screen-md-max) {
+        margin-bottom: 30px;
+      }
 
       .col-xs-4 {
         margin-bottom: 10px;

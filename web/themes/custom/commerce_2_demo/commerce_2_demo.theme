@@ -13,6 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\commerce_product\Entity\Product;
 use Drupal\commerce_order\Entity;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\user\Entity\User;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -310,6 +311,27 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       $entity_manager = \Drupal::entityTypeManager();
       $product_variation = $entity_manager->getStorage('commerce_product_variation')->load($product_variation_id);
       $form['#product_variation'] = $product_variation;
+
+      // Bundle products.
+      if (!empty($storage['product']->field_bundled_products->getValue())) {
+        // Get the bundled product values.
+        $form['#field_bundled_products'] = $storage['product']->field_bundled_products->getValue();
+
+        // Add include bundled products selector to form.
+        $form['include_bundle'] = array(
+          '#type' => 'radios',
+          '#title' => t('UH Sheath'),
+          '#default_value' => 1,
+          '#options' => array(
+            0 => t('No'),
+            1 => t('Yes +$80'),
+          ),
+          '#weight' => 0
+        );
+
+        // Add custom form submit handler function to add bundled products to the cart.
+        $form['actions']['submit']['#submit'][] = 'commerce_2_demo_bundled_add_to_cart_submit';
+      }
     }
   }
 
@@ -354,6 +376,49 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
         // Set data attribute for the order type.
         $form['#attributes']['data-order-type'] = $order_type[0]['target_id'];
       }
+    }
+  }
+}
+
+/**
+ * Custom checkout form submit handler function ($form, $form_state).
+ */
+function commerce_2_demo_bundled_add_to_cart_submit($form, FormStateInterface $form_state) {
+  // Get values from form and check if bundled products are to be included.
+  $form_values = $form_state->getValues();
+  if ($form_values['include_bundle'] === '1') {
+    // Loop through bundled products.
+    foreach ($form['#field_bundled_products'] as $bundled_product) {
+      // Set some useful variables.
+      $store_id = 1;
+      $order_type = 'default';
+      $variation_id = $bundled_product['target_id'];
+      $entity_manager = \Drupal::entityTypeManager();
+      $cart_manager = \Drupal::service('commerce_cart.cart_manager');
+      $cart_provider = \Drupal::service('commerce_cart.cart_provider');
+
+      // Following line is the same as Drupal\commerce_store\Entity\Store::load($store_id);
+      // Load the store and variation.
+      $store = $entity_manager->getStorage('commerce_store')->load($store_id);
+      $product_variation = $entity_manager->getStorage('commerce_product_variation')->load($variation_id);
+
+      // We must know if there is already a cart for the provided order type and store.
+      $cart = $cart_provider->getCart($order_type, $store);
+      if (!$cart) {
+        $cart = $cart_provider->createCart($order_type, $store);
+      }
+
+      // Create a new order item.
+      $order_item = $entity_manager->getStorage('commerce_order_item')->create(array(
+        'type' => 'default',
+        'purchased_entity' => (string) $variation_id,
+        'quantity' => 1, // Amount or quantity to be added to the cart.
+        'unit_price' => $product_variation->getPrice(),
+      ));
+      $order_item->save();
+
+      // Now add order item to the cart.
+      $cart_manager->addOrderItem($cart, $order_item);
     }
   }
 }

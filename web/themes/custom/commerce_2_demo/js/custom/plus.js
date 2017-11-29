@@ -212,37 +212,6 @@
         });
       });
 
-      // IMPORTANT: This is sheath bundle option specific.
-      // Highlight current option based on add to cart form selection.
-      // This is unique to the sheath because it isn't an AJAX event. Other options handled below.
-      $("fieldset[data-drupal-selector='edit-include-bundle'] .form-item", context).once('uhaxe').click(function (event) {
-        if (!$(this).find('input').is(':checked')) {
-          // Get attribute value of selected add to cart form attribute.
-          var $widgetBundleValueString = $(this).find('input').val();
-          var $widgetBundleValue = parseInt($widgetBundleValueString);
-
-          // Loop through attribute selectors, match attribute values, and add selected class.
-          $('.attribute-bundle .attribute-selector').each(function () {
-            var $selectorDataBundleValue = $(this).data('bundle-value');
-            if ($widgetBundleValue === $selectorDataBundleValue) {
-              $('.attribute-bundle .selected').removeClass('selected');
-              $(this).addClass('selected');
-            }
-          });
-
-          // Loop through mobile attribute description and show the right one.
-          $('.attribute-selector__description--mobile').each(function () {
-            var $descriptionBundleValue = $(this).data('bundle-value');
-            if ($widgetBundleValue === $descriptionBundleValue) {
-              $(this).fadeIn();
-            }
-            else {
-              $(this).hide();
-            }
-          });
-        }
-      });
-
       // Highlight current attribute option based on add to cart form selection.
       // This happens during any AJAX event which includes attribute selection in add to cart form.
       $('.attribute-widgets input:checked', context).once('uhaxe').each(function () {
@@ -283,6 +252,41 @@
             $(this).fadeIn();
           }
         });
+      });
+
+      // Highlight current option based on add to cart form sheath bundle selection.
+      // IMPORTANT: This is unique to the sheath because we DO NOT want it to happen during AJAX event.
+      $("fieldset[data-drupal-selector='edit-include-bundle'] .form-item", context).once('uhaxe').click(function (event) {
+        if ($.active) {
+          event.preventDefault();
+        }
+        else {
+          if (!$(this).find('input').is(':checked')) {
+            // Get attribute value of selected add to cart form attribute.
+            var $widgetBundleValueString = $(this).find('input').val();
+            var $widgetBundleValue = parseInt($widgetBundleValueString);
+
+            // Loop through attribute selectors, match attribute values, and add selected class.
+            $('.attribute-bundle .attribute-selector').each(function () {
+              var $selectorDataBundleValue = $(this).data('bundle-value');
+              if ($widgetBundleValue === $selectorDataBundleValue) {
+                $('.attribute-bundle .selected').removeClass('selected');
+                $(this).addClass('selected');
+              }
+            });
+
+            // Loop through mobile attribute description and show the right one.
+            $('.attribute-selector__description--mobile').each(function () {
+              var $descriptionBundleValue = $(this).data('bundle-value');
+              if ($widgetBundleValue === $descriptionBundleValue) {
+                $(this).fadeIn();
+              }
+              else {
+                $(this).hide();
+              }
+            });
+          }
+        }
       });
 
       // Review highlights.

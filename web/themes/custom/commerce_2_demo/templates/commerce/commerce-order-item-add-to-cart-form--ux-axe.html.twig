@@ -73,6 +73,71 @@
   </div>
 </div>
 
+{# Included bundled products (Sheath). #}
+<div class="row">
+  <div class="col-xs-12 text-center attribute-bundle">
+    <h2>{{ 'Add a sheath to protect your investment?'|t }}</h2>
+    <div class="row row-eq-height">
+      {# No #}
+      <div class="col-xs-6">
+        <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ 'Do not include sheath'|t }}" data-bundle-value="0">
+          {# Background image set via css. #}
+          <div class="attribute-bundle__image attribute-bundle__image--grey"></div>
+          <div class="attribute-bundle__content">
+            <div class="attribute-selector__name hidden-xs hidden-sm">
+              {# Hidden for mobile. #}
+              {{ 'No, thank you.'|t }}
+            </div>
+            <div class="attribute-selector__name hidden-md hidden-lg">
+              {# Mobile only. #}
+              {{ 'No'|t }}
+            </div>
+            <div class="attribute-selector__description hidden-xs">
+              {# Hidden for mobile. #}
+              {{ "I've never been the sharpest tool."|t }}
+            </div>
+          </div>
+        </a>
+      </div>
+      {# Yes #}
+      <div class="col-xs-6">
+        <a href="#" class="btn btn-default attribute-selector" role="button" aria-label="{{ 'Include sheath'|t }}" data-bundle-value="1">
+          {# Background image set via css. #}
+          <div class="attribute-bundle__image"></div>
+          <div class="attribute-bundle__content">
+            <div class="attribute-selector__name hidden-xs hidden-sm">
+              {# Hidden for mobile. #}
+              {{ 'Yes, please.'|t }}
+            </div>
+            <div class="attribute-selector__name hidden-md hidden-lg">
+              {# Mobile only. #}
+              {{ 'Yes'|t }}
+            </div>
+            <div class="attribute-selector__description hidden-xs">
+              {# Hidden for mobile. #}
+              {{ 'I always choose protection.'|t }}
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    {# Mobile attribute description. #}
+    <div class="row hidden-sm hidden-md hidden-lg">
+      <div class="col-xs-12">
+        {# No #}
+        <div class="attribute-selector__description attribute-selector__description--mobile" data-bundle-value="0">
+          {{ "I've never been the sharpest tool."|t }}
+        </div>
+        {# Yes #}
+        <div class="attribute-selector__description attribute-selector__description--mobile" data-bundle-value="1">
+          {{ 'I always choose protection.'|t }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-xs-12 text-center add-to-cart-form-title">
     <h2>{{ 'Review Your Axe'|t }}</h2>

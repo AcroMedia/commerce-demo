@@ -155,16 +155,18 @@
       }
     }
 
-    // Custom attribute selector.
+    // Custom attribute selectors.
+    // NOTE: Additional bundle specific styles further down.
     .attribute-handle-length,
-    .attribute-head-weight {
+    .attribute-head-weight,
+    .attribute-bundle {
       margin-bottom: 60px;
 
       @media (max-width: $screen-md-max) {
         margin-bottom: 30px;
       }
 
-      .col-xs-4 {
+      .col-xs-4, .col-xs-6 {
         margin-bottom: 10px;
 
         @media (max-width: $screen-xs-max) {
@@ -174,6 +176,7 @@
       }
 
       .attribute-selector {
+        position: relative;
         display: block;
         height: 100%;
         width: 100%;
@@ -186,21 +189,16 @@
 
         &:before {
           position: absolute;
-          top: 2px;
-          right: 17px;
-          bottom: 2px;
-          left: 17px;
+          top: 1px;
+          right: 1px;
+          bottom: 1px;
+          left: 1px;
           border: 5px solid #f6f6f6;
           content: '';
         }
 
         @media (max-width: $screen-xs-max) {
           padding: 10px 5px 15px;
-
-          &:before {
-            right: 7px;
-            left: 7px;
-          }
         }
 
         &:hover, &:focus {
@@ -219,21 +217,21 @@
             cursor: default;
           }
         }
-
-
       }
 
       .attribute-selector__name {
+        margin: 12px 0;
         font-family: $f-tertiary;
         font-size: 60px;
         font-weight: 700;
+        line-height: 1;
         color: $c-body;
 
         @media (max-width: $screen-xs-max) {
           font-size: 40px;
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 420px) {
           font-size: 30px;
         }
       }
@@ -242,9 +240,65 @@
         font-weight: 300;
         color: $gray-darker;
 
+        // For attributes.
         &.attribute-selector__description--mobile {
           margin-top: 7px;
           display: none;
+        }
+      }
+    }
+
+    // Additional bundle specific styles.
+    .attribute-bundle {
+      .attribute-bundle__image {
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        bottom: 7px;
+        width: 150px;
+        background: url(../gfx/product/uh-axe/uh-axe-with-sheath.jpg) center center no-repeat;
+        background-size: cover;
+
+        &.attribute-bundle__image--grey {
+          background: url(../gfx/product/uh-axe/uh-axe-without-sheath.jpg) center center no-repeat;
+          background-size: cover;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          width: 100px;
+        }
+
+        @media (max-width: 420px) {
+          display: none;
+        }
+      }
+
+      .attribute-bundle__content {
+        display: block;
+        width: 100%;
+        padding: 15px 0 15px 160px;
+        text-align: left;
+
+        @media (max-width: $screen-xs-max) {
+          padding: 7px 0 7px 100px;
+          text-align: center;
+        }
+
+        @media (max-width: 420px) {
+          padding: 0;
+          text-align: center;
+        }
+      }
+
+      .attribute-selector__name {
+        font-size: 50px;
+
+        @media (max-width: $screen-xs-max) {
+          font-size: 40px;
+        }
+
+        @media (max-width: 420px) {
+          font-size: 30px;
         }
       }
     }
@@ -312,6 +366,10 @@
         @media (max-width: $screen-md-max) {
           font-size: 20px;
         }
+
+        @media (max-width: 420px) {
+          font-size: 16px;
+        }
       }
 
       .form-type-radio {
@@ -324,6 +382,11 @@
 
         @media (max-width: $screen-md-max) {
           margin: 6px 0;
+        }
+
+        @media (max-width: 420px) {
+          width: 100%;
+          margin: 4px 0 0;
         }
 
         .ajax-progress {
@@ -383,6 +446,10 @@
         .form-type-radio {
           max-width: 200px;
           margin: 2px 8px 2px 0;
+
+          @media (max-width: 420px) {
+            margin: 0;
+          }
 
           label {
             &:before {

@@ -318,16 +318,15 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
         $form['#field_bundled_products'] = $storage['product']->field_bundled_products->getValue();
 
         // Add include bundled products selector to form.
-        $form['include_bundle'] = array(
+        $form['include_bundle'] = [
           '#type' => 'radios',
           '#title' => t('UH Sheath'),
           '#default_value' => 1,
-          '#options' => array(
+          '#options' => [
             0 => t('No'),
             1 => t('Yes +$80'),
-          ),
-          '#weight' => 0
-        );
+          ],
+        ];
 
         // Add custom form submit handler function to add bundled products to the cart.
         $form['actions']['submit']['#submit'][] = 'commerce_2_demo_bundled_add_to_cart_submit';
@@ -409,12 +408,12 @@ function commerce_2_demo_bundled_add_to_cart_submit($form, FormStateInterface $f
       }
 
       // Create a new order item.
-      $order_item = $entity_manager->getStorage('commerce_order_item')->create(array(
+      $order_item = $entity_manager->getStorage('commerce_order_item')->create([
         'type' => 'default',
         'purchased_entity' => (string) $variation_id,
         'quantity' => 1, // Amount or quantity to be added to the cart.
         'unit_price' => $product_variation->getPrice(),
-      ));
+      ]);
       $order_item->save();
 
       // Now add order item to the cart.

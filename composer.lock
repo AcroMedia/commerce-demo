@@ -1865,12 +1865,12 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce",
-                "reference": "245345b4897f1d0a1f82bd6da4e571a49056c12a"
+                "reference": "979a4dfe4f1ffd1d72c20df7a0770fc140d4ecea"
             },
             "require": {
                 "commerceguys/intl": "~0.7",
                 "drupal/address": "~1.0",
-                "drupal/core": "~8.3",
+                "drupal/core": "~8.4",
                 "drupal/entity": "~1.0",
                 "drupal/entity_reference_revisions": "~1.0",
                 "drupal/inline_entity_form": "~1.0",
@@ -1895,8 +1895,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-rc3+13-dev",
-                    "datestamp": "1505907543",
+                    "version": "8.x-2.1+13-dev",
+                    "datestamp": "1511878985",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -1937,7 +1937,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
             },
-            "time": "2017-09-20 11:14:34"
+            "time": "2017-11-30 14:36:05"
         },
         {
             "name": "drupal/commerce_authnet",

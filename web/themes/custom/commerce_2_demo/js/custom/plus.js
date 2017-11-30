@@ -206,9 +206,6 @@
           if ($dataBundleValue === $descriptionBundleValue) {
             $(this).fadeIn();
           }
-          else {
-            $(this).hide();
-          }
         });
       });
 

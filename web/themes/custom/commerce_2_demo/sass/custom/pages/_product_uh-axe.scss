@@ -157,7 +157,7 @@
       color: $gray-darker;
 
       @media (max-width: $screen-xs-max) {
-        margin-bottom: 12px;
+        margin-bottom: 20px;
         font-size: 28px;
       }
     }
@@ -181,6 +181,33 @@
           padding-right: 5px;
         }
       }
+
+      .attribute__most-popular {
+        position: relative;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 0;
+
+        .attribute__most-popular__flag {
+          position: absolute;
+          z-index: 1;
+          top: -9px;
+          left: -60px;
+          width: 120px;
+          background: $c-primary;
+          color: #fff;
+          font-size: 13px;
+          font-weight: 600;
+          text-transform: uppercase;
+
+          @media (max-width: $screen-xs-max) {
+            left: -55px;
+            width: 110px;
+          }
+        }
+      }
+
 
       .attribute-selector {
         position: relative;

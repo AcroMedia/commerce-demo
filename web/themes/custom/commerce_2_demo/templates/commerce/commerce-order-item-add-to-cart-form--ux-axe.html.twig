@@ -13,6 +13,10 @@
 <div class="row">
   <div class="col-xs-12 text-center attribute-handle-length">
     <h2>{{ 'Select a handle length'|t }}</h2>
+    <div class="attribute__most-popular">
+      <span class="attribute__most-popular__flag">Most Popular</span>
+    </div>
+
     <div class="row row-eq-height">
       {%  for attribute in form['#uh_axe_length'] %}
         <div class="col-xs-4">
@@ -45,6 +49,10 @@
 <div class="row">
   <div class="col-xs-12 text-center attribute-head-weight">
     <h2>{{ 'Now choose a head weight'|t }}</h2>
+    <div class="attribute__most-popular">
+      <span class="attribute__most-popular__flag">Most Popular</span>
+    </div>
+
     <div class="row row-eq-height">
       {%  for attribute in form['#uh_axe_weight'] %}
         <div class="col-xs-4">
@@ -77,6 +85,7 @@
 <div class="row">
   <div class="col-xs-12 text-center attribute-bundle">
     <h2>{{ 'Add a sheath to protect your investment?'|t }}</h2>
+
     <div class="row row-eq-height">
       {# No #}
       <div class="col-xs-6">

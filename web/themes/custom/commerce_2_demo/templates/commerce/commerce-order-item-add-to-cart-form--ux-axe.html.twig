@@ -278,6 +278,13 @@
         {{ form['#product_variation'].price.value.0|commerce_price_format }}
       </div>
 
+      {% if form['#bundle_available'] == 'yes' %}
+        <div class="product__intro__disclaimer">
+          {{ '+$80.00 with UH Sheath'|t }}
+        </div>
+      {% endif %}
+
+
       {{ form.actions }}
       <div class="product__intro__links">
         <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
@@ -296,15 +303,21 @@
           {{ form['#product_variation'].price.value.0|commerce_price_format }}
         </div>
 
-        <div class="product__intro__links">
-          <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
-          <a href="/placeholder-page" title="{{ 'Read our guarantee'|t }}">{{ 'GUARANTEE'|t }}</a>
-        </div>
+        {% if form['#bundle_available'] == 'yes' %}
+          <div class="product__intro__disclaimer">
+            {{ '+$80.00 with UH Sheath'|t }}
+          </div>
+        {% endif %}
       </div>
 
       <div class="product__intro--mobile__right">
         <div class="form-actions">
           <a href="#" title="Add to cart" class="btn btn-primary add-to-cart-trigger">{{ 'Add to cart'|t }}</a>
+        </div>
+
+        <div class="product__intro__links">
+          <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
+          <a href="/placeholder-page" title="{{ 'Read our guarantee'|t }}">{{ 'GUARANTEE'|t }}</a>
         </div>
       </div>
     </div>

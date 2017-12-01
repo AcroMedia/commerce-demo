@@ -87,6 +87,13 @@
     }
   });
 
+  // Get Started text scroll to handle finish selector.
+  $('.uh-axe-get-started').click(function () {
+    $('html, body').animate({
+      scrollTop: $(".paragraph--type--uh-axe-slider").offset().top -100
+    }, 600);
+  });
+
 
   /**
    * UH Axe - Scripts w/ AJAX events.
@@ -166,6 +173,14 @@
           if (!$(this).hasClass('selected')) {
             $('.attribute-bundle .selected').removeClass('selected');
             $(this).addClass('selected');
+          }
+
+          // Show or hide price disclaimer depending on which bundle option selected.
+          if ($(this).data('bundle-value') === 1) {
+            $('.product__intro__disclaimer').slideDown('fast');
+          }
+          else {
+            $('.product__intro__disclaimer').slideUp('fast');
           }
 
           // Scroll to main add to cart form.
@@ -249,6 +264,11 @@
             $(this).fadeIn();
           }
         });
+
+        // Show price disclaimer when bundle option selected.
+        if ($("fieldset[data-drupal-selector='edit-include-bundle'] input:checked").val() === "1") {
+          $('.product__intro__disclaimer').show();
+        }
       });
 
       // Highlight current option based on add to cart form sheath bundle selection.
@@ -282,6 +302,14 @@
                 $(this).hide();
               }
             });
+
+            // Show or hide price disclaimer depending on which bundle option selected.
+            if ($widgetBundleValue === 1) {
+              $('.product__intro__disclaimer').slideDown('fast');
+            }
+            else {
+              $('.product__intro__disclaimer').slideUp('fast');
+            }
           }
         }
       });

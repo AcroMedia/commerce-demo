@@ -333,7 +333,11 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       }
 
       // Bundle products.
+      $form['#bundle_available'] = 'no';
+
       if (!empty($storage['product']->field_bundled_products->getValue())) {
+        $form['#bundle_available'] = 'yes';
+
         // Get the bundled product values.
         $form['#field_bundled_products'] = $storage['product']->field_bundled_products->getValue();
 
@@ -344,7 +348,7 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
           '#default_value' => 1,
           '#options' => [
             0 => t('No'),
-            1 => t('Yes +$80'),
+            1 => t('Yes +$80.00'),
           ],
         ];
 

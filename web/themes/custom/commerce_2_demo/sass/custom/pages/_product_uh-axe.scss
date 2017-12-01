@@ -15,6 +15,7 @@
   .site-content {
     padding: 0;
     margin-bottom: 0;
+    overflow-y: hidden;
   }
 
   .product__content--top {
@@ -73,6 +74,12 @@
       text-transform: uppercase;
       text-align: center;
       color: #666;
+      cursor: pointer;
+      transition: color .1s ease-in-out;
+
+      &:hover, &:focus {
+        color: $c-primary-hover;
+      }
 
       &:after {
         display: block;
@@ -485,8 +492,17 @@
         font-size: 23px;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
       }
+    }
+
+    .product__intro__disclaimer {
+      display: none;
+      width: 100%;
+      max-width: 195px;
+      padding: 9px 5px 0;
+      margin: 4px auto 0;
+      border-top: 1px solid #ccc;
     }
 
     .product__intro__links {

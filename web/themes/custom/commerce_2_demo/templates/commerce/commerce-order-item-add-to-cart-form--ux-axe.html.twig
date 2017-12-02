@@ -8,13 +8,25 @@
 * @ingroup themeable
 */
 #}
+{# User selected default variation IDs (this is used with jQuery only) #}
+{% if form['#new_default_variation'] == 'yes' %}
+  {% if form['#default_finish_id'] %}
+    <span class="default-variation-finish" data-default-variation-finish="{{ form['#default_finish_id'] }}"></span>
+  {% endif %}
+  {% if form['#default_length_id'] %}
+    <span class="default-variation-length" data-default-variation-length="{{ form['#default_length_id'] }}"></span>
+  {% endif %}
+  {% if form['#default_weight_id']%}
+    <span class="default-variation-weight" data-default-variation-weight="{{ form['#default_weight_id'] }}"></span>
+  {% endif %}
+{% endif %}
 
 {# Handle legth selector. #}
 <div class="row">
   <div class="col-xs-12 text-center attribute-handle-length">
     <h2>{{ 'Select a handle length'|t }}</h2>
     <div class="attribute__most-popular">
-      <span class="attribute__most-popular__flag">Most Popular</span>
+      <span class="attribute__most-popular__flag">{{ 'Most Popular'|t }}</span>
     </div>
 
     <div class="row row-eq-height">
@@ -50,7 +62,7 @@
   <div class="col-xs-12 text-center attribute-head-weight">
     <h2>{{ 'Now choose a head weight'|t }}</h2>
     <div class="attribute__most-popular">
-      <span class="attribute__most-popular__flag">Most Popular</span>
+      <span class="attribute__most-popular__flag">{{ 'Most Popular'|t }}</span>
     </div>
 
     <div class="row row-eq-height">
@@ -293,8 +305,8 @@
         </div>
       {% endif %}
 
-
       {{ form.actions }}
+
       <div class="product__intro__links">
         <a href="/placeholder-page" title="{{ 'View shipping details'|t }}">{{ 'SHIPPING'|t }}</a> |
         <a href="/placeholder-page" title="{{ 'Read our guarantee'|t }}">{{ 'GUARANTEE'|t }}</a>

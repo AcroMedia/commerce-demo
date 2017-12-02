@@ -359,7 +359,7 @@
     }
 
     .product__intro-top {
-      padding: 25px 35px 12px;
+      padding: 25px 35px 17px;
       background-color: #f5f5f5;
 
       @media (max-width: $screen-md-max) {
@@ -486,14 +486,15 @@
           }
 
           label {
+            margin-bottom: 0;
+            border: none;
+
             &:before {
               display: none;
             }
           }
-        }
 
-        .product--rendered-attribute__selected {
-          ~ label.option {
+          input:checked ~ label {
             border: 2px solid #999;
           }
         }
@@ -820,4 +821,11 @@
       }
     }
   }
+}
+
+// User selected default variation data attributes for jQuery.
+.default-variation-finish,
+.default-variation-length,
+.default-variation-weight {
+  display: none;
 }

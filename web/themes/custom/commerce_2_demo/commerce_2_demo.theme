@@ -14,6 +14,9 @@ use Drupal\commerce_product\Entity\Product;
 use Drupal\commerce_order\Entity;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\user\Entity\User;
+use Drupal\commerce_product\Entity\ProductInterface;
+use Drupal\commerce_product\Entity\ProductVariationInterface;
+use Drupal\commerce_product\Event;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -306,35 +309,29 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       }
       $form['#uh_axe_weight'] = $uh_axe_weight;
 
-      // Use NEW default selected variation if user sets one.
+      // Load the default variation and set template variable.
+      $default_selected_variation_id = $form['purchased_entity']['widget'][0]['variation']['#value'];
+      $default_selected_variation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load($default_selected_variation_id);
+      $form['#product_variation'] = $default_selected_variation;
+
+      // Use NEW default variation setting if user selects one.
+      // NOTE: We can't change the default in the preprocess here. Instead, we set attribute ID variables and do the rest with jQuery.
+      // TODO: Do this in a module instead.
       if (!empty($storage['product']->field_default_selected_variation->getValue())) {
+        $form['#new_default_variation'] = 'yes';
+
         // Get variation ID and load it.
         $field_default_selected_variation = $storage['product']->field_default_selected_variation->getValue();
         $default_selected_variation_id = $field_default_selected_variation[0]['target_id'];
         $default_selected_variation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load($default_selected_variation_id);
 
-        // Set template variable.
-        $form['#product_variation'] = $default_selected_variation;
-
-        // Get and set attribute values.
-        $attribute_length_id = $default_selected_variation->get('attribute_uh_axe_length')->getValue()[0]['target_id'];
-        $attribute_weight_id = $default_selected_variation->get('attribute_uh_axe_weight')->getValue()[0]['target_id'];
-        $attribute_finish_id = $default_selected_variation->get('attribute_uh_axe_finish')->getValue()[0]['target_id'];
-
-        $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_length']['#default_value'] = $attribute_length_id;
-        $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_weight']['#default_value'] = $attribute_weight_id;
-        $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_finish']['#default_value'] = $attribute_finish_id;
-      }
-      // If not, load the default variation and set template variable.
-      else {
-        $default_selected_variation_id = $form['purchased_entity']['widget'][0]['variation']['#value'];
-        $default_selected_variation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load($default_selected_variation_id);
-        $form['#product_variation'] = $default_selected_variation;
+        // Set attribute id variables.
+        $form['#default_length_id'] = $default_selected_variation->get('attribute_uh_axe_length')->getValue()[0]['target_id'];
+        $form['#default_weight_id'] = $default_selected_variation->get('attribute_uh_axe_weight')->getValue()[0]['target_id'];
+        $form['#default_finish_id'] = $default_selected_variation->get('attribute_uh_axe_finish')->getValue()[0]['target_id'];
       }
 
       // Bundle products.
-      $form['#bundle_available'] = 'no';
-
       if (!empty($storage['product']->field_bundled_products->getValue())) {
         $form['#bundle_available'] = 'yes';
 

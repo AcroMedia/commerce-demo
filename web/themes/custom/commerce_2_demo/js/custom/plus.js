@@ -16,7 +16,6 @@
    */
   function ytVidId(url) {
     var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-    console.log(p);
     return (url.match(p)) ? RegExp.$1 : false;
   }
 
@@ -95,111 +94,27 @@
     }, 600);
   });
 
+  // Set user default product variation if one has been selected.
+  if ($('.default-variation-id').length) {
+    // Get variation ID and current URL.
+    var $defaultVariationID = $('.default-variation-id').data('default-variation-id');
+    var $currentURL = window.location.href;
+
+    // If URL does not contains variation query, load the default.
+    if ($currentURL.indexOf("?v=") < 0) {
+      window.location.replace($currentURL + '?v=' + $defaultVariationID)
+    }
+  }
+
+
   /**
    * UH Axe - Scripts w/ AJAX events.
    *
    * This section is for general scripts that involve AJAX events.
    */
-  // Variables used with default attribute selections below.
-  // If one exists, all exist.
-  if ($('.default-variation-id').length) {
-    // var defaultVariationSet = false;
-    var $defaultVariationID = $('.default-variation-id').data('default-variation-id');
-    var $currentURL = window.location.href;
-
-    console.log('default set');
-
-    if (window.location.href.indexOf("?v=") > -1) {
-      var variationURL = true;
-      console.log('URL contains variation');
-    }
-    else {
-      console.log('URL does not contain variation');
-      window.location.replace($currentURL + '?v=' + $defaultVariationID)
-    }
-  }
-
-  // Variables used with default attribute selections below.
-  // If one exists, all exist.
-  // if ($('.default-variation-finish').length) {
-  //   var defaultFinishSet = false;
-  //   var defaultLengthSet = false;
-  //   var defaultWeightSet = false;
-  //   var $defaultFinishID = $('.default-variation-finish').data('default-variation-finish');
-  //   var $defaultLengthID = $('.default-variation-length').data('default-variation-length');
-  //   var $defaultWeightID = $('.default-variation-weight').data('default-variation-weight');
-  // }
-  // If URL contains variation query.
-
 
   Drupal.behaviors.uhaxe = {
     attach: function(context, settings) {
-
-      // Set default attribute selections (chained through AJAX).
-      // This is only run during initial page load if no variation query found in URL.
-      // TODO: Do this better (in a module or other form preprocess).
-      // if (variationURL !== true) {
-        // if ((defaultFinishSet && defaultLengthSet && defaultWeightSet) === false) {
-        //   $.ajax({
-        //     success: function () {
-        //       // STEP 1: Set Handle Finish default.
-        //       if ((defaultFinishSet && defaultLengthSet && defaultWeightSet) === false) {
-        //         $(".attribute-widgets fieldset[id*='uh-axe-finish'] input").each(function () {
-        //           var $widgetAttributeValueString = $(this).val();
-        //           var $widgetAttributeValue = parseInt($widgetAttributeValueString);
-        //
-        //           if ($widgetAttributeValue === $defaultFinishID) {
-        //             $(this).click();
-        //           }
-        //         });
-        //         // Mark complete.
-        //         defaultFinishSet = true;
-        //       }
-        //
-        //       $.ajax({
-        //         success: function () {
-        //           // STEP 2: Set Handle Length default.
-        //           if (defaultFinishSet === true && (defaultLengthSet && defaultWeightSet) === false) {
-        //             $(".attribute-widgets fieldset[id*='uh-axe-length'] input").each(function () {
-        //               var $widgetAttributeValueString = $(this).val();
-        //               var $widgetAttributeValue = parseInt($widgetAttributeValueString);
-        //
-        //               if ($widgetAttributeValue === $defaultLengthID) {
-        //                 $(this).click();
-        //               }
-        //             });
-        //             // Mark complete.
-        //             defaultLengthSet = true;
-        //           }
-        //
-        //           $.ajax({
-        //             success: function () {
-        //               // STEP 3: Set Head Weight default.
-        //               if ((defaultFinishSet && defaultLengthSet) === true && defaultWeightSet === false) {
-        //                 $(".attribute-widgets fieldset[id*='uh-axe-weight'] input").each(function () {
-        //                   var $widgetAttributeValueString = $(this).val();
-        //                   var $widgetAttributeValue = parseInt($widgetAttributeValueString);
-        //
-        //                   if ($widgetAttributeValue === $defaultWeightID) {
-        //                     $(this).click();
-        //                   }
-        //                 });
-        //                 // Mark complete.
-        //                 defaultWeightSet = true;
-        //                 // Enable slick slider thumbs.
-        //                 $('.slick-slider__uh-axe-thumbs .slick-slide').css({
-        //                   'pointer-events':'all',
-        //                   'opacity':'1'
-        //                 });
-        //               }
-        //             }
-        //           });
-        //         }
-        //       });
-        //     }
-        //   });
-        // }
-      // }
 
       // When handle finish selected, scroll to handle length attributes.
       $('.slick-slider__uh-axe__slide a, .slick-slider__uh-axe-mobile a', context).once('uhaxe').click(function (event) {

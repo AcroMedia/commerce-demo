@@ -10,15 +10,18 @@
 #}
 {# User selected default variation IDs (this is used with jQuery only) #}
 {% if form['#new_default_variation'] == 'yes' %}
-  {% if form['#default_finish_id'] %}
-    <span class="default-variation-finish" data-default-variation-finish="{{ form['#default_finish_id'] }}"></span>
+  {% if form['#default_variation_id']%}
+    <span class="default-variation-id" data-default-variation-id="{{ form['#default_variation_id'] }}"></span>
   {% endif %}
-  {% if form['#default_length_id'] %}
-    <span class="default-variation-length" data-default-variation-length="{{ form['#default_length_id'] }}"></span>
-  {% endif %}
-  {% if form['#default_weight_id']%}
-    <span class="default-variation-weight" data-default-variation-weight="{{ form['#default_weight_id'] }}"></span>
-  {% endif %}
+  {#{% if form['#default_finish_id'] %}#}
+    {#<span class="default-variation-finish" data-default-variation-finish="{{ form['#default_finish_id'] }}"></span>#}
+  {#{% endif %}#}
+  {#{% if form['#default_length_id'] %}#}
+    {#<span class="default-variation-length" data-default-variation-length="{{ form['#default_length_id'] }}"></span>#}
+  {#{% endif %}#}
+  {#{% if form['#default_weight_id']%}#}
+    {#<span class="default-variation-weight" data-default-variation-weight="{{ form['#default_weight_id'] }}"></span>#}
+  {#{% endif %}#}
 {% endif %}
 
 {# Handle legth selector. #}

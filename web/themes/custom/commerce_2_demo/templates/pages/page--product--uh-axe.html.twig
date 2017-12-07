@@ -62,8 +62,12 @@
           {% if page.above_content %}
             {{ page.above_content }}
           {% endif %}
-          {{ page.content.messages }}
-          {{ page.content.commerce_2_demo_tabs }}
+          {% if page.content.messages %}
+            {{ page.content.messages }}
+          {% endif %}
+          {% if page.content.commerce_2_demo_tabs %}
+            {{ page.content.commerce_2_demo_tabs }}
+          {% endif %}
         </aside>
       </div>
     </div>

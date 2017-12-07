@@ -142,15 +142,15 @@
   }
 
   // Paragraph - Slick slider thumbs.
-  .paragraph.paragraph--type--uh-axe-slider .slick-slider__uh-axe-thumbs .slick-slide {
-    pointer-events: none;
-    opacity: 0.5;
-    transition: opacity .1s ease-in-out;
-
-    &.slick-current {
-      opacity: 1;
-    }
-  }
+  //.paragraph.paragraph--type--uh-axe-slider .slick-slider__uh-axe-thumbs .slick-slide {
+  //  pointer-events: none;
+  //  opacity: 0.5;
+  //  transition: opacity .1s ease-in-out;
+  //
+  //  &.slick-current {
+  //    opacity: 1;
+  //  }
+  //}
 
   // Override default image field styles.
   .field--name-field-image {
@@ -838,6 +838,7 @@
 }
 
 // User selected default variation data attributes for jQuery.
+.default-variation-id,
 .default-variation-finish,
 .default-variation-length,
 .default-variation-weight {

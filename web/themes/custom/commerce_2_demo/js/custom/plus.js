@@ -164,6 +164,11 @@
                       });
                       // Mark complete.
                       defaultWeightSet = true;
+                      // Enable slick slider thumbs.
+                      $('.slick-slider__uh-axe-thumbs .slick-slide').css({
+                        'pointer-events':'all',
+                        'opacity':'1'
+                      });
                     }
                   }
                 });

@@ -318,18 +318,10 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       // NOTE: We can't change the default in the preprocess here. Instead, we set attribute ID variables and do the rest with jQuery.
       // TODO: Do this in a module instead.
       if (!empty($storage['product']->field_default_selected_variation->getValue())) {
-        $form['#new_default_variation'] = 'yes';
-
-        // Get variation ID and load it.
+        // Get variation ID and set variables.
         $field_default_selected_variation = $storage['product']->field_default_selected_variation->getValue();
         $default_selected_variation_id = $field_default_selected_variation[0]['target_id'];
-//        $default_selected_variation = \Drupal::entityTypeManager()->getStorage('commerce_product_variation')->load($default_selected_variation_id);
-
-        // Set attribute id variables.
         $form['#default_variation_id'] = $default_selected_variation_id;
-//        $form['#default_length_id'] = $default_selected_variation->get('attribute_uh_axe_length')->getValue()[0]['target_id'];
-//        $form['#default_weight_id'] = $default_selected_variation->get('attribute_uh_axe_weight')->getValue()[0]['target_id'];
-//        $form['#default_finish_id'] = $default_selected_variation->get('attribute_uh_axe_finish')->getValue()[0]['target_id'];
       }
 
       // Bundle products.

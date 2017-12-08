@@ -8,49 +8,39 @@
    * General UH+ scripts.
    */
 
-  /**
-   * JavaScript function to match (and return) the video Id
-   * of any valid Youtube Url, given as input string.
-   * @author: Stephan Schmitz <eyecatchup@gmail.com>
-   * @url: https://stackoverflow.com/a/10315969/624466
-   */
-  function ytVidId(url) {
-    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-    return (url.match(p)) ? RegExp.$1 : false;
-  }
-
-  // videoModal embed video.
+  // Open any YouTube links in a modal.
   $('.region-content a').each(function () {
-    if ($(this).attr("href") !== 'undefined') {
-      // Check link for YouTube video id.
-      var $youTubeId = ytVidId($(this).attr("href"));
-      // If YouTube video, embed video in modal.
-      if ($youTubeId !== false) {
-        // Place video into #videoModal div using code from http://embedresponsively.com/.
-        $('#videoModal .modal-body').append(
-          '<iframe width="560px" height="315px" src="https://www.youtube.com/embed/' +
-          $youTubeId +
-          '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
-        );
-        // Use FitVid on modal-body for responsive video.
-        // https://github.com/davatron5000/FitVids.js
-        $('.modal-body').fitVids();
-        // Add a video class to the link.
-        $(this).addClass('video-link');
+    var url = $(this).attr('href');
+
+    // Filter YouTube URLs.
+    if (url !== undefined || url !== '') {
+      var regExp = /^.*(youtu.be\/|youtube\.com\|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      if (regExp.test(url)) {
+        var match = url.match(regExp);
+        if (match && match[2].length === 11) {
+          // If YouTube video, embed video in modal.
+          $('#videoModal .modal-body').append(
+            '<iframe width="560px" height="315px" src="https://www.youtube.com/embed/' +
+            match[2] +
+            '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+          );
+          // Use FitVid on modal-body for responsive video.
+          // https://github.com/davatron5000/FitVids.js
+          $('.modal-body').fitVids();
+          // Add a video class to the link.
+          $(this).addClass('video-link');
+        }
       }
     }
   });
 
   // Open videos in videoModal.
-  $('.region-content a').click(function (event) {
-    if ($(this).attr("href") !== 'undefined') {
-      // Check link for YouTube video id.
-      var $youTubeId = ytVidId($(this).attr("href"));
-      // If YouTube video, open video in modal.
-      if ($youTubeId !== false) {
-        event.preventDefault();
-        $('#videoModal').modal('show');
-      }
+  $('.video-link').click(function (event) {
+    if ($(this).hasClass('video-link')) {
+      // Prevent default link event.
+      event.preventDefault();
+      // Open video in modal.
+      $('#videoModal').modal('show');
     }
   });
 

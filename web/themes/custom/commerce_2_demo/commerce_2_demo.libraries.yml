@@ -5,11 +5,18 @@ global-styling:
       css/style.css: { media: all }
   js:
     js/custom/script.js: {}
-    js/custom/plus.js: {}
   dependencies:
     - core/jquery
     - core/drupal
     - commerce_2_demo/fitVid
+
+uh-axe:
+  version: 1.x
+  js:
+    js/custom/plus/uh-axe.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
 
 slider:
   version: 1.x

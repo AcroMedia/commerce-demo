@@ -467,16 +467,23 @@
             }
           }
 
-          &:after {
-            position: absolute;
-            top: calc(50% - 7px);
-            left: 13px;
-            font-size: 19px;
-            font-family: FontAwesome;
-            content: '\f014';
-            pointer-events: none;
-            transition: color .1s ease-in-out;
+          div {
+            position: relative;
+
+            &:after {
+              position: absolute;
+              top: 0;
+              left: 8px;
+              font-size: 19px;
+              line-height: 30px;
+              font-family: FontAwesome;
+              content: '\f014';
+              pointer-events: none;
+              transition: color .1s ease-in-out;
+            }
           }
+
+
         }
 
         td.views-field-purchased-entity {

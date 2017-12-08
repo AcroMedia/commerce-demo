@@ -315,6 +315,47 @@
     });
   }
 
+  // Open any YouTube links in a modal.
+  $('.region-content a').each(function () {
+    var url = $(this).attr('href');
+
+    // Filter YouTube URLs.
+    if (url !== undefined || url !== '') {
+      var regExp = /^.*(youtu.be\/|youtube\.com\|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      if (regExp.test(url)) {
+        var match = url.match(regExp);
+        if (match && match[2].length === 11) {
+          // If YouTube video, embed video in modal.
+          $('#videoModal .modal-body').append(
+            '<iframe width="560px" height="315px" src="https://www.youtube.com/embed/' +
+            match[2] +
+            '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+          );
+          // Use FitVid on modal-body for responsive video.
+          // https://github.com/davatron5000/FitVids.js
+          $('.modal-body').fitVids();
+          // Add a video class to the link.
+          $(this).addClass('video-link');
+        }
+      }
+    }
+  });
+
+  // Open videos in videoModal.
+  $('.video-link').click(function (event) {
+    if ($(this).hasClass('video-link')) {
+      // Prevent default link event.
+      event.preventDefault();
+      // Open video in modal.
+      $('#videoModal').modal('show');
+    }
+  });
+
+  // Stop video playback when videoModal is closed.
+  $("#videoModal").on('hidden.bs.modal', function (event) {
+    $("#videoModal iframe").attr("src", $("#videoModal iframe").attr("src"));
+  });
+
   // Run scripts after window fully loads.
   $(window).on('load', function() {
     // Language switcher.

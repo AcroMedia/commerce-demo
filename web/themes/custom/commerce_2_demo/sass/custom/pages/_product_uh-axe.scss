@@ -466,10 +466,12 @@
 
         input[type="radio"],
         input[type="checkbox"] {
+          display: block;
           position: absolute;
+          z-index: 1;
           opacity: 0;
-          width: 0;
-          height: 0;
+          width: 100%;
+          cursor: pointer;
 
           &:checked ~ label {
             cursor: default;

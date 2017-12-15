@@ -472,6 +472,7 @@
           opacity: 0;
           width: 100%;
           cursor: pointer;
+          pointer-events: none;
 
           &:checked ~ label {
             cursor: default;

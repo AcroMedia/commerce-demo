@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "784514dbda11f7c93895f28d29032be7",
+    "content-hash": "e9eed461de1eeadaa2448ed23a7c34ce",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -336,16 +336,16 @@
         },
         {
             "name": "commerceguys/authnet",
-            "version": "v1.0.0-beta1",
+            "version": "v1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/commerceguys/authnet.git",
-                "reference": "b7c0cf1d6c48966120eb3f3785b88448c6535673"
+                "reference": "0866adfc0881f388ec7d90be157e870ec206b97a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/commerceguys/authnet/zipball/b7c0cf1d6c48966120eb3f3785b88448c6535673",
-                "reference": "b7c0cf1d6c48966120eb3f3785b88448c6535673",
+                "url": "https://api.github.com/repos/commerceguys/authnet/zipball/0866adfc0881f388ec7d90be157e870ec206b97a",
+                "reference": "0866adfc0881f388ec7d90be157e870ec206b97a",
                 "shasum": ""
             },
             "require": {
@@ -375,8 +375,14 @@
                     "email": "nmd.matt@gmail.com"
                 }
             ],
-            "description": "PHP SDK for Authorize.Net API",
-            "time": "2017-07-02T20:01:43+00:00"
+            "description": "PHP SDK for Authorize.Net API, using Guzzle.",
+            "keywords": [
+                "authorize.net",
+                "authorizenet",
+                "ecommerce",
+                "payment"
+            ],
+            "time": "2017-11-26T00:18:46+00:00"
         },
         {
             "name": "commerceguys/enum",
@@ -1941,17 +1947,17 @@
         },
         {
             "name": "drupal/commerce_authnet",
-            "version": "1.0.0-beta2",
+            "version": "1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_authnet",
-                "reference": "8.x-1.0-beta2"
+                "reference": "8.x-1.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_authnet-8.x-1.0-beta2.zip",
-                "reference": "8.x-1.0-beta2",
-                "shasum": "9b71e2a92bdfd67109b781618e71111d6c8faf7b"
+                "url": "https://ftp.drupal.org/files/projects/commerce_authnet-8.x-1.0-beta3.zip",
+                "reference": "8.x-1.0-beta3",
+                "shasum": "4e150345629b1ea4bd430b5ac28ae7df3cb6c950"
             },
             "require": {
                 "commerceguys/authnet": "~1.0",
@@ -1965,8 +1971,12 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta2",
-                    "datestamp": "1499912344"
+                    "version": "8.x-1.0-beta3",
+                    "datestamp": "1512591784",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3040,23 +3050,23 @@
         },
         {
             "name": "drupal/facets",
-            "version": "1.0.0-alpha11",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/facets",
-                "reference": "8.x-1.0-alpha11"
+                "reference": "8.x-1.0-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/facets-8.x-1.0-alpha11.zip",
-                "reference": "8.x-1.0-alpha11",
-                "shasum": "7b53517e7049048a4379a5e30a2ca4a243ca1fe9"
+                "url": "https://ftp.drupal.org/files/projects/facets-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "3bd5e8f22f7f4077d666b1eca27a176d96342814"
             },
             "require": {
                 "drupal/core": "~8.0"
             },
             "require-dev": {
-                "drupal/search_api": "*"
+                "drupal/search_api": "~1.5"
             },
             "type": "drupal-module",
             "extra": {
@@ -3064,8 +3074,12 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-alpha11",
-                    "datestamp": "1500888543"
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1512228488",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3096,11 +3110,17 @@
         },
         {
             "name": "drupal/facets_pretty_paths",
-            "version": "dev-1.x",
+            "version": "1.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/facets_pretty_paths",
-                "reference": "bb078e2134d8d9cb84c160e5665d7400c1af2b5a"
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/facets_pretty_paths-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "5b4724d09272f57387e7788d9f3dc7b7096313a0"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -3111,8 +3131,15 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.x-dev",
-                    "datestamp": "1497300842"
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1510784284",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                },
+                "patches_applied": {
+                    "#2921502: Getting Error: ArgumentCountError: Too few arguments to function UrlProcessorPluginBase::__construct()": "https://www.drupal.org/files/issues/getting_error-2921502-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3133,8 +3160,7 @@
             "homepage": "https://www.drupal.org/project/facets_pretty_paths",
             "support": {
                 "source": "http://cgit.drupalcode.org/facets_pretty_paths"
-            },
-            "time": "2017-06-12 21:03:27"
+            }
         },
         {
             "name": "drupal/field_group",
@@ -3940,17 +3966,17 @@
         },
         {
             "name": "drupal/search_api_solr",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/search_api_solr",
-                "reference": "8.x-1.1"
+                "reference": "8.x-1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "ff124407b883c9e56030e8c10dcd8827c922cceb"
+                "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "cd77fc851d36ecfb04a0c29967c93e5c47e2d2c6"
             },
             "require": {
                 "drupal/core": "~8.0",
@@ -3961,7 +3987,8 @@
                 "drupal/facets": "1.x-dev",
                 "drupal/geofield": "1.x-dev",
                 "drupal/search_api_autocomplete": "1.x-dev",
-                "drupal/search_api_location": "1.x-dev"
+                "drupal/search_api_location": "1.x-dev",
+                "phayes/geophp": "dev-master"
             },
             "suggest": {
                 "drupal/facets": "Provides facetted search.",
@@ -3973,8 +4000,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1505488645",
+                    "version": "8.x-1.2",
+                    "datestamp": "1509546906",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -9471,7 +9498,6 @@
         "acromedia/drupalorange_profile": 20,
         "drupal/webform": 20,
         "drupal/physical": 5,
-        "drupal/facets_pretty_paths": 20,
         "drupal/taxonomy_term_depth": 20,
         "drupal/devel": 20
     },

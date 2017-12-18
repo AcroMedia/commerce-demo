@@ -25,7 +25,7 @@
         "cweagans/composer-patches": "~1.0",
         "drupal/core": "~8.4.0",
         "drupal/console": "~1.0",
-        "drupal/commerce": "~2.0",
+        "drupal/commerce": "^2.2",
         "drupal/swiftmailer": "1.x-dev",
         "drupal/config_inspector": "1.x-dev",
         "drupal/entity": "1.x",

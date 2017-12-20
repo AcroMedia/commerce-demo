@@ -114,7 +114,9 @@
         "patches": {
             "drupal/commerce": {
                 "#2882905: Adds unique identifier for stored payment methods":
-                "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch"
+                "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch",
+                "#2901504: Provide limit by no of orders per user condition for promotions in commerce core":
+                "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch"
             },
             "drupal/facets_pretty_paths": {
                 "#2921502: Getting Error: ArgumentCountError: Too few arguments to function UrlProcessorPluginBase::__construct()":

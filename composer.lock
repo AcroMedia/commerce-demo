@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3e57dcc2ecb4ffb629a288cd9f4a18d",
+    "content-hash": "c498bc0d3035ee22a824f0a7615a3e80",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1954,7 +1954,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce",
-                "reference": "4691303f8ee38702387d040944eace4306937731"
+                "reference": "e83802a28ae9539740f6a6a4b129606d8efd6151"
             },
             "require": {
                 "commerceguys/intl": "~0.7",
@@ -1984,15 +1984,16 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.2+7-dev",
-                    "datestamp": "1513303087",
+                    "version": "8.x-2.2+9-dev",
+                    "datestamp": "1513727284",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 },
                 "patches_applied": {
-                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch"
+                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch",
+                    "#2901504: Provide limit by no of orders per user condition for promotions in commerce core": "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2026,7 +2027,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
             },
-            "time": "2017-12-15 02:00:52"
+            "time": "2017-12-19 23:59:21"
         },
         {
             "name": "drupal/commerce_authnet",
@@ -9658,10 +9659,10 @@
         "drupal/config_inspector": 20,
         "acromedia/drupalorange_profile": 20,
         "drupal/webform": 20,
-        "drupal/physical": 5,
-        "drupal/taxonomy_term_depth": 20,
         "drupal/commerce_recurring": 10,
         "drupal/advancedqueue": 10,
+        "drupal/physical": 5,
+        "drupal/taxonomy_term_depth": 20,
         "drupal/devel": 20
     },
     "prefer-stable": true,

@@ -10,23 +10,6 @@ global-styling:
     - core/drupal
     - commerce_2_demo/fitVid
 
-uh-axe:
-  version: 1.x
-  js:
-    js/custom/plus/uh-axe.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
-
-slider:
-  version: 1.x
-  js:
-    js/custom/slider.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
-    - commerce_2_demo/slick-slider
-
 tours:
   version: 1.x
   css:
@@ -40,6 +23,31 @@ tours:
   dependencies:
     - core/jquery
     - core/drupal
+
+uh-axe:
+  version: 1.x
+  js:
+    js/custom/plus/uh-axe.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+uh-recurring-digital:
+  version: 1.x
+  js:
+    js/custom/plus/uh-recurring-digital.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+slider:
+  version: 1.x
+  js:
+    js/custom/slider.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - commerce_2_demo/slick-slider
 
 slick-slider:
   version: 1.x

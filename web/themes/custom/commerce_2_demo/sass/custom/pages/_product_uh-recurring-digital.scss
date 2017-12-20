@@ -1,0 +1,136 @@
+/**
+ * UH Recurring Digital product styling.
+ */
+
+/**
+ * Product full.
+ */
+
+// Layout.
+.path-product-sir-mix-bittm {
+  .primary-nav {
+    border-bottom: none;
+  }
+
+  .site-content {
+    padding: 0;
+    margin-bottom: 0;
+    overflow-x: hidden;
+  }
+
+  .product__content--top {
+    padding-bottom: 30px;
+
+    @media (max-width: $screen-md-max) {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.product--full.product--full--uh-recurring-digital {
+
+  // Page title hidden to start, then moved into paragraph with jQuery.
+  .page-title {
+    display: none;
+  }
+  .paragraph .page-title {
+    display: block;
+    margin-bottom: -15px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  // Paragraph overrides.
+  // Paragraph - 1 column content.
+  .product__content--top .paragraph.paragraph--type--1-column-content {
+    margin-bottom: 15px;
+
+    h2.paragraph-title {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: $gray-dark;
+      font-family: $f-tertiary;
+      font-size: 45px;
+      line-height: 1.2;
+      text-transform: none;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 36px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 36px;
+      }
+    }
+  }
+
+  // Paragraph - 2 column content.
+  .paragraph.paragraph--type--2-column-image-content {
+    background: url(../gfx/product/uh-axe/uh-stacked-firewood-bg.jpg) repeat;
+
+    // Button with video link class applied.
+    .paragraph--type--2-column-image-content__content {
+      .field--name-field-unlimited-cta-links {
+        a.video-link {
+          vertical-align: middle;
+          margin: 0 16px 0 0;
+          padding: 8px 0;
+          border: none;
+          background: transparent;
+          text-transform: none;
+          letter-spacing: normal;
+          color: #fff;
+
+          &:before {
+            display: inline-block;
+            position: relative;
+            top: 1px;
+            padding-right: 8px;
+            font-family: $f-fontawesome;
+            content: '\f144';
+          }
+
+          &:hover, &:focus {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .paragraph--type--2-column-image-content__content-left:after,
+    .paragraph--type--2-column-image-content__content-right:after {
+      opacity: 0;
+
+      @media (max-width: $screen-xs-max) {
+        opacity: .75;
+      }
+    }
+  }
+
+  // Overall add to cart form.
+  div[id^='commerce-product-add-to-cart-form'] {
+    margin-bottom: 17px;
+
+    h2 {
+      margin-top: 15px;
+      margin-bottom: 25px;
+      font-size: 30px;
+      letter-spacing: normal;
+      color: $gray-darker;
+
+      @media (max-width: $screen-xs-max) {
+        margin-bottom: 20px;
+        font-size: 28px;
+      }
+    }
+
+    .field--name-price {
+      margin-bottom: 0;
+      font-family: $f-tertiary;
+      font-size: 50px;
+      font-weight: 700;
+      color: #333;
+    }
+  }
+}

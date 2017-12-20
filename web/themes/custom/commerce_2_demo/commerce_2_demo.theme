@@ -258,7 +258,11 @@ function commerce_2_demo_preprocess_taxonomy_term(&$variables) {
  */
 function commerce_2_demo_theme($existing, $type, $theme, $path) {
   return [
-    'commerce_order_item_add_to_cart_form__ux_axe' => [
+    'commerce_order_item_add_to_cart_form__uh_axe' => [
+      'render element' => 'form',
+      'path' => $path . '/templates/commerce',
+    ],
+    'commerce_order_item_add_to_cart_form__uh_recurring_digital' => [
       'render element' => 'form',
       'path' => $path . '/templates/commerce',
     ],
@@ -284,10 +288,10 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
     $product_bundle = $storage['product']->bundle();
     $form['#product_bundle'] = $product_bundle;
 
-    // Check for specific uh_axe product type.
+    // UH Axe: Check for specific product type.
     if ($product_bundle == 'uh_axe') {
       // Set theme hook.
-      $form['#theme'][] = 'commerce_order_item_add_to_cart_form__ux_axe';
+      $form['#theme'][] = 'commerce_order_item_add_to_cart_form__uh_axe';
 
       // Get length attribute and set template variable.
       $uh_axe_length = [];
@@ -345,6 +349,12 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
         // Add custom form submit handler function to add bundled products to the cart.
         $form['actions']['submit']['#submit'][] = 'commerce_2_demo_bundled_add_to_cart_submit';
       }
+    }
+
+    // UH Recurring Digital: Check for specific product type.
+    if ($product_bundle == 'uh_recurring_digital') {
+      // Set theme hook.
+      $form['#theme'][] = 'commerce_order_item_add_to_cart_form__uh_recurring_digital';
     }
   }
 

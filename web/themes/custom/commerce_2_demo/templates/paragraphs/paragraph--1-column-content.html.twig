@@ -38,13 +38,18 @@
  * @ingroup themeable
  */
 #}
+{% if content.field_unique_class|render|trim is not empty  %}
+  {% set unique_class = paragraph.field_unique_class.value|striptags %}
+{% endif %}
+
 {%
-set classes = [
-'paragraph',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
-'paragraph--type--1-column-content',
-view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-]
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--type--1-column-content',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    unique_class ? unique_class,
+  ]
 %}
 
 {% block paragraph %}

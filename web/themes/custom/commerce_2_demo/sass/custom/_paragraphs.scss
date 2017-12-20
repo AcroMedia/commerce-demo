@@ -1,4 +1,8 @@
 /**
+ * NOTE: See bottom of document for class override section.
+ */
+
+/**
  * Paragraph general.
  */
 .paragraph {
@@ -144,6 +148,7 @@
 
   .paragraph--type--2-column-image-content__content {
 
+    // Links field.
     .field--name-field-unlimited-cta-links {
       .field__item {
         display: inline-block;
@@ -186,6 +191,31 @@
 
         @media (max-width: $screen-xs-max) {
           font-size: 18px;
+        }
+      }
+
+      // Button with video link class applied (via jQuery).
+      a.video-link {
+        vertical-align: middle;
+        margin: 0 16px 0 0;
+        padding: 8px 0;
+        border: none;
+        background: transparent;
+        text-transform: none;
+        letter-spacing: normal;
+        color: #fff;
+
+        &:before {
+          display: inline-block;
+          position: relative;
+          top: 1px;
+          padding-right: 8px;
+          font-family: $f-fontawesome;
+          content: '\f144';
+        }
+
+        &:hover, &:focus {
+          text-decoration: underline;
         }
       }
     }
@@ -320,6 +350,12 @@
     padding-bottom: 10px;
     text-align: center;
 
+    @media (min-width: $screen-md-min) {
+      .slick-track {
+        transform: translate3d(0, 0, 0) !important;
+      }
+    }
+
     .slick-list {
       display: inline-block;
       width: calc(100% - 100px);
@@ -445,6 +481,36 @@
       a.btn {
         margin: 0;
         background: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
+
+/**
+ * Class overrides.
+ *
+ * Some paragraphs have a 'unique class' field for specific customization.
+ * Classes that are often reused are customized here.
+ * Standalone page/template specific overrides are customized in that page's scss file.
+ */
+.paragraph {
+  // Title.
+  &.large-title {
+    h2.paragraph-title {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: $gray-dark;
+      font-family: $f-tertiary;
+      font-size: 45px;
+      line-height: 1.2;
+      text-transform: none;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 36px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 36px;
       }
     }
   }

@@ -46,24 +46,6 @@
   .product__content--top .paragraph.paragraph--type--1-column-content {
     margin-bottom: 15px;
 
-    h2.paragraph-title {
-      margin-top: 10px;
-      margin-bottom: 20px;
-      color: $gray-dark;
-      font-family: $f-tertiary;
-      font-size: 45px;
-      line-height: 1.2;
-      text-transform: none;
-
-      @media (max-width: $screen-sm-max) {
-        font-size: 36px;
-      }
-
-      @media (max-width: $screen-xs-max) {
-        font-size: 36px;
-      }
-    }
-
     .uh-axe-get-started {
       position: relative;
       margin-top: 20px;
@@ -102,50 +84,12 @@
   .paragraph.paragraph--type--2-column-image-content {
     background: url(../gfx/product/uh-axe/uh-stacked-firewood-bg.jpg) repeat;
 
-    // Button with video link class applied.
-    .paragraph--type--2-column-image-content__content {
-      .field--name-field-unlimited-cta-links {
-        a.video-link {
-          vertical-align: middle;
-          margin: 0 16px 0 0;
-          padding: 8px 0;
-          border: none;
-          background: transparent;
-          text-transform: none;
-          letter-spacing: normal;
-          color: #fff;
-
-          &:before {
-            display: inline-block;
-            position: relative;
-            top: 1px;
-            padding-right: 8px;
-            font-family: $f-fontawesome;
-            content: '\f144';
-          }
-
-          &:hover, &:focus {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-
     .paragraph--type--2-column-image-content__content-left:after,
     .paragraph--type--2-column-image-content__content-right:after {
       opacity: 0;
 
       @media (max-width: $screen-xs-max) {
         opacity: .75;
-      }
-    }
-  }
-
-  // Paragraph - Slick slider thumbs.
-  .paragraph.paragraph--type--uh-axe-slider .slick-slider__uh-axe-thumbs {
-    @media (min-width: $screen-md-min) {
-      .slick-track {
-        transform: translate3d(0, 0, 0) !important;
       }
     }
   }

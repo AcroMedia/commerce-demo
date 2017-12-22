@@ -131,12 +131,10 @@ base-demo-to-uat:
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
     - ssh-add <(echo "$DEPLOY_KEY_UAT")
 
-    # For Docker builds disable host key checking. Be aware that by adding that
-    # you are susceptible to man-in-the-middle attacks.
-    # WARNING: Use this only with the Docker executor, if you use it with shell
-    # you will overwrite your user's SSH config.
+    # Add the fingerprint for the host to known hosts so we can verify it.
+    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
     - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
     #move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
@@ -168,12 +166,10 @@ plus-demo-to-uat:
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
     - ssh-add <(echo "$DEPLOY_KEY_UAT")
 
-    # For Docker builds disable host key checking. Be aware that by adding that
-    # you are susceptible to man-in-the-middle attacks.
-    # WARNING: Use this only with the Docker executor, if you use it with shell
-    # you will overwrite your user's SSH config.
+    # Add the fingerprint for the host to known hosts so we can verify it.
+    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
     - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
     #move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
@@ -207,12 +203,10 @@ base-demo-to-live:
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
     - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
 
-    # For Docker builds disable host key checking. Be aware that by adding that
-    # you are susceptible to man-in-the-middle attacks.
-    # WARNING: Use this only with the Docker executor, if you use it with shell
-    # you will overwrite your user's SSH config.
+    # Add the fingerprint for the host to known hosts so we can verify it.
+    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
     - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
@@ -245,12 +239,10 @@ plus-demo-to-live:
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
     - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
 
-    # For Docker builds disable host key checking. Be aware that by adding that
-    # you are susceptible to man-in-the-middle attacks.
-    # WARNING: Use this only with the Docker executor, if you use it with shell
-    # you will overwrite your user's SSH config.
+    # Add the fingerprint for the host to known hosts so we can verify it.
+    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
     - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/

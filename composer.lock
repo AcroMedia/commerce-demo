@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c498bc0d3035ee22a824f0a7615a3e80",
+    "content-hash": "4f36971e57055bc2e897a7c24f1e87b9",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1954,7 +1954,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce",
-                "reference": "e83802a28ae9539740f6a6a4b129606d8efd6151"
+                "reference": "a28da927c519206909a97c1ba1f689b46a52d8c0"
             },
             "require": {
                 "commerceguys/intl": "~0.7",
@@ -1984,15 +1984,15 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.2+9-dev",
-                    "datestamp": "1513727284",
+                    "version": "8.x-2.2+11-dev",
+                    "datestamp": "1513816685",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 },
                 "patches_applied": {
-                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-2.patch",
+                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-3.patch",
                     "#2901504: Provide limit by no of orders per user condition for promotions in commerce core": "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch"
                 }
             },
@@ -2027,7 +2027,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
             },
-            "time": "2017-12-19 23:59:21"
+            "time": "2017-12-21 00:38:35"
         },
         {
             "name": "drupal/commerce_authnet",
@@ -2324,7 +2324,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta1",
-                    "datestamp": "1512047286",
+                    "datestamp": "1513792384",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f36971e57055bc2e897a7c24f1e87b9",
+    "content-hash": "06ea23f80374d23c9dff08998ced6ae9",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1992,7 +1992,7 @@
                     }
                 },
                 "patches_applied": {
-                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-3.patch",
+                    "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-5.patch",
                     "#2901504: Provide limit by no of orders per user condition for promotions in commerce core": "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch"
                 }
             },

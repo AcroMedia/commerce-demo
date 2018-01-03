@@ -258,7 +258,7 @@ function commerce_2_demo_preprocess_taxonomy_term(&$variables) {
  */
 function commerce_2_demo_theme($existing, $type, $theme, $path) {
   return [
-    'commerce_order_item_add_to_cart_form__uh_axe' => [
+    'add_to_cart_form__uh_axe' => [
       'render element' => 'form',
       'path' => $path . '/templates/commerce',
     ],
@@ -287,7 +287,7 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
     // UH Axe.
     if ($product_bundle == 'uh_axe') {
       // Set theme hook.
-      $form['#theme'][] = 'commerce_order_item_add_to_cart_form__uh_axe';
+      $form['#theme'][] = 'add_to_cart_form__uh_axe';
 
       // Get length attribute and set template variable.
       $uh_axe_length = [];

@@ -1,0 +1,19 @@
+{#
+/**
+* @file
+*
+* Custom UH+ Recurring Digital add to cart form.
+*
+* @see commerce_2_demo_form_alter() and uh_commerce custom module.
+*
+* @ingroup themeable
+*/
+#}
+
+{%
+  set variation = form['#variation']
+%}
+<div class="plan-selection">
+  <h3>TEST {{ variation.getTitle }}</h3>
+  {{ form }}
+</div>

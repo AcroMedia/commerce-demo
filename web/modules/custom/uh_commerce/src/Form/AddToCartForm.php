@@ -35,24 +35,32 @@ class AddToCartForm extends CoreAddToCardForm {
    * {@inheritdoc}
    */
   protected function actions(array $form, FormStateInterface $form_state) {
-    /** @var \Drupal\commerce_product\Entity\ProductVariationInterface $purchased_entity */
-    $purchased_entity = $form_state->get('variation');
+    // Get product type (bundle) from storage.
+    $storage = &$form_state->getStorage();
+    $product_bundle = $storage['product']->bundle();
+    $form['#product_bundle'] = $product_bundle;
 
-    // Submit button value (default and alternate user submitted).
-    $submit_button_value = 'Add to cart';
-    if (!empty($purchased_entity->get('field_alternate_button_label')->getValue())) {
-      $submit_button_value = $purchased_entity->get('field_alternate_button_label')->getValue()[0]['value'];
+    // UH Recurring Digital.
+    if ($product_bundle == 'uh_recurring_digital') {
+      /** @var \Drupal\commerce_product\Entity\ProductVariationInterface $purchased_entity */
+      $purchased_entity = $form_state->get('variation');
+
+      // Submit button value (default and alternate user submitted).
+      $submit_button_value = 'Add to cart';
+      if (!empty($purchased_entity->get('field_alternate_button_label')->getValue())) {
+        $submit_button_value = $purchased_entity->get('field_alternate_button_label')->getValue()[0]['value'];
+      }
+
+      // Set the button value.
+      $actions['submit'] = [
+        '#type' => 'submit',
+        '#value' => $this->t($submit_button_value),
+        '#submit' => ['::submitForm'],
+        '#name' => 'plan_' . Html::getId($purchased_entity->getSku()),
+      ];
+
+      return $actions;
     }
-
-    // Set the button value.
-    $actions['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t($submit_button_value),
-      '#submit' => ['::submitForm'],
-      '#name' => 'plan_' . Html::getId($purchased_entity->getSku()),
-    ];
-
-    return $actions;
   }
 
 

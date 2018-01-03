@@ -1,0 +1,16 @@
+{#
+/**
+* @file
+* Custom UH+ Recurring Digital add to cart form.
+*
+* @ingroup themeable
+*/
+#}
+
+{%
+  set variation = form['#variation']
+%}
+<div class="plan-selection">
+  <h3>{{ variation.getTitle }}</h3>
+  {{ form }}
+</div>

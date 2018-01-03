@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ *
+ * UH+ Commerce module.
+ */
+
+/**
+ * Implements hook_theme($existing, $type, $theme, $path).
+ */
+function uh_commerce_theme($existing, $type, $theme, $path) {
+  return [
+    'add_to_cart_form__uh_recurring_digital' => [
+      'render element' => 'form',
+    ],
+  ];
+}

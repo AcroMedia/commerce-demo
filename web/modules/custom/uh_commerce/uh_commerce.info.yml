@@ -1,0 +1,8 @@
+name: UH+ Commerce
+description: UH+ enhancements for Drupal Commerce.
+core: 8.x
+type: module
+dependencies:
+  - commerce
+  - commerce_cart
+  - commerce_checkout

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "06ea23f80374d23c9dff08998ced6ae9",
+    "content-hash": "66b2cb61d3561eff6d8122aef958ce91",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1954,7 +1954,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce",
-                "reference": "a28da927c519206909a97c1ba1f689b46a52d8c0"
+                "reference": "2f051d5b75ce68a0c858e0d63b5919d40f6a1675"
             },
             "require": {
                 "commerceguys/intl": "~0.7",
@@ -1984,8 +1984,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.2+11-dev",
-                    "datestamp": "1513816685",
+                    "version": "8.x-2.2+13-dev",
+                    "datestamp": "1514476384",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -1993,7 +1993,8 @@
                 },
                 "patches_applied": {
                     "#2882905: Adds unique identifier for stored payment methods": "https://www.drupal.org/files/issues/add_unique_identifier_for_stored_payment_methods-2882905-5.patch",
-                    "#2901504: Provide limit by no of orders per user condition for promotions in commerce core": "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch"
+                    "#2901504: Provide limit by no of orders per user condition for promotions in commerce core": "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch",
+                    "#2770731: Add a display name to promotions": "https://www.drupal.org/files/issues/adjustment_label_how-2770731-20.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2027,7 +2028,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
             },
-            "time": "2017-12-21 00:38:35"
+            "time": "2017-12-28 16:11:05"
         },
         {
             "name": "drupal/commerce_authnet",

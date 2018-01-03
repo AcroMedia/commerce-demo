@@ -23,6 +23,12 @@ body {
   display: flex;
 }
 
+.site-content .row-sidebar.row-eq-height {
+  @media (max-width: $screen-xs-max) {
+    display: block;
+  }
+}
+
 /**
  * Typography.
  */

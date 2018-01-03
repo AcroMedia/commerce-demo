@@ -52,7 +52,7 @@
 #}
 {% set page_sidebar_rendered = render_var(page.page_sidebar) %}
 {# Set row and column class based on sidebar. #}
-{% set row_class = page_sidebar_rendered ? 'row-eq-height' %}
+{% set row_class = page_sidebar_rendered ? 'row-sidebar row-eq-height' %}
 {% set col_class = page_sidebar_rendered ? 'col-sm-9 col-md-10' : 'col-sm-12' %}
 
 {# Site Header. #}

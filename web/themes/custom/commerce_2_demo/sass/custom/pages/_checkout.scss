@@ -232,11 +232,7 @@
   }
 
   .order-total {
-    float: right;
-
-    @media (max-width: $screen-sm) {
-      clear: both;
-    }
+    width: 100%;
   }
 
   .order-total-line {
@@ -244,11 +240,11 @@
     text-align: right;
 
     .order-total-line-label {
-      width: calc(100% - 155px);
+      width: calc(100% - 105px);
     }
 
     .order-total-line-value {
-      width: 150px;
+      width: 100px;
     }
   }
 

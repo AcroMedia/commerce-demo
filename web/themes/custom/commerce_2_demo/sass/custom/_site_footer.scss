@@ -226,22 +226,3 @@
     }
   }
 }
-
-/**
- * Sticky footer.
- */
-html {
-  height: 100%;
-}
-body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.site-header,
-.site-footer {
-  flex: none;
-}
-.site-content {
-  flex: 1 0 auto;
-}

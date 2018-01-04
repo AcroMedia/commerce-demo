@@ -32,6 +32,14 @@ uh-axe:
     - core/jquery
     - core/drupal
 
+uh-recurring-digital:
+  version: 1.x
+  js:
+    js/custom/plus/uh-recurring-digital.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
 slider:
   version: 1.x
   js:

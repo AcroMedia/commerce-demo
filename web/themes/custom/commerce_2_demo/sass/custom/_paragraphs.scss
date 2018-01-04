@@ -60,17 +60,11 @@
   .paragraph--type--2-column-image-content__image-left,
   .paragraph--type--2-column-image-content__image-right {
     width: 50%;
+    min-height: 535px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     position: relative;
-  }
-
-  .paragraph--type--2-column-image-content__image-left {
-    min-height: 535px;
-  }
-  .paragraph--type--2-column-image-content__image-right {
-    min-height: 535px;
   }
 
   @media (min-width: 1550px) {
@@ -87,6 +81,10 @@
   }
 
   @media (max-width: $screen-md-max) {
+    .paragraph--type--2-column-image-content__image-left,
+    .paragraph--type--2-column-image-content__image-right {
+      min-height: auto;
+    }
     .paragraph--type--2-column-image-content__image-left {
       background-position-x: 63%;
     }

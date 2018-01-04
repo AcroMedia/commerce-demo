@@ -31,8 +31,10 @@
     </div>
 
     {% if product.variation_field_original_price[0]['#markup'] %}
+      <div class="price__starting-at">{{ 'Starting at'|t }}</div>
       {{ product.variation_field_original_price }}
     {% endif %}
+    <div class="price__starting-at">{{ 'Starting at'|t }}</div>
     {{ product.variation_price }}
     {{ product.title }}
     {{ product.field_brand }}

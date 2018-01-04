@@ -172,6 +172,12 @@
           }
         }
 
+        .price__starting-at {
+          margin-top: -3px;
+          font-size: 14px;
+          color: $c-primary;
+        }
+
         .field--name-price {
           width: 100%;
           margin-bottom: 8px;

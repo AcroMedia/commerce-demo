@@ -63,29 +63,212 @@
     }
   }
 
-  // Overall add to cart form.
-  div[id^='commerce-product-add-to-cart-form'] {
+  // Variation defaults.
+  .plan-formatter {
     margin-bottom: 17px;
 
-    h2 {
-      margin-top: 15px;
-      margin-bottom: 25px;
-      font-size: 30px;
-      letter-spacing: normal;
-      color: $gray-darker;
+    .field__item {
+      display: inline-block;
+      vertical-align: top;
+      width: 33%;
 
-      @media (max-width: $screen-xs-max) {
+      @media (max-width: $screen-sm-max) {
+        width: 100%;
         margin-bottom: 20px;
-        font-size: 28px;
+      }
+    }
+  }
+
+  .uh-plan {
+    .uh-plan__title {
+      padding: 3px 20px;
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: normal;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .uh-plan__body-wrapper {
+      padding-top: 10px;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 10px 20px 20px;
+        border-left: 1px solid $gray;
+        border-right: 1px solid $gray;
+        border-bottom: 1px solid $gray;
       }
     }
 
-    .field--name-price {
-      margin-bottom: 0;
+    .uh-plan__body {
+      font-size: 20px;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 18px;
+      }
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px;
+      }
+
+      ul {
+        margin-bottom: 0;
+
+        li {
+          margin-bottom: 8px;
+        }
+      }
+    }
+
+    .uh-plan__price-wrapper {
+      @media (max-width: 430px) {
+        text-align: center;
+      }
+    }
+
+    .uh-plan__price {
+      display: inline-block;
+      vertical-align: bottom;
       font-family: $f-tertiary;
       font-size: 50px;
       font-weight: 700;
-      color: #333;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 44px;
+      }
+    }
+
+    .uh-plan__billing-schedule-abbr {
+      display: inline-block;
+      vertical-align: bottom;
+      margin: 0 6px 6px 0;
+      font-size: 20px;
+      text-transform: uppercase;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 18px;
+      }
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px;
+      }
+    }
+
+    .uh-plan__disclaimer-label {
+      display: inline-block;
+      vertical-align: bottom;
+      font-family: $f-tertiary;
+      font-size: 42px;
+      font-weight: 700;
+      color: $c-primary;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 34px;
+      }
+    }
+
+    .uh-plan__action {
+      @media (max-width: 430px) {
+        text-align: center;
+      }
+
+      .btn {
+        min-width: 200px;
+        font-size: 20px;
+      }
+    }
+
+    .uh-plan__disclaimer {
+      position: relative;
+      padding: 10px 0 0 21px;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-family: $f-tertiary;
+        font-size: 33px;
+        font-weight: 700;
+        color: $c-primary;
+        content: '*';
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 14px;
+
+        &:before {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+
+  // Even/odd styles.
+  .field__item:nth-of-type(odd) {
+    .uh-plan__title {
+      background-color: #000;
+    }
+
+    .uh-plan__action {
+      .btn {
+        background-color: #000;
+        border-color: #000;
+
+        &:hover, &:focus {
+          background-color: $gray-darker;
+          border-color: $gray-darker;
+        }
+      }
+    }
+  }
+
+  .field__item:nth-of-type(even) {
+    .uh-plan__title {
+      background-color: $gray-dark;
+    }
+
+    .uh-plan__action {
+      .btn {
+        background-color: $gray-dark;
+        border-color: $gray-dark;
+
+        &:hover, &:focus {
+          background-color: $gray-darker;
+          border-color: $gray-darker;
+        }
+      }
+    }
+  }
+
+  // Highlight styles.
+  .uh-plan.uh-plan--highlight {
+
+    .uh-plan__title {
+      background-color: $c-primary;
+    }
+
+    .uh-plan__price {
+      position: relative;
+
+      &:before {
+        position: absolute;
+        content: "";
+        left: -5px;
+        top: 65%;
+        right: -8px;
+        border-top: 4px solid $c-primary;
+        transform:rotate(-15deg);
+      }
+    }
+
+    .uh-plan__action {
+      .btn {
+        background-color: $c-primary;
+        border-color: $c-primary;
+
+        &:hover, &:focus {
+          background-color: $c-primary-hover;
+          border-color: $c-primary-hover;
+        }
+      }
     }
   }
 }

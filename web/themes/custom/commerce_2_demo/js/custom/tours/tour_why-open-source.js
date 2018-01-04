@@ -18,7 +18,7 @@
         {
           // No element makes this tip float on center of page.
           intro: '<span class="introjs-tooltip__title">No Fees</span>' +
-          "Using Drupal and Drupal Commerce doesn't cost a thing. Zero, sip, silch, nada, nothing. It's yours."
+          "Using Drupal and Drupal Commerce doesn't cost a thing. Zip, zero, zilch, nada. It's yours."
           + '<br><br>' +
           "There are no licensing fees, revenue sharing, or mandatory support contracts. This reason alone is why many businesses prefer open source platforms."
         },

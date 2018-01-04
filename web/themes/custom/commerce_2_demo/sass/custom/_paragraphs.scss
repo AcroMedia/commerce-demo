@@ -494,6 +494,11 @@
  * Standalone page/template specific overrides are customized in that page's scss file.
  */
 .paragraph {
+  // Margin.
+  &.no-margin {
+    margin: 0;
+  }
+
   // Title.
   &.large-title {
     h2.paragraph-title {
@@ -501,7 +506,7 @@
       margin-bottom: 20px;
       color: $gray-dark;
       font-family: $f-tertiary;
-      font-size: 45px;
+      font-size: 50px;
       line-height: 1.2;
       text-transform: none;
 

@@ -10,10 +10,54 @@
 */
 #}
 
-{%
-  set variation = form['#variation']
-%}
-<div class="plan-selection">
-  <h3>TEST {{ variation.getTitle }}</h3>
-  {{ form }}
+{% set variation = form['#variation'] %}
+
+{% set highlight_class = "" %}
+
+{% if variation.field_boolean.value %}
+  {% set highlight_class = "uh-plan--highlight" %}
+{% endif %}
+
+<div class="plan-selection uh-plan {{ highlight_class }}">
+  {% if variation.field_title.value %}
+    <div class="uh-plan__title">
+      {{ variation.field_title.value }}
+    </div>
+  {% endif %}
+
+  <div class="uh-plan__body-wrapper">
+    {% if variation.field_formatted_text.value %}
+      <div class="uh-plan__body">
+        {{ variation.field_formatted_text.value|raw }}
+      </div>
+    {% endif %}
+
+    <div class="uh-plan__price-wrapper">
+      <div class="uh-plan__price">
+        {{ variation.getPrice|commerce_price_format}}
+      </div>
+
+      {% if variation.field_billing_schedule_abbr.value %}
+        <div class="uh-plan__billing-schedule-abbr">
+          {{ '/ ' ~ variation.field_billing_schedule_abbr.value }}
+        </div>
+      {% endif %}
+
+      {% if variation.field_disclaimer_label.value %}
+        <div class="uh-plan__disclaimer-label">
+          {{ variation.field_disclaimer_label.value }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="uh-plan__action">
+      {{ form }}
+    </div>
+
+    {% if variation.field_disclaimer.value %}
+      <div class="uh-plan__disclaimer">
+        {{ variation.field_disclaimer.value|raw }}
+      </div>
+    {% endif %}
+  </div>
 </div>

@@ -44,6 +44,10 @@
   }
 }
 
+.maintenance-page #siteTours-start.fixed-button {
+  display: none;
+}
+
 /* Tour selection modal - Modal content */
 
 #siteTours {

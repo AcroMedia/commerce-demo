@@ -64,6 +64,101 @@
       </div>
     </div>
 
+    {# Features & Specs. #}
+    <div class="features-and-specs">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="features-and-specs__title">{{ 'Features & Specifications'|t }}</h2>
+
+            {# Tabs. #}
+            <ul id="product-tabs" class="nav nav-tabs" role="tablist">
+              {% if product.field_interface_preview|render|trim is not empty %}
+                <li role="presentation">
+                  <a href="#interface" aria-controls="interface" role="tab" data-toggle="tab">
+                    {{ 'Interface'|t }}
+                  </a>
+                </li>
+              {% endif %}
+
+              {% if product.field_specifications|render|trim is not empty %}
+                <li role="presentation">
+                  <a href="#specifications" aria-controls="specifications" role="tab" data-toggle="tab">
+                    {{ 'Specifications'|t }}
+                  </a>
+                </li>
+              {% endif %}
+
+              <li role="presentation">
+                <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">
+                  {{ 'User Reviews'|t }} <span class="badge">{{ product_reviews_count }}</span>
+                </a>
+              </li>
+            </ul>
+
+            {# Tab content. #}
+            <div class="tab-content">
+              {# Interface. #}
+              {% if product.field_interface_preview|render|trim is not empty %}
+                <div role="tabpanel" class="tab-pane fade" id="interface">
+                  {% if product.field_interface_introduction|render|trim is not empty %}
+                    <div class="interface__introduction">
+                      {{ product.field_interface_introduction }}
+                    </div>
+                  {% endif %}
+
+                  <div class="interface__preview">
+                    {% if product.field_interface_images|render|trim is not empty %}
+                      <a href="#" class="interface__slideshow-link">
+                        <div class="interface__slideshow-prompt">
+                          {{ 'View Gallery'|t }}
+                        </div>
+                        {{ product.field_interface_preview }}
+                      </a>
+                    {% else %}
+                      {{ product.field_interface_preview }}
+                    {% endif %}
+                  </div>
+
+                  {% if product.field_interface_images|render|trim is not empty %}
+                    <div class="interface__slideshow">
+                      {{ product.field_interface_images }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {# Specifications. #}
+              {% if product.field_specifications|render|trim is not empty %}
+                <div role="tabpanel" class="tab-pane fade" id="specifications">
+                  {{ product.field_specifications }}
+                </div>
+              {% endif %}
+
+              {# Reviews. #}
+              <div role="tabpanel" class="tab-pane fade" id="reviews">
+                <input type="checkbox" id="submit-review">
+                <label class="btn btn-primary btn-sm" for="submit-review">Submit a Review</label>
+                <div class="review-rating">
+                  <p>Overall Rating</p>
+                  <span class="{{ rating_average >= 1 ? 'filled' : ''}}"></span>
+                  <span class="half {{ rating_average >= 1.5 ? 'filled' : ''}}"></span>
+                  <span class="{{ rating_average >= 2 ? 'filled' : ''}}"></span>
+                  <span class="half {{ rating_average >= 2.5 ? 'filled' : ''}}"></span>
+                  <span class="{{ rating_average >= 3 ? 'filled' : ''}}"></span>
+                  <span class="half {{ rating_average >= 3.5 ? 'filled' : ''}}"></span>
+                  <span class="{{ rating_average >= 4 ? 'filled' : ''}}"></span>
+                  <span class="half {{ rating_average >= 4.5 ? 'filled' : ''}}"></span>
+                  <span class="{{ rating_average == 5 ? 'filled' : ''}}"></span>
+                </div>
+                {{ product.field_product_reviews }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {# Bottom paragraphs. #}
     {% if product.field_paragraph_bottom|render|trim is not empty %}
       <div class="product__content product__content--bottom">

@@ -632,6 +632,10 @@ input:checked ~ .field--name-field-product-reviews > .comment-product-reviews-fo
   display: block;
 }
 
+.comment-product-reviews-form.comment-form .form-textarea-wrapper textarea {
+  max-width: 100%;
+}
+
 input#submit-review {
   display: none;
 }

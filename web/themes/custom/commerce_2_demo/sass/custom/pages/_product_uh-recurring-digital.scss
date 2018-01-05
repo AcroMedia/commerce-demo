@@ -35,16 +35,22 @@
   }
   .paragraph .page-title {
     display: block;
-    margin-bottom: -15px;
+    margin-bottom: -10px;
     color: #fff;
-    text-transform: uppercase;
     font-weight: 600;
+    font-family: $f-tertiary;
   }
 
   // Paragraph overrides.
   // Paragraph - 1 column content.
-  .product__content--top .paragraph.paragraph--type--1-column-content {
-
+  .paragraph.paragraph--type--1-column-content {
+    // Free Trial Button class.
+    &.free-trial-button {
+      a.btn {
+        font-size: 20px;
+        padding: 5px 30px;
+      }
+    }
   }
 
   // Paragraph - 2 column content.
@@ -215,19 +221,11 @@
         }
       }
     }
-
-    // Free Trial Button class.
-    &.free-trial-button {
-      .btn {
-        font-size: 20px;
-        padding: 5px 30px;
-      }
-    }
   }
 
   // Variation defaults.
   .plan-formatter {
-    margin-bottom: 17px;
+    margin-bottom: 70px;
 
     .field__item {
       display: inline-block;
@@ -433,4 +431,213 @@
       }
     }
   }
+
+  // Features & Specifications.
+  .features-and-specs {
+    padding: 30px 0;
+    margin-bottom: 60px;
+    background-color: $gray-light;
+
+    .features-and-specs__title {
+      margin-top: 10px;
+      margin-bottom: 25px;
+      color: $gray-dark;
+      font-family: $f-tertiary;
+      font-size: 50px;
+      line-height: 1.2;
+      text-align: center;
+      text-transform: none;
+      letter-spacing: 0;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 36px;
+      }
+    }
+  }
+
+  // Features & Specifications - Tab override styles.
+  .nav-tabs {
+    border-bottom: none;
+    text-align: center;
+
+    .badge {
+      margin-bottom: 3px;
+    }
+
+    & > li {
+      float: none;
+      display: inline-block;
+      vertical-align: middle;
+      margin: -2px 8px 0;
+
+      & > a {
+        padding: 4px 34px;
+        background-color: #fff;
+        border: 2px solid $gray-dark;
+        border-radius: 0;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $gray-dark;
+        transition: color .2s ease-in-out, background-color .2s ease-in-out, border .2s ease-in-out;
+
+        &:hover, &:focus {
+          border: 2px solid #000;
+          color: #000;
+        }
+      }
+
+      &.active > a {
+        background-color: $gray-dark;
+        color: #fff;
+
+        &:before {
+          top: -2px;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -14px;
+          width: 0;
+          height: 0;
+          border-top: solid 14px $gray-dark;
+          border-left: solid 14px transparent;
+          border-right: solid 14px transparent;
+
+          @media (max-width: $screen-xs-max) {
+            display: none;
+          }
+        }
+
+        &:hover, &:focus {
+          border: 2px solid $gray-dark;
+          background-color: $gray-dark !important;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    padding: 30px 0;
+    border: none;
+  }
+
+  // Features & Specifications - Interface.
+  .interface__introduction {
+    margin-bottom: 10px;
+    font-size: 20px;
+
+    @media (max-width: $screen-xs-max) {
+      p {
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .interface__slideshow-link {
+    position: relative;
+    display: block;
+
+    .interface__slideshow-prompt {
+      position: absolute;
+      z-index: 1;
+      top: 35%;
+      left: calc(50% - 140px);
+      width: 280px;
+      padding: 10px 20px 13px;
+      background-color: rgba(0,0,0,0.75);
+      opacity: 0;
+      border: 2px solid #fff;
+      font-size: 28px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
+      transition: opacity .2s ease-in-out, background-color .2s ease-in-out;
+    }
+
+    img {
+      opacity: 1;
+      transition: opacity .2s ease-in-out;
+    }
+
+    &:hover, &:focus {
+      .interface__slideshow-prompt {
+        opacity: 1;
+
+        &:hover, &:focus {
+          background-color: rgba(0,0,0,1);
+        }
+      }
+
+      img {
+        opacity: 0.65;
+      }
+    }
+  }
+
+  // Features & Specifications - Specs.
+  #specifications {
+    font-size: 20px;
+
+    @media (max-width: $screen-xs-max) {
+      p {
+        line-height: 1.5;
+      }
+    }
+
+    ul {
+      padding: 20px 0 0;
+      list-style: none;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        position: relative;
+        vertical-align: top;
+        width: 48%;
+        padding: 10px 15px 10px 50px;
+        margin: 0 5px 15px;
+        background-color: #fff;
+        border: 1px solid $gray-light;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        text-align: left;
+        transition: all .2s ease-in-out;
+
+        @media (max-width: $screen-sm-max) {
+          width: 90%;
+        }
+
+        &:before {
+          position: absolute;
+          top: 4px;
+          left: 15px;
+          font-family: $f-fontawesome;
+          font-size: 36px;
+          line-height: 36px;
+          content: '\f101';
+          color: $c-primary;
+          transition: all .1s ease-in-out;
+        }
+
+        &:hover, &:focus {
+          border: 1px solid $gray;
+          box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
+
+          &:before {
+            left: 18px;
+          }
+        }
+      }
+    }
+  }
+
+  // Features & Specifications - Reviews.
 }

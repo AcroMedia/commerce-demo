@@ -303,7 +303,8 @@
     $brandsMobile.slice(15).hide();
 
     // If too many options, show button.
-    if (($brandsDesktop.size() || $brandsMobile.size()) > 16) {
+    if (($brandsDesktop.length || $brandsMobile.length) > 16) {
+      // Show buttons.
       $(".site-sidebar--desktop #block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
       $(".site-sidebar--mobile #block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
     }

@@ -101,6 +101,7 @@
               {# Interface. #}
               {% if product.field_interface_preview|render|trim is not empty %}
                 <div role="tabpanel" class="tab-pane fade" id="interface">
+                  {# Introduction. #}
                   {% if product.field_interface_introduction|render|trim is not empty %}
                     <div class="interface__introduction">
                       {{ product.field_interface_introduction }}
@@ -108,7 +109,9 @@
                   {% endif %}
 
                   <div class="interface__preview">
+                    {# Link to gallery and load magnific popup if there are gallery images. #}
                     {% if product.field_interface_images|render|trim is not empty %}
+                      {{ attach_library('magnific_popup/magnific_popup') }}
                       <a href="#" class="interface__slideshow-link">
                         <div class="interface__slideshow-prompt">
                           {{ 'View Gallery'|t }}
@@ -120,6 +123,7 @@
                     {% endif %}
                   </div>
 
+                  {# Slideshow gallery images. #}
                   {% if product.field_interface_images|render|trim is not empty %}
                     <div class="interface__slideshow">
                       {{ product.field_interface_images }}

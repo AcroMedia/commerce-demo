@@ -250,7 +250,7 @@
     }
 
     .uh-plan__body-wrapper {
-      padding-top: 10px;
+      padding: 10px 15px 0;
 
       @media (max-width: $screen-sm-max) {
         padding: 10px 20px 20px;
@@ -293,7 +293,7 @@
       font-weight: 700;
 
       @media (max-width: $screen-md-max) {
-        font-size: 44px;
+        font-size: 42px;
       }
     }
 
@@ -321,7 +321,7 @@
       color: $c-primary;
 
       @media (max-width: $screen-md-max) {
-        font-size: 34px;
+        font-size: 32px;
       }
     }
 
@@ -536,6 +536,10 @@
         line-height: 1.5;
       }
     }
+  }
+
+  .interface__slideshow {
+    display: none;
   }
 
   .interface__slideshow-link {

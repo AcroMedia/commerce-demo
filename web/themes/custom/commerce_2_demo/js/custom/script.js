@@ -121,8 +121,8 @@
   $('#product-tabs a:first').tab('show'); // Show first tab initially
 
   $('#product-tabs a').click(function (e) {
-    e.preventDefault()
-    $(this).tab('show')
+    e.preventDefault();
+    $(this).tab('show');
   });
 
   // Make reviews tab active if it is the only tab.

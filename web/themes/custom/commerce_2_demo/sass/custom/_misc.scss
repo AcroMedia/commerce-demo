@@ -7,3 +7,29 @@
 .zopim {
   z-index: 999 !important;
 }
+
+
+/* Magnific Popup overrides */
+
+.mfp-fade.mfp-bg.mfp-ready {
+  opacity: 0.9;
+}
+
+// Content at start.
+.mfp-fade.mfp-wrap .mfp-content {
+  opacity: 0;
+
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+}
+
+// Content animate in.
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+}
+
+// Content animate out.
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+}

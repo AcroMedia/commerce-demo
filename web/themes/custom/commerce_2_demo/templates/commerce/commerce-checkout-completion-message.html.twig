@@ -21,7 +21,7 @@
     </div>
   {% endif %}
 
-  {# Show files for digital order types #}
+  {# Show files for digital order types. #}
   {% if order_type.entity.id == 'digital' %}
     <h2>{{ 'Your downloads'|t }}</h2>
     <div class="checkout-complete__digital">
@@ -30,6 +30,39 @@
           <a href="{{ file_url(file.entity.field_file.entity.fileuri) }}" class="checkout-complete__file" title="{{ file.entity.title.value }}">
             {{ file.entity.title.value }}
           </a>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# For digital_recurring order types. #}
+  {% if order_type.entity.id == 'digital_recurring' %}
+    <h2>{{ 'Your subscription is active!'|t }}</h2>
+    <div class="checkout-complete__digital-recurring">
+      {% for order_item in order_items %}
+        {% for purchased_entity in order_item.purchased_entity %}
+
+          {# If uh_recurring_digital type. #}
+          {% if purchased_entity.entity.type.entity.id == 'uh_recurring_digital' %}
+            <table class="table">
+              <tbody>
+              <tr>
+                <td><strong>{{ 'Download'|t }}:</strong></td>
+                <td><a href="#" title="{{ 'Link for example purposes only'|t }}">Click here</a></td>
+              </tr>
+              <tr>
+                <td><strong>{{ 'License Key'|t }}:</strong></td>
+                <td>XXXX-XXXX-XXXX-1234</td>
+              </tr>
+              </tbody>
+            </table>
+            {% trans %}
+              <p>This information is also available on your account page when logged in.</p>
+
+              <p><strong>Note:</strong> The software license key provided is for example purposes only. <a href="https://www.acromedia.com/contact-us" target="_blank" title="Go to Acro Media's contact page">Talk to us</a> about your recurring billing or license integration requirements.</p>
+            {% endtrans %}
+          {% endif %}
+
         {% endfor %}
       {% endfor %}
     </div>

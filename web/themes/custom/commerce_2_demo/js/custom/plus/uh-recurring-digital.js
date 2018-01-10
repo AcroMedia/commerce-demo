@@ -15,8 +15,8 @@
 
   // Paragraph buttons.
   $('.product--full--uh-recurring-digital .paragraph a').each(function (event) {
-    // If Free Trial link.
-    if (($(this).text().toLowerCase() === 'try 1-month free!') || ($(this).text().toLowerCase() === 'free 30-day trial')) {
+    // If Free Trial or View Pricing link.
+    if (($(this).text().toLowerCase() === 'try 1-month free!') || ($(this).text().toLowerCase() === 'free 30-day trial')  || ($(this).text().toLowerCase() === 'view pricing')) {
       // Add highlight class.
       $(this).addClass('highlight');
       // Add click event.

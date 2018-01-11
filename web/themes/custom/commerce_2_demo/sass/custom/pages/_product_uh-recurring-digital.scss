@@ -47,8 +47,12 @@
     // Free Trial Button class.
     &.free-trial-button {
       a.btn {
+        padding: 8px 25px;
+        border-radius: 0;
         font-size: 20px;
-        padding: 5px 30px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
     }
   }
@@ -332,7 +336,11 @@
 
       .btn {
         min-width: 200px;
+        padding: 8px 27px;
         font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
       }
     }
 
@@ -642,6 +650,23 @@
       }
     }
   }
+}
 
-  // Features & Specifications - Reviews.
+
+/**
+ * Cart overrides.
+ */
+
+.cart-block--contents form[data-order-type="digital_recurring"] {
+  .views-field-quantity {
+    display: none;
+  }
+}
+
+.view-commerce-cart-form .order-type-digital_recurring {
+  // Hide table data that isn't needed for this order type.
+  .views-field-unit-price__number,
+  .views-field-edit-quantity {
+    display: none;
+  }
 }

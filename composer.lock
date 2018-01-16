@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1f11f9c78b6a5cfee0fb229b3f9193c",
+    "content-hash": "18dbcce832c18812040cffb1298076c3",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -1946,6 +1946,58 @@
             "homepage": "https://www.drupal.org/project/color_field",
             "support": {
                 "source": "http://cgit.drupalcode.org/color_field"
+            }
+        },
+        {
+            "name": "drupal/comments_order",
+            "version": "1.0.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/comments_order",
+                "reference": "8.x-1.0-beta2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/comments_order-8.x-1.0-beta2.zip",
+                "reference": "8.x-1.0-beta2",
+                "shasum": "6a3c0adb571fdc861df0727cd347e4541c7d5f83"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta2",
+                    "datestamp": "1505476443",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "madlobz",
+                    "homepage": "https://www.drupal.org/user/769176"
+                }
+            ],
+            "description": "This module allows to set order for node comments",
+            "homepage": "https://www.drupal.org/project/comments_order",
+            "keywords": [
+                "Comment",
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/comments_order",
+                "issues": "https://www.drupal.org/project/issues/comments_order"
             }
         },
         {
@@ -9778,6 +9830,7 @@
         "drupal/advancedqueue": 10,
         "drupal/physical": 5,
         "drupal/taxonomy_term_depth": 20,
+        "drupal/comments_order": 10,
         "drupal/devel": 20
     },
     "prefer-stable": true,

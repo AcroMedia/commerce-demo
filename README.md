@@ -36,7 +36,7 @@ __Requirements__
 * PHP 7.1 (or 7.0 with [this patch](https://www.drupal.org/node/2898119))
 * MariaDB, MSQL, or equivalent
 * Apache, NGINX, or equivalent
-* Apache SOLR
+* Apache Solr 5.5
 * General knowledge on how to setup a website server and use these tools
 
 __To setup the demo__
@@ -45,12 +45,12 @@ __To setup the demo__
 3. Extract `dumps/files.tar.gz` into `web/sites/default`.
 4. Create a database and import `dumps/database.sql`.
 5. Configure your `settings.php` or `local.settings.php` to use the newly created database.
-6. Setup an Apache SOLR core for the site to use.
+6. Setup an Apache Solr core for the site to use (use Solr 5.x).
 7. Get your hosting setup (local or otherwise). The web root is `/web`.
 8. View the site!
 9. Login with username and password as `demoadmin`.
     - NOTE: demoadmin does have some restrictions. If you'd prefer to login as a full admin, use Drush from the `/web` root to get a one-time admin login. Drush 9.0 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
-10. Enter your SOLR core within ‘Configure Standard SOLR Connector’ at `yoursite.com/admin/config/search/search-api/server/solr_5/edit`.
+10. Enter your Solr core within ‘Configure Standard Solr Connector’ at `yoursite.com/admin/config/search/search-api/server/solr_5/edit`.
 11. Reindex the products at `yoursite.com/admin/config/search/search-api/index/products`.
 
 ## Issues

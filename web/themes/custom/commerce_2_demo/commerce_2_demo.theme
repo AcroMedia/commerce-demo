@@ -157,11 +157,6 @@ function commerce_2_demo_preprocess_node(&$variables) {
       if (isset($node->field_carousel_slide_image_sml->entity)) {
         $variables['slide_mobile_image_url'] = ImageStyle::load('homepage_carousel_slide_image_mobile')->buildUrl($node->field_carousel_slide_image_sml->entity->getFileUri());
       }
-      // Link URL.
-      if (isset($node->field_carousel_slide_link->uri)) {
-        $carousel_link = $node->field_carousel_slide_link->uri;
-        $variables['slide_link_url'] = Url::fromUri($carousel_link);
-      }
     }
 
     // Blog Post.

@@ -12,6 +12,12 @@
  * @see template_preprocess_node()
  */
 #}
+{% if node.field_boolean.value == '1' %}
+  {% set slide_link_url = node.field_carousel_slide_link.uri|replace({'internal:': ''}) %}
+{% else %}
+  {% set slide_link_url = content.field_carousel_slide_link.0['#url'] %}
+{% endif %}
+
 <div class="homepage-carousel-slide">
   {% if slide_link_url and not node.field_carousel_slide_link.title %}
     <a href="{{ slide_link_url }}" class="homepage-carousel-slide__link-wrapper">

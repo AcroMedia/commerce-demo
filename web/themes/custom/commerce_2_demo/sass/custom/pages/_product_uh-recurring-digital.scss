@@ -413,6 +413,21 @@
       background-color: $c-primary;
     }
 
+    .uh-plan__action {
+      .btn {
+        background-color: $c-primary;
+        border-color: $c-primary;
+
+        &:hover, &:focus {
+          background-color: $c-primary-hover;
+          border-color: $c-primary-hover;
+        }
+      }
+    }
+  }
+
+  // Price strikethrough styles.
+  .uh-plan.uh-plan--price-strikethrough {
     .uh-plan__price {
       position: relative;
 
@@ -424,18 +439,6 @@
         right: -8px;
         border-top: 4px solid $c-primary;
         transform:rotate(-15deg);
-      }
-    }
-
-    .uh-plan__action {
-      .btn {
-        background-color: $c-primary;
-        border-color: $c-primary;
-
-        &:hover, &:focus {
-          background-color: $c-primary-hover;
-          border-color: $c-primary-hover;
-        }
       }
     }
   }

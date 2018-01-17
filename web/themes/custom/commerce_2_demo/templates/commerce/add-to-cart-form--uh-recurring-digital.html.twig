@@ -13,12 +13,16 @@
 {% set variation = form['#variation'] %}
 
 {% set highlight_class = "" %}
-
 {% if variation.field_boolean.value %}
-  {% set highlight_class = "uh-plan--highlight" %}
+  {% set highlight_class = " uh-plan--highlight" %}
 {% endif %}
 
-<div class="plan-selection uh-plan {{ highlight_class }}">
+{% set strikethrough_class = "" %}
+{% if variation.field_price_strikethrough.value %}
+  {% set strikethrough_class = " uh-plan--price-strikethrough" %}
+{% endif %}
+
+<div class="plan-selection uh-plan{{ highlight_class }}{{ strikethrough_class }}">
   {% if variation.field_title.value %}
     <div class="uh-plan__title">
       {{ variation.field_title.value }}

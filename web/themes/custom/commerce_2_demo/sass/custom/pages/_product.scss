@@ -678,6 +678,7 @@ input#submit-review {
     color: #c5c5c5;
     float: right;
     font-size: 0;
+    cursor: pointer;
   }
 
   .fieldset-wrapper > div > input:checked ~ label {

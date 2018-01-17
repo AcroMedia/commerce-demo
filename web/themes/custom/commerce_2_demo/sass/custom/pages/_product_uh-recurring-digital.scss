@@ -7,7 +7,7 @@
  */
 
 // Layout.
-.path-product-sir-mix-bittm {
+.path-product-sir-mix-a-bit {
   .primary-nav {
     border-bottom: none;
   }
@@ -571,12 +571,21 @@
       text-align: center;
       color: #fff;
       box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
+      outline: none;
       transition: opacity .2s ease-in-out, background-color .2s ease-in-out;
+
+      @media (max-width: $screen-md-max) {
+        opacity: 1;
+      }
     }
 
     img {
       opacity: 1;
       transition: opacity .2s ease-in-out;
+
+      @media (max-width: $screen-md-max) {
+        opacity: 0.7;
+      }
     }
 
     &:hover, &:focus {

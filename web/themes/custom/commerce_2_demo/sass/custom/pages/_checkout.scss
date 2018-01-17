@@ -321,8 +321,15 @@
 /**
  * Login.
  */
-.form-wrapper__returning-customer .form-optional {
-  display: none;
+.form-wrapper__returning-customer,
+.form-wrapper__guest-checkout {
+  .form-optional {
+    display: none;
+  }
+}
+
+.form-wrapper__guest-checkout .form-item:first-of-type {
+  margin-top: 0;
 }
 
 .form-wrapper__login-option input.button,

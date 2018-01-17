@@ -131,9 +131,9 @@
 
             <div role="tabpanel" class="tab-pane fade" id="reviews">
               <input type="checkbox" id="submit-review">
-              <label class="btn btn-primary btn-sm" for="submit-review">Submit a Review</label>
+              <label class="btn btn-primary btn-sm" for="submit-review">{{ 'Submit a Review'|t }}</label>
               <div class="review-rating">
-                <p>Overall Rating</p>
+                <p>{{ 'Overall Rating'|t }}</p>
                 <span class="{{ rating_average >= 1 ? 'filled' : ''}}"></span>
                 <span class="half {{ rating_average >= 1.5 ? 'filled' : ''}}"></span>
                 <span class="{{ rating_average >= 2 ? 'filled' : ''}}"></span>

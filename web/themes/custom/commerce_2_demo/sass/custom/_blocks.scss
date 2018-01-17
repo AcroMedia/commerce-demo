@@ -99,7 +99,29 @@
  * 3 CTAs block.
  */
 .block-type-3-ctas {
+  position: relative;
   text-align: center;
+
+  h2 {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 30px;
+    padding: 0 25px;
+    background-color: #fff;
+    font-size: 24px;
+  }
+
+  // Only appears if h2 title is displayed.
+  .underline {
+    display: inline-block;
+    position: absolute;
+    top: 44px;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    border-bottom: 1px solid $gray;
+  }
 
   a {
     display: inline-block;
@@ -121,6 +143,14 @@
       img {
         opacity: 0.85;
       }
+    }
+  }
+
+  // Unique class modifiers.
+  .link-bottom {
+    a .field-item__title {
+      top: 85%;
+      transform: translateX(-50%);
     }
   }
 }

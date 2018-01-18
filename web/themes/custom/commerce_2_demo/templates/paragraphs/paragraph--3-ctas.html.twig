@@ -55,7 +55,13 @@
     {% block content %}
       {# Linked CTA. #}
       {% if content.field_link_cta_link|render|trim is not empty  %}
-        <a href="{{ content.field_link_cta_link[0]['#url'] }}" aria-label="{{ content.field_link_cta_link[0]['#title'] }}">
+        {% if paragraph.field_boolean.value == '1' %}
+          {% set link_url = paragraph.field_link_cta_link.uri|replace({'internal:': ''}) %}
+        {% else %}
+          {% set link_url = content.field_link_cta_link.0['#url'] %}
+        {% endif %}
+
+        <a href="{{ link_url }}" aria-label="{{ content.field_link_cta_link[0]['#title'] }}">
           {# CTA content. #}
           {{ content.field_cta_image_small }}
           <div class="field-item__title btn btn-secondary">{{ content.field_link_cta_link[0]['#title'] }}</div>

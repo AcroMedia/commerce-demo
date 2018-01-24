@@ -284,6 +284,11 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       // Set theme hook.
       $form['#theme'][] = 'add_to_cart_form__uh_axe';
 
+      // Alter attribute titles.
+      $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_length']['#title'] = t('Length');
+      $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_weight']['#title'] = t('Head Weight');
+      $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_finish']['#title'] = t('Handle Finish');
+
       // Get length attribute and set template variable.
       $uh_axe_length = [];
       $uh_axe_length_key = 0;

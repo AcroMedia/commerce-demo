@@ -327,7 +327,8 @@
       text-align: center;
     }
 
-    div[id^='commerce-product-add-to-cart-form'] {
+    // Attribut widgets.
+    .attribute-widgets {
       margin-bottom: 0;
 
       fieldset {

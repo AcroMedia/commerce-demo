@@ -75,3 +75,7 @@ If those don’t help, Google the issue or submit an issue to our issue queue. G
 ### Let us set it up for you (and other stuff)
 
 If you’re a business and interested in having Acro Media setup the demo for you, or if you’d like to talk to us about something else, [contact us!](https://www.acromedia.com/contact-us).
+
+## Photo Credits
+
+The photos used in this website have been provided by the generous community of photographers at [Unsplash](https://unsplash.com) ([view license](https://unsplash.com/license)).

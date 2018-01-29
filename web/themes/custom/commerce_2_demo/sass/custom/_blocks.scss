@@ -334,11 +334,12 @@
   padding: 15px;
   margin-bottom: 20px;
   text-align: center;
-  background: #000 url(../gfx/icon-heart-big.svg) 11% 20% no-repeat;
-  background-size: 368px 234px;
+  background: #000 url(../gfx/logo-icon-invert-watermark.svg) 10% 50% no-repeat;
+  background-size: 200px 200px;
 
   @media (max-width: $screen-sm-max) {
-    background-position: 49% center;
+    background-position: 50% center;
+    background-size: 300px 300px;
   }
 
   &:before {
@@ -346,10 +347,10 @@
     position: relative;
     vertical-align: middle;
     margin-right: 5px;
-    width: 128px;
-    height: 81px;
-    background: url(../gfx/icon-heart.svg) center center no-repeat;
-    background-size: 128px 81px;
+    width: 85px;
+    height: 85px;
+    background: url(../gfx/logo-icon-invert.svg) center center no-repeat;
+    background-size: 85px 85px;
     content: '';
 
     @media (max-width: $screen-sm-max) {
@@ -381,6 +382,7 @@ form.newsletter-signup-form {
     font-size: 28px;
     text-transform: uppercase;
     color: #fff;
+    letter-spacing: 0.02em;
   }
 
   h3 {

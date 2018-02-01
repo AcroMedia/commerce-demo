@@ -600,6 +600,11 @@
 .product-slider__main-slider {
   margin: 0 0 10px 0;
   padding: 0;
+  display: none;
+
+  &.slick-initialized {
+    display: block;
+  }
 }
 .product-slider__main-slider__item {
 
@@ -667,11 +672,16 @@
 
 // Product Slider - Nav Slider.
 .product-slider--no-thumbnails .product-slider__nav-slider {
-  display: none;
+  display: none !important;
 }
 .product-slider__nav-slider {
   margin: 0;
   padding: 0 40px;
+  display: none;
+
+  &.slick-initialized {
+    display: block;
+  }
 
   // Slider arrows.
   .slick-prev,

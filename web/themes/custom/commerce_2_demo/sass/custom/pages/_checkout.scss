@@ -140,6 +140,10 @@
 
           .product__thumbnail__cart {
             position: relative;
+            width: 80px;
+            height: 80px;
+            background: url(../gfx/logo-icon-watermark.svg) center center no-repeat;
+            background-size: 75px 75px;
 
             img {
               width: 80px;

@@ -23,7 +23,7 @@
   {# Product teaser. #}
   <a href="{{ product_url }}" class="product product--teaser product--teaser--uh-recurring-digital" aria-label="{{ product_entity.title.value }}">
     <div class="product__thumbnail">
-      {% if product.field_catalog_image %}
+      {% if product.field_catalog_image|render|trim is not empty %}
         {{ product.field_catalog_image }}
       {% else %}
         <img src="{{ base_path ~ directory }}/gfx/logo-icon.svg" class="no-product-thumbnail" alt="{{ product_entity.title.value }}" />

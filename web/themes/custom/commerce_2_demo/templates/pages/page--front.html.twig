@@ -14,6 +14,8 @@
 {# / Site Header. #}
 
 {% if homepage_carousel_view %}
+  {# Attach slick slider #}
+  {{ attach_library('commerce_2_demo/slider') }}
   {{ homepage_carousel_view }}
 {% endif %}
 

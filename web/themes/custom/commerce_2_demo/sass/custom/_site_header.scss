@@ -388,14 +388,20 @@
     height: 30px;
     vertical-align: middle;
     margin: 0;
-    background-color: #eaeaea;
-    border: 1px solid #eaeaea;
+    background-color: $c-primary;
+    border: 1px solid $c-primary;
     border-radius: $border-radius;
     font-size: 20px;
     font-weight: 600;
     text-align: center;
-    color: #333;
-    transition: border .2s ease-in-out;
+    color: #fff;
+    transition: background-color .2s ease-in-out, border .2s ease-in-out;
+
+    &.empty {
+      background-color: #eaeaea;
+      border: 1px solid #eaeaea;
+      color: #333;
+    }
   }
 
   &:hover, &:focus {
@@ -404,7 +410,16 @@
     }
 
     .cart-block--summary__count {
-      border: 1px solid $gray;
+      background-color: $c-primary-hover;
+      border: 1px solid $c-primary-hover;
+      color: #fff;
+
+      &.empty {
+        background-color: #eaeaea;
+        border: 1px solid $gray;
+        color: #333;
+        cursor: default;
+      }
     }
   }
 }
@@ -432,8 +447,43 @@
           line-height: 1.1em;
           text-align: left;
 
-          &.views-field-title {
+          // Image.
+          &:nth-of-type(1) {
+            width: 50px;
+
+            .product__thumbnail__cart {
+              position: relative;
+
+              img {
+                width: 40px;
+                height: 40px;
+                border: 1px solid $gray;
+                transition: border .2s ease-in-out;
+              }
+
+              a {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                font-size: 0;
+
+                &:hover + img,
+                &:focus + img {
+                  border: 1px solid $c-primary;
+                }
+              }
+            }
+          }
+
+          // Linked title.
+          &.views-field-purchased-entity-1 {
             font-weight: 600;
+            transition: color .2s ease-in-out;
+
+            &:hover, &:focus {
+              color: $c-primary;
+            }
           }
 
           &.views-field-quantity {
@@ -481,26 +531,6 @@
               pointer-events: none;
               transition: color .1s ease-in-out;
             }
-          }
-
-
-        }
-
-        td.views-field-purchased-entity {
-          width: 50px;
-
-          img {
-            width: 40px;
-            height: 40px;
-            border: 1px solid $gray;
-          }
-
-          div.field {
-            display: none;
-          }
-
-          div.field--name-field-image {
-            display: block;
           }
         }
       }

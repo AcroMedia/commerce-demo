@@ -92,19 +92,6 @@
     });
   }
 
-  // Homepage Carousel Slider.
-  if ($('.homepage-carousel-slider').length) {
-    $('.homepage-carousel-slider').flexslider({
-      animation: 'fade',
-      slideshow: true,
-      controlNav: true,
-      directionNav: true,
-      smoothHeight: true,
-      prevText: '',
-      nextText: ''
-    });
-  }
-
   // Sets primary nav menu item active class.
   var currentPath = window.location.pathname; // Returns path only
 
@@ -356,6 +343,16 @@
   $("#videoModal").on('hidden.bs.modal', function (event) {
     $("#videoModal iframe").attr("src", $("#videoModal iframe").attr("src"));
   });
+
+  // Magnific Popup Gallery.
+  if ($('.magnific-popup-gallery').length) {
+    $('.magnific-popup-gallery').magnificPopup({
+      type: 'image',
+      gallery: {
+        enabled: true
+      }
+    });
+  }
 
   // Run scripts after window fully loads.
   $(window).on('load', function() {

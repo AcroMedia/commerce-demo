@@ -9,6 +9,8 @@ global-styling:
     - core/jquery
     - core/drupal
     - commerce_2_demo/fitVid
+    - magnific_popup/magnific_popup
+    - commerce_2_demo/slider
 
 tours:
   version: 1.x

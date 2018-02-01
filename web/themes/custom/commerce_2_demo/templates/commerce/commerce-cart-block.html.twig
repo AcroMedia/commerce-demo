@@ -2,7 +2,7 @@
   <div class="cart-block--summary">
     <a class="cart-block--link__expand" href="{{ url }}">
       <span class="cart-block--summary__icon"></span>
-      <span class="cart-block--summary__count">{{ count }}</span>
+      <span class="cart-block--summary__count {{ count == 0 ? 'empty' : '' }}">{{ count }}</span>
     </a>
   </div>
   {% if content %}

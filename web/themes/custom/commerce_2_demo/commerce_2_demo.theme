@@ -18,6 +18,15 @@ use Drupal\commerce_product\Entity\ProductInterface;
 use Drupal\commerce_product\Entity\ProductVariationInterface;
 use Drupal\commerce_product\Event;
 
+use Drupal\commerce_product\Entity\ProductVariation;
+use Drupal\commerce_product\Plugin\Field\FieldWidget\ProductVariationAttributesWidget;
+use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\Display\EntityFormDisplayInterface;
+use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
+use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\comment\Entity\Comment;
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  *
@@ -272,10 +281,15 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
 
   // Commerce Add to Cart form.
   if ((strpos($form_id,'commerce_order_item_add_to_cart_form_commerce_product_') === 0)) {
-    // Access form storage
-    $storage = &$form_state->getStorage();
+    // Check for existing variation.
+    if (isset($form['purchased_entity']['widget'][0]['variation']['#value'])) {
+      // Set data attribute for the product variation id.
+      $product_variation_id = $form['purchased_entity']['widget'][0]['variation']['#value'];
+      $form['#attributes']['data-product-variation-id'] = $product_variation_id;
+    }
 
-    // Get product type (bundle).
+    // Get product type (bundle) from storage.
+    $storage = &$form_state->getStorage();
     $product_bundle = $storage['product']->bundle();
     $form['#product_bundle'] = $product_bundle;
 
@@ -461,15 +475,57 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
       $product = $variables['elements']['#commerce_product'];
       $product_variations = $product->getVariations();
 
-      // Variation Image
-      if (isset($product_variations[0]->field_image->entity)) {
-        $field_image = $product_variations[0]->field_image->entity;
+      // Product Images.
+      if (isset($product->field_image->entity)) {
+        // Create array to feed images into.
+        $product_images = [];
+      }
+      if (isset($product->field_image->entity)) {
+        foreach ($product->field_image as $key => &$product_image) {
+          $product_images[$key]['variation_id'] = '';
+          $product_images[$key]['images'][$key] = $product_image;
+        }
+      }
 
-        // Image.
-        $variables['product_image_full_url'] = ImageStyle::load('product_large')->buildUrl($field_image->getFileUri());
+      // Product Variation Images.
+      if (!empty($product_variations)) {
+        // Loop through variations and create array to feed images
+        // if the variation is active and contains an image.
+        foreach ($product_variations as $variation) {
+          if ($variation->status->value == '1') {
+            if (isset($variation->field_image->entity)) {
+              // Create array to feed images into.
+              $product_variation_images = [];
+              break;
+            }
+          }
+        }
 
-        // Image thumbnail.
-        $variables['product_image_thumb_url'] = ImageStyle::load('product_thumb')->buildUrl($field_image->getFileUri());
+        foreach ($product_variations as $key => $variation) {
+          // If variation is active.
+          if ($variation->status->value == '1') {
+            // If variation has an image.
+            if (isset($variation->field_image->entity)) {
+              $variation_id = $variation->variation_id->value;
+              $product_variation_images[$key]['variation_id'] = $variation_id;
+
+              foreach ($variation->field_image as $image_key => &$variation_image) {
+                $product_variation_images[$key]['images'][$image_key] = $variation_image;
+              }
+            }
+          }
+        }
+      }
+
+      // Set product images variable combining both product images and variation images.
+      if (isset($product_images) && isset($product_variation_images)) {
+        $variables['product_variation_images'] = array_merge($product_variation_images, $product_images);
+      }
+      elseif (isset($product_variation_images)) {
+        $variables['product_variation_images'] = $product_variation_images;
+      }
+      elseif (isset($product_images)) {
+        $variables['product_variation_images'] = $product_images;
       }
 
       // Product reviews.
@@ -512,6 +568,18 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
         }
       }
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_commerce_product_variation(&$variables).
+ */
+function commerce_2_demo_preprocess_commerce_product_variation(&$variables) {
+  // Commerce Product Variation.
+  if (isset($variables['elements']['#commerce_product_variation'])) {
+    // Get view mode & assign variable.
+    $view_mode = $variables['elements']['#view_mode'];
+    $variables['view_mode'] = $view_mode;
   }
 }
 

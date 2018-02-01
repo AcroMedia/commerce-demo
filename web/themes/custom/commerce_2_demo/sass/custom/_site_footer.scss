@@ -195,6 +195,12 @@
       text-decoration: underline;
     }
   }
+
+  @media (max-width: $screen-xs-max) {
+    span {
+      display: block;
+    }
+  }
 }
 
 /**

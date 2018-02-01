@@ -23,8 +23,8 @@
   {# Product teaser. #}
   <a href="{{ product_url }}" class="product product--teaser" aria-label="{{ product_entity.title.value }}">
     <div class="product__thumbnail">
-      {% if product_image_thumb_url %}
-        <img src="{{ product_image_thumb_url }}" alt="{{ product_entity.title.value }}" />
+      {% if product.field_catalog_image %}
+        {{ product.field_catalog_image }}
       {% else %}
         <img src="{{ base_path ~ directory }}/gfx/logo-icon.svg" class="no-product-thumbnail" alt="{{ product_entity.title.value }}" />
       {% endif %}
@@ -54,18 +54,77 @@
     </div>
 
     <div class="row">
-      {% if product_image_full_url %}
+      {% if product_variation_images %}
         {# Product images. #}
+        {{ attach_library('magnific_popup/magnific_popup') }}
+
+        {# Set product slider class. #}
+        {% if product_variation_images|length <= 1 %}
+          {% set product_slider_class = 'product-slider product-slider--no-thumbnails' %}
+        {% else %}
+          {% set product_slider_class = 'product-slider' %}
+        {% endif %}
+
         <div class="col-sm-12 col-md-6">
-          <div class="product__images">
-            {{ product.variation_field_image }}
+          <div class="{{ product_slider_class }}">
+            {# Main product image. #}
+            <div class="product-slider__main-slider">
+              {% for product_variation in product_variation_images %}
+                {% for product_variation_image in product_variation.images %}
+                  {# Set product thumbnail. #}
+                  {%
+                    set product_slider_image_thumbnail = {
+                    '#theme':      'image_style',
+                    '#style_name': 'product_large',
+                    '#uri':        product_variation_image.entity.uri.value,
+                    '#alt':        product_variation_image.alt,
+                  }
+                  %}
+                  <div>
+                    <div class="product-slider__main-slider__item">
+                      <a href="{{ file_url(product_variation_image.entity.uri.value) }}" class="magnific-popup-gallery">
+                        <span>{{ product_slider_image_thumbnail }}</span>
+                      </a>
+                    </div>
+                  </div>
+                {% endfor %}
+              {% endfor %}
+            </div>
+
+            {# Image thumbnails. #}
+            <div class="product-slider__nav-slider">
+              {% for product_variation in product_variation_images %}
+                {% if product_variation.variation_id %}
+                  {% set product_variation_id = product_variation.variation_id %}
+                {% else %}
+                  {% set product_variation_id = '' %}
+                {% endif %}
+
+                {% for product_variation_image in product_variation.images %}
+                  {# Set product thumbnail. #}
+                  {%
+                    set product_slider_image_thumbnail = {
+                    '#theme':      'image_style',
+                    '#style_name': 'product_thumb',
+                    '#uri':        product_variation_image.entity.uri.value,
+                    '#alt':        product_variation_image.alt,
+                  }
+                  %}
+                  <div>
+                    <a class="product-slider__nav-slider__item" data-product-variation-id="{{ product_variation_id }}">
+                      <span>{{ product_slider_image_thumbnail }}</span>
+                    </a>
+                  </div>
+                {% endfor %}
+              {% endfor %}
+            </div>
           </div>
         </div>
-        {# Product intro (w/ product image). #}
+        {# Product intro (w/ product images). #}
         <div class="col-sm-12 col-md-6">
           <div class="product__intro">
       {% else %}
-        {# Product intro (w/o product image). #}
+        {# Product intro (w/o product images). #}
         <div class="col-sm-12">
           <div class="product__intro product__intro--full-width">
       {% endif %}

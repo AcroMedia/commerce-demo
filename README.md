@@ -19,7 +19,7 @@ If you notice any bugs, please submit an issue. We’ll do our best to keep on t
 
 ### View the demo site
 
-If you still haven’t seen the demo site, [check it out!](https://commercedemo.acromedia.com).
+If you still haven’t seen the demo site, [check it out!](https://commerce.acromedia.com).
 
 Click around, take the interactive guided tours, go through the checkout flow, whatever. This site is made so that you can truly experience what Commerce 2 and Drupal 8 offer as a standard.
 

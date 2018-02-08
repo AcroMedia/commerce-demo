@@ -85,23 +85,31 @@
 .help-form .hs-form-field {
   display: inline-block;
   vertical-align: top;
-  margin-bottom: 10px;
+  margin-top: 5px;
 }
 .help-form .hs_firstname,
-.help-form .hs_lastname {
-  width: 25%;
-}
-.help-form .hs_email {
-  width: 35%;
+.help-form .hs_lastname,
+.help-form .hs_email,
+.help-form .hs_country {
+  width: 40%;
 }
 .help-form .hs_submit {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: bottom;
   width: 15%;
-  margin-top: 24px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+}
+@media (max-width: 475px) {
+  .help-form .hs_firstname,
+  .help-form .hs_lastname,
+  .help-form .hs_email,
+  .help-form .hs_country,
+  .help-form .hs_submit {
+    width: 100%;
+  }
 }
 .help-form .hs-form-field label {
+  margin-bottom: 0;
   font-size: 14px;
 }
 .help-form .hs-form-field label .hs-form-required {
@@ -115,6 +123,8 @@
   font-size: 14px;
 }
 .help-form .hs-button.primary {
+  width: 100%;
+  max-width: 100px;
   padding: 6px 15px;
   margin: 5px 2px 0;
   border: 1px solid #cc0000;

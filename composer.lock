@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b1dfe1cff031b07fbe47d2deb054481",
+    "content-hash": "556a565ed3440dd7a35c06506d7ba3fc",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -26,7 +26,7 @@
                 "GPL-2.0+"
             ],
             "description": "Creates a page showcasing general site styles and commonly used elements.",
-            "time": "2017-04-12 19:23:03"
+            "time": "2017-04-12T19:23:03+00:00"
         },
         {
             "name": "acromedia/drupalorange_profile",
@@ -68,7 +68,7 @@
             ],
             "description": "Acro Media's Orange installation profile",
             "homepage": "https://github.com/AcroMedia/drupalorange_profile",
-            "time": "2017-06-02 23:59:21"
+            "time": "2017-06-02T23:59:21+00:00"
         },
         {
             "name": "acromedia/orange_framework",
@@ -91,7 +91,7 @@
             ],
             "description": "Acro Media Inc. Drupal Base Theme",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-04-13 20:47:10"
+            "time": "2017-04-13T20:47:10+00:00"
         },
         {
             "name": "acromedia/orange_starter",
@@ -114,7 +114,7 @@
             ],
             "description": "Custom theme for our amazing clients.",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-09-15 08:58:15"
+            "time": "2017-09-15T08:58:15+00:00"
         },
         {
             "name": "alchemy/zippy",
@@ -1752,17 +1752,17 @@
         },
         {
             "name": "drupal/admin_toolbar",
-            "version": "1.22.0",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/admin_toolbar",
-                "reference": "8.x-1.22"
+                "reference": "8.x-1.23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/admin_toolbar-8.x-1.22.zip",
-                "reference": "8.x-1.22",
-                "shasum": "a0dd52e0e9405fef3f8d32ee308ed298dfba99ad"
+                "url": "https://ftp.drupal.org/files/projects/admin_toolbar-8.x-1.23.zip",
+                "reference": "8.x-1.23",
+                "shasum": "46d7ed18a9154c35e765ae43ce43aa292c025d65"
             },
             "require": {
                 "drupal/core": "*"
@@ -1773,8 +1773,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.22",
-                    "datestamp": "1515177697",
+                    "version": "8.x-1.23",
+                    "datestamp": "1517936581",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2080,7 +2080,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
             },
-            "time": "2017-12-28 16:11:05"
+            "time": "2017-12-28T16:11:05+00:00"
         },
         {
             "name": "drupal/commerce_authnet",
@@ -2577,7 +2577,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/config_inspector"
             },
-            "time": "2017-01-09 10:06:11"
+            "time": "2017-01-09T10:06:11+00:00"
         },
         {
             "name": "drupal/console",
@@ -3329,20 +3329,21 @@
         },
         {
             "name": "drupal/facets_pretty_paths",
-            "version": "1.0.0-alpha1",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/facets_pretty_paths",
-                "reference": "8.x-1.0-alpha1"
+                "reference": "8.x-1.0-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/facets_pretty_paths-8.x-1.0-alpha1.zip",
-                "reference": "8.x-1.0-alpha1",
-                "shasum": "5b4724d09272f57387e7788d9f3dc7b7096313a0"
+                "url": "https://ftp.drupal.org/files/projects/facets_pretty_paths-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "38d2c0cf552fd8fde208872433f3ab7c0c425369"
             },
             "require": {
-                "drupal/core": "~8.0"
+                "drupal/core": "~8.0",
+                "drupal/facets": "*"
             },
             "type": "drupal-module",
             "extra": {
@@ -3350,20 +3351,17 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-alpha1",
-                    "datestamp": "1510784284",
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1516716485",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
                     }
-                },
-                "patches_applied": {
-                    "#2921502: Getting Error: ArgumentCountError: Too few arguments to function UrlProcessorPluginBase::__construct()": "https://www.drupal.org/files/issues/getting_error-2921502-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -3433,7 +3431,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
             },
-            "time": "2017-07-13 21:36:25"
+            "time": "2017-07-13T21:36:25+00:00"
         },
         {
             "name": "drupal/google_analytics",
@@ -3933,7 +3931,7 @@
                 "source": "http://cgit.drupalcode.org/metatag",
                 "issues": "http://drupal.org/project/issues/metatag"
             },
-            "time": "2017-09-29 20:16:14"
+            "time": "2017-09-29T20:16:14+00:00"
         },
         {
             "name": "drupal/paragraphs",
@@ -4629,7 +4627,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/swiftmailer"
             },
-            "time": "2017-03-02 20:10:24"
+            "time": "2017-03-02T20:10:24+00:00"
         },
         {
             "name": "drupal/taxonomy_menu",
@@ -4683,7 +4681,7 @@
                 "source": "http://cgit.drupalcode.org/taxonomy_menu",
                 "issues": "http://drupal.org/project/taxonomy_menu"
             },
-            "time": "2017-09-09 10:04:40"
+            "time": "2017-09-09T10:04:40+00:00"
         },
         {
             "name": "drupal/taxonomy_term_depth",
@@ -4725,7 +4723,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/taxonomy_term_depth"
             },
-            "time": "2017-04-28 12:16:17"
+            "time": "2017-04-28T12:16:17+00:00"
         },
         {
             "name": "drupal/token",
@@ -4920,7 +4918,7 @@
                 "source": "http://cgit.drupalcode.org/webform",
                 "issues": "https://drupal.org/project/issues/webform"
             },
-            "time": "2017-10-02 13:52:05"
+            "time": "2017-10-02T13:52:05+00:00"
         },
         {
             "name": "drush/drush",
@@ -8685,7 +8683,7 @@
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2017-09-28 13:20:31"
+            "time": "2017-09-28T13:20:31+00:00"
         },
         {
             "name": "drupal/typed_data",

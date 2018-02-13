@@ -122,10 +122,6 @@
                 "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch",
                 "#2770731: Add a display name to promotions":
                 "https://www.drupal.org/files/issues/adjustment_label_how-2770731-20.patch"
-            },
-            "drupal/facets_pretty_paths": {
-                "#2921502: Getting Error: ArgumentCountError: Too few arguments to function UrlProcessorPluginBase::__construct()":
-                "https://www.drupal.org/files/issues/getting_error-2921502-2.patch"
             }
         }
     }

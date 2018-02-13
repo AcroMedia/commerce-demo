@@ -29,7 +29,7 @@
 
     // Take user to a product page.
     checkoutPhysicalTourAlert.start().oncomplete(function() {
-      window.location.href = '/product/boom-box-beverage-cooler';
+      window.location.href = '/product/dream-tank';
     });
   }
 

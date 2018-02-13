@@ -52,7 +52,7 @@
           'Share buttons let customers quickly share this product with their friends.'
         },
         {
-          element: '.product__images',
+          element: '.product-slider',
           intro: '<span class="introjs-tooltip__title">Product Photos</span>' +
           'This photo changes as customizable options are selected. It can also be a gallery of image.'
         },

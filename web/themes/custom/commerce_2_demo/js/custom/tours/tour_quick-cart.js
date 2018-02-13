@@ -27,7 +27,7 @@
 
     // Take user to a product page.
     quickCartTourAlert.start().oncomplete(function() {
-      window.location.href = '/product/black-cat-tape-dispenser';
+      window.location.href = '/product/adventure-begins-camping-mug';
     });
   }
 

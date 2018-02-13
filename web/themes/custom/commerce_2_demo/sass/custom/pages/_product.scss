@@ -512,7 +512,8 @@
       }
 
       .form-item-purchased-entity-0-attributes-attribute-straw-color .form-required,
-      .form-item-purchased-entity-0-attributes-attribute-size .form-required {
+      .form-item-purchased-entity-0-attributes-attribute-size .form-required,
+      .form-item-purchased-entity-0-attributes-attribute-size-shoe .form-required {
         display: none;
       }
 
@@ -527,6 +528,8 @@
 
       select {
         position: relative;
+        width: auto;
+        min-width: 165px;
         max-width: 370px;
         height: 40px;
         padding: 7px 40px 7px 19px;

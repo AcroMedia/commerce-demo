@@ -288,6 +288,15 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       $form['#attributes']['data-product-variation-id'] = $product_variation_id;
     }
 
+    // General attribute title changes.
+    $form['purchased_entity']['widget'][0]['attributes']['attribute_size']['#title'] = t('Size');
+    $form['purchased_entity']['widget'][0]['attributes']['attribute_size_shoe']['#title'] = t('Size');
+
+    // UH+ General attribute title changes.
+    $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_length']['#title'] = t('Length');
+    $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_weight']['#title'] = t('Head Weight');
+    $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_finish']['#title'] = t('Handle Finish');
+
     // Get product type (bundle) from storage.
     $storage = &$form_state->getStorage();
     $product_bundle = $storage['product']->bundle();
@@ -297,11 +306,6 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
     if ($product_bundle == 'uh_axe') {
       // Set theme hook.
       $form['#theme'][] = 'add_to_cart_form__uh_axe';
-
-      // Alter attribute titles.
-      $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_length']['#title'] = t('Length');
-      $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_weight']['#title'] = t('Head Weight');
-      $form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_finish']['#title'] = t('Handle Finish');
 
       // Get length attribute and set template variable.
       $uh_axe_length = [];

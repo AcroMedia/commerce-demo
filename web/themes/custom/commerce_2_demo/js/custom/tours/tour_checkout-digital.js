@@ -29,7 +29,7 @@
 
     // Take user to a product page.
     checkoutDigitalTourAlert.start().oncomplete(function() {
-      window.location.href = '/product/kid';
+      window.location.href = '/product/epic-mix-tape-urban-hipster';
     });
   }
 

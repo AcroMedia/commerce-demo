@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "556a565ed3440dd7a35c06506d7ba3fc",
+    "content-hash": "d7fe33d80156f2f6d030bb993c70b0d4",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -2149,6 +2149,59 @@
             }
         },
         {
+            "name": "drupal/commerce_log",
+            "version": "dev-2.x",
+            "require": {
+                "drupal/commerce": "self.version",
+                "drupal/core": "~8.0"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.4+9-dev",
+                    "datestamp": "1520203680",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Damien Tournoud",
+                    "homepage": "https://www.drupal.org/user/22211"
+                },
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Provides activity logs for Commerce entities.",
+            "homepage": "https://www.drupal.org/project/commerce",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce"
+            }
+        },
+        {
             "name": "drupal/commerce_order",
             "version": "dev-2.x",
             "require": {
@@ -2303,6 +2356,201 @@
             }
         },
         {
+            "name": "drupal/commerce_pos",
+            "version": "dev-2.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/commerce_pos",
+                "reference": "a598afe03dbcb22b8a6b1302317af620bd6409cd"
+            },
+            "require": {
+                "drupal/commerce": "~2.4",
+                "drupal/commerce_log": "*",
+                "drupal/commerce_order": "*",
+                "drupal/commerce_payment": "*",
+                "drupal/commerce_pos_keypad": "*",
+                "drupal/commerce_product": "*",
+                "drupal/commerce_tax": "*",
+                "drupal/core": "*"
+            },
+            "require-dev": {
+                "drupal/commerce_pos_currency_denominations": "*",
+                "drupal/commerce_price": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.0-beta1+11-dev",
+                    "datestamp": "1520036580",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "alexpott",
+                    "homepage": "https://www.drupal.org/user/157725"
+                },
+                {
+                    "name": "ksalbrecht",
+                    "homepage": "https://www.drupal.org/user/175607"
+                },
+                {
+                    "name": "rbayliss",
+                    "homepage": "https://www.drupal.org/user/772738"
+                },
+                {
+                    "name": "slip",
+                    "homepage": "https://www.drupal.org/user/332775"
+                },
+                {
+                    "name": "smccabe",
+                    "homepage": "https://www.drupal.org/user/289245"
+                },
+                {
+                    "name": "thomas.fleming",
+                    "homepage": "https://www.drupal.org/user/826568"
+                }
+            ],
+            "description": "Provides Point of Sale functionality for Commerce",
+            "homepage": "https://www.drupal.org/project/commerce_pos",
+            "keywords": [
+                "Commerce",
+                "Drupal",
+                "POS"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_pos",
+                "issues": "https://www.drupal.org/project/issues/commerce_pos"
+            },
+            "time": "2018-03-06T23:25:27+00:00"
+        },
+        {
+            "name": "drupal/commerce_pos_currency_denominations",
+            "version": "dev-2.x",
+            "require": {
+                "drupal/commerce_pos": "self.version",
+                "drupal/commerce_price": "*",
+                "drupal/core": "~8.0"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.0-beta1+11-dev",
+                    "datestamp": "1520036580",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "alexpott",
+                    "homepage": "https://www.drupal.org/user/157725"
+                },
+                {
+                    "name": "ksalbrecht",
+                    "homepage": "https://www.drupal.org/user/175607"
+                },
+                {
+                    "name": "rbayliss",
+                    "homepage": "https://www.drupal.org/user/772738"
+                },
+                {
+                    "name": "slip",
+                    "homepage": "https://www.drupal.org/user/332775"
+                },
+                {
+                    "name": "smccabe",
+                    "homepage": "https://www.drupal.org/user/289245"
+                },
+                {
+                    "name": "thomas.fleming",
+                    "homepage": "https://www.drupal.org/user/826568"
+                }
+            ],
+            "description": "Provides a interface for configuring currency denominations.",
+            "homepage": "https://www.drupal.org/project/commerce_pos",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_pos"
+            }
+        },
+        {
+            "name": "drupal/commerce_pos_keypad",
+            "version": "dev-2.x",
+            "require": {
+                "drupal/commerce_pos": "self.version",
+                "drupal/commerce_pos_currency_denominations": "*",
+                "drupal/core": "~8.0"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.0-beta1+11-dev",
+                    "datestamp": "1520036580",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "alexpott",
+                    "homepage": "https://www.drupal.org/user/157725"
+                },
+                {
+                    "name": "ksalbrecht",
+                    "homepage": "https://www.drupal.org/user/175607"
+                },
+                {
+                    "name": "rbayliss",
+                    "homepage": "https://www.drupal.org/user/772738"
+                },
+                {
+                    "name": "slip",
+                    "homepage": "https://www.drupal.org/user/332775"
+                },
+                {
+                    "name": "smccabe",
+                    "homepage": "https://www.drupal.org/user/289245"
+                },
+                {
+                    "name": "thomas.fleming",
+                    "homepage": "https://www.drupal.org/user/826568"
+                }
+            ],
+            "description": "Provides a keypad widget for entering values in form fields.",
+            "homepage": "https://www.drupal.org/project/commerce_pos",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_pos"
+            }
+        },
+        {
             "name": "drupal/commerce_price",
             "version": "dev-2.x",
             "require": {
@@ -2342,6 +2590,61 @@
                 }
             ],
             "description": "Defines the Currency entity.",
+            "homepage": "https://www.drupal.org/project/commerce",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_product",
+            "version": "dev-2.x",
+            "require": {
+                "drupal/commerce": "self.version",
+                "drupal/commerce_price": "*",
+                "drupal/commerce_store": "*",
+                "drupal/core": "*"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.4+9-dev",
+                    "datestamp": "1520203680",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Damien Tournoud",
+                    "homepage": "https://www.drupal.org/user/22211"
+                },
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Defines the Product entity and associated features.",
             "homepage": "https://www.drupal.org/project/commerce",
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
@@ -2524,6 +2827,60 @@
                 }
             ],
             "description": "Defines the Store entity and associated features.",
+            "homepage": "https://www.drupal.org/project/commerce",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_tax",
+            "version": "dev-2.x",
+            "require": {
+                "drupal/commerce": "self.version",
+                "drupal/commerce_order": "*",
+                "drupal/core": "~8.0"
+            },
+            "type": "metapackage",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.4+9-dev",
+                    "datestamp": "1520203680",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Damien Tournoud",
+                    "homepage": "https://www.drupal.org/user/22211"
+                },
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Provides tax functionality.",
             "homepage": "https://www.drupal.org/project/commerce",
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce"
@@ -9889,6 +10246,7 @@
         "drupal/physical": 5,
         "drupal/taxonomy_term_depth": 20,
         "drupal/comments_order": 10,
+        "drupal/commerce_pos": 20,
         "drupal/devel": 20
     },
     "prefer-stable": true,

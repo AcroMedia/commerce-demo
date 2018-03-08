@@ -5,6 +5,7 @@
  * Functions to support theming.
  */
 
+use Drupal\commerce_product\Entity\ProductAttributeValue;
 use Drupal\Core\Template\Attribute;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\taxonomy\Entity\Term;
@@ -280,7 +281,7 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
   }
 
   // Commerce Add to Cart form.
-  if ((strpos($form_id,'commerce_order_item_add_to_cart_form_commerce_product_') === 0)) {
+  if ((strpos($form_id, 'commerce_order_item_add_to_cart_form_commerce_product_') === 0)) {
     // Check for existing variation.
     if (isset($form['purchased_entity']['widget'][0]['variation']['#value'])) {
       // Set data attribute for the product variation id.
@@ -311,7 +312,7 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       $uh_axe_length = [];
       $uh_axe_length_key = 0;
       foreach ($form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_length']['#options'] as $key => &$option) {
-        $attribute = \Drupal\commerce_product\Entity\ProductAttributeValue::load($key);
+        $attribute = ProductAttributeValue::load($key);
         $uh_axe_length[$uh_axe_length_key] = $attribute;
         $uh_axe_length_key++;
       }
@@ -321,7 +322,7 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       $uh_axe_weight = [];
       $uh_axe_weight_key = 0;
       foreach ($form['purchased_entity']['widget'][0]['attributes']['attribute_uh_axe_weight']['#options'] as $key => &$option) {
-        $attribute = \Drupal\commerce_product\Entity\ProductAttributeValue::load($key);
+        $attribute = ProductAttributeValue::load($key);
         $uh_axe_weight[$uh_axe_weight_key] = $attribute;
         $uh_axe_weight_key++;
       }
@@ -450,7 +451,8 @@ function commerce_2_demo_bundled_add_to_cart_submit($form, FormStateInterface $f
       $order_item = $entity_manager->getStorage('commerce_order_item')->create([
         'type' => 'default',
         'purchased_entity' => (string) $variation_id,
-        'quantity' => 1, // Amount or quantity to be added to the cart.
+      // Amount or quantity to be added to the cart.
+        'quantity' => 1,
         'unit_price' => $product_variation->getPrice(),
       ]);
       $order_item->save();

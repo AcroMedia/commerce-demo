@@ -29,36 +29,68 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class AddToCartFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
 
-  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager */
+  /**
+   * The Drupal entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
   protected $entityTypeManager;
 
-  /** @var \Drupal\Core\DependencyInjection\ClassResolverInterface $classResolver */
+  /**
+   * The Drupal class resolver.
+   *
+   * @var \Drupal\Core\DependencyInjection\ClassResolverInterface
+   */
   protected $classResolver;
 
-  /** @var \Drupal\Core\Form\FormBuilderInterface $formBuilder */
+  /**
+   * The Drupal form builder.
+   *
+   * @var \Drupal\Core\Form\FormBuilderInterface
+   */
   protected $formBuilder;
 
-  /** @var \Drupal\Core\StringTranslation\TranslationManager $translationManager */
+  /**
+   * The Drupal translation manager.
+   *
+   * @var \Drupal\Core\StringTranslation\TranslationManager
+   */
   protected $translationManager;
 
-  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
+  /**
+   * The Drupal module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
   protected $moduleHandler;
 
   /**
    * AddToCartFormatter constructor.
    *
    * @param string $plugin_id
+   *   The plugin_id for the formatter.
    * @param mixed $plugin_definition
+   *   The plugin implementation definition.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   The definition of the field to which the formatter is associated.
    * @param array $settings
+   *   The formatter settings.
    * @param string $label
+   *   The formatter label display setting.
    * @param string $view_mode
+   *   The view mode.
    * @param array $third_party_settings
+   *   Any third party settings.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager, for dealing with commerce objects.
    * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $classResolver
+   *   The class resolver, for getting cart types.
    * @param \Drupal\Core\Form\FormBuilderInterface $formBuilder
+   *   The form builder, for add to cart customization.
    * @param \Drupal\Core\StringTranslation\TranslationManager $translationManager
+   *   The translation manager.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler.
    *
    * @internal param \Drupal\user\PrivateTempStoreFactory $privateTempStore
    * @internal param \Drupal\commerce_store\Resolver\StoreResolverInterface $storeResolver
@@ -105,24 +137,17 @@ class AddToCartFormatter extends FormatterBase implements ContainerFactoryPlugin
     );
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function view(FieldItemListInterface $items, $langcode = NULL) {
     $elements = parent::view($items, $langcode);
     $elements['#attributes']['class'][] = 'plan-formatter';
     return $elements;
   }
 
-
   /**
-   * Builds a renderable array for a field value.
-   *
-   * @param \Drupal\Core\Field\FieldItemListInterface $items
-   *   The field values to be rendered.
-   * @param string $langcode
-   *   The language that should be used to render the field.
-   *
-   * @return array
-   *   A renderable array for $items, as an array of child elements keyed by
-   *   consecutive numeric indexes starting from 0.
+   * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];

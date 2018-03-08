@@ -17,7 +17,6 @@ stages:
 
 code_standards:
   stage: test
-  when: manual
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
@@ -84,7 +83,7 @@ build:
 
 # Deploy base demo to STAGING site (AWS1).
 base-demo-to-uat:
-  stage: deploy-uat
+  stage: deploy
   when: manual
 
   # add any other tags or branches you want here
@@ -119,7 +118,7 @@ base-demo-to-uat:
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:
-  stage: deploy-uat
+  stage: deploy
   when: manual
 
   # add any other tags or branches you want here
@@ -155,7 +154,7 @@ plus-demo-to-uat:
 
 # Deploy base demo to LIVE site (CLOUD4).
 base-demo-to-live:
-  stage: deploy-live
+  stage: deploy
   when: manual
 
   # add any other tags or branches you want here
@@ -191,7 +190,7 @@ base-demo-to-live:
 
 # Deploy plus demo to LIVE site (CLOUD4).
 plus-demo-to-live:
-  stage: deploy-live
+  stage: deploy
   when: manual
 
   # add any other tags or branches you want here.

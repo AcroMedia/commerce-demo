@@ -1,8 +1,6 @@
 <?php
 
 /**
- * Implements hook_uninstall().
+ * @file
+ * This module only installs config, so the module file is empty.
  */
-function commerce_tour_uninstall() {
-  Drupal::configFactory()->getEditable('tour.tour.commerce_promotion')->delete();
-}

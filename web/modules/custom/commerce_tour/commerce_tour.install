@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * This module only provides config, this cleans it up on uninstall.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function commerce_tour_uninstall() {
+  Drupal::configFactory()->getEditable('tour.tour.commerce_promotion')->delete();
+}

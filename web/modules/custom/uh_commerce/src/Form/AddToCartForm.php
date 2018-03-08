@@ -11,6 +11,9 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class AddToCartForm extends CoreAddToCardForm {
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Get product type (bundle) from storage.
     $storage = &$form_state->getStorage();
@@ -62,7 +65,6 @@ class AddToCartForm extends CoreAddToCardForm {
       return $actions;
     }
   }
-
 
   /**
    * {@inheritdoc}

@@ -112,9 +112,9 @@ base-demo-to-uat:
     #move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
-    # log into the site and flush cache
+    # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com '/bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-uat.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-uat.sh
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:
@@ -184,9 +184,9 @@ base-demo-to-live:
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
 
-    # log into the site and flush cache
+    # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com '/bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-live.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-live.sh
 
 # Deploy plus demo to LIVE site (CLOUD4).
 plus-demo-to-live:
@@ -220,6 +220,6 @@ plus-demo-to-live:
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
 
-    # log into the site and flush cache
+    # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com '/bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live.sh

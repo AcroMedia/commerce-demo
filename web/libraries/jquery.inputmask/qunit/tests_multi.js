@@ -1,15 +1,4 @@
-define([
-	"qunit",
-	"inputmask.dependencyLib",
-	"inputmask",
-	"../dist/inputmask/inputmask.date.extensions",
-	"../dist/inputmask/inputmask.extensions",
-	"../dist/inputmask/inputmask.numeric.extensions",
-	"../dist/inputmask/inputmask.phone.extensions",
-	"../dist/inputmask/inputmask.regex.extensions",
-	"prototypeExtensions",
-	"simulator"
-], function (qunit, $, Inputmask) {
+export default function (qunit, $, Inputmask) {
 
 	qunit.module("multi masks");
 	qunit.test("inputmask({ mask: [\"99-99\", \"999-99\"]}) - input 12345", function (assert) {
@@ -363,9 +352,9 @@ define([
 		var $fixture = $("#qunit-fixture");
 		$fixture.append('<input type="text" id="testmask" />');
 		var testmask = document.getElementById("testmask");
-		Inputmask("(99 99 999999)|(i{+})", {
+		Inputmask("(99 99 999999)|(*{+})", {
 			definitions: {
-				"i": {
+				"*": {
 					validator: ".",
 					cardinality: 1,
 					definitionSymbol: "*"
@@ -417,4 +406,32 @@ define([
 		assert.equal(testmask.inputmask._valueGet(), "+_(___)___-__-__", "Result " + testmask.inputmask._valueGet());
 
 	});
-});
+
+	qunit.test("(9{4} 9{4} 9{4} 9{4})|(9{4} 9{6} 9[5])|(9{9} 9{9}) - 1234123412341234 - necrosisoff ", function (assert) {
+		var $fixture = $("#qunit-fixture");
+		$fixture.append('<input type="text" id="testmask" />');
+		var testmask = document.getElementById("testmask");
+		Inputmask("(9{4} 9{4} 9{4} 9{4})|(9{4} 9{6} 9[5])|(9{9} 9{9})", {
+				"keepStatic": true
+			}
+		).mask(testmask);
+		testmask.focus();
+		$("#testmask").Type("1234123412341234")
+		assert.equal(testmask.inputmask._valueGet(), "1234 1234 1234 1234", "Result " + testmask.inputmask._valueGet());
+
+	});
+
+	qunit.test("(9{4} 9{4} 9{4} 9{4})|(9{4} 9{6} 9[5])|(9{9} 9{9}) - 12341234123412341 - necrosisoff ", function (assert) {
+		var $fixture = $("#qunit-fixture");
+		$fixture.append('<input type="text" id="testmask" />');
+		var testmask = document.getElementById("testmask");
+		Inputmask("(9{4} 9{4} 9{4} 9{4})|(9{4} 9{6} 9[5])|(9{9} 9{9})", {
+				"keepStatic": true
+			}
+		).mask(testmask);
+		testmask.focus();
+		$("#testmask").Type("12341234123412341")
+		assert.equal(testmask.inputmask._valueGet(), "123412341 23412341_", "Result " + testmask.inputmask._valueGet());
+
+	});
+};

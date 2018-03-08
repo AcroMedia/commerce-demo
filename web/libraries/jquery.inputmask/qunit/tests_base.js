@@ -1,11 +1,4 @@
-define([
-	"qunit",
-	"inputmask.dependencyLib",
-	"inputmask",
-	"../dist/inputmask/inputmask.extensions",
-	"prototypeExtensions",
-	"simulator"
-], function (qunit, $, Inputmask) {
+export default function (qunit, $, Inputmask) {
 	qunit.module("Simple masking");
 
 	qunit.test("inputmask(\"99-99-99\", { clearMaskOnLostFocus: false}", function (assert) {
@@ -366,7 +359,7 @@ define([
 
 		$("#testmask").Type("abc");
 
-		assert.equal(testmask.value, "A.B.C", "Result " + testmask.value);
+		assert.equal(testmask.value, "A.B.C.", "Result " + testmask.value);
 	});
 
 	qunit.test("{ mask: \"A\", placeholder: \"\", repeat: 16 }) - type testtest - glosswordteam", function (assert) {
@@ -573,4 +566,4 @@ define([
 
 		assert.equal(document.getElementById("testmask").inputmask._valueGet(), "___BA__V__", "Result " + document.getElementById("testmask").inputmask._valueGet());
 	});
-});
+};

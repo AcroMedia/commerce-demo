@@ -43,7 +43,7 @@ Close the timepicker when the window is scrolled. (Replicates ```<select>``` beh
 *default: false*
 
 - **disableTimeRanges**  
-Disable selection of certain time ranges. Input is an array of time pairs, like ```[['3:00am', '4:30am'], ['5:00pm', '8:00pm']]``. The start of the interval will be disabled but the end won't.
+Disable selection of certain time ranges. Input is an array of time pairs, like ```[['3:00am', '4:30am'], ['5:00pm', '8:00pm']]```. The start of the interval will be disabled but the end won't.
 *default: []*
 
 - **disableTextInput**  
@@ -274,9 +274,9 @@ Install from [Bower](http://bower.io/) as ```jquery-timepicker-jt```.
 
 An AngularJS directive is available at https://github.com/Recras/angular-jquery-timepicker
 
-Available via CDN at [https://cdnjs.com/libraries/jquery-timepicker](https://cdnjs.com/libraries/jquery-timepicker).
+Available via CDN at [https://cdn.jsdelivr.net/npm/timepicker/](https://cdn.jsdelivr.net/npm/timepicker/).
 
-[NPM - https://www.npmjs.com/package/timepicker](https://www.npmjs.com/package/timepicker)
+NPM: [npm install --save timepicker](https://www.npmjs.com/package/timepicker)
 
 Help
 ----

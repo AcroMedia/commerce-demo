@@ -1,15 +1,4 @@
-define([
-	"qunit",
-	"inputmask.dependencyLib",
-	"inputmask",
-	"../dist/inputmask/inputmask.date.extensions",
-	"../dist/inputmask/inputmask.extensions",
-	"../dist/inputmask/inputmask.numeric.extensions",
-	"../dist/inputmask/inputmask.phone.extensions",
-	"../dist/inputmask/inputmask.regex.extensions",
-	"prototypeExtensions",
-	"simulator"
-], function (qunit, $, Inputmask) {
+export default function (qunit, $, Inputmask) {
 	qunit.module("inputEventOnly: true");
 
 	qunit.test("XXX-9999-9999-XXX-XXX - gersteba", function (assert) {
@@ -48,18 +37,6 @@ define([
 		assert.equal(testmask.value, "(123) 123-1234", "Result " + testmask.value);
 	});
 
-	qunit.test("(999) 999-9999 - type abc", function (assert) {
-		var $fixture = $("#qunit-fixture");
-		$fixture.append('<input type="text" id="testmask" />');
-		var testmask = document.getElementById("testmask");
-		Inputmask("(999) 999-9999", {inputEventOnly: true}).mask(testmask);
-
-		testmask.focus();
-		//simulate input
-		$(testmask).input("abc");
-		assert.ok($.caret(testmask).begin == 1, "Caret " + $.caret(testmask).begin);
-	});
-
 	qunit.test("(999) 999-9999 - type 123 + backspace", function (assert) {
 		var $fixture = $("#qunit-fixture");
 		$fixture.append('<input type="text" id="testmask" />');
@@ -74,4 +51,4 @@ define([
 		assert.ok($.caret(testmask).begin == 3, "Caret " + $.caret(testmask).begin);
 	});
 
-});
+};

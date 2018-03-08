@@ -1,21 +1,22 @@
 /*!
 * inputmask.extensions.js
-* https://github.com/RobinHerbots/jquery.inputmask
-* Copyright (c) 2010 - 2016 Robin Herbots
+* https://github.com/RobinHerbots/Inputmask
+* Copyright (c) 2010 - 2017 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 3.3.4
+* Version: 3.3.10
 */
+
 !function(factory) {
-    "function" == typeof define && define.amd ? define([ "inputmask.dependencyLib", "inputmask" ], factory) : "object" == typeof exports ? module.exports = factory(require("./inputmask.dependencyLib"), require("./inputmask")) : factory(window.dependencyLib || jQuery, window.Inputmask);
+    "function" == typeof define && define.amd ? define([ "./dependencyLibs/inputmask.dependencyLib", "./inputmask" ], factory) : "object" == typeof exports ? module.exports = factory(require("./dependencyLibs/inputmask.dependencyLib"), require("./inputmask")) : factory(window.dependencyLib || jQuery, window.Inputmask);
 }(function($, Inputmask) {
     return Inputmask.extendDefinitions({
         A: {
-            validator: "[A-Za-z\u0410-\u044f\u0401\u0451\xc0-\xff\xb5]",
+            validator: "[A-Za-zА-яЁёÀ-ÿµ]",
             cardinality: 1,
             casing: "upper"
         },
         "&": {
-            validator: "[0-9A-Za-z\u0410-\u044f\u0401\u0451\xc0-\xff\xb5]",
+            validator: "[0-9A-Za-zА-яЁёÀ-ÿµ]",
             cardinality: 1,
             casing: "upper"
         },
@@ -58,7 +59,7 @@
             mask: "*{1,64}[.*{1,64}][.*{1,64}][.*{1,63}]@-{1,63}.-{1,63}[.-{1,63}][.-{1,63}]",
             greedy: !1,
             onBeforePaste: function(pastedValue, opts) {
-                return pastedValue = pastedValue.toLowerCase(), pastedValue.replace("mailto:", "");
+                return (pastedValue = pastedValue.toLowerCase()).replace("mailto:", "");
             },
             definitions: {
                 "*": {

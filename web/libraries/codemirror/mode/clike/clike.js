@@ -33,7 +33,7 @@ function popContext(state) {
 }
 
 function typeBefore(stream, state, pos) {
-  if (state.prevToken == "variable" || state.prevToken == "variable-3") return true;
+  if (state.prevToken == "variable" || state.prevToken == "type") return true;
   if (/\S(?:[^- ]>|[*\]])\s*$|\*$/.test(stream.string.slice(0, pos))) return true;
   if (state.typeAtEndOfLine && stream.column() == stream.indentation()) return true;
 }
@@ -112,7 +112,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
       if (contains(defKeywords, cur)) isDefKeyword = true;
       return "keyword";
     }
-    if (contains(types, cur)) return "variable-3";
+    if (contains(types, cur)) return "type";
     if (contains(builtin, cur)) {
       if (contains(blockKeywords, cur)) curPunc = "newstatement";
       return "builtin";
@@ -244,6 +244,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     electricInput: indentSwitch ? /^\s*(?:case .*?:|default:|\{\}?|\})$/ : /^\s*[{}]$/,
     blockCommentStart: "/*",
     blockCommentEnd: "*/",
+    blockCommentContinue: " * ",
     lineComment: "//",
     fold: "brace"
   };
@@ -281,7 +282,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
   }
 
   function pointerHook(_stream, state) {
-    if (state.prevToken == "variable-3") return "variable-3";
+    if (state.prevToken == "type") return "type";
     return false;
   }
 
@@ -515,8 +516,8 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
       "StringBuffer System Thread ThreadGroup ThreadLocal Throwable Triple Void"
     ),
     multiLineStrings: true,
-    blockKeywords: words("catch class do else finally for forSome if match switch try while"),
-    defKeywords: words("class def object package trait type val var"),
+    blockKeywords: words("catch class enum do else finally for forSome if match switch try while"),
+    defKeywords: words("class enum def object package trait type val var"),
     atoms: words("true false null"),
     indentStatements: false,
     indentSwitch: false,
@@ -591,7 +592,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     multiLineStrings: true,
     number: /^(?:0x[a-f\d_]+|0b[01_]+|(?:[\d_]+\.?\d*|\.\d+)(?:e[-+]?[\d_]+)?)(u|ll?|l|f)?/i,
     blockKeywords: words("catch class do else finally for if where try while enum"),
-    defKeywords: words("class val var object package interface fun"),
+    defKeywords: words("class val var object interface fun"),
     atoms: words("true false null this"),
     hooks: {
       '"': function(stream, state) {
@@ -774,7 +775,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
         return "atom";
       },
       token: function(_stream, state, style) {
-          if ((style == "variable" || style == "variable-3") &&
+          if ((style == "variable" || style == "type") &&
               state.prevToken == ".") {
             return "variable-2";
           }

@@ -1,5 +1,5 @@
 /*!
- * jquery-timepicker v1.11.10 - A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.
+ * jquery-timepicker v1.11.12 - A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.
  * Copyright (c) 2015 Jon Thornton - http://jonthornton.github.com/jquery-timepicker/
  * License: MIT
  */
@@ -122,6 +122,8 @@
 					if (settings.disableTextInput) {
 						self.on('keydown.timepicker', _disableTextInputHandler);
 					}
+                    			self.on('cut.timepicker', _keyuphandler);
+                    			self.on('paste.timepicker', _keyuphandler);
 
 					_formatValue.call(self.get(0), null, 'initial');
 				}
@@ -215,6 +217,11 @@
 				} else if (settings.scrollDefault) {
 					selected = _findRow(self, list, settings.scrollDefault());
 				}
+			}
+
+			// if not found or disabled, intelligently find first selectable element
+			if (!selected.length || selected.hasClass('ui-timepicker-disabled')) {
+				selected = list.find('li:not(.ui-timepicker-disabled):first');
 			}
 
 			if (selected && selected.length) {
@@ -362,7 +369,9 @@
 				prettyTime = value;
 			}
 
-			_setTimeValue(self, prettyTime);
+			_setTimeValue(self, prettyTime, 'initial');
+			_formatValue.call(self.get(0), {'type':'change'}, 'initial');
+
 			if (self.data('timepicker-list')) {
 				_setSelected(self, self.data('timepicker-list'));
 			}
@@ -747,7 +756,8 @@
 	{
 		list.find('li').removeClass('ui-timepicker-selected');
 
-		var timeValue = _time2int(_getTimeValue(self), self.data('timepicker-settings'));
+		var settings = self.data('timepicker-settings');
+		var timeValue = _time2int(_getTimeValue(self), settings);
 		if (timeValue === null) {
 			return;
 		}
@@ -761,18 +771,25 @@
 				list.scrollTop(list.scrollTop() + selected.position().top - selected.outerHeight());
 			}
 
-			selected.addClass('ui-timepicker-selected');
+			if (settings.forceRoundTime || selected.data('time') === timeValue) {
+				selected.addClass('ui-timepicker-selected');
+			}
 		}
 	}
 
 
 	function _formatValue(e, origin)
 	{
-		if (this.value === '' || origin == 'timepicker') {
+		if (origin == 'timepicker') {
 			return;
 		}
 
 		var self = $(this);
+
+		if (this.value === '') {
+			_setTimeValue(self, null, origin);
+			return;
+		}
 
 		if (self.is(':focus') && (!e || e.type != 'change')) {
 			return;
@@ -836,7 +853,7 @@
 			self.val(value);
 
 			var settings = self.data('timepicker-settings');
-			if (settings.useSelect && source != 'select' && source != 'initial') {
+			if (settings.useSelect && source != 'select') {
 				self.data('timepicker-list').val(_roundAndFormatTime(_time2int(value), settings));
 			}
 		}
@@ -851,7 +868,9 @@
 
 			return true;
 		} else {
-			self.trigger('selectTime');
+			if (['error', 'initial'].indexOf(source) == -1) {
+				self.trigger('selectTime');
+			}
 			return false;
 		}
 	}
@@ -974,6 +993,17 @@
 
 		if (!list || !_isVisible(list) || settings.disableTextInput) {
 			return true;
+		}
+
+		if (e.type === 'paste' || e.type === 'cut') {
+		    	setTimeout(function () {
+				if (settings.typeaheadHighlight) {
+			    		_setSelected(self, list);
+				} else {
+			    		list.hide();
+				}
+		    	}, 0);
+		    	return;
 		}
 
 		switch (e.keyCode) {
@@ -1192,16 +1222,10 @@
 		}
 
 		var hour = parseInt(time[2]*1, 10);
-		if (hour > 24) {
-			if (settings && settings.wrapHours === false) {
-				return null;
-			} else {
-				hour = hour % 24;
-			}
-		}
-
 		var ampm = time[1] || time[5];
 		var hours = hour;
+		var minutes = ( time[3]*1 || 0 );
+		var seconds = ( time[4]*1 || 0 );
 
 		if (hour <= 12 && ampm) {
 			var isPm = (ampm == _lang.pm || ampm == _lang.PM);
@@ -1211,10 +1235,17 @@
 			} else {
 				hours = (hour + (isPm ? 12 : 0));
 			}
+		} else if (settings) {
+			var t = hour * 3600 + minutes * 60 + seconds;
+			if (t >= _ONE_DAY + (settings.show2400 ? 1 : 0)) {
+				if (settings.wrapHours === false) {
+					return null;
+				}
+
+				hours = hour % 24;
+			}
 		}
 
-		var minutes = ( time[3]*1 || 0 );
-		var seconds = ( time[4]*1 || 0 );
 		var timeInt = hours*3600 + minutes*60 + seconds;
 
 		// if no am/pm provided, intelligently guess based on the scrollDefault

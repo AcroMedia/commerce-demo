@@ -23,7 +23,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "~8.4.0",
+        "drupal/core": "~8.5",
         "drupal/console": "~1.0",
         "drupal/commerce": "^2.2",
         "drupal/swiftmailer": "1.x-dev",
@@ -34,7 +34,7 @@
         "drupal/webform": "5.x-dev",
         "drupal/field_group": "~1.0-rc6",
         "drupal/commerce_paypal": "~1.0",
-        "drupal/commerce_authnet": "~1.0",
+        "drupal/commerce_authnet": "1.0-beta4",
         "drupal/commerce_shipping": "~2.0-beta3",
         "drupal/commerce_recurring": "^1.0@beta",
         "drupal/advancedqueue": "^1.0@beta",
@@ -122,7 +122,7 @@
                 "#2901504: Provide limit by no of orders per user condition for promotions in commerce core":
                 "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch",
                 "#2770731: Add a display name to promotions":
-                "https://www.drupal.org/files/issues/adjustment_label_how-2770731-20.patch"
+                "https://www.drupal.org/files/issues/adjustment_label-2770731-28.patch"
             }
         }
     }

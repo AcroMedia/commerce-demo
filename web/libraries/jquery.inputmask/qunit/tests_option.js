@@ -1,15 +1,4 @@
-define([
-	"qunit",
-	"inputmask.dependencyLib",
-	"inputmask",
-	"../dist/inputmask/inputmask.date.extensions",
-	"../dist/inputmask/inputmask.extensions",
-	"../dist/inputmask/inputmask.numeric.extensions",
-	"../dist/inputmask/inputmask.phone.extensions",
-	"../dist/inputmask/inputmask.regex.extensions",
-	"prototypeExtensions",
-	"simulator"
-], function (qunit, $, Inputmask) {
+export default function (qunit, $, Inputmask) {
 	qunit.module("Extra options after masking");
 
 	qunit.test("decimal alias add suffix later - gkostov", function (assert) {
@@ -22,4 +11,4 @@ define([
 		$("#testmask").Type("123.45");
 		assert.equal(testmask.value, "123.45%", "Result " + testmask.value);
 	});
-});
+};

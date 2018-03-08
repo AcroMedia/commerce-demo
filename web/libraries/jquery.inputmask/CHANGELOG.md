@@ -1,6 +1,110 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [3.3.10 - 2017-10-16]
+### Updates
+- Fix changes from PR #1664
+
+## [3.3.9 - 2017-10-10]
+### Updates
+- enhance inputfallback (Android)
+
+## [3.3.8 - 2017-08-24]
+### added
+- added \uFF11-\uFF19 character range to 9 definition #1606
+- importDataAttributes option #1633
+- add dot support in regex #1651
+
+### Updates
+- pass inputmask object in the callbacks
+- colorMask enhancement: better positioning and more controllable via inputmask.css
+- remove maxLength attribute on android #1490
+- enhance inputfallback (Android)
+
+### Fixes
+- Mask appear when I press TAB & showMaskOnFocus: false, showMaskOnHover: false #1198
+- DependencyLib.Event CustomEvent #1642
+- Wrong initial cursor position with Numeric and Prefix #1578
+- Currency mask works incorrectly on Android Chrome v58 #1617
+- Can't input character at the end if it's also a placeholder on Android #1648
+- colorMask - incorrect positioning #1421
+- Object doesn't support property or method '_valueGet' in version 3.3.7 #1645
+- Usage of numericInput in data-inputmask causes reversed value #1640
+- Numeric suffix makes radixPoint disappear on preset value #1638
+- Cannot delete after fill up all the mask Android Chrome browser Jsfiddle #1637
+
+## [3.3.7 - 2017-06-09]
+### added
+- allow custom operation in casing option by callback #1565
+
+### Updates
+- put back Regex alias extension for legacy support #1611
+- postvalidation cannot set pos of undefined
+- fix undoValue initialization 
+
+### Fixed
+- Major issue with regex #1611
+- React onChange event doesn't work with Inputmask #1377
+- Currency digits and delete #1351
+- Decimal editing problems #1603
+- UX problem with email mask #1600
+- Force numeric to empty (on blur) with '0' as value #215
+- ndxInitializer.shift is not a function
+
+## [3.3.6 - 2017-05-11]
+### added
+- noValuePatching option #1276
+
+### Updates
+- drop Regex alias => use the inputmask regex option instead
+- alternator syntax update - regex like alternations is now supported (aa|99|AA) ~ aa or 99 or AA
+
+### Fixed
+- NaN with negationSymbol and unmaskAsNumber #1581
+- A dot (.) in Regex Causes Errors #647
+- variable "undoValue" isn't initialized correctly #1519
+- on submit change event is triggered #1392
+- Change Event Problems for Masked Input #1583
+- integer backspace bug when set maxLength attr. #1546
+- Regex with placeholder, not working? #798
+- Visualize regular expressions #1040
+- Mobile phone code update needed for Malaysia #1571
+- suffix bug (regression) #1558
+- 29 february of non leap-year #1567
+
+## [3.3.5 - 2017-04-10]
+### Added
+- add example webpack setup (thx to Kevin Suen)
+- build-in regex support without extension (WIP)
+
+### Updates
+- Change package name to Inputmask to better reflect that Inputmask doesn't require jQuery
+- make removing the inputmask take the autoUnmask option into account
+- enhance inputfallback event (android)
+- restructure project
+- performance updates
+	- initialization
+
+### Fixed
+- Changes are not reflected back to model when using with Vue2 (mobile) #1468
+- Multiple alternators #1553
+- Weird Issue with decimal masking when value is like 0.55 #1512
+- IE 8 problems with currency and jquery.inputmask.bundle.js #1545
+- Rounding error for numeric aliases #1300
+- Currency InputMask Input Value issue with numericInput: true #1269
+- onCleared event doesn't fire with 'numeric' alias in some case #1495
+- Currency InputMask Input Value issue with numericInput: true #1269
+- Rounding numeric values #1540
+- Casing lower/upper as extend aliases? #1529
+- This line of code returns an unexpected value when unmasking as number #1527
+- Phone Mask Cursor Issue on Chrome on some Androids.. #1490
+- min value issue fix #1177
+- static is a reserved keyword #1479
+- hasOwnProperty check missing in reverseTokens (numericInput) #1486
+- Per-element radixPoint overwrites defaults #1454
+- Form not cleaning correctly when AutoUnmask option is set to true #1442
+- Form can`t submitted with input[name=disabled] #1473
+
 ## [3.3.4 - 2016-12-22]
 ### Added
 - extra extension points: analyseMask

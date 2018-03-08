@@ -38,14 +38,14 @@ You can view a live demo and some examples of how to use the various options her
 
 
 ## Browser Compatibility
-| Chrome | FF  | Safari | IE  | Chrome Android | Mobile Safari | IE Mob |
-| :----: | :-: | :----: | :-: | :------------: | :-----------: | :----: |
-|    ✓   |  ✓  |    ✓   |  9  |      ✓         |       ✓       |     ✓  |
+| Chrome |  FF  | Safari |  IE  | Chrome Android | Mobile Safari | IE Mob |
+| :----: | :--: | :----: | :--: | :------------: | :-----------: | :----: |
+|    ✓   |   ✓  |    ✓   |  11  |       ✓        |       ✓       |    ✓   |
 
-Note: In v11.0.0 we dropped support for IE8, because it is no longer supported by any version of Windows - see https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8/
+Note: In v12.0.0 we dropped support for IE9 and IE10, because they are no longer supported by any version of Windows - see https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8/
 
 ## Getting Started
-1. Download the [latest release](https://github.com/jackocnr/intl-tel-input/releases/latest), or better yet install it with [npm](https://www.npmjs.com/) or [Bower](http://bower.io)
+1. Download the [latest release](https://github.com/jackocnr/intl-tel-input/releases/latest), or better yet install it with [npm](https://www.npmjs.com/package/intl-tel-input)
 
 2. Include the stylesheet
   ```html
@@ -55,7 +55,7 @@ Note: In v11.0.0 we dropped support for IE8, because it is no longer supported b
 3. Override the path to flags.png in your CSS
   ```css
   .iti-flag {background-image: url("path/to/flags.png");}
-    
+
   @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     .iti-flag {background-image: url("path/to/flags@2x.png");}
   }
@@ -76,7 +76,7 @@ Note: In v11.0.0 we dropped support for IE8, because it is no longer supported b
 
 
 ## Recommended Usage
-We highly recommend you load the included utils.js using the `utilsScript` option. Then even when `nationalMode` or `separateDialCode` is enabled, the plugin is built to always deal with numbers in the full international format (e.g. "+17024181234") and convert them accordingly. I recommend you get, store, and set numbers exclusively in this format for simplicity.
+We highly recommend you load the included utils.js using the `utilsScript` option. Then the plugin is built to always deal with numbers in the full international format (e.g. "+17024181234") and convert them accordingly - even when `nationalMode` or `separateDialCode` is enabled. I recommend you get, store, and set numbers exclusively in this format for simplicity - then you don't have to deal with handling the country code separately, as full international numbers include the country code information.
 
 You can always get the full international number (including country code) using `getNumber`, then you only have to store that one string in your database (you don't have to store the country separately), and then the next time you initialise the plugin with that number it will automatically set the country and format it according to the options you specify (e.g. if you enable `nationalMode` it will automatically remove the international dial code for you).
 
@@ -131,10 +131,10 @@ Format the input value (according to the `nationalMode` option) during initialis
 Type: `Function` Default: `null`  
 When setting `initialCountry` to `"auto"`, you must use this option to specify a custom function that looks up the user's location. Also note that when instantiating the plugin, we now return a [deferred object](https://api.jquery.com/category/deferred-object/), so you can use `.done(callback)` to know when initialisation requests like this have completed.
 
-Here is an example using the [ipinfo.io](http://ipinfo.io/) service (note: this service requires a paid account to use over HTTPS):  
+Here is an example using the [ipinfo.io](https://ipinfo.io/) service:  
 ```js
 geoIpLookup: function(callback) {
-  $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+  $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
     var countryCode = (resp && resp.country) ? resp.country : "";
     callback(countryCode);
   });
@@ -142,6 +142,10 @@ geoIpLookup: function(callback) {
 ```
 _Note that the callback must still be called in the event of an error, hence the use of `always` in this example._  
 _Tip: store the result in a cookie to avoid repeat lookups!_
+
+**hiddenInput**  
+Type: `String` Default: `""`  
+Add a hidden input with the given name, and on submit, populate it with the full international number (using `getNumber`). This is a quick way for people using non-ajax forms to get the full international number, even when `nationalMode` is enabled. _Note: requires the main telephone input to be inside a form element, as this feature works by listening for the submit event on the closest form element._
 
 **initialCountry**  
 Type: `String` Default: `""`  
@@ -174,7 +178,7 @@ Display the country dial code next to the selected flag so it's not part of the 
 
 **utilsScript**  
 Type: `String` Default: `""` Example: `"build/js/utils.js"`  
-Enable formatting/validation etc. by specifying the URL of the included utils.js script (or alternatively just point it to the file on [cdnjs.com](https://cdnjs.com/libraries/intl-tel-input)). The script is fetched using Ajax when the page has finished loading (on the `window.load` event) to prevent blocking. When instantiating the plugin, we return a [deferred object](https://api.jquery.com/category/deferred-object/), so you can use `.done(callback)` to know when initialisation requests like this have finished. See [Utilities Script](#utilities-script) for more information. _Note that if you're lazy loading the plugin script itself (intlTelInput.js) this will not work and you will need to use the `loadUtils` method instead._
+Enable formatting/validation etc. by specifying the URL of the included utils.js script (or alternatively just point it to the file on [cdnjs.com](https://cdnjs.com/libraries/intl-tel-input)). The script is fetched using Ajax when the page has finished loading (on the `window.load` event) to prevent blocking (the script is ~215KB). When instantiating the plugin, we return a [deferred object](https://api.jquery.com/category/deferred-object/), so you can use `.done(callback)` to know when initialisation requests like this have finished. See [Utilities Script](#utilities-script) for more information. _Note that if you're lazy loading the plugin script itself (intlTelInput.js) this will not work and you will need to use the `loadUtils` method instead._
 
 
 ## Public Methods
@@ -258,6 +262,12 @@ Insert a number, and update the selected flag accordingly. _Note that if `format
 $("#phone").intlTelInput("setNumber", "+447733123456");
 ```
 
+**setPlaceholderNumberType**  
+Change the placeholderNumberType option.
+```js
+$("#phone").intlTelInput("setPlaceholderNumberType", "FIXED_LINE");
+```
+
 
 ## Static Methods
 
@@ -296,7 +306,13 @@ $("#phone").on("countrychange", function(e, countryData) {
   // do something with countryData
 });
 ```
-See an example here: [Country sync](http://intl-tel-input.com/node_modules/intl-tel-input/examples/gen/country-sync.html)
+See an example here: [Country sync](http://intl-tel-input.com/node_modules/intl-tel-input/examples/gen/country-sync.html)  
+
+**open:countrydropdown**  
+This is triggered when the user opens the dropdown.  
+
+**close:countrydropdown**  
+This is triggered when the user closes the dropdown.  
 
 
 ## Utilities Script
@@ -307,7 +323,7 @@ The utilities script ([build/js/utils.js](build/js/utils.js)) is a custom build 
 * Placeholder set to an example number for the selected country - even specify the type of number (e.g. mobile) using the `placeholderNumberType` option
 * Extract the standardised (E.164) international number with `getNumber` even when using the `nationalMode` option
 
-International number formatting/validation is hard (it varies by country/district, and we currently support ~230 countries). The only comprehensive solution I have found is libphonenumber, which I have precompiled into a single JavaScript file and included in the lib directory. Unfortunately even after minification it is still ~215KB, but if you use the `utilsScript` option then it will only fetch the script when the page has finished loading (to prevent blocking). If size is not a concern, then you can manually include the script yourself however you like, and as long as it has loaded before you initialise the plugin then it should work fine.
+International number formatting/validation is hard (it varies by country/district, and we currently support ~230 countries). The only comprehensive solution I have found is libphonenumber, from which I have precompiled the relevant parts into a single JavaScript file and included in the lib directory. Unfortunately even after minification it is still ~215KB, but if you use the `utilsScript` option then it will only fetch the script when the page has finished loading (to prevent blocking). If size is not a concern, then you can manually include the script yourself however you like, and as long as it has loaded before you initialise the plugin then it should work fine.
 
 To recompile the utilities script yourself, see the comments at the top of [src/js/utils.js](src/js/utils.js).
 

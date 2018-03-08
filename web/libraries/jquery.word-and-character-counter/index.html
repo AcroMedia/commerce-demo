@@ -1,0 +1,478 @@
+<!DOCtype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://static.jquery.com/ui/css/base2.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/redmond/jquery-ui.css"
+          type="text/css" media="all"/>
+    <!--http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css-->
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <title>jQuery word and Character Counter Plugin</title>
+</head>
+<body style="display:none">
+<div id="notice" class="ui-state-highlight ui-corner-all" style="display:none">
+    <div id="n_body">
+        <a href="#" title="close" id="close">close</a>
+        <p>
+            Works with the latest release of <a style="font-size:16px" href="http://jquery.com/"
+                                                target="_blank">jQuery</a>
+        </p>
+    </div>
+</div>
+<div id="body">
+    <h1 title="jQuery word and character counter plugin">jQuery Word and character counter plug-in!</h1>
+    <div id="tabs">
+        <ul>
+            <li>
+                <a href="#about">jQuery counter plug-in</a>
+            </li>
+            <li>
+                <a href="#default_usageInfo">default</a>
+            </li>
+            <li>
+                <a href="#character_count">characters</a>
+            </li>
+            <li>
+                <a href="#word_count">words</a>
+            </li>
+            <li>
+                <a href="#custom_message">custom msg</a>
+            </li>
+            <li>
+                <a href="#infinite">infinite</a>
+            </li>
+            <li>
+                <a href="#appTar">append/target</a>
+            </li>
+            <li>
+                <a href="#containerClass">container class</a>
+            </li>
+        </ul>
+        <div id="about">
+            <p>
+                This <strong>jQuery Word and character counter plug-in</strong> allows you to count characters or words,
+                up or down. You can set a minimum or maximum goal for the counter to reach.
+            </p>
+            <p>
+                It will insert a
+                <code>
+                    div
+                </code>
+                with an
+                <code>
+                    id
+                </code>
+                of the name of the input area you are counting with a "_counter" suffix. For example, if the
+                <code>
+                    input
+                </code>
+                you want to count is called "countMe", the
+                <code>
+                    id
+                </code>
+                of the
+                <code>
+                    div
+                </code>
+                that keeps track of the count will be "countMe<i>_counter</i>".
+            </p>
+            <p>
+                Simple? You bet your ass it is.
+            </p>
+            <ul id="newDesc" class="hide">
+                <li>
+                    Show only the counter and not the additional text.
+                </li>
+                <li>
+                    Set a minimum number the user much reach. You set the function to be excecuted when they go above or
+                    below the minimum you set.
+                </li>
+                <li>
+                    Bug fixes
+                </li>
+                <li>
+                    Optimized
+                </li>
+            </ul>
+            <br/>
+            <!-- Yes. A table. I went there. -->
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th width="240px">Value</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>type</td>
+                    <td><strong>char</strong> || word</td>
+                    <td>
+                        <p>
+                            Count characters or words by using &#39;char&#39; or &#39;word&#39; respectively.
+                        </p></td>
+                </tr>
+                <tr>
+                    <td>count</td>
+                    <td><strong>down</strong> || up</td>
+                    <td>
+                        <p>
+                            Count up or down <i>to</i> or <i>from</i> your goal
+                        </p></td>
+                </tr>
+                <tr>
+                    <td>goal</td>
+                    <td><strong>140</strong> || x || 'sky'</td>
+                    <td>
+                        <p>
+                            The goal number. If you are counting <i>down</i>, the counter will <b>start</b> on this
+                            number. If however you are counting <i>up</i>, the counter will <b>end</b> on this number.
+                        </p>
+                        <p>
+                            <strong>Sky's</strong> the limit! Setting the goal to the string
+                            <code>
+                                'sky'
+                            </code>
+                            enables counting up, infinitely without stopping the user.
+                        </p></td>
+                </tr>
+                <tr>
+                    <td>text</td>
+                    <td><strong>true</strong> || false</td>
+                    <td>Set <b>false</b> if you only want the numbers to show and <i>not</i> the words (
+                        <code>
+                            msg
+                        </code>).
+                    </td>
+                </tr>
+                <tr>
+                    <td>msg</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <strong>x character(s)/word(s) left</strong>
+                            </li>
+                            <li>
+                                x character(s)/word(s) (y max)
+                            </li>
+                            <li>
+                                Your message here!
+                            </li>
+                            <li>
+                                Custom language translation
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <p>
+                            There are various defaults set based on the
+                            <code>
+                                type, count
+                            </code>
+                            options being used. You can set your own message to be added after the input field using
+                            this plugin.
+                            If you want the message off, just set the
+                            <code>
+                                text
+                            </code>
+                            to false.
+                        </p>
+                        <p>
+                            Optionally, you can use the
+                            <code>
+                                translation
+                            </code>
+                            option to translate the default language of the message that is shown after the input field.
+                        </p></td>
+                </tr>
+                <tr>
+                    <td>target</td>
+                    <td><strong>false</strong> || custom selector <code>String</code></td>
+                    <td>Passing a valid jQuery selector will use that DOM element to place the counter on the page.</td>
+                </tr>
+                <tr>
+                    <td>append</td>
+                    <td><strong>true</strong> || false</td>
+                    <td>By default, inserts the counter <em>after</em> the desired DOM element. If set to false, this
+                        will place the counter <em>before</em> the (either custom or default) target element.
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div id="default_usageInfo">
+            <h3>Default Usage</h3>
+            <p>
+                The most basic way to use the counter is to simply call the
+                <code>
+                    counter()
+                </code>
+                method on a jQuery object.
+            </p>
+            <pre class="brush: js;">
+            			$("#default_usage").counter();</pre>
+            <p>
+                Start typing!
+            </p>
+            <div class="sample">
+                <p>
+                    Bacon ipsum dolor sit amet beef short loin pork belly strip steak venison, pig bacon tenderloin
+                    ribeye ham hock pastrami fatback brisket mea<span>tloaf. Flank ribeye chicken ball tip, shoulder pastrami turkey.</span>
+                </p>
+                <textarea id="default_usage" cols="40" rows="5"></textarea>
+            </div>
+            <p>
+                Copy & paste the text to the right of the input box above inside the text area. You'll notice that the
+                text gets cut off, not allowing you to paste or type any further.
+            </p>
+            <hr/>
+            <h3>Numbers Only</h3>
+            <p>
+                If you want the numbers only Twitter feel, use the
+                <code>
+                    text
+                </code>
+                option.
+            </p>
+            <pre class="brush: js;">
+            			$("#default_usage_num_only").counter({
+							text: false
+						});       			</pre>
+            <textarea id="default_usage_num_only" cols="40" rows="5"></textarea>
+
+
+            <hr/>
+            <h3>Content Editable</h3>
+            <p>Also supports DOM elements with <code>contenteditable</code> set to true. </p>
+            <div contenteditable="true" id="contentEditable">Type In Here</div>
+
+        </div>
+        <div id="character_count">
+            <h3>Character Count</h3>
+            <p>
+                By default, this plugin will <b>count characters</b>. Also by default, it will <b>count down</b>. Lets
+                see how counting up to ten will look:
+            </p>
+            <pre class="brush: js;">
+			            $("#charUp").counter({
+				            count: 'up',
+				            goal: 10
+			            });</pre>
+            <div class="sample">
+                <p>
+                    Bacon ipsu<span>m dolor sit amet beef short loin pork belly strip steak venison, pig bacon tenderloin ribeye ham hock pastrami fatback brisket meatloaf. Flank ribeye chicken ball tip, shoulder pastrami turkey.</span>
+                </p>
+                <textarea id="charUp" cols="40" rows="5"></textarea>
+            </div>
+        </div>
+        <div id="word_count">
+            <h3>Word Count</h3>
+            <p>
+                Since by default this plugin counts characters, you have to set the
+                <code>
+                    type
+                </code>
+                option to
+                <code>
+                    word
+                </code>
+                like so:
+            </p>
+            <pre class="brush: js;">
+					$("#wordDown").counter({
+					    type: 'word',
+					    goal: 20
+					});</pre>
+            <b>New in 2.0!</b>
+            <p>
+                After a user pastes more than the words allowed, the extra words will be removed.
+            </p>
+            <div class="sample">
+                <p>
+                    Bacon ipsum dolor sit amet beef short loin pork belly strip steak venison, pig bacon tenderloin
+                    ribeye ham hock pastrami <span>fatback brisket meatloaf. Flank ribeye chicken ball tip, shoulder pastrami turkey.</span>
+                </p>
+                <textarea id="wordDown" cols="40" rows="5"></textarea>
+            </div>
+            <br/>
+            <hr/>
+            <p>
+                Similarly, if you want to count words up, you would set the <b>count</b> option do <i>up</i> like so:
+            </p>
+            <pre class="brush: js;">
+						$("#wordUp").counter({
+						    type: 'word',
+						    goal: 20,
+						    count: 'up'
+						});</pre>
+            <div class="sample">
+                <p>
+                    Bacon ipsum dolor sit amet beef short loin pork belly strip steak venison, pig bacon tenderloin
+                    ribeye ham hock pastrami <span>fatback brisket meatloaf. Flank ribeye chicken ball tip, shoulder pastrami turkey.</span>
+                </p>
+                <textarea id="wordUp" cols="40" rows="5"></textarea>
+            </div>
+        </div>
+        <div id="custom_message">
+            <h3>Translate message</h3>
+            <b>New in 2.2!</b>
+            <p>
+                By providing a String of 4 words separated by space, you can include your own translation used to build
+                the message you show to your users.
+            </p>
+            <b>Translate the following words (from English)</b>
+            <ul>
+                <li>
+                    character
+                </li>
+                <li>
+                    word
+                </li>
+                <li>
+                    remaining
+                </li>
+                <li>
+                    maximum
+                </li>
+            </ul>
+            <p>
+                Then, all you need to do is pass them as a String (in order) as the option 'translation'.
+            </p>
+            <pre class="brush: js;">
+				        $("#translate_words").counter({
+					        goal : 10,
+					        type : 'word',
+					        translation : 'caracter palavra restante m&agrave;x'
+					    });</pre>
+            <div class="sample">
+                <textarea id="translate_words" cols="40" rows="5"></textarea>
+            </div>
+            <pre class="brush: js;">
+				         $("#translate_char").counter({
+					        goal : 10,
+					        count : 'up',
+					        translation : 'caracter palavra restante m&agrave;x'
+					    });</pre>
+            <div class="sample">
+                <textarea id="translate_char" cols="40" rows="5"></textarea>
+            </div>
+            <br/>
+            <h3>Custom message</h3>
+            <b>New in 2.0!</b>
+            <p>
+                Let's say you don't like the default text appended to the counter. Simple, just change it.
+            </p>
+            <pre class="brush: js;">
+				        $("#custom_msg").counter({
+				            msg: 'words left before you fall into a pit of emptiness.'
+				        });</pre>
+            <div class="sample">
+                <textarea id="custom_msg" cols="40" rows="5"></textarea>
+            </div>
+        </div>
+        <div id="infinite">
+            <b>New in 2.1</b>
+            <p>
+                Sky is the limit! (Cheesy, I know.)
+            </p>
+            <p>
+                Setting the
+                <code>
+                    goal
+                </code>
+                to the string
+                <code>
+                    'sky'
+                </code>
+                (with quotes) <b>overrides</b> the
+                <code>
+                    count
+                </code>
+                to
+                <code>
+                    up
+                </code>
+                and removes the default message. You can optionaly put your own custom message by using the
+                <code>
+                    msg
+                </code>
+                option.
+            </p>
+            <pre class="brush: js;">
+					$("#keepCountingChar").counter({
+						goal: 'sky'
+					});</pre>
+            <textarea cols="60" rows="10" id="keepCountingChar"></textarea>
+
+            <pre class="brush: js;">
+					$("#keepCountingWord").counter({
+						goal: 'sky',
+						type : 'word',
+						msg : 'amazing words'
+					});</pre>
+            <textarea cols="60" rows="10" id="keepCountingWord"></textarea>
+        </div>
+        <div id="appTar">
+            Courtesy of <a href="https://github.com/Gator92" target="_blank">Gator92</a>
+            <b>New in 2.1</b><br>
+            <h3>Append/Target</h3>
+            <p>With these new options, you can now place the counter anywhere on the page.</p>
+            <p>You can have the counter insert before/after the input you are counting (defaults to
+                after/<code>true</code>) by setting a boolean value to the <code>append</code> property.</p>
+            <p>You can also target any element on the page to insert the counter by passing a jQuery selector to the
+                <code>target</code> property.</p>
+            <pre class="brush: js;">
+			            $('#append-target').counter({
+					        append: false,
+					        target: '#append-here'
+					    });</pre>
+            <p>In this example, we are using a custom <code>target</code> to move the counter. We're also setting <code>append</code>
+                to false so that it can be above our target area.</p>
+            <div class="sample">
+                <textarea cols="40" rows="5" id="append-target"></textarea>
+            </div>
+            <div id="append-here">id = 'append-here'</div>
+        </div>
+
+        <div id="containerClass">
+            Courtesy of <a href="https://github.com/thomasgohard" target="_blank">thomasgohard</a> via <a
+                href="https://github.com/qwertypants/jQuery-Word-and-Character-Counter-Plugin/pull/11" target="_blank">pull
+            #11</a>
+
+            <p>Let's say you have multilple counters on a single page and want them all to be styled the same way. In
+                this case, we have a class named 'wrapper'. All you need to do is set the <code>containerClass</code>
+                property to the name of the class.</p>
+            <p>This will add the classname to the counter, giving you an easy way to style multiple counters.</p>
+            <pre class="brush: css;">
+			            .wrapper {
+						  font-size: 11px;
+						  border: 1px solid green;
+						  border-radius: 50px;
+						  width: 40%;
+						  padding: 10px;
+						}
+					</pre>
+            <pre class="brush: js;">
+			            $('#myInput').counter( {
+						   containerClass: 'wrapper'
+						});
+					</pre>
+
+            <div class="sample">
+                <textarea cols="40" rows="5" id="myInput"></textarea>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="js/load.js"></script>
+</body>
+</html>

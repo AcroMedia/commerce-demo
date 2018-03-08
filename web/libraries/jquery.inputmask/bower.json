@@ -1,28 +1,34 @@
 {
-  "name": "jquery.inputmask",
-  "version": "3.3.4",
+  "name": "inputmask",
+  "version": "3.3.10",
   "main": [
-	  "./dist/inputmask/inputmask.dependencyLib",
-	  "./dist/inputmask/inputmask",
-	  "./dist/inputmask/inputmask.extensions",
-	  "./dist/inputmask/inputmask.date.extensions",
-	  "./dist/inputmask/inputmask.numeric.extensions",
-	  "./dist/inputmask/inputmask.phone.extensions",
-	  "./dist/inputmask/inputmask.regex.extensions",
-	  "./dist/inputmask/jquery.inputmask"
+	  "./dist/inputmask/inputmask.js",
+	  "./dist/inputmask/inputmask.extensions.js",
+	  "./dist/inputmask/inputmask.date.extensions.js",
+	  "./dist/inputmask/inputmask.numeric.extensions.js",
+	  "./dist/inputmask/inputmask.phone.extensions.js",
+	  "./dist/inputmask/jquery.inputmask.js",
+	  "./dist/inputmask/global/document.js",
+	  "./dist/inputmask/global/window.js",
+	  "./dist/inputmask/phone-codes/phone.js",
+	  "./dist/inputmask/phone-codes/phone-be.js",
+	  "./dist/inputmask/phone-codes/phone-nl.js",
+	  "./dist/inputmask/phone-codes/phone-ru.js",
+	  "./dist/inputmask/phone-codes/phone-uk.js",
+	  "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.jqlite.js",
+	  "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.jquery.js",
+	  "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.js",
+	  "./dist/inputmask/bindings/inputmask.binding.js"
   ],
   "keywords": ["jquery", "plugins", "input", "form", "inputmask", "mask"],
-  "description": "jquery.inputmask is a jquery plugin which create an input mask.",
+  "description": "Inputmask is a javascript library which creates an input mask.  Inputmask can run against vanilla javascript, jQuery and jqlite.",
   "license": "http://opensource.org/licenses/mit-license.php",
   "ignore": [
     "**/*",
     "!dist/*",
     "!dist/inputmask/*",
     "!dist/min/*",
-    "!dist/min/inputmask/*",
-    "!extra/bindings/*",
-    "!extra/dependencyLibs/*",
-    "!extra/phone-codes/*"
+    "!dist/min/inputmask/*"
   ],
   "dependencies": {
     "jquery": ">=1.7"
@@ -30,5 +36,5 @@
   "authors": [{
     "name": "Robin Herbots"
   }],
-  "homepage": "http://robinherbots.github.io/jquery.inputmask"
+  "homepage": "http://robinherbots.github.io/Inputmask"
 }

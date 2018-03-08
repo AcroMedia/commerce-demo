@@ -13,8 +13,7 @@ variables:
 stages:
   - test
   - build
-  - deploy-uat
-  - deploy-live
+  - deploy
 
 code_standards:
   stage: test
@@ -25,7 +24,6 @@ code_standards:
     - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md web/modules/custom
     - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md web/themes/custom --ignore=*.css
 
-#DRUPAL 8
 custom_tests_d8:
   stage: test
   when: manual
@@ -34,7 +32,7 @@ custom_tests_d8:
   - theasci/docker-mysql-tmpfs:latest
 
   script:
-    #apache should be running by default, and does on my local, but gitlabci
+    # apache should be running by default, and does on my local, but gitlabci
     # prevents that for some reason, so we manually start it
     # the & is important so it doesn't block everything below it from running.
     - apache2-foreground > /dev/null 2>&1 &
@@ -59,36 +57,13 @@ custom_tests_d8:
     #- ../vendor/phpunit/phpunit/phpunit -c core/phpunit.xml.dist --group SITENAME
     - echo 'No custom unit tests currently, edit config if they are added'
 
-build-dev:
-  stage: build
-
-  only:
-      - UAT
-
-  # this tells the build server to save these files between jobs, this keeps them to be deployed
-  artifacts:
-    paths:
-      - bin
-      - vendor
-      - web
-      - web/themes/custom/commerce_2_demo/css
-
-  script:
-    # Run Composer to build site (use --no-dev for production builds).
-    - composer install --no-interaction
-    # Compile Sass from theme.
-    - cd web/themes/custom/commerce_2_demo
-    - npm install
-    - gulp sass
-    # Remove the node_modules dir generated from npm install.
-    - rm -rf node_modules
-
-build-live:
+build:
   stage: build
 
   # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
   only:
     - master
+    - UAT
 
   # this tells the build server to save these files between jobs, this keeps them to be deployed
   artifacts:
@@ -96,7 +71,6 @@ build-live:
       - bin
       - vendor
       - web
-      - web/themes/custom/commerce_2_demo/css
 
   script:
     # Run Composer to build site (use --no-dev for production builds).

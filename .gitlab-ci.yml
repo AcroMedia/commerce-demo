@@ -144,12 +144,12 @@ plus-demo-to-uat:
     - mkdir -p ~/.ssh
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
-    #move updated files up to deployment server, exclude .git since it's not needed
+    #move updated files up to deployment server, exclude .git since it's not needed.
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
 
-    # log into the site and flush cache
+    # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com '/bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-uat.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-uat.sh
 
 
 # Deploy base demo to LIVE site (CLOUD4).

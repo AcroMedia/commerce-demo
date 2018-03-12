@@ -618,6 +618,7 @@
     padding: 0;
     text-decoration: none;
     border: 1px solid $gray;
+    outline: none;
 
     // Triangle.
     &:before {
@@ -633,6 +634,7 @@
       z-index: 30;
       transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
     }
+
     // Zoom icon.
     &:after {
       @include fa-icon();

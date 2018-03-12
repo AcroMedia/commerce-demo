@@ -151,7 +151,7 @@
 
   // Checkout form - Guest Checkout
   // Create checkbox to let user use shipping info for payment (when no stored cards).
-  if ( (!$("fieldset[id^='edit-payment-information-payment-method'] input[id^='edit-payment-information-payment-method-stored']").is(':checked')) ) {
+  if ( (!$(".payment-method--stored").is(':checked')) ) {
     var useShippingLabel = Drupal.t('Use my shipping information.');
 
     $("fieldset[id^='edit-payment-information-payment-method']").after('<div class="fieldset-wrapper">' +
@@ -208,7 +208,7 @@
   // Checkout form - Other payment options.
   // This basically does the same as above but for AJAX.
   $(document).on('click', "div[id^='edit-payment-information-payment-method'] input", function() {
-    var notStoredCard = !$("input[id^='edit-payment-information-payment-method-stored']").is(':checked');
+    var notStoredCard = !$(".payment-method--stored").is(':checked');
 
     $.ajax( this.href, {
       complete: function(data) {

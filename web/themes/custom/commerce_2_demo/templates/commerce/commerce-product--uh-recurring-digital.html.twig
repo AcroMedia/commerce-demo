@@ -20,8 +20,17 @@
  */
 #}
 {% if view_mode == 'teaser' %}
+
+  {%
+    set classesTeaser = [
+      'product',
+      'product--teaser',
+      'product--teaser--uh-recurring-digital'
+    ]
+  %}
+
   {# Product teaser. #}
-  <a href="{{ product_url }}" class="product product--teaser product--teaser--uh-recurring-digital" aria-label="{{ product_entity.title.value }}">
+  <a href="{{ product_url }}" {{ attributes.addClass(classesTeaser) }} aria-label="{{ product_entity.title.value }}">
     <div class="product__thumbnail">
       {% if product.field_catalog_image|render|trim is not empty %}
         {{ product.field_catalog_image }}
@@ -42,8 +51,16 @@
 
 {% else %}
 
+  {%
+    set classesFull = [
+      'product',
+      'product--full',
+      'product--full--uh-recurring-digital'
+    ]
+  %}
+
   {# Product full page. #}
-  <article{{ attributes }} class="product product--full product--full--uh-recurring-digital">
+  <article{{ attributes.addClass(classesFull) }}>
 
     {# Page title rendered here but then moved with jQuery. #}
     <h1 class="page-title">{{ product_entity.title.value }}</h1>

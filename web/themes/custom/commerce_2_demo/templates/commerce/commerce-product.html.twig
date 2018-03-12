@@ -20,8 +20,17 @@
  */
 #}
 {% if view_mode == 'teaser' %}
+
+  {%
+    set classesTeaser = [
+      'product',
+      'product--teaser',
+      'product--teaser--' ~ product_entity.title.value|clean_class
+    ]
+  %}
+
   {# Product teaser. #}
-  <a href="{{ product_url }}" class="product product--teaser" aria-label="{{ product_entity.title.value }}">
+  <a href="{{ product_url }}" {{ attributes.addClass(classesTeaser) }} aria-label="{{ product_entity.title.value }}">
     <div class="product__thumbnail">
       {% if product.field_catalog_image|render|trim is not empty %}
         {{ product.field_catalog_image }}
@@ -41,8 +50,16 @@
 
 {% else %}
 
+  {%
+    set classesFull = [
+      'product',
+      'product--full',
+      'product--full--' ~ product_entity.title.value|clean_class
+    ]
+  %}
+
   {# Product full page. #}
-  <article{{ attributes }} class="product product--full">
+  <article{{ attributes.addClass(classesFull) }}>
     <div class="row">
       <div class="col-xs-12 back-and-share">
         {# Back button. #}

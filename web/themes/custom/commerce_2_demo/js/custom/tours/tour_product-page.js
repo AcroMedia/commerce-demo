@@ -16,7 +16,7 @@
           'This tour will show you some things you can do with your products. Click > to continue.'
         },
         {
-          element: '#block-views-block-featured-products-block-1 .view-content .views-row:first-of-type',
+          element: '.product--teaser--custom-mason-jar',
           intro: '<span class="introjs-tooltip__title">Featured Products</span>' +
           "Products can easily be configure to show as a featured product. Let's move on to the product page. Click next page to continue."
         }

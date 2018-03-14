@@ -133,7 +133,7 @@
   // Checkout form - Remove screenreader class from all labels.
   $('.path-checkout form label').removeClass('sr-only');
 
-  // Checkout form - pre-populate fields for quick checkout.
+  // Checkout form - pre-populate SHIPPING fields for quick checkout.
   $('input#edit-contact-information-email').val('demo@acromediainc.com');
   $('#shipping-information-wrapper select.country').val('US');
   $('#shipping-information-wrapper input.given-name').val('Charles');
@@ -144,66 +144,21 @@
   $('#shipping-information-wrapper input.locality').val('Scales Mound');
   $('#shipping-information-wrapper select.administrative-area').val('IL');
   $('#shipping-information-wrapper input.postal-code').val('61075');
+
+  // Checkout form - pre-populate BILLING fields for quick checkout.
   $('input#edit-payment-information-add-payment-method-payment-details-number').val('4111111111111111');
   $('select#edit-payment-information-add-payment-method-payment-details-expiration-month').val('10');
   $('select#edit-payment-information-add-payment-method-payment-details-expiration-year').val('2022');
   $('input#edit-payment-information-add-payment-method-payment-details-security-code').val('123');
-
-  // Checkout form - Guest Checkout
-  // Create checkbox to let user use shipping info for payment (when no stored cards).
-  if ( (!$(".payment-method--stored").is(':checked')) ) {
-    var useShippingLabel = Drupal.t('Use my shipping information.');
-
-    $("fieldset[id^='edit-payment-information-payment-method']").after('<div class="fieldset-wrapper">' +
-      ' <div id="use-shipping-information" class="webform-options-display-one-column js-webform-radios form-checkbox"> ' +
-      ' <div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-use-shipping-information js-form-item-use-shipping-information">' +
-      ' <input data-drupal-selector="use-shipping-information-input" type="checkbox" id="use-shipping-information-input" name="Use Shipping Information" value="use-shipping-information" class="form-radio"> ' +
-      ' <label for="use-shipping-information-label" class="control-label option">' +
-      useShippingLabel  +
-      ' </label><span class="form-optional use-shipping-information-label"> - Optional</span> ' +
-      ' </div>' +
-      ' </div>'
-    );
-  }
-
-  // Use the checkbox above.
-  $('#use-shipping-information-input').click(function () {
-    if ( $(this).is(':checked') ) {
-      // Get current shipping field values.
-      var $shippingCountry = $('#shipping-information-wrapper select.country').val();
-      var $shippingFirst = $('#shipping-information-wrapper input.given-name').val();
-      var $shippingLast = $('#shipping-information-wrapper input.family-name').val();
-      var $shippingCompany = $('#shipping-information-wrapper input.organization').val();
-      var $shippingStreet = $('#shipping-information-wrapper input.address-line1').val();
-      var $shippingStreet2 = $('#shipping-information-wrapper input.address-line2').val();
-      var $shippingCity = $('#shipping-information-wrapper input.locality').val();
-      var $shippingState = $('#shipping-information-wrapper select.administrative-area').val();
-      var $shippingPostal = $('#shipping-information-wrapper input.postal-code').val();
-
-      // Set the payment field values.
-      $("div[id^='payment-information-wrapper'] select.country").val($shippingCountry);
-      $("div[id^='payment-information-wrapper'] input.given-name").val($shippingFirst);
-      $("div[id^='payment-information-wrapper'] input.family-name").val($shippingLast);
-      $("div[id^='payment-information-wrapper'] input.organization").val($shippingCompany);
-      $("div[id^='payment-information-wrapper'] input.address-line1").val($shippingStreet);
-      $("div[id^='payment-information-wrapper'] input.address-line2").val($shippingStreet2);
-      $("div[id^='payment-information-wrapper'] input.locality").val($shippingCity);
-      $("div[id^='payment-information-wrapper'] select.administrative-area").val($shippingState);
-      $("div[id^='payment-information-wrapper'] input.postal-code").val($shippingPostal);
-    }
-    else {
-      // Remove payment field values.
-      $("div[id^='payment-information-wrapper'] select.country").val('');
-      $("div[id^='payment-information-wrapper'] input.given-name").val('');
-      $("div[id^='payment-information-wrapper'] input.family-name").val('');
-      $("div[id^='payment-information-wrapper'] input.organization").val('');
-      $("div[id^='payment-information-wrapper'] input.address-line1").val('');
-      $("div[id^='payment-information-wrapper'] input.address-line2").val('');
-      $("div[id^='payment-information-wrapper'] input.locality").val('');
-      $("div[id^='payment-information-wrapper'] select.administrative-area").val('');
-      $("div[id^='payment-information-wrapper'] input.postal-code").val('');
-    }
-  });
+  $("div[id^='payment-information-wrapper'] select.country").val('US');
+  $("div[id^='payment-information-wrapper'] input.given-name").val('Charles');
+  $("div[id^='payment-information-wrapper'] input.family-name").val('Mound');
+  $("div[id^='payment-information-wrapper'] input.organization").val('');
+  $("div[id^='payment-information-wrapper'] input.address-line1").val('688 W Charles Mound Rd');
+  $("div[id^='payment-information-wrapper'] input.address-line2").val('');
+  $("div[id^='payment-information-wrapper'] input.locality").val('Scales Mound');
+  $("div[id^='payment-information-wrapper'] select.administrative-area").val('IL');
+  $("div[id^='payment-information-wrapper'] input.postal-code").val('61075');
 
   // Checkout form - Other payment options.
   // This basically does the same as above but for AJAX.
@@ -216,64 +171,20 @@
           // Checkout form - Remove screenreader class from all labels.
           $('.path-checkout form label').removeClass('sr-only');
 
-          // Prefill credit card details
+          // Prefill BILLING details
           $("input[id^='edit-payment-information-add-payment-method-payment-details-number").val('4111111111111111');
           $("select[id^='edit-payment-information-add-payment-method-payment-details-expiration-month").val('10');
           $("select[id^='edit-payment-information-add-payment-method-payment-details-expiration-year").val('2022');
           $("input[id^='edit-payment-information-add-payment-method-payment-details-security-code").val('123');
-
-          // Create checkbox to let user use shipping info for new card.
-          var useShippingLabel = Drupal.t('Use my shipping information.');
-
-          $("fieldset[id^='edit-payment-information-payment-method']").after('<div class="fieldset-wrapper">' +
-            ' <div id="use-shipping-information" class="webform-options-display-one-column js-webform-radios form-checkbox"> ' +
-            ' <div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-use-shipping-information js-form-item-use-shipping-information">' +
-            ' <input data-drupal-selector="use-shipping-information-input" type="checkbox" id="use-shipping-information-input" name="Use Shipping Information" value="use-shipping-information" class="form-radio"> ' +
-            ' <label for="use-shipping-information-label" class="control-label option">' +
-            useShippingLabel  +
-            ' </label><span class="form-optional use-shipping-information-label"> - Optional</span> ' +
-            ' </div>' +
-            ' </div>'
-          );
-
-          // Use the checkbox above.
-          $('#use-shipping-information-input').click(function () {
-            if ( $(this).is(':checked') ) {
-              // Get current shipping field values.
-              var $shippingCountry = $('#shipping-information-wrapper select.country').val();
-              var $shippingFirst = $('#shipping-information-wrapper input.given-name').val();
-              var $shippingLast = $('#shipping-information-wrapper input.family-name').val();
-              var $shippingCompany = $('#shipping-information-wrapper input.organization').val();
-              var $shippingStreet = $('#shipping-information-wrapper input.address-line1').val();
-              var $shippingStreet2 = $('#shipping-information-wrapper input.address-line2').val();
-              var $shippingCity = $('#shipping-information-wrapper input.locality').val();
-              var $shippingState = $('#shipping-information-wrapper select.administrative-area').val();
-              var $shippingPostal = $('#shipping-information-wrapper input.postal-code').val();
-
-              // Set the payment field values.
-              $("div[id^='payment-information-wrapper'] select.country").val($shippingCountry);
-              $("div[id^='payment-information-wrapper'] input.given-name").val($shippingFirst);
-              $("div[id^='payment-information-wrapper'] input.family-name").val($shippingLast);
-              $("div[id^='payment-information-wrapper'] input.organization").val($shippingCompany);
-              $("div[id^='payment-information-wrapper'] input.address-line1").val($shippingStreet);
-              $("div[id^='payment-information-wrapper'] input.address-line2").val($shippingStreet2);
-              $("div[id^='payment-information-wrapper'] input.locality").val($shippingCity);
-              $("div[id^='payment-information-wrapper'] select.administrative-area").val($shippingState);
-              $("div[id^='payment-information-wrapper'] input.postal-code").val($shippingPostal);
-            }
-            else {
-              // Remove payment field values.
-              $("div[id^='payment-information-wrapper'] select.country").val('');
-              $("div[id^='payment-information-wrapper'] input.given-name").val('');
-              $("div[id^='payment-information-wrapper'] input.family-name").val('');
-              $("div[id^='payment-information-wrapper'] input.organization").val('');
-              $("div[id^='payment-information-wrapper'] input.address-line1").val('');
-              $("div[id^='payment-information-wrapper'] input.address-line2").val('');
-              $("div[id^='payment-information-wrapper'] input.locality").val('');
-              $("div[id^='payment-information-wrapper'] select.administrative-area").val('');
-              $("div[id^='payment-information-wrapper'] input.postal-code").val('');
-            }
-          });
+          $("div[id^='payment-information-wrapper'] select.country").val('US');
+          $("div[id^='payment-information-wrapper'] input.given-name").val('Charles');
+          $("div[id^='payment-information-wrapper'] input.family-name").val('Mound');
+          $("div[id^='payment-information-wrapper'] input.organization").val('');
+          $("div[id^='payment-information-wrapper'] input.address-line1").val('688 W Charles Mound Rd');
+          $("div[id^='payment-information-wrapper'] input.address-line2").val('');
+          $("div[id^='payment-information-wrapper'] input.locality").val('Scales Mound');
+          $("div[id^='payment-information-wrapper'] select.administrative-area").val('IL');
+          $("div[id^='payment-information-wrapper'] input.postal-code").val('61075');
         }
       }
     });

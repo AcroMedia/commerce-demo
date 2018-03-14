@@ -58,7 +58,7 @@
         "drupal/comments_order": "^1.0@beta",
         "drupal/hotjar": "^1.2",
         "drupal/commerce_pos": "2.x-dev",
-        "drupal/contribute": "^5.0@beta"
+        "drupal/contribute": "^1.0"
     },
     "require-dev": {
         "behat/mink": "~1.7",

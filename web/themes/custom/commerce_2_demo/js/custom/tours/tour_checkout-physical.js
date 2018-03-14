@@ -98,7 +98,7 @@
           element: '#block-checkoutprogress',
           position: 'bottom-middle-aligned',
           intro: '<span class="introjs-tooltip__title">Checkout Progress</span>' +
-          "This checkout progress indicator lets customers know what step they're on throughout the entire checkout flow."
+          "The checkout progress indicator at the top of the page lets customers know what step they're on throughout the entire checkout flow."
         },
         {
           element: '#edit-login-returning-customer',
@@ -175,7 +175,7 @@
           element: '#block-checkoutprogress',
           position: 'bottom-middle-aligned',
           intro: '<span class="introjs-tooltip__title">Checkout Progress</span>' +
-          "This checkout progress indicator lets customers know what step they're on throughout the entire checkout flow."
+          "The checkout progress indicator at the top of the page lets customers know what step they're on throughout the entire checkout flow."
         },
         {
           element: '.layout-region-checkout-secondary',

@@ -54,3 +54,16 @@
     display: none;
   }
 }
+
+/**
+ * Checkout complete.
+ */
+
+.checkout-complete__drupalcon-preorder {
+  .instructions {
+    display: block;
+    padding-top: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $gray-light;
+  }
+}

@@ -42,6 +42,15 @@ uh-recurring-digital:
     - core/jquery
     - core/drupal
 
+uh-drupalcon-preorder:
+  version: 1.x
+  js:
+    js/contrib/jquery.form-validator.min.js: {}
+    js/custom/plus/uh-drupalcon-preorder.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
 slider:
   version: 1.x
   js:

@@ -243,6 +243,13 @@ a {
   font-size: 24px;
 }
 
+// Button disabled.
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+  background-color: $gray;
+  border-color: $gray;
+  pointer-events: none;
+}
+
 /**
  * Tabs.
  */

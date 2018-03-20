@@ -21,12 +21,12 @@
 
     // Remove disabled class if valid and product is in stock.
     // Add or remove hidden class to username error message.
-    if (valid) {
-      usernameMessage.addClass('hidden');
-    }
-    else if ( valid && $('.drupalcon-preorder__out-of-stock').hasClass('hidden') ) {
+    if ( valid && $('.drupalcon-preorder__out-of-stock').hasClass('hidden') ) {
       usernameMessage.addClass('hidden');
       addToCartButton.removeClass('disabled');
+    }
+    else if (valid) {
+      usernameMessage.addClass('hidden');
     }
     else {
       usernameMessage.removeClass('hidden');

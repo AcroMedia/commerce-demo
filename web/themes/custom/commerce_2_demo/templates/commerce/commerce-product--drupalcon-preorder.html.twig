@@ -83,13 +83,6 @@
         {% endif %}
 
         <div class="col-sm-12 col-md-6">
-          {# Main product image - no slider. #}
-          <div class="product-slider product-slider--no-thumbnails">
-            <div class="product-slider__main-slider__item">
-              {{ product.variation_field_image }}
-            </div>
-          </div>
-
           {# Main product image - with slider. #}
           <div class="{{ product_slider_class }}">
             <div class="product-slider__main-slider">

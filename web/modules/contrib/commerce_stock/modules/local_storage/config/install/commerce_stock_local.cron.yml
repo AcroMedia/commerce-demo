@@ -1,0 +1,2 @@
+update_batch_size: 50
+update_interval: 3600

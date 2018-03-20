@@ -1,0 +1,7 @@
+name: 'Commerce Stock Local Storage'
+description: 'Provides a local database storage service for Commerce Stock.'
+package: 'Commerce Stock'
+dependencies:
+  - commerce_stock
+core: 8.x
+type: module

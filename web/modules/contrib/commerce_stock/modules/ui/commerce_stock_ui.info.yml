@@ -1,0 +1,7 @@
+name: Commerce Stock UI
+type: module
+description: UI for Commerce stock
+core: 8.x
+package: Commerce Stock
+dependencies:
+  - commerce_stock

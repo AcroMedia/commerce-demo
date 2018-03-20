@@ -1,0 +1,21 @@
+administer commerce stock location entities:
+  title: 'Administer stock location entities'
+  description: 'Allow to access the administration form to configure stock location entities.'
+  restrict access: true
+
+administer commerce stock location types:
+  title: 'Administer stock location types'
+  description: 'Allow to access the administration form to configure stock location types.'
+  restrict access: true
+
+add commerce stock location entities:
+  title: 'Create new commerce stock location entities.'
+
+delete commerce stock location entities:
+  title: 'Delete commerce stock location entities.'
+
+view commerce stock location entities:
+  title: 'View commerce stock location entities.'
+
+view inactive commerce stock location entities:
+  title: 'View inactive commerce stock location entities.'

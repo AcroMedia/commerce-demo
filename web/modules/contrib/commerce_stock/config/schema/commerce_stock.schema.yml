@@ -1,0 +1,19 @@
+commerce_stock.service_manager:
+  type: config_object
+  mapping:
+    default_service_id:
+      type: string
+      label: 'Default service ID'
+
+commerce_stock.core_stock_events:
+  type: config_object
+  mapping:
+    core_stock_events_order_complete:
+        type: boolean
+        label: Whether the order complete stock event is enabled or not.
+    core_stock_events_order_cancel:
+        type: boolean
+        label: Whether the order cancel stock event is enabled or not.
+    core_stock_events_order_updates:
+        type: boolean
+        label: Whether the order update stock event is enabled or not.

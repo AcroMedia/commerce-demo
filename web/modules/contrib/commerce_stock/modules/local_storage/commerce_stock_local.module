@@ -1,0 +1,150 @@
+<?php
+
+/**
+ * @file
+ * Commerce Stock Local module.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function commerce_stock_local_entity_base_field_info(EntityTypeInterface $entity_type) {
+  // Get class of entity type.
+  if (in_array('Drupal\commerce\PurchasableEntityInterface', class_implements($entity_type->getOriginalClass()))) {
+    $fields['commerce_stock_always_in_stock'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Always in stock?'))
+      ->setDescription(t('Should this product be considered "always in stock"?'))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => 5,
+      ])
+      ->setDefaultValue(FALSE);
+    return $fields;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function commerce_stock_local_cron() {
+  $next = \Drupal::state()->get('commerce_stock_local.update_level_next') ?: 0;
+  $interval = \Drupal::config('commerce_stock_local.cron')->get('update_interval');
+  if (REQUEST_TIME >= $next) {
+    _commerce_stock_local_update_stock_level_queue();
+    \Drupal::state()->set('commerce_stock_local.update_level_next', REQUEST_TIME + $interval);
+  }
+}
+
+/**
+ * Updates the stock level update queue.
+ *
+ * Adds purchasable entities from the latest unprocessed stock transactions
+ * to the queue worker responsible for totaling location stock levels.
+ *
+ * @todo Support all purchasable entities - not just product variations.
+ * @see https://www.drupal.org/node/2844010
+ */
+function _commerce_stock_local_update_stock_level_queue() {
+  $queue = \Drupal::queue('commerce_stock_local_stock_level_updater');
+
+  // Get the last processed product id.
+  $level_last_id = \Drupal::state()->get('commerce_stock_local.update_last_id');
+  $level_last_id = !empty($level_last_id) ? $level_last_id : 0;
+
+  // Check if Q empty and not initialized to 0.
+  if (($queue->numberOfItems() == 0) && ($level_last_id != 0)) {
+    // Set the Q reset state.
+    \Drupal::state()->set('commerce_stock_local.llq_reset', TRUE);
+    $llq_reset = TRUE;
+  }
+  else {
+    // Get the Q reset state.
+    $llq_reset = \Drupal::state()->get('commerce_stock_local.llq_reset');
+    $llq_reset = !empty($llq_reset) ? $llq_reset : FALSE;
+  }
+  // Get the batch size.
+  $llq_batchsize = \Drupal::state()->get('commerce_stock_local.llq_batchsize');
+  $llq_batchsize = !empty($llq_batchsize) ? $llq_batchsize : 50;
+
+  /** @var \Drupal\Core\Entity\EntityStorageInterface $storage */
+  $storage = \Drupal::entityTypeManager()->getStorage('commerce_product_variation');
+
+  $result = $storage->getQuery()
+    ->condition('variation_id', $level_last_id, '>')
+    ->condition('status', 1, '=')
+    ->sort('variation_id', 'ASC')
+    ->range(0, $llq_batchsize)
+    ->execute();
+  foreach ($result as $pid) {
+    $entity = $storage->load($pid);
+    $data = [
+      'entity_id' => $entity->id(),
+      'entity_type' => $entity->getEntityTypeId(),
+    ];
+    $queue->createItem($data);
+  }
+  // Check if we can restrt processing products from the top.
+  if ($llq_reset && (count($result) < $llq_batchsize)) {
+    // Set reset to FALSE.
+    \Drupal::state()->set('commerce_stock_local.llq_reset', FALSE);
+    // Set last product id to 0.
+    \Drupal::state()->set('commerce_stock_local.update_last_id', 0);
+  }
+  else {
+    // Set the last product id for the Q bookmark.
+    if (!empty($result)) {
+      \Drupal::state()->set('commerce_stock_local.update_last_id', $pid);
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function commerce_stock_local_theme() {
+  $theme = [];
+  $theme['commerce_stock_location'] = [
+    'render element' => 'elements',
+  ];
+  $theme['commerce_stock_location_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function commerce_stock_local_theme_suggestions_commerce_stock_location(array $variables) {
+  return _commerce_entity_theme_suggestions('commerce_stock_location', $variables);
+}
+
+/**
+ * Prepares variables for Stock location templates.
+ *
+ * Default template: commerce-stock-location.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the user information and any
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_commerce_stock_location(array &$variables) {
+  // Fetch StockLocation Entity Object.
+  $commerce_stock_location = $variables['elements']['#commerce_stock_location'];
+
+  $variables['commerce_stock_location_entity'] = $commerce_stock_location;
+  $variables['commerce_stock_location_url'] = $commerce_stock_location->toUrl();
+  $variables['commerce_stock_location'] = [];
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['commerce_stock_location'][$key] = $variables['elements'][$key];
+  }
+
+}

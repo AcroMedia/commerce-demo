@@ -1,0 +1,10 @@
+commerce_stock_local.cron:
+ type: config_object
+ label: 'Commerce Stock Local Cron'
+ mapping:
+   update_interval:
+     type: integer
+     label: 'Update interval'
+   update_batch_size:
+     type: integer
+     label: 'Update batch size'

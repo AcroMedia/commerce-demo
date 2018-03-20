@@ -1,0 +1,7 @@
+name: Commerce Stock Local Test
+type: module
+description: Module for testing local stock module.
+core: 8.x
+dependencies:
+  - commerce_stock_local
+  - commerce_stock_field

@@ -1,0 +1,6 @@
+commerce_stock_ui.stock_transactions:
+  title: 'Stock transactions'
+  description: 'Create and view commerce stock transactions.'
+  route_name: commerce_stock_ui.stock_transactions1
+  parent: 'commerce_stock.configuration'
+  weight: 40

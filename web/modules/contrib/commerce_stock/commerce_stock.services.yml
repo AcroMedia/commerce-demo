@@ -1,0 +1,27 @@
+services:
+  commerce_stock.availability_checker:
+    class: Drupal\commerce_stock\StockAvailabilityChecker
+    arguments: ['@commerce_stock.service_manager']
+    tags:
+      - { name: commerce.availability_checker, priority: 0 }
+
+  commerce_stock.service_manager:
+    class: Drupal\commerce_stock\StockServiceManager
+    tags:
+      - { name: service_collector, tag: commerce_stock.stock_service, call: addService }
+    arguments: [ '@config.factory' ]
+
+  commerce_stock.always_in_stock_service:
+    class: Drupal\commerce_stock\AlwaysInStockService
+    tags:
+      - { name: commerce_stock.stock_service, priority: 0 }
+
+  commerce_stock.order_event_subscriber:
+    class: Drupal\commerce_stock\EventSubscriber\OrderEventSubscriber
+    arguments: ['@commerce_stock.service_manager']
+    tags:
+      - { name: 'event_subscriber' }
+
+  plugin.manager.stock_events:
+    class: Drupal\commerce_stock\Plugin\StockEventsManager
+    parent: default_plugin_manager

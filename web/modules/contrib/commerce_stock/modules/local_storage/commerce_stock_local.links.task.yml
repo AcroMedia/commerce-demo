@@ -1,0 +1,17 @@
+# Stock Location routing definition
+
+entity.commerce_stock_location.canonical:
+  route_name: entity.commerce_stock_location.canonical
+  base_route: entity.commerce_stock_location.canonical
+  title: 'View'
+
+entity.commerce_stock_location.edit_form:
+  route_name: entity.commerce_stock_location.edit_form
+  base_route: entity.commerce_stock_location.canonical
+  title: 'Edit'
+
+entity.commerce_stock_location.delete_form:
+  route_name:  entity.commerce_stock_location.delete_form
+  base_route:  entity.commerce_stock_location.canonical
+  title: Delete
+  weight: 10

@@ -1,0 +1,298 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for commerce stock local.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\commerce_stock_local\Entity\StockLocation;
+
+/**
+ * Implements hook_schema().
+ */
+function commerce_stock_local_schema() {
+
+  $schema['commerce_stock_transaction_type'] = [
+    'description' => 'Commerce Stock transaction types',
+    'fields' => [
+      'id' => [
+        'description' => 'Transaction type ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'description' => 'Transaction type name',
+        'type' => 'varchar_ascii',
+        'not null' => TRUE,
+        'default' => '',
+        'length' => 128,
+      ],
+      'parent_id' => [
+        'description' => 'Parent transaction type',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'foreign keys' => [
+      'parent_type' => [
+        'table' => 'commerce_stock_transaction_type',
+        'columns' => [
+          'parent_id' => 'id',
+        ],
+      ],
+    ],
+
+  ];
+
+  $schema['commerce_stock_transaction'] = [
+    'description' => 'Stores inventory transactions form commerce stock.',
+    'fields' => [
+      'id' => [
+        'description' => 'Transaction ID',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'entity_id' => [
+        'description' => 'Purchasable entity ID',
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+      ],
+      'entity_type' => [
+        'description' => 'Purchasable entity type',
+        'type'        => 'varchar_ascii',
+        'length'      => EntityTypeInterface::ID_MAX_LENGTH,
+        'not null'    => FALSE,
+      ],
+      'qty' => [
+        'description' => 'Transaction quantity',
+        'type' => 'numeric',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'default' => 0,
+        'precision' => 10,
+        'scale' => 2,
+      ],
+      'location_id' => [
+        'description' => 'Transaction location ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'location_zone' => [
+        'description' => 'Transaction location zone',
+        'type' => 'varchar_ascii',
+        'length' => 28,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'unit_cost' => [
+        'description' => 'Amount paid per unit',
+        'type' => 'numeric',
+        'size' => 'normal',
+        'precision' => 19,
+        'scale' => 6,
+      ],
+      'transaction_time' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'The date & time of the transaction',
+      ],
+      'transaction_type_id' => [
+        'description' => 'Transaction type ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      // Metadata.
+      'related_tid' => [
+        'description' => 'Related transaction ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ],
+      'related_oid' => [
+        'description' => 'Related order ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ],
+      'related_uid' => [
+        'description' => 'Related user ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ],
+      'data' => [
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => 'Serialized data array',
+      ],
+
+    ],
+    'primary key' => ['id'],
+    'foreign keys' => [
+      'location' => [
+        'table' => 'commerce_stock_location',
+        'columns' => [
+          'location_id' => 'location_id',
+        ],
+      ],
+      'transaction_type' => [
+        'table' => 'commerce_stock_transaction_type',
+        'columns' => [
+          'transaction_type_id' => 'id',
+        ],
+      ],
+      'related_transaction' => [
+        'table' => 'commerce_stock_transaction',
+        'columns' => [
+          'related_tid' => 'id',
+        ],
+      ],
+      'related_order' => [
+        'table' => 'commerce_order',
+        'columns' => [
+          'related_oid' => 'order_id',
+        ],
+      ],
+      'related_user' => [
+        'table' => 'users',
+        'columns' => [
+          'related_uid' => 'uid',
+        ],
+      ],
+    ],
+  ];
+
+  $schema['commerce_stock_location_level'] = [
+    'description' => 'Stock Level at a location.',
+    'fields' => [
+      'location_id' => [
+        'description' => 'The location ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'entity_id' => [
+        'description' => 'Purchasable entity ID',
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+      ],
+      'qty' => [
+        'description' => 'The quantity',
+        'type' => 'numeric',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'default' => 0,
+        'precision' => 10,
+        'scale' => 2,
+      ],
+      'last_transaction_id' => [
+        'description' => 'The last transaction that was used to calculate the total quantity',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['location_id', 'entity_id'],
+    'foreign keys' => [
+      'location' => [
+        'table' => 'commerce_stock_location',
+        'columns' => [
+          'location_id' => 'location_id',
+        ],
+      ],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function commerce_stock_local_install() {
+  $db = \Drupal::database();
+
+  // Add core transaction types.
+  $db->insert('commerce_stock_transaction_type')
+    ->fields([
+      'id' => 1,
+      'name' => 'Stock in',
+      'parent_id' => 1,
+    ])
+    ->execute();
+  $db->insert('commerce_stock_transaction_type')
+    ->fields([
+      'id' => 2,
+      'name' => 'Stock Out',
+      'parent_id' => 2,
+    ])
+    ->execute();
+  // Add sub transaction types.
+  $db->insert('commerce_stock_transaction_type')
+    ->fields([
+      'id' => 4,
+      'name' => 'Sale',
+      'parent_id' => 2,
+    ])
+    ->execute();
+  $db->insert('commerce_stock_transaction_type')
+    ->fields([
+      'id' => 5,
+      'name' => 'Return',
+      'parent_id' => 1,
+    ])
+    ->execute();
+  $db->insert('commerce_stock_transaction_type')
+    ->fields([
+      'id' => 6,
+      'name' => 'New Stock',
+      'parent_id' => 1,
+    ])
+    ->execute();
+  $db->insert('commerce_stock_transaction_type')
+    ->fields([
+      'id' => 7,
+      'name' => 'Move From',
+      'parent_id' => 2,
+    ])
+    ->execute();
+  $db->insert('commerce_stock_transaction_type')
+    ->fields([
+      'id' => 8,
+      'name' => 'Move To',
+      'parent_id' => 1,
+    ])
+    ->execute();
+
+  $defaultStockLocation = StockLocation::create([
+    'name' => 'Main',
+    'status' => TRUE,
+    'type' => "default",
+  ]);
+  $defaultStockLocation->save();
+
+}
+
+/**
+ * Adds 'entity_type' column to commerce_stock_transaction table.
+ */
+function commerce_stock_local_update_8001() {
+  $spec = [
+    'description' => 'Purchasable entity type',
+    'type'        => 'varchar_ascii',
+    'length'      => EntityTypeInterface::ID_MAX_LENGTH,
+    'not null'    => FALSE,
+  ];
+  $schema = \Drupal::database()->schema();
+  $schema->addField('commerce_stock_transaction', 'entity_type', $spec);
+}

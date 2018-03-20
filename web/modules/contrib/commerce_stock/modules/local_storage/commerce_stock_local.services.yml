@@ -1,0 +1,24 @@
+services:
+  commerce_stock.local_stock_service:
+    class: Drupal\commerce_stock_local\LocalStockService
+    arguments: ['@commerce_stock.local_stock_checker', '@commerce_stock.local_stock_updater', '@commerce_stock.local_stock_service_config']
+    tags:
+      - { name: commerce_stock.stock_service, priority: 0 }
+
+  commerce_stock.local_stock_checker:
+    class: Drupal\commerce_stock_local\LocalStockChecker
+    arguments: ['@database', '@entity_type.manager']
+
+  commerce_stock.local_stock_updater:
+    class: Drupal\commerce_stock_local\LocalStockUpdater
+    arguments: ['@database', '@commerce_stock.local_stock_checker']
+
+  commerce_stock.local_stock_service_config:
+    class: Drupal\commerce_stock_local\LocalStockServiceConfig
+    arguments: ['@entity_type.manager']
+
+  commerce_stock_local_uninstall_validator:
+      class: Drupal\commerce_stock_local\LocalStockUninstallValidator
+      tags:
+        - { name: module_install.uninstall_validator }
+      arguments: ['@entity_type.manager', '@string_translation']

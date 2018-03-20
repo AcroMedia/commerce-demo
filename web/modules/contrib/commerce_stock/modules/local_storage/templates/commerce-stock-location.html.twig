@@ -1,0 +1,24 @@
+{#
+/**
+ * @file commerce_stock_location.html.twig
+ * Default template for  stock locations.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - commerce_stock_location: The rendered commerce_stock_location fields.
+ *   Use 'commerce_stock_location' to print them all, or print a subset such as
+ *   'commerce_stock_location.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ commerce_stock_location|without('title') }}
+ *   @endcode
+ * - commerce_stock_location_entity: The commerce_stock_location entity.
+ * - url: The stock location URL.
+ *
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes }}>
+    {{- commerce_stock_location -}}
+</div>

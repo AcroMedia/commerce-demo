@@ -1,0 +1,18 @@
+field.value.commerce_stock_level:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    value:
+      type: numeric
+      label: 'Value'
+
+field.widget.settings.commerce_stock_level_simple:
+  type: mapping
+  label: 'Stock level field display format settings'
+  mapping:
+    entry_system:
+      type: string
+      label: 'The entry system to use for simple stock level form fields'
+    transaction_note:
+      type: boolean
+      label: 'Whether a transaction note should be captured by the widget'

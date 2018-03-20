@@ -1,0 +1,8 @@
+name: Commerce Stock Field
+type: module
+description: Provides a stock level field for Commerce Stock.
+package: Commerce Stock
+dependencies:
+  - commerce_product
+  - commerce_stock
+core: 8.x

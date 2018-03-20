@@ -1,0 +1,17 @@
+commerce_stock.configuration:
+  path: '/admin/commerce/config/stock'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Stock'
+  requirements:
+    _permission: 'access commerce administration pages'
+
+commerce_stock.stock_config:
+  path: '/admin/commerce/config/stock/settings'
+  defaults:
+    _form: '\Drupal\commerce_stock\Form\StockConfigForm'
+    _title: 'Configure Commerce Stock'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

@@ -21,3 +21,8 @@ web/sites/default/settings.local.php
 
 # Ignore web/vender folder if composer accidentally run within web
 /web/vendor/
+
+# Special handling for commerce_stock module.
+!/web/modules/contrib/
+/web/modules/contrib/*
+!/web/modules/contrib/commerce_stock/

@@ -1,0 +1,15 @@
+commerce_stock_ui.stock_transactions1:
+  path: '/admin/commerce/config/stock/transactions1'
+  defaults:
+    _form: '\Drupal\commerce_stock_ui\Form\StockTransactions1'
+    _title: 'Create stock transaction'
+  requirements:
+    _access: 'TRUE'
+
+commerce_stock_ui.stock_transactions2:
+  path: '/admin/commerce/config/stock/transactions2'
+  defaults:
+    _form: '\Drupal\commerce_stock_ui\Form\StockTransactions2'
+    _title: 'Create stock transaction'
+  requirements:
+    _access: 'TRUE'

@@ -1,0 +1,13 @@
+commerce_stock.configuration:
+  title: 'Stock'
+  route_name: 'commerce_stock.configuration'
+  parent: 'commerce.configuration'
+  weight: -5
+
+
+commerce_stock.stock_config:
+  title: 'Stock configuration'
+  description: 'Configure Commerce Stock settings.'
+  parent: 'commerce_stock.configuration'
+  route_name: commerce_stock.stock_config
+  weight: 10

@@ -1,0 +1,33 @@
+{#
+/**
+* @file
+*
+* Custom DrupalCon Preorder add to cart form.
+*
+* @see commerce_2_demo_form_alter().
+*
+* @ingroup themeable
+*/
+#}
+
+<div class="drupalcon-preorder-form">
+  {{ form }}
+
+  {# Validation messages. #}
+  <div class="drupalcon-preorder__username description help-block">
+    {{ "Enter your Drupal.org username."|t }}
+  </div>
+
+  <div class="hidden drupalcon-preorder__out-of-stock description help-block">
+    {{ "Sorry, we're out of stock in this size. Please choose another."|t }}
+  </div>
+
+  {# Hidden attributes used with jQuery. #}
+  <div class="hidden">
+    {% for extra in form['#drupalcon_preorder_extras'] %}
+      <div class="drupalcon-preorder-attribute" data-attribute-id="{{ extra.size_attribute_id }}" data-stock="{{ extra.stock }}"></div>
+    {% endfor %}
+  </div>
+</div>
+
+

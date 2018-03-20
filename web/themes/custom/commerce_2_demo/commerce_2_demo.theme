@@ -410,32 +410,11 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
         // If out of stock, update stock template variable.
         if ($available === FALSE) {
           $drupalcon_preorder_extras[$key]['stock'] = 'out-of-stock';
-          //          $size_attribute_field = $variation->attribute_size->getValue();
-          //          $size_attribute = ProductAttributeValue::load($size_attribute_field[0]['target_id']);
         }
       }
       // Add variables into form.
       $form['#drupalcon_preorder_extras'] = $drupalcon_preorder_extras;
     }
-
-//      foreach ($product_variations as $product_variation) {
-//        // Load variation.
-//        $variation = ProductVariation::load($product_variation['target_id']);
-//
-//        // Check if there is stock available.
-//        $localStockChecker = \Drupal::service('commerce_stock.local_stock_checker');
-//        $locationList = $localStockChecker->getLocationList();
-//        $available = $localStockChecker->getIsInStock($variation, $locationList);
-//
-//        // If out of stock, add data-available attribute to select option.
-//        if ($available === FALSE) {
-////          $size_attribute_field = $variation->attribute_size->getValue();
-////          $size_attribute = ProductAttributeValue::load($size_attribute_field[0]['target_id']);
-//        }
-//
-//        $TEST = $variation;
-//      }
-//    }
   }
 
   // Commerce Cart page form.

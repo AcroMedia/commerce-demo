@@ -124,7 +124,11 @@
                 "https://www.drupal.org/files/issues/adjustment_label-2770731-28.patch",
                 "#2852207: Billing same as shipping":
                 "https://www.drupal.org/files/issues/2018-03-15/checkbox-same-as-billing-2852207_0.patch"
-            }
+            },
+	    "drupal/commerce_pos": {
+		"#2950908: Customer Facing Screen":
+		"https://www.drupal.org/files/issues/2018-04-06/commerce_pos-customer_display-2950980-20.patch"
+	    }
         }
     }
 }

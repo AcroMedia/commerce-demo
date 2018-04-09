@@ -1,5 +1,5 @@
 diff --git a/commerce_pos.install b/commerce_pos.install
-index be60409..a03fb24 100644
+index be60409..43dcc08 100644
 --- a/commerce_pos.install
 +++ b/commerce_pos.install
 @@ -7,6 +7,7 @@
@@ -10,19 +10,6 @@ index be60409..a03fb24 100644
  
  /**
   * Implements hook_schema().
-@@ -151,3 +152,11 @@ function commerce_pos_update_8204() {
- 
-   $active_storage->write('core.entity_form_display.commerce_order.pos.default', $source->read('core.entity_form_display.commerce_order.pos.default'));
- }
-+
-+function commerce_pos_update_8205() {
-+  $field = FieldConfig::loadByName('commerce_order', 'pos', 'field_register');
-+
-+  $field->set('locked', FALSE);
-+
-+  $field->save();
-+}
-\ No newline at end of file
 diff --git a/config/install/field.storage.commerce_order.field_register.yml b/config/install/field.storage.commerce_order.field_register.yml
 index 51ae600..680f3e4 100644
 --- a/config/install/field.storage.commerce_order.field_register.yml

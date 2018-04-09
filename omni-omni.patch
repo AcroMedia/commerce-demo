@@ -1,5 +1,5 @@
 diff --git a/src/Form/OrderLookupForm.php b/src/Form/OrderLookupForm.php
-index 1812b2b..acc91e6 100644
+index 1812b2b..f1bc3d5 100644
 --- a/src/Form/OrderLookupForm.php
 +++ b/src/Form/OrderLookupForm.php
 @@ -115,7 +115,6 @@ class OrderLookupForm extends FormBase {
@@ -18,3 +18,41 @@ index 1812b2b..acc91e6 100644
        $query = $query->sort('order_id', 'DESC')
          ->range(0, !empty($result_limit) ? $result_limit : 10);
  
+@@ -227,15 +225,20 @@ class OrderLookupForm extends FormBase {
+       ]);
+       $edit_url = Url::fromRoute('commerce_pos.main', ['commerce_order' => $order->id()]);
+ 
+-      $cashier = User::load($order->get('field_cashier')->getValue()[0]['target_id']);
++      $cashier = User::load($order->get('field_cashier')
++        ->getValue()[0]['target_id']);
+ 
+-      $cashier_url = Url::fromRoute('entity.user.canonical', [
+-        'user' => $cashier->id(),
+-      ], [
+-        'attributes' => [
+-          'target' => '_blank',
+-        ],
+-      ]);
++      if (isset($cashier)) {
++        $cashier_url = Url::fromRoute('entity.user.canonical', [
++          'user' => $cashier->id(),
++        ], [
++          'attributes' => [
++            'target' => '_blank',
++          ],
++        ]);
++
++        $cashier_name = $cashier->getDisplayName();
++      }
+ 
+       $customer_url = Url::fromRoute('entity.user.canonical', [
+         'user' => $order->getCustomer()
+@@ -273,7 +276,7 @@ class OrderLookupForm extends FormBase {
+         Link::fromTextAndUrl($order->id(), $order_url),
+         DrupalDateTime::createFromTimestamp($order->getChangedTime())->format('Y-m-d H:i'),
+         $order->getState()->getLabel(),
+-        Link::fromTextAndUrl($cashier->getDisplayName(), $cashier_url),
++        isset($cashier) ? Link::fromTextAndUrl($cashier_name, $cashier_url) : '',
+         ['data' => $customer],
+         $order->getEmail(),
+         $formatted_amount,

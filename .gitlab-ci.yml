@@ -191,7 +191,6 @@ base-demo-to-live:
 # Deploy plus demo to LIVE site (CLOUD4).
 plus-demo-to-live:
   stage: deploy
-  when: manual
 
   # add any other tags or branches you want here.
   # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo

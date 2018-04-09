@@ -1,3 +1,41 @@
+diff --git a/commerce_pos.install b/commerce_pos.install
+index be60409..1d586c8 100644
+--- a/commerce_pos.install
++++ b/commerce_pos.install
+@@ -7,6 +7,7 @@
+ 
+ use Drupal\Core\Config\FileStorage;
+ use Drupal\Core\Field\BaseFieldDefinition;
++use Drupal\field\Entity\FieldConfig;
+ 
+ /**
+  * Implements hook_schema().
+@@ -151,3 +152,11 @@ function commerce_pos_update_8204() {
+ 
+   $active_storage->write('core.entity_form_display.commerce_order.pos.default', $source->read('core.entity_form_display.commerce_order.pos.default'));
+ }
++
++function commerce_pos_update_8205() {
++  $field = FieldConfig::loadByName('commerce_order', 'commerce_order_type', 'pos');
++
++  $field->set('locked', FALSE);
++
++  $field->save();
++}
+\ No newline at end of file
+diff --git a/config/install/field.storage.commerce_order.field_register.yml b/config/install/field.storage.commerce_order.field_register.yml
+index 51ae600..680f3e4 100644
+--- a/config/install/field.storage.commerce_order.field_register.yml
++++ b/config/install/field.storage.commerce_order.field_register.yml
+@@ -11,7 +11,7 @@ type: entity_reference
+ settings:
+   target_type: commerce_pos_register
+ module: core
+-locked: true
++locked: false
+ cardinality: 1
+ translatable: false
+ indexes: {  }
 diff --git a/src/Form/OrderLookupForm.php b/src/Form/OrderLookupForm.php
 index 1812b2b..f1bc3d5 100644
 --- a/src/Form/OrderLookupForm.php

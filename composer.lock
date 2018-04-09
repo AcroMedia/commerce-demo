@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7eeca67759e3c7bdd34f89a9d23e3b5c",
+    "content-hash": "15aaecab5aa96f3c1a786124c6c82498",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -26,7 +26,7 @@
                 "GPL-2.0+"
             ],
             "description": "Creates a page showcasing general site styles and commonly used elements.",
-            "time": "2017-04-12T19:23:03+00:00"
+            "time": "2017-04-12 19:23:03"
         },
         {
             "name": "acromedia/drupalorange_profile",
@@ -68,7 +68,7 @@
             ],
             "description": "Acro Media's Orange installation profile",
             "homepage": "https://github.com/AcroMedia/drupalorange_profile",
-            "time": "2018-02-02T18:06:23+00:00"
+            "time": "2018-02-02 18:06:23"
         },
         {
             "name": "acromedia/orange_framework",
@@ -91,7 +91,7 @@
             ],
             "description": "Acro Media Inc. Drupal Base Theme",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-12-01T09:30:17+00:00"
+            "time": "2017-12-01 09:30:17"
         },
         {
             "name": "acromedia/orange_starter",
@@ -114,7 +114,7 @@
             ],
             "description": "Custom theme for our amazing clients.",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-09-15T08:58:15+00:00"
+            "time": "2017-09-15 08:58:15"
         },
         {
             "name": "alchemy/zippy",
@@ -2409,7 +2409,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "4b0d8d074c6f65b1a6824706394b99d13501e7b3"
+                "reference": "66d3fc520dc8100cb96d19fd135f5359ca33a637"
             },
             "require": {
                 "drupal/commerce": "~2.4",
@@ -2431,15 +2431,15 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta2+2-dev",
-                    "datestamp": "1521653880",
+                    "version": "8.x-2.0-beta2+3-dev",
+                    "datestamp": "1522711381",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
                     }
                 },
                 "patches_applied": {
-                    "#2950908: Customer Facing Screen": "https://www.drupal.org/files/issues/2018-04-06/commerce_pos-customer_display-2950980-22.patch"
+                    "omni omni": "./omni-omni.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2483,7 +2483,7 @@
                 "source": "http://cgit.drupalcode.org/commerce_pos",
                 "issues": "https://www.drupal.org/project/issues/commerce_pos"
             },
-            "time": "2018-04-02T23:22:43+00:00"
+            "time": "2018-04-07 01:43:45"
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
@@ -3007,7 +3007,7 @@
                 "issues": "https://drupal.org/project/issues/config_inspector",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2018-03-25T15:40:45+00:00"
+            "time": "2018-03-25 15:40:45"
         },
         {
             "name": "drupal/console",
@@ -3927,7 +3927,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
             },
-            "time": "2017-07-13T21:36:25+00:00"
+            "time": "2017-07-13 21:36:25"
         },
         {
             "name": "drupal/google_analytics",
@@ -4428,7 +4428,7 @@
                 "source": "http://cgit.drupalcode.org/metatag",
                 "issues": "http://drupal.org/project/issues/metatag"
             },
-            "time": "2018-03-29T17:44:09+00:00"
+            "time": "2018-03-29 17:44:09"
         },
         {
             "name": "drupal/paragraphs",
@@ -4936,17 +4936,17 @@
         },
         {
             "name": "drupal/simple_sitemap",
-            "version": "2.11.0",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/simple_sitemap",
-                "reference": "8.x-2.11"
+                "reference": "8.x-2.12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/simple_sitemap-8.x-2.11.zip",
-                "reference": "8.x-2.11",
-                "shasum": "d4b5f24c90d0636acd2c345eca566891194a7d0a"
+                "url": "https://ftp.drupal.org/files/projects/simple_sitemap-8.x-2.12.zip",
+                "reference": "8.x-2.12",
+                "shasum": "fe1c1a636adfba8358399a5a1ccdf20685066573"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -4957,8 +4957,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.11",
-                    "datestamp": "1513130309",
+                    "version": "8.x-2.12",
+                    "datestamp": "1523202480",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5137,7 +5137,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/swiftmailer"
             },
-            "time": "2018-02-05T10:42:44+00:00"
+            "time": "2018-02-05 10:42:44"
         },
         {
             "name": "drupal/taxonomy_menu",
@@ -5242,7 +5242,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/taxonomy_term_depth"
             },
-            "time": "2018-03-22T19:09:58+00:00"
+            "time": "2018-03-22 19:09:58"
         },
         {
             "name": "drupal/token",
@@ -5369,7 +5369,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/webform",
-                "reference": "833f5f22945c9e389bf4226fd8113dd7b44b3d30"
+                "reference": "3be4e6c95dbe04402b3efbe50aa9824b7d29c3b7"
             },
             "require": {
                 "drupal/core": "*"
@@ -5386,8 +5386,8 @@
                     "dev-5.x": "5.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-5.0-rc8+11-dev",
-                    "datestamp": "1523046484",
+                    "version": "8.x-5.0-rc9+2-dev",
+                    "datestamp": "1523290980",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -5455,7 +5455,7 @@
                 "docs": "https://www.drupal.org/docs/8/modules/webform",
                 "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
             },
-            "time": "2018-04-06T20:30:08+00:00"
+            "time": "2018-04-09 16:21:22"
         },
         {
             "name": "drush/drush",
@@ -6747,16 +6747,16 @@
         },
         {
             "name": "react/event-loop",
-            "version": "v0.5.0",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/event-loop.git",
-                "reference": "f3ab8edeb6416466a73b1217b3af475ce9e3b087"
+                "reference": "e1e0647a5c6e2c86013a24e9c8252113df86105a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/f3ab8edeb6416466a73b1217b3af475ce9e3b087",
-                "reference": "f3ab8edeb6416466a73b1217b3af475ce9e3b087",
+                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/e1e0647a5c6e2c86013a24e9c8252113df86105a",
+                "reference": "e1e0647a5c6e2c86013a24e9c8252113df86105a",
                 "shasum": ""
             },
             "require": {
@@ -6784,7 +6784,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2018-04-05T11:53:43+00:00"
+            "time": "2018-04-09T11:59:21+00:00"
         },
         {
             "name": "react/promise",
@@ -9377,7 +9377,7 @@
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2018-03-14T18:20:55+00:00"
+            "time": "2018-03-14 18:20:55"
         },
         {
             "name": "fabpot/goutte",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "15aaecab5aa96f3c1a786124c6c82498",
+    "content-hash": "61b4774293ab7140e636b3dc47a589e6",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -26,7 +26,7 @@
                 "GPL-2.0+"
             ],
             "description": "Creates a page showcasing general site styles and commonly used elements.",
-            "time": "2017-04-12 19:23:03"
+            "time": "2017-04-12T19:23:03+00:00"
         },
         {
             "name": "acromedia/drupalorange_profile",
@@ -68,7 +68,7 @@
             ],
             "description": "Acro Media's Orange installation profile",
             "homepage": "https://github.com/AcroMedia/drupalorange_profile",
-            "time": "2018-02-02 18:06:23"
+            "time": "2018-02-02T18:06:23+00:00"
         },
         {
             "name": "acromedia/orange_framework",
@@ -91,7 +91,7 @@
             ],
             "description": "Acro Media Inc. Drupal Base Theme",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-12-01 09:30:17"
+            "time": "2017-12-01T09:30:17+00:00"
         },
         {
             "name": "acromedia/orange_starter",
@@ -114,7 +114,7 @@
             ],
             "description": "Custom theme for our amazing clients.",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-09-15 08:58:15"
+            "time": "2017-09-15T08:58:15+00:00"
         },
         {
             "name": "alchemy/zippy",
@@ -2439,7 +2439,9 @@
                     }
                 },
                 "patches_applied": {
-                    "omni omni": "./omni-omni.patch"
+                    "#2950908: Customer Facing Screen": "https://www.drupal.org/files/issues/2018-04-06/commerce_pos-customer_display-2950980-22.patch",
+                    "omni omni": "patches/omni-omni.patch",
+                    "drupalcon": "patches/drupalcon.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2483,7 +2485,7 @@
                 "source": "http://cgit.drupalcode.org/commerce_pos",
                 "issues": "https://www.drupal.org/project/issues/commerce_pos"
             },
-            "time": "2018-04-07 01:43:45"
+            "time": "2018-04-07T01:43:45+00:00"
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
@@ -2739,7 +2741,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta3",
-                    "datestamp": "1518474973",
+                    "datestamp": "1518473280",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -3007,7 +3009,7 @@
                 "issues": "https://drupal.org/project/issues/config_inspector",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2018-03-25 15:40:45"
+            "time": "2018-03-25T15:40:45+00:00"
         },
         {
             "name": "drupal/console",
@@ -3927,7 +3929,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
             },
-            "time": "2017-07-13 21:36:25"
+            "time": "2017-07-13T21:36:25+00:00"
         },
         {
             "name": "drupal/google_analytics",
@@ -4428,7 +4430,7 @@
                 "source": "http://cgit.drupalcode.org/metatag",
                 "issues": "http://drupal.org/project/issues/metatag"
             },
-            "time": "2018-03-29 17:44:09"
+            "time": "2018-03-29T17:44:09+00:00"
         },
         {
             "name": "drupal/paragraphs",
@@ -4715,7 +4717,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.7",
-                    "datestamp": "1520165041",
+                    "datestamp": "1519387684",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5137,7 +5139,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/swiftmailer"
             },
-            "time": "2018-02-05 10:42:44"
+            "time": "2018-02-05T10:42:44+00:00"
         },
         {
             "name": "drupal/taxonomy_menu",
@@ -5242,7 +5244,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/taxonomy_term_depth"
             },
-            "time": "2018-03-22 19:09:58"
+            "time": "2018-03-22T19:09:58+00:00"
         },
         {
             "name": "drupal/token",
@@ -5455,7 +5457,7 @@
                 "docs": "https://www.drupal.org/docs/8/modules/webform",
                 "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
             },
-            "time": "2018-04-09 16:21:22"
+            "time": "2018-04-09T16:21:22+00:00"
         },
         {
             "name": "drush/drush",
@@ -9377,7 +9379,7 @@
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2018-03-14 18:20:55"
+            "time": "2018-03-14T18:20:55+00:00"
         },
         {
             "name": "fabpot/goutte",

@@ -1,0 +1,20 @@
+diff --git a/src/Form/OrderLookupForm.php b/src/Form/OrderLookupForm.php
+index 1812b2b..acc91e6 100644
+--- a/src/Form/OrderLookupForm.php
++++ b/src/Form/OrderLookupForm.php
+@@ -115,7 +115,6 @@ class OrderLookupForm extends FormBase {
+     if ($do_like_search) {
+       $query = \Drupal::database();
+       $query = $query->select('commerce_order', 'o')
+-        ->condition('type', 'pos')
+         ->condition('state', $state, $operator)
+         ->orderBy('order_id', 'DESC')
+         ->range(0, $result_limit)
+@@ -141,7 +140,6 @@ class OrderLookupForm extends FormBase {
+     else {
+       $query = \Drupal::entityQuery('commerce_order');
+       $query = $query->condition('state', $state, $operator);
+-      $query = $query->condition('type', 'pos');
+       $query = $query->sort('order_id', 'DESC')
+         ->range(0, !empty($result_limit) ? $result_limit : 10);
+ 

@@ -128,7 +128,8 @@
             },
 	    "drupal/commerce_pos": {
 		"#2950908: Customer Facing Screen":
-		"https://www.drupal.org/files/issues/2018-04-06/commerce_pos-customer_display-2950980-22.patch"
+		"https://www.drupal.org/files/issues/2018-04-06/commerce_pos-customer_display-2950980-22.patch",
+		"omni omni": "./omni-omni.patch"
 	    }
         }
     }

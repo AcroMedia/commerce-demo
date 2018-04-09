@@ -1,5 +1,5 @@
 diff --git a/commerce_pos.install b/commerce_pos.install
-index be60409..1d586c8 100644
+index be60409..8e453fd 100644
 --- a/commerce_pos.install
 +++ b/commerce_pos.install
 @@ -7,6 +7,7 @@
@@ -16,7 +16,7 @@ index be60409..1d586c8 100644
  }
 +
 +function commerce_pos_update_8205() {
-+  $field = FieldConfig::loadByName('commerce_order', 'commerce_order_type', 'pos');
++  $field = FieldConfig::loadByName('commerce_order_type', 'pos', 'field_register');
 +
 +  $field->set('locked', FALSE);
 +

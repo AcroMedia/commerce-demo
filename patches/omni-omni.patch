@@ -36,6 +36,19 @@ index 51ae600..680f3e4 100644
  cardinality: 1
  translatable: false
  indexes: {  }
+diff --git a/src/Controller/POS.php b/src/Controller/POS.php
+index 710457f..f65538c 100644
+--- a/src/Controller/POS.php
++++ b/src/Controller/POS.php
+@@ -98,7 +98,7 @@ class POS extends ControllerBase {
+       // Immediately create a new draft order.
+       $commerce_order->save();
+     }
+-    elseif ($commerce_order->field_register->entity->id() != $register->id() && $commerce_order->getState()->value != 'completed') {
++    elseif (!isset($commerce_order->field_register->entity) || $commerce_order->field_register->entity->id() != $register->id() && $commerce_order->getState()->value != 'completed') {
+       // The order is not on this register so it needs to be updated.
+       $commerce_order->set('field_register', $register->id());
+       $commerce_order->save();
 diff --git a/src/Form/OrderLookupForm.php b/src/Form/OrderLookupForm.php
 index 1812b2b..f1bc3d5 100644
 --- a/src/Form/OrderLookupForm.php

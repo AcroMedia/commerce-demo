@@ -1,22 +1,30 @@
 diff --git a/modules/customer_display/css/commerce_pos_customer_display.css b/modules/customer_display/css/commerce_pos_customer_display.css
-new file mode 100644
-index 0000000..f2ed53b
---- /dev/null
+index 478bca2..f2ed53b 100644
+--- a/modules/customer_display/css/commerce_pos_customer_display.css
 +++ b/modules/customer_display/css/commerce_pos_customer_display.css
-@@ -0,0 +1,3 @@
+@@ -1,3 +1,3 @@
+-#toolbar-administration{display:none}html,body,.dialog-off-canvas-main-canvas{height:100% !important;overflow:hidden;margin-bottom:-1px;background:#fff;font-size:16px;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;line-height:1.2}.dialog-off-canvas-main-canvas{font-size:0}.commerce-pos-customer-display *{box-sizing:border-box;position:relative}.commerce-pos-customer-display{display:inline-block;width:100%;height:100%;font-size:0}.commerce-pos-customer-display__left{display:inline-block;vertical-align:top;height:100%;width:calc(100% - 750px);color:#000;overflow:hidden}.commerce-pos-customer-display__right{display:inline-block;vertical-align:top;height:100%;width:750px;background:#900;color:#fff}.commerce-pos-customer-display__right .commerce-pos-customer-display__right__top{padding:60px}.commerce-pos-customer-display__right .commerce-pos-customer-display__right__bottom{position:absolute;bottom:0;width:100%;padding:60px;background-color:rgba(0,0,0,0.35)}.commerce-pos-customer-display__header{height:150px;margin:0 65px;padding:30px 0;border-bottom:2px solid #f0f0f0}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-logo{display:inline-block;float:left}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-logo img{max-height:calc(150px - 60px);padding-right:50px}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info{display:inline-block}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-name{padding-bottom:5px;font-size:2.5rem;color:#000}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier{display:inline-block;font-size:16px;color:#666;padding-right:15px}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__store-location__label,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__cashier__label,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__store-location__label,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__cashier__label{display:inline-block}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__store-location__value,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__cashier__value,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__store-location__value,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__cashier__value{display:inline-block}.commerce-pos-customer-display__items{height:calc(100% - 150px);width:100%;padding-right:18px;overflow-y:scroll;box-sizing:content-box;font-size:16px}.commerce-pos-customer-display__items .commerce-pos-customer-display__item{display:none;padding:30px 0;margin:0 65px;border-bottom:2px solid #f0f0f0}.commerce-pos-customer-display__items .commerce-pos-customer-display__item:last-of-type{border:none}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__image{display:inline-block;vertical-align:top;width:225px;margin-right:50px;text-align:center}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__image img{max-width:220px;border:1px solid #ccc}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .icon-image-placeholder{display:inline-block;vertical-align:middle;height:90px;width:90px;margin-top:10px;fill:#f0f0f0}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__info-wrapper{display:inline-block;vertical-align:top;width:calc(100% - 275px)}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .field--name-title{padding-bottom:10px;font-size:2.25rem}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .field--name-sku{padding-bottom:25px;font-size:1.125rem;color:#666}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__quantity{font-size:1.375rem;padding-bottom:10px;color:#666}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__quantity div{display:inline-block;padding-right:10px}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__total-price{font-size:2.25rem;font-weight:bold}.commerce-pos-customer-display__totals-title{font-size:3rem;text-align:right;padding-bottom:60px}.commerce-pos-customer-display__total{padding-bottom:40px}.commerce-pos-customer-display__total:last-of-type{padding-bottom:0}.commerce-pos-customer-display__total .commerce-pos-customer-display__total__label{display:inline-block;width:40%;vertical-align:baseline;font-size:1.5rem;text-transform:uppercase}.commerce-pos-customer-display__total .commerce-pos-customer-display__total__value{display:inline-block;width:60%;vertical-align:baseline;font-size:2.25rem;text-align:right}.commerce-pos-customer-display__total--to-pay .commerce-pos-customer-display__total__value{font-size:3.75rem}
 +.path-pos-customer-display #siteTours-start.fixed-button,.path-pos-customer-display .jx_ui_Widget{display:none}#toolbar-administration{display:none}html,body,.dialog-off-canvas-main-canvas{height:100% !important;overflow:hidden;margin-bottom:-1px;background:#fff;font-size:16px;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;line-height:1.2}.dialog-off-canvas-main-canvas{font-size:0}.commerce-pos-customer-display *{box-sizing:border-box;position:relative}.commerce-pos-customer-display{display:inline-block;width:100%;height:100%;font-size:0}.commerce-pos-customer-display__left{display:inline-block;vertical-align:top;height:100%;width:calc(100% - 750px);color:#000;overflow:hidden}.commerce-pos-customer-display__right{display:inline-block;vertical-align:top;height:100%;width:750px;background:#24a8e0;color:#fff}.commerce-pos-customer-display__right .commerce-pos-customer-display__right__top{padding:60px}.commerce-pos-customer-display__right .commerce-pos-customer-display__right__bottom{position:absolute;bottom:0;width:100%;padding:60px;background-color:rgba(0,0,0,0.35)}.commerce-pos-customer-display__header{height:150px;margin:0 65px;padding:30px 0;border-bottom:2px solid #f0f0f0}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-logo{display:inline-block;float:left}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-logo img{max-height:calc(150px - 60px);padding-right:50px}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info{display:inline-block}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-name{padding-bottom:5px;font-size:2.5rem;color:#000}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier{display:inline-block;font-size:16px;color:#666;padding-right:15px}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__store-location__label,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__cashier__label,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__store-location__label,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__cashier__label{display:inline-block}.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__store-location__value,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__store-location .commerce-pos-customer-display__cashier__value,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__store-location__value,.commerce-pos-customer-display__header .commerce-pos-customer-display__store-info .commerce-pos-customer-display__cashier .commerce-pos-customer-display__cashier__value{display:inline-block}.commerce-pos-customer-display__items{height:calc(100% - 150px);width:100%;padding-right:18px;overflow-y:scroll;box-sizing:content-box;font-size:16px}.commerce-pos-customer-display__items .commerce-pos-customer-display__item{display:none;padding:30px 0;margin:0 65px;border-bottom:2px solid #f0f0f0}.commerce-pos-customer-display__items .commerce-pos-customer-display__item:last-of-type{border:none}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__image{display:inline-block;vertical-align:top;width:225px;margin-right:50px;text-align:center}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__image img{max-width:220px;border:1px solid #ccc}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .icon-image-placeholder{display:inline-block;vertical-align:middle;height:90px;width:90px;margin-top:10px;fill:#f0f0f0}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__info-wrapper{display:inline-block;vertical-align:top;width:calc(100% - 275px)}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .field--name-title{padding-bottom:10px;font-size:2.25rem}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .field--name-sku{padding-bottom:25px;font-size:1.125rem;color:#666}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__quantity{font-size:1.375rem;padding-bottom:10px;color:#666}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__quantity div{display:inline-block;padding-right:10px}.commerce-pos-customer-display__items .commerce-pos-customer-display__item .commerce-pos-customer-display__item__total-price{font-size:2.25rem;font-weight:bold}.commerce-pos-customer-display__totals-title{font-size:3rem;text-align:right;padding-bottom:60px}.commerce-pos-customer-display__total{padding-bottom:40px}.commerce-pos-customer-display__total:last-of-type{padding-bottom:0}.commerce-pos-customer-display__total .commerce-pos-customer-display__total__label{display:inline-block;width:40%;vertical-align:baseline;font-size:1.5rem;text-transform:uppercase}.commerce-pos-customer-display__total .commerce-pos-customer-display__total__value{display:inline-block;width:60%;vertical-align:baseline;font-size:2.25rem;text-align:right}.commerce-pos-customer-display__total--to-pay .commerce-pos-customer-display__total__value{font-size:3.75rem}
-+
-+/*# sourceMappingURL=commerce_pos_customer_display.css.map */
+ 
+ /*# sourceMappingURL=commerce_pos_customer_display.css.map */
+diff --git a/modules/customer_display/css/commerce_pos_customer_display.css.map b/modules/customer_display/css/commerce_pos_customer_display.css.map
+index 70d65a4..b4cb20b 100644
+--- a/modules/customer_display/css/commerce_pos_customer_display.css.map
++++ b/modules/customer_display/css/commerce_pos_customer_display.css.map
+@@ -1 +1 @@
+-{"version":3,"file":"commerce_pos_customer_display.css","sources":["commerce_pos_customer_display.scss"],"sourcesContent":["// TODO: Let primary color be a setting.\n// 1 - Change this so that the hex value is set in the Customer Display Settings.\n// 2 - With jQuery, set the background colour of .commerce-pos-customer-display__right to use the hex value.\n// 3 - Remove this SASS variable and the associated CSS in .commerce-pos-customer-display__right below.\n$c-primary: #990000;\n\n// Variables.\n$c-gray-dark: #000;\n$c-gray-mid: #666;\n$c-gray-light: #ccc;\n$c-gray-lighter: #f0f0f0;\n$font-size-base: 16px;\n$header-height: 150px;\n$sidebar-width: 750px;\n\n// Hide admin bar.\n#toolbar-administration {\n  display: none;\n}\n\n// Layout.\nhtml, body, .dialog-off-canvas-main-canvas {\n  height: 100% !important;\n  overflow: hidden;\n  margin-bottom: -1px;\n  background: #fff;\n  font-size: $font-size-base;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  line-height: 1.2;\n}\n\n.dialog-off-canvas-main-canvas {\n  font-size: 0;\n}\n\n.commerce-pos-customer-display * {\n  box-sizing: border-box;\n  position: relative;\n}\n\n.commerce-pos-customer-display {\n  display: inline-block;\n  width: 100%;\n  height: 100%;\n  font-size: 0;\n}\n\n.commerce-pos-customer-display__left {\n  display: inline-block;\n  vertical-align: top;\n  height: 100%;\n  width: calc(100% - #{$sidebar-width});\n  color: #000;\n  overflow: hidden;\n}\n\n.commerce-pos-customer-display__right {\n  display: inline-block;\n  vertical-align: top;\n  height: 100%;\n  width: $sidebar-width;\n  background: $c-primary;\n  color: #fff;\n\n  .commerce-pos-customer-display__right__top {\n    padding: 60px;\n  }\n\n  .commerce-pos-customer-display__right__bottom {\n    position: absolute;\n    bottom: 0;\n    width: 100%;\n    padding: 60px;\n    background-color: rgba(0, 0, 0, .35);\n  }\n}\n\n// Header.\n.commerce-pos-customer-display__header {\n  height: $header-height;\n  margin: 0 65px;\n  padding: 30px 0;\n  border-bottom: 2px solid $c-gray-lighter;\n\n  // Logo\n  .commerce-pos-customer-display__store-logo {\n    display: inline-block;\n    float: left;\n\n    img {\n      max-height: calc(#{$header-height} - 60px);\n      padding-right: 50px;\n    }\n  }\n\n  // Store info.\n  .commerce-pos-customer-display__store-info {\n    display: inline-block;\n\n    .commerce-pos-customer-display__store-name {\n      padding-bottom: 5px;\n      font-size: 2.5rem;\n      color: $c-gray-dark;\n    }\n\n    .commerce-pos-customer-display__store-location,\n    .commerce-pos-customer-display__cashier {\n      display: inline-block;\n      font-size: $font-size-base;\n      color: $c-gray-mid;\n      padding-right: 15px;\n\n      .commerce-pos-customer-display__store-location__label,\n      .commerce-pos-customer-display__cashier__label {\n        display: inline-block;\n      }\n\n      .commerce-pos-customer-display__store-location__value,\n      .commerce-pos-customer-display__cashier__value {\n        display: inline-block;\n      }\n    }\n  }\n}\n\n// Items (products).\n.commerce-pos-customer-display__items {\n  height: calc(100% - #{$header-height});\n  width: 100%;\n  padding-right: 18px; // Used to hide scrollbar.\n  overflow-y: scroll;\n  box-sizing: content-box;\n  font-size: $font-size-base;\n\n  // Individual item.\n  .commerce-pos-customer-display__item {\n    display: none;\n    padding: 30px 0;\n    margin: 0 65px;\n    border-bottom: 2px solid $c-gray-lighter;\n\n    &:last-of-type {\n      border: none;\n    }\n\n    .commerce-pos-customer-display__item__image {\n      display: inline-block;\n      vertical-align: top;\n      width: 225px;\n      margin-right: 50px;\n      text-align: center;\n\n      img {\n        max-width: 220px;\n        border: 1px solid $c-gray-light;\n      }\n    }\n\n    .icon-image-placeholder {\n      display: inline-block;\n      vertical-align: middle;\n      height: 90px;\n      width: 90px;\n      margin-top: 10px;\n      fill: $c-gray-lighter;\n    }\n\n    .commerce-pos-customer-display__item__info-wrapper {\n      display: inline-block;\n      vertical-align: top;\n      width: calc(100% - 275px);\n    }\n\n    .field--name-title {\n      padding-bottom: 10px;\n      font-size: 2.25rem;\n    }\n\n    .field--name-sku {\n      padding-bottom: 25px;\n      font-size: 1.125rem;\n      color: $c-gray-mid;\n    }\n\n    .commerce-pos-customer-display__item__quantity {\n      font-size: 1.375rem;\n      padding-bottom: 10px;\n      color: $c-gray-mid;\n\n      div {\n        display: inline-block;\n        padding-right: 10px;\n      }\n    }\n\n    .commerce-pos-customer-display__item__total-price {\n      font-size: 2.25rem;\n      font-weight: bold;\n    }\n  }\n}\n\n// Total title.\n.commerce-pos-customer-display__totals-title {\n  font-size: 3rem;\n  text-align: right;\n  padding-bottom: 60px;\n}\n\n// Total - Individual total default styles.\n.commerce-pos-customer-display__total {\n  padding-bottom: 40px;\n\n  &:last-of-type {\n    padding-bottom: 0;\n  }\n\n  .commerce-pos-customer-display__total__label {\n    display: inline-block;\n    width: 40%;\n    vertical-align: baseline;\n    font-size: 1.5rem;\n    text-transform: uppercase;\n  }\n\n  .commerce-pos-customer-display__total__value {\n    display: inline-block;\n    width: 60%;\n    vertical-align: baseline;\n    font-size: 2.25rem;\n    text-align: right;\n  }\n}\n\n// Total - Specific total override styles.\n.commerce-pos-customer-display__total--to-pay {\n  .commerce-pos-customer-display__total__value {\n    font-size: 3.75rem;\n  }\n}\n"],"names":[],"mappings":"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"}
+\ No newline at end of file
++{"version":3,"file":"commerce_pos_customer_display.css","sources":["commerce_pos_customer_display.scss"],"sourcesContent":["// TODO: Let primary color be a setting.\n// 1 - Change this so that the hex value is set in the Customer Display Settings.\n// 2 - With jQuery, set the background colour of .commerce-pos-customer-display__right to use the hex value.\n// 3 - Remove this SASS variable and the associated CSS in .commerce-pos-customer-display__right below.\n//$c-primary: #990000;\n\n// DrupalCon patch.\n$c-primary: #24a8e0;\n.path-pos-customer-display #siteTours-start.fixed-button,\n.path-pos-customer-display .jx_ui_Widget {\n  display: none;\n}\n\n// Variables.\n$c-gray-dark: #000;\n$c-gray-mid: #666;\n$c-gray-light: #ccc;\n$c-gray-lighter: #f0f0f0;\n$font-size-base: 16px;\n$header-height: 150px;\n$sidebar-width: 750px;\n\n// Hide admin bar.\n#toolbar-administration {\n  display: none;\n}\n\n// Layout.\nhtml, body, .dialog-off-canvas-main-canvas {\n  height: 100% !important;\n  overflow: hidden;\n  margin-bottom: -1px;\n  background: #fff;\n  font-size: $font-size-base;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  line-height: 1.2;\n}\n\n.dialog-off-canvas-main-canvas {\n  font-size: 0;\n}\n\n.commerce-pos-customer-display * {\n  box-sizing: border-box;\n  position: relative;\n}\n\n.commerce-pos-customer-display {\n  display: inline-block;\n  width: 100%;\n  height: 100%;\n  font-size: 0;\n}\n\n.commerce-pos-customer-display__left {\n  display: inline-block;\n  vertical-align: top;\n  height: 100%;\n  width: calc(100% - #{$sidebar-width});\n  color: #000;\n  overflow: hidden;\n}\n\n.commerce-pos-customer-display__right {\n  display: inline-block;\n  vertical-align: top;\n  height: 100%;\n  width: $sidebar-width;\n  background: $c-primary;\n  color: #fff;\n\n  .commerce-pos-customer-display__right__top {\n    padding: 60px;\n  }\n\n  .commerce-pos-customer-display__right__bottom {\n    position: absolute;\n    bottom: 0;\n    width: 100%;\n    padding: 60px;\n    background-color: rgba(0, 0, 0, .35);\n  }\n}\n\n// Header.\n.commerce-pos-customer-display__header {\n  height: $header-height;\n  margin: 0 65px;\n  padding: 30px 0;\n  border-bottom: 2px solid $c-gray-lighter;\n\n  // Logo\n  .commerce-pos-customer-display__store-logo {\n    display: inline-block;\n    float: left;\n\n    img {\n      max-height: calc(#{$header-height} - 60px);\n      padding-right: 50px;\n    }\n  }\n\n  // Store info.\n  .commerce-pos-customer-display__store-info {\n    display: inline-block;\n\n    .commerce-pos-customer-display__store-name {\n      padding-bottom: 5px;\n      font-size: 2.5rem;\n      color: $c-gray-dark;\n    }\n\n    .commerce-pos-customer-display__store-location,\n    .commerce-pos-customer-display__cashier {\n      display: inline-block;\n      font-size: $font-size-base;\n      color: $c-gray-mid;\n      padding-right: 15px;\n\n      .commerce-pos-customer-display__store-location__label,\n      .commerce-pos-customer-display__cashier__label {\n        display: inline-block;\n      }\n\n      .commerce-pos-customer-display__store-location__value,\n      .commerce-pos-customer-display__cashier__value {\n        display: inline-block;\n      }\n    }\n  }\n}\n\n// Items (products).\n.commerce-pos-customer-display__items {\n  height: calc(100% - #{$header-height});\n  width: 100%;\n  padding-right: 18px; // Used to hide scrollbar.\n  overflow-y: scroll;\n  box-sizing: content-box;\n  font-size: $font-size-base;\n\n  // Individual item.\n  .commerce-pos-customer-display__item {\n    display: none;\n    padding: 30px 0;\n    margin: 0 65px;\n    border-bottom: 2px solid $c-gray-lighter;\n\n    &:last-of-type {\n      border: none;\n    }\n\n    .commerce-pos-customer-display__item__image {\n      display: inline-block;\n      vertical-align: top;\n      width: 225px;\n      margin-right: 50px;\n      text-align: center;\n\n      img {\n        max-width: 220px;\n        border: 1px solid $c-gray-light;\n      }\n    }\n\n    .icon-image-placeholder {\n      display: inline-block;\n      vertical-align: middle;\n      height: 90px;\n      width: 90px;\n      margin-top: 10px;\n      fill: $c-gray-lighter;\n    }\n\n    .commerce-pos-customer-display__item__info-wrapper {\n      display: inline-block;\n      vertical-align: top;\n      width: calc(100% - 275px);\n    }\n\n    .field--name-title {\n      padding-bottom: 10px;\n      font-size: 2.25rem;\n    }\n\n    .field--name-sku {\n      padding-bottom: 25px;\n      font-size: 1.125rem;\n      color: $c-gray-mid;\n    }\n\n    .commerce-pos-customer-display__item__quantity {\n      font-size: 1.375rem;\n      padding-bottom: 10px;\n      color: $c-gray-mid;\n\n      div {\n        display: inline-block;\n        padding-right: 10px;\n      }\n    }\n\n    .commerce-pos-customer-display__item__total-price {\n      font-size: 2.25rem;\n      font-weight: bold;\n    }\n  }\n}\n\n// Total title.\n.commerce-pos-customer-display__totals-title {\n  font-size: 3rem;\n  text-align: right;\n  padding-bottom: 60px;\n}\n\n// Total - Individual total default styles.\n.commerce-pos-customer-display__total {\n  padding-bottom: 40px;\n\n  &:last-of-type {\n    padding-bottom: 0;\n  }\n\n  .commerce-pos-customer-display__total__label {\n    display: inline-block;\n    width: 40%;\n    vertical-align: baseline;\n    font-size: 1.5rem;\n    text-transform: uppercase;\n  }\n\n  .commerce-pos-customer-display__total__value {\n    display: inline-block;\n    width: 60%;\n    vertical-align: baseline;\n    font-size: 2.25rem;\n    text-align: right;\n  }\n}\n\n// Total - Specific total override styles.\n.commerce-pos-customer-display__total--to-pay {\n  .commerce-pos-customer-display__total__value {\n    font-size: 3.75rem;\n  }\n}\n"],"names":[],"mappings":"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"}
+\ No newline at end of file
 diff --git a/modules/customer_display/sass/commerce_pos_customer_display.scss b/modules/customer_display/sass/commerce_pos_customer_display.scss
-new file mode 100644
-index 0000000..523d421
---- /dev/null
+index e2fccf2..523d421 100644
+--- a/modules/customer_display/sass/commerce_pos_customer_display.scss
 +++ b/modules/customer_display/sass/commerce_pos_customer_display.scss
-@@ -0,0 +1,247 @@
-+// TODO: Let primary color be a setting.
-+// 1 - Change this so that the hex value is set in the Customer Display Settings.
-+// 2 - With jQuery, set the background colour of .commerce-pos-customer-display__right to use the hex value.
-+// 3 - Remove this SASS variable and the associated CSS in .commerce-pos-customer-display__right below.
+@@ -2,7 +2,14 @@
+ // 1 - Change this so that the hex value is set in the Customer Display Settings.
+ // 2 - With jQuery, set the background colour of .commerce-pos-customer-display__right to use the hex value.
+ // 3 - Remove this SASS variable and the associated CSS in .commerce-pos-customer-display__right below.
+-$c-primary: #990000;
 +//$c-primary: #990000;
 +
 +// DrupalCon patch.
@@ -25,238 +33,6 @@ index 0000000..523d421
 +.path-pos-customer-display .jx_ui_Widget {
 +  display: none;
 +}
-+
-+// Variables.
-+$c-gray-dark: #000;
-+$c-gray-mid: #666;
-+$c-gray-light: #ccc;
-+$c-gray-lighter: #f0f0f0;
-+$font-size-base: 16px;
-+$header-height: 150px;
-+$sidebar-width: 750px;
-+
-+// Hide admin bar.
-+#toolbar-administration {
-+  display: none;
-+}
-+
-+// Layout.
-+html, body, .dialog-off-canvas-main-canvas {
-+  height: 100% !important;
-+  overflow: hidden;
-+  margin-bottom: -1px;
-+  background: #fff;
-+  font-size: $font-size-base;
-+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-+  line-height: 1.2;
-+}
-+
-+.dialog-off-canvas-main-canvas {
-+  font-size: 0;
-+}
-+
-+.commerce-pos-customer-display * {
-+  box-sizing: border-box;
-+  position: relative;
-+}
-+
-+.commerce-pos-customer-display {
-+  display: inline-block;
-+  width: 100%;
-+  height: 100%;
-+  font-size: 0;
-+}
-+
-+.commerce-pos-customer-display__left {
-+  display: inline-block;
-+  vertical-align: top;
-+  height: 100%;
-+  width: calc(100% - #{$sidebar-width});
-+  color: #000;
-+  overflow: hidden;
-+}
-+
-+.commerce-pos-customer-display__right {
-+  display: inline-block;
-+  vertical-align: top;
-+  height: 100%;
-+  width: $sidebar-width;
-+  background: $c-primary;
-+  color: #fff;
-+
-+  .commerce-pos-customer-display__right__top {
-+    padding: 60px;
-+  }
-+
-+  .commerce-pos-customer-display__right__bottom {
-+    position: absolute;
-+    bottom: 0;
-+    width: 100%;
-+    padding: 60px;
-+    background-color: rgba(0, 0, 0, .35);
-+  }
-+}
-+
-+// Header.
-+.commerce-pos-customer-display__header {
-+  height: $header-height;
-+  margin: 0 65px;
-+  padding: 30px 0;
-+  border-bottom: 2px solid $c-gray-lighter;
-+
-+  // Logo
-+  .commerce-pos-customer-display__store-logo {
-+    display: inline-block;
-+    float: left;
-+
-+    img {
-+      max-height: calc(#{$header-height} - 60px);
-+      padding-right: 50px;
-+    }
-+  }
-+
-+  // Store info.
-+  .commerce-pos-customer-display__store-info {
-+    display: inline-block;
-+
-+    .commerce-pos-customer-display__store-name {
-+      padding-bottom: 5px;
-+      font-size: 2.5rem;
-+      color: $c-gray-dark;
-+    }
-+
-+    .commerce-pos-customer-display__store-location,
-+    .commerce-pos-customer-display__cashier {
-+      display: inline-block;
-+      font-size: $font-size-base;
-+      color: $c-gray-mid;
-+      padding-right: 15px;
-+
-+      .commerce-pos-customer-display__store-location__label,
-+      .commerce-pos-customer-display__cashier__label {
-+        display: inline-block;
-+      }
-+
-+      .commerce-pos-customer-display__store-location__value,
-+      .commerce-pos-customer-display__cashier__value {
-+        display: inline-block;
-+      }
-+    }
-+  }
-+}
-+
-+// Items (products).
-+.commerce-pos-customer-display__items {
-+  height: calc(100% - #{$header-height});
-+  width: 100%;
-+  padding-right: 18px; // Used to hide scrollbar.
-+  overflow-y: scroll;
-+  box-sizing: content-box;
-+  font-size: $font-size-base;
-+
-+  // Individual item.
-+  .commerce-pos-customer-display__item {
-+    display: none;
-+    padding: 30px 0;
-+    margin: 0 65px;
-+    border-bottom: 2px solid $c-gray-lighter;
-+
-+    &:last-of-type {
-+      border: none;
-+    }
-+
-+    .commerce-pos-customer-display__item__image {
-+      display: inline-block;
-+      vertical-align: top;
-+      width: 225px;
-+      margin-right: 50px;
-+      text-align: center;
-+
-+      img {
-+        max-width: 220px;
-+        border: 1px solid $c-gray-light;
-+      }
-+    }
-+
-+    .icon-image-placeholder {
-+      display: inline-block;
-+      vertical-align: middle;
-+      height: 90px;
-+      width: 90px;
-+      margin-top: 10px;
-+      fill: $c-gray-lighter;
-+    }
-+
-+    .commerce-pos-customer-display__item__info-wrapper {
-+      display: inline-block;
-+      vertical-align: top;
-+      width: calc(100% - 275px);
-+    }
-+
-+    .field--name-title {
-+      padding-bottom: 10px;
-+      font-size: 2.25rem;
-+    }
-+
-+    .field--name-sku {
-+      padding-bottom: 25px;
-+      font-size: 1.125rem;
-+      color: $c-gray-mid;
-+    }
-+
-+    .commerce-pos-customer-display__item__quantity {
-+      font-size: 1.375rem;
-+      padding-bottom: 10px;
-+      color: $c-gray-mid;
-+
-+      div {
-+        display: inline-block;
-+        padding-right: 10px;
-+      }
-+    }
-+
-+    .commerce-pos-customer-display__item__total-price {
-+      font-size: 2.25rem;
-+      font-weight: bold;
-+    }
-+  }
-+}
-+
-+// Total title.
-+.commerce-pos-customer-display__totals-title {
-+  font-size: 3rem;
-+  text-align: right;
-+  padding-bottom: 60px;
-+}
-+
-+// Total - Individual total default styles.
-+.commerce-pos-customer-display__total {
-+  padding-bottom: 40px;
-+
-+  &:last-of-type {
-+    padding-bottom: 0;
-+  }
-+
-+  .commerce-pos-customer-display__total__label {
-+    display: inline-block;
-+    width: 40%;
-+    vertical-align: baseline;
-+    font-size: 1.5rem;
-+    text-transform: uppercase;
-+  }
-+
-+  .commerce-pos-customer-display__total__value {
-+    display: inline-block;
-+    width: 60%;
-+    vertical-align: baseline;
-+    font-size: 2.25rem;
-+    text-align: right;
-+  }
-+}
-+
-+// Total - Specific total override styles.
-+.commerce-pos-customer-display__total--to-pay {
-+  .commerce-pos-customer-display__total__value {
-+    font-size: 3.75rem;
-+  }
-+}
+ 
+ // Variables.
+ $c-gray-dark: #000;

@@ -2348,17 +2348,17 @@
         },
         {
             "name": "drupal/commerce_paypal",
-            "version": "1.0.0-beta1",
+            "version": "1.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_paypal",
-                "reference": "8.x-1.0-beta1"
+                "reference": "8.x-1.0-beta2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_paypal-8.x-1.0-beta1.zip",
-                "reference": "8.x-1.0-beta1",
-                "shasum": "cda8217fe8d72f24ffd94fa862b59eca82122950"
+                "url": "https://ftp.drupal.org/files/projects/commerce_paypal-8.x-1.0-beta2.zip",
+                "reference": "8.x-1.0-beta2",
+                "shasum": "cf89cf412abbe4fe05521fd55580d1599ea6897d"
             },
             "require": {
                 "drupal/commerce": "~2",
@@ -2371,8 +2371,12 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta1",
-                    "datestamp": "1499960643"
+                    "version": "8.x-1.0-beta2",
+                    "datestamp": "1524068884",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "61b4774293ab7140e636b3dc47a589e6",
+    "content-hash": "861385c5d93a1525991c5cfff2cef918",
     "packages": [
         {
             "name": "acromedia/acro_live_css",
@@ -26,7 +26,7 @@
                 "GPL-2.0+"
             ],
             "description": "Creates a page showcasing general site styles and commonly used elements.",
-            "time": "2017-04-12 19:23:03"
+            "time": "2017-04-12T19:23:03+00:00"
         },
         {
             "name": "acromedia/drupalorange_profile",
@@ -68,7 +68,7 @@
             ],
             "description": "Acro Media's Orange installation profile",
             "homepage": "https://github.com/AcroMedia/drupalorange_profile",
-            "time": "2018-02-02 18:06:23"
+            "time": "2018-02-02T18:06:23+00:00"
         },
         {
             "name": "acromedia/orange_framework",
@@ -91,7 +91,7 @@
             ],
             "description": "Acro Media Inc. Drupal Base Theme",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-12-01 09:30:17"
+            "time": "2017-12-01T09:30:17+00:00"
         },
         {
             "name": "acromedia/orange_starter",
@@ -114,7 +114,7 @@
             ],
             "description": "Custom theme for our amazing clients.",
             "homepage": "https://github.com/AcroMedia/orange_framework",
-            "time": "2017-09-15 08:58:15"
+            "time": "2017-09-15T08:58:15+00:00"
         },
         {
             "name": "alchemy/zippy",
@@ -2083,7 +2083,7 @@
                 "patches_applied": {
                     "#2901504: Provide limit by no of orders per user condition for promotions in commerce core": "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch",
                     "#2770731: Add a display name to promotions": "https://www.drupal.org/files/issues/adjustment_label-2770731-28.patch",
-                    "#2852207: Billing same as shipping": "https://www.drupal.org/files/issues/2018-04-06/checkbox-same-as-billing-2852207-153.patch"
+                    "#2852207: Billing same as shipping": "https://www.drupal.org/files/issues/2018-04-07/checkbox-same-as-billing-2852207-154.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2409,7 +2409,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "66d3fc520dc8100cb96d19fd135f5359ca33a637"
+                "reference": "7846b163d3ff05e43c6bcb537692f95f508cecd8"
             },
             "require": {
                 "drupal/commerce": "~2.4",
@@ -2431,17 +2431,12 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta2+3-dev",
-                    "datestamp": "1522711381",
+                    "version": "8.x-2.0-beta2+4-dev",
+                    "datestamp": "1523065684",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
                     }
-                },
-                "patches_applied": {
-                    "#2950908: Customer Facing Screen": "https://www.drupal.org/files/issues/2018-04-06/commerce_pos-customer_display-2950980-22.patch",
-                    "omni omni": "patches/omni-omni.patch",
-                    "drupalcon": "patches/drupalcon.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2485,7 +2480,7 @@
                 "source": "http://cgit.drupalcode.org/commerce_pos",
                 "issues": "https://www.drupal.org/project/issues/commerce_pos"
             },
-            "time": "2018-04-07 01:43:45"
+            "time": "2018-04-13T18:49:38+00:00"
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
@@ -2741,7 +2736,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta3",
-                    "datestamp": "1518474973",
+                    "datestamp": "1518473280",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -3009,7 +3004,7 @@
                 "issues": "https://drupal.org/project/issues/config_inspector",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2018-03-25 15:40:45"
+            "time": "2018-03-25T15:40:45+00:00"
         },
         {
             "name": "drupal/console",
@@ -3326,16 +3321,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.5.1",
+            "version": "8.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "2aeca7dfa2661296602ac16bf9fd6085f0a121be"
+                "reference": "bc21760d4be4ad117851809183c8d18880ab275a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/2aeca7dfa2661296602ac16bf9fd6085f0a121be",
-                "reference": "2aeca7dfa2661296602ac16bf9fd6085f0a121be",
+                "url": "https://api.github.com/repos/drupal/core/zipball/bc21760d4be4ad117851809183c8d18880ab275a",
+                "reference": "bc21760d4be4ad117851809183c8d18880ab275a",
                 "shasum": ""
             },
             "require": {
@@ -3557,7 +3552,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2018-03-27T09:58:42+00:00"
+            "time": "2018-04-18T17:00:56+00:00"
         },
         {
             "name": "drupal/ctools",
@@ -3929,7 +3924,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
             },
-            "time": "2017-07-13 21:36:25"
+            "time": "2017-07-13T21:36:25+00:00"
         },
         {
             "name": "drupal/google_analytics",
@@ -4430,7 +4425,7 @@
                 "source": "http://cgit.drupalcode.org/metatag",
                 "issues": "http://drupal.org/project/issues/metatag"
             },
-            "time": "2018-03-29 17:44:09"
+            "time": "2018-03-29T17:44:09+00:00"
         },
         {
             "name": "drupal/paragraphs",
@@ -4691,17 +4686,17 @@
         },
         {
             "name": "drupal/search_api",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/search_api",
-                "reference": "8.x-1.7"
+                "reference": "8.x-1.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.7.zip",
-                "reference": "8.x-1.7",
-                "shasum": "a380eb516a813d99cf6178bd0fe15e8ea7be5842"
+                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "04d7b3b680e84aad086a61fb9eb4ffe77dc278e4"
             },
             "require": {
                 "drupal/core": "^8.4"
@@ -4716,8 +4711,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.7",
-                    "datestamp": "1520165041",
+                    "version": "8.x-1.8",
+                    "datestamp": "1523872384",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5139,7 +5134,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/swiftmailer"
             },
-            "time": "2018-02-05 10:42:44"
+            "time": "2018-02-05T10:42:44+00:00"
         },
         {
             "name": "drupal/taxonomy_menu",
@@ -5244,7 +5239,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/taxonomy_term_depth"
             },
-            "time": "2018-03-22 19:09:58"
+            "time": "2018-03-22T19:09:58+00:00"
         },
         {
             "name": "drupal/token",
@@ -5457,7 +5452,7 @@
                 "docs": "https://www.drupal.org/docs/8/modules/webform",
                 "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
             },
-            "time": "2018-04-09 16:21:22"
+            "time": "2018-04-09T16:21:22+00:00"
         },
         {
             "name": "drush/drush",
@@ -9085,16 +9080,16 @@
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-stdlib.git",
-                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78"
+                "reference": "10ef03144902d1955f935fff5346ed52f7d99bcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/debedcfc373a293f9250cc9aa03cf121428c8e78",
-                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/10ef03144902d1955f935fff5346ed52f7d99bcc",
+                "reference": "10ef03144902d1955f935fff5346ed52f7d99bcc",
                 "shasum": ""
             },
             "require": {
@@ -9103,7 +9098,7 @@
             "require-dev": {
                 "athletic/athletic": "~0.1",
                 "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "^2.6.2"
+                "zendframework/zend-coding-standard": "~1.0.0"
             },
             "type": "library",
             "extra": {
@@ -9126,7 +9121,7 @@
                 "stdlib",
                 "zf2"
             ],
-            "time": "2016-09-13T14:38:50+00:00"
+            "time": "2018-04-12T16:05:42+00:00"
         }
     ],
     "packages-dev": [
@@ -9379,7 +9374,7 @@
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2018-03-14 18:20:55"
+            "time": "2018-03-14T18:20:55+00:00"
         },
         {
             "name": "fabpot/goutte",

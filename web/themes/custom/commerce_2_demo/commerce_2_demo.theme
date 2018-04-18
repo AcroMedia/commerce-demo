@@ -269,10 +269,6 @@ function commerce_2_demo_theme($existing, $type, $theme, $path) {
       'render element' => 'form',
       'path' => $path . '/templates/commerce',
     ],
-    'add_to_cart_form__drupalcon_preorder' => [
-      'render element' => 'form',
-      'path' => $path . '/templates/commerce',
-    ],
   ];
 }
 
@@ -377,43 +373,6 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
 
       // Do stuff.
 
-    }
-
-    // DrupalCon Preorder.
-    if ($product_bundle == 'drupalcon_preorder') {
-      // Set theme hook.
-      $form['#theme'][] = 'add_to_cart_form__drupalcon_preorder';
-
-      // Get variations.
-      $product_variations = $storage['product']->variations->getValue();
-
-      // Loop through variations and set template variables.
-      $drupalcon_preorder_extras = [];
-      foreach ($product_variations as $key => $product_variation) {
-
-        // Load variation.
-        $variation = ProductVariation::load($product_variation['target_id']);
-
-        // Get size_attribute values.
-        $size_attribute_field = $variation->attribute_size->getValue();
-
-        // Check if there is stock available.
-        $localStockChecker = \Drupal::service('commerce_stock.local_stock_checker');
-        $locationList = $localStockChecker->getLocationList();
-        $available = $localStockChecker->getIsInStock($variation, $locationList);
-
-        // Set template variables.
-        $drupalcon_preorder_extras[$key]['variation_id'] = $product_variation['target_id'];
-        $drupalcon_preorder_extras[$key]['size_attribute_id'] = $size_attribute_field[0]['target_id'];
-        $drupalcon_preorder_extras[$key]['stock'] = 'in-stock';
-
-        // If out of stock, update stock template variable.
-        if ($available === FALSE) {
-          $drupalcon_preorder_extras[$key]['stock'] = 'out-of-stock';
-        }
-      }
-      // Add variables into form.
-      $form['#drupalcon_preorder_extras'] = $drupalcon_preorder_extras;
     }
   }
 

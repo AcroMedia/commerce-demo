@@ -65,23 +65,4 @@
       {% endfor %}
     </div>
   {% endif %}
-
-  {# For DrupalCon Preorder. #}
-  {% if order_type.entity.id == 'preorder_no_shipping' %}
-    <h2>{{ 'Your preorder has been placed! Awesome!'|t }}</h2>
-    <div class="checkout-complete__drupalcon-preorder">
-      {% trans %}
-      <span class="instructions"><strong>Instructions:</strong></span>
-
-      <p>At DrupalCon Nashville, visit the Acro Media booth (#803, 805) and claim your free shirt! All we need is one of the following:</p>
-
-      <ul>
-        <li>Your order number ({{ order_entity.getOrderNumber }}).</li>
-        <li>The email address that you used to checkout with.</li>
-      </ul>
-
-      <p>There will be a bunch of us at the booth, so don’t be shy. In fact, <a href="https://blog.acromedia.com/catch-up-with-acro-media-at-drupalcon-2018-in-nashville-tn" target="_blank">take a look</a> at who from Acro Media will be there. We’re all friendly.</p>
-      {% endtrans %}
-    </div>
-  {% endif %}
 </div>

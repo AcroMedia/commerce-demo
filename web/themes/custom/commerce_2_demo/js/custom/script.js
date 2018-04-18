@@ -133,18 +133,8 @@
   // Checkout form - Remove screenreader class from all labels.
   $('.path-checkout form label').removeClass('sr-only');
 
-
-  // Checkout form - pre-populate email field for quick checkout unless its the DrupalCon preorder product.
-  $('.checkout-pane-order-summary .views-field-purchased-entity a').each(function() {
-    var $purchasedEntity = $(this).text();
-
-    if (!$purchasedEntity.startsWith("DrupalCon 2018 Drupal Commerce Tee"))  {
-      $('input#edit-contact-information-email').val('demo@acromediainc.com');
-    }
-  });
-
   // Checkout form - pre-populate SHIPPING fields for quick checkout.
-  // $('input#edit-contact-information-email').val('demo@acromediainc.com');
+  $('input#edit-contact-information-email').val('demo@acromediainc.com');
   $('#shipping-information-wrapper select.country').val('US');
   $('#shipping-information-wrapper input.given-name').val('Charles');
   $('#shipping-information-wrapper input.family-name').val('Mound');

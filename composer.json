@@ -59,7 +59,8 @@
         "drupal/hotjar": "^1.2",
         "drupal/commerce_pos": "2.x-dev",
         "drupal/contribute": "^1.0",
-        "cboden/ratchet": "^0.4.1"
+        "cboden/ratchet": "^0.4.1",
+        "drupal/asset_injector": "^2.2"
     },
     "require-dev": {
         "behat/mink": "~1.7",

@@ -4,8 +4,9 @@ This is a full __Commerce 2__ demo website built on __Drupal 8__. It has been bu
 
 1. So that people can view, interact and login to an actual working demo site.
 2. So that developers can install, trial and review code and configuration.
-3. This is __NOT__ intended to be a base for building a new project, for that we recommend generating your own composer files yourself or use the [Commerce Kickstart](https://install.commercekickstart.com).
-So that the community can see and discuss what Drupal Commerce includes basically out of-the-box.
+3. So that the community can see and discuss what Drupal Commerce includes basically out of-the-box.
+
+__NOTE:__ This is __NOT__ intended to be a base for building a new project, for that we recommend generating your own composer files yourself or use the [Commerce Kickstart](https://www.commercekickstart.com).
 
 ## Welcome!
 
@@ -33,7 +34,7 @@ If you’d like to setup a copy of the demo yourself, follow these instructions.
 
 __Requirements__
 * Composer
-* PHP 7.1 (or 7.0 with [this patch](https://www.drupal.org/node/2898119))
+* PHP 7.1 or higher
 * MariaDB, MSQL, or equivalent
 * Apache, NGINX, or equivalent
 * Apache Solr 5.5
@@ -63,8 +64,7 @@ If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/co
 
 Please note, our team is busy completing service work for clients, and thus, we will not be able to help you with setting up the demo on your own. If you’re having trouble, some things that could cause your issue are:
 
-* Is your site running on PHP 7.1?
-  * If not, you'll need [this patch](https://www.drupal.org/node/2898119).
+* Is your site running on PHP 7.1 or higher?
 * Are your Drupal file & folder permissions correct?
 * Flush caches (i.e. through Drupal UI or run `../vendor/drush/drush/drush cr` from within `/web`)
 * Update entities (i.e. run `../vendor/drush/drush/drush entup` from within `/web`)

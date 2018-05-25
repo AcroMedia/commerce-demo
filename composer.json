@@ -34,7 +34,7 @@
         "drupal/webform": "5.x-dev",
         "drupal/field_group": "~1.0-rc6",
         "drupal/commerce_paypal": "~1.0",
-        "drupal/commerce_authnet": "1.0-beta4",
+        "drupal/commerce_authnet": "^1.0",
         "drupal/commerce_shipping": "~2.0-beta3",
         "drupal/commerce_recurring": "^1.0@beta",
         "drupal/advancedqueue": "^1.0@beta",

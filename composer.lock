@@ -2480,7 +2480,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "7846b163d3ff05e43c6bcb537692f95f508cecd8"
+                "reference": "fad9aa54ea93b7dc00b3546d64453c473024e9b5"
             },
             "require": {
                 "drupal/commerce": "~2.4",
@@ -2490,7 +2490,8 @@
                 "drupal/commerce_pos_keypad": "*",
                 "drupal/commerce_product": "*",
                 "drupal/commerce_tax": "*",
-                "drupal/core": "*"
+                "drupal/core": "*",
+                "drupal/search_api": "~1.0"
             },
             "require-dev": {
                 "drupal/commerce_pos_currency_denominations": "*",
@@ -2502,8 +2503,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta2+4-dev",
-                    "datestamp": "1523065684",
+                    "version": "8.x-2.0-rc1+8-dev",
+                    "datestamp": "1526580484",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2520,24 +2521,12 @@
                     "homepage": "https://www.drupal.org/user/157725"
                 },
                 {
-                    "name": "ksalbrecht",
-                    "homepage": "https://www.drupal.org/user/175607"
-                },
-                {
                     "name": "rbayliss",
                     "homepage": "https://www.drupal.org/user/772738"
                 },
                 {
-                    "name": "slip",
-                    "homepage": "https://www.drupal.org/user/332775"
-                },
-                {
                     "name": "smccabe",
                     "homepage": "https://www.drupal.org/user/289245"
-                },
-                {
-                    "name": "thomas.fleming",
-                    "homepage": "https://www.drupal.org/user/826568"
                 }
             ],
             "description": "Provides Point of Sale functionality for Commerce",
@@ -2551,7 +2540,7 @@
                 "source": "http://cgit.drupalcode.org/commerce_pos",
                 "issues": "https://www.drupal.org/project/issues/commerce_pos"
             },
-            "time": "2018-04-13T18:49:38+00:00"
+            "time": "2018-05-17T18:03:44+00:00"
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",

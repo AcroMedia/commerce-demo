@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "df4c5d232ea4ae35afeed31fa355fdb7",
+    "content-hash": "6b973606a85f51efda70ff01803afb93",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2516,7 +2516,7 @@
                     }
                 },
                 "patches_applied": {
-                    "#2950980: Customer Facing Screen": "https://www.drupal.org/files/issues/2018-05-30/commerce_pos-customer_display-2950980-24.patch"
+                    "#2950980: Customer Facing Screen": "https://www.drupal.org/files/issues/2018-05-31/commerce_pos-customer_display-2950980-25.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -9568,7 +9568,8 @@
                 "source": "http://cgit.drupalcode.org/devel",
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
+            },
+            "time": "2018-04-21T14:58:42+00:00"
         },
         {
             "name": "fabpot/goutte",

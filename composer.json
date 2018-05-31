@@ -147,7 +147,7 @@
             },
             "drupal/commerce_pos": {
                 "#2950980: Customer Facing Screen":
-                "https://www.drupal.org/files/issues/2018-05-30/commerce_pos-customer_display-2950980-24.patch"
+                "https://www.drupal.org/files/issues/2018-05-31/commerce_pos-customer_display-2950980-25.patch"
             }
         }
     }

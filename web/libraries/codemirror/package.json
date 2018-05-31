@@ -1,28 +1,28 @@
 {
-  "_from": "codemirror@5.31.0",
-  "_id": "codemirror@5.31.0",
+  "_from": "codemirror@5.36.0",
+  "_id": "codemirror@5.36.0",
   "_inBundle": false,
-  "_integrity": "sha512-LKbMZKoAz7pMmWuSEl253G6yyloSulj1kXfvYv+3n3I8wMiI7QwnCHwKM3Zw5S9ItNV28Layq0/ihQXWmn9T9w==",
+  "_integrity": "sha512-XGR+ic+9DSMSE4mD2XLinGrMcIO4xbHpNrPzAFpCW5bjy+Em8fUOTCpagVP/+LLtTQsAROqrq1f55KyRxDcokA==",
   "_location": "/codemirror",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "codemirror@5.31.0",
+    "raw": "codemirror@5.36.0",
     "name": "codemirror",
     "escapedName": "codemirror",
-    "rawSpec": "5.31.0",
+    "rawSpec": "5.36.0",
     "saveSpec": null,
-    "fetchSpec": "5.31.0"
+    "fetchSpec": "5.36.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.31.0.tgz",
-  "_shasum": "ecf3d057eb74174147066bfc7c5f37b4c4e07df2",
-  "_spec": "codemirror@5.31.0",
-  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.kE61hrCe",
+  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.36.0.tgz",
+  "_shasum": "1172ad9dc298056c06e0b34e5ccd23825ca15b40",
+  "_spec": "codemirror@5.36.0",
+  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.V5GiaEFH",
   "bugs": {
     "url": "http://github.com/codemirror/CodeMirror/issues"
   },
@@ -30,6 +30,9 @@
   "contributors": [
     {
       "name": "List of CodeMirror contributors. Updated before every release."
+    },
+    {
+      "name": "4oo4"
     },
     {
       "name": "4r2r"
@@ -356,6 +359,9 @@
       "name": "Brandon Wamboldt"
     },
     {
+      "name": "Bret Little"
+    },
+    {
       "name": "Brett Zamir"
     },
     {
@@ -386,6 +392,12 @@
       "name": "Camilo Roca"
     },
     {
+      "name": "Casey Klebba"
+    },
+    {
+      "name": "César González Íñiguez"
+    },
+    {
       "name": "Chad Jolly"
     },
     {
@@ -414,6 +426,9 @@
     },
     {
       "name": "Chris Morgan"
+    },
+    {
+      "name": "Chris Reeves"
     },
     {
       "name": "Chris Smith"
@@ -459,6 +474,9 @@
     },
     {
       "name": "ComFreek"
+    },
+    {
+      "name": "Cristian Prieto"
     },
     {
       "name": "Curtis Gagliardi"
@@ -662,6 +680,9 @@
       "name": "Filip Stollár"
     },
     {
+      "name": "Filype Pereira"
+    },
+    {
       "name": "flack"
     },
     {
@@ -791,7 +812,13 @@
       "name": "Hasan Karahan"
     },
     {
+      "name": "Heanes"
+    },
+    {
       "name": "Hector Oswaldo Caballero"
+    },
+    {
+      "name": "Hélio"
     },
     {
       "name": "Hendrik Wallbaum"
@@ -822,6 +849,9 @@
     },
     {
       "name": "Ian Dickinson"
+    },
+    {
+      "name": "Ian Rose"
     },
     {
       "name": "Ian Wehrman"
@@ -932,6 +962,9 @@
       "name": "Jason Siefken"
     },
     {
+      "name": "Jayaprabhakar"
+    },
+    {
       "name": "Jaydeep Solanki"
     },
     {
@@ -1012,6 +1045,9 @@
     },
     {
       "name": "Jonas Helfer"
+    },
+    {
+      "name": "Jonathan Hart"
     },
     {
       "name": "Jonathan Malmaud"
@@ -1164,6 +1200,9 @@
       "name": "leaf corcoran"
     },
     {
+      "name": "Lemmon"
+    },
+    {
       "name": "Leonid Khachaturov"
     },
     {
@@ -1177,6 +1216,12 @@
     },
     {
       "name": "Libo Cannici"
+    },
+    {
+      "name": "Lior Goldberg"
+    },
+    {
+      "name": "Lior Shub"
     },
     {
       "name": "LloydMilligan"
@@ -1374,6 +1419,9 @@
       "name": "melpon"
     },
     {
+      "name": "meshuamam"
+    },
+    {
       "name": "Metatheos"
     },
     {
@@ -1405,6 +1453,9 @@
     },
     {
       "name": "Michal Dorner"
+    },
+    {
+      "name": "Michal Kapiczynski"
     },
     {
       "name": "Mighty Guava"
@@ -1479,6 +1530,12 @@
       "name": "ndr"
     },
     {
+      "name": "Neil Anderson"
+    },
+    {
+      "name": "neon-dev"
+    },
+    {
       "name": "nerbert"
     },
     {
@@ -1502,6 +1559,9 @@
     {
       "name": "Nicholas Bollweg",
       "url": "Nick"
+    },
+    {
+      "name": "NickKolok"
     },
     {
       "name": "Nick Kreeger"
@@ -1553,6 +1613,9 @@
     },
     {
       "name": "Oskar Segersvärd"
+    },
+    {
+      "name": "overdodactyl"
     },
     {
       "name": "pablo"
@@ -1657,6 +1720,12 @@
       "name": "Prayag Verma"
     },
     {
+      "name": "Prendota"
+    },
+    {
+      "name": "Qiang Li"
+    },
+    {
       "name": "Radek Piórkowski"
     },
     {
@@ -1678,10 +1747,19 @@
       "name": "Randy Edmunds"
     },
     {
+      "name": "Randy Luecke"
+    },
+    {
+      "name": "Raphael Amorim"
+    },
+    {
       "name": "Rasmus Erik Voel Jensen"
     },
     {
       "name": "Rasmus Schultz"
+    },
+    {
+      "name": "Raymond Hill"
     },
     {
       "name": "ray ratchup"
@@ -1736,6 +1814,9 @@
     },
     {
       "name": "Ryan Prior"
+    },
+    {
+      "name": "ryu-sato"
     },
     {
       "name": "sabaca"
@@ -1810,6 +1891,9 @@
       "name": "Se-Won Kim"
     },
     {
+      "name": "Shane Liesegang"
+    },
+    {
       "name": "shaund"
     },
     {
@@ -1858,6 +1942,9 @@
       "name": "sonson"
     },
     {
+      "name": "Sorab Bisht"
+    },
+    {
       "name": "spastorelli"
     },
     {
@@ -1880,6 +1967,9 @@
     },
     {
       "name": "Steffen Kowalski"
+    },
+    {
+      "name": "Stephane Moore"
     },
     {
       "name": "Stephen Lavelle"
@@ -1978,6 +2068,9 @@
       "name": "Timothy Hatcher"
     },
     {
+      "name": "Tobias Bertelsen"
+    },
+    {
       "name": "TobiasBg"
     },
     {
@@ -2002,7 +2095,16 @@
       "name": "Tom MacWright"
     },
     {
+      "name": "Tom McLaughlin"
+    },
+    {
       "name": "Tony Jian"
+    },
+    {
+      "name": "tophf"
+    },
+    {
+      "name": "totalamd"
     },
     {
       "name": "Travis Heppe"
@@ -2021,6 +2123,9 @@
     },
     {
       "name": "Tyler Long"
+    },
+    {
+      "name": "Vaibhav Sagar"
     },
     {
       "name": "VapidWorx"
@@ -2165,5 +2270,5 @@
     "watch": "rollup -w -c"
   },
   "style": "lib/codemirror.css",
-  "version": "5.31.0"
+  "version": "5.36.0"
 }

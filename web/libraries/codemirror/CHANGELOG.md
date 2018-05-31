@@ -1,3 +1,119 @@
+## 5.36.0 (2018-03-20)
+
+### Bug fixes
+
+Make sure all document-level event handlers are registered on the document that the editor is part of.
+
+Fix issue that prevented edits whose origin starts with `+` from being combined in history events for an editor-less document.
+
+[multiplex addon](http://codemirror.net/demo/multiplex.html): Improve handling of indentation.
+
+[merge addon](http://codemirror.net/doc/manual.html#addon_merge): Use CSS `:after` element to style the scroll-lock icon.
+
+[javascript-hint addon](http://codemirror.net/doc/manual.html#addon_javascript-hint): Don't provide completions in JSON mode.
+
+[continuelist addon](http://codemirror.net/doc/manual.html#addon_continuelist): Fix numbering error.
+
+[show-hint addon](http://codemirror.net/doc/manual.html#addon_show-hint): Make `fromList` completion strategy act on the current token up to the cursor, rather than the entire token.
+
+[markdown mode](http://codemirror.net/mode/markdown/): Fix a regexp with potentially exponental complexity.
+
+### New features
+
+New theme: [lucario](http://codemirror.net/demo/theme.html#lucario).
+
+## 5.35.0 (2018-02-20)
+
+### Bug fixes
+
+Fix problem where selection undo might change read-only documents.
+
+Fix crash when calling `addLineWidget` on a document that has no attached editor.
+
+[searchcursor addon](http://codemirror.net/doc/manual.html#addon_searchcursor): Fix behavior of `^` in multiline regexp mode.
+
+[match-highlighter addon](http://codemirror.net/doc/manual.html#addon_match-highlighter): Fix problem with matching words that have regexp special syntax in them.
+
+[sublime bindings](http://codemirror.net/demo/sublime.html): Fix `addCursorToSelection` for short lines.
+
+[javascript mode](http://codemirror.net/mode/javascript/): Support TypeScript intersection types, dynamic `import`.
+
+[stex mode](http://codemirror.net/mode/stex/): Fix parsing of `\(` `\)` delimiters, recognize more atom arguments.
+
+[haskell mode](http://codemirror.net/mode/haskell/): Highlight more builtins, support `<*` and `*>`.
+
+[sql mode](http://codemirror.net/mode/sql/): Make it possible to disable backslash escapes in strings for dialects that don't have them, do this for MS SQL.
+
+[dockerfile mode](http://codemirror.net/mode/dockerfile/): Highlight strings and ports, recognize more instructions.
+
+### New features
+
+[vim bindings](http://codemirror.net/demo/vim.html): Support alternative delimiters in replace command.
+
+## 5.34.0 (2018-01-29)
+
+### Bug fixes
+
+[markdown mode](http://codemirror.net/mode/markdown/): Fix a problem where inline styles would persist across list items.
+
+[sublime bindings](http://codemirror.net/demo/sublime.html): Fix the `toggleBookmark` command.
+
+[closebrackets addon](http://codemirror.net/doc/manual.html#addon_closebrackets): Improve behavior when closing triple quotes.
+
+[xml-fold addon](http://codemirror.net/demo/folding.html): Fix folding of line-broken XML tags.
+
+[shell mode](http://codemirror.net/mode/shell/): Better handling of nested quoting.
+
+[javascript-lint addon](http://codemirror.net/demo/lint.html): Clean up and simplify.
+
+[matchbrackets addon](http://codemirror.net/doc/manual.html#addon_matchbrackets): Fix support for multiple editors at the same time.
+
+### New features
+
+New themes: [oceanic-next](http://codemirror.net/demo/theme.html#oceanic-next) and [shadowfox](http://codemirror.net/demo/theme.html#shadowfox).
+
+## 5.33.0 (2017-12-21)
+
+### Bug fixes
+
+[lint addon](http://codemirror.net/doc/manual.html#addon_lint): Make updates more efficient.
+
+[css mode](http://codemirror.net/mode/css/): The mode is now properly case-insensitive.
+
+[continuelist addon](http://codemirror.net/doc/manual.html#addon_continuelist): Fix broken handling of unordered lists introduced in previous release.
+
+[swift](http://codemirror.net/mode/swift) and [scala](http://codemirror.net/mode/clike/) modes: Support nested block comments.
+
+[mllike mode](http://codemirror.net/mode/mllike/index.html): Improve OCaml support.
+
+[sublime bindings](http://codemirror.net/demo/sublime.html): Use the proper key bindings for `addCursorToNextLine` and `addCursorToPrevLine`.
+
+### New features
+
+[jsx mode](http://codemirror.net/mode/jsx/index.html): Support JSX fragments.
+
+[closetag addon](http://codemirror.net/demo/closetag.html): Add an option to disable auto-indenting.
+
+## 5.32.0 (2017-11-22)
+
+### Bug fixes
+
+Increase contrast on default bracket-matching colors.
+
+[javascript mode](http://codemirror.net/mode/javascript/): Recognize TypeScript type parameters for calls, type guards, and type parameter defaults. Improve handling of `enum` and `module` keywords.
+
+[comment addon](http://codemirror.net/doc/manual.html#addon_comment): Fix bug when uncommenting a comment that spans all but the last selected line.
+
+[searchcursor addon](http://codemirror.net/doc/manual.html#addon_searchcursor): Fix bug in case folding.
+
+[emacs bindings](http://codemirror.net/demo/emacs.html): Prevent single-character deletions from resetting the kill ring.
+
+[closebrackets addon](http://codemirror.net/doc/manual.html#addon_closebrackets): Tweak quote matching behavior.
+
+### New features
+
+[continuelist addon](http://codemirror.net/doc/manual.html#addon_continuelist): Increment ordered list numbers when adding one.
+
 ## 5.31.0 (2017-10-20)
 
 ### Bug fixes

@@ -65,7 +65,7 @@ Note: In v12.0.0 we dropped support for IE9 and IE10, because they are no longer
   ```html
   <input type="tel" id="phone">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="path/to/intlTelInput.js"></script>
   <script>
     $("#phone").intlTelInput();
@@ -121,11 +121,11 @@ $("#scrollingElement").scroll(function() {
 
 **excludeCountries**  
 Type: `Array` Default: `undefined`  
-Don't display the countries you specify.
+In the dropdown, display all countries except the ones you specify here.
 
 **formatOnDisplay**  
 Type: `Boolean` Default: `true`  
-Format the input value (according to the `nationalMode` option) during initialisation, and on setNumber. Requires the `utilsScript` option.
+Format the input value (according to the `nationalMode` option) during initialisation, and on `setNumber`. Requires the `utilsScript` option.
 
 **geoIpLookup**  
 Type: `Function` Default: `null`  
@@ -163,7 +163,7 @@ Specify [one of the keys](https://github.com/jackocnr/intl-tel-input/blob/master
 
 **onlyCountries**  
 Type: `Array` Default: `undefined`  
-Display only the countries you specify - [see example](http://intl-tel-input.com/node_modules/intl-tel-input/examples/gen/only-countries-europe.html).
+In the dropdown, display only the countries you specify - [see example](http://intl-tel-input.com/node_modules/intl-tel-input/examples/gen/only-countries-europe.html).
 
 **preferredCountries**  
 Type: `Array` Default: `["us", "gb"]`  
@@ -316,7 +316,7 @@ This is triggered when the user closes the dropdown.
 
 
 ## Utilities Script
-The utilities script ([build/js/utils.js](build/js/utils.js)) is a custom build of Google's [libphonenumber](http://libphonenumber.googlecode.com) which enables the following features:
+The utilities script ([build/js/utils.js](build/js/utils.js)) is a custom build of Google's [libphonenumber](https://github.com/googlei18n/libphonenumber) which enables the following features:
 
 * Formatting upon initialisation, as well as with `getNumber` and `setNumber`
 * Validation with `isValidNumber`, `getNumberType` and `getValidationError` methods
@@ -368,7 +368,7 @@ See the [contributing guide](https://github.com/jackocnr/intl-tel-input/blob/mas
 ## Attributions
 * Flag images from [region-flags](https://github.com/behdad/region-flags)
 * Original country data from mledoze's [World countries in JSON, CSV and XML](https://github.com/mledoze/countries)
-* Formatting/validation/example number code from [libphonenumber](http://libphonenumber.googlecode.com)
+* Formatting/validation/example number code from [libphonenumber](https://github.com/googlei18n/libphonenumber)
 * Feature contributions are listed in the wiki: [Contributions](https://github.com/jackocnr/intl-tel-input/wiki/Contributions)
 
 
@@ -377,3 +377,8 @@ See the [contributing guide](https://github.com/jackocnr/intl-tel-input/blob/mas
 * List of [integrations with intl-tel-input](https://github.com/jackocnr/intl-tel-input/wiki/Integrations)
 * Android native port: [IntlPhoneInput](https://github.com/Rimoto/IntlPhoneInput)
 * Typescript type definitions are available in the [DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/intl-tel-input/intl-tel-input.d.ts) (more info [here](https://github.com/jackocnr/intl-tel-input/issues/433#issuecomment-228517623))
+
+<a href="https://www.browserstack.com">
+<img src="https://p3.zdusercontent.com/attachment/1015988/y0Sl6KKaxGxel8uLLhHApi2qm?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..hoHbaGv1_jq5R6TNcCFGIA.473ykDjNHc14lsbZiXZGif42ZDHhoPJNqdfU8b-ihD4tLIuUViVWg5946CdM3HN8K6OIBhLLRtLNlgqFo7a33Yqm7QPvWpOnVJMlAlqF_Po_UVift60eQWwCjjPgd9G8qML_yu5SqBJM6e5RrqmKHz6DBHD-w_VlmNyjNNi9ELmBH3rE-ukofrhD38UFvsSUVkMX_J7CpW7qhw63VWuMaDETGnL2Udd2tMoe512agY17jbY74WtA20VgfljcnZuvzdYu0_CLPnd54_mUs2_UxefRQ1Nhp1L24Dacf6BdUVc.dPdKrHesuyEMEjCWAC5cTA" width="200px"></a>
+
+Tested on [BrowserStack](https://www.browserstack.com)

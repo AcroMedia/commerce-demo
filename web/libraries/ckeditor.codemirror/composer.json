@@ -1,0 +1,25 @@
+{
+  "name": "ckeditor-codemirror-plugin",
+  "homepage": "http://w8tcha.github.io/CKEditor-CodeMirror-Plugin/",
+  "version": "1.17.2",
+  "authors": [
+    "Ingo Herbote"
+  ],
+  "description": "Syntax Highlighting for the CKEditor (Source View and Source Dialog) with the CodeMirror Plugin.",
+  "main": "codemirror/plugin.js",
+  "moduleType": [],
+  "keywords": [
+    "CKEditor",
+    "CodeMirror",
+    "plugin",
+    "source"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

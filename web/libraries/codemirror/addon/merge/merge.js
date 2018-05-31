@@ -211,7 +211,7 @@
   function setScrollLock(dv, val, action) {
     dv.lockScroll = val;
     if (val && action != false) syncScroll(dv, DIFF_INSERT) && makeConnections(dv);
-    dv.lockButton.innerHTML = val ? "\u21db\u21da" : "\u21db&nbsp;&nbsp;\u21da";
+    (val ? CodeMirror.addClass : CodeMirror.rmClass)(dv.lockButton, "CodeMirror-merge-scrolllock-enabled");
   }
 
   // Updating the marks for editor content
@@ -738,6 +738,9 @@
       mark.clear();
       cm.removeLineClass(from, "wrap", "CodeMirror-merge-collapsed-line");
     }
+    if (mark.explicitlyCleared) clear();
+    CodeMirror.on(widget, "click", clear);
+    mark.on("clear", clear);
     CodeMirror.on(widget, "click", clear);
     return {mark: mark, clear: clear};
   }

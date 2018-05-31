@@ -41,11 +41,15 @@
 @media (max-width: 1065px) {
   #siteTours-start.fixed-button {
     display: none;
+    visibility: hidden;
   }
 }
 
-.maintenance-page #siteTours-start.fixed-button {
+.maintenance-page #siteTours-start.fixed-button,
+.path-pos-customer-display #siteTours-start.fixed-button,
+.path-commerce-pos #siteTours-start.fixed-button {
   display: none;
+  visibility: hidden;
 }
 
 /* Tour selection modal - Modal content */

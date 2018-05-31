@@ -13,7 +13,21 @@
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "jqueryprint": {
+            "type": "package",
+            "package": {
+                "name": "DoersGuild/jQuery.print",
+                "version": "master",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/DoersGuild/jQuery.print.git",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
         }
+
     },
     "config": {
       "bin-dir": "bin"
@@ -60,7 +74,8 @@
         "drupal/commerce_pos": "2.x-dev",
         "drupal/contribute": "^1.0",
         "cboden/ratchet": "^0.4.1",
-        "drupal/asset_injector": "^2.2"
+        "drupal/asset_injector": "^2.2",
+        "DoersGuild/jQuery.print": "master"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -116,6 +131,9 @@
             ],
             "drush/contrib/{$name}": [
                 "type:drupal-drush"
+            ],
+            "libraries/{$name}": [
+                "type:drupal-library"
             ]
         },
         "patches": {
@@ -126,6 +144,10 @@
                 "https://www.drupal.org/files/issues/adjustment_label-2770731-28.patch",
                 "#2852207: Billing same as shipping":
                 "https://www.drupal.org/files/issues/2018-04-07/checkbox-same-as-billing-2852207-154.patch"
+            },
+            "drupal/commerce_pos": {
+                "#2950980: Customer Facing Screen":
+                "https://www.drupal.org/files/issues/2018-05-30/commerce_pos-customer_display-2950980-24.patch"
             }
         }
     }

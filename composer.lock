@@ -4,8 +4,19 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2c89d3f926f32e5fd9f01fbf5515926",
+    "content-hash": "df4c5d232ea4ae35afeed31fa355fdb7",
     "packages": [
+        {
+            "name": "DoersGuild/jQuery.print",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DoersGuild/jQuery.print.git",
+                "reference": "origin/master"
+            },
+            "type": "drupal-library",
+            "time": "2017-10-13T06:26:59+00:00"
+        },
         {
             "name": "acromedia/acro_live_css",
             "version": "dev-8.x-1.x",
@@ -435,20 +446,20 @@
         },
         {
             "name": "commerceguys/intl",
-            "version": "v0.7.5",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/commerceguys/intl.git",
-                "reference": "de1435502068393fae4061818e194e4ea61b98d6"
+                "reference": "44abbda26e6d2d51021ad49766429b020c053151"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/commerceguys/intl/zipball/de1435502068393fae4061818e194e4ea61b98d6",
-                "reference": "de1435502068393fae4061818e194e4ea61b98d6",
+                "url": "https://api.github.com/repos/commerceguys/intl/zipball/44abbda26e6d2d51021ad49766429b020c053151",
+                "reference": "44abbda26e6d2d51021ad49766429b020c053151",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=5.5.0"
             },
             "require-dev": {
                 "mikey179/vfsstream": "1.*",
@@ -457,7 +468,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -475,7 +486,7 @@
                 }
             ],
             "description": "Internationalization library powered by CLDR data.",
-            "time": "2017-12-29T00:13:05+00:00"
+            "time": "2018-05-28T00:56:04+00:00"
         },
         {
             "name": "composer/installers",
@@ -2100,25 +2111,25 @@
         },
         {
             "name": "drupal/commerce",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce",
-                "reference": "8.x-2.6"
+                "reference": "8.x-2.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce-8.x-2.6.zip",
-                "reference": "8.x-2.6",
-                "shasum": "737365a3915196d2b3c09e9b93bf9c3082bc4450"
+                "url": "https://ftp.drupal.org/files/projects/commerce-8.x-2.7.zip",
+                "reference": "8.x-2.7",
+                "shasum": "e1f5c30f4899913e7e1a8200e8f65b422e50d451"
             },
             "require": {
-                "commerceguys/intl": "~0.7",
-                "drupal/address": "~1.0",
+                "commerceguys/intl": "^1.0.0",
+                "drupal/address": "^1.4",
                 "drupal/core": "~8.5",
                 "drupal/entity": "^1.0-beta3",
                 "drupal/entity_reference_revisions": "~1.0",
-                "drupal/inline_entity_form": "~1.0",
+                "drupal/inline_entity_form": "^1.0-rc1",
                 "drupal/profile": "~1.0",
                 "drupal/state_machine": "~1.0"
             },
@@ -2139,8 +2150,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2157,10 +2168,6 @@
                 "GPL-2.0+"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
@@ -2249,7 +2256,7 @@
         },
         {
             "name": "drupal/commerce_log",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "require": {
                 "drupal/commerce": "self.version",
                 "drupal/core": "~8.0"
@@ -2260,8 +2267,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2273,10 +2280,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
@@ -2302,7 +2305,7 @@
         },
         {
             "name": "drupal/commerce_order",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "require": {
                 "drupal/commerce": "self.version",
                 "drupal/commerce_price": "*",
@@ -2318,8 +2321,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2331,10 +2334,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
@@ -2360,7 +2359,7 @@
         },
         {
             "name": "drupal/commerce_payment",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "require": {
                 "drupal/commerce": "self.version",
                 "drupal/commerce_order": "*",
@@ -2373,8 +2372,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2386,10 +2385,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
@@ -2480,10 +2475,10 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "fad9aa54ea93b7dc00b3546d64453c473024e9b5"
+                "reference": "bb7d7ae51cae5565d8b590647d118549e62a6837"
             },
             "require": {
-                "drupal/commerce": "~2.4",
+                "drupal/commerce": "~2.7",
                 "drupal/commerce_log": "*",
                 "drupal/commerce_order": "*",
                 "drupal/commerce_payment": "*",
@@ -2503,17 +2498,20 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-rc1+8-dev",
-                    "datestamp": "1526580484",
+                    "version": "8.x-2.0-rc2+5-dev",
+                    "datestamp": "1527726484",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
                     }
+                },
+                "patches_applied": {
+                    "#2950980: Customer Facing Screen": "https://www.drupal.org/files/issues/2018-05-30/commerce_pos-customer_display-2950980-24.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -2540,7 +2538,7 @@
                 "source": "http://cgit.drupalcode.org/commerce_pos",
                 "issues": "https://www.drupal.org/project/issues/commerce_pos"
             },
-            "time": "2018-05-17T18:03:44+00:00"
+            "time": "2018-05-31T00:30:26+00:00"
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
@@ -2660,7 +2658,7 @@
         },
         {
             "name": "drupal/commerce_price",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "require": {
                 "drupal/commerce": "self.version",
                 "drupal/core": "~8.0"
@@ -2671,8 +2669,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2684,10 +2682,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
@@ -2713,7 +2707,7 @@
         },
         {
             "name": "drupal/commerce_product",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "require": {
                 "drupal/commerce": "self.version",
                 "drupal/commerce_price": "*",
@@ -2726,8 +2720,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2739,10 +2733,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
@@ -2904,7 +2894,7 @@
         },
         {
             "name": "drupal/commerce_store",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "require": {
                 "drupal/commerce": "self.version",
                 "drupal/commerce_price": "*",
@@ -2916,8 +2906,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2929,10 +2919,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"
@@ -2958,7 +2944,7 @@
         },
         {
             "name": "drupal/commerce_tax",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "require": {
                 "drupal/commerce": "self.version",
                 "drupal/commerce_order": "*",
@@ -2970,8 +2956,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1523023380",
+                    "version": "8.x-2.7",
+                    "datestamp": "1527530416",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2983,10 +2969,6 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
-                {
-                    "name": "Damien Tournoud",
-                    "homepage": "https://www.drupal.org/user/22211"
-                },
                 {
                     "name": "bojanz",
                     "homepage": "https://www.drupal.org/user/86106"

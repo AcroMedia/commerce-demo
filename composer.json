@@ -75,7 +75,8 @@
         "drupal/contribute": "^1.0",
         "cboden/ratchet": "^0.4.1",
         "drupal/asset_injector": "^2.2",
-        "DoersGuild/jQuery.print": "master"
+        "DoersGuild/jQuery.print": "master",
+        "drupal/commerce_reports": "^1.0@beta"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -144,10 +145,6 @@
                 "https://www.drupal.org/files/issues/adjustment_label-2770731-28.patch",
                 "#2852207: Billing same as shipping":
                 "https://www.drupal.org/files/issues/2018-04-07/checkbox-same-as-billing-2852207-154.patch"
-            },
-            "drupal/commerce_pos": {
-                "#2950980: Customer Facing Screen":
-                "https://www.drupal.org/files/issues/2018-05-31/commerce_pos-customer_display-2950980-25.patch"
             }
         }
     }

@@ -2485,7 +2485,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "98e5d4ce1f27300f571def77822a373dd1974592"
+                "reference": "212bda9c0a5d1429857e96fab1aab85cbebaa508"
             },
             "require": {
                 "drupal/commerce": "~2.7",
@@ -2508,8 +2508,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-rc2+11-dev",
-                    "datestamp": "1527902284",
+                    "version": "8.x-2.0-rc2+12-dev",
+                    "datestamp": "1527902884",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2545,7 +2545,7 @@
                 "source": "http://cgit.drupalcode.org/commerce_pos",
                 "issues": "https://www.drupal.org/project/issues/commerce_pos"
             },
-            "time": "2018-06-02T01:25:10+00:00"
+            "time": "2018-06-02T01:43:52+00:00"
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",

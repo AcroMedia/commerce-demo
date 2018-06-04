@@ -2,17 +2,17 @@
 
 namespace Drupal\commerce_stock\EventSubscriber;
 
-use Drupal\commerce_order\Event\OrderEvents;
+use Drupal\commerce\Context;
+use Drupal\commerce\PurchasableEntityInterface;
 use Drupal\commerce_order\Event\OrderEvent;
+use Drupal\commerce_order\Event\OrderEvents;
 use Drupal\commerce_order\Event\OrderItemEvent;
+use Drupal\commerce_stock\Plugin\StockEventsInterface;
 use Drupal\commerce_stock\StockLocationInterface;
 use Drupal\commerce_stock\StockServiceManagerInterface;
 use Drupal\commerce_stock\StockTransactionsInterface;
-use Drupal\commerce\Context;
 use Drupal\state_machine\Event\WorkflowTransitionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Drupal\commerce\PurchasableEntityInterface;
-use Drupal\commerce_stock\Plugin\StockEventsInterface;
 
 /**
  * Performs stock transactions on order and order item events.
@@ -34,6 +34,25 @@ class OrderEventSubscriber implements EventSubscriberInterface {
    */
   public function __construct(StockServiceManagerInterface $stock_service_manager) {
     $this->stockServiceManager = $stock_service_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents() {
+    $events = [
+      // State change events fired on workflow transitions from state_machine.
+      'commerce_order.place.post_transition' => ['onOrderPlace', -100],
+      'commerce_order.cancel.post_transition' => ['onOrderCancel', -100],
+      // Order storage events dispatched during entity operations in
+      // CommerceContentEntityStorage.
+      // ORDER_UPDATE handles new order items since ORDER_ITEM_INSERT doesn't.
+      OrderEvents::ORDER_UPDATE => ['onOrderUpdate', -100],
+      OrderEvents::ORDER_PREDELETE => ['onOrderDelete', -100],
+      OrderEvents::ORDER_ITEM_UPDATE => ['onOrderItemUpdate', -100],
+      OrderEvents::ORDER_ITEM_DELETE => ['onOrderItemDelete', -100],
+    ];
+    return $events;
   }
 
   /**
@@ -73,6 +92,38 @@ class OrderEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
+   * Run the stock event.
+   *
+   * @param int $orderEvent
+   *   The order event ID as defined by the OrderEvents class.
+   * @param \Drupal\commerce\Context $context
+   *   The context containing the customer & store.
+   * @param \Drupal\commerce\PurchasableEntityInterface $entity
+   *   The purchasable entity.
+   * @param int $quantity
+   *   The quantity.
+   * @param \Drupal\commerce_stock\StockLocationInterface $location
+   *   The stock location.
+   * @param int $transaction_type_id
+   *   The transaction type ID.
+   * @param array $metadata
+   *   Holds all the optional values those are:
+   *     - related_oid: related order.
+   *     - related_uid: related user.
+   *     - data: Serialized data array holding a message.
+   *
+   * @return int
+   *   Return the ID of the transaction or FALSE if no transaction created.
+   */
+  private function runTransactionEvent($orderEvent, Context $context, PurchasableEntityInterface $entity, $quantity, StockLocationInterface $location, $transaction_type_id, array $metadata) {
+
+    $type = \Drupal::service('plugin.manager.stock_events');
+    $plugin = $type->createInstance('core_stock_events');
+    return $plugin->stockEvent($context, $entity, $orderEvent, $quantity, $location,
+      $transaction_type_id, $metadata);
+  }
+
+  /**
    * Acts on the order update event to create transactions for new items.
    *
    * The reason this isn't handled by OrderEvents::ORDER_ITEM_INSERT is because
@@ -86,7 +137,10 @@ class OrderEventSubscriber implements EventSubscriberInterface {
     $original_order = $order->original;
     foreach ($order->getItems() as $item) {
       if (!$original_order->hasItem($item)) {
-        if ($order && !in_array($order->getState()->value, ['draft', 'canceled'])) {
+        if ($order && !in_array($order->getState()->value, [
+          'draft',
+          'canceled',
+        ])) {
           $entity = $item->getPurchasedEntity();
           if (!$entity) {
             continue;
@@ -122,6 +176,9 @@ class OrderEventSubscriber implements EventSubscriberInterface {
    */
   public function onOrderCancel(WorkflowTransitionEvent $event) {
     $order = $event->getEntity();
+    if ($order->original && $order->original->getState()->value === 'draft') {
+      return;
+    }
     foreach ($order->getItems() as $item) {
       $entity = $item->getPurchasedEntity();
       if (!$entity) {
@@ -160,7 +217,7 @@ class OrderEventSubscriber implements EventSubscriberInterface {
    */
   public function onOrderDelete(OrderEvent $event) {
     $order = $event->getOrder();
-    if ($order->getState()->value == 'canceled') {
+    if (in_array($order->getState()->value, ['draft', 'canceled'])) {
       return;
     }
     $items = $order->getItems();
@@ -265,57 +322,6 @@ class OrderEventSubscriber implements EventSubscriberInterface {
           $entity, $item->getQuantity(), $location, $transaction_type, $metadata);
       }
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getSubscribedEvents() {
-    $events = [
-      // State change events fired on workflow transitions from state_machine.
-      'commerce_order.place.post_transition' => ['onOrderPlace', -100],
-      'commerce_order.cancel.post_transition' => ['onOrderCancel', -100],
-      // Order storage events dispatched during entity operations in
-      // CommerceContentEntityStorage.
-      // ORDER_UPDATE handles new order items since ORDER_ITEM_INSERT doesn't.
-      OrderEvents::ORDER_UPDATE => ['onOrderUpdate', -100],
-      OrderEvents::ORDER_PREDELETE => ['onOrderDelete', -100],
-      OrderEvents::ORDER_ITEM_UPDATE => ['onOrderItemUpdate', -100],
-      OrderEvents::ORDER_ITEM_DELETE => ['onOrderItemDelete', -100],
-    ];
-    return $events;
-  }
-
-  /**
-   * Run the stock event.
-   *
-   * @param int $orderEvent
-   *   The order event ID as defined by the OrderEvents class.
-   * @param \Drupal\commerce\Context $context
-   *   The context containing the customer & store.
-   * @param \Drupal\commerce\PurchasableEntityInterface $entity
-   *   The purchasable entity.
-   * @param int $quantity
-   *   The quantity.
-   * @param \Drupal\commerce_stock\StockLocationInterface $location
-   *   The stock location.
-   * @param int $transaction_type_id
-   *   The transaction type ID.
-   * @param array $metadata
-   *   Holds all the optional values those are:
-   *     - related_oid: related order.
-   *     - related_uid: related user.
-   *     - data: Serialized data array holding a message.
-   *
-   * @return int
-   *   Return the ID of the transaction or FALSE if no transaction created.
-   */
-  private function runTransactionEvent($orderEvent, Context $context, PurchasableEntityInterface $entity, $quantity, StockLocationInterface $location, $transaction_type_id, array $metadata) {
-
-    $type = \Drupal::service('plugin.manager.stock_events');
-    $plugin = $type->createInstance('core_stock_events');
-    return $plugin->stockEvent($context, $entity, $orderEvent, $quantity, $location,
-      $transaction_type_id, $metadata);
   }
 
 }

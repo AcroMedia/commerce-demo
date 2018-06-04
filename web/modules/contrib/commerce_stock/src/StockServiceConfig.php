@@ -51,7 +51,7 @@ class StockServiceConfig implements StockServiceConfigInterface {
    * {@inheritdoc}
    */
   public function getTransactionLocation(Context $context, PurchasableEntityInterface $entity, $quantity) {
-    $locations = $this->getLocationList($entity);
+    $locations = $this->getAvailabilityLocations($context, $entity);
     // @todo - we need a better way of managing this.
     return array_shift($locations);
   }

@@ -1,15 +1,14 @@
 <?php
 
-namespace Drupal\Tests\commerce_stock\Unit;
+namespace Drupal\Tests\commerce_stock\Kernel;
 
 use Drupal\commerce_stock\StockServiceManager;
-use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\commerce_stock\StockServiceManager
  * @group commerce_stock
  */
-class StockServiceManagerTest extends UnitTestCase {
+class StockServiceManagerTest extends CommerceStockKernelTestBase {
 
   /**
    * The stock service manager.
@@ -23,9 +22,8 @@ class StockServiceManagerTest extends UnitTestCase {
    */
   public function setUp() {
     parent::setUp();
-
-    $configFactory = $this->prophesize('\Drupal\Core\Config\ConfigFactory');
-    $this->stockServiceManager = new StockServiceManager($configFactory->reveal());
+    $configFactory = $this->container->get('config.factory');
+    $this->stockServiceManager = new StockServiceManager($configFactory);
   }
 
   /**

@@ -2,10 +2,12 @@
 
 namespace Drupal\Tests\commerce_stock\Kernel;
 
+use Drupal\commerce\Context;
 use Drupal\commerce\PurchasableEntityInterface;
 use Drupal\commerce_stock\StockCheckInterface;
 use Drupal\commerce_stock\StockLocationInterface;
 use Drupal\commerce_stock\StockServiceConfig;
+use Drupal\Tests\PhpunitCompatibilityTrait;
 use Prophecy\Argument;
 
 /**
@@ -17,6 +19,8 @@ use Prophecy\Argument;
  */
 class StockServiceConfigTest extends CommerceStockKernelTestBase {
 
+  use PhpunitCompatibilityTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -26,9 +30,9 @@ class StockServiceConfigTest extends CommerceStockKernelTestBase {
   }
 
   /**
-   * @covers ::getLocationList
+   * @covers ::getAvailabilityLocations
    * @covers ::loadConfiguration
-   * @covers ::getPrimaryTransactionLocation
+   * @covers ::getTransactionLocation
    */
   public function testLocalStockService() {
 
@@ -49,20 +53,22 @@ class StockServiceConfigTest extends CommerceStockKernelTestBase {
 
     $prophecy = $this->prophesize(PurchasableEntityInterface::class);
     $entity = $prophecy->reveal();
+    $user = $this->createMock('\Drupal\Core\Session\AccountInterface');
+    $store = $this->createMock('Drupal\commerce_store\Entity\StoreInterface');
+    $context = new Context($user, $store);
 
-    // Test that getLocationList() returns active location entities.
-    $locations = $stockServiceConfig->getLocationList($entity);
-    self::assertEquals(3, count($locations));
+    // Wheter we get only active locations back.
+    $locations = $stockServiceConfig->getAvailabilityLocations($context, $entity);
     foreach ($locations as $location) {
       self::assertInstanceOf('Drupal\commerce_stock\StockLocationInterface', $location);
       self::assertTrue($location->isActive());
     }
+    self::assertEquals(3, count($locations), 'Only active locations are returned from StockServiceConfig::getAvailabilityLocations()');
 
-    // Test that getPrimaryTransactionLocation() returns one active location
-    // entity.
-    $primary = $stockServiceConfig->getPrimaryTransactionLocation($entity, 1);
+    // Whether a active location entity is returned.
+    $primary = $stockServiceConfig->getTransactionLocation($context, $entity, 1);
     self::assertInstanceOf('Drupal\commerce_stock\StockLocationInterface', $primary);
-    self::assertTrue($primary->isActive());
+    self::assertTrue($primary->isActive(), 'Active location is returned from StockServiceConfig::getTransactionLocation()');
 
   }
 

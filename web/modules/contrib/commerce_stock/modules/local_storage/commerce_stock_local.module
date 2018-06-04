@@ -33,9 +33,9 @@ function commerce_stock_local_entity_base_field_info(EntityTypeInterface $entity
  */
 function commerce_stock_local_cron() {
   $next = \Drupal::state()->get('commerce_stock_local.update_level_next') ?: 0;
-  $interval = \Drupal::config('commerce_stock_local.cron')->get('update_interval');
   if (REQUEST_TIME >= $next) {
     _commerce_stock_local_update_stock_level_queue();
+    $interval = \Drupal::config('commerce_stock_local.cron')->get('update_interval');
     \Drupal::state()->set('commerce_stock_local.update_level_next', REQUEST_TIME + $interval);
   }
 }

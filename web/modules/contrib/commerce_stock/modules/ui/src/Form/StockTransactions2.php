@@ -2,8 +2,12 @@
 
 namespace Drupal\commerce_stock_ui\Form;
 
+use Drupal\commerce_product\ProductVariationStorage;
+use Drupal\commerce_stock\StockServiceManager;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * The second part of a two part create stock transaction form.
@@ -25,11 +29,37 @@ class StockTransactions2 extends FormBase {
   protected $stockServiceManager;
 
   /**
-   * Constructs a StockTransactions2 object.
+   * The current request.
+   *
+   * @var \Symfony\Component\HttpFoundation\Request
    */
-  public function __construct() {
-    $this->productVariationStorage = \Drupal::service('entity_type.manager')->getStorage('commerce_product_variation');
-    $this->stockServiceManager = \Drupal::service('commerce_stock.service_manager');
+  protected $request;
+
+  /**
+   * Constructs a StockTransactions2 object.
+   *
+   * @param \Drupal\commerce_product\ProductVariationStorage $productVariationStorage
+   *   The commerce product variation storage.
+   * @param \Drupal\commerce_stock\StockServiceManager $stockServiceManager
+   *   The stock service manager.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   */
+  public function __construct(ProductVariationStorage $productVariationStorage, StockServiceManager $stockServiceManager, Request $request) {
+    $this->productVariationStorage = $productVariationStorage;
+    $this->stockServiceManager = $stockServiceManager;
+    $this->request = $request;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity_type.manager')->getStorage('commerce_product_variation'),
+      $container->get('commerce_stock.service_manager'),
+      $container->get('request_stack')->getCurrentRequest()
+    );
   }
 
   /**
@@ -43,9 +73,9 @@ class StockTransactions2 extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $request = \Drupal::request();
-    if ($request->query->has('commerce_product_v_id')) {
-      $variation_id = $request->query->get('commerce_product_v_id');
+
+    if ($this->request->query->has('commerce_product_v_id')) {
+      $variation_id = $this->request->query->get('commerce_product_v_id');
     }
     else {
       return $this->redirect('commerce_stock_ui.stock_transactions1');
@@ -162,9 +192,14 @@ class StockTransactions2 extends FormBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   *
+   * @todo: We need to check the product is managed by a stock service. Or
+   * remove this override as it does nothing.
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
-    // @todo - We need to check the product is managed by a stock service.
   }
 
   /**

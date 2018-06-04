@@ -1,12 +1,14 @@
 <?php
 
-namespace Drupal\Tests\commerce_product_local\Kernel\Entity;
+namespace Drupal\Tests\commerce_stock_local\Kernel;
 
 use Drupal\commerce_stock_local\Entity\StockLocation;
 use Drupal\Tests\commerce_stock\Kernel\CommerceStockKernelTestBase;
 
 /**
  * Test the stock location storage.
+ *
+ * @group commerce_stock
  */
 class StockLocationStorageTest extends CommerceStockKernelTestBase {
 

@@ -50,7 +50,7 @@ class StockLocationStorage extends CommerceContentEntityStorage implements Stock
         return $this->loadEnabled($entity);
       }
       // Load them.
-      $store_locations = array();
+      $store_locations = [];
       foreach ($locations as $location) {
         $store_locations[$location['target_id']] = $location['target_id'];
       }

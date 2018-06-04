@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\commerce_product_local\Kernel;
+namespace Drupal\Tests\commerce_stock_local\Kernel;
 
 use Drupal\commerce_stock_local\Entity\StockLocation;
 use Drupal\commerce_stock_local\LocalStockChecker;

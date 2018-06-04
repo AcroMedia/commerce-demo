@@ -11,6 +11,6 @@
     "source": "http://cgit.drupalcode.org/commerce_stock"
   },
   "require": {
-    "drupal/commerce": "2.x-dev"
+    "drupal/commerce": "~2.0"
   }
 }

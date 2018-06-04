@@ -42,10 +42,12 @@ class StockTransactions1 extends FormBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @todo: We need to check the product is managed by a stock service.
+   * Otherwise we should remove this override.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
-    // @todo - We need to check the product is managed by a stock service.
   }
 
   /**

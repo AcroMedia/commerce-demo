@@ -51,7 +51,7 @@ class LocalStockServiceTest extends CommerceStockKernelTestBase {
     $stockChecker = $prophecy->reveal();
     $stockUpdater = $this->prophesize(StockUpdateInterface::class)->reveal();
     $prophecy = $this->prophesize(StockServiceConfigInterface::class);
-    $prophecy->getLocationList(Argument::any())->willReturn([1 => 'main']);
+    $prophecy->getAvailabilityLocations(Argument::any())->willReturn([1 => 'main']);
     $stockServiceConfig = $prophecy->reveal();
 
     $localStockService = new LocalStockService($stockChecker, $stockUpdater, $stockServiceConfig);

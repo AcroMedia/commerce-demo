@@ -3,10 +3,14 @@
 namespace Drupal\commerce_stock_field\Plugin\Field\FieldWidget;
 
 use Drupal\commerce\PurchasableEntityInterface;
+use Drupal\commerce_stock\StockServiceManager;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'commerce_stock_level' widget.
@@ -20,7 +24,42 @@ use Drupal\Core\Link;
  *   }
  * )
  */
-class SimpleStockLevelWidget extends WidgetBase {
+class SimpleStockLevelWidget extends WidgetBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The Stock Service Manager.
+   *
+   * @var \Drupal\commerce_stock\StockServiceManager
+   */
+  protected $stockServiceManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(
+    $plugin_id,
+    $plugin_definition,
+    FieldDefinitionInterface $field_definition,
+    array $settings,
+    array $third_party_settings,
+    StockServiceManager $simple_stock_manager
+  ) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
+    $this->stockServiceManager = $simple_stock_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['third_party_settings'],
+      $container->get('commerce_stock.service_manager'));
+  }
 
   /**
    * {@inheritdoc}
@@ -108,7 +147,7 @@ class SimpleStockLevelWidget extends WidgetBase {
     }
 
     // We currently only support the Local stock service.
-    $stockServiceManager = \Drupal::service('commerce_stock.service_manager');
+    $stockServiceManager = $this->stockServiceManager;
     $stock_service_name = $stockServiceManager->getService($entity)->getName();
     // @todo - service should be able can determine if it needs an interface.
     if ($stock_service_name != 'Local stock') {
@@ -117,7 +156,7 @@ class SimpleStockLevelWidget extends WidgetBase {
     }
 
     // Get the Stock service manager.
-    $stockServiceManager = \Drupal::service('commerce_stock.service_manager');
+    $stockServiceManager = $this->stockServiceManager;
     // If not a valid context.
     if (!$stockServiceManager->isValidContext($entity)) {
       // If context fallback is not set.
@@ -236,7 +275,7 @@ class SimpleStockLevelWidget extends WidgetBase {
    * Submits the form.
    */
   public function submitAll(array &$form, FormStateInterface $form_state) {
-    drupal_set_message(t('updated STOCK!!'));
+    drupal_set_message($this->t('updated STOCK!!'));
   }
 
 }

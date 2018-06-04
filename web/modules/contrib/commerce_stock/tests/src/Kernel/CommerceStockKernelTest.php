@@ -6,6 +6,8 @@ use Drupal\commerce_product\Entity\ProductVariation;
 
 /**
  * Commerce stock kernel test.
+ *
+ * @group commerce_stock
  */
 class CommerceStockKernelTest extends CommerceStockKernelTestBase {
 

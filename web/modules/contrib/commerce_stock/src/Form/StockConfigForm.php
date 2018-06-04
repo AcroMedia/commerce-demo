@@ -2,9 +2,14 @@
 
 namespace Drupal\commerce_stock\Form;
 
+use Drupal\commerce_stock\Plugin\StockEventsManager;
+use Drupal\commerce_stock\StockServiceManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfo;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * The stock configuration form.
@@ -19,29 +24,27 @@ class StockConfigForm extends ConfigFormBase {
   protected $purchasableEntityTypes;
 
   /**
-   * {@inheritdoc}
+   * The Stock Service Manager.
+   *
+   * @var \Drupal\commerce_stock\StockServiceManager
    */
-  protected function getEditableConfigNames() {
-    return [
-      'commerce_stock.service_manager',
-    ];
-  }
+  protected $stockServiceManager;
+
+  /**
+   * The Stock Service Manager.
+   *
+   * @var \Drupal\commerce_stock\Plugin\StockEventsManager
+   */
+  protected $stockEventsManager;
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
-    return 'commerce_stock_config_form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct(ConfigFactoryInterface $config_factory) {
+  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManager $entity_type_manager, EntityTypeBundleInfo $entity_type_bundle_info, StockServiceManagerInterface $stockServiceManager, StockEventsManager $stockEventsManager) {
     parent::__construct($config_factory);
 
-    $entity_type_manager = \Drupal::service('entity_type.manager');
-    $entity_type_bundle_info = \Drupal::service('entity_type.bundle.info');
+    $this->stockServiceManager = $stockServiceManager;
+    $this->stockEventsManager = $stockEventsManager;
 
     // Prepare the list of purchasable entity types and bundles.
     $entity_types = $entity_type_manager->getDefinitions();
@@ -65,12 +68,32 @@ class StockConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('entity_type.manager'),
+      $container->get('entity_type.bundle.info'),
+      $container->get('commerce_stock.service_manager'),
+      $container->get('plugin.manager.stock_events')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'commerce_stock_config_form';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Get the default service.
     $config = $this->config('commerce_stock.service_manager');
     $default_service_id = $config->get('default_service_id');
 
-    $stock_service_manager = \Drupal::service('commerce_stock.service_manager');
+    $stock_service_manager = $this->stockServiceManager;
     $service_options = $stock_service_manager->listServiceIds();
 
     $form['service_manager'] = [
@@ -111,7 +134,7 @@ class StockConfigForm extends ConfigFormBase {
     $selected_plugin_id = $config->get('stock_events_plugin_id') ?: 'core_stock_events';
 
     // Get the list of available plugins.
-    $type = \Drupal::service('plugin.manager.stock_events');
+    $type = $this->stockEventsManager;
     $plugin_definitions = $type->getDefinitions();
     $plugin_list = [];
     foreach ($plugin_definitions as $plugin_definition) {
@@ -158,6 +181,8 @@ class StockConfigForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
@@ -181,7 +206,7 @@ class StockConfigForm extends ConfigFormBase {
     $config->save();
 
     // Update all plugin options.
-    $type = \Drupal::service('plugin.manager.stock_events');
+    $type = $this->stockEventsManager;
     $plugin_definitions = $type->getDefinitions();
 
     foreach ($plugin_definitions as $plugin_definition) {
@@ -191,6 +216,15 @@ class StockConfigForm extends ConfigFormBase {
     }
 
     drupal_set_message($this->t('Stock configuration updated.'));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getEditableConfigNames() {
+    return [
+      'commerce_stock.service_manager',
+    ];
   }
 
 }

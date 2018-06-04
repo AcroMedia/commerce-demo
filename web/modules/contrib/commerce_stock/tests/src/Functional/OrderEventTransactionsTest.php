@@ -2,11 +2,10 @@
 
 namespace Drupal\Tests\commerce_stock\Functional;
 
+use Drupal\commerce\Context;
 use Drupal\commerce_order\Entity\Order;
 use Drupal\commerce_order\Entity\OrderType;
-use Drupal\commerce_price\Price;
 use Drupal\commerce_product\Entity\Product;
-use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_product\Entity\ProductVariationType;
 use Drupal\commerce_stock\StockServiceManagerInterface;
 use Drupal\commerce_stock\StockTransactionsInterface;
@@ -18,20 +17,11 @@ use Drupal\profile\Entity\Profile;
 /**
  * Ensure the stock transactions are performed on order events.
  *
- * @coversDefaultClass \Drupal\commerce_stock\StockServiceManager
- *
  * @group commerce_stock
  */
 class OrderEventTransactionsTest extends StockBrowserTestBase {
 
   use StoreCreationTrait;
-
-  /**
-   * The default store.
-   *
-   * @var \Drupal\commerce_store\Entity\StoreInterface
-   */
-  protected $store;
 
   /**
    * A test product.
@@ -92,7 +82,7 @@ class OrderEventTransactionsTest extends StockBrowserTestBase {
   /**
    * The second stock service configuration.
    *
-   * @var \Drupal\commerce_stock\stockServiceConfiguration2
+   * @var \Drupal\commerce_stock\stockServiceConfiguration
    */
   protected $stockServiceConfiguration2;
 
@@ -143,12 +133,10 @@ class OrderEventTransactionsTest extends StockBrowserTestBase {
     $order_type->setWorkflowId('order_fulfillment_validation');
     $order_type->save();
 
-    $this->store = $this->createStore('Default store', 'admin@example.com');
-    \Drupal::entityTypeManager()->getStorage('commerce_store')->markAsDefault($this->store);
-
     $user = $this->createUser([], $this->randomString());
 
-    $config = \Drupal::configFactory()->getEditable('commerce_stock.service_manager');
+    $config = \Drupal::configFactory()
+      ->getEditable('commerce_stock.service_manager');
     $config->set('default_service_id', 'local_stock');
     $config->save();
     $this->stockServiceManager = \Drupal::service('commerce_stock.service_manager');
@@ -158,50 +146,48 @@ class OrderEventTransactionsTest extends StockBrowserTestBase {
     $variation_type->setGenerateTitle(FALSE);
     $variation_type->save();
 
-    $product = Product::create([
-      'type' => 'default',
-      'title' => 'Default testing product',
-    ]);
-    $product->save();
-
-    $variation1 = ProductVariation::create([
+    $this->variation = $this->createEntity('commerce_product_variation', [
       'type' => 'default',
       'sku' => 'TEST_' . strtolower($this->randomMachineName()),
       'title' => $this->randomString(),
       'status' => 1,
-      'price' => new Price('12.00', 'USD'),
+      'price' => [
+        'number' => 12.00,
+        'currency_code' => 'USD',
+      ],
+      'field_stock_level' => 10,
     ]);
-    $variation1->save();
-    // Variation must be saved before stock level can be set.
-    $variation1->field_stock_level = 10;
-    $variation1->save();
-    $product->addVariation($variation1)->save();
 
-    $variation2 = ProductVariation::create([
+    $this->variation2 = $this->createEntity('commerce_product_variation', [
       'type' => 'default',
       'sku' => 'TEST_' . strtolower($this->randomMachineName()),
       'title' => $this->randomString(),
       'status' => 1,
-      'price' => new Price('12.00', 'USD'),
+      'price' => [
+        'number' => 11.00,
+        'currency_code' => 'USD',
+      ],
+      'field_stock_level' => 11,
     ]);
-    $variation2->save();
-    $variation2->field_stock_level = 10;
-    $variation2->save();
-    $product->addVariation($variation2)->save();
 
-    $this->variation = $variation1;
-    $this->variation2 = $variation2;
-    $this->product = $product;
-    $this->checker = $this->stockServiceManager->getService($variation1)
+    $this->product = $this->createEntity('commerce_product', [
+      'type' => 'default',
+      'title' => $this->randomMachineName(),
+      'stores' => [$this->store],
+      'variations' => [$this->variation, $this->variation2],
+    ]);
+
+    $this->checker = $this->stockServiceManager->getService($this->variation)
       ->getStockChecker();
-    $this->checker2 = $this->stockServiceManager->getService($variation2)
+    $this->checker2 = $this->stockServiceManager->getService($this->variation2)
       ->getStockChecker();
-    $this->stockServiceConfiguration = $this->stockServiceManager->getService($variation1)
+    $this->stockServiceConfiguration = $this->stockServiceManager->getService($this->variation)
       ->getConfiguration();
-    $this->stockServiceConfiguration2 = $this->stockServiceManager->getService($variation2)
+    $this->stockServiceConfiguration2 = $this->stockServiceManager->getService($this->variation2)
       ->getConfiguration();
-    $this->locations = $this->stockServiceConfiguration->getLocationList($variation1);
-    $this->locations2 = $this->stockServiceConfiguration2->getLocationList($variation2);
+    $context = new Context($this->loggedInUser, $this->store);
+    $this->locations = $this->stockServiceConfiguration->getAvailabilityLocations($context, $this->variation);
+    $this->locations2 = $this->stockServiceConfiguration2->getAvailabilityLocations($context, $this->variation2);
 
     $profile = Profile::create([
       'type' => 'customer',
@@ -223,22 +209,29 @@ class OrderEventTransactionsTest extends StockBrowserTestBase {
     $order->save();
 
     /** @var \Drupal\commerce_order\OrderItemStorageInterface $order_item_storage */
-    $order_item_storage = $this->container->get('entity_type.manager')->getStorage('commerce_order_item');
+    $order_item_storage = $this->container->get('entity_type.manager')
+      ->getStorage('commerce_order_item');
 
     // Add order item.
-    $order_item1 = $order_item_storage->createFromPurchasableEntity($variation1);
+    $order_item1 = $order_item_storage->createFromPurchasableEntity($this->variation);
     $order_item1->save();
     $order->addItem($order_item1);
     $order->save();
 
     $this->order = $order;
 
+  }
+
+  /**
+   * Test order save event.
+   */
+  public function testOrderSaveEvent() {
     // Tests initial stock level transactions set by the field values.
     $this->assertInstanceOf(StockServiceManagerInterface::class, $this->stockServiceManager);
     $this->assertInstanceOf(LocalStockChecker::class, $this->checker);
     $this->assertInstanceOf(LocalStockServiceConfig::class, $this->stockServiceConfiguration);
     $this->assertEquals(10, $this->checker->getTotalStockLevel($this->variation, $this->locations));
-    $this->assertEquals(10, $this->checker2->getTotalStockLevel($this->variation2, $this->locations2));
+    $this->assertEquals(11, $this->checker2->getTotalStockLevel($this->variation2, $this->locations2));
     $query = \Drupal::database()->select('commerce_stock_transaction', 'txn')
       ->fields('txn')
       ->condition('transaction_type_id', StockTransactionsInterface::STOCK_IN);
@@ -303,7 +296,7 @@ class OrderEventTransactionsTest extends StockBrowserTestBase {
    */
   public function testOrderEvents() {
     // Tests the order item creation event.
-    $this->assertEquals(10, $this->checker2->getTotalStockLevel($this->variation2, $this->locations2));
+    $this->assertEquals(11, $this->checker2->getTotalStockLevel($this->variation2, $this->locations2));
     $this->drupalGet($this->order->toUrl('edit-form'));
     $this->assertSession()->statusCodeEquals(200);
     $this->submitForm([], 'Add new order item');

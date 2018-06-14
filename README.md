@@ -46,7 +46,7 @@ __To setup the demo__
 3. Extract `dumps/files.tar.gz` into `web/sites/default`.
 4. Create a database and import `dumps/database.sql`.
 5. Configure your `settings.php` or `local.settings.php` to use the newly created database.
-6. Setup an Apache Solr core for the site to use (use Solr 5.x).
+6. Setup Apache Solr cores for the site to use - one for product search and one for the Point of Sale search (use Solr 5.x).
 7. Get your hosting setup (local or otherwise). The web root is `/web`.
 8. View the site!
 9. Login with username and password as `demoadmin`.

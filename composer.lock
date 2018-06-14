@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e77bdf98693b40e0fa3d3e0d7f0aff8",
+    "content-hash": "c8d8d8ee300e2f4d00066f9c598b683d",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2481,11 +2481,17 @@
         },
         {
             "name": "drupal/commerce_pos",
-            "version": "dev-2.x",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "0209ba9d782bdcac922cc62e150fa310990cc00d"
+                "reference": "8.x-2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_pos-8.x-2.0.zip",
+                "reference": "8.x-2.0",
+                "shasum": "63c82b046d335dd7221e89eb74f7ff9b96fefd2c"
             },
             "require": {
                 "cboden/ratchet": "^0.4.1",
@@ -2502,6 +2508,7 @@
             },
             "require-dev": {
                 "drupal/commerce_pos_currency_denominations": "*",
+                "drupal/commerce_pos_print": "*",
                 "drupal/commerce_price": "*"
             },
             "type": "drupal-module",
@@ -2510,8 +2517,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-rc2+13-dev",
-                    "datestamp": "1527904084",
+                    "version": "8.x-2.0",
+                    "datestamp": "1528936132",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2546,12 +2553,11 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce_pos",
                 "issues": "https://www.drupal.org/project/issues/commerce_pos"
-            },
-            "time": "2018-06-04T01:41:19+00:00"
+            }
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
-            "version": "dev-2.x",
+            "version": "2.0.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_price": "*",
@@ -2563,8 +2569,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta1+11-dev",
-                    "datestamp": "1520036580",
+                    "version": "8.x-2.0",
+                    "datestamp": "1528936132",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2581,24 +2587,12 @@
                     "homepage": "https://www.drupal.org/user/157725"
                 },
                 {
-                    "name": "ksalbrecht",
-                    "homepage": "https://www.drupal.org/user/175607"
-                },
-                {
                     "name": "rbayliss",
                     "homepage": "https://www.drupal.org/user/772738"
                 },
                 {
-                    "name": "slip",
-                    "homepage": "https://www.drupal.org/user/332775"
-                },
-                {
                     "name": "smccabe",
                     "homepage": "https://www.drupal.org/user/289245"
-                },
-                {
-                    "name": "thomas.fleming",
-                    "homepage": "https://www.drupal.org/user/826568"
                 }
             ],
             "description": "Provides a interface for configuring currency denominations.",
@@ -2609,7 +2603,7 @@
         },
         {
             "name": "drupal/commerce_pos_keypad",
-            "version": "dev-2.x",
+            "version": "2.0.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_pos_currency_denominations": "*",
@@ -2621,8 +2615,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta1+11-dev",
-                    "datestamp": "1520036580",
+                    "version": "8.x-2.0",
+                    "datestamp": "1528936132",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2639,24 +2633,12 @@
                     "homepage": "https://www.drupal.org/user/157725"
                 },
                 {
-                    "name": "ksalbrecht",
-                    "homepage": "https://www.drupal.org/user/175607"
-                },
-                {
                     "name": "rbayliss",
                     "homepage": "https://www.drupal.org/user/772738"
                 },
                 {
-                    "name": "slip",
-                    "homepage": "https://www.drupal.org/user/332775"
-                },
-                {
                     "name": "smccabe",
                     "homepage": "https://www.drupal.org/user/289245"
-                },
-                {
-                    "name": "thomas.fleming",
-                    "homepage": "https://www.drupal.org/user/826568"
                 }
             ],
             "description": "Provides a keypad widget for entering values in form fields.",
@@ -10776,7 +10758,6 @@
         "drupal/physical": 5,
         "drupal/taxonomy_term_depth": 20,
         "drupal/comments_order": 10,
-        "drupal/commerce_pos": 20,
         "drupal/commerce_reports": 10,
         "drupal/devel": 20
     },

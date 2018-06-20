@@ -28,14 +28,14 @@ code_quality:
   when: manual
   script:
     - mkdir code_quality
-    - phpmd web/modules/custom html cleancode --reportFile code_quality/phpmd-cleancode.html || true
-    - phpmd web/modules/custom html codesize --reportFile code_quality/phpmd-codesize.html || true
-    - phpmd web/modules/custom html controversial --reportFile code_quality/phpmd-controversial.html || true
-    - phpmd web/modules/custom html design --reportFile code_quality/phpmd-design.html || true
-    - phpmd web/modules/custom html naming --reportFile code_quality/phpmd-naming.html || true
-    - phpmd web/modules/custom html unusedcode --reportFile code_quality/phpmd-unusedcode.html || true
+    - phpmd web/modules/custom html cleancode --reportfile code_quality/phpmd-cleancode.html || true
+    - phpmd web/modules/custom html codesize --reportfile code_quality/phpmd-codesize.html || true
+    - phpmd web/modules/custom html controversial --reportfile code_quality/phpmd-controversial.html || true
+    - phpmd web/modules/custom html design --reportfile code_quality/phpmd-design.html || true
+    - phpmd web/modules/custom html naming --reportfile code_quality/phpmd-naming.html || true
+    - phpmd web/modules/custom html unusedcode --reportfile code_quality/phpmd-unusedcode.html || true
 
-    - phpcpd wwwroot/sites/all/modules/SITENAME --log-pmd=code_quality/phpcpd.xml || true
+    - phpcpd web/modules/custom --log-pmd=code_quality/phpcpd.xml || true
 
   artifacts:
     paths:

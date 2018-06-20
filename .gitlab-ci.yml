@@ -26,12 +26,12 @@ code_standards:
 code_quality:
   stage: test
   script:
-    - phpmd web/modules/custom html cleancode || true
-    - phpmd web/modules/custom html codesize || true
-    - phpmd web/modules/custom html controversial || true
-    - phpmd web/modules/custom html design || true
-    - phpmd web/modules/custom html naming || true
-    - phpmd web/modules/custom html unusedcode || true
+    - phpmd web/modules/custom text cleancode || true
+    - phpmd web/modules/custom text codesize || true
+    - phpmd web/modules/custom text controversial || true
+    - phpmd web/modules/custom text design || true
+    - phpmd web/modules/custom text naming || true
+    - phpmd web/modules/custom text unusedcode || true
 
     - phpcpd web/modules/custom || true
 

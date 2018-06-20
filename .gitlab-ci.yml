@@ -25,17 +25,15 @@ code_standards:
 
 code_quality:
   stage: test
-  when: manual
   script:
-    - mkdir code_quality
-    - phpmd web/modules/custom html cleancode --reportfile code_quality/phpmd-cleancode.html || true
-    - phpmd web/modules/custom html codesize --reportfile code_quality/phpmd-codesize.html || true
-    - phpmd web/modules/custom html controversial --reportfile code_quality/phpmd-controversial.html || true
-    - phpmd web/modules/custom html design --reportfile code_quality/phpmd-design.html || true
-    - phpmd web/modules/custom html naming --reportfile code_quality/phpmd-naming.html || true
-    - phpmd web/modules/custom html unusedcode --reportfile code_quality/phpmd-unusedcode.html || true
+    - phpmd web/modules/custom html cleancode || true
+    - phpmd web/modules/custom html codesize || true
+    - phpmd web/modules/custom html controversial || true
+    - phpmd web/modules/custom html design || true
+    - phpmd web/modules/custom html naming || true
+    - phpmd web/modules/custom html unusedcode || true
 
-    - phpcpd web/modules/custom --log-pmd=code_quality/phpcpd.xml || true
+    - phpcpd web/modules/custom || true
 
   artifacts:
     paths:

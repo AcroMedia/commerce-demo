@@ -25,6 +25,8 @@ code_standards:
 mess_detector:
   stage: test
   script:
+    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css
+
     - phpmd web/modules/custom text cleancode || true
     - phpmd web/modules/custom text codesize || true
     - phpmd web/modules/custom text controversial || true

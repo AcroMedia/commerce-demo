@@ -10,4 +10,4 @@ plugins:
     enabled: true
     config:
       file-list: ".phpcs-files"
-      rulesets: "cleancode, codesize, controversial, design, naming, unusedcode"
+      rulesets: "cleancode,codesize,controversial,design,naming,unusedcode"

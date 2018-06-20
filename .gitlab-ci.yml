@@ -20,7 +20,7 @@ code_standards:
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=template.phpcs-files --ignore=*.css
+    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css
 
 mess_detector:
   stage: test

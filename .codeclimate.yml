@@ -1,0 +1,13 @@
+version: "2"
+plugins:
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php,module,inc,install,test,profile,theme,css,info,txt,md"
+      standard: "DrupalPractice"
+      file-list: ".phpcs-files"
+  phpmd:
+    enabled: true
+    config:
+      file-list: ".phpcs-files"
+      rulesets: "cleancode, codesize, controversial, design, naming, unusedcode"

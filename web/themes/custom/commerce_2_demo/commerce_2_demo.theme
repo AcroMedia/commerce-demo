@@ -419,6 +419,15 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
       }
     }
   }
+
+  // Store - Product Catalog view exposed form.
+  if ($form['#id'] == 'views-exposed-form-products-page-1') {
+    $current_path = \Drupal::request()->getRequestUri();
+
+    // Fix for views using facets with pretty paths enabled.
+    // Replace form action with current path to maintain active facets.
+    $form['#action'] = $current_path;
+  }
 }
 
 /**

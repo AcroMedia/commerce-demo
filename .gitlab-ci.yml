@@ -77,7 +77,7 @@ build:
     # Compile Sass from theme using npm defined in our package.
     - cd web/themes/custom/commerce_2_demo
     - npm install
-    - ../node_modules/gulp/bin/gulp.js sass
+    - ./node_modules/gulp/bin/gulp.js sass
     # Compile Sass from theme using npm.
     # - cd web/themes/custom/commerce_2_demo
     # - npm install

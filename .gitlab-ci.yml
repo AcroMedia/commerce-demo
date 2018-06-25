@@ -75,20 +75,20 @@ build:
     # Run Composer to build site (use --no-dev for production builds).
     - composer install --no-interaction --no-dev
     # Compile Sass from theme using npm defined in our package.
-    - cd web/themes/custom/commerce_2_demo
-    - npm install
-    - ../node_modules/gulp/bin/gulp.js sass
+    # - cd web/themes/custom/commerce_2_demo
+    # - npm install
+    # - ../node_modules/gulp/bin/gulp.js sass
     # Compile Sass from theme using npm.
     # - cd web/themes/custom/commerce_2_demo
     # - npm install
     # - npm install -g gulp
     # - gulp sass
     # Compile Sass from theme using Yarn.
-    # - cd web/themes/custom/commerce_2_demo
-    # - curl -o- -L https://yarnpkg.com/install.sh | bash
-    # - export PATH="$HOME/.yarn/bin:$PATH"
-    # - yarn install
-    # - yarn run gulp -- sass
+    - cd web/themes/custom/commerce_2_demo
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - export PATH="$HOME/.yarn/bin:$PATH"
+    - yarn install
+    - yarn run gulp -- sass
     # Remove the node_modules dir generated from npm install.
     - rm -rf node_modules
 

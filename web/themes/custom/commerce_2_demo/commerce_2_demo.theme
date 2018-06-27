@@ -424,9 +424,12 @@ function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $for
   if ($form['#id'] == 'views-exposed-form-products-page-1') {
     $current_path = \Drupal::request()->getRequestUri();
 
-    // Fix for views using facets with pretty paths enabled.
-    // Replace form action with current path to maintain active facets.
-    $form['#action'] = $current_path;
+    // If current path is within /products, correct the form action path.
+    if ((strpos($current_path, '/products') === 0)) {
+      // Fix for views using facets with pretty paths enabled.
+      // Replace form action with current path to maintain active facets.
+      $form['#action'] = $current_path;
+    }
   }
 }
 

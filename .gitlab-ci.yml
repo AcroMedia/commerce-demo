@@ -22,19 +22,19 @@ code_standards:
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
     - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css
 
-mess_detector:
-  stage: test
-  script:
-    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css || true
+#phpmd:
+#  stage: test
+#  script:
+#    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css || true
+#
+#    - phpmd web/modules/custom text cleancode || true
+#    - phpmd web/modules/custom text codesize || true
+#    - phpmd web/modules/custom text controversial || true
+#    - phpmd web/modules/custom text design || true
+#    - phpmd web/modules/custom text naming || true
+#    - phpmd web/modules/custom text unusedcode || true
 
-    - phpmd web/modules/custom text cleancode || true
-    - phpmd web/modules/custom text codesize || true
-    - phpmd web/modules/custom text controversial || true
-    - phpmd web/modules/custom text design || true
-    - phpmd web/modules/custom text naming || true
-    - phpmd web/modules/custom text unusedcode || true
-
-    - phpcpd web/modules/custom || true
+#    - phpcpd web/modules/custom || true
 
 debt:
   stage: test

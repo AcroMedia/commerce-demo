@@ -76,17 +76,11 @@
         "cboden/ratchet": "^0.4.1",
         "drupal/asset_injector": "^2.2",
         "DoersGuild/jQuery.print": "master",
-        "drupal/commerce_reports": "^1.0@beta"
+        "drupal/commerce_reports": "^1.0@beta",
+        "webflo/drupal-finder": "^1.0.0"
     },
     "require-dev": {
-        "behat/mink": "~1.7",
-        "behat/mink-goutte-driver": "~1.2",
-        "jcalderonzumba/gastonjs": "~1.0.2",
-        "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
-        "mikey179/vfsStream": "~1.2",
-        "phpunit/phpunit": "~6.0",
-        "symfony/css-selector": "~2.8",
-        "drupal/devel": "1.x-dev"
+        "webflo/drupal-core-require-dev": "^8.5.3"
     },
     "conflict": {
         "drupal/drupal": "*"

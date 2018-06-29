@@ -145,6 +145,10 @@
                 "https://www.drupal.org/files/issues/adjustment_label-2770731-28.patch",
                 "#2852207: Billing same as shipping":
                 "https://www.drupal.org/files/issues/2018-04-07/checkbox-same-as-billing-2852207-154.patch"
+            },
+            "drupal/core": {
+                "#2978270: Javascript tests are failing if you override MINK_DRIVER_CLASS":
+                "https://www.drupal.org/files/issues/2018-06-19/drupal-fix-webdriver-javascript-tests-2978270-23.patch"
             }
         }
     }

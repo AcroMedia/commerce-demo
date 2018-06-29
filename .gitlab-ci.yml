@@ -67,6 +67,48 @@ security_advisories:
     # Run the SensioLabs security advisory checker. See security.sensiolabs.org.
     - security-checker security:check composer.lock
 
+automated_tests_js:
+  stage: test
+
+  services:
+    - mysql:5.7
+
+  before_script:
+    # Start chromedriver for Javascript testing.
+    - chromedriver --url-base=/wd/hub --port=4444 > /dev/null 2>&1 &
+    # Automated tests have no need to xdebug
+    - rm /usr/local/etc/php/conf.d/xdebug.ini || true
+    # If you have issues with rate limiting, you'll want to setup a github key variable and uncomment the config line below
+    # https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens
+    #- composer config -g github-oauth.github.com $DEPLOY_GITHUB
+    # Allow composer to use all the memory available. On PHP 5.6 it needs it.
+    - COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction
+
+    # Change apache's document folder to point to the web folder.
+    - cd web
+    - sed -ri -e 's!/var/www/html!${PWD}!g' /etc/apache2/sites-available/*.conf
+    - sed -ri -e 's!/var/www/!${PWD}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+    # Apache should be running by default, and does on my local, but gitlabci
+    # prevents that for some reason, so we manually start it.
+    # The & is important so it doesn't block everything below it from running.
+    - apache2-foreground > /dev/null 2>&1 &
+
+    # Setup the environment for running tests.
+    - export SIMPLETEST_DB='mysql://root:mysql_strong_password@mysql/drupal'
+    - export SIMPLETEST_BASE_URL=http://localhost
+    - export BROWSERTEST_OUTPUT_DIRECTORY=/tmp
+
+    # Create the directory for test sites and ensure the webserver has write access.
+    - mkdir sites/simpletest
+    - setfacl -Rdm 'u:www-data:rwX' sites/simpletest
+    - setfacl -Rm 'u:www-data:rwX' sites/simpletest
+  script:
+    - composer install --no-interaction --no-dev
+    - export MINK_DRIVER_ARGS='["chrome", {"chrome":{"switches":["--headless","--no-sandbox"]}}, "http://localhost:4444/wd/hub"]'
+    - export MINK_DRIVER_CLASS='Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver'
+    - ../vendor/phpunit/phpunit/phpunit -v -c core core/tests/Drupal/FunctionalJavascriptTests/Core/MachineNameTest.php
+    - ../vendor/phpunit/phpunit/phpunit -v -c core --group commerce_pos
+
 build:
   stage: build
 

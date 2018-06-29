@@ -103,7 +103,7 @@ automated_tests_js:
     - setfacl -Rdm 'u:www-data:rwX' sites/simpletest
     - setfacl -Rm 'u:www-data:rwX' sites/simpletest
   script:
-    - export MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chrome":{"switches":["--headless","--no-sandbox","--disable-dev-shm-usage"]}}, "http://localhost:4444/wd/hub"]'
+    - export MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chrome":{"switches":["--headless","--no-sandbox"]}}, "http://localhost:4444/wd/hub"]'
     - export MINK_DRIVER_CLASS='Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver'
     - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos
 

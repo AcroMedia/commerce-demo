@@ -36,10 +36,10 @@ phpmd:
 
     - phpcpd web/modules/custom || true
 
-#debt:
-#  stage: test
-#  script:
-#    - phpdebt web/modules/custom
+debt:
+  stage: test
+  script:
+    - phpdebt web/modules/custom
 
 codequality:
   # It won't make sense to run codequality on deploy branches, because we

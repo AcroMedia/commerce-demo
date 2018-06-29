@@ -20,41 +20,52 @@ code_standards:
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md web/modules/custom
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md web/themes/custom --ignore=*.css
+    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css
 
-custom_tests_d8:
+phpmd:
   stage: test
-  when: manual
-
-  services:
-  - theasci/docker-mysql-tmpfs:latest
-
   script:
-    # apache should be running by default, and does on my local, but gitlabci
-    # prevents that for some reason, so we manually start it
-    # the & is important so it doesn't block everything below it from running.
-    - apache2-foreground > /dev/null 2>&1 &
+    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css || true
 
-    # move to the webroot
-    - cp . /var/www/html/ -rf
-    - cd /var/www/html
+    - phpmd web/modules/custom text cleancode || true
+    - phpmd web/modules/custom text codesize || true
+    - phpmd web/modules/custom text controversial || true
+    - phpmd web/modules/custom text design || true
+    - phpmd web/modules/custom text naming || true
+    - phpmd web/modules/custom text unusedcode || true
 
-    # if you have issues with rate limiting, you'll want to setup a github key variable and uncomment the config line below
-    # https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens
-    #- composer config -g github-oauth.github.com $DEPLOY_GITHUB
+    - phpcpd web/modules/custom || true
 
-    - composer install
+debt:
+  stage: test
+  script:
+    - phpdebt web/modules/custom
 
-    #install the drupal site provided by the docker image so we can use it for testing
-    - cd web
-    - drush site-install standard --db-url='mysql://testrunner:@theasci__docker-mysql-tmpfs/drupal' -y
+codequality:
+  # It won't make sense to run codequality on deploy branches, because we
+  # are assuming that the developer has already addressed the problems.
+  # except:
+    # - uat
+    # - master
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  before_script:
+    - docker info
+  script:
+    - docker pull codeclimate/codeclimate
+    - docker run --env CODECLIMATE_CODE="$PWD" --volume "$PWD":/code --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp/cc:/tmp/cc codeclimate/codeclimate analyze -f json > codeclimate.json
+  artifacts:
+    paths: [codeclimate.json]
 
-    - export SIMPLETEST_DB='mysql://testrunner:@theasci__docker-mysql-tmpfs/drupal'
-    - export SIMPLETEST_BASE_URL=http://localhost
-    - export BROWSERTEST_OUTPUT_DIRECTORY=/tmp
-    #- ../vendor/phpunit/phpunit/phpunit -c core/phpunit.xml.dist --group SITENAME
-    - echo 'No custom unit tests currently, edit config if they are added'
+security_advisories:
+  stage: test
+  script:
+    # Run the SensioLabs security advisory checker. See security.sensiolabs.org.
+    - security-checker security:check composer.lock
 
 build:
   stage: build
@@ -228,7 +239,7 @@ plus-demo-to-live:
     - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
+    - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.

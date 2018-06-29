@@ -108,7 +108,6 @@ automated_tests_js:
     - cd web
     - export MINK_DRIVER_ARGS='["chrome", {"chrome":{"switches":["--headless","--no-sandbox"]}}, "http://localhost:4444/wd/hub"]'
     - export MINK_DRIVER_CLASS='Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver'
-    - ../vendor/phpunit/phpunit/phpunit -v -c core core/tests/Drupal/FunctionalJavascriptTests/Core/MachineNameTest.php
     - ../vendor/phpunit/phpunit/phpunit -v -c core --group commerce_pos
 
 build:

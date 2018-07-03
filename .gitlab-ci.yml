@@ -76,8 +76,19 @@ automated_tests_js:
   before_script:
     # Start chromedriver for Javascript testing.
     - chromedriver --url-base=/wd/hub --port=4444 > /dev/null 2>&1 &
+
+    #install phantomjs
+    - apt-get update && apt-get install -y build-essential chrpath libssl-dev libxft-dev libfreetype6-dev libfreetype6 libfontconfig1-dev libfontconfig1
+    - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+    - tar jxf phantomjs-2.1.1-linux-x86_64.tar.bz2
+    - mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+    - chmod +x /usr/local/bin/phantomjs
+    # Start phantomjs for older JS testing.
+    - phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 > /dev/null 2>&1 &
+
     # Automated tests have no need to xdebug
     - rm /usr/local/etc/php/conf.d/xdebug.ini || true
+
     # If you have issues with rate limiting, you'll want to setup a github key variable and uncomment the config line below
     # https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens
     #- composer config -g github-oauth.github.com $DEPLOY_GITHUB
@@ -104,10 +115,7 @@ automated_tests_js:
     - setfacl -Rm 'u:www-data:rwX' sites/simpletest
   script:
     - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/tests/src/Functional || true
-    - export MINK_DRIVER_ARGS_WEBDRIVER='["chrome", {"chrome":{"switches":["--headless","--no-sandbox"]}}, "http://localhost:4444/wd/hub"]'
-    - export MINK_DRIVER_CLASS='Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver'
-    - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/tests/src/FunctionalJavascript || true
-    - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/tests/src/Functional
+    - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/tests/src/FunctionalJavascript
 
 build:
   stage: build

@@ -82,7 +82,7 @@ automated_tests_js:
     - mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
     - chmod +x /usr/local/bin/phantomjs
     # Start phantomjs for older JS testing.
-    - phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 > /dev/null 2>&1 &
+    - /usr/local/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 &
 
     # Automated tests have no need to xdebug
     - rm /usr/local/etc/php/conf.d/xdebug.ini || true

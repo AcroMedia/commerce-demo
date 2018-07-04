@@ -113,7 +113,7 @@ automated_tests_js:
     - setfacl -Rm 'u:www-data:rwX' sites/simpletest
   script:
     - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/ || true
-    - ../vendor/phpunit/phpunit/phpunit -v -c core/phpunit.xml.dist.code_coverage modules/contrib/commerce_pos/ --code-coverage
+    - ../vendor/phpunit/phpunit/phpunit -v -c core/phpunit.xml.dist.code_coverage modules/contrib/commerce_pos/ --coverage-text
 
 
 build:

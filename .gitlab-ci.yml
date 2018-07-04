@@ -75,9 +75,6 @@ automated_tests_js:
     # Start chromedriver for Javascript testing.
     - chromedriver --url-base=/wd/hub --port=4444 > /dev/null 2>&1 &
 
-    # Start phantomjs for older JS testing.
-    - /usr/local/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 &
-
     # Automated tests have no need to xdebug
     - rm /usr/local/etc/php/conf.d/xdebug.ini || true
 
@@ -86,6 +83,9 @@ automated_tests_js:
     #- composer config -g github-oauth.github.com $DEPLOY_GITHUB
     # Allow composer to use all the memory available. On PHP 5.6 it needs it.
     - COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction
+
+    # Start phantomjs for older JS testing.
+    - /usr/local/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 &
 
     # Change apache's document folder to point to the web folder.
     - cd web

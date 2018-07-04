@@ -102,7 +102,10 @@ automated_tests_js:
     - export BROWSERTEST_OUTPUT_DIRECTORY=/tmp
 
     # Code coverage settings
+    - ls core
+    - cat core/phpunit.xml.dist
     - sed 's/<directory>.*<\/directory>//g' core/phpunit.xml.dist | sed 's/<whitelist>/<whitelist>\n      <directory>..\/modules\/contrib\/commerce_pos<\/directory>/g' > core/phpunit.xml.dist
+    - cat core/phpunit.xml.dist
 
     # Create the directory for test sites and ensure the webserver has write access.
     - mkdir sites/simpletest

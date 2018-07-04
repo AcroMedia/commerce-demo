@@ -85,7 +85,7 @@ automated_tests_js:
     - COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction
 
     # Start phantomjs for older JS testing.
-    - /usr/local/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 &
+    - /usr/local/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 > /dev/null 2>&1 &
 
     # Change apache's document folder to point to the web folder.
     - cd web

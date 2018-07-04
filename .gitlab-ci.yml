@@ -101,6 +101,9 @@ automated_tests_js:
     - export SIMPLETEST_BASE_URL=http://localhost
     - export BROWSERTEST_OUTPUT_DIRECTORY=/tmp
 
+    # Code coverage settings
+    - sed 's/<directory>.*<\/directory>//g' core/phpunit.xml.dist | sed 's/<whitelist>/<whitelist>\n      <directory>..\/modules\/contrib/commerce_pos<\/directory>/g' > core/phpunit.xml.dist
+
     # Create the directory for test sites and ensure the webserver has write access.
     - mkdir sites/simpletest
     - setfacl -Rdm 'u:www-data:rwX' sites/simpletest
@@ -108,6 +111,8 @@ automated_tests_js:
   script:
     - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/tests/src/Functional || true
     - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/tests/src/FunctionalJavascript
+    - ../vendor/phpunit/phpunit/phpunit -v -c core modules/contrib/commerce_pos/ --code-coverage
+
 
 build:
   stage: build

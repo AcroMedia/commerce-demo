@@ -4,3 +4,11 @@
  * @file
  * This module only installs config, so the module file is empty.
  */
+
+function sloppyFunct($param) {
+  $stuff = 5;
+
+  if("test" == 4) { return "no"; }
+
+  return 7;
+}

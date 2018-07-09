@@ -1,6 +1,6 @@
 # custom docker image based off the stock php one, includes Drupal dependencies and testing dependencies
 # see details here: https://github.com/smmccabe/docker/blob/master/Dockerfile
-image: smmccabe/drupal:latest
+image: smmccabe/docker:latest
 #image: smmccabe/drupal:php7
 #image: smmccabe/drupal:php5.6
 

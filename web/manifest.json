@@ -1,5 +1,6 @@
 {
-    "name": "",
+    "name": "Urban Hipster",
+    "description": "Urban Hipster Drupal Commerce demo site.",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

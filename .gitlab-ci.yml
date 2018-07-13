@@ -232,11 +232,12 @@ plus-demo-to-live:
     - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live.sh
 
 plus-demo-live-post:
-  image: selenium/standalone-firefox
+  image: debian
   stage: post
   dependencies:
     - plus-demo-to-live
   script:
+    - apt-get update && apt-get install -y firefox bc
     - wget https://raw.githubusercontent.com/smmccabe/loadtimer/master/loadtimer
     - chmod +x loadtimer
     - ./loadtimer commerceplus.acromedia.com

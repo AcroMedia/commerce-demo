@@ -239,4 +239,5 @@ plus-demo-live-post:
   script:
     - wget https://raw.githubusercontent.com/smmccabe/loadtimer/master/loadtimer
     - chmod +x loadtimer
+    - mv loadtimer /usr/local/bin
     - loadtimer commerceplus.acromedia.com

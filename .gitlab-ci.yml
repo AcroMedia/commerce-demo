@@ -10,18 +10,19 @@ stages:
   - test
   - build
   - deploy
+  - post
 
 code_standards:
   stage: test
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css
+    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files
 
 phpmd:
   stage: test
   script:
-    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --file-list=.phpcs-files --ignore=*.css || true
+    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files || true
 
     - phpmd web/modules/custom text cleancode || true
     - phpmd web/modules/custom text codesize || true
@@ -38,11 +39,6 @@ debt:
     - phpdebt web/modules/custom
 
 codequality:
-  # It won't make sense to run codequality on deploy branches, because we
-  # are assuming that the developer has already addressed the problems.
-  # except:
-    # - uat
-    # - master
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2
@@ -85,17 +81,6 @@ build:
     - cd web/themes/custom/commerce_2_demo
     - npm install
     - ./node_modules/gulp/bin/gulp.js sass
-    # Compile Sass from theme using npm.
-    # - cd web/themes/custom/commerce_2_demo
-    # - npm install
-    # - npm install -g gulp
-    # - gulp sass
-    # Compile Sass from theme using Yarn.
-    # - cd web/themes/custom/commerce_2_demo
-    # - curl -o- -L https://yarnpkg.com/install.sh | bash
-    # - export PATH="$HOME/.yarn/bin:$PATH"
-    # - yarn install
-    # - yarn run gulp -- sass
     # Remove the node_modules dir generated from npm install.
     - rm -rf node_modules
 
@@ -240,3 +225,13 @@ plus-demo-to-live:
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
     - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live.sh
+
+plus-demo-live-post:
+  image: selenium/standalone-firefox
+  stage: post
+  dependencies:
+    - plus-demo-to-live
+  script:
+    - wget https://raw.githubusercontent.com/smmccabe/loadtimer/master/loadtimer
+    - chmod +x loadtimer
+    - loadtimer commerceplus.acromedia.com

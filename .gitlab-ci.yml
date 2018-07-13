@@ -39,6 +39,11 @@ debt:
     - phpdebt web/modules/custom
 
 codequality:
+  # It won't make sense to run codequality on deploy branches, because we
+  # are assuming that the developer has already addressed the problems.
+  except:
+   - uat
+   - master
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2

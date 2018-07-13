@@ -17,12 +17,12 @@ code_standards:
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files
+    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files --ignore=*.css
 
 phpmd:
   stage: test
   script:
-    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files || true
+    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files --ignore=*.css || true
 
     - phpmd web/modules/custom text cleancode || true
     - phpmd web/modules/custom text codesize || true

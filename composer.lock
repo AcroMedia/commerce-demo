@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8d8d8ee300e2f4d00066f9c598b683d",
+    "content-hash": "6a24094388938d7eacf8686cd2236f5a",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -15,7 +15,7 @@
                 "reference": "origin/master"
             },
             "type": "drupal-library",
-            "time": "2017-10-13T06:26:59+00:00"
+            "time": "2018-06-13T06:02:01+00:00"
         },
         {
             "name": "acromedia/acro_live_css",
@@ -2262,6 +2262,57 @@
             "homepage": "http://drupal.org/project/commerce_authnet",
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce_authnet"
+            }
+        },
+        {
+            "name": "drupal/commerce_export",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/commerce_export",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_export-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "9eb818daf1d5732aef92abc81d760798892714cc"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1519094284",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "jantoine",
+                    "homepage": "https://www.drupal.org/user/192192"
+                },
+                {
+                    "name": "quietone",
+                    "homepage": "https://www.drupal.org/user/2572884"
+                }
+            ],
+            "description": "Import products from a CSV file",
+            "homepage": "https://www.drupal.org/project/commerce_export",
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_export"
             }
         },
         {
@@ -10759,6 +10810,7 @@
         "drupal/taxonomy_term_depth": 20,
         "drupal/comments_order": 10,
         "drupal/commerce_reports": 10,
+        "drupal/commerce_export": 15,
         "drupal/devel": 20
     },
     "prefer-stable": true,

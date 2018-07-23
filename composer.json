@@ -39,7 +39,7 @@
         "cweagans/composer-patches": "~1.0",
         "drupal/core": "~8.5.0",
         "drupal/console": "~1.0",
-        "drupal/commerce": "^2.2",
+        "drupal/commerce": "^2.8",
         "drupal/swiftmailer": "1.x-dev",
         "drupal/config_inspector": "1.x-dev",
         "drupal/entity": "~1.0",
@@ -142,9 +142,9 @@
                 "#2901504: Provide limit by no of orders per user condition for promotions in commerce core":
                 "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch",
                 "#2770731: Add a display name to promotions":
-                "https://www.drupal.org/files/issues/adjustment_label-2770731-28.patch",
+                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
                 "#2852207: Billing same as shipping":
-                "https://www.drupal.org/files/issues/2018-04-07/checkbox-same-as-billing-2852207-154.patch"
+                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch"
             }
         }
     }

@@ -396,16 +396,16 @@
         },
         {
             "name": "commerceguys/authnet",
-            "version": "v1.0.0-rc3",
+            "version": "v1.0.0-rc5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/commerceguys/authnet.git",
-                "reference": "aabb09cf0a908b5407aece4ebc80b983a746a7ef"
+                "reference": "16e1e3ca95aa1c1ac90b03fde9244b2101b855bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/commerceguys/authnet/zipball/aabb09cf0a908b5407aece4ebc80b983a746a7ef",
-                "reference": "aabb09cf0a908b5407aece4ebc80b983a746a7ef",
+                "url": "https://api.github.com/repos/commerceguys/authnet/zipball/16e1e3ca95aa1c1ac90b03fde9244b2101b855bf",
+                "reference": "16e1e3ca95aa1c1ac90b03fde9244b2101b855bf",
                 "shasum": ""
             },
             "require": {
@@ -442,7 +442,7 @@
                 "ecommerce",
                 "payment"
             ],
-            "time": "2018-05-02T15:02:36+00:00"
+            "time": "2018-07-13T12:32:48+00:00"
         },
         {
             "name": "commerceguys/intl",
@@ -2069,17 +2069,17 @@
         },
         {
             "name": "drupal/comments_order",
-            "version": "1.0.0-beta4",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/comments_order",
-                "reference": "8.x-1.0-beta4"
+                "reference": "8.x-1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/comments_order-8.x-1.0-beta4.zip",
-                "reference": "8.x-1.0-beta4",
-                "shasum": "e63006b2d4e78252c520130325f2bcf92df2def9"
+                "url": "https://ftp.drupal.org/files/projects/comments_order-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "59a2cf5b08a7b59b9aa00ed78d098326d993c53a"
             },
             "require": {
                 "drupal/core": "*"
@@ -2090,8 +2090,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta4",
-                    "datestamp": "1525205884",
+                    "version": "8.x-1.0",
+                    "datestamp": "1532024281",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2104,7 +2104,7 @@
             ],
             "authors": [
                 {
-                    "name": "madlobz",
+                    "name": "lobodacyril",
                     "homepage": "https://www.drupal.org/user/769176"
                 }
             ],
@@ -2203,20 +2203,20 @@
         },
         {
             "name": "drupal/commerce_authnet",
-            "version": "1.0.0-rc1",
+            "version": "1.0.0-rc2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_authnet",
-                "reference": "8.x-1.0-rc1"
+                "reference": "8.x-1.0-rc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_authnet-8.x-1.0-rc1.zip",
-                "reference": "8.x-1.0-rc1",
-                "shasum": "e4f4fc44049c24a6e9a0dcdbaa13f2e8d092c158"
+                "url": "https://ftp.drupal.org/files/projects/commerce_authnet-8.x-1.0-rc2.zip",
+                "reference": "8.x-1.0-rc2",
+                "shasum": "0a28ace2c37b9a135e428e629cc666288c15aa8b"
             },
             "require": {
-                "commerceguys/authnet": "^1.0.0-beta6",
+                "commerceguys/authnet": "^v1.0.0-rc4",
                 "drupal/commerce": "~2.0",
                 "drupal/commerce_payment": "*",
                 "drupal/core": "~8.5",
@@ -2228,8 +2228,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-rc1",
-                    "datestamp": "1526309580",
+                    "version": "8.x-1.0-rc2",
+                    "datestamp": "1532108281",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
@@ -2481,17 +2481,17 @@
         },
         {
             "name": "drupal/commerce_pos",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "8.x-2.0"
+                "reference": "8.x-2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_pos-8.x-2.0.zip",
-                "reference": "8.x-2.0",
-                "shasum": "63c82b046d335dd7221e89eb74f7ff9b96fefd2c"
+                "url": "https://ftp.drupal.org/files/projects/commerce_pos-8.x-2.1.zip",
+                "reference": "8.x-2.1",
+                "shasum": "c8281465542254adb21af4697880dd31861e6b0f"
             },
             "require": {
                 "cboden/ratchet": "^0.4.1",
@@ -2517,8 +2517,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0",
-                    "datestamp": "1528936132",
+                    "version": "8.x-2.1",
+                    "datestamp": "1531353221",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2557,7 +2557,7 @@
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_price": "*",
@@ -2569,8 +2569,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0",
-                    "datestamp": "1528936132",
+                    "version": "8.x-2.1",
+                    "datestamp": "1531353221",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2603,7 +2603,7 @@
         },
         {
             "name": "drupal/commerce_pos_keypad",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_pos_currency_denominations": "*",
@@ -2615,8 +2615,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0",
-                    "datestamp": "1528936132",
+                    "version": "8.x-2.1",
+                    "datestamp": "1531353221",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2900,20 +2900,20 @@
         },
         {
             "name": "drupal/commerce_shipping",
-            "version": "2.0.0-beta4",
+            "version": "2.0.0-beta5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_shipping",
-                "reference": "8.x-2.0-beta4"
+                "reference": "8.x-2.0-beta5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_shipping-8.x-2.0-beta4.zip",
-                "reference": "8.x-2.0-beta4",
-                "shasum": "4fde717879f0f52a20946affb1537306864ff0ea"
+                "url": "https://ftp.drupal.org/files/projects/commerce_shipping-8.x-2.0-beta5.zip",
+                "reference": "8.x-2.0-beta5",
+                "shasum": "70840d4e1ec83a1ac8008c38146380df90576ea0"
             },
             "require": {
-                "drupal/commerce": "~2.0",
+                "drupal/commerce": "^2.8",
                 "drupal/commerce_order": "*",
                 "drupal/commerce_price": "*",
                 "drupal/core": "~8.0",
@@ -2925,8 +2925,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-beta4",
-                    "datestamp": "1508273944",
+                    "version": "8.x-2.0-beta5",
+                    "datestamp": "1531922621",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -4814,20 +4814,20 @@
         },
         {
             "name": "drupal/search_api",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/search_api",
-                "reference": "8.x-1.8"
+                "reference": "8.x-1.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.8.zip",
-                "reference": "8.x-1.8",
-                "shasum": "04d7b3b680e84aad086a61fb9eb4ffe77dc278e4"
+                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.9.zip",
+                "reference": "8.x-1.9",
+                "shasum": "b019b3af9e724a1804b540ae0e4a56d2ee98c603"
             },
             "require": {
-                "drupal/core": "^8.4"
+                "drupal/core": "^8.5"
             },
             "require-dev": {
                 "drupal/search_api_autocomplete": "@dev",
@@ -4839,8 +4839,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.8",
-                    "datestamp": "1523872384",
+                    "version": "8.x-1.9",
+                    "datestamp": "1531985581",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

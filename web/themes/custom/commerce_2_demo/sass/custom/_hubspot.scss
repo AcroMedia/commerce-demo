@@ -1,0 +1,178 @@
+/**
+ * HubSpot embedded elements.
+ */
+
+/**
+ * Form - Default styling.
+ */
+
+.hbspt-form {
+
+  form {
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .legal-consent-container {
+    font-size: 13px;
+
+    p {
+      margin-bottom: 5px;
+      line-height: 1.4em;
+    }
+  }
+
+  // Lists.
+  ul {
+    margin: 0;
+
+    li {
+      padding: 3px 0 0;
+      background: none;
+
+      span {
+        vertical-align: middle;
+        font-weight: normal;
+      }
+
+      .hs-input {
+        min-height: auto;
+        width: auto !important;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  // Labels.
+  label {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.2em;
+  }
+
+  // Required marker.
+  // NOTE: Hidden by default. Shown with jQuery under certain conditions. See script.js
+  .hs-form-required {
+    display: none;
+    padding-left: 5px;
+    color: $c-primary;
+  }
+
+  // Descriptions.
+  legend {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 1.2em;
+  }
+
+  // Fieldsets.
+  fieldset {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 10px;
+    color: $gray-dark;
+  }
+
+  // Padding below each form field.
+  .hs-form-field {
+    margin-bottom: 10px;
+  }
+
+  // Input elements - All.
+  .hs-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 38px;
+    padding: 0 10px;
+    line-height: 38px;
+    background: #fff;
+    border: 1px solid $gray;
+    text-decoration: none;
+    font-weight: 300;
+    color: $gray-dark;
+    box-sizing: border-box;
+
+    &.error {
+      border: 1px solid $c-primary;
+    }
+
+    &:focus {
+      border-color: #000;
+      outline: 0;
+      box-shadow: 0 0 6px rgba(#000, 0.2);
+    }
+  }
+
+  // Input element - Radio/Checkbox.
+  .hs-input[type='radio'] + span,
+  .hs-input[type='checkbox'] + span {
+    padding-left: 6px;
+  }
+
+  // Input element - Text area.
+  textarea.hs-input {
+    min-height: 100px;
+    padding: 10px;
+    line-height: 1.2em !important;
+  }
+
+  // Input element - Select.
+  select.hs-input {
+    padding-left: 5px;
+    padding-right: 0;
+
+    // Firefox only.
+    @-moz-document url-prefix() {
+      padding-top: 7px;
+      padding-bottom: 8px;
+    }
+  }
+
+  // Submit button.
+  .hs-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 20px;
+    background: $c-link;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 0.15s linear;
+
+    &:focus,
+    &:hover {
+      background-color: $c-link-hover;
+      outline: none;
+    }
+  }
+
+  // Errors.
+  .hs-error-msgs {
+    color: $c-primary;
+    font-size: 12px;
+
+    li {
+      line-height: 14px;
+
+      label {
+        font-weight: normal;
+      }
+    }
+  }
+
+  // Hide error rollup. Errors will still show for individual fields.
+  .hs_error_rollup {
+    display: none;
+  }
+}

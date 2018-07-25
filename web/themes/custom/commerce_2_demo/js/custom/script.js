@@ -267,6 +267,19 @@
 
   // Run scripts after window fully loads.
   $(window).on('load', function() {
+    // HubSpot embedded forms.
+    // If field is required but has no label, hide the required marker.
+    if ($('.hs-form-required').length) {
+      $('.hs-form-required').each(function () {
+        var requiredMarker = $(this);
+        var inputLabel = $(this).prev();
+
+        if (inputLabel.text()) {
+          requiredMarker.show();
+        }
+      });
+    }
+
     // Language switcher.
     $('#block-currentlanguage a.is-active').click(function(event) {
       event.preventDefault();

@@ -20,7 +20,7 @@ gulp.task('sass', function() {
         stylesheetPath: './css',
       }),
       autoprefixer({
-        browsers: ['> 3%']
+        browsers: ['> 5%','safari 8','firefox 60']
       })
     ]))
     .pipe(sourcemaps.write())

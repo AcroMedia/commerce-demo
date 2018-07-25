@@ -33,3 +33,10 @@
 .mfp-fade.mfp-wrap.mfp-removing .mfp-content {
   opacity: 0;
 }
+
+/* Access Gate modal overrides. */
+#accessGate {
+  h1, h2, h3, h4 {
+    margin-top: 10px;
+  }
+}

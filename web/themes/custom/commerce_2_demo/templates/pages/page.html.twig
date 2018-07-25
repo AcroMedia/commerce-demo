@@ -96,3 +96,9 @@
 {# Site Footer. #}
 {% include base_path ~ directory ~ '/templates/pages/includes/site_footer.html.twig' %}
 {# / Site Footer. #}
+
+{# Gated Access. #}
+{% if page.gate %}
+  {{ page.gate }}
+{% endif %}
+{# / Gated Access. #}

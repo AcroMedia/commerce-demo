@@ -19,12 +19,12 @@ tours:
       css/contrib/introjs.min.css: { media: all }
       css/tours.css: { media: all }
   js:
-    js/contrib/js.cookie.js: {}
     js/contrib/intro.min.js: {}
     js/custom/tours.js: {}
   dependencies:
     - core/jquery
     - core/drupal
+    - commerce_2_demo/cookie
 
 uh-axe:
   version: 1.x
@@ -41,6 +41,15 @@ uh-recurring-digital:
   dependencies:
     - core/jquery
     - core/drupal
+
+uh-access-gate:
+  version: 1.x
+  js:
+    js/custom/plus/uh-access-gate.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - commerce_2_demo/cookie
 
 slider:
   version: 1.x
@@ -77,3 +86,11 @@ maintenance_page:
       css/maintenance-page.css: { media: all }
   dependencies:
     - system/maintenance
+
+cookie:
+  version: 1.x
+  js:
+    js/contrib/js.cookie.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

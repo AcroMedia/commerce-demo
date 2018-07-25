@@ -23,8 +23,9 @@
       $.each($sourceArray, function(index, $source) {
         // If referrer matches a source AND the access gate cookie is not disabled, show access gate.
         if ((referrer.indexOf($source) !== -1 || $source === 'fullgate') && (Cookies.get('showAccessGate') !== 'false')) {
-          // Stop the Guided Tours from opening.
+          // Stop the Guided Tours from opening and add cookie so that they stay closed (expires in 7 days).
           $('#siteTours').modal('hide');
+          Cookies.set('showSiteTours', 'false', { expires: 7 });
 
           // Open modal and prevent clicking the background or using the keyboard to close the modal.
           $this.modal({
@@ -60,11 +61,11 @@
       });
 
       // Open Guided Tours after hiding the access gate, except for mobile
-      $this.find('#footerClose').on('click', function () {
-        if (window.matchMedia('(min-width: 767px)').matches) {
-          $('#siteTours').modal('show');
-        }
-      });
+      // $this.find('#footerClose').on('click', function () {
+      //   if (window.matchMedia('(min-width: 767px)').matches) {
+      //     $('#siteTours').modal('show');
+      //   }
+      // });
     });
 
   }

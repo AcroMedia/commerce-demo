@@ -1,0 +1,14 @@
+{#
+/**
+ * @file
+ * Default product add-on add product label template.
+ *
+ * Available variables:
+ * - product_entity: The add on product.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="add-on-item__label">{{ product_entity.label }}</div>
+<div class="add-on-item__price">{{ product_entity.getDefaultVariation.getPrice|commerce_price_format }}</div>
+

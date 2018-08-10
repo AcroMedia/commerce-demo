@@ -31,6 +31,12 @@
 
   {# Product teaser. #}
   <a href="{{ product_url }}" {{ attributes.addClass(classesTeaser) }} aria-label="{{ product_entity.title.value }}">
+    {% if product.field_add_on_products.0 %}
+      <div class="corner-flag corner-flag--bundle">
+        <i class="fa fa-star"></i>
+      </div>
+    {% endif %}
+
     <div class="product__thumbnail">
       {% if product.field_catalog_image|render|trim is not empty %}
         {{ product.field_catalog_image }}

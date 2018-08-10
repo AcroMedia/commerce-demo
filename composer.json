@@ -76,7 +76,8 @@
         "cboden/ratchet": "^0.4.1",
         "drupal/asset_injector": "^2.2",
         "DoersGuild/jQuery.print": "master",
-        "drupal/commerce_reports": "^1.0@beta"
+        "drupal/commerce_reports": "^1.0@beta",
+        "drupal/commerce_pado": "^1.0@beta"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -145,6 +146,10 @@
                 "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
                 "#2852207: Billing same as shipping":
                 "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch"
+            },
+            "drupal/commerce_pado": {
+                "#2992041: Group add on items under generic variable":
+                "https://www.drupal.org/files/issues/2018-08-10/group-add-on_items_under_generic_variable-2992041-2.patch"
             }
         }
     }

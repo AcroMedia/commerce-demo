@@ -580,6 +580,67 @@
   }
 }
 
+/**
+ * Product add-ons.
+ */
+
+.add-ons-wrapper {
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px solid $gray;
+  background: $gray-light;
+  border-radius: 4px;
+
+  // Hide description box.
+  .description {
+    display: none;
+  }
+
+  // Individual item.
+  div[class*="form-item-add-ons-items-add-ons-"] {
+    padding: 5px 10px;
+    border: 1px solid $gray;
+    background: #fff;
+
+    input {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 5px;
+    }
+
+    .option {
+      display: inline-block;
+      width: calc(100% - 20px);
+      padding-left: 5px;
+      margin: 0;
+      vertical-align: top;
+      font-weight: normal;
+      text-transform: none;
+      color: $c-body;
+    }
+
+    .add-on-item__label {
+      display: inline-block;
+      width: calc(100% - 105px);
+      vertical-align: top;
+    }
+
+    .add-on-item__price {
+      display: inline-block;
+      width: 85px;
+      vertical-align: top;
+      text-align: right;
+    }
+  }
+
+   // Fieldgroup overrides.
+  .fieldgroup .fieldset-legend {
+    .add-on-item__price {
+      display: none;
+    }
+  }
+}
+
 
 /**
  * Product image slideshow.

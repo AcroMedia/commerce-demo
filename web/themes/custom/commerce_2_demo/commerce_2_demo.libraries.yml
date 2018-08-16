@@ -51,6 +51,14 @@ uh-access-gate:
     - core/drupal
     - commerce_2_demo/cookie
 
+uh-pado:
+  version: 1.x
+  js:
+    js/custom/plus/uh-pado.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
 slider:
   version: 1.x
   js:

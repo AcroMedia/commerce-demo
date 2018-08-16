@@ -10,12 +10,16 @@
  * @ingroup themeable
  */
 #}
+
+{# Include UH PADO library. #}
+{{ attach_library('commerce_2_demo/uh-pado') }}
+
 {{ form|without('add_ons', 'actions') }}
 
-{% if form.add_ons.items %}
+{% if form.add_ons %}
   <div class="add-ons-wrapper">
-    <label class="add-ons__title"><i class="fa fa-star"></i> {{ 'Bundle and save!'|t }}</label>
-    <div class="add-ons__header">{{ 'Also add these items and get a discount! The discount is applied to your cart automatically'|t }}</div>
+    <label class="add-ons__title"><i class="fa fa-star"></i> {{ 'Bundle and Save!'|t }}</label>
+    <div class="add-ons__header">{{ 'Purchase with the following items and save! Discount applied in cart.'|t }}</div>
     {{ form.add_ons }}
   </div>
 {% endif %}

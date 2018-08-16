@@ -127,6 +127,7 @@
       // Fields.
       a.product--teaser {
         display: block;
+        overflow: hidden;
         line-height: 1.3em;
         color: #000;
 
@@ -584,6 +585,27 @@
  * Product add-ons.
  */
 
+// Add on item teaser flag.
+.add-on-item__teaser-flag {
+  position: absolute;
+  top: 17px;
+  left: -29px;
+  z-index: 1;
+  transform: rotate(-45deg);
+  width: 120px;
+  padding: 2px;
+  background: $c-primary;
+  text-align: center;
+  display: inline-block;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1.1em;
+}
+
+// Add on items.
 .add-ons-wrapper {
   margin-top: 25px;
   padding: 20px;
@@ -596,22 +618,37 @@
     display: none;
   }
 
+  .add-ons__header {
+    padding-bottom: 10px;
+    font-size: 15px;
+  }
+
   // Individual item.
   div[class*="form-item-add-ons-items-add-ons-"] {
-    padding: 5px 10px;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 10px !important;
+    padding: 10px 10px;
     border: 1px solid $gray;
     background: #fff;
+    transition: border .2s ease, background .2s ease;
+
+    &.checked {
+      border: 1px solid $c-primary;
+
+      .add-on-item__content .add-on-item__link--add:before {
+        content: '\f056';
+      }
+    }
 
     input {
-      display: inline-block;
-      vertical-align: top;
-      margin-top: 5px;
+      display: none;
     }
 
     .option {
       display: inline-block;
-      width: calc(100% - 20px);
-      padding-left: 5px;
+      width: 100% ;
+      padding: 0;
       margin: 0;
       vertical-align: top;
       font-weight: normal;
@@ -619,24 +656,128 @@
       color: $c-body;
     }
 
-    .add-on-item__label {
-      display: inline-block;
-      width: calc(100% - 105px);
-      vertical-align: top;
+    .add-on-item {
+      display: flex;
+      flex-wrap: wrap;
     }
 
-    .add-on-item__price {
-      display: inline-block;
-      width: 85px;
-      vertical-align: top;
-      text-align: right;
+    .add-on-item__image {
+      flex-basis: 50px;
+      margin-right: 10px;
+    }
+
+    .add-on-item__content {
+      flex-basis: calc(100% - 60px);
+      line-height: 1.2em;
+
+      .add-on-item__label {
+        display: inline-block;
+        width: calc(100% - 105px);
+        vertical-align: top;
+        padding-bottom: 5px;
+        font-weight: 600;
+
+        @media (max-width: $screen-xs-max) {
+          width: 100%;
+          font-size: 14px;
+        }
+      }
+
+      .add-on-item__price {
+        display: inline-block;
+        width: 85px;
+        vertical-align: top;
+        text-align: right;
+        padding-bottom: 5px;
+
+        @media (max-width: $screen-xs-max) {
+          width: 100%;
+          padding-bottom: 10px;
+          font-size: 14px;
+          text-align: left;
+        }
+      }
+
+      .add-on-item__link {
+        padding: 2px 15px;
+        margin-right: 5px;
+        font-size: 14px;
+
+        @media (max-width: $screen-xs-max) {
+          padding: 2px 8px;
+          margin-right: 2px;
+        }
+      }
+
+      .add-on-item__link--add {
+        position: relative;
+
+        &:before {
+          position: relative;
+          display: inline-block;
+          padding-right: 5px;
+          content: '\f055';
+          font-family: FontAwesome;
+        }
+      }
     }
   }
 
    // Fieldgroup overrides.
-  .fieldgroup .fieldset-legend {
-    .add-on-item__price {
+  .fieldgroup {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 10px !important;
+
+    .fieldset-legend {
+      .add-on-item {
+        display: inline-block;
+        width: 100%;
+        padding: 5px 10px;
+        border: 1px solid $gray;
+        background: #fff;
+      }
+
+      .add-on-item__label {
+        display: inline-block;
+        padding-right: 10px;
+      }
+
+      // This element generated via jQuery in uh-pado.js.
+      .add-on-item__toggle {
+        position: relative;
+        display: inline-block;
+        padding: 2px;
+        font-weight: normal;
+        font-size: 14px;
+
+        &:before {
+          position: relative;
+          display: inline-block;
+          padding-right: 5px;
+          content: '\f13a';
+          font-family: FontAwesome;
+        }
+
+        &.active {
+          &:before {
+            content: '\f139';
+          }
+        }
+      }
+
+      // Hide elements we don't want.
+      .add-on-item__image,
+      .add-on-item__price,
+      .add-on-item__link {
+        display: none;
+        visibility: hidden;
+      }
+    }
+
+    .fieldset-wrapper {
       display: none;
+      margin-top: 10px;
     }
   }
 }

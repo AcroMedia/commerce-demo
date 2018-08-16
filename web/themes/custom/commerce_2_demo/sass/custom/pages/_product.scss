@@ -664,6 +664,10 @@
     .add-on-item__image {
       flex-basis: 50px;
       margin-right: 10px;
+
+      img {
+        border: 1px solid $gray;
+      }
     }
 
     .add-on-item__content {
@@ -778,6 +782,10 @@
     .fieldset-wrapper {
       display: none;
       margin-top: 10px;
+
+      div[class*="form-item-add-ons-items-add-ons-"]:last-of-type {
+        margin-bottom: 0 !important;
+      }
     }
   }
 }

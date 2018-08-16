@@ -20,7 +20,7 @@
 
       // Check or uncheck checkbox.
       if (checkbox.prop("checked")) {
-        checkbox.prop("checked", false).trigger();
+        checkbox.prop("checked", false);
         thisItem.removeClass('checked')
       }
       else {

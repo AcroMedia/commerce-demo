@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1dabb72959b6cdfae4a4bb0c8aeb4805",
+    "content-hash": "8f29a631dd401c9141cf5a6cfd69043f",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2451,7 +2451,7 @@
                     }
                 },
                 "patches_applied": {
-                    "#2992041: Group add on items under generic variable": "https://www.drupal.org/files/issues/2018-08-10/group-add-on_items_under_generic_variable-2992041-2.patch"
+                    "#2992041: Group add on items under generic variable": "https://www.drupal.org/files/issues/2018-08-16/group_add_on_items_under_generic_variable-2992041-5.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

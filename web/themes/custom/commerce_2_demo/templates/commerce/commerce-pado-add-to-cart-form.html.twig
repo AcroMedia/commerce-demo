@@ -16,7 +16,7 @@
 
 {{ form|without('add_ons', 'actions') }}
 
-{% if form.add_ons %}
+{% if form.add_ons.items %}
   <div class="add-ons-wrapper">
     <label class="add-ons__title"><i class="fa fa-star"></i> {{ 'Bundle and Save!'|t }}</label>
     <div class="add-ons__header">{{ 'Purchase with the following items and save! Discount applied in cart.'|t }}</div>

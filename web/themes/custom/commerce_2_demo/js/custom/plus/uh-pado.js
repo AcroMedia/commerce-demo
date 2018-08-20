@@ -38,7 +38,7 @@
       var thisGroup = $(this);
 
       // Create toggle button.
-      thisGroup.find('legend .add-on-item__actions').prepend('<a href="#" class="btn btn-primary add-on-item__link add-on-item__link--toggle">' + Drupal.t("View options") + '</a>');
+      thisGroup.find('legend .add-on-item__actions').prepend('<a href="#" class="btn btn-primary add-on-item__link add-on-item__link--toggle">' + Drupal.t("See options") + '</a>');
 
       // Use toggle button.
       thisGroup.find('.add-on-item__link--toggle').click( function (event) {

@@ -10,26 +10,7 @@
  */
 #}
 
-{# If variation has an image, use it. If not, use product iamge. #}
-{% if variation_entity.field_image.entity.fileuri %}
-  {% set image = {
-    '#theme':      'image_style',
-    '#style_name': 'thumbnail',
-    '#uri':        variation_entity.field_image.entity.fileuri,
-    '#attributes': { class: 'add-on-item__image' },
-  } %}
-{% else %}
-  {% set image = {
-    '#theme':      'image_style',
-    '#style_name': 'thumbnail',
-    '#uri':        product_entity.field_catalog_image.entity.fileuri,
-    '#attributes': { class: 'add-on-item__image' },
-  } %}
-{% endif %}
-
 <div class="add-on-item add-on-item--variation">
-  <div class="add-on-item__image">{{ image }}</div>
-
   <div class="add-on-item__content">
     <div class="add-on-item__label">{{ variation_entity.label }}</div>
     <div class="add-on-item__price">{{ variation_entity.getPrice|commerce_price_format }}</div>

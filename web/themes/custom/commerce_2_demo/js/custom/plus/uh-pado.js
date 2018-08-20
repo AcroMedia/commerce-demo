@@ -38,10 +38,10 @@
       var thisGroup = $(this);
 
       // Create toggle button.
-      thisGroup.find('legend .add-on-item__label').after('<a href="#" class="add-on-item__toggle">' + Drupal.t("View options") + '</a>');
+      thisGroup.find('legend .add-on-item__actions').prepend('<a href="#" class="btn btn-primary add-on-item__link add-on-item__link--toggle">' + Drupal.t("View options") + '</a>');
 
       // Use toggle button.
-      thisGroup.find('.add-on-item__toggle').click( function (event) {
+      thisGroup.find('.add-on-item__link--toggle').click( function (event) {
         // Stop default link action.
         event.preventDefault();
 

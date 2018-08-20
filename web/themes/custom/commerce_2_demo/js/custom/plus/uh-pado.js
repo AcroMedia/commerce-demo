@@ -51,7 +51,7 @@
 
         // Update button text.
         var text = $(this).text();
-        $(this).text(text === "View options" ? Drupal.t("Hide options") : Drupal.t("View options"));
+        $(this).text(text === "See options" ? Drupal.t("Hide options") : Drupal.t("See options"));
       })
     });
   }

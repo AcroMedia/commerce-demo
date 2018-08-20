@@ -15,8 +15,8 @@
     <div class="add-on-item__label">{{ variation_entity.label }}</div>
     <div class="add-on-item__price">{{ variation_entity.getPrice|commerce_price_format }}</div>
     <div class="add-on-item__actions">
-      <a class="btn btn-primary add-on-item__link add-on-item__link--add" href="#" target="_blank">{{ 'Add'|t }}</a>
-      <a class="btn btn-default add-on-item__link add-on-item__link--view" href="{{ path('entity.commerce_product.canonical', {'commerce_product': product_entity.id}) }}" target="_blank"><i class="fa fa-chevron-circle-right"></i> {{ 'View'|t }}</a>
+      <a class="btn btn-primary add-on-item__link add-on-item__link--add" href="#">{{ 'Add'|t }}</a>
+      <a class="btn btn-default add-on-item__link add-on-item__link--view" href="{{ path('entity.commerce_product.canonical', {'commerce_product': product_entity.id}) }}"><i class="fa fa-chevron-circle-right"></i> {{ 'View'|t }}</a>
     </div>
   </div>
 </div>

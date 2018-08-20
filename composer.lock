@@ -2592,21 +2592,21 @@
         },
         {
             "name": "drupal/commerce_pos",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "8.x-2.1"
+                "reference": "8.x-2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_pos-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "c8281465542254adb21af4697880dd31861e6b0f"
+                "url": "https://ftp.drupal.org/files/projects/commerce_pos-8.x-2.2.zip",
+                "reference": "8.x-2.2",
+                "shasum": "73a240d05d98975f60c2e3421eb360add9a8b4b8"
             },
             "require": {
                 "cboden/ratchet": "^0.4.1",
-                "drupal/commerce": "~2.7",
+                "drupal/commerce": "~2.8",
                 "drupal/commerce_log": "*",
                 "drupal/commerce_order": "*",
                 "drupal/commerce_payment": "*",
@@ -2614,7 +2614,7 @@
                 "drupal/commerce_product": "*",
                 "drupal/commerce_tax": "*",
                 "drupal/core": "*",
-                "drupal/search_api": "~1.0",
+                "drupal/search_api": "~1.9",
                 "picqer/php-barcode-generator": "^0.2.2"
             },
             "require-dev": {
@@ -2628,8 +2628,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1531353221",
+                    "version": "8.x-2.2",
+                    "datestamp": "1534455180",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2668,7 +2668,7 @@
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_price": "*",
@@ -2680,8 +2680,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1531353221",
+                    "version": "8.x-2.2",
+                    "datestamp": "1534455180",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2714,7 +2714,7 @@
         },
         {
             "name": "drupal/commerce_pos_keypad",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_pos_currency_denominations": "*",
@@ -2726,8 +2726,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1531353221",
+                    "version": "8.x-2.2",
+                    "datestamp": "1534455180",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -4204,17 +4204,17 @@
         },
         {
             "name": "drupal/honeypot",
-            "version": "1.27.0",
+            "version": "1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/honeypot",
-                "reference": "8.x-1.27"
+                "reference": "8.x-1.28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/honeypot-8.x-1.27.zip",
-                "reference": "8.x-1.27",
-                "shasum": "b40f86ef45a7f4325343e8aa455ecbdceab51ffe"
+                "url": "https://ftp.drupal.org/files/projects/honeypot-8.x-1.28.zip",
+                "reference": "8.x-1.28",
+                "shasum": "bbfea8791cee7d88be705e0cbf28bd6a22a54c60"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -4225,8 +4225,12 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.27",
-                    "datestamp": "1499867343"
+                    "version": "8.x-1.28",
+                    "datestamp": "1533849180",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

@@ -764,7 +764,12 @@
         }
       }
 
+      .add-on-item__content {
+        line-height: 1.2em;
+      }
+
       .add-on-item__label {
+        padding-bottom: 5px;
         font-weight: 600;
       }
 

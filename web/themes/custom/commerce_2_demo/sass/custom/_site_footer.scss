@@ -172,36 +172,62 @@
 }
 
 /**
- * Copyright.
+ * Credits.
  */
-.site-footer__copyright {
+.site-footer__credits {
   padding-top: 16px;
-  font-size: 13px;
-  color: #666;
-}
 
-/**
- * Acro.
- */
-.site-footer__acro {
-  padding-top: 9px;
-  font-size: 11px;
-  color: #999;
+  // Acro Media logo.
+  .site-footer__acro-logo {
+    float: left;
+    width: 120px;
+    margin: 2px 20px 10px 0;
 
-  a {
+    @media (max-width: $screen-sm-max) {
+      float: none;
+      width: 100%;
+      margin: 0 0 10px;
+      text-align: center;
+    }
+
+    a {
+      opacity: .15;
+
+      &:hover, &:focus {
+      opacity: 1;
+    }
+    }
+  }
+
+  // Copyright.
+  .site-footer__copyright {
+    font-size: 13px;
+    color: #666;
+  }
+
+  // Credits.
+  .site-footer__credit-links {
+    padding-top: 8px;
+    font-size: 11px;
     color: #999;
 
-    &:hover, &:focus {
-      text-decoration: underline;
-    }
-  }
+    a {
+      color: #999;
 
-  @media (max-width: $screen-xs-max) {
-    span {
-      display: block;
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+      span {
+        display: block;
+      }
     }
   }
 }
+
+
 
 /**
  * GitHub.

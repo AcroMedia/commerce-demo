@@ -1,5 +1,6 @@
 {# Set the path for the footer logo icon. #}
 {% set site_logo_icon_url =  base_path ~ directory ~ '/gfx/logo-icon.svg' %}
+{% set acro_media_logo_url =  base_path ~ directory ~ '/gfx/acro-media-logo.svg' %}
 
 <footer class="site-footer">
   <div class="container">
@@ -95,18 +96,27 @@
             </div>
           {% endif %}
 
-          {# Copyright. #}
-          <div class="site-footer__copyright">
-            {{ 'Copyright &copy; @year'|t({'@year': 'now'|date('Y')}) }}
-            <a href="{{ front_page }}">{{ 'Urban Hipster Inc.'|t }}</a>
-            {{ 'All rights reserved.'|t }}
-          </div>
+          <div class="site-footer__credits">
+            {# Acro Media logo. #}
+            <div class="site-footer__acro-logo">
+              <a href="https://www.acromedia.com" target="_blank" title="{{ 'Visit acromedia.com'|t }}">
+                <img src="{{ acro_media_logo_url }}" alt="Acro Media logo" />
+              </a>
+            </div>
 
-          {# Acro Media Inc. #}
-          <div class="site-footer__acro">
-            <span>{{ 'Website design by'|t }} <a href="https://www.acromedia.com" target="_blank">{{ 'Acro Media Inc.' }}</a></span>
-            <span class="hidden-xs"> &nbsp; | &nbsp; </span>
-            <span>{{ 'Photos freely available from'|t }} <a href="https://www.unsplash.com" target="_blank">{{ 'Unsplash.com' }}</a></span>
+            {# Copyright. #}
+            <div class="site-footer__copyright">
+              {{ 'Copyright &copy; @year'|t({'@year': 'now'|date('Y')}) }}
+              <a href="https://www.acromedia.com" target="_blank" title="{{ 'Visit acromedia.com'|t }}">{{ 'Acro Media Inc.'|t }}</a>
+              {{ 'All rights reserved.'|t }}
+            </div>
+
+            {# Credits. #}
+            <div class="site-footer__credit-links">
+              <span>{{ 'Website design by'|t }} <a href="https://www.acromedia.com" target="_blank">{{ 'Acro Media Inc.' }}</a></span>
+              <span class="hidden-xs"> &nbsp; | &nbsp; </span>
+              <span>{{ 'Photos available from'|t }} <a href="https://www.unsplash.com" target="_blank">{{ 'Unsplash.com' }}</a></span>
+            </div>
           </div>
         </div>
       </div>

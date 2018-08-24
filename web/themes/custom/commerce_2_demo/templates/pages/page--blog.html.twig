@@ -45,15 +45,14 @@
  * @see html.html.twig
  */
 #}
-{#
-  Render sidebar to be able to check if it is truly empty.
-  IMPORTANT: Only works when debug is OFF.
-  Issue: https://www.drupal.org/node/953034.
-#}
-{% set page_sidebar_rendered = render_var(page.blog_sidebar) %}
+
+{% set blog_sidebar_rendered = page.blog_sidebar|render %}
+{% set blog_sidebar_exists = blog_sidebar_rendered|striptags('<a><img>')|trim ? true : false %}
+
 {# Set row and column class based on sidebar. #}
-{% set row_class = page_sidebar_rendered ? 'row-sidebar row-eq-height' %}
-{% set col_class = page_sidebar_rendered ? 'col-sm-8 col-md-9' : 'col-md-12' %}
+{% set row_class = blog_sidebar_exists ? 'row-sidebar row-eq-height' %}
+{% set col_class = blog_sidebar_exists ? 'col-sm-8 col-md-9' : 'col-sm-12' %}
+{% set content_class = blog_sidebar_exists ? 'content__main-content--with-sidebar' %}
 
 {# Site Header. #}
 {% include base_path ~ directory ~ '/templates/pages/includes/site_header.html.twig' %}
@@ -68,7 +67,7 @@
 
     <div class="row {{ row_class }}">
       <div class="{{ col_class }}">
-        <main class="content__main-content blog_content__main-content clearfix" role="main">
+        <main class="content__main-content blog_content__main-content {{ content_class }} clearfix" role="main">
           <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
           {% if page.highlighted %}
             {{ page.highlighted }}
@@ -85,7 +84,7 @@
         </main>
       </div>
 
-      {% if page_sidebar_rendered %}
+      {% if blog_sidebar_exists %}
         <div class="col-sm-4 col-md-3">
           <aside class="site-sidebar site-sidebar--blog" role="complementary">
             {{ page.blog_sidebar }}

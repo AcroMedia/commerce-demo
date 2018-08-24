@@ -24,8 +24,10 @@
     'clearfix',
   ]
 %}
+
 {% if view_mode == 'teaser' %}
 
+  {# Teaser. #}
   <div class="blog-listing-item blog-listing-item--teaser">
     <div class="blog-listing-item__image">
       <a href="{{ url }}"><img src="{{ blog_image_url }}" alt="{{ node.field_blog_image.alt }}" /></a>
@@ -37,35 +39,33 @@
 
 {% elseif view_mode == 'listing' %}
 
+  {# Listing. #}
   <div class="blog-listing-item">
     <div class="blog-listing-item__image">
       <a href="{{ url }}"><img src="{{ blog_image_url }}" alt="{{ node.field_blog_image.alt }}" /></a>
     </div>
+
     <h3 class="blog-listing-item__title">
       <a href="{{ url }}">{{ label }}</a>
     </h3>
+
     <div class="blog-post-meta">
       <div class="blog-post-meta__date">
         {{ blog_post_date }}
       </div>
+
       {% if blog_author_name %}
-        <i>|</i>
-         <div class="blog-post-meta__author">
+        <div class="blog-post-meta__author">
+          <i>|</i>
           {{ 'By'|t }} <a href="{{ base_path }}blog/author/{{ blog_author_id }}">{{ blog_author_name }}</a>
         </div>
       {% endif %}
-    </div>
-    <div class="blog-listing-item__body">
-      {% set teaser_text = content.body|render|striptags %}
-      {{ teaser_text|length > 300 ? teaser_text|slice(0, 300) ~ '...' : teaser_text }}
-    </div>
-    <div class="blog-listing-item__footer clearfix">
-      <a class="btn btn-primary" href="{{ url }}">{{ 'Read More'|t }}</a>
 
       {% if node.field_blog_category.target_id %}
-        <div class="blog-listing-item__tags blog-post-tags">
-          <span class="blog-post-tags--label">{{ 'Posted in'|t }}</span>
-          <ul class="blog-post-tags__list clearfix">
+        <div class="blog-post-meta__tags">
+          <i>|</i>
+          {{ 'Posted in'|t }}
+          <ul class="blog-post-meta__tags__list clearfix">
             {% for category in node.field_blog_category %}
               <li>
                 <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': category.entity.tid.value}) }}">{{ category.entity.name.value }}</a>
@@ -75,10 +75,20 @@
         </div>
       {% endif %}
     </div>
+
+    <div class="blog-listing-item__body">
+      {% set teaser_text = content.body|render|striptags %}
+      {{ teaser_text|length > 300 ? teaser_text|slice(0, 300) ~ '...' : teaser_text }}
+    </div>
+
+    <div class="blog-listing-item__footer clearfix">
+      <a class="btn btn-primary" href="{{ url }}">{{ 'Read More'|t }}</a>
+    </div>
   </div>
 
 {% else %}
 
+  {# Full post. #}
   <article{{ attributes.addClass(classes) }}>
     {% if blog_image_url %}
       <div class="blog-post-image">
@@ -107,11 +117,30 @@
     <h1 {{ title_attributes.addClass('page-title--blog-post') }}>{{ label }}</h1>
     {{ title_suffix }}
 
-    <div class="blog-post-meta blog-post-meta-node">
-      {{ blog_post_date }}
+    <div class="blog-post-meta">
+      <div class="blog-post-meta__date">
+        {{ blog_post_date }}
+      </div>
+
       {% if blog_author_name %}
-        <i>|</i>
-        {{ 'By'|t }} <a href="{{ base_path }}blog/author/{{ blog_author_id }}">{{ blog_author_name }}</a>
+        <div class="blog-post-meta__author">
+          <i>|</i>
+          {{ 'By'|t }} <a href="{{ base_path }}blog/author/{{ blog_author_id }}">{{ blog_author_name }}</a>
+        </div>
+      {% endif %}
+
+      {% if node.field_blog_category.target_id %}
+        <div class="blog-post-meta__tags">
+          <i>|</i>
+          {{ 'Posted in'|t }}
+          <ul class="blog-post-meta__tags__list clearfix">
+            {% for category in node.field_blog_category %}
+              <li>
+                <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': category.entity.tid.value}) }}">{{ category.entity.name.value }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
       {% endif %}
     </div>
 
@@ -119,17 +148,10 @@
       {{ content.body }}
     </div>
 
-    {% if node.field_blog_category.target_id %}
+    {% if content.field_related_products|render|trim is not empty %}
       <div class="blog-post-footer">
-        <div class="blog-post-tags">
-          {{ 'Posted in'|t }}
-          <ul class="blog-post-tags__list clearfix">
-            {% for category in node.field_blog_category %}
-              <li>
-                <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': category.entity.tid.value}) }}">{{ category.entity.name.value }}</a>
-              </li>
-            {% endfor %}
-          </ul>
+        <div class="recommended-products">
+          {{ content.field_related_products }}
         </div>
       </div>
     {% endif %}

@@ -65,8 +65,13 @@
     }
   }
 
+  .block-menu {
+    margin-top: 10px;
+  }
+
   .menu {
     margin: 0;
+    border-top: 1px solid $gray;
   }
   .menu__item {
     display: block;

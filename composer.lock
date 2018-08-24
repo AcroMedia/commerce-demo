@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f29a631dd401c9141cf5a6cfd69043f",
+    "content-hash": "3ecdbe1ac385cbd3a36d366e442129f2",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -4569,6 +4569,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "#2809699: Menu parent as block title": "https://www.drupal.org/files/issues/2018-05-07/menu_block-label_configuration-2809699-77.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

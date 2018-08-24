@@ -427,6 +427,8 @@ a.card:hover {
 /**
  * Tables.
  */
+
+// Default styling.
 table {
   width: 100%;
 
@@ -461,6 +463,43 @@ table {
   background: $c-secondary;
   color: #fff;
 }
+
+// General page tables.
+.node__content {
+  table {
+    margin-bottom: 20px;
+    border: 1px solid $c-primary-hover;
+
+    // Table head.
+    thead {
+      background-color: $c-primary;
+      color: #fff;
+
+      th {
+        padding: 10px 15px;
+        border-right: 1px solid $c-primary-hover;
+
+        &:last-of-type {
+          border: none;
+        }
+      }
+    }
+
+    // Table body.
+    tbody {
+      tr {
+        border: 1px solid $gray;
+        border-top: none;
+
+        td {
+          padding: 10px 15px;
+          border-right: 1px solid $gray;
+        }
+      }
+    }
+  }
+}
+
 
 /**
  * Pagination.

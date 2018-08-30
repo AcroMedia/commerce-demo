@@ -156,6 +156,10 @@
             "drupal/menu_block": {
                 "#2809699: Menu parent as block title":
                 "https://www.drupal.org/files/issues/2018-05-07/menu_block-label_configuration-2809699-77.patch"
+            },
+            "drupal/core": {
+                "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
+                "https://www.drupal.org/files/issues/2018-05-08/drupalimage_ckeditor-2771837-27.patch"
             }
         }
     }

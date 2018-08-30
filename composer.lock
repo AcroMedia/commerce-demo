@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff05f75b5f1365bcc21496e16c986849",
+    "content-hash": "25e04286e345a71b51135c715f772681",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2120,20 +2120,23 @@
         },
         {
             "name": "drupal/color_field",
-            "version": "2.0.0-rc3",
+            "version": "2.0.0-rc4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/color_field",
-                "reference": "b9ffa9032f997fd982d0c7692746e15da947c703"
+                "reference": "8.x-2.0-rc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/color_field-8.x-2.0-rc3.zip",
-                "reference": "b9ffa9032f997fd982d0c7692746e15da947c703",
-                "shasum": "85979aa1739dd42f413ad7437b19db08031587ae"
+                "url": "https://ftp.drupal.org/files/projects/color_field-8.x-2.0-rc4.zip",
+                "reference": "8.x-2.0-rc4",
+                "shasum": "07f5d9f77822ca458072932124a471749db7ff1c"
             },
             "require": {
                 "drupal/core": "*"
+            },
+            "require-dev": {
+                "drupal/token": "~1.3"
             },
             "suggest": {
                 "bower-asset/jquery-simple-color": "^v1.2.2: Provides JavaScript library necessary for the Color Grid widget",
@@ -2145,8 +2148,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-rc3",
-                    "datestamp": "1526529484",
+                    "version": "8.x-2.0-rc4",
+                    "datestamp": "1535578984",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
@@ -3857,6 +3860,9 @@
                     "recurse": false,
                     "replace": false,
                     "merge-extra": false
+                },
+                "patches_applied": {
+                    "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled": "https://www.drupal.org/files/issues/2018-05-08/drupalimage_ckeditor-2771837-27.patch"
                 }
             },
             "autoload": {
@@ -5939,12 +5945,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "f5067afbf6cadccbd4bb05381a43ba80c48eafef"
+                "reference": "44f3d5e79de8fb42136a33f30af428adf8f8f9f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/f5067afbf6cadccbd4bb05381a43ba80c48eafef",
-                "reference": "f5067afbf6cadccbd4bb05381a43ba80c48eafef",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/44f3d5e79de8fb42136a33f30af428adf8f8f9f6",
+                "reference": "44f3d5e79de8fb42136a33f30af428adf8f8f9f6",
                 "shasum": ""
             },
             "require": {
@@ -6034,7 +6040,7 @@
             ],
             "description": "Drush is a command line shell and scripting interface for Drupal, a veritable Swiss Army knife designed to make life easier for those of us who spend some of our working hours hacking away at the command prompt.",
             "homepage": "http://www.drush.org",
-            "time": "2018-08-29T12:47:05+00:00"
+            "time": "2018-08-30T14:46:42+00:00"
         },
         {
             "name": "e0ipso/shaper",
@@ -9099,34 +9105,35 @@
         },
         {
             "name": "symfony/psr-http-message-bridge",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/psr-http-message-bridge.git",
-                "reference": "c2b757934f2d9681a287e662efbc27c41fe8ef86"
+                "reference": "53c15a6a7918e6c2ab16ae370ea607fb40cab196"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/c2b757934f2d9681a287e662efbc27c41fe8ef86",
-                "reference": "c2b757934f2d9681a287e662efbc27c41fe8ef86",
+                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/53c15a6a7918e6c2ab16ae370ea607fb40cab196",
+                "reference": "53c15a6a7918e6c2ab16ae370ea607fb40cab196",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "psr/http-message": "~1.0",
-                "symfony/http-foundation": "~2.3|~3.0|~4.0"
+                "php": "^5.3.3 || ^7.0",
+                "psr/http-message": "^1.0",
+                "symfony/http-foundation": "^2.3.42 || ^3.4 || ^4.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "~3.2|4.0"
+                "symfony/phpunit-bridge": "^3.4 || 4.0"
             },
             "suggest": {
+                "psr/http-factory-implementation": "To use the PSR-17 factory",
                 "psr/http-message-implementation": "To use the HttpFoundation factory",
                 "zendframework/zend-diactoros": "To use the Zend Diactoros factory"
             },
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -9155,7 +9162,7 @@
                 "http-message",
                 "psr-7"
             ],
-            "time": "2017-12-19T00:31:44+00:00"
+            "time": "2018-08-30T16:28:28+00:00"
         },
         {
             "name": "symfony/routing",

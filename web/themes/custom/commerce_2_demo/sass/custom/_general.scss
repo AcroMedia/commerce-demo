@@ -125,6 +125,38 @@ blockquote {
 }
 
 /**
+ * Images.
+ */
+img {
+  // CKEditor alignment styles.
+  &.align-left {
+    display: block;
+    float: none;
+    margin: 0 0 20px 0;
+
+    @media (min-width: $screen-xs-min) {
+      float: left;
+      margin: 0 30px 20px 0;
+    }
+  }
+  &.align-right {
+    display: block;
+    float: none;
+    margin: 0 0 20px 0;
+
+    @media (min-width: $screen-xs-min) {
+      float: right;
+      margin: 0 0 20px 30px;
+    }
+  }
+  &.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/**
  * Links.
  */
 a {

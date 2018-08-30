@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "febd40fb2e00016918b07ae8fa7070af",
+    "content-hash": "a65b2ac63f444fd4f384e94b552a61c9",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2560,7 +2560,7 @@
                     }
                 },
                 "patches_applied": {
-                    "#2992041: Group add on items under generic variable": "https://www.drupal.org/files/issues/2018-08-16/group_add_on_items_under_generic_variable-2992041-5.patch"
+                    "#2992041: Group add on items under generic variable": "https://www.drupal.org/files/issues/2018-08-29/group_add_on_items_under_generic_variable-2992041-8.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -10047,7 +10047,8 @@
                 "source": "http://cgit.drupalcode.org/devel",
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
+            },
+            "time": "2018-08-17T11:57:16+00:00"
         },
         {
             "name": "fabpot/goutte",

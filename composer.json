@@ -149,7 +149,7 @@
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
-                "https://www.drupal.org/files/issues/2018-08-16/group_add_on_items_under_generic_variable-2992041-5.patch"
+                "https://www.drupal.org/files/issues/2018-08-29/group_add_on_items_under_generic_variable-2992041-8.patch"
             },
             "drupal/menu_block": {
                 "#2809699: Menu parent as block title":

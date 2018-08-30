@@ -77,7 +77,9 @@
         "drupal/asset_injector": "^2.2",
         "DoersGuild/jQuery.print": "master",
         "drupal/commerce_reports": "^1.0@beta",
-        "drupal/commerce_pado": "^1.0@beta"
+        "drupal/commerce_pado": "^1.0@beta",
+        "drupal/jsonapi": "1.x-dev",
+        "drupal/jsonapi_extras": "^2.8"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -149,7 +151,11 @@
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
-                "https://www.drupal.org/files/issues/2018-08-16/group_add_on_items_under_generic_variable-2992041-5.patch"
+                "https://www.drupal.org/files/issues/2018-08-29/group_add_on_items_under_generic_variable-2992041-8.patch"
+            },
+            "drupal/menu_block": {
+                "#2809699: Menu parent as block title":
+                "https://www.drupal.org/files/issues/2018-05-07/menu_block-label_configuration-2809699-77.patch"
             }
         }
     }

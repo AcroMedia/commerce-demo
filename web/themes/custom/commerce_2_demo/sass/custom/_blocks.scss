@@ -19,7 +19,7 @@
   .block {
     h2 {
       margin-top: 0;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
   }
 }
@@ -364,10 +364,10 @@
 form.newsletter-signup-form {
   display: inline-block;
   vertical-align: middle;
-  width: calc(100% - 460px);
+  width: calc(100% - 365px);
 
   @media (max-width: $screen-md-max) {
-    width: calc(100% - 410px);
+    width: calc(100% - 240px);
   }
 
   @media (max-width: $screen-sm-max) {

@@ -28,7 +28,16 @@
 
   #block-commerce-2-demo-mainpagecontent {
     position: relative;
+    padding-top: 20px;
     padding-bottom: 40px;
+  }
+}
+
+// Pages with sidebar recommended products.
+.site-content .content__main-content--with-sidebar {
+  .region-below-content {
+    padding-top: 20px;
+    border-top: 5px solid $gray;
   }
 }
 
@@ -43,10 +52,12 @@
 .site-sidebar {
   height: 100%;
   padding: 18px 10px 18px 15px;
-  background-color: $gray-light;
+
+  &.site-sidebar--products {
+    background-color: $gray-light;
+  }
 
   &.site-sidebar--contact {
-    background-color: #fff;
     padding-top: 115px;
 
     @media (max-width: $screen-sm-max) {
@@ -54,18 +65,38 @@
     }
   }
 
+  .block-menu {
+    margin-top: 10px;
+  }
+
   .menu {
     margin: 0;
+    border-top: 1px solid $gray;
   }
   .menu__item {
     display: block;
   }
   .menu__link {
     padding: 10px 15px;
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray;
+    font-weight: normal;
+    color: $gray-darker;
 
-    &:hover {
-      background-color: $gray-lighter;
+    &:before {
+      @include fa-icon();
+      content: $fa-var-angle-right;
+      position: absolute;
+      top: 12px;
+      left: 0;
+      color: $c-primary;
+    }
+
+    &.is-active {
+      color: $c-primary;
+    }
+
+    &:hover, &:focus {
+      color: $c-primary-hover;
     }
   }
 
@@ -73,17 +104,12 @@
   .menu--level-1 .menu__link {
     position: relative;
     padding-left: 30px;
+    font-size: 15px;
 
     // Sub item icon.
     &:before {
-      @include fa-icon();
-      content: $fa-var-chevron-right;
-      position: absolute;
-      top: 16px;
+      top: 14px;
       left: 15px;
-      font-size: 12px;
-      line-height: 12px;
-      color: $gray;
     }
   }
 
@@ -401,6 +427,8 @@ a.card:hover {
 /**
  * Tables.
  */
+
+// Default styling.
 table {
   width: 100%;
 
@@ -435,6 +463,43 @@ table {
   background: $c-secondary;
   color: #fff;
 }
+
+// General page tables.
+.node__content {
+  table {
+    margin-bottom: 20px;
+    border: 1px solid $c-primary-hover;
+
+    // Table head.
+    thead {
+      background-color: $c-primary;
+      color: #fff;
+
+      th {
+        padding: 10px 15px;
+        border-right: 1px solid $c-primary-hover;
+
+        &:last-of-type {
+          border: none;
+        }
+      }
+    }
+
+    // Table body.
+    tbody {
+      tr {
+        border: 1px solid $gray;
+        border-top: none;
+
+        td {
+          padding: 10px 15px;
+          border-right: 1px solid $gray;
+        }
+      }
+    }
+  }
+}
+
 
 /**
  * Pagination.

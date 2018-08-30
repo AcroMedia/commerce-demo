@@ -180,6 +180,9 @@
     @media (max-width: $screen-sm-max) {
       font-size: 35px;
     }
+    @media (max-width: 475px) {
+      font-size: 26px;
+    }
 
     &:before, &:after {
       display: inline-block;
@@ -223,10 +226,10 @@
     font-size: 95px;
   }
   @media (max-width: $screen-sm-max) {
-    font-size: 60px;
+    font-size: 50px;
   }
   @media (max-width: 475px) {
-    font-size: 38px;
+    font-size: 30px;
   }
 }
 .homepage-carousel-slide__link {

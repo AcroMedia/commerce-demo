@@ -47,6 +47,14 @@
       padding: 0 2px 0 0;
       font-size: 14px;
       font-weight: 600;
+      color: #999;
+
+      &:after {
+        position: relative;
+        display: inline-block;
+        padding-left: 5px;
+        content:"|";
+      }
     }
 
     .field--name-field-promo-link {
@@ -57,8 +65,9 @@
         padding: 0;
         background: none;
         border: none;
-        font-weight: normal;
+        font-weight: 600;
         text-transform: lowercase;
+        color: #cc3333;
 
         &:after {
           position: relative;
@@ -69,7 +78,7 @@
         }
 
         &:hover, &:focus {
-          color: $c-primary;
+          text-decoration: underline;
         }
       }
     }

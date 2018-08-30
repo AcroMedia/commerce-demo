@@ -77,7 +77,9 @@
         "drupal/asset_injector": "^2.2",
         "DoersGuild/jQuery.print": "master",
         "drupal/commerce_reports": "^1.0@beta",
-        "drupal/commerce_pado": "^1.0@beta"
+        "drupal/commerce_pado": "^1.0@beta",
+        "drupal/jsonapi": "1.x-dev",
+        "drupal/jsonapi_extras": "^2.8"
     },
     "require-dev": {
         "behat/mink": "~1.7",

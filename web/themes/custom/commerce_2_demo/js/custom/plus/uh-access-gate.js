@@ -57,6 +57,16 @@
                 // Allow access gate modal to be closed.
                 $this.find('#footerClose').removeClass('disabled');
                 $this.find('#footerClose').removeAttr('tabindex');
+
+                // Make sure Google Analytics is available. If so, send event data.
+                if (window.ga && ga.create) {
+                  ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'Access Gate Form',
+                    eventAction: 'Submitted',
+                    transport: 'beacon'
+                  });
+                }
               }
             }, 1000);
           });

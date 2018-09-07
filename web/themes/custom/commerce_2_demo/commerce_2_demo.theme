@@ -613,3 +613,15 @@ function commerce_2_demo_preprocess_commerce_checkout_completion_message(&$varia
   $variables['order_items'] = $order_items;
   $variables['order_type'] = $order_entity->type;
 }
+
+/**
+ * Implements hook_preprocess_swiftmailer(&$variables).
+ */
+function commerce_2_demo_preprocess_swiftmailer(&$variables) {
+  // Load the site name out of configuration.
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
+  $variables['base_path'] = base_path();
+  $variables['site_path'] = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+}

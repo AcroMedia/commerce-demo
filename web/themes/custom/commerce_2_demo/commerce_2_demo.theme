@@ -573,7 +573,7 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
           foreach ($comments as $comment) {
             if (is_array($comment) && isset($comment['#comment'])) {
               // Only adjust for first level comments, not replies.
-              if ($comment['#comment']->hasParentComment() == false) {
+              if ($comment['#comment']->hasParentComment() == FALSE) {
                 $rating = $comment['#comment']->field_review_rating->value;
                 $ratingSum += floatval($rating);
                 $ratingCount++;

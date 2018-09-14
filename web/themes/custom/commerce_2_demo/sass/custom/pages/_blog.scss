@@ -136,6 +136,17 @@
   display: none;
 }
 
+// Comments.
+.blog-post-comments {
+  margin-top: 30px;
+  padding: 15px;
+  border: 1px solid $gray;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 30px;
+  }
+}
+
 // Listing.
 .view-display-id-blog_listing .item-list > ul {
   margin: 0;

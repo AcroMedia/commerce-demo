@@ -3,20 +3,28 @@
  */
 .comment-form-wrapper {
   clear: both;
-  margin: 30px 0 30px 0;
-  padding: 20px;
+  margin: 0 0 30px;
+  padding: 15px 15px 5px;
   background: #efefef;
   border: 1px solid #dfdfdf;
 
   @media (min-width: $screen-sm-min) {
-    padding: 40px;
+    padding: 30px 30px 15px;
   }
 
-  // Comment message textarea.
-  .form-textarea-wrapper textarea {
-    width: 100%;
+  h2.comment-form__title {
+    margin-top: 0;
   }
 }
+
+// Comment message textarea.
+.comment-form {
+  .form-textarea-wrapper textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 .field--name-comment-body {
 
   // Hide text format markup.
@@ -24,78 +32,36 @@
     display: none;
   }
 }
+
+.path-comment .comment,
 .comment {
+  display: inline-block;
+  width: 100%;
   position: relative;
   clear: both;
   margin: 0;
-  padding: 10px 0 10px 60px;
-  border-bottom: none;
+  padding: 30px 0 0 60px;
+  border: none;
 
-  // Comment bubble icon.
-  &:before {
-    position: absolute;
-    top: 18px;
-    left: 0;
-    content: $fa-var-comment;
-    @include fa-icon();
-    @include fa-icon-flip(-1,1,0);
-    font-size: 43px;
-    line-height: 43px;
-    color: $c-accent-1;
-  }
+  // Parent item.
+  &.comment--parent {
+    border-top: 1px solid $gray;
 
-  ul.links {
-    clear: both;
-    display: block;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: right;
+    &:first-of-type {
+      padding-top: 20px;
+      margin-top: 0;
+      border-top: none;
 
-    li {
-      position: relative;
-      display: inline-block;
-      margin: 0 0 0 10px;
-      padding: 0;
-      background: none;
-      vertical-align: top;
-
-      a {
-        position: relative;
-        display: inline-block;
-        vertical-align: top;
-      }
-
-      &:first-child {
-
-        a {
-          padding-left: 30px;
-
-          // Reply icon.
-          &:before {
-            position: absolute;
-            top: -1px;
-            left: 0;
-            content: $fa-var-reply;
-            @include fa-icon();
-            @include fa-icon-flip(-1,-1,0);
-            font-size: 21px;
-            line-height: 21px;
-            color: $c-accent-1;
-          }
-        }
+      // Comment bubble icon.
+      &:before {
+        top: 10px;
       }
     }
   }
-}
-.comment-wrapper > .comment:first-child {
-  margin-top: 30px;
-}
-// Comment Reply.
-.indented {
 
-  .comment {
-    padding-left: 35px;
+  // Reply items.
+  &.comment--reply {
+    padding: 0 0 0 35px;
 
     // Reply icon.
     &:before {
@@ -105,16 +71,193 @@
       font-size: 21px;
       line-height: 21px;
     }
+
+    .review-rating {
+      display: none;
+    }
+  }
+
+  // Comment bubble icon.
+  &:before {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    content: $fa-var-comment;
+    @include fa-icon();
+    @include fa-icon-flip(-1,1,0);
+    font-size: 43px;
+    line-height: 43px;
+    color: $c-accent-1;
+  }
+
+  // New marker.
+  mark {
+    display: inline-block;
+    padding: 3px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  // Author.
+  .comment__author {
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  // Date.
+  .comment__created {
+    margin: 2px 0 10px 0;
+    padding: 0;
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  // Content.
+  .comment__content {
+    font-size: 14px;
+  }
+
+  // Action links.
+  ul.links {
+    clear: both;
+    display: block;
+    margin: 10px 0 30px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+
+    li {
+      position: relative;
+      display: inline-block;
+      margin: 0 10px 0 0;
+      padding: 0;
+      background: none;
+      vertical-align: top;
+
+      a {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        padding-right: 10px;
+        border-right: 1px solid $gray;
+      }
+
+      &:last-of-type a {
+        padding-right: 0;
+        border: 0;
+      }
+    }
   }
 }
-.comment__date-created {
-  margin: 0 0 15px 0;
-  padding: 0;
-  font-size: 12px;
+
+// Rating.
+.review-rating {
+  display: block;
+  float: none;
+  margin: 0;
+
+  @media(min-width: $screen-xs-max) {
+    display: inline-block;
+    float: right;
+  }
+
+  p {
+    font-weight: bold;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 0;
+    margin-right: 15px;
+  }
+
+  // Star.
+  span:before {
+    font-size: 20px;
+    content: "\f005";
+    font-family: FontAwesome;
+    color: #c5c5c5;
+  }
+
+  span.half:before {
+    content: "\f089";
+    position: absolute;
+  }
+
+  span.filled:before {
+    color: #f5cb00;
+  }
 }
-.comment-form__title {
-  margin-top: 0;
+
+// Rating form element.
+.field--name-field-review-rating {
+  legend {
+    border: none;
+  }
+
+  .fieldset-legend {
+    color: #333;
+  }
+
+  .fieldset-legend:after {
+    content: " *";
+    color: $c-primary;
+    font-weight: normal;
+  }
+
+  .fieldset-wrapper > div {
+    border: none;
+    float: left;
+  }
+
+  .fieldset-wrapper > div > input,
+  .fieldset-wrapper .form-optional {
+    display: none;
+  }
+
+  .fieldset-wrapper > div > label:before {
+    margin: 5px;
+    font-size: 24px;
+    display: inline-block;
+    font-family: FontAwesome;
+    content: "\f005";
+  }
+
+  .fieldset-wrapper > div > label {
+    color: #c5c5c5;
+    float: right;
+    font-size: 0;
+    cursor: pointer;
+  }
+
+  .fieldset-wrapper > div > input:checked ~ label {
+    color: darken(#f5cb00, 2%);  // show gold star when clicked
+  }
+
+  // hover current star
+  .fieldset-wrapper > div:not(:checked) > label:hover,
+    // hover previous stars in list
+  .fieldset-wrapper > div:not(:checked) > label:hover ~ label,
+    // hover current star when changing rating
+  .fieldset-wrapper > div > input:checked + label:hover,
+  .fieldset-wrapper > div > input:checked ~ label:hover,
+    // lighten current selection
+  .fieldset-wrapper > div > label:hover ~ input:checked ~ label,
+  .fieldset-wrapper > div > input:checked ~ label:hover ~ label {
+    color: #f5cb00;
+  }
 }
-.comment__author {
-  font-weight: bold;
+
+// Comment reply page.
+.path-comment {
+  .field--name-field-review-rating {
+    display: none;
+  }
+
+  .form-optional {
+    display: none;
+  }
+
+  ul.links {
+    display: none !important;
+  }
 }

@@ -51,6 +51,14 @@ uh-access-gate:
     - core/drupal
     - commerce_2_demo/cookie
 
+uh-feature-beacon:
+  version: 1.x
+  js:
+    js/custom/plus/uh-feature-beacon.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
 uh-pado:
   version: 1.x
   js:

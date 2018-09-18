@@ -33,4 +33,5 @@ regions:
   social_nav: 'Footer Top - Social Media Navigation'
   footer: 'Footer Main'
   footer_nav: 'Footer Bottom - Navigation'
+  feature_beacon: 'Feature Beacon'
   access_gate: 'Access Gate'

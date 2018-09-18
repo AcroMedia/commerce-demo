@@ -45,7 +45,7 @@
         "drupal/entity": "~1.0",
         "acromedia/drupalorange_profile": "dev-8.x-1.x",
         "drupal/menu_block": "^1.4",
-        "drupal/webform": "5.x-dev",
+        "drupal/webform": "^5.0",
         "drupal/field_group": "~1.0-rc6",
         "drupal/commerce_paypal": "~1.0",
         "drupal/commerce_authnet": "^1.0",
@@ -79,7 +79,9 @@
         "drupal/commerce_reports": "^1.0@beta",
         "drupal/commerce_pado": "^1.0@beta",
         "drupal/jsonapi": "1.x-dev",
-        "drupal/jsonapi_extras": "^2.8"
+        "drupal/jsonapi_extras": "^2.8",
+        "drupal/matomo": "^1.7",
+        "drupal/mautic": "^1.1"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -89,7 +91,7 @@
         "mikey179/vfsStream": "~1.2",
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8",
-        "drupal/devel": "1.x-dev"
+        "drupal/devel": "^1.2"
     },
     "conflict": {
         "drupal/drupal": "*"

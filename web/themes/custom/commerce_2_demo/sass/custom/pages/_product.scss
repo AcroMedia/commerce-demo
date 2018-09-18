@@ -533,9 +533,14 @@
         display: none;
       }
 
+      .form-item.form-type-radio[class*="-color"] label {
+        height: 42px;
+      }
+
       .color_field__swatch--square {
         border: 2px solid #fff;
         border-radius: $border-radius;
+        cursor: pointer;
       }
 
       .select-wrapper {
@@ -555,6 +560,7 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        cursor: pointer;
 
         &::-ms-expand {
           display: none;

@@ -59,6 +59,19 @@
     }
   }
 
+  // Reply indenting (first item).
+  &.comment--parent + .indented {
+    margin-left: 50px;
+
+    @media(max-width: $screen-xs-max) {
+      margin-left: 25px;
+
+      .indented {
+        margin-left: 0;
+      }
+    }
+  }
+
   // Reply items.
   &.comment--reply {
     padding: 0 0 0 35px;
@@ -66,6 +79,7 @@
     // Reply icon.
     &:before {
       top: -1px;
+      left: 8px;
       content: $fa-var-reply;
       @include fa-icon-flip(-1,-1,0);
       font-size: 21px;

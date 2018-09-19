@@ -681,16 +681,16 @@
         },
         {
             "name": "consolidation/annotated-command",
-            "version": "2.8.5",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/annotated-command.git",
-                "reference": "1e8ff512072422b850b44aa721b5b303e4a5ebb3"
+                "reference": "4bdbb8fa149e1cc1511bd77b0bc4729fd66bccac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/annotated-command/zipball/1e8ff512072422b850b44aa721b5b303e4a5ebb3",
-                "reference": "1e8ff512072422b850b44aa721b5b303e4a5ebb3",
+                "url": "https://api.github.com/repos/consolidation/annotated-command/zipball/4bdbb8fa149e1cc1511bd77b0bc4729fd66bccac",
+                "reference": "4bdbb8fa149e1cc1511bd77b0bc4729fd66bccac",
                 "shasum": ""
             },
             "require": {
@@ -729,7 +729,7 @@
                 }
             ],
             "description": "Initialize Symfony Console commands from annotated command class methods.",
-            "time": "2018-08-18T23:51:49+00:00"
+            "time": "2018-09-19T17:47:18+00:00"
         },
         {
             "name": "consolidation/config",
@@ -2713,17 +2713,17 @@
         },
         {
             "name": "drupal/commerce_pos",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce_pos",
-                "reference": "8.x-2.2"
+                "reference": "8.x-2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_pos-8.x-2.2.zip",
-                "reference": "8.x-2.2",
-                "shasum": "73a240d05d98975f60c2e3421eb360add9a8b4b8"
+                "url": "https://ftp.drupal.org/files/projects/commerce_pos-8.x-2.3.zip",
+                "reference": "8.x-2.3",
+                "shasum": "5a8b989f0259d7f6580682ab7dab74e2d96161fb"
             },
             "require": {
                 "cboden/ratchet": "^0.4.1",
@@ -2749,8 +2749,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.2",
-                    "datestamp": "1534455180",
+                    "version": "8.x-2.3",
+                    "datestamp": "1537304880",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2789,7 +2789,7 @@
         },
         {
             "name": "drupal/commerce_pos_currency_denominations",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_price": "*",
@@ -2801,8 +2801,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.2",
-                    "datestamp": "1534455180",
+                    "version": "8.x-2.3",
+                    "datestamp": "1537304880",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2835,7 +2835,7 @@
         },
         {
             "name": "drupal/commerce_pos_keypad",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "require": {
                 "drupal/commerce_pos": "self.version",
                 "drupal/commerce_pos_currency_denominations": "*",
@@ -2847,8 +2847,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.2",
-                    "datestamp": "1534455180",
+                    "version": "8.x-2.3",
+                    "datestamp": "1537304880",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -3009,7 +3009,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta3",
-                    "datestamp": "1518474973",
+                    "datestamp": "1518473280",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."

@@ -5,6 +5,7 @@
  * Functions to support theming.
  */
 
+use Drupal\node\NodeInterface;
 use Drupal\commerce_product\Entity\ProductAttributeValue;
 use Drupal\Core\Template\Attribute;
 use Drupal\image\Entity\ImageStyle;
@@ -18,7 +19,6 @@ use Drupal\user\Entity\User;
 use Drupal\commerce_product\Entity\ProductInterface;
 use Drupal\commerce_product\Entity\ProductVariationInterface;
 use Drupal\commerce_product\Event;
-
 use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_product\Plugin\Field\FieldWidget\ProductVariationAttributesWidget;
 use Drupal\Core\Entity\ContentEntityForm;
@@ -38,7 +38,9 @@ use Drupal\commerce_stock_local;
 function commerce_2_demo_theme_suggestions_page_alter(array &$suggestions, array $variables) {
   // Add content type suggestions.
   if ($node = \Drupal::request()->attributes->get('node')) {
-    array_splice($suggestions, 1, 0, 'page__type__' . $node->getType());
+    if ($node instanceof NodeInterface) {
+      array_splice($suggestions, 1, 0, 'page__type__' . $node->getType());
+    }
   }
 
   // Add taxonomy vocabulary suggestions.
@@ -570,9 +572,12 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
 
           foreach ($comments as $comment) {
             if (is_array($comment) && isset($comment['#comment'])) {
-              $rating = $comment['#comment']->field_review_rating->value;
-              $ratingSum += floatval($rating);
-              $ratingCount++;
+              // Only adjust for first level comments, not replies.
+              if ($comment['#comment']->hasParentComment() == FALSE) {
+                $rating = $comment['#comment']->field_review_rating->value;
+                $ratingSum += floatval($rating);
+                $ratingCount++;
+              }
             }
           }
 

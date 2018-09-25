@@ -533,9 +533,14 @@
         display: none;
       }
 
+      .form-item.form-type-radio[class*="-color"] label {
+        height: 42px;
+      }
+
       .color_field__swatch--square {
         border: 2px solid #fff;
         border-radius: $border-radius;
+        cursor: pointer;
       }
 
       .select-wrapper {
@@ -555,6 +560,7 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        cursor: pointer;
 
         &::-ms-expand {
           display: none;
@@ -1133,183 +1139,22 @@
 /**
  * Product reviews.
  */
-.review-rating {
-  display: block;
-  margin: 10px 0 0 0;
-
-  @media(min-width: $screen-xs-max) {
-    display: inline-block;
-    float: right;
-    margin: 0;
-  }
-
-  p {
-    font-weight: bold;
-    display: inline-block;
-    font-size: 16px;
-    line-height: 0;
-    margin-right: 15px;
-  }
-
-  span:before {
-    font-size: 20px;
-    content: "\f005";
-    font-family: FontAwesome;
-    color: #c5c5c5;
-  }
-
-  span.half:before {
-    content: "\f089";
-    position: absolute;
-  }
-
-  span.filled:before {
-    color: #f5cb00;
-  }
-}
 
 // The submit a review form
-.path-product .comment-product-reviews-form.comment-form {
-  display: none;
-}
-
-input:checked ~ .field--name-field-product-reviews > .comment-product-reviews-form.comment-form {
-  display: block;
-}
-
-.comment-product-reviews-form.comment-form .form-textarea-wrapper textarea {
-  max-width: 100%;
-}
-
-input#submit-review {
-  display: none;
-}
-
-// Review form
-.field--name-field-review-rating {
-  legend {
-    border: none;
-  }
-
-  .fieldset-legend {
-    color: #333;
-  }
-
-  .fieldset-legend:after {
-    content: " *";
-    color: $c-primary;
-    font-weight: normal;
-  }
-
-  .fieldset-wrapper > div {
-    border: none;
-    float: left;
-  }
-
-  .fieldset-wrapper > div > input,
-  .fieldset-wrapper .form-optional {
+.path-product {
+  .comment-product-reviews-form.comment-form {
     display: none;
   }
 
-  .fieldset-wrapper > div > label:before {
-    margin: 5px;
-    font-size: 24px;
-    display: inline-block;
-    font-family: FontAwesome;
-    content: "\f005";
+  .comment.comment--parent:first-of-type {
+    margin-top: 40px;
   }
 
-  .fieldset-wrapper > div > label {
-    color: #c5c5c5;
-    float: right;
-    font-size: 0;
-    cursor: pointer;
+  input:checked ~ .field--name-field-product-reviews > .comment-product-reviews-form.comment-form {
+    display: block;
   }
 
-  .fieldset-wrapper > div > input:checked ~ label {
-    color: darken(#f5cb00, 2%);  // show gold star when clicked
-  }
-
-  // hover current star
-  .fieldset-wrapper > div:not(:checked) > label:hover,
-    // hover previous stars in list
-  .fieldset-wrapper > div:not(:checked) > label:hover ~ label,
-    // hover current star when changing rating
-  .fieldset-wrapper > div > input:checked + label:hover,
-  .fieldset-wrapper > div > input:checked ~ label:hover,
-    // lighten current selection
-  .fieldset-wrapper > div > label:hover ~ input:checked ~ label,
-  .fieldset-wrapper > div > input:checked ~ label:hover ~ label {
-    color: #f5cb00;
-  }
-}
-
-// The actual reviews.
-.path-product {
-
-  // Individual review.
-  .comment .content {
-    padding: 20px 0 10px;
-    margin: 20px 0 0 0;
-    border-top: 1px solid #e8e8e8;
-    overflow: hidden;
-
-    .field--name-field-review-name {
-      font-size: 18px;
-      font-weight: 700;
-      display: inline-block;
-      line-height: 1;
-
-      @media(min-width: 768px) {
-        margin: 0 0 10px 0;
-      }
-    }
-
-    .review-rating {
-      margin: 0;
-      line-height: 1.1;
-
-      span:before {
-        font-size: 14px;
-      }
-
-      span.half {
-        display: none;
-      }
-
-      @media(min-width: 768px) {
-        margin: 0 0 0 10px;
-        display: inline-block;
-        float: right;
-      }
-    }
-
-    .created {
-      display: inline-block;
-      margin: 0 0 10px 0;
-      font-size: 14px;
-      color: #949494;
-
-      @media(min-width: 768px) {
-        float: right;
-      }
-    }
-
-    .field--name-field-review-body {
-      margin-top: 26px;
-    }
-
-    .field--name-field-review {
-      clear: both;
-      font-size: 14px;
-
-      @media(min-width: $screen-xs-max) {
-        font-size: 16px;
-      }
-    }
-  }
-
-  .comment:last-of-type .content {
-    padding: 20px 0 20px;
+  input#submit-review {
+    display: none;
   }
 }

@@ -359,6 +359,10 @@ a {
   border: 1px solid #ccc;
   border-top: none;
 
+  @media (max-width: $screen-xs-max) {
+    padding: 20px;
+  }
+
   // Removes top margin if heading is the first element in content.
   .field--name-body {
     &>h1:first-child,

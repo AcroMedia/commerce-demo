@@ -64,25 +64,48 @@
  * @see template_preprocess_comment()
  */
 #}
+
 {% if threaded %}
   {{ attach_library('classy/indented') }}
 {% endif %}
+
 {%
-set classes = [
-'comment',
-'js-comment',
-status != 'published' ? status,
-comment.owner.anonymous ? 'by-anonymous',
-author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
-]
+  set classes = [
+    'comment',
+    'js-comment',
+    status != 'published' ? status,
+    comment.owner.anonymous ? 'by-anonymous',
+    author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
+    parent ? 'comment--reply' : 'comment--parent',
+  ]
 %}
+
 <article{{ attributes.addClass(classes) }}>
-   <div{{ content_attributes.addClass('content') }}>
-    {{ content.field_review_name }}
-    {{ content.field_review_rating }}
-    <div class="created">
+  <div{{ content_attributes.addClass('content') }}>
+    <mark class="hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+
+    <div class="comment__author">
+      {% set author_warning = comment.owner.anonymous ? '(not verified)'|t %}
+
+      {% if content.field_review_name %}
+        {{ content.field_review_name }}
+      {% elseif comment.name.value %}
+        {{ comment.name.value }} {{ author_warning }}
+      {% else %}
+        {{ 'Anonymous'|t }} {{ author_warning }}
+      {% endif %}
+    </div>
+
+    {% if content.field_review_rating %}
+      {{ content.field_review_rating }}
+    {% endif %}
+
+    <div class="comment__created">
       {{ created }}
     </div>
-    {{ content.field_review}}
+
+    <div class="comment__content">
+      {{ content|without('field_review_name', 'field_review_rating') }}
+    </div>
   </div>
 </article>

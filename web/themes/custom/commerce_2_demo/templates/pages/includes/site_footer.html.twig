@@ -225,6 +225,12 @@
   </div>
 </div>
 
+{# Feature Beacon. #}
+{% if page.feature_beacon %}
+  {{ page.feature_beacon }}
+{% endif %}
+{# / Feature Beacon. #}
+
 {% if page.access_gate %}
 {# Access Gate Modal Block #}
  {{ page.access_gate }}

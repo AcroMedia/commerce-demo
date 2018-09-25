@@ -10,7 +10,7 @@
 @import 'navigation';
 @import 'content';
 @import 'comments';
-@import 'blocks';
+@import 'blocks/blocks';
 @import 'paragraphs';
 
 // Pages.
@@ -27,6 +27,8 @@
 
 // Misc.
 @import 'misc';
+@import 'blocks/uh-feature-beacon';
+@import 'blocks/uh-access-gate';
 @import 'hubspot';
 
 // Live CSS.

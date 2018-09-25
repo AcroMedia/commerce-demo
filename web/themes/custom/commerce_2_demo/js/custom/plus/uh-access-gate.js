@@ -5,9 +5,9 @@
 (function ($, Drupal) {
 
   // Access gate modal.
-  if ($('#accessGate').length) {
+  if ($('.access-gate').length) {
 
-    $('#accessGate').each(function () {
+    $('.access-gate').each(function () {
       var $this = $(this);
 
       // Current page URL.

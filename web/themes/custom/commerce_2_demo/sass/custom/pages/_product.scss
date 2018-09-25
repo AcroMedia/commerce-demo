@@ -615,7 +615,6 @@
 // File/Audio Download.
 .audio__item {
   display: block;
-  //border-bottom: 1px solid #ccc;
   padding: 10px 0;
 
   audio {
@@ -628,12 +627,12 @@
     .loop-index {
       display: inline-block;
       vertical-align: top;
-      width: 20px;
-      height: 20px;
-      margin: 2px 5px 0 0;
+      width: 26px;
+      height: 26px;
+      margin: 0 5px 0 0;
       background-color: $c-primary;
       border-radius: 50%;
-      line-height: 20px;
+      line-height: 26px;
       text-align: center;
       font-size: 14px;
       font-weight: 700;

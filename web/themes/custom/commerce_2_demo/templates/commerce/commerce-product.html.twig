@@ -218,18 +218,14 @@
                   {# Loop through all media files. #}
                   {% for media_entity in product_entity.field_album_samples.entity.field_media_audio_file %}
                     {# Default audio formatter doesn't let you show the file description OR include a download link. So we have to do it this way. #}
+                    {% set media_title = media_entity.value.description|length > 0 ? media_entity.value.description : media_entity.entity.filename.value %}
+
                     <div class="audio__item">
-                      {% if media_entity.value.description|length > 0 %}
-                        <div class="audio__title"><span class="loop-index">{{ loop.index }}</span>{{ media_entity.value.description }}</div>
-                      {% endif %}
+                      <div class="audio__title"><div class="loop-index">{{ loop.index }}</div><span>{{ media_title }}</span></div>
 
                       <div class="audio__player">
                         <audio src="{{ file_url(media_entity.entity.fileuri) }}" preload="auto" controls></audio>
                       </div>
-
-                      <a href="{{ file_url(media_entity.entity.fileuri) }}" class="audio__download" title="{{ 'Download sample'|t }}">
-                        <i class="fa fa-cloud-download"></i>
-                      </a>
                     </div>
                   {% endfor %}
                 {% endif %}

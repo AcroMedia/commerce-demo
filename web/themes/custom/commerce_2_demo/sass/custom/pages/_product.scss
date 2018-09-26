@@ -612,6 +612,41 @@
   }
 }
 
+// File/Audio Download.
+.audio__item {
+  display: block;
+  padding: 10px 0;
+
+  audio {
+    width: 100%;
+  }
+
+  .audio__title {
+    margin-bottom: 10px;
+
+    .loop-index {
+      display: inline-block;
+      vertical-align: top;
+      width: 26px;
+      height: 26px;
+      margin: 0 5px 0 0;
+      background-color: $c-primary;
+      border-radius: 50%;
+      line-height: 26px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}
+
+
 /**
  * Product add-ons.
  */

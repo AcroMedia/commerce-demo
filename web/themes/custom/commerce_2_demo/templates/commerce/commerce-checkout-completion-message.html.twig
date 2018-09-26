@@ -29,29 +29,29 @@
         {# Enter the purchased entity. #}
         {% for purchased_entity in order_item.purchased_entity %}
           {# Media manager album files referenced within Product Variation.  #}
-          {% for album_entity in purchased_entity.entity.field_album %}
-            {% for media_entity in album_entity.entity.field_media_audio_file_1 %}
-              {# Default audio formatter doesn't let you show the file description OR include a download link. So we have to do it this way. #}
-              <div class="audio__item">
-                {% if media_entity.value.description|length > 0 %}
-                  <div class="audio__title"><span class="loop-index">{{ loop.index }}</span>{{ media_entity.value.description }}</div>
-                {% endif %}
+          {% if purchased_entity.entity.field_album is not empty %}
+            {% for album_entity in purchased_entity.entity.field_album %}
+              {% for media_entity in album_entity.entity.field_media_audio_file_1 %}
+                {# Default audio formatter doesn't let you show the file description OR include a download link. So we have to do it this way. #}
+                {% set media_title = media_entity.value.description|length > 0 ? media_entity.value.description : media_entity.entity.filename.value %}
 
-                <div class="audio__player">
-                  <audio src="{{ file_url(media_entity.entity.fileuri) }}" preload="auto" controls></audio>
+                <div class="audio__item">
+                  <div class="audio__title"><div class="loop-index">{{ loop.index }}</div><span>{{ media_title }}</span></div>
+
+                  <div class="audio__player">
+                    <audio src="{{ file_url(media_entity.entity.fileuri) }}" preload="auto" controls></audio>
+                  </div>
                 </div>
-
-                <a href="{{ file_url(media_entity.entity.fileuri) }}" class="audio__download" title="{{ 'Download your copy'|t }}">
-                  <i class="fa fa-cloud-download"></i>
-                </a>
-              </div>
+              {% endfor %}
             {% endfor %}
-          {% endfor %}
+          {% endif %}
 
           {# Files uploaded within Product Variation. #}
-          <a href="{{ file_url(purchased_entity.entity.field_file.entity.fileuri) }}" class="checkout-complete__file" title="{{ purchased_entity.entity.title.value }}">
-            {{ purchased_entity.entity.title.value }}
-          </a>
+          {% if purchased_entity.entity.field_file is not empty %}
+            <a href="{{ file_url(purchased_entity.entity.field_file.entity.fileuri) }}" class="checkout-complete__file" title="{{ purchased_entity.entity.title.value }}">
+              {{ purchased_entity.entity.title.value }}
+            </a>
+          {% endif %}
         {% endfor %}
       {% endfor %}
     </div>

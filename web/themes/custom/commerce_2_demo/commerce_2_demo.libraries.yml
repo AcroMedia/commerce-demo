@@ -58,6 +58,7 @@ uh-feature-beacon:
   dependencies:
     - core/jquery
     - core/drupal
+    - commerce_2_demo/cookie
 
 uh-pado:
   version: 1.x

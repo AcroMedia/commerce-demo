@@ -32,19 +32,45 @@
 
 {% block content %}
 
-  {# Set block content variable to access raw data. #}
+  {# Set block content variables to access raw data. #}
   {% set block_entity = content['#block_content'] %}
+  {% set block_id = 'feature-beacon--' ~ block_entity.id.value %}
+  {% set modal_size = block_entity.field_modal_size.value %}
 
-  <div class="modal fade feature-beacon" tabindex="-1" role="dialog" aria-label="">
-    <div class="modal-dialog" role="document">
+  {# Beacon and modal attributes. #}
+  {% set link_attributes = create_attribute() %}
+  {% set modal_attributes = create_attribute() %}
+
+  {% if block_entity.field_display_label|length %}
+    {% set link_attributes = link_attributes.setAttribute('title', block_entity.field_display_label.value) %}
+    {% set modal_attributes = modal_attributes.setAttribute('aria-label', block_entity.field_display_label.value) %}
+  {% endif %}
+
+  {% if block_entity.field_page_element|length %}
+    {% set link_attributes = link_attributes.setAttribute('data-selector', block_entity.field_page_element.value) %}
+  {% endif %}
+
+  {% if block_entity.field_position_on_element|length %}
+    {% set link_attributes = link_attributes.setAttribute('class', 'feature-beacon__marker feature-beacon__marker--' ~ block_entity.field_position_on_element.value) %}
+  {% endif %}
+
+  {# Marker. #}
+  <a href="#{{ block_id }}" {{ link_attributes }} data-toggle="modal"><i class="fa fa-star"></i></a>
+
+  {# Modal. #}
+  <div class="modal fade feature-beacon__modal" {{ modal_attributes }} id="{{ block_id }}" tabindex="-1" role="dialog" >
+    <div class="modal-dialog {{ modal_size }}" role="document">
       <div class="modal-content">
         <div class="modal-body">
+          {% if label %}
+            <h3{{ title_attributes }}>{{ label }}</h3>
+          {% endif %}
 
           {{ content }}
 
         </div>
         <div class="modal-footer">
-          <button type="button" id="footerClose" class="btn btn-primary disabled" tabindex="-1" data-dismiss="modal">{{ 'Close'|t }}</button>
+          <button type="button" id="footerClose" class="btn btn-primary" tabindex="-1" data-dismiss="modal">{{ 'Close'|t }}</button>
         </div>
       </div>
     </div>

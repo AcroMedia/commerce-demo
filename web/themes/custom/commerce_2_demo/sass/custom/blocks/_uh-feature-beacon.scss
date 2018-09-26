@@ -1,8 +1,145 @@
 /**
  * UH Feature Beacons.
+ *
+ * Marker styling modified from https://codepen.io/magnus16/pen/pnGAB
  */
 
-.access-gate {
+// Toggle button.
+.feature-beacon-toggle {
+  display: none; // Shown with jQuery.
+}
+
+// Marker animation.
+@keyframes active{
+  0%{
+    transform:scale(.1);
+    opacity:1;
+  }
+  70%{
+    transform:scale(2);
+    opacity:0;
+  }
+  100%{
+    opacity:0;
+  }
+}
+
+// Marker.
+$beacon-color: #f95e27;
+$beacon-glow: darken($beacon-color, 10%);
+$beacon-size: 26px;
+$beacon-offset: 18px;
+$beacon-offset-xs: 5px;
+
+a.feature-beacon__marker {
+  position:absolute;
+  z-index: 2;
+  width: $beacon-size;
+  height: $beacon-size;
+  background-color: rgba($beacon-color, .9);
+  border-radius:50%;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  line-height: $beacon-size;
+
+  &:before{
+    position: absolute;
+    content:"";
+    width: $beacon-size;
+    height: $beacon-size;
+    left:0;
+    top:0;
+    background-color:transparent;
+    border-radius:50%;
+    box-shadow:0 0 3px 3px $beacon-glow;
+    animation:active 2s infinite ease-out;
+  }
+
+  &.feature-beacon__marker--top-left {
+    top: -$beacon-offset;
+    left: -$beacon-offset;
+
+    @media (max-width: $screen-xs-max) {
+      top: -$beacon-offset-xs;
+      left: -$beacon-offset-xs;
+    }
+  }
+
+  &.feature-beacon__marker--top-center {
+    top: -$beacon-offset;
+    left: calc(50% - #{$beacon-offset});
+
+    @media (max-width: $screen-xs-max) {
+      top: -$beacon-offset-xs;
+    }
+  }
+
+  &.feature-beacon__marker--top-right {
+    top: -$beacon-offset;
+    right: -$beacon-offset;
+
+    @media (max-width: $screen-xs-max) {
+      top: -$beacon-offset-xs;
+      right: -$beacon-offset-xs;
+    }
+  }
+
+  &.feature-beacon__marker--center-left {
+    top: calc(50% - #{$beacon-offset});
+    left: -$beacon-offset;
+
+    @media (max-width: $screen-xs-max) {
+      left: -$beacon-offset-xs;
+    }
+  }
+
+  &.feature-beacon__marker--center {
+    top: calc(50% - #{$beacon-offset});
+    left: calc(50% - #{$beacon-offset});
+  }
+
+  &.feature-beacon__marker--center-right {
+    top: calc(50% - #{$beacon-offset});
+    right: -$beacon-offset;
+
+    @media (max-width: $screen-xs-max) {
+      right: -$beacon-offset-xs;
+    }
+  }
+
+  &.feature-beacon__marker--bottom-left {
+    bottom: -$beacon-offset;
+    left: -$beacon-offset;
+
+    @media (max-width: $screen-xs-max) {
+      bottom: -$beacon-offset-xs;
+      left: -$beacon-offset-xs;
+    }
+  }
+
+  &.feature-beacon__marker--bottom-center {
+    bottom: -$beacon-offset;
+    left: calc(50% - #{$beacon-offset});
+
+    @media (max-width: $screen-xs-max) {
+      bottom: -$beacon-offset-xs;
+    }
+  }
+
+  &.feature-beacon__marker--bottom-right {
+    bottom: -$beacon-offset;
+    right: -$beacon-offset;
+
+    @media (max-width: $screen-xs-max) {
+      bottom: -$beacon-offset-xs;
+      right: -$beacon-offset-xs;
+    }
+  }
+}
+
+// Modal.
+.feature-beacon__modal {
   h1, h2, h3, h4 {
     margin-top: 10px;
   }

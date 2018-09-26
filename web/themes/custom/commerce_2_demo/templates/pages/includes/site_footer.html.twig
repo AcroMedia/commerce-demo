@@ -75,6 +75,11 @@
     <div class="site-footer__bottom">
       <div class="row">
         <div class="hidden-xs col-sm-12 col-md-5 pull-right site-tours-wrapper">
+          {# Hide/show feature beacons #}
+          <button type="button" class="btn btn-primary feature-beacon-toggle">
+            <i class="fa fa-star-o fa-lg"></i> <span>{{ 'Hide Beacons'|t }}</span>
+          </button>
+
           {# Button trigger modal #}
           <button type="button" id="siteTours-start" class="btn btn-primary" data-toggle="modal" data-target="#siteTours">
             <i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}

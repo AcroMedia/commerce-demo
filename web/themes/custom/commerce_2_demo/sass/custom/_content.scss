@@ -545,7 +545,6 @@ table {
  */
 .modal.fade .modal-dialog {
   transform: scale(0.1);
-  top: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
@@ -563,7 +562,6 @@ table {
 
 .modal.fade.in .modal-dialog {
   transform: scale(1);
-  transform: translate3d(0, -50%, 0);
   opacity: 1;
 }
 

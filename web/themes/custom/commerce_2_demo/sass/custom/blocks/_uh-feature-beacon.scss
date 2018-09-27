@@ -88,6 +88,8 @@ a.feature-beacon__marker {
   font-size: 14px;
   color: $beacon-font-color !important;
   line-height: $beacon-size;
+  transition: transform .2s ease;
+  outline: none;
 
   &:before{
     position: absolute;
@@ -100,6 +102,15 @@ a.feature-beacon__marker {
     border-radius:50%;
     box-shadow:0 0 3px 3px $beacon-color-dark;
     animation:active 2s infinite ease-out;
+    outline: none;
+  }
+
+  &:hover, &:focus {
+    transform: scale(1.23);
+
+    &:before{
+      transform: scale(1.23);
+    }
   }
 
   &.feature-beacon__marker--top-left {

@@ -4,9 +4,28 @@
  * Marker styling modified from https://codepen.io/magnus16/pen/pnGAB
  */
 
+// Useful variables.
+$beacon-color: #00aeef;
+$beacon-color-dark: darken($beacon-color, 10%);
+$beacon-size: 26px;
+$beacon-offset: 18px;
+$beacon-offset-xs: 5px;
+
 // Toggle button.
 .feature-beacon-toggle {
   display: none; // Shown with jQuery.
+  background-color: $beacon-color;
+  border-color: $beacon-color;
+  transition: background .1s ease-in-out, border .1s ease-in-out;
+
+  &:hover, &:focus {
+    background-color: $beacon-color-dark;
+    border-color: $beacon-color-dark;
+  }
+
+  i {
+    margin-right: 3px;
+  }
 }
 
 // Marker animation.
@@ -25,12 +44,6 @@
 }
 
 // Marker.
-$beacon-color: #f95e27;
-$beacon-glow: darken($beacon-color, 10%);
-$beacon-size: 26px;
-$beacon-offset: 18px;
-$beacon-offset-xs: 5px;
-
 a.feature-beacon__marker {
   position:absolute;
   z-index: 2;
@@ -52,7 +65,7 @@ a.feature-beacon__marker {
     top:0;
     background-color:transparent;
     border-radius:50%;
-    box-shadow:0 0 3px 3px $beacon-glow;
+    box-shadow:0 0 3px 3px $beacon-color-dark;
     animation:active 2s infinite ease-out;
   }
 

@@ -23,6 +23,23 @@
   .site-footer__bottom {
     padding-top: 22px;
     border-top: 1px solid #ccc;
+
+    @media (min-width: $screen-sm) {
+      .site-tours-wrapper {
+        float: right;
+
+        .btn-primary {
+          margin: 0 2px;
+        }
+      }
+    }
+    @media (max-width: $screen-xs-max) {
+      .site-tours-wrapper {
+        .btn-primary {
+          margin: 0 2px 5px;
+        }
+      }
+    }
   }
 }
 
@@ -234,11 +251,6 @@
  */
 .github {
   margin-top: 8px;
-
-  @media (max-width: $screen-sm-max) {
-    margin-top: 25px;
-    margin-bottom: 15px;
-  }
 
   .fa-github {
     display: inline-block;

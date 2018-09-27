@@ -61,6 +61,10 @@
   <div class="modal fade feature-beacon__modal" {{ modal_attributes }} id="{{ block_id }}" tabindex="-1" role="dialog" >
     <div class="modal-dialog {{ modal_size }}" role="document">
       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" id="headerClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><i class="fa fa-star fa-lg"></i> {{ 'Feature'|t }}</h4>
+        </div>
         <div class="modal-body">
           {% if label %}
             <h3{{ title_attributes }}>{{ label }}</h3>
@@ -70,7 +74,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" id="footerClose" class="btn btn-primary" tabindex="-1" data-dismiss="modal">{{ 'Close'|t }}</button>
+          <button type="button" id="footerClose" class="btn btn-default" tabindex="-1" data-dismiss="modal">{{ 'Close'|t }}</button>
         </div>
       </div>
     </div>

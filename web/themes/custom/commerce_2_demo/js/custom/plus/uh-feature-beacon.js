@@ -6,7 +6,7 @@
 
   if ($('.feature-beacon__marker').length) {
 
-    // Hide/show feature beacons.
+    // Usefull variable.
     var $beaconButton = $('.feature-beacon-toggle');
     var $buttonIcon = $beaconButton.find('i');
     var $buttonText = $beaconButton.find('span');
@@ -40,23 +40,36 @@
     });
 
     // Append markers to elements.
-    $('.feature-beacon__marker').each(function () {
-      var $this = $(this);
+    $(window).on('load', function () {
+      $('.feature-beacon__marker').each(function () {
+        var $this = $(this);
 
-      // Selector(s) to attach beacon to.
-      var $selector = $this.data('selector');
+        // Selector(s) to attach beacon to.
+        var $selector = $this.data('selector');
 
-      // Append on load and show or hide beacon.
-      $(window).on('load', function () {
+        // Append marker.
         $($selector).append($this);
 
-        if (Cookies.get('hideFeatureBeacons') !== 'true') {
-          $this.show();
+        // Show or hide marker all markers depending on cookie.
+        if (Cookies.get('hideFeatureBeacons') === 'true') {
+          $('.feature-beacon__marker').hide();
         }
         else {
-          $this.hide();
+          $('.feature-beacon__marker').show();
         }
       });
+    });
+
+    // Make sure Google Analytics is available. If so, send event data when beacon clicked.
+    $('.feature-beacon__marker').click(function () {
+      if (window.ga && ga.create) {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Feature Beacon',
+          eventAction: 'Clicked',
+          transport: 'beacon'
+        });
+      }
     });
 
   }

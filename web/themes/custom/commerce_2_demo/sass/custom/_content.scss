@@ -620,12 +620,14 @@ table {
 // Help modal.
 .help-modal.fixed-button {
   position: fixed;
-  top: calc(50% + 13px);
+  top: 50%;
   right: 0;
   z-index: 5;
-  padding: 10px 6px 10px 10px;
+  width: 45px;
+  padding: 10px 0;
   border-radius: 5px 0 0 5px;
   border-right: 5px solid $c-primary-hover;
+  text-align: center;
 
   @media (max-width: 1065px) {
     display: none;

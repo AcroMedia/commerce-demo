@@ -63,8 +63,9 @@
     <a href="#main-content" class="visually-hidden focusable skip-link">
       {{ 'Skip to main content'|t }}
     </a>
-    <button type="button" id="siteTours-start" class="btn btn-primary fixed-button" data-toggle="modal" data-target="#siteTours">
-      <i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}
+    {# Button trigger help modal #}
+    <button type="button" class="btn btn-primary fixed-button help-modal" data-toggle="modal" data-target="#help" aria-label="Help">
+      <i class="fa fa-question-circle fa-2x"></i>
     </button>
     {{ page_top }}
     {{ page }}

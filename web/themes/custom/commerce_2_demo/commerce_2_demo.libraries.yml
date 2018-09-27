@@ -12,20 +12,6 @@ global-styling:
     - magnific_popup/magnific_popup
     - commerce_2_demo/slider
 
-tours:
-  version: 1.x
-  css:
-    theme:
-      css/contrib/introjs.min.css: { media: all }
-      css/tours.css: { media: all }
-  js:
-    js/contrib/intro.min.js: {}
-    js/custom/tours.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
-    - commerce_2_demo/cookie
-
 uh-axe:
   version: 1.x
   js:

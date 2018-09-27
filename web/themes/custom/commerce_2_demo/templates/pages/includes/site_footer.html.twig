@@ -74,15 +74,15 @@
     {# Footer bottom. #}
     <div class="site-footer__bottom">
       <div class="row">
-        <div class="col-sm-12 col-md-5 site-tours-wrapper">
+        <div class="col-sm-12 col-md-5 site-footer__buttons">
           {# Hide/show feature beacons #}
           <button type="button" class="btn btn-primary feature-beacon-toggle">
             <i class="fa fa-star-o fa-lg"></i> <span>{{ 'Hide Beacons'|t }}</span>
           </button>
 
-          {# Button trigger modal #}
-          <button type="button" id="siteTours-start" class="btn btn-primary" data-toggle="modal" data-target="#siteTours">
-            <i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}
+          {# Button trigger help modal #}
+          <button type="button" class="btn btn-primary help-modal" data-toggle="modal" data-target="#help">
+            <i class="fa fa-question-circle fa-lg"></i> {{ 'Help'|t }}
           </button>
 
           {# GitHub links #}
@@ -144,64 +144,18 @@
   </div>
 </div>
 
-{# Tour Modal #}
-<div class="modal fade" id="siteTours" tabindex="-1" role="dialog" aria-labelledby="siteToursLabel">
+{# Help Modal #}
+<div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="helpLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" id="headerCloseTours" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="siteToursLabel"><i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}</h4>
+        <button type="button" id="headerClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="helpLabel"><i class="fa fa-question-circle fa-lg"></i> {{ 'Help'|t }}</h4>
       </div>
       <div class="modal-body">
-        <p>
-          {{ 'Select a guided tour below OR close the window and look around.'|t }}
-        </p>
-
-        <button type="button" class="btn btn-primary" id="homepageTour">
-          <i class="fa fa-home fa-lg"></i> {{ 'Homepage Features'|t }}
-        </button>
-
-        <button type="button" class="btn btn-primary" id="productPageTour">
-          <i class="fa fa-gift fa-lg"></i> {{ 'Product Page'|t }}
-        </button>
-
-        <button type="button" class="btn btn-primary" id="catalogFiltersTour">
-          <i class="fa fa-th-large fa-lg"></i> {{ 'Catalog & Filters'|t }}
-        </button>
-
-        <button type="button" class="btn btn-primary" id="solrSearchTour">
-          <i class="fa fa-search fa-lg"></i> {{ 'Faceted Search'|t }}
-        </button>
-
-        <button type="button" class="btn btn-primary" id="quickCartTour">
-          <i class="fa fa-shopping-basket fa-lg"></i> {{ 'Quick Cart'|t }}
-        </button>
-
-        <button type="button" class="btn btn-primary" id="checkoutPhysicalTour">
-          <i class="fa fa-shopping-cart fa-lg"></i> {{ 'Checkout - Physical'|t }}
-        </button>
-
-        <button type="button" class="btn btn-primary" id="checkoutDigitalTour">
-          <i class="fa fa-cart-arrow-down fa-lg"></i> {{ 'Checkout - Digital'|t }}
-        </button>
-
-        {#
-        <button type="button" class="btn btn-primary disabled" id="customerAccountTour">
-          <i class="fa fa-address-book fa-lg"></i> {{ 'Customer Account'|t }}
-        </button>
-        #}
-
-        <button type="button" class="btn btn-primary" id="whyDrupalTour">
-          <i class="fa fa-drupal fa-lg"></i> {{ 'Why Drupal?'|t }}
-        </button>
-
-        <button type="button" class="btn btn-primary" id="whyOpenSourceTour">
-          <i class="fa fa-code fa-lg"></i> {{ 'Why Open Source?'|t }}
-        </button>
-
         <div class="help-form text-left">
           <h3>Need a Hand?</h3>
-          Fill out the form to have one of our Drupal Commerce experts contact you.<br>
+          Fill out the form to have one of our Drupal Commerce experts contact you.<br><br>
           <span class="small">All fields marked with * are required.</span>
 
           <!--[if lte IE 8]>
@@ -220,11 +174,11 @@
       <div class="modal-footer">
         <div class="modal-credits">
           {% trans %}
-            Tours built by <a href="https://www.acromedia.com" target="_blank" title="Visit Acro Media's website">Acro Media Inc.</a>
+            Drupal Commerce demo site by <a href="https://www.acromedia.com" target="_blank" title="Visit Acro Media's website">Acro Media Inc.</a>
           {% endtrans %}
         </div>
 
-        <button type="button" id="footerCloseTours" class="btn btn-default" data-dismiss="modal">{{ 'Close'|t }}</button>
+        <button type="button" id="footerClose" class="btn btn-default" data-dismiss="modal">{{ 'Close'|t }}</button>
       </div>
     </div>
   </div>

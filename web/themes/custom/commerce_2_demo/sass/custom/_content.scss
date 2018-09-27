@@ -540,12 +540,31 @@ table {
   transition: all 0.3s;
 }
 
+.modal {
+  h1, h2, h3, h4 {
+    margin-top: 0;
+  }
+
+  .modal-title {
+    margin: 0;
+    line-height: 1.42857;
+  }
+}
+
 .modal.fade.in .modal-dialog {
   transform: scale(1);
   transform: translate3d(0, -50%, 0);
   opacity: 1;
 }
 
+.modal-credits {
+  float: left;
+  margin: 8px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+// Video modal.
 #videoModal {
   background-color: rgba(0, 0, 0, 0.75) !important;
 
@@ -596,4 +615,27 @@ table {
       }
     }
   }
+}
+
+// Help modal.
+.help-modal.fixed-button {
+  position: fixed;
+  top: calc(50% + 13px);
+  right: 0;
+  z-index: 5;
+  padding: 10px 6px 10px 10px;
+  border-radius: 5px 0 0 5px;
+  border-right: 5px solid $c-primary-hover;
+
+  @media (max-width: 1065px) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.maintenance-page .help-modal.fixed-button,
+.path-pos-customer-display .help-modal.fixed-button,
+.path-commerce-pos .help-modal.fixed-button {
+  display: none;
+  visibility: hidden;
 }

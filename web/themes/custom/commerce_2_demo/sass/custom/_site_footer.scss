@@ -24,17 +24,23 @@
     padding-top: 22px;
     border-top: 1px solid #ccc;
 
-    @media (min-width: $screen-sm) {
-      .site-tours-wrapper {
-        float: right;
+    .site-footer__buttons {
+      text-align: right;
+      float: right;
 
-        .btn-primary {
-          margin: 0 2px;
+      .btn-primary {
+        margin: 0 2px;
+
+        i {
+          margin-right: 3px;
         }
       }
-    }
-    @media (max-width: $screen-xs-max) {
-      .site-tours-wrapper {
+
+      @media (max-width: $screen-sm-max) {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      @media (max-width: $screen-xs-max) {
         .btn-primary {
           margin: 0 2px 5px;
         }

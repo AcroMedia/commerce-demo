@@ -70,7 +70,6 @@
     position: absolute;
     top: -77px;
     font-size: 14px;
-    z-index: 9999999; // z-index only needed for JS site tour.
 
     @media (max-width: $screen-sm-max) {
       position: relative;

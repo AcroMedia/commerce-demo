@@ -1,6 +1,16 @@
 /**
  * Content styles.
  */
+
+// Make all divs relative. This is for the feature beacon placement.
+.site-content,
+.site-header,
+.site-footer {
+  div {
+    position: relative;
+  }
+}
+
 .site-content {
   padding: 20px 0;
   margin-bottom: 40px;

@@ -4,12 +4,10 @@
  * Marker styling modified from https://codepen.io/magnus16/pen/pnGAB
  */
 
-// Useful variables.
+// Beacon colors.
 $beacon-color: #00aeef;
 $beacon-color-dark: darken($beacon-color, 10%);
-$beacon-size: 26px;
-$beacon-offset: 18px;
-$beacon-offset-xs: 5px;
+$beacon-font-color: #fff;
 
 // Toggle buttons.
 .feature-beacon-toggle {
@@ -72,6 +70,13 @@ $beacon-offset-xs: 5px;
 }
 
 // Marker.
+$beacon-size: 26px;
+$beacon-size-half: $beacon-size / 2;
+$beacon-offset-x: 20px; // Horizontal.
+$beacon-offset-y: 13px; // Vertical.
+$beacon-offset-x-xs: 5px;
+$beacon-offset-y-xs: 5px;
+
 a.feature-beacon__marker {
   position:absolute;
   z-index: 2;
@@ -81,7 +86,7 @@ a.feature-beacon__marker {
   border-radius:50%;
   text-align: center;
   font-size: 14px;
-  color: #fff;
+  color: $beacon-font-color !important;
   line-height: $beacon-size;
 
   &:before{
@@ -98,83 +103,83 @@ a.feature-beacon__marker {
   }
 
   &.feature-beacon__marker--top-left {
-    top: -$beacon-offset;
-    left: -$beacon-offset;
+    top: -$beacon-offset-y;
+    left: -$beacon-offset-x;
 
     @media (max-width: $screen-xs-max) {
-      top: -$beacon-offset-xs;
-      left: -$beacon-offset-xs;
+      top: -$beacon-offset-y-xs;
+      left: -$beacon-offset-x-xs;
     }
   }
 
   &.feature-beacon__marker--top-center {
-    top: -$beacon-offset;
-    left: calc(50% - #{$beacon-offset});
+    top: -$beacon-offset-y;
+    left: calc(50% - #{$beacon-size-half});
 
     @media (max-width: $screen-xs-max) {
-      top: -$beacon-offset-xs;
+      top: -$beacon-offset-y-xs;
     }
   }
 
   &.feature-beacon__marker--top-right {
-    top: -$beacon-offset;
-    right: -$beacon-offset;
+    top: -$beacon-offset-y;
+    right: -$beacon-offset-x;
 
     @media (max-width: $screen-xs-max) {
-      top: -$beacon-offset-xs;
-      right: -$beacon-offset-xs;
+      top: -$beacon-offset-y-xs;
+      right: -$beacon-offset-x-xs;
     }
   }
 
   &.feature-beacon__marker--center-left {
-    top: calc(50% - #{$beacon-offset});
-    left: -$beacon-offset;
+    top: calc(50% - #{$beacon-size-half});
+    left: -$beacon-offset-x;
 
     @media (max-width: $screen-xs-max) {
-      left: -$beacon-offset-xs;
+      left: -$beacon-offset-x-xs;
     }
   }
 
   &.feature-beacon__marker--center {
-    top: calc(50% - #{$beacon-offset});
-    left: calc(50% - #{$beacon-offset});
+    top: calc(50% - #{$beacon-size-half});
+    left: calc(50% - #{$beacon-size-half});
   }
 
   &.feature-beacon__marker--center-right {
-    top: calc(50% - #{$beacon-offset});
-    right: -$beacon-offset;
+    top: calc(50% - #{$beacon-size-half});
+    right: -$beacon-offset-x;
 
     @media (max-width: $screen-xs-max) {
-      right: -$beacon-offset-xs;
+      right: -$beacon-offset-x-xs;
     }
   }
 
   &.feature-beacon__marker--bottom-left {
-    bottom: -$beacon-offset;
-    left: -$beacon-offset;
+    bottom: -$beacon-offset-y;
+    left: -$beacon-offset-x;
 
     @media (max-width: $screen-xs-max) {
-      bottom: -$beacon-offset-xs;
-      left: -$beacon-offset-xs;
+      bottom: -$beacon-offset-y-xs;
+      left: -$beacon-offset-x-xs;
     }
   }
 
   &.feature-beacon__marker--bottom-center {
-    bottom: -$beacon-offset;
-    left: calc(50% - #{$beacon-offset});
+    bottom: -$beacon-offset-y;
+    left: calc(50% - #{$beacon-size-half});
 
     @media (max-width: $screen-xs-max) {
-      bottom: -$beacon-offset-xs;
+      bottom: -$beacon-offset-y-xs;
     }
   }
 
   &.feature-beacon__marker--bottom-right {
-    bottom: -$beacon-offset;
-    right: -$beacon-offset;
+    bottom: -$beacon-offset-y;
+    right: -$beacon-offset-x;
 
     @media (max-width: $screen-xs-max) {
-      bottom: -$beacon-offset-xs;
-      right: -$beacon-offset-xs;
+      bottom: -$beacon-offset-y-xs;
+      right: -$beacon-offset-x-xs;
     }
   }
 }

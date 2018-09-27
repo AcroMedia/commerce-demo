@@ -68,7 +68,7 @@
 #block-commerce-2-demo-mainpagecontent .view-products {
   .view-header {
     position: absolute;
-    top: -77px;
+    top: -96px;
     font-size: 14px;
 
     @media (max-width: $screen-sm-max) {
@@ -96,6 +96,7 @@
 
     .field__item,
     .views-row {
+      position: initial;
       display: inline-block;
       vertical-align: top;
       width: 18%;
@@ -651,7 +652,7 @@
  */
 
 // Add on item teaser flag.
-.add-on-item__teaser-flag {
+div.add-on-item__teaser-flag {
   position: absolute;
   top: 17px;
   left: -29px;

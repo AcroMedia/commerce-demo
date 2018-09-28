@@ -8,6 +8,11 @@
 .site-footer {
   div {
     position: relative;
+
+    // Except for the following.
+    &.contextual {
+      position: absolute;
+    }
   }
 }
 

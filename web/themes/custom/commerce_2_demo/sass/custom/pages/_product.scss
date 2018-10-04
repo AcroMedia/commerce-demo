@@ -437,6 +437,7 @@
     width: 200px;
     float: right;
     margin-bottom: 20px;
+    z-index: auto !important;
 
     @media (max-width: 420px) {
       display: block !important;

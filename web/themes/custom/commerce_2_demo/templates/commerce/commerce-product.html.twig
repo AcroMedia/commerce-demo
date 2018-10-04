@@ -81,76 +81,66 @@
         {{ attach_library('magnific_popup/magnific_popup') }}
 
         {# Set product slider class. #}
-        {% if product_variation_images|length <= 1 %}
+        {% if product_variation_images|length <= 1 or product_entity.bundle == 'mason_jar' %}
           {% set product_slider_class = 'product-slider product-slider--no-thumbnails' %}
         {% else %}
           {% set product_slider_class = 'product-slider' %}
         {% endif %}
 
         <div class="col-sm-12 col-md-6">
-          {# Main product image - no slider. #}
-          {% if product_entity.bundle == 'mason_jar' %}
-            <div class="product-slider product-slider--no-thumbnails">
-              <div class="product-slider__main-slider__item">
-                {{ product.variation_field_image }}
-              </div>
-            </div>
-
           {# Main product image - with slider. #}
-          {% else %}
-            <div class="{{ product_slider_class }}">
-              <div class="product-slider__main-slider">
-                {% for product_variation in product_variation_images %}
-                  {% for product_variation_image in product_variation.images %}
-                    {# Set product thumbnail. #}
-                    {%
-                      set product_slider_image_thumbnail = {
-                      '#theme':      'image_style',
-                      '#style_name': 'product_large',
-                      '#uri':        product_variation_image.entity.uri.value,
-                      '#alt':        product_variation_image.alt,
-                    }
-                    %}
-                    <div>
-                      <div class="product-slider__main-slider__item">
-                        <a href="{{ file_url(product_variation_image.entity.uri.value) }}" class="magnific-popup-gallery">
-                          <span>{{ product_slider_image_thumbnail }}</span>
-                        </a>
-                      </div>
-                    </div>
-                  {% endfor %}
-                {% endfor %}
-              </div>
-
-              {# Image thumbnails. #}
-              <div class="product-slider__nav-slider">
-                {% for product_variation in product_variation_images %}
-                  {% if product_variation.variation_id %}
-                    {% set product_variation_id = product_variation.variation_id %}
-                  {% else %}
-                    {% set product_variation_id = '' %}
-                  {% endif %}
-
-                  {% for product_variation_image in product_variation.images %}
-                    {# Set product thumbnail. #}
-                    {%
-                      set product_slider_image_thumbnail = {
-                      '#theme':      'image_style',
-                      '#style_name': 'product_thumb',
-                      '#uri':        product_variation_image.entity.uri.value,
-                      '#alt':        product_variation_image.alt,
-                    }
-                    %}
-                    <div>
-                      <a class="product-slider__nav-slider__item" data-product-variation-id="{{ product_variation_id }}">
+          <div class="{{ product_slider_class }}">
+            <div class="product-slider__main-slider">
+              {% for product_variation in product_variation_images %}
+                {% for product_variation_image in product_variation.images %}
+                  {# Set product thumbnail. #}
+                  {%
+                    set product_slider_image_thumbnail = {
+                    '#theme':      'image_style',
+                    '#style_name': 'product_large',
+                    '#uri':        product_variation_image.entity.uri.value,
+                    '#alt':        product_variation_image.alt,
+                  }
+                  %}
+                  <div>
+                    <div class="product-slider__main-slider__item">
+                      <a href="{{ file_url(product_variation_image.entity.uri.value) }}" class="magnific-popup-gallery">
                         <span>{{ product_slider_image_thumbnail }}</span>
                       </a>
                     </div>
-                  {% endfor %}
+                  </div>
                 {% endfor %}
-              </div>
+              {% endfor %}
             </div>
-          {% endif %}
+
+            {# Image thumbnails. #}
+            <div class="product-slider__nav-slider">
+              {% for product_variation in product_variation_images %}
+                {% if product_variation.variation_id %}
+                  {% set product_variation_id = product_variation.variation_id %}
+                {% else %}
+                  {% set product_variation_id = '' %}
+                {% endif %}
+
+                {% for product_variation_image in product_variation.images %}
+                  {# Set product thumbnail. #}
+                  {%
+                    set product_slider_image_thumbnail = {
+                    '#theme':      'image_style',
+                    '#style_name': 'product_thumb',
+                    '#uri':        product_variation_image.entity.uri.value,
+                    '#alt':        product_variation_image.alt,
+                  }
+                  %}
+                  <div>
+                    <a class="product-slider__nav-slider__item" data-product-variation-id="{{ product_variation_id }}">
+                      <span>{{ product_slider_image_thumbnail }}</span>
+                    </a>
+                  </div>
+                {% endfor %}
+              {% endfor %}
+            </div>
+          </div>
         </div>
         {# Product intro (w/ product images). #}
         <div class="col-sm-12 col-md-6">

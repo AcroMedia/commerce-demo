@@ -176,3 +176,14 @@
     display: none;
   }
 }
+
+/**
+ * Overrides for specific forms.
+ */
+
+// Help form.
+#hsForm_4c37690f-26db-47d5-8e95-d9561e6f9594 {
+  textarea.hs-input {
+    min-height: auto;
+  }
+}

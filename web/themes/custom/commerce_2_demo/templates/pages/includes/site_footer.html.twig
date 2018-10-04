@@ -76,19 +76,19 @@
       <div class="row">
         <div class="col-sm-12 col-md-5 site-footer__buttons">
           {# Hide/show feature beacons #}
-          <button type="button" class="btn btn-primary feature-beacon-toggle">
+          <button type="button" class="btn btn-primary feature-beacon-toggle" title="{{ 'Toggle feature icons'|t }}">
             <i class="fa fa-star-o fa-lg"></i> <span>{{ 'Hide Beacons'|t }}</span>
           </button>
 
           {# Button trigger help modal #}
-          <button type="button" class="btn btn-primary help-modal" data-toggle="modal" data-target="#help">
+          <button type="button" class="btn btn-primary help-modal" data-toggle="modal" data-target="#help" title="{{ 'Learn more abou this demo'|t }}">
             <i class="fa fa-question-circle fa-lg"></i> {{ 'Help'|t }}
           </button>
 
           {# GitHub links #}
           <div class="github">
             <i class="fa fa-github fa-2x"></i>
-            <a href="https://github.com/AcroMedia/commerce-demo" target="_blank" class="btn btn-default">{{ 'View source code'|t }} <i class="fa fa-angle-right"></i></a>
+            <a href="https://github.com/AcroMedia/commerce-demo/blob/master/README.md" target="_blank" class="btn btn-default">{{ 'View source code'|t }} <i class="fa fa-angle-right"></i></a>
             <a href="https://github.com/AcroMedia/commerce-demo/issues" target="_blank" class="btn btn-default">{{ 'Report a bug'|t }} <i class="fa fa-angle-right"></i></a>
           </div>
         </div>
@@ -154,9 +154,10 @@
       </div>
       <div class="modal-body">
         <div class="help-form text-left">
-          <h3>Need a Hand?</h3>
-          Fill out the form to have one of our Drupal Commerce experts contact you.<br><br>
-          <span class="small">All fields marked with * are required.</span>
+          {% trans %}
+          <h3>Want to learn more?</h3>
+          If you like what you’re seeing and want to learn more about leveraging Drupal and Drupal Commerce for your commerce solution, reach out to one of our business developers for more information.<br><br>
+          {% endtrans %}
 
           <!--[if lte IE 8]>
           <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
@@ -169,6 +170,18 @@
               formId: '4c37690f-26db-47d5-8e95-d9561e6f9594'
             });
           </script>
+
+          <hr>
+
+          {% trans %}
+            <h3>Developer help</h3>
+            Looking for community help with your Drupal Commerce project?<br><br>
+            <ul>
+              <li>Visit Acro Media's <a href="https://www.youtube.com/user/acromediainc" target="_blank">YouTube channel</a></li>
+              <li>View this demo's <a href="https://github.com/AcroMedia/commerce-demo/blob/master/README.md" target="_blank">source code</a></li>
+              <li>See the official <a href="https://docs.drupalcommerce.org/commerce2/getting-started/getting-help" target="_blank">Drupal Commerce help resources</a></li>
+            </ul>
+          {% endtrans %}
         </div>
       </div>
       <div class="modal-footer">

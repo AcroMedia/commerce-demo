@@ -5,25 +5,6 @@
 (function ($, Drupal) {
 
   /**
-   * Scripts w/o AJAX events.
-   */
-
-  // Set initial checkbox state.
-  // $('div[class*="form-item-add-ons-items-add-ons-"]').each(function () {
-  //   var thisItem = $(this);
-  //   var checkbox = thisItem.find('input[type="checkbox"]');
-  //
-  //   // Check initial checkbox state.
-  //   if (checkbox.prop("checked")) {
-  //     thisItem.addClass('checked')
-  //   }
-  //   else {
-  //     thisItem.removeClass('checked')
-  //   }
-  // });
-
-
-  /**
    * Scripts w/ AJAX events.
    */
 

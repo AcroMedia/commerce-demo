@@ -155,6 +155,10 @@
                 "#2992041: Group add on items under generic variable":
                 "https://www.drupal.org/files/issues/2018-08-29/group_add_on_items_under_generic_variable-2992041-8.patch"
             },
+            "drupal/commerce_shipping": {
+                "#2952457: Removing user's profile causes fatal error with PackerManager::packToShipments()":
+                "https://www.drupal.org/files/issues/2018-08-07/commerce_shipping-fix_fatal_error_on_missing_profile-2952457-10-D8.patch"
+            },
             "drupal/menu_block": {
                 "#2809699: Menu parent as block title":
                 "https://www.drupal.org/files/issues/2018-05-07/menu_block-label_configuration-2809699-77.patch"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1c202a50000516e8b20ca10510910e6",
+    "content-hash": "1f8303415230520a7d8163f4e3d35862",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -3163,6 +3163,9 @@
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
                     }
+                },
+                "patches_applied": {
+                    "#2952457: Removing user's profile causes fatal error with PackerManager::packToShipments()": "https://www.drupal.org/files/issues/2018-08-07/commerce_shipping-fix_fatal_error_on_missing_profile-2952457-10-D8.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -4696,7 +4699,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {

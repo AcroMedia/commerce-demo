@@ -206,7 +206,7 @@ plus-demo-to-live:
     - master
 
   environment:
-    name: cloud4
+    name: cloud4.acromedia.com
     url: https://demoplus.cloud4.acromedia.com
 
   script:

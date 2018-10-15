@@ -144,8 +144,6 @@
         },
         "patches": {
             "drupal/commerce": {
-                "#2901504: Provide limit by no of orders per user condition for promotions in commerce core":
-                "https://www.drupal.org/files/issues/provide_limit_by_no_of-2901504-2.patch",
                 "#2770731: Add a display name to promotions":
                 "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
                 "#2852207: Billing same as shipping":

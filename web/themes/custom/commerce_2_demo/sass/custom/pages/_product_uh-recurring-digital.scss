@@ -289,6 +289,21 @@
       }
     }
 
+    .uh-plan__list-price {
+      color: $c-primary;
+
+      .field__label {
+        display: inline-block;
+        color: $c-body;
+        font-weight: 600;
+      }
+
+      .field__item {
+        display: inline-block;
+        text-decoration: $c-primary-hover line-through;
+      }
+    }
+
     .uh-plan__price {
       display: inline-block;
       vertical-align: bottom;

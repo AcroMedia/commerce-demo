@@ -37,6 +37,13 @@
     {% endif %}
 
     <div class="uh-plan__price-wrapper">
+      {% if variation.getListPrice %}
+        <div class="uh-plan__list-price">
+          <div class="field__label">{{ 'List price:'|t }}</div>
+          <div class="field__item">{{ variation.getListPrice|commerce_price_format }}</div>
+        </div>
+      {% endif %}
+
       <div class="uh-plan__price">
         {{ variation.getPrice|commerce_price_format}}
       </div>

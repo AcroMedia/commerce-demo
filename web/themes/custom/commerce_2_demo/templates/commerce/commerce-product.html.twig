@@ -48,6 +48,7 @@
     {% if product.variation_field_original_price[0]['#markup'] %}
       {{ product.variation_field_original_price }}
     {% endif %}
+    {{ product.variation_list_price }}
     {{ product.variation_price }}
     {{ product.title }}
     {{ product.field_brand }}
@@ -154,6 +155,7 @@
             {{ product.field_brand }}
             {{ product.field_artist }}
             <h1 class="page-title">{{ product_entity.title.value }}</h1>
+            {{ product.variation_list_price }}
             {{ product.variation_price }}
             {{ product.field_short_description }}
 

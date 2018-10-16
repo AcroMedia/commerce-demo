@@ -178,8 +178,24 @@
           color: $c-primary;
         }
 
+        .field--name-list-price {
+          margin-bottom: 5px;
+          color: $c-primary;
+          font-size: 14px;
+          text-decoration: $c-primary-hover line-through;
+
+          .field__label {
+            color: $c-body;
+            font-weight: 600;
+            font-size: 12px;
+          }
+
+          .field__item {
+            text-decoration: $c-primary-hover line-through;
+          }
+        }
+
         .field--name-price {
-          width: 100%;
           margin-bottom: 8px;
           font-size: 24px;
           font-weight: 300;
@@ -485,6 +501,21 @@
 
       @media (max-width: $screen-xs-max) {
         font-size: 36px;
+      }
+    }
+
+    .field--name-list-price {
+      color: $c-primary;
+
+      .field__label {
+        display: inline-block;
+        color: $c-body;
+        font-weight: 600;
+      }
+
+      .field__item {
+        display: inline-block;
+        text-decoration: $c-primary-hover line-through;
       }
     }
 

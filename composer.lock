@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2126c621a85c4ea33b775299aea3fbc4",
+    "content-hash": "35a36785353bb881e19291223fe34bf9",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2291,7 +2291,8 @@
                 },
                 "patches_applied": {
                     "#2770731: Add a display name to promotions": "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
-                    "#2852207: Billing same as shipping": "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch"
+                    "#2852207: Billing same as shipping": "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch",
+                    "#2938760: Variation fields can permanently disappear during ajax replacement": "https://www.drupal.org/files/issues/2018-06-29/2938760-add_variation_field_wrapper-13.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

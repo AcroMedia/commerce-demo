@@ -147,7 +147,9 @@
                 "#2770731: Add a display name to promotions":
                 "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
                 "#2852207: Billing same as shipping":
-                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch"
+                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch",
+                "#2938760: Variation fields can permanently disappear during ajax replacement":
+                "https://www.drupal.org/files/issues/2018-06-29/2938760-add_variation_field_wrapper-13.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":

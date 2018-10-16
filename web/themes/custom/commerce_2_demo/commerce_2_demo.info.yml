@@ -8,7 +8,6 @@ base theme: orange_framework
 
 libraries:
   - commerce_2_demo/global-styling
-  - commerce_2_demo/tours
 
 ckeditor_stylesheets:
   - css/style.css
@@ -33,4 +32,5 @@ regions:
   social_nav: 'Footer Top - Social Media Navigation'
   footer: 'Footer Main'
   footer_nav: 'Footer Bottom - Navigation'
+  feature_beacon: 'Feature Beacon'
   access_gate: 'Access Gate'

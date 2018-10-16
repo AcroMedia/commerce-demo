@@ -1,0 +1,82 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+
+{# Include UH Access Gate library. #}
+{{ attach_library('commerce_2_demo/uh-feature-beacon') }}
+{# / Include UH Access Gate library. #}
+
+{% block content %}
+
+  {# Set block content variables to access raw data. #}
+  {% set block_entity = content['#block_content'] %}
+  {% set block_id = 'feature-beacon--' ~ block_entity.id.value %}
+  {% set modal_size = block_entity.field_modal_size.value %}
+
+  {# Beacon and modal attributes. #}
+  {% set link_attributes = create_attribute() %}
+  {% set modal_attributes = create_attribute() %}
+
+  {% if block_entity.field_display_label|length %}
+    {% set link_attributes = link_attributes.setAttribute('title', block_entity.field_display_label.value) %}
+    {% set modal_attributes = modal_attributes.setAttribute('aria-label', block_entity.field_display_label.value) %}
+  {% endif %}
+
+  {% if block_entity.field_page_element|length %}
+    {% set link_attributes = link_attributes.setAttribute('data-selector', block_entity.field_page_element.value) %}
+  {% endif %}
+
+  {% if block_entity.field_position_on_element|length %}
+    {% set link_attributes = link_attributes.setAttribute('class', 'feature-beacon__marker feature-beacon__marker--' ~ block_entity.field_position_on_element.value) %}
+  {% endif %}
+
+  {# Marker. #}
+  <a href="#{{ block_id }}" {{ link_attributes }} data-toggle="modal"><i class="fa fa-star"></i></a>
+
+  {# Modal. #}
+  <div class="modal fade feature-beacon__modal" {{ modal_attributes }} id="{{ block_id }}" tabindex="-1" role="dialog" >
+    <div class="modal-dialog {{ modal_size }}" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" id="headerClose" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><i class="fa fa-star fa-lg"></i> {{ 'Feature'|t }}</h4>
+        </div>
+        <div class="modal-body">
+          {% if label %}
+            <h3{{ title_attributes }}>{{ label }}</h3>
+          {% endif %}
+
+          {{ content }}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="footerClose" class="btn btn-default" tabindex="-1" data-dismiss="modal">{{ 'Close'|t }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

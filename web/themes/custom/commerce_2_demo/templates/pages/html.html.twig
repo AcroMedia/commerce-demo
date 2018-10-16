@@ -63,8 +63,13 @@
     <a href="#main-content" class="visually-hidden focusable skip-link">
       {{ 'Skip to main content'|t }}
     </a>
-    <button type="button" id="siteTours-start" class="btn btn-primary fixed-button" data-toggle="modal" data-target="#siteTours">
-      <i class="fa fa-star fa-lg"></i> {{ 'Guided Tours'|t }}
+    {# Button trigger help modal #}
+    <button type="button" class="btn btn-primary fixed-button help-modal" data-toggle="modal" data-target="#help" title="{{ 'Learn more about this demo'|t }}">
+      <i class="fa fa-question-circle fa-lg"></i>
+    </button>
+    {# Hide/show feature beacons #}
+    <button type="button" class="btn btn-primary fixed-button feature-beacon-toggle" title="{{ 'Toggle feature icons'|t }}">
+      <i class="fa fa-star-o fa-lg"></i>
     </button>
     {{ page_top }}
     {{ page }}

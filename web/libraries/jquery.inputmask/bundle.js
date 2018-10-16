@@ -1,11 +1,9 @@
-import "./css/inputmask.css";
+// import "./css/inputmask.css";
 
 import "./js/inputmask.date.extensions";
 import "./js/inputmask.extensions";
 import "./js/inputmask.numeric.extensions";
 import "./js/inputmask.phone.extensions";
-//remove me later
-import "./js/inputmask.regex.extensions";
 
 // import "./js/phone-codes/phone-be";
 // import "./js/phone-codes/phone-nl";

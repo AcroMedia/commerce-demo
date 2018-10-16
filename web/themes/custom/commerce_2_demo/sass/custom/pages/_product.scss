@@ -68,9 +68,8 @@
 #block-commerce-2-demo-mainpagecontent .view-products {
   .view-header {
     position: absolute;
-    top: -77px;
+    top: -96px;
     font-size: 14px;
-    z-index: 9999999; // z-index only needed for JS site tour.
 
     @media (max-width: $screen-sm-max) {
       position: relative;
@@ -97,6 +96,7 @@
 
     .field__item,
     .views-row {
+      position: initial;
       display: inline-block;
       vertical-align: top;
       width: 18%;
@@ -178,8 +178,24 @@
           color: $c-primary;
         }
 
+        .field--name-list-price {
+          margin-bottom: 5px;
+          color: $c-primary;
+          font-size: 14px;
+          text-decoration: $c-primary-hover line-through;
+
+          .field__label {
+            color: $c-body;
+            font-weight: 600;
+            font-size: 12px;
+          }
+
+          .field__item {
+            text-decoration: $c-primary-hover line-through;
+          }
+        }
+
         .field--name-price {
-          width: 100%;
           margin-bottom: 8px;
           font-size: 24px;
           font-weight: 300;
@@ -437,6 +453,7 @@
     width: 200px;
     float: right;
     margin-bottom: 20px;
+    z-index: auto !important;
 
     @media (max-width: 420px) {
       display: block !important;
@@ -484,6 +501,21 @@
 
       @media (max-width: $screen-xs-max) {
         font-size: 36px;
+      }
+    }
+
+    .field--name-list-price {
+      color: $c-primary;
+
+      .field__label {
+        display: inline-block;
+        color: $c-body;
+        font-weight: 600;
+      }
+
+      .field__item {
+        display: inline-block;
+        text-decoration: $c-primary-hover line-through;
       }
     }
 
@@ -652,7 +684,7 @@
  */
 
 // Add on item teaser flag.
-.add-on-item__teaser-flag {
+div.add-on-item__teaser-flag {
   position: absolute;
   top: 17px;
   left: -29px;

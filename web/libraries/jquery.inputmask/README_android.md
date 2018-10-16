@@ -15,19 +15,29 @@ When browsers would implement the inputmode attribute, disabling will be possibl
 
 ##Update 18/01/2017
 
-It seems that the GBoard keyboard fires the keydown event only with 229 as keycode.  This behavior is not considered a bug as other means should be used to handle input.  (when available offcourse ;-) )
+It seems that the GBoard keyboard fires the keydown event only with 229 as keycode.  This behavior is not considered a bug as other means should be used to handle input.  
 See https://github.com/w3c/input-events
 
+##Update 10/10/2017
+
+Masking on mobile devices is currently implemented solely based on the input event.  The beforeinput event isn't common in the browsers yet and so cannot be used.
+
+I renamed the androidHack option to disablePredictiveText, so the option is now also available for other platforms.
+This can be enabled by passing true for the option.  
+
+ 
+
+<strike>
 ##The workaround, the patchwork, the bad and ugly ;-)
 
 This is not enabled by default, because I find that the developer should be aware of what it does and what you need to take into account when using this hack.
 
 What it does.
 - changes the input type to password => disabled predictive text
-- enables the colorMask option which creates a div which is positioned above the input.
-So we type in the hidden password input and render the mask in the created div.
-Be aware that by changing the type to password that all css you targeted for type=text will not be applied anymore.
-You will need to adapt your css for it.  It is possible that the div is not well positioned.  If so, open an issue for it with a jsfiddle.
+- enables the colorMask option which creates a div, which surrounds the input.  
+So we type in the hidden password input and render the mask in the a created div.
+
+To use the colorMask, you need to include the inputmask.css you might need to add some css-tweaks to make it all visually correct in your page.
 
 To enable the workaround add the androidHack option to your individual masks or globally by setting defaults.
 You should set the option to "rtfm".
@@ -37,13 +47,14 @@ Inputmask("myfancymask", {androidHack: "rtfm"}).mask(selector);
 
 Inputmask.extendDefaults({ androidHack: "rtfm" });
 ```
+</strike>
 
 ##Reporting android related issues
 
 Before you submit an issue related to Android.  Test the issue with and without predictive text enabled.
 
 If the issue also occurs with predictive text disabled you may create an issue for it on Github.
-Otherwise, retry the issue on a desktop browser and add the colorMask: true option.
+Otherwise, retry the issue on a desktop browser and add the inputEventOnly: true and colorMask: true option.
 If the problem is still there you may submit an issue.
 
 Always include a jsfiddle or alike to ease reproducing the problem.

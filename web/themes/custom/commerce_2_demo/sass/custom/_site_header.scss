@@ -436,7 +436,8 @@
 /**
  * Commerce cart block expanded.
  */
-.cart-block--contents {
+div.cart-block--contents {
+  position: absolute;
   width: 350px;
   margin-top: 5px;
   border: 1px solid $gray;

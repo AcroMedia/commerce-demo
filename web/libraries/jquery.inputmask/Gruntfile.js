@@ -1,4 +1,5 @@
 const webpackConfig = require('./webpack.config');
+const buildWebpackConfig = require('./webpackbuild.config');
 const qunitWebpackConfig = require('./qunit/webpack.config');
 
 module.exports = function (grunt) {
@@ -86,13 +87,15 @@ module.exports = function (grunt) {
                 updateConfigs: ['pkg'],
                 commit: false,
                 createTag: false,
-                push: false
+                push: false,
+                prereleaseName: "beta"
             }
         },
         release: {
             options: {
                 bump: false,
-                commitMessage: 'Inputmask <%= version %>'
+                commit: false,
+                add: false
             }
         },
         nugetpack: {
@@ -129,17 +132,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        shell: {
-            options: {
-                stderr: false
-            },
-            gitcommitchanges: {
-                command: ['git add .',
-                    'git reset -- package.json',
-                    'git commit -m "Inputmask <%= pkg.version %>"'
-                ].join('&&')
-            }
-        },
         eslint: {
             target: "{extra/*,js}/*.js"
         },
@@ -153,7 +145,8 @@ module.exports = function (grunt) {
             }
         },
         webpack: {
-            build: webpackConfig,
+            main: webpackConfig,
+            build: buildWebpackConfig,
             qunit: qunitWebpackConfig
         }
     });
@@ -161,10 +154,15 @@ module.exports = function (grunt) {
 // Load the plugin that provides the tasks.
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('publish:patch', ['clean', 'bump:patch', 'webpack:build', 'uglify', 'shell:gitcommitchanges', 'release', 'nugetpack', 'nugetpush']);
-    grunt.registerTask('publish:minor', ['clean', 'bump:minor', 'webpack:build', 'uglify', 'shell:gitcommitchanges', 'release', 'nugetpack', 'nugetpush']);
-    grunt.registerTask('publish:major', ['clean', 'bump:major', 'webpack:build', 'uglify', 'shell:gitcommitchanges', 'release', 'nugetpack', 'nugetpush']);
+    grunt.registerTask('publish', ['release', 'nugetpack', 'nugetpush']);
+    grunt.registerTask('publishnext', function () {
+        grunt.config('release.options.npmtag', "next");
+        grunt.task.run('release');
+    });
     grunt.registerTask('validate', ['webpack:qunit', 'eslint', 'karma']);
     grunt.registerTask('build', ['bump:prerelease', 'clean', 'webpack:build', 'uglify']);
+    grunt.registerTask('build:patch', ['bump:patch', 'clean', 'webpack:build', 'uglify']);
+    grunt.registerTask('build:minor', ['bump:minor', 'clean', 'webpack:build', 'uglify']);
+    grunt.registerTask('build:major', ['bump:major', 'clean', 'webpack:build', 'uglify']);
     grunt.registerTask('default', ["availabletasks"]);
 };

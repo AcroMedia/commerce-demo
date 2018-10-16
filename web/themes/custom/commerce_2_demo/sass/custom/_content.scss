@@ -1,6 +1,21 @@
 /**
  * Content styles.
  */
+
+// Make all divs relative. This is for the feature beacon placement.
+.site-content,
+.site-header,
+.site-footer {
+  div {
+    position: relative;
+
+    // Except for the following.
+    &.contextual {
+      position: absolute;
+    }
+  }
+}
+
 .site-content {
   padding: 20px 0;
   margin-bottom: 40px;
@@ -535,17 +550,34 @@ table {
  */
 .modal.fade .modal-dialog {
   transform: scale(0.1);
-  top: 50%;
   opacity: 0;
   transition: all 0.3s;
 }
 
+.modal {
+  h1, h2, h3, h4 {
+    margin-top: 0;
+  }
+
+  .modal-title {
+    margin: 0;
+    line-height: 1.42857;
+  }
+}
+
 .modal.fade.in .modal-dialog {
   transform: scale(1);
-  transform: translate3d(0, -50%, 0);
   opacity: 1;
 }
 
+.modal-credits {
+  float: left;
+  margin: 8px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+// Video modal.
 #videoModal {
   background-color: rgba(0, 0, 0, 0.75) !important;
 
@@ -596,4 +628,29 @@ table {
       }
     }
   }
+}
+
+// Help modal.
+.help-modal.fixed-button {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 5;
+  width: 45px;
+  padding: 10px 0;
+  border-radius: 5px 0 0 5px;
+  border-right: 5px solid $c-primary-hover;
+  text-align: center;
+
+  @media (max-width: 1065px) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.maintenance-page .help-modal.fixed-button,
+.path-pos-customer-display .help-modal.fixed-button,
+.path-commerce-pos .help-modal.fixed-button {
+  display: none;
+  visibility: hidden;
 }

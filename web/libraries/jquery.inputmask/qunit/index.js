@@ -9,13 +9,13 @@ import "../js/inputmask.phone.extensions";
 import "../js/phone-codes/phone-be";
 import "../js/phone-codes/phone-nl";
 import "../js/phone-codes/phone-ru";
-import "../js/phone-codes/phone-uk";
 import "../js/phone-codes/phone";
 import "../js/jquery.inputmask";
 
-import  Inputmask from "../js/inputmask";
+import Inputmask from "../js/inputmask";
 import dependencyLib from "../js/dependencyLibs/inputmask.dependencyLib";
 import jQuery from "jquery";
+
 if (dependencyLib === jQuery)
     window.jQuery = dependencyLib;
 
@@ -25,10 +25,11 @@ import simulator from "./simulator.js";
 
 
 // android testing
-// Inputmask.extendDefaults({
-//    inputEventOnly: true
-// });
-// window.Inputmask = Inputmask; //inject globally for the simulator to detect inputeventonly
+Inputmask.extendDefaults({
+    inputEventOnly: false
+});
+
+window.Inputmask = Inputmask; //inject globally for the simulator to detect inputeventonly
 
 import tests_alternations from "./tests_alternations";
 import tests_attributes from "./tests_attributes";
@@ -86,7 +87,7 @@ tests_regex(qunit, dependencyLib, Inputmask);
 tests_setvalue(qunit, dependencyLib, Inputmask);
 
 //phone
-// tests_phone_world(qunit, dependencyLib, Inputmask);
+//tests_phone_world(qunit, dependencyLib, Inputmask);
 // tests_phonebe(qunit, dependencyLib, Inputmask);
 // tests_phonenl(qunit, dependencyLib, Inputmask);
 // tests_phoneru(qunit, dependencyLib, Inputmask);

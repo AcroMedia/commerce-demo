@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'ar', {
@@ -19,8 +19,8 @@ CKEDITOR.plugins.setLang( 'link', 'ar', {
 	anchorName: 'حسب إسم الإشارة المرجعية',
 	charset: 'ترميز المادة المطلوبة',
 	cssClasses: 'فئات التنسيق',
-	download: 'Force Download', // MISSING
-	displayText: 'Display Text', // MISSING
+	download: 'فرض التحميل',
+	displayText: 'نص العرض',
 	emailAddress: 'البريد الإلكتروني',
 	emailBody: 'محتوى الرسالة',
 	emailSubject: 'موضوع الرسالة',

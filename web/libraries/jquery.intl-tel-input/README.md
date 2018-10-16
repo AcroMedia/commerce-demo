@@ -145,7 +145,7 @@ _Tip: store the result in a cookie to avoid repeat lookups!_
 
 **hiddenInput**  
 Type: `String` Default: `""`  
-Add a hidden input with the given name, and on submit, populate it with the full international number (using `getNumber`). This is a quick way for people using non-ajax forms to get the full international number, even when `nationalMode` is enabled. _Note: requires the main telephone input to be inside a form element, as this feature works by listening for the submit event on the closest form element._
+Add a hidden input with the given name (or if your input name contains square brackets then it will give the hidden input the same name, replacing the contents of the brackets with the given name). On submit, populate it with the full international number (using `getNumber`). This is a quick way for people using non-ajax forms to get the full international number, even when `nationalMode` is enabled. _Note: requires the main telephone input to be inside a form element, as this feature works by listening for the submit event on the closest form element._
 
 **initialCountry**  
 Type: `String` Default: `""`  
@@ -153,17 +153,25 @@ Set the initial country selection by specifying it's country code. You can also 
 
 If you leave `initialCountry` blank, it will default to the first country in the list.
 
+**localizedCountries**  
+Type: `Object` Default: `{}`  
+Allows to translate the countries by its given iso code e.g.:
+
+```js
+{ 'de': 'Deutschland' }
+```
+
 **nationalMode**  
 Type: `Boolean` Default: `true`  
 Allow users to enter national numbers (and not have to think about international dial codes). Formatting, validation and placeholders still work. Then you can use `getNumber` to extract a full international number - [see example](http://intl-tel-input.com/node_modules/intl-tel-input/examples/gen/national-mode.html). This option now defaults to `true`, and it is recommended that you leave it that way as it provides a better experience for the user.
 
-**placeholderNumberType**  
-Type: `String` Default: `"MOBILE"`  
-Specify [one of the keys](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/utils.js#L119) from the global enum `intlTelInputUtils.numberType` e.g. `"FIXED_LINE"` to set the number type to use for the placeholder.
-
 **onlyCountries**  
 Type: `Array` Default: `undefined`  
 In the dropdown, display only the countries you specify - [see example](http://intl-tel-input.com/node_modules/intl-tel-input/examples/gen/only-countries-europe.html).
+
+**placeholderNumberType**  
+Type: `String` Default: `"MOBILE"`  
+Specify [one of the keys](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/utils.js#L119) from the global enum `intlTelInputUtils.numberType` e.g. `"FIXED_LINE"` to set the number type to use for the placeholder.
 
 **preferredCountries**  
 Type: `Array` Default: `["us", "gb"]`  
@@ -198,9 +206,9 @@ Returns a string e.g. if the input value was `"(702) 555-5555 ext. 1234"`, this 
 **getNumber**  
 Get the current number in the given format (defaults to [E.164 standard](http://en.wikipedia.org/wiki/E.164)). The different formats are available in the enum `intlTelInputUtils.numberFormat` - which you can see [here](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/utils.js#L109). Requires the `utilsScript` option. _Note that even if `nationalMode` is enabled, this can still return a full international number. Also note that this method expects a valid number, and so should only be used after validation._  
 ```js
-var intlNumber = $("#phone").intlTelInput("getNumber");
+var number = $("#phone").intlTelInput("getNumber");
 // or
-var ntlNumber = $("#phone").intlTelInput("getNumber", intlTelInputUtils.numberFormat.E164);
+var number = $("#phone").intlTelInput("getNumber", intlTelInputUtils.numberFormat.E164);
 ```
 Returns a string e.g. `"+17024181234"`
 
@@ -287,7 +295,7 @@ Returns an array of country objects:
 
 **loadUtils**  
 _Note: this is only needed if you're lazy loading the plugin script itself (intlTelInput.js). If not then just use the `utilsScript` option._  
-Load the utils.js script (included in the lib directory) to enable formatting/validation etc. See [Utilities Script](#utilities-script) for more information.
+Load the utils.js script (included in the lib directory) to enable formatting/validation etc. See [Utilities Script](#utilities-script) for more information. This method should only be called once per page. It returns a Deferred object, so you can chain it with `.done(callback)` to know when it's finished.
 ```js
 $.fn.intlTelInput.loadUtils("build/js/utils.js");
 ```

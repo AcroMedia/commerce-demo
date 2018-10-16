@@ -17,7 +17,6 @@
   margin: 0 auto 20px auto;
   padding: 0;
   max-width: 1570px;
-  overflow: hidden;
 
   // Slider.
   .slides {
@@ -67,14 +66,22 @@
       }
     }
     li.flex-nav-prev {
-      left: 40px;
+      left: 55px;
+
+      @media (max-width: 1065px) {
+        left: 25px;
+      }
 
       a {
         background: url(../gfx/arrow-prev.svg) center center no-repeat;
       }
     }
     li.flex-nav-next {
-      right: 40px;
+      right: 55px;
+
+      @media (max-width: 1065px) {
+        right: 25px;
+      }
 
       a {
         background: url(../gfx/arrow-next.svg) center center no-repeat;

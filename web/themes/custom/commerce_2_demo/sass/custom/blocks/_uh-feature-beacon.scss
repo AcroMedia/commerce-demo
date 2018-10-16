@@ -1,0 +1,196 @@
+/**
+ * UH Feature Beacons.
+ *
+ * Marker styling modified from https://codepen.io/magnus16/pen/pnGAB
+ */
+
+// Beacon colors.
+$beacon-color: #00aeef;
+$beacon-color-dark: darken($beacon-color, 10%);
+$beacon-font-color: #fff;
+
+// Toggle buttons.
+.feature-beacon-toggle {
+  display: none; // Shown with jQuery.
+  background-color: $beacon-color;
+  border-color: $beacon-color;
+  transition: background .1s ease-in-out, border .1s ease-in-out;
+
+  &:hover, &:focus {
+    background-color: $beacon-color-dark;
+    border-color: $beacon-color-dark;
+  }
+
+  i {
+    margin-right: 3px;
+  }
+}
+
+.feature-beacon-toggle.fixed-button {
+  position: fixed;
+  top: calc(50% + 50px);
+  right: 0;
+  z-index: 5;
+  width: 45px;
+  padding: 10px 0;
+  border-radius: 5px 0 0 5px;
+  border-right: 5px solid $beacon-color-dark;
+  text-align: center;
+
+  i {
+    margin-right: 0;
+  }
+
+  @media (max-width: 1065px) {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+.maintenance-page .help-modal.fixed-button,
+.path-pos-customer-display .help-modal.fixed-button,
+.path-commerce-pos .help-modal.fixed-button {
+  display: none;
+  visibility: hidden;
+}
+
+// Marker animation.
+@keyframes active{
+  0%{
+    transform:scale(.1);
+    opacity:1;
+  }
+  70%{
+    transform:scale(2);
+    opacity:0;
+  }
+  100%{
+    opacity:0;
+  }
+}
+
+// Marker.
+$beacon-size: 26px;
+$beacon-size-half: $beacon-size / 2;
+$beacon-offset-x: 20px; // Horizontal.
+$beacon-offset-y: 13px; // Vertical.
+$beacon-offset-x-xs: 5px;
+$beacon-offset-y-xs: 5px;
+
+a.feature-beacon__marker {
+  position:absolute;
+  z-index: 2;
+  width: $beacon-size;
+  height: $beacon-size;
+  background-color: rgba($beacon-color, .9);
+  border-radius:50%;
+  text-align: center;
+  font-size: 14px;
+  color: $beacon-font-color !important;
+  line-height: $beacon-size;
+  transition: transform .2s ease;
+  outline: none;
+
+  &:before{
+    position: absolute;
+    content:"";
+    width: $beacon-size;
+    height: $beacon-size;
+    left:0;
+    top:0;
+    background-color:transparent;
+    border-radius:50%;
+    box-shadow:0 0 3px 3px $beacon-color-dark;
+    animation:active 2s infinite ease-out;
+    outline: none;
+  }
+
+  &:hover, &:focus {
+    transform: scale(1.23);
+
+    &:before{
+      transform: scale(1.23);
+    }
+  }
+
+  &.feature-beacon__marker--top-left {
+    top: -$beacon-offset-y;
+    left: -$beacon-offset-x;
+
+    @media (max-width: $screen-xs-max) {
+      top: -$beacon-offset-y-xs;
+      left: -$beacon-offset-x-xs;
+    }
+  }
+
+  &.feature-beacon__marker--top-center {
+    top: -$beacon-offset-y;
+    left: calc(50% - #{$beacon-size-half});
+
+    @media (max-width: $screen-xs-max) {
+      top: -$beacon-offset-y-xs;
+    }
+  }
+
+  &.feature-beacon__marker--top-right {
+    top: -$beacon-offset-y;
+    right: -$beacon-offset-x;
+
+    @media (max-width: $screen-xs-max) {
+      top: -$beacon-offset-y-xs;
+      right: -$beacon-offset-x-xs;
+    }
+  }
+
+  &.feature-beacon__marker--center-left {
+    top: calc(50% - #{$beacon-size-half});
+    left: -$beacon-offset-x;
+
+    @media (max-width: $screen-xs-max) {
+      left: -$beacon-offset-x-xs;
+    }
+  }
+
+  &.feature-beacon__marker--center {
+    top: calc(50% - #{$beacon-size-half});
+    left: calc(50% - #{$beacon-size-half});
+  }
+
+  &.feature-beacon__marker--center-right {
+    top: calc(50% - #{$beacon-size-half});
+    right: -$beacon-offset-x;
+
+    @media (max-width: $screen-xs-max) {
+      right: -$beacon-offset-x-xs;
+    }
+  }
+
+  &.feature-beacon__marker--bottom-left {
+    bottom: -$beacon-offset-y;
+    left: -$beacon-offset-x;
+
+    @media (max-width: $screen-xs-max) {
+      bottom: -$beacon-offset-y-xs;
+      left: -$beacon-offset-x-xs;
+    }
+  }
+
+  &.feature-beacon__marker--bottom-center {
+    bottom: -$beacon-offset-y;
+    left: calc(50% - #{$beacon-size-half});
+
+    @media (max-width: $screen-xs-max) {
+      bottom: -$beacon-offset-y-xs;
+    }
+  }
+
+  &.feature-beacon__marker--bottom-right {
+    bottom: -$beacon-offset-y;
+    right: -$beacon-offset-x;
+
+    @media (max-width: $screen-xs-max) {
+      bottom: -$beacon-offset-y-xs;
+      right: -$beacon-offset-x-xs;
+    }
+  }
+}

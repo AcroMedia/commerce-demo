@@ -190,30 +190,6 @@
     });
   });
 
-  // Facet Brand filter - Show more.
-  if ($(".site-sidebar--desktop #block-brands li").length || $(".site-sidebar--mobile #block-brands li").length) {
-    // Get number of options.
-    var $brandsDesktop = $(".site-sidebar--desktop #block-brands li");
-    var $brandsMobile = $(".site-sidebar--mobile #block-brands li");
-
-    // Only show first 15 options.
-    $brandsDesktop.slice(15).hide();
-    $brandsMobile.slice(15).hide();
-
-    // If too many options, show button.
-    if (($brandsDesktop.length || $brandsMobile.length) > 16) {
-      // Show buttons.
-      $(".site-sidebar--desktop #block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
-      $(".site-sidebar--mobile #block-brands ul").after('<span class="show-more-options" tabindex="0">' + Drupal.t('Show more') + '</span>');
-    }
-
-    // When button clicked, show all options and hide button.
-    $('.show-more-options').click(function () {
-      $('#block-brands li').fadeIn();
-      $(this).hide();
-    });
-  }
-
   // Open any YouTube links in a modal.
   $('.region-content a').each(function () {
     var url = $(this).attr('href');

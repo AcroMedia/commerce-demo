@@ -1,17 +1,70 @@
 # Change Log
-All notable changes to this project will be documented in this file.
 
-## [3.3.11 - 2017-11-21]
-### Updates
-- Fix css for use with the androidHack & colorMask option
+## [4.0.0 - 2018-05-26]
+### added
+- add support for beforeInput event with inputType (Input Events Level 2 - https://w3c.github.io/input-events/)
+- extend positionCaretOnClick with "ignore" to ignore the click in the input
+- jit enabled dynamic masks
+- add support for input type search
+- new datetime alias
+- extend positionCaretOnClick with "select" to select the whole input on focus
+- add regex option (replaces the Regex alias)
+- CSS Unit Mask #1843
 
-## [3.3.10 - 2017-10-16]
 ### Updates
-- Fix changes from PR #1664
+- make behavior of [] an {0,1} consistent
+- change default value from greedy option to false
+- fix unmatched alternations in gettests. ("[0-9]{2}|[0-9]{3}" like masks)
+- code cleanup and refactoring
+    - enhance determineTestTemplate
+    - oncomplete calls
+    - merge setValidPosition and stripValidPositions => revalidateMask
+    - remove canClearPosition hook
+    - change notation of optionalmarker, quantifiermarker, groupmarker
+    - drop prevalidator and cardinality support in definitions
+    - drop Regex alias
+    - drop all date/time related aliases => replaced by new datetime alias
+- improve alternation logic
+- improve inputfallback (Android)
+- better caret handling in colormask
+- disable autocorrect on safari when disablePredictiveText is used
+- rename androidHack option to disablePredictiveText. Make it available for other platforms.
+
+### Fixed
+- Both date and time in same masked textbox #1888
+- time input mask min and max #1674
+- Bug: Using backspace when caret is not at the end messes up static placeholders #1525
+- Fast typing text #1872
+- jitMasking + disablePredictiveText causes android browser tab to stuck when clicked on "backspase" #1862
+- Android 6 issue - Samsung device keyboard #1818
+- Method oncomplete doesn't work correctly with jitMasking #1845
+- isComplete in numeric extensions doesn't take into account negationSymbol #1844
+- Email alias - retype @ removes last . #1324
+- When "clearIncomplete: true" and pressing Enter to Submit Form #1839
+- Hang on combination of optional mask and repeat #698
+- Can't remove inputmask on focus? #1820
+- Not able to input 31.12. in DD.MM date input in v4.x #1803
+- problem with two separate alternations #1722
+- colorMask + Remask = Duplicate im-colormask element #1709
+
+### Note
+Be aware when upgrading from 3.3.11, that the regex alias is removed 
+and that the datetime alias has totally changed. 
+So expect you need todo some changes to your date-masks and regex masks.
+Also some defaults has changed, so have a read through the changes for this release.
+
+There are still many open issues but postponing the release to resolve all issues will take like another year, 
+while there are already many enhancements available.
+
 
 ## [3.3.9 - 2017-10-10]
 ### Updates
 - enhance inputfallback (Android)
+
+### Fixes
+- On Android with date mask input mashing up #1708
+- Currency mask works incorrectly on Android Chrome v58 #1617
+- Can't input character at the end if it's also a placeholder on Android #1648
 
 ## [3.3.8 - 2017-08-24]
 ### added

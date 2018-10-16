@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'fr-ca', {
@@ -20,7 +20,7 @@ CKEDITOR.plugins.setLang( 'link', 'fr-ca', {
 	charset: 'Encodage de la cible',
 	cssClasses: 'Classes CSS',
 	download: 'Force Download', // MISSING
-	displayText: 'Display Text', // MISSING
+	displayText: 'Afficher le texte',
 	emailAddress: 'Courriel',
 	emailBody: 'Corps du message',
 	emailSubject: 'Objet du message',

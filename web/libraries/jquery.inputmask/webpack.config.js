@@ -19,11 +19,15 @@ const rules = {
         exclude: /(node_modules)/,
         options: {
             presets: [
-                'es2015',
-                'stage-0',
+                'env'
             ],
             passPerPreset: true,
         },
+    },
+    ts: {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+        exclude: /(node_modules)/
     },
     styles: {
         test: /\.css$/,
@@ -56,20 +60,22 @@ module.exports = {
         filename: "build/bundle.js"
     },
     externals: {
-        "jquery": "jQuery"
+        // "jquery": "jQuery"
+        // "jqlite": "jqlite"
     },
     module: {
         rules: [
             rules.sourceMap,
             rules.js,
+            rules.ts,
             rules.styles
         ]
     },
     resolve: {
         alias: {
-            "./js/dependencyLibs/inputmask.dependencyLib": "./js/dependencyLibs/inputmask.dependencyLib.jquery",
-            "./dependencyLibs/inputmask.dependencyLib": "./dependencyLibs/inputmask.dependencyLib.jquery"
-            //"./js/dependencyLibs/inputmask.dependencyLib": "./js/dependencyLibs/inputmask.dependencyLib.jqlite",
+            // "./js/dependencyLibs/inputmask.dependencyLib": "./js/dependencyLibs/inputmask.dependencyLib.jquery",
+            // "./dependencyLibs/inputmask.dependencyLib": "./dependencyLibs/inputmask.dependencyLib.jquery"
+            // "./js/dependencyLibs/inputmask.dependencyLib": "./js/dependencyLibs/inputmask.dependencyLib.jqlite",
             // "./dependencyLibs/inputmask.dependencyLib": "./dependencyLibs/inputmask.dependencyLib.jqlite"
         }
     },

@@ -1,0 +1,31 @@
+{
+  "name": "jquery-text-counter",
+  "title": "jQuery Text Counter",
+  "description": "jQuery plugin to count text/characters in a textarea or input. Allows error notifications on minimum or maximum number of characters/words.",
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "words",
+    "characters",
+    "counter",
+    "minimum",
+    "maximum"
+  ],
+  "version": "0.8.0",
+  "author": {
+    "name": "ractoon",
+    "url": "https://www.ractoon.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ractoon/jQuery-Text-Counter/blob/master/LICENSE.md"
+    }
+  ],
+  "bugs": "https://github.com/ractoon/jQuery-Text-Counter/issues",
+  "homepage": "https://github.com/ractoon/jQuery-Text-Counter",
+  "repository": "https://github.com/ractoon/jQuery-Text-Counter",
+  "dependencies": {
+    "jquery": ">=1.5"
+  }
+}

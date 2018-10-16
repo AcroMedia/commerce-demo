@@ -10,7 +10,7 @@
     CKEDITOR.plugins.add('codemirror', {
         icons: 'searchcode,autoformat,commentselectedrange,uncommentselectedrange,autocomplete', // %REMOVE_LINE_CORE%
         lang: 'af,ar,bg,bn,bs,ca,cs,cy,da,de,el,en-au,en-ca,en-gb,en,eo,es,et,eu,fa,fi,fo,fr-ca,fr,gl,gu,he,hi,hr,hu,is,it,ja,ka,km,ko,ku,lt,lv,mk,mn,ms,nb,nl,no,pl,pt-br,pt,ro,ru,sk,sl,sr-latn,sr,sv,th,tr,ug,uk,vi,zh-cn,zh', // %REMOVE_LINE_CORE%
-        version: '1.17.5',
+        version: '1.17.6',
         init: function (editor) {
             var rootPath = this.path,
                 defaultConfig = {
@@ -58,7 +58,7 @@
             if (editor.plugins.bbcode && config.mode.indexOf("bbcode") <= 0) {
                 config.mode = "bbcode";
             }
-            var requirePresent = "function" === typeof require;
+            var requirePresent = "function" === typeof require && "function" === typeof require.config;
 
             if (requirePresent){
                 var location = CKEDITOR.getUrl('plugins/codemirror/js');
@@ -66,7 +66,7 @@
                     packages: [{
                         name: 'codemirror',
                         location: location,
-                        main: 'codemirror.js'
+                        main: 'codemirror.min.js'
                     }, {
                         name: 'codemirror-mode-twig',
                         location: location,
@@ -109,7 +109,7 @@
                     map: {
                         '*': {
                             //all the requires pointing to ../../lib/codemirror from addons will be redirected to module named codemirror.js
-                            //which is located in bundle 'codemirror' whose js file is codemirror.js
+                            //which is located in bundle 'codemirror' whose js file is codemirror.min.js
                             'lib/codemirror': 'codemirror.js'
                         }
                     }
@@ -301,7 +301,7 @@
                                 } else {
                                     if (typeof (CodeMirror) == 'undefined') {
 
-                                        CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror.js',
+                                        CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror.min.js',
                                             function() {
 
                                                 CKEDITOR.scriptLoader.load(getCodeMirrorScripts(),
@@ -661,7 +661,7 @@
                 } else {
                     if (typeof (CodeMirror) == 'undefined') {
 
-                        CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror.js',
+                        CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror.min.js',
                             function() {
 
                                 CKEDITOR.scriptLoader.load(getCodeMirrorScripts(),

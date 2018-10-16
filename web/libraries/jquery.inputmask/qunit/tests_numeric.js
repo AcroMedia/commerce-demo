@@ -294,7 +294,7 @@ export default function (qunit, $, Inputmask) {
 
         //IE7 does not know type=number and treats as type=text
         //noinspection JSUnresolvedFunction
-        assert.ok(testmask.value === "" || testmask.value === "123456", "Result " + testmask.value);
+        assert.ok(testmask.value === "" || testmask.value === "123456-", "Result " + testmask.value);
 
     });
 
@@ -2039,5 +2039,29 @@ export default function (qunit, $, Inputmask) {
         $("#testmask").SendKey(Inputmask.keyCode.DELETE);
 
         assert.equal(testmask.inputmask._valueGet(), "0.00", "Result " + testmask.inputmask._valueGet());
+    });
+
+    qunit.test("numeric + (negationSymbol = parentheses) + (clearIncomplete = true) + type -123. then blur", function (assert) {
+        var $fixture = $("#qunit-fixture");
+        $fixture.append('<input type="text" id="testmask" />');
+        var testmask = document.getElementById("testmask");
+        Inputmask("numeric", {
+            rightAlign: false,
+            autoGroup:  true,
+            groupSize: 3,
+            digits: 3,
+            enforceDigitsOnBlur: true,
+            groupSeparator: ',',
+            negationSymbol: {
+                front: "(",
+                back: ")"
+            },
+            clearIncomplete: true
+        }).mask(testmask);
+        testmask.focus();
+        $("#testmask").Type("-123.");
+        testmask.blur();
+
+        assert.equal(testmask.value, "(123.000)", "Result " + testmask.value);
     });
 };

@@ -30,22 +30,6 @@
         return -1;
     }
 
-    var class2type = {},
-        classTypes = "Boolean Number String Function Array Date RegExp Object Error".split(" ");
-    for (var nameNdx = 0; nameNdx < classTypes.length; nameNdx++) {
-        class2type["[object " + classTypes[nameNdx] + "]"] = classTypes[nameNdx].toLowerCase();
-    }
-
-    function type(obj) {
-        if (obj == null) {
-            return obj + "";
-        }
-        // Support: Android<4.0, iOS<6 (functionish RegExp)
-        return typeof obj === "object" || typeof obj === "function" ?
-            class2type[class2type.toString.call(obj)] || "object" :
-            typeof obj;
-    }
-
     function isWindow(obj) {
         return obj != null && obj === obj.window;
     }
@@ -56,7 +40,7 @@
         // hasOwn isn't used here due to false negatives
         // regarding Nodelist length in IE
         var length = "length" in obj && obj.length,
-            ltype = type(obj);
+            ltype = typeof obj;
 
         if (ltype === "function" || isWindow(obj)) {
             return false;
@@ -219,7 +203,7 @@
                         var evnt, i, params = {
                             bubbles: true,
                             cancelable: true,
-                            detail: Array.prototype.slice.call(arguments, 1)
+                            detail: arguments[1]
                         };
                         // The custom event that will be created
                         if (document.createEvent) {
@@ -234,6 +218,7 @@
                         } else {
                             evnt = document.createEventObject();
                             evnt.eventType = ev;
+                            evnt.detail = arguments[1];
                             if (events.type) DependencyLib.extend(evnt, events);
                             elem.fireEvent("on" + evnt.eventType, evnt);
                         }
@@ -259,7 +244,7 @@
 
     //static
     DependencyLib.isFunction = function (obj) {
-        return type(obj) === "function";
+        return typeof obj === "function";
     };
     DependencyLib.noop = function () {
     };
@@ -275,11 +260,11 @@
         // - Any object or value whose internal [[Class]] property is not "[object Object]"
         // - DOM nodes
         // - window
-        if (type(obj) !== "object" || obj.nodeType || isWindow(obj)) {
+        if (typeof obj !== "object" || obj.nodeType || isWindow(obj)) {
             return false;
         }
 
-        if (obj.constructor && !class2type.hasOwnProperty.call(obj.constructor.prototype, "isPrototypeOf")) {
+        if (obj.constructor && !Object.hasOwnProperty.call(obj.constructor.prototype, "isPrototypeOf")) {
             return false;
         }
 
@@ -373,37 +358,6 @@
         }
 
         return obj;
-    };
-    DependencyLib.map = function (elems, callback) {
-        var value,
-            i = 0,
-            length = elems.length,
-            isArray = isArraylike(elems),
-            ret = [];
-
-        // Go through the array, translating each of the items to their new values
-        if (isArray) {
-            for (; i < length; i++) {
-                value = callback(elems[i], i);
-
-                if (value != null) {
-                    ret.push(value);
-                }
-            }
-
-            // Go through every key on the object,
-        } else {
-            for (i in elems) {
-                value = callback(elems[i], i);
-
-                if (value != null) {
-                    ret.push(value);
-                }
-            }
-        }
-
-        // Flatten any nested arrays
-        return [].concat(ret);
     };
 
     DependencyLib.data = function (owner, key, value) {

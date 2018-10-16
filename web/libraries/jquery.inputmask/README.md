@@ -1,6 +1,8 @@
-# Inputmask 3.x
+# Inputmask
 
-Copyright (c) 2010 - 2017 Robin Herbots Licensed under the MIT license ([http://opensource.org/licenses/mit-license.php](http://opensource.org/licenses/mit-license.php))
+Copyright (c) 2010 - 2018 Robin Herbots Licensed under the MIT license ([http://opensource.org/licenses/mit-license.php](http://opensource.org/licenses/mit-license.php))
+
+[![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZNR3EB6JTMMSS)
 
 [![NPM Version][npm-image]][npm-url] [![Dependency Status][david-image]][david-url] [![devDependency Status][david-dev-image]][david-dev-url]
 
@@ -27,11 +29,11 @@ Highlights:
 - value formatting / validating without input element
 - AMD/CommonJS support
 - dependencyLibs: vanilla javascript, jQuery, jqlite
-- <strike>[Android support](README_android.md)</strike>
+- [Android support](README_android.md)
 
 Demo page see [http://robinherbots.github.io/Inputmask](http://robinherbots.github.io/Inputmask)
 
-[![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZNR3EB6JTMMSS)
+Thanks to [Jetbrains](https://www.jetbrains.com/) for providing a free license for their excellent Webstorm IDE.
 
 ## Setup
 ### dependencyLibs
@@ -90,7 +92,12 @@ If you like to automatically bind the inputmask to the inputs marked with the da
 
 #### Install the package
 ```
-npm install inputmask --save-dev
+npm install inputmask --save
+```
+
+##### Install the latest beta version
+```
+npm install inputmask@next --save
 ```
 
 #### In your modules
@@ -140,6 +147,9 @@ im.mask(selector);
 Inputmask({"mask": "(999) 999-9999", .... other options .....}).mask(selector);
 Inputmask("9-a{1,3}9{1,3}").mask(selector);
 Inputmask("9", { repeat: 10 }).mask(selector);
+  
+Inputmask({ regex: "\\d*" }).mask(selector);
+Inputmask({ regex: String.raw`\d*` }).mask(selector);
 ```
 
 ### via jquery plugin
@@ -155,7 +165,7 @@ $(document).ready(function(){
 ### via data-inputmask attribute
 
 ```html
-<input data-inputmask="'alias': 'date'" />
+<input data-inputmask="'alias': 'datetime'" />
 <input data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false" />
 <input data-inputmask="'mask': '99-9999999'" />
 ```
@@ -184,6 +194,7 @@ $(document).ready(function(){
 
 ### Allowed HTML-elements
 - `<input type="text">`
+- `<input type="search">`
 - `<input type="tel">`
 - `<input type="password">`
 - `<div contenteditable="true">` (and all others supported by contenteditable)
@@ -256,7 +267,10 @@ The initial mask shown will be "**_**" instead of "**_**-____".
 ### Dynamic masks
 Dynamic masks can change during the input.  To define a dynamic part use { }.
 
-{n} => n repeats<br>{n,m} => from n to m repeats
+{n} => n repeats  
+{n|j} => n repeats, with j jitmasking  
+{n,m} => from n to m repeats  
+{n,m|j} => from n to m repeats, with j jitmasking
 
 Also {+} and {*} is allowed. + start from 1 and * start from 0.
 
@@ -276,11 +290,23 @@ $(document).ready(function(){
     definitions: {
       '*': {
         validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
-        cardinality: 1,
         casing: "lower"
       }
     }
   });
+  //decimal mask
+   Inputmask("(.999){+|1},00", {
+        positionCaretOnClick: "radixFocus",
+        radixPoint: ",",
+        _radixDance: true,
+        numericInput: true,
+        placeholder: "0",
+        definitions: {
+            "0": {
+                validator: "[0-9\uFF11-\uFF19]"
+            }
+        }
+   }).mask(selector);
 });
 ```
 
@@ -299,7 +325,6 @@ $("selector").inputmask("(99.9)|(X)", {
   definitions: {
     "X": {
       validator: "[xX]",
-      cardinality: 1,
       casing: "upper"
     }
   }
@@ -314,7 +339,6 @@ $("selector").inputmask({
   definitions: {
     "X": {
       validator: "[xX]",
-      cardinality: 1,
       casing: "upper"
     }
   }
@@ -335,7 +359,7 @@ Default: false
 Value can be true or a threshold number or false.
 
 ```javascript
-Inputmask("date", { jitMasking: true }).mask(selector);
+Inputmask("datetime", { jitMasking: true }).mask(selector);
 ```
 
 ## Define custom definitions
@@ -361,41 +385,24 @@ The return value of a validator can be true,  false or a command object.
   - true => refresh validPositions from the complete buffer
   - { start: , end: } => refresh from start to end
 
-### cardinality
-Cardinality specifies how many characters are represented and validated for the definition.
-
-### prevalidator(chrs, maskset, pos, strict, opts)
-The prevalidator option is used to validate the characters before the definition cardinality is reached. (see 'j' example)
-
 ### definitionSymbol
 When you insert or delete characters, they are only shifted when the definition type is the same.  This behavior can be overridden by giving a definitionSymbol. (see example x, y, z, which can be used for ip-address masking, the validation is different, but it is allowed to shift the characters between the definitions)
 
 ```javascript
 Inputmask.extendDefinitions({
   'f': {  //masksymbol
-    "validator": "[0-9\(\)\.\+/ ]",
-    "cardinality": 1,
-    'prevalidator': null
+    "validator": "[0-9\(\)\.\+/ ]"
   },
   'g': {
     "validator": function (chrs, buffer, pos, strict, opts) {
       //do some logic and return true, false, or { "pos": new position, "c": character to place }
     }
-    "cardinality": 1,
-    'prevalidator': null
   },
   'j': { //basic year
-    validator: "(19|20)\\d{2}",
-    cardinality: 4,
-    prevalidator: [
-      { validator: "[12]", cardinality: 1 },
-      { validator: "(19|20)", cardinality: 2 },
-      { validator: "(19|20)\\d", cardinality: 3 }
-    ]
+    validator: "(19|20)\\d{2}"
   },
   'x': {
     validator: "[0-2]",
-    cardinality: 1,
     definitionSymbol: "i" //this allows shifting values from other definitions, with the same masksymbol or definitionSymbol
   },
   'y': {
@@ -403,7 +410,6 @@ Inputmask.extendDefinitions({
       var valExp2 = new RegExp("2[0-5]|[01][0-9]");
       return valExp2.test(buffer[pos - 1] + chrs);
     },
-    cardinality: 1,
     definitionSymbol: "i"
   },
   'z': {
@@ -411,7 +417,6 @@ Inputmask.extendDefinitions({
       var valExp3 = new RegExp("25[0-5]|2[0-4][0-9]|[01][0-9][0-9]");
       return valExp3.test(buffer[pos - 2] + buffer[pos - 1] + chrs);
     },
-    cardinality: 1,
     definitionSymbol: "i"
   }
 });
@@ -430,12 +435,10 @@ Inputmask.extendDefaults({
 Inputmask.extendDefinitions({
   'A': {
     validator: "[A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5]",
-    cardinality: 1,
     casing: "upper" //auto uppercasing
   },
   '+': {
     validator: "[0-9A-Za-z\u0410-\u044F\u0401\u0451\u00C0-\u00FF\u00B5]",
-    cardinality: 1,
     casing: "upper"
   }
 });
@@ -448,11 +451,13 @@ Inputmask.extendAliases({
 });
 ```
 
-But if the property is defined within an alias you need to set it for the alias definition.
+But if the property is defined within an alias you need to set it for the alias definition.  
+This is also for default plugin options.  If the alias definitions extends on default options, you can only override it at alias level.
 
 ```javascript
 Inputmask.extendAliases({
-  'numeric': {
+  'numeric': 
+    autoUnmask: true,
     allowPlus: false,
     allowMinus: false
   }
@@ -475,7 +480,7 @@ Inputmask.extendAliases({
 Once defined, you can call the alias by:
 
 ```javascript
-$(selector).inputmask("myNum");
+Inputmask("myNum").mask(selector);
 ```
 
 All callbacks are implemented as options.  This means that you can set general implementations for the callbacks by setting a default.
@@ -612,7 +617,20 @@ $(selector).inputmask("getmetadata");
 ```
 
 ### setvalue
-The setvalue functionality is to set a value to the inputmask like you would do with jQuery.val, BUT it will trigger the internal event used by the inputmask always, whatever the case. This is particular usefull when cloning an inputmask with jQuery.clone.  Cloning an inputmask is not a fully functional clone.  On the first event (mouseenter, focus, ...) the inputmask can detect if it where cloned an can reactivate the masking.  However when setting the value with jQuery.val there is none of the events triggered in that case.  The setvalue functionality does this for you.
+The setvalue functionality is to set a value to the inputmask like you would do with jQuery.val, 
+BUT it will trigger the internal event used by the inputmask always, whatever the case. 
+This is particular usefull when cloning an inputmask with jQuery.clone.  Cloning an inputmask is not a fully functional clone.  
+On the first event (mouseenter, focus, ...) the inputmask can detect if it where cloned and can reactivate the masking.  However when setting the value with jQuery.val there is none of the events triggered in that case.  The setvalue functionality does this for you.
+
+```
+$(selector).inputmask("setvalue", value);  
+  
+var selector = document.getElementById("selector");
+selector.inputmask.setValue(value);  
+  
+Inputmask.setValue(selector, value);
+```
+
 
 ### option(options, noremask)
 Get or set an option on an existing inputmask.
@@ -641,14 +659,14 @@ $("#CellPhone").inputmask("option", {
 Instead of masking an input element it is also possible to use the inputmask for formatting given values. Think of formatting values to show in jqGrid or on other elements then inputs.
 
 ```javascript
-var formattedDate = Inputmask.format("2331973", { alias: "dd/mm/yyyy"});
+var formattedDate = Inputmask.format("2331973", { alias: "datetime", inputFormat: "dd/mm/yyyy"});
 ```
 
 ### isValid
 Validate a given value against the mask.
 
 ```javascript
-var isValid = Inputmask.isValid("23/03/1973", { alias: "dd/mm/yyyy"});
+var isValid = Inputmask.isValid("23/03/1973", { alias: "datetime", inputFormat: "dd/mm/yyyy"});
 ```
 
 ## Options:
@@ -713,6 +731,24 @@ See **escape special mask chars**
 ### mask
 The mask to use.
 
+```
+Inputmask({ mask: "9{*}").mask(selector);
+```
+
+### regex
+Use a regular expression as a mask
+
+```
+Inputmask({ regex: "[0-9]*" }).mask(selector);
+```
+
+When using shorthands be aware that you need to double escape or use String.raw with a string literal.
+```
+Inputmask({ regex: "\\d*" }).mask(selector);
+~  
+Inputmask({ regex: String.raw`\d*` }).mask(selector);
+```
+
 ### oncomplete
 Execute a function when the mask is completed
 
@@ -750,6 +786,7 @@ $(document).ready(function(){
 ```
 
 ### greedy
+Default: false
 Toggle to allocate as much possible or the opposite. Non-greedy repeat function.
 
 ```javascript
@@ -803,25 +840,25 @@ Some examples can be found in jquery.inputmask.xxx.extensions.js
 use:
 
 ```javascript
-$("#date").inputmask("date");
+$("#date").inputmask("datetime");
 ```
 
 or
 
 ```javascript
-$("#date").inputmask({ alias: "date"});
+$("#date").inputmask({ alias: "datetime"});
 ```
 
 You can also call an alias and extend it with some more options
 
 ```javascript
-$("#date").inputmask("date", { "clearIncomplete": true });
+$("#date").inputmask("datetime", { "clearIncomplete": true });
 ```
 
 or
 
 ```javascript
-$("#date").inputmask({ alias: "date", "clearIncomplete": true });
+$("#date").inputmask({ alias: "datetime", "clearIncomplete": true });
 ```
 
 ### alias
@@ -994,9 +1031,6 @@ $(selector).inputmask({
 });
 ```
 
-### canClearPosition
-Hook to alter the clear behavior in the stripValidPositions<br>Args => maskset, position, lastValidPosition, opts<br>Return => true|false
-
 ### postValidation
 Hook to postValidate the result from isValid.  Usefull for validating the entry as a whole.  Args => buffer, currentResult, opts<br>Return => true|false|command object
 
@@ -1014,7 +1048,6 @@ Inputmask("(99 99 999999)|(i{+})", {
   definitions: {
     "i": {
       validator: ".",
-      cardinality: 1,
       definitionSymbol: "*"
     }
   },
@@ -1031,7 +1064,15 @@ Disable value property patching
 Default: false
 
 ### positionCaretOnClick
-Positioning of the caret on click.  Options none, lvp (based on the last valid position (default), radixFocus (position caret to radixpoint on initial click)
+Positioning of the caret on click.   
+
+Options: 
+ - none
+ - lvp (based on the last valid position (default)
+ - radixFocus (position caret to radixpoint on initial click)
+ - select (select the whole input)
+ - ignore (ignore the click and continue the mask)
+ 
 Default: "lvp"
 
 ### casing
@@ -1055,9 +1096,37 @@ https://html.spec.whatwg.org/#input-modalities:-the-inputmode-attribute
 ### colorMask
 Default: false
 Create a css styleable mask.
-Uses css classes: im-caret, im-static.
 
-You need to include the inputmask.css in your page to use this option in full.
+You need to include the inputmask.css in your page to use this option.
+
+See the inputmask.css for more info about the used styling.
+You can override the Inputmask.prototype.positionColorMask`if you need some custom positioning.
+```
+ Inputmask.prototype.positionColorMask = function (input, template) {
+                template.style.left = input.offsetLeft + "px";
+                template.zIndex = input.zIndex - 1;
+           }
+```
+ 
+### disablePredictiveText
+Default: false  
+Disables predictive text on mobile devices.  
+
+What it does.
+- changes the input type to password => disables predictive text
+- enables the colorMask option which creates a div, which surrounds the input.  
+So we type in the hidden password input and render the mask in the a created div.
+
+To use the colorMask, you need to include the inputmask.css you might need to add some css-tweaks to make it all visually correct in your page.
+
+ 
+### importDataAttributes
+Specify to use the data-inputmask attributes or to ignore them.
+
+If you don't use data attributes you can disable the import by specifying importDataAttributes: false.
+
+
+Default: true
 
 ## General
 ### set a value and apply mask
@@ -1101,12 +1170,10 @@ You can define within a definition to automatically apply some casing on the ent
 Inputmask.extendDefinitions({
   'A': {
     validator: "[A-Za-z]",
-    cardinality: 1,
     casing: "upper" //auto uppercasing
   },
   '+': {
     validator: "[A-Za-z\u0410-\u044F\u0401\u04510-9]",
-    cardinality: 1,
     casing: "upper"
   }
 });
@@ -1149,7 +1216,7 @@ $(document).ready(function(){
 You can also apply an inputmask by using the data-inputmask attribute.  In the attribute you specify the options wanted for the inputmask. This gets parsed with $.parseJSON (for the moment), so be sure to use a well-formed json-string without the {}.
 
 ```html
-<input data-inputmask="'alias': 'date'" />
+<input data-inputmask="'alias': 'datetime'" />
 <input data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false" />
 ```
 

@@ -1,0 +1,68 @@
+/**
+ * Accordion.
+ */
+.base-accordion {
+  clear: both;
+  margin: 0 0 28px 0;
+  padding: 0;
+
+  .base-accordion__item {
+    clear: both;
+  }
+  .base-accordion__header {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 20px 0 20px 25px;
+    font-size: 24px;
+    font-family: $f-primary;
+    color: $c-body;
+    line-height: 1.0;
+    text-decoration: none;
+    outline: none;
+    border-bottom: 1px solid #e6e6e6;
+
+    // Arrow icon.
+    &:before {
+      @include fa-icon();
+      content: $fa-var-angle-right;
+      color: lighten($gray-light, 10%);
+      position: absolute;
+      left: 0;
+      transition: all .2s ease-in-out;
+    }
+    &:hover,
+    &:focus {
+      color: $c-link-hover;
+
+      // Arrow icon.
+      &:before {
+        color: $gray-light;
+      }
+    }
+  }
+  // Active item.
+  .active .base-accordion__header {
+    color: $c-body;
+
+    // Arrow icon.
+    &:before {
+      content: $fa-var-angle-down;
+    }
+    &:hover,
+    &:focus {
+      color: $c-link-hover;
+    }
+  }
+  .base-accordion__content {
+    display: none;
+    margin: 0;
+    padding: 20px;
+    border-bottom: 1px solid #e6e6e6;
+
+    p:last-child {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

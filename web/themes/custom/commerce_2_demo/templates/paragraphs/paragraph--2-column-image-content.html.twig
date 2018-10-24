@@ -48,6 +48,7 @@
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     'paragraph--type--2-column-image-content',
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
     unique_class ? unique_class,
   ]
 %}

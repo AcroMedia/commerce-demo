@@ -1,0 +1,119 @@
+/**
+ * Featured Products.
+ */
+.component-featured-products {
+  clear: both;
+  margin: 0 0 40px 0;
+  padding: 0;
+}
+.component-featured-products__title {
+  margin: 0 0 20px 0;
+  padding: 0;
+  font-size: 35px;
+  line-height: 1.2;
+}
+.component-featured-products__slider {
+  margin: 0;
+  padding: 0 40px;
+
+  // Slider arrows.
+  .slick-prev,
+  .slick-next {
+    position: absolute;
+    top: 35%;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    font-size: 0;
+    line-height: 1.0;
+    background: none;
+    border: none;
+    outline: none;
+    vertical-align: middle;
+    z-index: 2;
+  }
+  .slick-prev {
+    left: 3px;
+
+    // Arrow.
+    &:before {
+      @include fa-icon();
+      content: $fa-var-angle-left;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      color: #6a6a6a;
+      font-size: 50px;
+      text-align: center;
+      outline: none;
+    }
+    &:hover:before {
+      opacity: 0.6;
+    }
+  }
+  .slick-next {
+    right: 3px;
+
+    // Arrow.
+    &:before {
+      @include fa-icon();
+      content: $fa-var-angle-right;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      color: #6a6a6a;
+      font-size: 50px;
+      text-align: center;
+      outline: none;
+    }
+    &:hover:before {
+      opacity: 0.6;
+    }
+  }
+  .slick-next,
+  .slick-prev {
+    &.slick-disabled {
+      // Arrow.
+      &:before {
+        color: #ccc;
+        opacity: 1;
+      }
+    }
+  }
+}
+.component-featured-products__slider__slide__item {
+  padding: 0 10px;
+}
+// If there are not enough items to trigger the slider.
+.component-featured-products__slider--no-slider {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: $screen-xs-min) {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+  .component-featured-products__slider__slide {
+    float: none;
+    margin: 0 0 30px 0;
+    padding: 0 10px;
+    width: 50%;
+    background: none;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 0 10px;
+      width: 25%;
+    }
+    @media (min-width: $screen-md-min) {
+      width: 15%;
+    }
+  }
+  .component-featured-products__slider__slide__item {
+    padding: 0;
+  }
+}

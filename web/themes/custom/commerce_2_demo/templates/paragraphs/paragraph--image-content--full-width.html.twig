@@ -1,0 +1,11 @@
+{% extends "paragraph--image-content.html.twig" %}
+
+{% block paragraph %}
+  <div data-aos="fade-up"{{ attributes.addClass(classes) }}>
+    <div class="component-image-content__container container">
+      {% block content %}
+        {{ parent() }}
+      {% endblock %}
+    </div>
+  </div>
+{% endblock paragraph %}

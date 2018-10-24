@@ -9,6 +9,10 @@ base theme: orange_framework
 libraries:
   - commerce_2_demo/global-styling
 
+libraries-override:
+  # Use this themes bootstrap instead of the base themes.
+  orange_framework/bootstrap: commerce_2_demo/bootstrap
+
 ckeditor_stylesheets:
   - css/style.css
 

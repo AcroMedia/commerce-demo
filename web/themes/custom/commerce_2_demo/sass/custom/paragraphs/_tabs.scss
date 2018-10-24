@@ -1,0 +1,28 @@
+/**
+ * Tabs.
+ */
+.component-tabs {
+  clear: both;
+  margin: 60px 0;
+  padding: 0;
+}
+
+// Vertical Tabs.
+.component-tabs--vertical {
+  .component-tabs__tabs {
+    display: block;
+
+    @media (min-width: $screen-sm-min) {
+      display: flex;
+    }
+  }
+  .tab-pane {
+    padding: 40px;
+    border: 1px solid $gray-border;
+    border-left: transparent;
+
+    .tab-pane__title {
+      margin-top: 0;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+/**
+ * Webform + Content.
+ */
+.component-webform-content {
+  margin: 20px 0;
+  padding: 0;
+
+  @media (min-width: $screen-sm-min) {
+    margin: 20px 0;
+    padding: 0;
+  }
+}
+.component-webform-content__body {
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: $screen-md-min) {
+    padding: 0 0 0 60px;
+  }
+}
+.component-webform-content__body--webform-right {
+  padding: 0;
+
+  @media (min-width: $screen-md-min) {
+    padding: 0 60px 0 0;
+  }
+}
+.component-webform-content__form {
+  margin: 0 0 40px 0;
+  padding: 0;
+}

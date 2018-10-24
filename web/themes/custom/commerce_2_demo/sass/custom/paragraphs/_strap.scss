@@ -1,0 +1,118 @@
+/**
+ * Strap.
+ */
+.component-strap {
+  position: relative;
+  clear: both;
+  margin: 0 0 60px 0;
+
+  .component-strap__content {
+    position: relative;
+    margin: 0;
+    padding: 40px 20px;
+    text-align: center;
+    z-index: 1;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 40px;
+    }
+  }
+}
+.component-strap__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+}
+.component-strap__body {
+  margin: 0;
+  padding: 0;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 14px 0;
+    padding: 0;
+  }
+}
+// If there's a text color override set.
+.component-strap--color-override {
+  .base-accordion .base-accordion__content {
+    background: none;
+  }
+  a {
+    text-decoration: underline;
+  }
+  a:hover,
+  a:focus {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// Buttons.
+.component-strap__buttons {
+  clear: both;
+
+  div {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .btn,
+  .btn--primary,
+  .btn--default {
+    margin: 0 5px 15px 5px;
+    padding: 13px 20px;
+    font-size: 20px;
+  }
+  .btn--default {
+    color: #fff;
+    border: 1px solid #fff;
+    @include background-opacity(#000, 0.4);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background: #000;
+    }
+  }
+}
+
+// Webforms.
+.component-strap .component-webform {
+  margin: 0;
+}
+.component-strap form {
+  .form-item {
+    display: inline-block;
+    margin: 20px 20px;
+    padding: 0;
+    max-width: 240px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .form-actions {
+    display: inline-block;
+    margin: 20px 20px;
+    padding: 29px 0 0 0;
+    vertical-align: top;
+  }
+  .btn--default {
+    color: #fff;
+    border: 1px solid #fff;
+    @include background-opacity(#000, 0.4);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background: #000;
+    }
+  }
+}

@@ -1,0 +1,101 @@
+/**
+ * Content Carousel.
+ */
+.component-content-carousel {
+  position: relative;
+  clear: both;
+  margin: 40px auto;
+  padding: 0;
+
+  // Arrow navigation.
+  .slick-arrow {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 100%;
+    font-size: 0;
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    z-index: 4;
+
+    @media (min-width: $screen-sm-min) {
+      width: 50px;
+    }
+    // Icon.
+    &:before {
+      @include fa-icon();
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 40px;
+      color: $gray-border;
+      outline: none;
+      @include smooth-transition();
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 60px;
+      }
+    }
+    &:hover {
+      // Icon.
+      &:before {
+        color: $gray-dark;
+      }
+    }
+    // Disabled.
+    &.slick-disabled {
+      // Icon.
+      &:before {
+        color: $gray-border;
+        opacity: 0.5;
+      }
+    }
+  }
+  .slick-arrow.slick-prev {
+    left: 0;
+
+    // Icon.
+    &:before {
+      content: $fa-var-angle-left;
+    }
+  }
+  .slick-arrow.slick-next {
+    right: 0;
+
+    // Icon.
+    &:before {
+      content: $fa-var-angle-right;
+    }
+  }
+}
+.component-content-carousel__slide {
+  margin: 0 40px;
+  padding: 30px 20px;
+  border: 2px solid $gray-border;
+
+  @media (min-width: $screen-sm-min) {
+    margin: 0 80px;
+    padding: 50px;
+  }
+  // Set standard content margins.
+  .field {
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    p:last-child,
+    ul:last-child,
+    ol:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

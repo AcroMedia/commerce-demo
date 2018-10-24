@@ -1,0 +1,131 @@
+{#
+/**
+ * @file
+ * Theme implementation for an Image Strap paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'component-image-strap',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% set row_style_attributes = create_attribute() %}
+{% set body_attributes = create_attribute() %}
+{% set image_attributes = create_attribute() %}
+
+{# Image Alignment. #}
+{% if paragraph.field_alignment.value and (paragraph.field_alignment.value == 'right') %}
+  {% set attributes = attributes.addClass('component-image-strap--image-right') %}
+{% endif %}
+
+{# Background Image. #}
+{% if paragraph.field_image.entity.fileuri %}
+  {% set bg_image = paragraph.field_image.entity.fileuri|image_style('background') %}
+  {% set bg_image_style = style_value ~ 'background-image: url(' ~ bg_image ~ ');' %}
+  {% set image_attributes = image_attributes.setAttribute('style', bg_image_style) %}
+  {% set image_attributes = image_attributes.addClass('component-image-strap__bg-image') %}
+{% endif %}
+
+{# Background Color. #}
+{% if paragraph.field_bg_color.color %}
+  {% set bg_color = paragraph.field_bg_color.color %}
+  {% set bg_color_style = style_value ~ 'background-color: ' ~ bg_color ~ ';' %}
+  {% set attributes = attributes.setAttribute('style', bg_color_style) %}
+{% endif %}
+
+{# Text Color. #}
+{% if paragraph.field_bg_color.color %}
+  {% set bg_color = paragraph.field_bg_color.color %}
+  {% set row_style_attributes = row_style_attributes.setAttribute('style', 'background-color: ' ~ bg_color ~ ';' ) %}
+{% endif %}
+
+{% block paragraph %}
+  <div data-aos="fade-up"{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if paragraph.field_image.entity.fileuri %}
+      <div{{ image_attributes }}>
+        <div class="component-image-strap__image">
+          {{ content.field_image }}
+        </div>
+      </div>
+      {% endif %}
+      <div class="component-image-strap__container container">
+        <div{{ row_style_attributes }} class="row">
+          {% set col_class = 'col-md-6' %}
+          {% set col2_class = 'col-md-6' %}
+          {% if paragraph.field_alignment.value and (paragraph.field_alignment.value == 'right') %}
+            {% set col_class = 'col-md-6 col-md-push-6' %}
+            {% set col2_class = 'col-md-6 col-md-pull-6' %}
+          {% endif %}
+          <div class="component-image-strap__col {{ col_class }}">
+
+          </div>
+          <div class="component-image-strap__col {{ col2_class }}">
+            <div class="component-image-strap__content">
+
+              {% if content.field_paragraphs_reference %}
+                {% if paragraph.field_color.color %}
+                  {% set color_id = 'paragraph-' ~ paragraph.id.value ~ '-color' %}
+                  {% set body_attributes = body_attributes.setAttribute('id', color_id) %}
+                  {% set body_attributes = body_attributes.addClass('component-image-strap__body--color-override') %}
+                  {% set tags = ['h1','h2','h3','h4','h5','h6','h7','h8','div','span','p','a','blockquote','ul','ol','label','table','tr','td','.base-accordion__header::before'] %}
+                  <style type="text/css">
+                    {% for tag in tags %}#{{ color_id }} {{ tag }}{% if not loop.last %},{% endif %}{% endfor %} {
+                      color: {{ paragraph.field_color.color }};
+                    }
+                  </style>
+                {% endif %}
+                <div{{ body_attributes.addClass('component-image-strap__body') }}>
+                  {{ content.field_paragraphs_reference }}
+                </div>
+              {% endif %}
+              {% if paragraph.field_paragraphs_reference_2.0.target_id %}
+                <div class="component-image-strap__buttons">
+                  {{ content.field_paragraphs_reference_2 }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

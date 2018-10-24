@@ -1,0 +1,106 @@
+{#
+/**
+ * @file
+ * Theme implementation for a Content Strap Item paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'component-content-strap-column',
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% set body_attributes = create_attribute() %}
+{% set overlay_attributes = create_attribute() %}
+{% set style_value = '' %}
+
+{# Background Color. #}
+{% if paragraph.field_bg_color.color %}
+  {% set bg_color = paragraph.field_bg_color.color %}
+  {% set style_value = style_value ~ 'background-color: ' ~ bg_color ~ ';' %}
+  {% set attributes = attributes.setAttribute('style', style_value) %}
+{% endif %}
+
+{# Overlay / Background Image. #}
+{% if paragraph.field_image.entity.fileuri %}
+  {% set opacity_value = 1 %}
+  {% if paragraph.field_opacity.value %}
+    {% set opacity_value = paragraph.field_opacity.value / 100 %}
+  {% endif %}
+
+  {% set overlay_attributes = overlay_attributes.addClass('component-content-strap-column__overlay') %}
+
+  {% set bg_image = paragraph.field_image.entity.fileuri|image_style('background') %}
+  {% set overlay_style_value = overlay_style_value ~ 'background-image: url(' ~ bg_image ~ ');' %}
+
+  {% set overlay_style_value = overlay_style_value ~ ' opacity: ' ~ opacity_value ~ ';' %}
+
+  {% set overlay_attributes = overlay_attributes.setAttribute('style', overlay_style_value) %}
+  {% set attributes = attributes.addClass('component-content-strap-column--image') %}
+{% endif %}
+
+{% if paragraph.field_color.color %}
+  {% set color_id = 'paragraph-' ~ paragraph.id.value ~ '-color' %}
+  {% set body_attributes = body_attributes.setAttribute('id', color_id) %}
+  {% set body_attributes = body_attributes.addClass('override-text-color') %}
+  {% set tags = ['h1','h2','h3','h4','h5','h6','h7','h8','div','span','p','a','blockquote','ul','ol','label','table','tr','td','.base-accordion__header::before'] %}
+  <style type="text/css">
+    {% for tag in tags %}#{{ color_id }} {{ tag }}{% if not loop.last %},{% endif %}{% endfor %} {
+      color: {{ paragraph.field_color.color }};
+    }
+  </style>
+{% endif %}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% if paragraph.field_image.entity.fileuri %}
+      <div{{ overlay_attributes }}></div>
+    {% endif %}
+    {% block content %}
+      <div class="component-content-strap-column__content" data-aos="fade-up">
+        <div{{ body_attributes.addClass('component-content-strap-column__body') }}>
+          {% if paragraph.field_paragraphs_reference.0.target_id %}
+            {{ content.field_paragraphs_reference }}
+          {% endif %}
+        </div>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

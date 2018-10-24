@@ -1,0 +1,23 @@
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+<div class="container-fluid">
+  {% if multiple %}
+    <div{{ attributes.addClass(classes, 'row') }}>
+      {% set number_of_columns = items|length %}
+      {% set column_class = 'col-md-' ~ 12 / number_of_columns %}
+      {% for item in items %}
+        <div{{ item.attributes.addClass(column_class) }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, 'row') }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+</div>

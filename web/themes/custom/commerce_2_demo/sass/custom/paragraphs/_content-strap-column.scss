@@ -1,0 +1,57 @@
+/**
+ * Content Strap Column.
+ */
+.component-content-strap-column {
+  position: relative;
+  clear: both;
+  margin: 0;
+  padding: 40px 20px;
+  height: 100%;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 40px 40px;
+  }
+}
+.component-content-strap-column__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+.component-content-strap-column__content {
+  position: relative;
+  z-index: 1;
+}
+.component-content-strap-column__body {
+  margin: 0;
+  padding: 0;
+
+  .text-formatted {
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+  .btn--default {
+    color: #fff;
+    border: 1px solid #fff;
+    @include background-opacity(#000, 0.4);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background: #000;
+    }
+  }
+}

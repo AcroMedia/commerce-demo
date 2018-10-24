@@ -39,6 +39,7 @@
       @media (max-width: $screen-sm-max) {
         margin-bottom: 20px;
         text-align: center;
+        float: none;
       }
       @media (max-width: $screen-xs-max) {
         .btn-primary {

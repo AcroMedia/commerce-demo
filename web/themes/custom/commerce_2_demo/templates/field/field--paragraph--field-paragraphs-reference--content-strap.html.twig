@@ -1,0 +1,26 @@
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+<div class="container-fluid">
+  {% for row in items|batch(4) %}
+    <div{{ attributes.addClass(classes, 'row') }}>
+      {% for column in row %}
+        {% set number_of_columns = row|length %}
+        {# Set column classes. #}
+        {% if number_of_columns > 2 %}
+          {% set column_class = 'col-xs-12 col-md-6 col-lg-' ~ 12 / number_of_columns %}
+        {% else %}
+          {% set column_class = 'col-xs-12 col-md-' ~ 12 / number_of_columns %}
+        {% endif %}
+        <div{{ column.attributes.addClass(column_class) }}>
+          {{ column.content }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,77 @@
+/**
+ * Logo Carousel.
+ */
+.component-logo-carousel {
+  position: relative;
+  clear: both;
+  margin: 60px auto;
+  padding: 0;
+
+  // Arrow navigation.
+  .slick-arrow {
+    position: absolute;
+    top: -8px;
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 100%;
+    font-size: 0;
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    z-index: 4;
+
+    @media (min-width: $screen-sm-min) {
+      width: 50px;
+    }
+    // Icon.
+    &:before {
+      @include fa-icon();
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 50px;
+      color: $gray-border;
+      outline: none;
+      @include smooth-transition();
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 60px;
+      }
+    }
+    &:hover {
+      // Icon.
+      &:before {
+        color: $gray-dark;
+      }
+    }
+  }
+  .slick-arrow.slick-prev {
+    left: 0;
+
+    // Icon.
+    &:before {
+      content: $fa-var-angle-left;
+    }
+  }
+  .slick-arrow.slick-next {
+    right: 0;
+
+    // Icon.
+    &:before {
+      content: $fa-var-angle-right;
+    }
+  }
+}
+.component-logo-carousel__slider {
+  padding: 0 40px;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 0 70px;
+  }
+}
+.component-logo-carousel__slide {
+  margin: 0;
+  padding: 0 20px;
+}

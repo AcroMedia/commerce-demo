@@ -29,3 +29,6 @@
   background: $color; /* Fallback. */
   background: rgba($color, $opacity);
 }
+@mixin smooth-transition() {
+  transition: color .2s ease-in-out, opacity .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+}

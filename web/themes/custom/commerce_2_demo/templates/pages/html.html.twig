@@ -24,6 +24,12 @@
  */
 #}
 {%
+  set html_classes = [
+  not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+  current_path ? 'path' ~ current_path|clean_class,
+]
+%}
+{%
   set body_classes = [
     logged_in ? 'user-logged-in',
     not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
@@ -33,10 +39,11 @@
     current_path ? 'path' ~ current_path|clean_class,
     term_vocabulary ? 'term-vocab-' ~ term_vocabulary|clean_class,
     term_name ? 'term-' ~ term_name|clean_class,
+    commerce_product_type ? 'page-product-type-' ~ commerce_product_type|clean_class,
   ]
 %}
 <!DOCTYPE html>
-<html{{ html_attributes }}>
+<html{{ html_attributes.addClass(html_classes) }}>
   <head>
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>

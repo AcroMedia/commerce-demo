@@ -1,0 +1,44 @@
+/**
+ * Strap.
+ */
+.component-cta-strap {
+  position: relative;
+  clear: both;
+  margin: 0 0 60px 0;
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+
+  .component-cta-strap__content {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    z-index: 1;
+  }
+}
+.component-cta-strap__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.component-cta-strap__body {
+  margin: 0;
+  padding: 0;
+}
+// If there's a text color override set.
+.component-cta-strap--color-override {
+  .base-accordion .base-accordion__content {
+    background: none;
+  }
+  a {
+    text-decoration: underline;
+  }
+  a:hover,
+  a:focus {
+    color: inherit;
+    text-decoration: none;
+  }
+}

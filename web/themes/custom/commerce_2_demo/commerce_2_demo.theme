@@ -97,6 +97,11 @@ function commerce_2_demo_preprocess_html(&$variables) {
     // Set variable for taxonomy term's name.
     $variables['term_name'] = $term->getName();
   }
+
+  // Commerce Product.
+  if ($commerce_product = \Drupal::request()->attributes->get('commerce_product')) {
+    $variables['commerce_product_type'] = $commerce_product->bundle();
+  }
 }
 
 /**
@@ -116,6 +121,22 @@ function commerce_2_demo_preprocess_block(&$variables) {
   // Set bundle variable for custom blocks.
   if (isset($variables['elements']['content']['#block_content']) && $bundle = $variables['elements']['content']['#block_content']->bundle()) {
     $variables['bundle'] = $bundle;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for inputs.
+ */
+function commerce_2_demo_theme_suggestions_input_alter(&$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  // Set suggestion for inputs within nested paragraphs.
+  if (isset($element['#attributes']['data-paragraph-parent'])) {
+    array_splice($suggestions, 1, 0, 'input__' . $element['#type'] . '__' . 'paragraph__parent' . '__' . $element['#attributes']['data-paragraph-parent']);
+  }
+  // Set suggestion for inputs within paragraphs.
+  if (isset($element['#attributes']['data-paragraph'])) {
+    array_splice($suggestions, 1, 0, 'input__' . $element['#type'] . '__' . 'paragraph' . '__' . $element['#attributes']['data-paragraph']);
   }
 }
 
@@ -278,6 +299,36 @@ function commerce_2_demo_theme($existing, $type, $theme, $path) {
  * Implements hook_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id).
  */
 function commerce_2_demo_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Webforms.
+  if ((isset($form['#entity_type'])) && ($form['#entity_type'] == 'webform_submission')) {
+    $paragraph_matches = [];
+
+    // Check for webforms within paragraphs.
+    if (preg_match('/paragraph_([0-9]+)/', $form_id, $paragraph_matches)) {
+      $paragraph_id = $paragraph_matches[1];
+      $paragraph = Paragraph::load($paragraph_id);
+
+      if ($paragraph = Paragraph::load($paragraph_id)) {
+        $paragraph_type = $paragraph->bundle();
+
+        // Set paragraph attribute.
+        $form['actions']['submit']['#attributes']['data-paragraph'] = $paragraph_type;
+
+        // Paragraph parent.
+        if ($paragraph->parent_id->value) {
+          $paragraph_parent_id = $paragraph->parent_id->value;
+
+          if ($paragraph_parent = Paragraph::load($paragraph_parent_id)) {
+            $paragraph_parent_type = $paragraph_parent->bundle();
+
+            // Set paragraph parent attribute.
+            $form['actions']['submit']['#attributes']['data-paragraph-parent'] = $paragraph_parent_type;
+          }
+        }
+      }
+    }
+  }
+
   // Comment form.
   if (($form_id == 'comment_node_comment_form') || ($form_id == 'comment_product_reviews_form')) {
     // Update submit button text.
@@ -617,6 +668,49 @@ function commerce_2_demo_preprocess_commerce_checkout_completion_message(&$varia
   $order_items = $order_entity->getItems();
   $variables['order_items'] = $order_items;
   $variables['order_type'] = $order_entity->type;
+}
+
+/**
+ * Implements hook_preprocess_input(&$variables).
+ */
+function commerce_2_demo_preprocess_input(&$variables) {
+  if (isset($variables['element'])) {
+    if (isset($variables['element']['#type'])) {
+      $variables['type'] = $variables['element']['#type'];
+    }
+    if (isset($variables['element']['#button_type'])) {
+      $variables['button_type'] = $variables['element']['#button_type'];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_form_element(&$variables).
+ */
+function commerce_2_demo_preprocess_form_element(&$variables) {
+  $variables['label']['#attributes']['data-element-type'] = $variables['element']['#type'];
+}
+
+/**
+ * Implements hook_preprocess_form_element_label(&$variables).
+ */
+function commerce_2_demo_preprocess_form_element_label(&$variables) {
+  if (isset($variables['element'])) {
+    $variables['attributes'] = array_merge($variables['attributes'], $variables['element']['#attributes']);
+
+    if (isset($variables['element']['#attributes']['data-element-type'])) {
+      $variables['element_type'] = $variables['element']['#attributes']['data-element-type'];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_fieldset(&$variables).
+ */
+function commerce_2_demo_preprocess_fieldset(&$variables) {
+  if (isset($variables['element']['#type'])) {
+    $variables['element_type'] = $variables['element']['#type'];
+  }
 }
 
 /**

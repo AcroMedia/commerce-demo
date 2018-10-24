@@ -1,0 +1,121 @@
+/**
+ * Image Strap.
+ */
+.component-image-strap {
+  position: relative;
+  margin: 0 0 60px 0;
+}
+.component-image-strap__container {
+  background: #fff;
+}
+.component-image-strap__col {
+  padding: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+.component-image-strap__content {
+  position: relative;
+  margin: 0;
+  padding: 20px;
+  z-index: 1;
+
+  @media (min-width: $screen-md-min) {
+    padding: 40px 20px 40px 60px;
+  }
+}
+.component-image-strap--image-right .component-image-strap__content {
+  padding: 20px;
+
+  @media (min-width: $screen-md-min) {
+    padding: 40px 60px 40px 20px;
+  }
+}
+.component-image-strap__body {
+  margin: 0;
+  padding: 0;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+  }
+}
+// If there's a text color override set.
+.component-image-strap__body--color-override {
+  .base-accordion .base-accordion__content {
+    background: none;
+  }
+  a {
+    text-decoration: underline;
+  }
+  a:hover,
+  a:focus {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+.component-image-strap__bg-image {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 300px;
+  text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  @media (min-width: $screen-md-min) {
+    position: absolute;
+    display: block;
+    width: 50%;
+    height: 100%;
+  }
+}
+.component-image-strap--image-right .component-image-strap__bg-image {
+  left: auto;
+  right: 0;
+}
+.component-image-strap__image {
+  display: none;
+
+  @media (min-width: $screen-md-min) {
+    display: none;
+  }
+}
+
+// Buttons.
+.component-image-strap__buttons {
+  clear: both;
+
+  div {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .btn,
+  .btn--primary,
+  .btn--default {
+    margin: 0 5px 15px 5px;
+    padding: 13px 20px;
+    font-size: 20px;
+  }
+  .btn--default {
+    color: #fff;
+    border: 1px solid #fff;
+    @include background-opacity(#000, 0.4);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background: #000;
+    }
+  }
+}

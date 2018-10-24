@@ -1,0 +1,230 @@
+/**
+ * Gallery.
+ */
+.component-gallery {
+  margin: 0 auto 50px auto;
+  padding: 0;
+  max-width: 900px;
+
+  @media (min-width: $screen-md-min) {
+    margin: 0 0 30px 0;
+    max-width: none;
+  }
+}
+
+// Gallery - Main Slider.
+.component-gallery__main-slider {
+  margin: 0 0 10px 0;
+  padding: 0;
+  text-align: center;
+
+  .component-gallery__item {
+
+    a {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto;
+      padding: 0;
+      text-decoration: none;
+
+      // Triangle.
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 77px;
+        height: 77px;
+        border-top: 77px solid #000;
+        border-right: 77px solid transparent;
+        z-index: 30;
+        transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+      }
+      // Zoom icon.
+      &:after {
+        @include fa-icon();
+        content: $fa-var-search-plus;
+        position: absolute;
+        top: 10px;
+        left: 11px;
+        color: #fff;
+        font-size: 23px;
+        z-index: 31;
+        transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+      }
+
+      span {
+        position: relative;
+        display: block;
+        opacity: 1;
+        transition: opacity .2s ease-in-out;
+      }
+
+      &:hover,
+      &:focus {
+
+        &:before {
+          border-top: 77px solid $c-link;
+        }
+        span {
+          opacity: 0.9;
+        }
+      }
+    }
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// Gallery - Nav Slider.
+.product-slider--no-thumbnails .product-slider__nav-slider {
+  display: none;
+}
+.component-gallery__nav-slider {
+  margin: 0;
+  padding: 0 40px;
+
+  // Slider arrows.
+  .slick-prev,
+  .slick-next {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: 100%;
+    font-size: 0;
+    line-height: 1.0;
+    background: none;
+    border: none;
+    outline: none;
+    vertical-align: middle;
+    z-index: 30;
+  }
+
+  .slick-prev {
+    left: 3px;
+
+    // Arrow.
+    &:before {
+      @include fa-icon();
+      content: $fa-var-angle-left;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      color: #6a6a6a;
+      font-size: 50px;
+      text-align: center;
+      outline: none;
+    }
+    &:hover:before {
+      opacity: 0.6;
+    }
+  }
+  .slick-next {
+    right: 3px;
+
+    // Arrow.
+    &:before {
+      @include fa-icon();
+      content: $fa-var-angle-right;
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      color: #6a6a6a;
+      font-size: 50px;
+      text-align: center;
+      outline: none;
+    }
+    &:hover:before {
+      opacity: 0.6;
+    }
+  }
+  .slick-next,
+  .slick-prev {
+    &.slick-disabled {
+      // Arrow.
+      &:before {
+        color: #ccc;
+        opacity: 1;
+      }
+    }
+  }
+  .component-gallery__item {
+    position: relative;
+    display: block;
+    margin: 4px 10px;
+    padding: 0;
+    text-decoration: none;
+    box-shadow: 0 0 0 2px #ccc;
+    cursor: pointer;
+    width: 100px;
+
+    span {
+      position: relative;
+      display: block;
+      opacity: 1;
+      transition: opacity .2s ease-in-out;
+    }
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 0 2px $c-link;
+
+      span {
+        opacity: 0.9;
+      }
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .slick-current.component-gallery__item {
+    box-shadow: 0 0 0 4px $c-link;
+  }
+}
+.component-gallery__youtube-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+  background: #000;
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    opacity: 0.5;
+  }
+
+  // Play icon.
+  &:after {
+    @include fa-icon();
+    content: $fa-var-youtube-play;
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 51px;
+    height: 43px;
+    color: #ff0000;
+    font-size: 50px;
+  }
+}
+.component-gallery__image {
+
+}

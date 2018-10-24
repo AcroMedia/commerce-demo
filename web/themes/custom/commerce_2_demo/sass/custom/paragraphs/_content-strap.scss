@@ -1,0 +1,20 @@
+/**
+ * Content Strap.
+ */
+.component-content-strap {
+  position: relative;
+  clear: both;
+  margin: 0 0 60px 0;
+
+  > .container-fluid > .row  {
+    display: flex;
+    flex-wrap: wrap;
+
+    > [class*='col-'] {
+      display: flex;
+      flex-direction: column;
+      // Remove padding since we have padding within each actual item.
+      padding: 0 !important;
+    }
+  }
+}

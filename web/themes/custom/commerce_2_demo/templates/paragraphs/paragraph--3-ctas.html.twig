@@ -47,6 +47,7 @@
     'paragraph',
     'paragraph--type--3-ctas',
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
     unique_class ? unique_class,
   ]
 %}

@@ -7,7 +7,7 @@
   if ($('.component-logo-carousel__slider').length) {
     $('.component-logo-carousel__slider').each(function () {
       $(this).slick({
-        slidesToShow: 8,
+        slidesToShow: 5,
         slidesToScroll: 1,
         fade: false,
         arrows: true,
@@ -17,16 +17,16 @@
         adaptiveHeight: true,
         responsive: [
           {
-            breakpoint: 1400,
+            breakpoint: 1200,
             settings: {
-              slidesToShow: 5,
+              slidesToShow: 4,
               slidesToScroll: 1
             }
           },
           {
             breakpoint: 1024,
             settings: {
-              slidesToShow: 4,
+              slidesToShow: 3,
               slidesToScroll: 1
             }
           },

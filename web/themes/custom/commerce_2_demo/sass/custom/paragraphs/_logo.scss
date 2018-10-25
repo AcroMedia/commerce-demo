@@ -3,6 +3,7 @@
  */
 .component-logo {
   min-height: 50px;
+  margin-bottom: 0;
 
   img {
     display: block;
@@ -17,6 +18,7 @@
   margin: 0 auto;
   padding: 0;
   opacity: 1;
+  outline: none;
 
   &:hover,
   &:focus {

@@ -5,9 +5,6 @@
   position: relative;
   margin: 0 0 60px 0;
 }
-.component-image-strap__container {
-  background: #fff;
-}
 .component-image-strap__col {
   padding: 0;
 
@@ -62,7 +59,7 @@
     text-decoration: none;
   }
 }
-.component-image-strap__bg-image {
+div.component-image-strap__bg-image {
   position: relative;
   display: block;
   top: 0;
@@ -99,23 +96,5 @@
   div {
     display: inline-block;
     vertical-align: top;
-  }
-  .btn,
-  .btn--primary,
-  .btn--default {
-    margin: 0 5px 15px 5px;
-    padding: 13px 20px;
-    font-size: 20px;
-  }
-  .btn--default {
-    color: #fff;
-    border: 1px solid #fff;
-    @include background-opacity(#000, 0.4);
-
-    &:hover,
-    &:focus {
-      color: #fff;
-      background: #000;
-    }
   }
 }

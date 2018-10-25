@@ -20,7 +20,13 @@
     margin: 0;
     padding: 0;
   }
+  // Remove bootstrap column margins.
+  .landing-page--content-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
+
 // Adjust region spacing if logged in.
 .user-logged-in.toolbar-vertical.page-node-type-landing-page,
 .user-logged-in.toolbar-horizontal.page-node-type-landing-page {

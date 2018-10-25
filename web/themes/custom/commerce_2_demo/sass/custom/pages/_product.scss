@@ -83,6 +83,123 @@
 /**
  * Product teaser.
  */
+a.product--teaser {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  line-height: 1.3em;
+  color: #000;
+
+  .product__thumbnail {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 170px;
+    height: 170px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+
+    @media (max-width: $screen-md-max) {
+      height: 140px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      height: 160px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      height: 135px;
+    }
+
+    img {
+      &.no-product-thumbnail {
+        opacity: 0.15;
+      }
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .price__starting-at {
+    margin-top: -3px;
+    font-size: 14px;
+    color: $c-primary;
+  }
+
+  .field--name-list-price {
+    display: block;
+    margin-bottom: 5px;
+    color: $c-primary;
+    font-size: 14px;
+    text-decoration: $c-primary-hover line-through;
+
+    .field__label {
+      color: $c-body;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .field__item {
+      text-decoration: $c-primary-hover line-through;
+    }
+  }
+
+  .field--name-price {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 300;
+    color: $c-primary;
+
+    .field__label {
+      display: none;
+    }
+  }
+
+  .field--name-title {
+    display: block;
+    width: 100%;
+    margin-bottom: 2px;
+
+    &:hover {
+      color: $c-primary;
+    }
+  }
+
+  .field--name-field-brand,
+  .field--name-field-artist {
+    .field__item {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 0;
+      font-size: 12px;
+      font-weight: 700;
+
+      &:after {
+        content: ',';
+        margin-right: 2px;
+      }
+
+      &:last-of-type:after {
+        content: '';
+      }
+    }
+  }
+
+  &:focus {
+    .product__thumbnail {
+      opacity: 0.8;
+    }
+
+    .field--name-title {
+      color: $c-primary;
+    }
+  }
+}
+
 .recommended-products,
 .view-products,
 .view-featured-products {
@@ -94,10 +211,10 @@
     flex-wrap: wrap;
     align-items: stretch;
 
-    .field__item,
+    > .field__item,
     .views-row {
-      position: initial;
       display: inline-block;
+      position: initial;
       vertical-align: top;
       width: 18%;
       margin: 0 2% 20px 0;
@@ -114,135 +231,6 @@
       @media (max-width: 485px) {
         width: 47%;
       }
-
-      // Resets.
-      .field__items {
-        display: inline-block;
-        width: 100%;
-      }
-
-      .field__item {
-        width: auto;
-        margin: 0;
-      }
-
-      // Fields.
-      a.product--teaser {
-        position: relative;
-        display: block;
-        overflow: hidden;
-        line-height: 1.3em;
-        color: #000;
-
-        .product__thumbnail {
-          position: relative;
-          display: inline-block;
-          width: 100%;
-          max-width: 170px;
-          height: 170px;
-          margin-bottom: 15px;
-          border: 1px solid #ccc;
-          overflow: hidden;
-
-          @media (max-width: $screen-md-max) {
-            height: 140px;
-          }
-
-          @media (max-width: $screen-sm-max) {
-            height: 160px;
-          }
-
-          @media (max-width: $screen-xs-max) {
-            height: 135px;
-          }
-
-          img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%);
-
-            &.no-product-thumbnail {
-              opacity: 0.15;
-            }
-          }
-
-          &:hover {
-            opacity: 0.8;
-          }
-        }
-
-        .price__starting-at {
-          margin-top: -3px;
-          font-size: 14px;
-          color: $c-primary;
-        }
-
-        .field--name-list-price {
-          margin-bottom: 5px;
-          color: $c-primary;
-          font-size: 14px;
-          text-decoration: $c-primary-hover line-through;
-
-          .field__label {
-            color: $c-body;
-            font-weight: 600;
-            font-size: 12px;
-          }
-
-          .field__item {
-            text-decoration: $c-primary-hover line-through;
-          }
-        }
-
-        .field--name-price {
-          margin-bottom: 8px;
-          font-size: 24px;
-          font-weight: 300;
-          color: $c-primary;
-
-          .field__label {
-            display: none;
-          }
-        }
-
-        .field--name-title {
-          width: 100%;
-          margin-bottom: 2px;
-
-          &:hover {
-            color: $c-primary;
-          }
-        }
-
-        .field--name-field-brand,
-        .field--name-field-artist {
-          .field__item {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 700;
-
-            &:after {
-              content: ',';
-              margin-right: 2px;
-            }
-
-            &:last-of-type:after {
-              content: '';
-            }
-          }
-        }
-
-        &:focus {
-          .product__thumbnail {
-            opacity: 0.8;
-          }
-
-          .field--name-title {
-            color: $c-primary;
-          }
-        }
-      }
     }
   }
 }
@@ -256,7 +244,7 @@
   .view-content {
     justify-content: space-between;
 
-    .field__item,
+    > .field__item,
     .views-row {
       width: 15%;
       margin: 0 0 20px 0;
@@ -294,7 +282,7 @@
         width: 100%;
       }
 
-      .field__item {
+      > .field__item {
         width: auto;
         margin: 0;
       }
@@ -321,7 +309,7 @@
 }
 
 // Product page recommended products.
-.recommended-products {
+.path-product .recommended-products {
   border-bottom: none;
   margin-bottom: 0;
 
@@ -349,7 +337,7 @@
       text-align: center;
     }
 
-    .field__item {
+    > .field__item {
       margin: 0 18px 20px 0;
 
       @media (max-width: $screen-md-max) {
@@ -374,7 +362,7 @@
         width: 100%;
       }
 
-      .field__item {
+      > .field__item {
         width: auto;
         margin: 0;
       }

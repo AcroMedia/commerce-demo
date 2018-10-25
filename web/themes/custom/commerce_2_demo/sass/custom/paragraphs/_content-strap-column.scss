@@ -12,7 +12,7 @@
     padding: 40px 40px;
   }
 }
-.component-content-strap-column__overlay {
+div.component-content-strap-column__overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -41,17 +41,6 @@
       &:first-child {
         margin-top: 0;
       }
-    }
-  }
-  .btn--default {
-    color: #fff;
-    border: 1px solid #fff;
-    @include background-opacity(#000, 0.4);
-
-    &:hover,
-    &:focus {
-      color: #fff;
-      background: #000;
     }
   }
 }

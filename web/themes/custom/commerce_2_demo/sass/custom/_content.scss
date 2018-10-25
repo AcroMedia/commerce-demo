@@ -2,7 +2,9 @@
  * Content styles.
  */
 
-// Make all divs relative. This is for the feature beacon placement.
+// Make all divs relative. This is for Feature Beacon placement.
+// If you see any element in any stylesheet selected like div.element, it was done to override this setting.
+// Example: div.component-cta__link (in cta.scss).
 .site-content,
 .site-header,
 .site-footer {
@@ -385,6 +387,9 @@ input.form-search {
   .btn {
     margin: 0 0 20px 0;
   }
+}
+.card__image {
+  overflow: hidden;
 }
 .card__text-wrapper {
   // 1px padding-bottom to fix spacing issues across browsers.

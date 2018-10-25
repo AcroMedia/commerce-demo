@@ -298,12 +298,16 @@ a {
     }
 
     & > a {
-      padding: 9px 36px 7px;
+      padding: 9px 32px 7px;
       border: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
       font-weight: 600;
       text-transform: uppercase;
       transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+
+      .field--type-string {
+        display: inline-block;
+      }
 
       &:hover, &:focus {
         border: 1px solid #ccc;
@@ -313,6 +317,7 @@ a {
 
       @media (max-width: $screen-xs-max) {
         width: 100%;
+        padding: 9px 20px 7px;
         background-color: $gray-light;
       }
     }

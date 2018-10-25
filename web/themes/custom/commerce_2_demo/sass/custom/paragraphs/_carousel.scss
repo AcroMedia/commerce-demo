@@ -149,9 +149,9 @@
     height: auto;
   }
 }
-.component-carousel-slide__content-wrapper {
+div.component-carousel-slide__content-wrapper {
   position: relative;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
   text-align: center;
@@ -160,8 +160,9 @@
 
   @media (min-width: $screen-sm-min) {
     position: absolute;
-    bottom: 60px;
+    top: 50%;
     left: 0;
+    transform: translateY(-50%);
     background: none;
   }
 }

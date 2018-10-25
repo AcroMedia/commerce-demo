@@ -1,0 +1,194 @@
+/**
+ * 2 Column with Image and Content - Used on enhanced product pages.
+ */
+.paragraph.paragraph--type--2-column-image-content {
+  background-color: $gray-dark;
+  color: #fff;
+  font-size: 18px;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 16px;
+  }
+
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 29px;
+    letter-spacing: normal;
+    color: #fff;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 26px;
+      line-height: 1.4;
+    }
+  }
+
+  @media (max-width: 1550px) {
+    .container {
+      width: 100% !important;
+    }
+  }
+
+  // Background image.
+  .paragraph--type--2-column-image-content__image-left,
+  .paragraph--type--2-column-image-content__image-right {
+    width: 50%;
+    min-height: 535px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+
+  @media (min-width: 1550px) {
+    .paragraph--type--2-column-image-content__image-left,
+    .paragraph--type--2-column-image-content__image-right {
+      width: 85%;
+    }
+    .paragraph--type--2-column-image-content__image-left {
+      margin-left: -35%;
+    }
+    .paragraph--type--2-column-image-content__image-right {
+      margin-right: -35%;
+    }
+  }
+
+  @media (max-width: $screen-md-max) {
+    .paragraph--type--2-column-image-content__image-left,
+    .paragraph--type--2-column-image-content__image-right {
+      min-height: auto;
+    }
+    .paragraph--type--2-column-image-content__image-left {
+      background-position-x: 63%;
+    }
+    .paragraph--type--2-column-image-content__image-right {
+      background-position-x: 37%;
+    }
+  }
+
+  // Content area - background image at mobile.
+  .paragraph--type--2-column-image-content__content-left,
+  .paragraph--type--2-column-image-content__content-right {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+    &:after {
+      content: "";
+      background-color: $gray-dark;
+      opacity: 0.75;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: 1;
+    }
+  }
+  @media (min-width: $screen-sm-min) {
+    .paragraph--type--2-column-image-content__content-left,
+    .paragraph--type--2-column-image-content__content-right {
+      background: none !important;
+    }
+  }
+
+  // Content area.
+  .paragraph--type--2-column-image-content__content-right .paragraph--type--2-column-image-content__content {
+    position: relative;
+    z-index: 2;
+    padding: 55px 55px 55px 35px;
+  }
+  .paragraph--type--2-column-image-content__content-left .paragraph--type--2-column-image-content__content {
+    position: relative;
+    z-index: 2;
+    padding: 55px 35px 55px 35px;
+  }
+  @media (max-width: $screen-sm-max) {
+    .paragraph--type--2-column-image-content__content-right .paragraph--type--2-column-image-content__content,
+    .paragraph--type--2-column-image-content__content-left .paragraph--type--2-column-image-content__content {
+      padding: 25px 20px 40px;
+    }
+  }
+  @media (max-width: $screen-xs-max) {
+    .paragraph--type--2-column-image-content__content-right .paragraph--type--2-column-image-content__content,
+    .paragraph--type--2-column-image-content__content-left .paragraph--type--2-column-image-content__content {
+      padding: 25px 10px 40px;
+    }
+  }
+
+  .paragraph--type--2-column-image-content__content {
+
+    // Links field.
+    .field--name-field-unlimited-cta-links {
+      .field__item {
+        display: inline-block;
+      }
+
+      a {
+        display: inline-block;
+        margin: 20px 16px 0 0;
+        padding: 8px 25px;
+        border: 2px solid #fff;
+        border-radius: 0;
+        background: #000;
+        background: rgba(0, 0, 0, 0.4);
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #fff;
+        transition: color .1s ease-in-out, background-color .1s ease-in-out, opacity .1s ease-in-out,  border .1s ease-in-out;
+        white-space: nowrap;
+        user-select: none;
+        touch-action: manipulation;
+
+        // With highlight class added.
+        &.highlight {
+          color: #fff;
+          background: $c-primary;
+          border: 2px solid $c-primary;
+        }
+
+        &:hover, &:focus {
+          color: #fff;
+          background: rgba(0, 0, 0, 1);
+
+          &.highlight {
+            background: $c-primary-hover;
+            border: 2px solid $c-primary-hover;
+          }
+        }
+
+        @media (max-width: $screen-xs-max) {
+          font-size: 18px;
+        }
+      }
+
+      // Button with video link class applied (via jQuery).
+      a.video-link {
+        vertical-align: middle;
+        margin: 0 16px 0 0;
+        padding: 8px 0;
+        border: none;
+        background: transparent;
+        text-transform: none;
+        letter-spacing: normal;
+        color: #fff;
+
+        &:before {
+          display: inline-block;
+          position: relative;
+          top: 1px;
+          padding-right: 8px;
+          font-family: $f-fontawesome;
+          content: '\f144';
+        }
+
+        &:hover, &:focus {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

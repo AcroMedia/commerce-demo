@@ -41,8 +41,8 @@
 {% block paragraph %}
   {% block content %}
     {% if paragraph.field_button_style.value %}
-      {% set button_style = 'btn--' ~ paragraph.field_button_style.value %}
+      {% set button_style = 'btn-' ~ paragraph.field_button_style.value %}
     {% endif %}
-    <a href="{{ content.field_link.0['#url'] }}" class="btn hvr-float-shadow {{ button_style ? button_style }}">{{ content.field_link.0['#title'] }}</a>
+    <a href="{{ content.field_link.0['#url'] }}" class="btn {{ button_style ? button_style }}">{{ content.field_link.0['#title'] }}</a>
   {% endblock %}
 {% endblock paragraph %}

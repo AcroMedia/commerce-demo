@@ -74,12 +74,12 @@
 }
 .component-content-carousel__slide {
   margin: 0 40px;
-  padding: 30px 20px;
-  border: 2px solid $gray-border;
+  padding: 20px 20px 0;
+  border: 1px solid $gray-border;
 
   @media (min-width: $screen-sm-min) {
     margin: 0 80px;
-    padding: 50px;
+    padding: 30px 30px 0;
   }
   // Set standard content margins.
   .field {
@@ -98,4 +98,7 @@
       margin-bottom: 0;
     }
   }
+}
+.component-content-carousel__slider_item {
+  outline: none;
 }

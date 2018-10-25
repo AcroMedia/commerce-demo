@@ -1,13 +1,17 @@
 /**
  * Tabs.
+ *
+ * General tab styling is in general.scss.
+ * These are overrides specific to the Tabs Paragraph component.
  */
+
 .component-tabs {
   clear: both;
   margin: 60px 0;
   padding: 0;
 }
 
-// Vertical Tabs.
+// Vertical.
 .component-tabs--vertical {
   .component-tabs__tabs {
     display: block;
@@ -17,12 +21,59 @@
     }
   }
   .tab-pane {
-    padding: 40px;
-    border: 1px solid $gray-border;
-    border-left: transparent;
-
     .tab-pane__title {
       margin-top: 0;
     }
   }
+}
+
+// Vertical tabs.
+.nav-tabs--vertical {
+  width: 100%;
+  z-index: 1;
+  border-bottom: none;
+
+  @media (min-width: $screen-sm-min) {
+    flex: 1 0 200px;
+  }
+  @media (min-width: $screen-md-min) {
+    flex: 1 0 250px;
+  }
+
+  // Default.
+  > li {
+    width: 100%;
+    margin-right: 0;
+
+    > a {
+      margin: 0 -1px 0 0;
+      border-bottom: 1px solid $gray-border;
+
+      @media (min-width: $screen-sm-min) {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: $border-radius;
+      }
+    }
+  }
+
+  // Active.
+  > li.active {
+
+    > a {
+      @media (min-width: $screen-sm-min) {
+        border-right: 1px solid #fff;
+        border-bottom: 1px solid $gray-border;
+
+        &:hover, &:focus {
+          border-right: 1px solid #fff;
+          border-bottom: 1px solid $gray-border;
+        }
+      }
+    }
+  }
+}
+
+// Vertical tab content.
+.component-tabs--vertical .tab-content {
+  border-top: 1px solid $gray-border
 }

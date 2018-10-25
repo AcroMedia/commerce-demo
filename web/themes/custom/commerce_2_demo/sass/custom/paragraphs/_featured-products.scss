@@ -4,13 +4,15 @@
 .component-featured-products {
   clear: both;
   margin: 0 0 40px 0;
-  padding: 0;
+  padding: 0 15px;
 }
 .component-featured-products__title {
-  margin: 0 0 20px 0;
-  padding: 0;
-  font-size: 35px;
-  line-height: 1.2;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: $c-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 .component-featured-products__slider {
   margin: 0;
@@ -85,7 +87,13 @@
 }
 .component-featured-products__slider__slide__item {
   padding: 0 10px;
+
+  a {
+    line-height: 1.3em;
+    color: #000;
+  }
 }
+
 // If there are not enough items to trigger the slider.
 .component-featured-products__slider--no-slider {
   display: flex;

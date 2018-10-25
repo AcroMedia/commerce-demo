@@ -1,0 +1,47 @@
+/**
+ * 3 Homepage CTAs.
+ */
+
+.paragraph--type--3-ctas {
+  position: relative;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 18px;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 16px;
+  }
+
+  a, .no-link {
+    display: inline-block;
+    position: relative;
+
+    .field-item__title {
+      position: absolute;
+      z-index: 5;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+  }
+
+  a {
+    img {
+      opacity: 1;
+    }
+
+    &:hover, &:focus {
+      img {
+        opacity: 0.85;
+      }
+    }
+  }
+
+  // Unique class modifiers.
+  &.link-bottom {
+    a .field-item__title {
+      top: 85%;
+      transform: translateX(-50%);
+    }
+  }
+}

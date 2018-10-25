@@ -46,6 +46,7 @@
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   ]
 %}
+
 {%
   set tab_classes = [
     'nav',
@@ -55,6 +56,14 @@
 {% set tabs_attributes = create_attribute() %}
 {% set tabs_attributes = tabs_attributes.addClass(tab_classes) %}
 
+{%
+  set tab_content_classes = [
+  'tab-content',
+]
+%}
+{% set tabs_content_attributes = create_attribute() %}
+{% set tabs_content_attributes = tabs_content_attributes.addClass(tab_content_classes) %}
+
 {# Set langcode so we can reference it within entities. #}
 {% set langcode = paragraph.get('langcode').value %}
 
@@ -62,6 +71,7 @@
 {% if paragraph.field_tabs_layout.value == 'vertical' %}
   {% set attributes = attributes.addClass('component-tabs--vertical') %}
   {% set tabs_attributes = tabs_attributes.addClass('nav-tabs--vertical') %}
+  {% set tabs_content_attributes = tabs_content_attributes.addClass('tab-content--vertical') %}
 {% endif %}
 
 {% block paragraph %}
@@ -92,7 +102,7 @@
           {% endif %}
         </ul>
         {# Tab Content. #}
-        <div class="tab-content">
+        <div{{ tabs_content_attributes }}">
           {% if paragraph.field_paragraphs_reference.0.target_id %}
             {% for tab in paragraph.field_paragraphs_reference %}
               {% set tab_entity = tab.entity.getTranslation(langcode) %}

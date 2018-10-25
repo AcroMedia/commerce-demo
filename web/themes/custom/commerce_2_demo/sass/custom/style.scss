@@ -12,22 +12,12 @@
 @import 'content';
 @import 'comments';
 @import 'blocks/blocks';
-@import 'paragraphs';
-
-// Pages.
-@import 'site_header';
-@import 'site_footer';
-@import 'pages/homepage';
-@import 'pages/contact';
-@import 'pages/landing-page';
-@import 'pages/blog';
-@import 'pages/product';
-@import 'pages/product_uh-axe';
-@import 'pages/product_uh-recurring-digital';
-@import 'pages/checkout';
-@import 'pages/user';
 
 // Paragraphs.
+@import 'paragraphs/paragraphs';
+@import 'paragraphs/1-column-content';
+@import 'paragraphs/2-column-image-content';
+@import 'paragraphs/3-ctas';
 @import 'paragraphs/accordion';
 @import 'paragraphs/cta';
 @import 'paragraphs/content-strap';
@@ -44,7 +34,21 @@
 @import 'paragraphs/webform-content';
 @import 'paragraphs/gallery';
 @import 'paragraphs/tabs';
+@import 'paragraphs/uh-axe-slider';
 @import 'paragraphs/webform';
+
+// Pages.
+@import 'site_header';
+@import 'site_footer';
+@import 'pages/homepage';
+@import 'pages/contact';
+@import 'pages/landing-page';
+@import 'pages/blog';
+@import 'pages/product';
+@import 'pages/product_uh-axe';
+@import 'pages/product_uh-recurring-digital';
+@import 'pages/checkout';
+@import 'pages/user';
 
 // Misc.
 @import 'misc';

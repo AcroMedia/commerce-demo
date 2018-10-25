@@ -72,6 +72,12 @@
   }
 }
 .component-logo-carousel__slide {
+  height: 100%;
   margin: 0;
   padding: 0 20px;
+  outline: none;
+}
+
+.component-logo-carousel__slider__item {
+  outline: none;
 }

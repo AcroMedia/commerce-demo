@@ -81,7 +81,9 @@
         "drupal/jsonapi": "1.x-dev",
         "drupal/jsonapi_extras": "^2.8",
         "drupal/matomo": "^1.7",
-        "drupal/mautic": "^1.1"
+        "drupal/mautic": "^1.1",
+        "drupal/image_effects": "^2.1",
+        "drupal/twig_tweak": "^2.1"
     },
     "require-dev": {
         "behat/mink": "~1.7",

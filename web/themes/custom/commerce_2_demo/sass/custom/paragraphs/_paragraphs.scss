@@ -1,0 +1,48 @@
+/**
+ * Default styles for all paragraphs.
+ */
+
+.paragraph {
+  margin-bottom: 40px;
+
+  @media (max-width: $screen-xs-max) {
+    p {
+      line-height: 1.5;
+    }
+  }
+}
+
+/**
+ * Class overrides.
+ *
+ * Some paragraphs have a 'unique class' field for specific customization.
+ * Classes that are often reused are customized here.
+ * Standalone page/template specific overrides are customized in that page's scss file.
+ */
+.paragraph {
+  // Margin.
+  &.no-margin {
+    margin: 0;
+  }
+
+  // Title.
+  &.large-title {
+    h2.paragraph-title {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: $gray-dark;
+      font-family: $f-tertiary;
+      font-size: 50px;
+      line-height: 1.2;
+      text-transform: none;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 36px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 36px;
+      }
+    }
+  }
+}

@@ -158,7 +158,7 @@ div.component-carousel-slide__content-wrapper {
   background: $gray-darker;
   z-index: 2;
 
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $screen-md-min) {
     position: absolute;
     top: 50%;
     left: 0;
@@ -171,7 +171,7 @@ div.component-carousel-slide__content-wrapper {
   padding: 20px 20px 60px 20px;
   max-width: 1200px;
 
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $screen-md-min) {
     padding: 0 55px;
   }
 }
@@ -179,17 +179,17 @@ div.component-carousel-slide__content-wrapper {
   h2 {
     margin: 0 0 10px 0;
     padding: 0;
-    font-size: 30px;
+    font-size: 26px;
     line-height: 1.2;
     color: #fff;
     text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.6);
 
     @media (min-width: $screen-xs-min) {
-      font-size: 39px;
+      font-size: 30px;
       text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
     }
     @media (min-width: $screen-sm-min) {
-      font-size: 45px;
+      font-size: 38px;
     }
   }
 }

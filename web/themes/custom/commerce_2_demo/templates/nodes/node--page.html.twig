@@ -53,6 +53,6 @@
   </header>
 
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    {{ content }}
+    {{ content|without('field_image','field_paragraphs_reference_2') }}
   </div>
 </article>

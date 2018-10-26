@@ -2,8 +2,20 @@
  * Default styles for all paragraphs.
  */
 
+// Remove bootstrap padding for page footer components.
+.page-footer-components {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// Default paragraph styles.
 .paragraph {
   margin-bottom: 40px;
+
+  // Remove bottom margin from paragraphs within paragraphs.
+  .paragraph {
+    margin-bottom: 0;
+  }
 
   @media (max-width: $screen-xs-max) {
     p {

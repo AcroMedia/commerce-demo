@@ -79,7 +79,7 @@
             {{ page.above_content }}
           {% endif %}
           {% if page.content %}
-            {{ page.content }}
+            {{ page.content|without('field_paragraphs_reference_2') }}
           {% endif %}
           {% if page.below_content %}
             {{ page.below_content }}
@@ -88,6 +88,21 @@
       </div>
     </div>
   </div>
+
+  {# Footer Components. #}
+  {% if node and node.field_paragraphs_reference_2.0.target_id %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 page-footer-components">
+          <main class="content__main-content clearfix" role="complementary">
+            {{ drupal_field('field_paragraphs_reference_2', 'node', node.id, 'default') }}
+          </main>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {# / Footer Components. #}
+
 </div>
 {# / Main Content. #}
 

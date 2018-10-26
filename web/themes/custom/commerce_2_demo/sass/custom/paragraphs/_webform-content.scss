@@ -2,12 +2,13 @@
  * Webform + Content.
  */
 .component-webform-content {
-  margin: 20px 0;
+  max-width: 1140px;
+  margin: 20px auto;
   padding: 0;
 
-  @media (min-width: $screen-sm-min) {
-    margin: 20px 0;
-    padding: 0;
+  &.paragraph--view-mode--full-width {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 .component-webform-content__body {

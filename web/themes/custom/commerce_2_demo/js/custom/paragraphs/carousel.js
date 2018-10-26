@@ -13,7 +13,6 @@
         arrows: true,
         dots: true,
         focusOnSelect: true,
-        arrows: true,
         infinite: true,
         adaptiveHeight: true
       });

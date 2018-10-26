@@ -125,3 +125,10 @@
     padding: 0;
   }
 }
+
+// Overrides for in-page featured products.
+.paragraph--view-mode--default {
+  a.product--teaser .product__thumbnail {
+    height: 160px;
+  }
+}

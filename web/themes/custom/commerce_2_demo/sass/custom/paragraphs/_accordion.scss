@@ -5,6 +5,11 @@
   max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
+
+  &.paragraph--view-mode--full-width {
+    padding-left: 15px;
+    padding-bottom: 15px;
+  }
 }
 .base-accordion {
   clear: both;

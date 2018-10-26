@@ -1,0 +1,31 @@
+/**
+ * Buttons.
+ */
+
+// This ensures styling is the same no matter what paragraph a button is added to.
+.field--name-field-paragraphs-reference,
+.field--name-field-paragraphs-reference-2 {
+  // Default button.
+  .btn-default {
+    margin-bottom: 5px;
+    color: #000 !important;
+    outline: none;
+    text-decoration: none !important;
+
+    &:hover, &:focus {
+      color: $c-primary !important;
+    }
+  }
+
+  // Primary button.
+  .btn-primary {
+    margin-bottom: 5px;
+    color: #fff !important;
+    outline: none;
+    text-decoration: none !important;
+
+    &:hover, &:focus {
+      color: #fff !important;
+    }
+  }
+}

@@ -1,6 +1,11 @@
 /**
  * Accordion.
  */
+.component-accordion {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .base-accordion {
   clear: both;
   margin: 0 0 28px 0;

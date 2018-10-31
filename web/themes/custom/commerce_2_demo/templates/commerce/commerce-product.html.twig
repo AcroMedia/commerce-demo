@@ -31,13 +31,13 @@
 
   {# Product teaser. #}
   <a href="{{ product_url }}" {{ attributes.addClass(classesTeaser) }} aria-label="{{ product_entity.title.value }}">
-    {% if product.field_add_on_products['#items'] %}
-      <div class="add-on-item__teaser-flag">
-        {{ 'Bundle<br>Available!'|t }}
-      </div>
-    {% endif %}
-
     <div class="product__thumbnail">
+      {% if product.field_add_on_products['#items'] %}
+        <div class="add-on-item__teaser-flag">
+          {{ 'Bundle<br>Available!'|t }}
+        </div>
+      {% endif %}
+
       {% if product.field_catalog_image|render|trim is not empty %}
         {{ product.field_catalog_image }}
       {% else %}

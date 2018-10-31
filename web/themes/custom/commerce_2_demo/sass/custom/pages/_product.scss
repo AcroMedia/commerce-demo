@@ -86,7 +86,6 @@
 a.product--teaser {
   position: relative;
   display: block;
-  overflow: hidden;
   line-height: 1.3em;
   color: #000;
 
@@ -240,6 +239,22 @@ a.product--teaser {
 .view-featured-products {
   border-bottom: 1px solid $gray;
 
+  .field--type-entity-reference > .field__label {
+    margin-top: 30px;
+    margin-bottom: 12px;
+    font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    color: #cc0000;
+
+    @media (max-width: 485px) {
+      text-align: center;
+    }
+  }
+
   .field__items,
   .view-content {
     justify-content: space-between;
@@ -312,22 +327,6 @@ a.product--teaser {
 .path-product .recommended-products {
   border-bottom: none;
   margin-bottom: 0;
-
-  .field__label {
-    margin-top: 30px;
-    margin-bottom: 12px;
-    font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    line-height: 1.2;
-    color: #cc0000;
-
-    @media (max-width: 485px) {
-      text-align: center;
-    }
-  }
 
   .field__items {
     display: inline-block;

@@ -78,6 +78,7 @@ $beacon-offset-x-xs: 5px;
 $beacon-offset-y-xs: 5px;
 
 a.feature-beacon__marker {
+  display: none; // Shown with jQuery.
   position:absolute;
   z-index: 2;
   width: $beacon-size;

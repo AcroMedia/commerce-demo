@@ -34,6 +34,7 @@ body {
  * Typography.
  */
 h1 {
+  position: relative;
   margin-top: 30px;
   font-family: $f-primary;
   font-size: 50px;
@@ -46,6 +47,7 @@ h1 {
   }
 }
 h2 {
+  position: relative;
   margin-top: 30px;
   font-family: $f-primary;
   font-size: 28px;
@@ -57,6 +59,7 @@ h2 {
   }
 }
 h3 {
+  position: relative;
   margin-top: 30px;
   font-family: $f-primary;
   font-size: 26px;
@@ -68,6 +71,7 @@ h3 {
   }
 }
 h4 {
+  position: relative;
   margin-top: 25px;
   font-family: $f-primary;
   font-size: 16px;
@@ -76,6 +80,7 @@ h4 {
   text-transform: uppercase;
 }
 h5 {
+  position: relative;
   margin-top: 25px;
   font-family: $f-primary;
   font-size: 13px;
@@ -83,6 +88,7 @@ h5 {
   color: #000;
 }
 h6 {
+  position: relative;
   margin-top: 25px;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 11px;

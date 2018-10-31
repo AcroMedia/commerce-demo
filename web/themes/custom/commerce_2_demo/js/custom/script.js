@@ -228,7 +228,8 @@
 
   // Stop any video playback when modal is closed.
   $(".modal").on('hidden.bs.modal', function (event) {
-    $(".modal iframe").attr("src", $(".modal iframe").attr("src"));
+    var src = $(this).find("iframe").attr("src");
+    $(this).find("iframe").attr("src", src);
   });
 
   // Magnific Popup Gallery.

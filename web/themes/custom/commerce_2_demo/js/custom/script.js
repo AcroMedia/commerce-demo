@@ -226,9 +226,9 @@
     }
   });
 
-  // Stop video playback when videoModal is closed.
-  $("#videoModal").on('hidden.bs.modal', function (event) {
-    $("#videoModal iframe").attr("src", $("#videoModal iframe").attr("src"));
+  // Stop any video playback when modal is closed.
+  $(".modal").on('hidden.bs.modal', function (event) {
+    $(".modal iframe").attr("src", $(".modal iframe").attr("src"));
   });
 
   // Magnific Popup Gallery.

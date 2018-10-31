@@ -48,6 +48,7 @@ uh-feature-beacon:
     - core/jquery
     - core/drupal
     - commerce_2_demo/cookie
+    - commerce_2_demo/lightweight-youtube-player
 
 uh-pado:
   version: 1.x
@@ -84,6 +85,17 @@ fitVid:
   dependencies:
       - core/jquery
       - core/drupal
+
+lightweight-youtube-player:
+  version: 1.x
+  css:
+    theme:
+      js/contrib/lightweight-youtube-player/lw-yt-player.css: { media: all }
+  js:
+    js/contrib/lightweight-youtube-player/lw-yt-player.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
 
 aos:
   version: 1.x

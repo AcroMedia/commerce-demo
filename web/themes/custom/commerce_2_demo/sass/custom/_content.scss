@@ -575,6 +575,13 @@ table {
   opacity: 1;
 }
 
+.modal-header {
+  .close {
+    position: relative;
+    z-index: 1;
+  }
+}
+
 .modal-credits {
   float: left;
   margin: 8px 0;

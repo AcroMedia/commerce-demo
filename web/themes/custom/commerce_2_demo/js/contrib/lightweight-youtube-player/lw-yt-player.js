@@ -28,7 +28,7 @@
       var url = event.target.dataset.youtubeButton;
       var youtubePlaceholder = event.target.parentNode;
 
-      var htmlString = '<div class="feature-video__youtube"> <iframe class="feature-video__iframe" src="' + url + '?autoplay=0" frameborder="0" allowfullscreen></iframe></div>';
+      var htmlString = '<div class="feature-video__youtube"> <iframe class="feature-video__iframe" src="' + url + '?autoplay=1" frameborder="0" allowfullscreen></iframe></div>';
 
       youtubePlaceholder.style.display = 'none';
       youtubePlaceholder.insertAdjacentHTML('beforebegin', htmlString);

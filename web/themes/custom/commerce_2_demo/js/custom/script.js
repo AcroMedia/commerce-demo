@@ -228,7 +228,11 @@
 
   // Stop any video playback when modal is closed.
   $(".modal").on('hidden.bs.modal', function (event) {
+    // Get current iframe source.
     var src = $(this).find("iframe").attr("src");
+    // If autoplay is on, turn it off.
+    src = src.replace('autoplay=1', 'autoplay=0');
+    // Reload iframe source.
     $(this).find("iframe").attr("src", src);
   });
 

@@ -199,9 +199,11 @@ a.product--teaser {
   }
 }
 
-.recommended-products,
-.view-products,
-.view-featured-products {
+/**
+ * Product catalog item layout.
+ */
+
+.view-products {
   margin-bottom: 30px;
 
   .field__items,
@@ -234,10 +236,20 @@ a.product--teaser {
   }
 }
 
-// Full page width teaser blocks.
+/**
+ * Related products views and blocks.
+ */
+
+// Related products - Default styling.
 .recommended-products,
 .view-featured-products {
+  margin-bottom: 30px;
   border-bottom: 1px solid $gray;
+
+  @media (max-width: $screen-xs-max) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .field--type-entity-reference > .field__label {
     margin-top: 30px;
@@ -257,15 +269,29 @@ a.product--teaser {
 
   .field__items,
   .view-content {
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    //justify-content: space-between;
 
     > .field__item,
     .views-row {
+      display: inline-block;
+      position: initial;
+      vertical-align: top;
       width: 15%;
-      margin: 0 0 20px 0;
+      margin: 0 2% 20px 0;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
 
       @media (max-width: $screen-sm-max) {
-        width: 22%;
+        width: 23%;
+
+        &:nth-of-type(4) {
+          margin-right: 0;
+        }
 
         &:nth-of-type(5),
         &:nth-of-type(6) {
@@ -274,7 +300,11 @@ a.product--teaser {
       }
 
       @media (max-width: $screen-xs-max) {
-        width: 30%;
+        width: 32%;
+
+        &:nth-of-type(3) {
+          margin-right: 0;
+        }
 
         &:nth-of-type(4),
         &:nth-of-type(5),
@@ -284,7 +314,14 @@ a.product--teaser {
       }
 
       @media (max-width: 485px) {
-        width: 47%;
+        width: 49%;
+
+        &:nth-of-type(odd) {
+          margin-right: 2% !important;
+        }
+        &:nth-of-type(even) {
+          margin-right: 0  !important;
+        }
 
         &:nth-of-type(4) {
           display: inline-block;
@@ -323,53 +360,13 @@ a.product--teaser {
   }
 }
 
-// Product page recommended products.
+// Related products - Default overrides on product pages.
 .path-product .recommended-products {
   border-bottom: none;
   margin-bottom: 0;
-
-  .field__items {
-    display: inline-block;
-    width: 100%;
-
-    @media (max-width: 485px) {
-      text-align: center;
-    }
-
-    > .field__item {
-      margin: 0 18px 20px 0;
-
-      @media (max-width: $screen-md-max) {
-        margin-right: 14px;
-      }
-
-      @media (max-width: $screen-sm-max) {
-        margin-right: 18px;
-      }
-
-      @media (max-width: $screen-xs-max) {
-        margin-right: 5px;
-      }
-
-
-      &:last-of-type {
-        margin-right: 0;
-      }
-
-      .field__items {
-        display: inline-block;
-        width: 100%;
-      }
-
-      > .field__item {
-        width: auto;
-        margin: 0;
-      }
-    }
-  }
 }
 
-// Featured/recommended products on general pages w/ sidebars.
+// Related products - Default overrides on general pages w/ sidebars.
 .content__main-content--with-sidebar {
   .recommended-products,
   .view-featured-products {
@@ -391,6 +388,7 @@ a.product--teaser {
 /**
  * Product full.
  */
+
 .product--full {
   // Back button.
   .back-and-share {

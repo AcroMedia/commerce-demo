@@ -151,7 +151,7 @@
                 "#2852207: Billing same as shipping":
                 "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch",
                 "#2938760: Variation fields can permanently disappear during ajax replacement":
-                "https://www.drupal.org/files/issues/2018-06-29/2938760-add_variation_field_wrapper-13.patch"
+                "https://www.drupal.org/files/issues/2018-10-31/2938760-20.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
@@ -167,7 +167,7 @@
             },
             "drupal/core": {
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
-                "https://www.drupal.org/files/issues/2018-05-08/drupalimage_ckeditor-2771837-27.patch"
+                "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch"
             }
         }
     }

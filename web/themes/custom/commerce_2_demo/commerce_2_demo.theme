@@ -28,8 +28,6 @@ use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\comment\Entity\Comment;
 
-use Drupal\commerce_stock_local;
-
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  *

@@ -435,6 +435,91 @@ form.newsletter-signup-form {
 }
 
 /**
+ * Catalog selected facet summary.
+ */
+.block-facets-summary {
+  text-align: right;
+
+  @media (min-width: $screen-md-min) {
+    text-align: left;
+  }
+
+  // Block title.
+  h2 {
+    display: none;
+  }
+
+  > ul {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 0;
+    vertical-align: top;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 0 0 15px;
+      border-bottom: 1px solid $gray-light;
+    }
+
+    li {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      vertical-align: top;
+
+      a {
+        position: relative;
+        display: inline-block;
+        margin: 0 5px 5px 0;
+        padding: 2px 35px 4px 10px;
+        font-size: 15px;
+        color: $c-body;
+        text-decoration: none;
+        background: #fff;
+        border: 1px solid $gray;
+
+        @media (min-width: $screen-sm-min) {
+          padding: 2px 40px 4px 15px;
+        }
+
+        // Close icon.
+        &:after {
+          @include fa-icon();
+          content: $fa-var-times;
+          position: absolute;
+          top: 0;
+          right: 0;
+          display: block;
+          margin: 0;
+          padding: 7px 0 0 0;
+          width: 25px;
+          height: 100%;
+          color: $c-body;
+          text-align: center;
+          background: $gray-light;
+          transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+        }
+        .js-facet-deactivate {
+          display: none;
+        }
+
+        &:hover,
+        &:focus {
+          color: $c-link;
+          border-color: $c-link;
+
+          // Close icon.
+          &:after {
+            color: #fff;
+            background: $c-link;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  * Side column facets.
  */
 .block-facets {

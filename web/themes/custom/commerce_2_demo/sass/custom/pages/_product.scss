@@ -4,7 +4,7 @@
  * Product page sorting.
  */
 #block-items-per-page {
-  margin: 15px 0 50px;
+  margin: 15px 0 30px;
   text-align: right;
 
   .form-item {
@@ -68,7 +68,7 @@
 #block-commerce-2-demo-mainpagecontent .view-products {
   .view-header {
     position: absolute;
-    top: -96px;
+    top: -77px;
     font-size: 14px;
 
     @media (max-width: $screen-sm-max) {

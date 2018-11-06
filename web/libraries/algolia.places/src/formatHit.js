@@ -8,11 +8,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = formatHit;
 
-var _findCountryCode = require('./findCountryCode.js');
+var _findCountryCode = require('./findCountryCode');
 
 var _findCountryCode2 = _interopRequireDefault(_findCountryCode);
 
-var _findType = require('./findType.js');
+var _findType = require('./findType');
 
 var _findType2 = _interopRequireDefault(_findType);
 
@@ -47,6 +47,39 @@ function getBestHighlightedForm(highlightedValues) {
   return bestAttributes[0].index === 0 ? defaultValue + ' (' + highlightedValues[bestAttributes[1].index].value + ')' : highlightedValues[bestAttributes[0].index].value + ' (' + defaultValue + ')';
 }
 
+function getBestPostcode(postcodes, highlightedPostcodes) {
+  var defaultValue = highlightedPostcodes[0].value;
+  // collect all other matches
+  var bestAttributes = [];
+  for (var i = 1; i < highlightedPostcodes.length; ++i) {
+    if (highlightedPostcodes[i].matchLevel !== 'none') {
+      bestAttributes.push({
+        index: i,
+        words: highlightedPostcodes[i].matchedWords
+      });
+    }
+  }
+  // no matches in this attribute, retrieve first value
+  if (bestAttributes.length === 0) {
+    return { postcode: postcodes[0], highlightedPostcode: defaultValue };
+  }
+  // sort the matches by `desc(words)`
+  bestAttributes.sort(function (a, b) {
+    if (a.words > b.words) {
+      return -1;
+    } else if (a.words < b.words) {
+      return 1;
+    }
+    return a.index - b.index;
+  });
+
+  var postcode = postcodes[bestAttributes[0].index];
+  return {
+    postcode: postcode,
+    highlightedPostcode: highlightedPostcodes[bestAttributes[0].index].value
+  };
+}
+
 function formatHit(_ref) {
   var formatInputValue = _ref.formatInputValue,
       hit = _ref.hit,
@@ -63,13 +96,18 @@ function formatHit(_ref) {
 
     var county = hit.county && hit.county[0] !== name ? hit.county[0] : undefined;
 
+    var _ref2 = hit.postcode ? getBestPostcode(hit.postcode, hit._highlightResult.postcode) : { postcode: undefined, highlightedPostcode: undefined },
+        postcode = _ref2.postcode,
+        highlightedPostcode = _ref2.highlightedPostcode;
+
     var highlight = {
       name: getBestHighlightedForm(hit._highlightResult.locale_names),
       city: city ? getBestHighlightedForm(hit._highlightResult.city) : undefined,
       administrative: administrative ? getBestHighlightedForm(hit._highlightResult.administrative) : undefined,
       country: country ? hit._highlightResult.country.value : undefined,
       suburb: suburb ? getBestHighlightedForm(hit._highlightResult.suburb) : undefined,
-      county: county ? getBestHighlightedForm(hit._highlightResult.county) : undefined
+      county: county ? getBestHighlightedForm(hit._highlightResult.county) : undefined,
+      postcode: highlightedPostcode
     };
 
     var suggestion = {
@@ -85,7 +123,8 @@ function formatHit(_ref) {
         lat: hit._geoloc.lat,
         lng: hit._geoloc.lng
       },
-      postcode: hit.postcode && hit.postcode[0]
+      postcode: postcode,
+      postcodes: hit.postcode ? hit.postcode : undefined
     };
 
     // this is the value to put inside the <input value=

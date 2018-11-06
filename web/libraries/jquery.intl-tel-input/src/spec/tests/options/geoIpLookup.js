@@ -1,8 +1,8 @@
 "use strict";
 
 describe("geoIpLookup:", function() {
-
-  var deferred;
+  var country = "gb",
+    resolved = false;
 
   beforeEach(function() {
     intlSetup();
@@ -11,46 +11,90 @@ describe("geoIpLookup:", function() {
   });
 
   afterEach(function() {
-    input.intlTelInput("destroy").remove();
-    input = deferred = null;
+    intlTeardown();
+    resolved = false;
   });
 
-  it("init vanilla plugin resolves straight away", function() {
-    deferred = input.intlTelInput();
-    expect(deferred.state()).toEqual("resolved");
+  describe("init vanilla plugin", function() {
+    beforeEach(function(done) {
+      iti = window.intlTelInput(input[0]);
+      iti.promise.then(function() {
+        resolved = true;
+      });
+      setTimeout(done);
+    });
+
+    it("does not resolve straight away", function() {
+      expect(resolved).toEqual(true);
+    });
   });
 
   describe("init plugin with geoIpLookup", function() {
-
-    var country = "gb";
-
     beforeEach(function() {
-      jasmine.clock().install();
-      deferred = input.intlTelInput({
+      iti = window.intlTelInput(input[0], {
         initialCountry: "auto",
         geoIpLookup: function(callback) {
-          setTimeout(function() {
-            callback(country);
-          }, 1000);
-        }
+          callback(country);
+        },
+      });
+      iti.promise.then(function() {
+        resolved = true;
       });
     });
 
-    afterEach(function() {
-      jasmine.clock().uninstall();
+    it("does not resolve straight away", function() {
+      expect(resolved).toEqual(false);
     });
-
-    it("does not resolve straight away, but then fast forward and it does resolve", function() {
-      expect(deferred.state()).toEqual("pending");
-      jasmine.clock().tick(1001);
-      expect(deferred.state()).toEqual("resolved");
-    });
-
-    it("future instances resolve straight away", function() {
-      expect($.fn.intlTelInput.autoCountry).toEqual(country);
-      expect(deferred.state()).toEqual("resolved");
-    });
-
   });
 
+  describe('init plugin with geoIpLookup, and wait for it to finish', function() {
+    beforeEach(function(done) {
+      iti = window.intlTelInput(input[0], {
+        initialCountry: "auto",
+        geoIpLookup: function(callback) {
+          callback(country);
+        },
+      });
+      iti.promise.then(function() {
+        resolved = true;
+        done();
+      });
+    });
+
+    it("does resolve", function() {
+      expect(resolved).toEqual(true);
+    });
+
+    describe('init a second instance with geoIpLookup', function() {
+      var input2,
+        iti2,
+        resolved2 = false;
+
+      beforeEach(function(done) {
+        input2 = $("<input>").appendTo("body");
+        iti2 = window.intlTelInput(input2[0], {
+          initialCountry: "auto",
+          geoIpLookup: function(callback) {
+            callback(country);
+          },
+        });
+        iti2.promise.then(function() {
+          resolved2 = true;
+        });
+        setTimeout(done);
+      });
+
+      afterEach(function() {
+        iti2.destroy();
+        input2.remove();
+        input2 = iti2 = null;
+        resolved2 = false
+      });
+
+      it("does resolve straight away", function() {
+        expect(window.intlTelInputGlobals.autoCountry).toEqual(country);
+        expect(resolved2).toEqual(true);
+      });
+    });
+  });
 });

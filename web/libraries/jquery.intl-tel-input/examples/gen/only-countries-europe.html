@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>Example: European countries</title>
     <link rel="stylesheet" href="../css/prism.css">
-    <link rel="stylesheet" href="../../build/css/intlTelInput.css?1528537600167">
-    <link rel="stylesheet" href="../../build/css/demo.css?1528537600167">
+    <link rel="stylesheet" href="../../build/css/intlTelInput.css?1541153396801">
+    <link rel="stylesheet" href="../../build/css/demo.css?1541153396801">
     
 
     <!-- GOOGLE ANALYTICS -->
@@ -29,13 +29,15 @@
     <pre><code class="language-markup">&lt;input id=&quot;phone&quot; type=&quot;tel&quot;&gt;</code></pre>
 
     <h2>Code</h2>
-    <pre><code class="language-javascript">$(&quot;#phone&quot;).intlTelInput({
-  onlyCountries: [&quot;al&quot;, &quot;ad&quot;, &quot;at&quot;, &quot;by&quot;, &quot;be&quot;, &quot;ba&quot;, &quot;bg&quot;, &quot;hr&quot;, &quot;cz&quot;, &quot;dk&quot;, 
-  &quot;ee&quot;, &quot;fo&quot;, &quot;fi&quot;, &quot;fr&quot;, &quot;de&quot;, &quot;gi&quot;, &quot;gr&quot;, &quot;va&quot;, &quot;hu&quot;, &quot;is&quot;, &quot;ie&quot;, &quot;it&quot;, &quot;lv&quot;, 
-  &quot;li&quot;, &quot;lt&quot;, &quot;lu&quot;, &quot;mk&quot;, &quot;mt&quot;, &quot;md&quot;, &quot;mc&quot;, &quot;me&quot;, &quot;nl&quot;, &quot;no&quot;, &quot;pl&quot;, &quot;pt&quot;, &quot;ro&quot;, 
+    <pre><code class="language-javascript">var input = document.querySelector(&quot;#phone&quot;);
+window.intlTelInput(input, {
+  onlyCountries: [&quot;al&quot;, &quot;ad&quot;, &quot;at&quot;, &quot;by&quot;, &quot;be&quot;, &quot;ba&quot;, &quot;bg&quot;, &quot;hr&quot;, &quot;cz&quot;, &quot;dk&quot;,
+  &quot;ee&quot;, &quot;fo&quot;, &quot;fi&quot;, &quot;fr&quot;, &quot;de&quot;, &quot;gi&quot;, &quot;gr&quot;, &quot;va&quot;, &quot;hu&quot;, &quot;is&quot;, &quot;ie&quot;, &quot;it&quot;, &quot;lv&quot;,
+  &quot;li&quot;, &quot;lt&quot;, &quot;lu&quot;, &quot;mk&quot;, &quot;mt&quot;, &quot;md&quot;, &quot;mc&quot;, &quot;me&quot;, &quot;nl&quot;, &quot;no&quot;, &quot;pl&quot;, &quot;pt&quot;, &quot;ro&quot;,
   &quot;ru&quot;, &quot;sm&quot;, &quot;rs&quot;, &quot;sk&quot;, &quot;si&quot;, &quot;es&quot;, &quot;se&quot;, &quot;ch&quot;, &quot;ua&quot;, &quot;gb&quot;],
-  utilsScript: &quot;../../build/js/utils.js&quot; // just for formatting/placeholders etc
-});</code></pre>
+  utilsScript: &quot;../../build/js/utils.js?1541153396801&quot; // just for formatting/placeholders etc
+});
+</code></pre>
 
     <h2>Result</h2>
     <div id="result">
@@ -43,8 +45,7 @@
     </div>
 
     <script src="../js/prism.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="../../build/js/intlTelInput.js?1528537600167"></script>
-    <script src="../js/onlyCountriesEurope.js?1528537600167"></script>
+    <script src="../../build/js/intlTelInput.js?1541153396801"></script>
+    <script src="./js/onlyCountriesEurope.js?1541153396801"></script>
   </body>
 </html>

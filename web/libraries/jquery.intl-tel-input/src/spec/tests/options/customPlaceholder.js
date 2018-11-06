@@ -4,8 +4,8 @@ describe("customPlaceholder: init plugin with autoPlaceholder=polite and customP
 
   beforeEach(function() {
     intlSetup(true);
-    input = $("<input>");
-    input.intlTelInput({
+    input = $("<input>").wrap("div");
+    iti = window.intlTelInput(input[0], {
       autoPlaceholder: "polite",
       customPlaceholder: function(placeholder) {
         return "e.g. " + placeholder;
@@ -14,8 +14,7 @@ describe("customPlaceholder: init plugin with autoPlaceholder=polite and customP
   });
 
   afterEach(function() {
-    input.intlTelInput("destroy");
-    input = null;
+    intlTeardown();
   });
 
   it("sets the placeholder to the customised US number", function() {

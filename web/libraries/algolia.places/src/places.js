@@ -12,7 +12,7 @@ var _events = require('events');
 
 var _events2 = _interopRequireDefault(_events);
 
-var _algoliasearchLite = require('algoliasearch/src/browser/builds/algoliasearchLite.js');
+var _algoliasearchLite = require('algoliasearch/src/browser/builds/algoliasearchLite');
 
 var _algoliasearchLite2 = _interopRequireDefault(_algoliasearchLite);
 
@@ -20,9 +20,9 @@ var _autocomplete = require('autocomplete.js');
 
 var _autocomplete2 = _interopRequireDefault(_autocomplete);
 
-require('./navigatorLanguage.js');
+require('./navigatorLanguage');
 
-var _createAutocompleteDataset = require('./createAutocompleteDataset.js');
+var _createAutocompleteDataset = require('./createAutocompleteDataset');
 
 var _createAutocompleteDataset2 = _interopRequireDefault(_createAutocompleteDataset);
 
@@ -42,7 +42,7 @@ var _insertCss = require('insert-css');
 
 var _insertCss2 = _interopRequireDefault(_insertCss);
 
-var _errors = require('./errors.js');
+var _errors = require('./errors');
 
 var _errors2 = _interopRequireDefault(_errors);
 

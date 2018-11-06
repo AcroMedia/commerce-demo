@@ -26,8 +26,11 @@ module.exports = function (grunt) {
                     banner: createBanner(dstFile),
                     beautify: true,
                     mangle: false,
-                    preserveComments: false,
-                    ASCIIOnly: true
+                    compress: false,
+                    output: {
+                        ascii_only : true,
+                        comments: false
+                    }
                 }
             };
             uglifyConfig[dstFileMin] = {
@@ -35,8 +38,12 @@ module.exports = function (grunt) {
                 src: srcFiles[srcNdx],
                 options: {
                     banner: createBanner(dstFileMin),
-                    preserveComments: false,
-                    ASCIIOnly: true
+                    mangle: false,
+                    compress: false,
+                    output: {
+                        ascii_only : true,
+                        comments: false
+                    }
                 }
             };
         }
@@ -48,8 +55,11 @@ module.exports = function (grunt) {
                 banner: createBanner("jquery.inputmask.bundle.js"),
                 beautify: true,
                 mangle: false,
-                preserveComments: false,
-                ASCIIOnly: true
+                compress: false,
+                output: {
+                    ascii_only : true,
+                    comments: false
+                }
             }
         };
         uglifyConfig["bundlemin"] = {
@@ -57,8 +67,12 @@ module.exports = function (grunt) {
             src: "build/bundle.js",
             options: {
                 banner: createBanner("jquery.inputmask.bundle.js"),
-                preserveComments: false,
-                ASCIIOnly: true
+                mangle: false,
+                compress: false,
+                output: {
+                    ascii_only : true,
+                    comments: false
+                }
             }
         };
 
@@ -70,20 +84,9 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON("package.json"),
         uglify: createUglifyConfig("js"),
         clean: ["dist"],
-        karma: {
-            options: {
-                configFile: 'karma.conf.js'
-            },
-            unit: {
-                runnerPort: 9999,
-                singleRun: true,
-                browsers: ["Chrome"], //will later add extra test targets
-                logLevel: 'ERROR'
-            }
-        },
         bump: {
             options: {
-                files: ['package.json', 'bower.json', 'composer.json', 'component.json'],
+                files: ['package.json', 'bower.json', 'composer.json'],
                 updateConfigs: ['pkg'],
                 commit: false,
                 createTag: false,
@@ -159,7 +162,7 @@ module.exports = function (grunt) {
         grunt.config('release.options.npmtag', "next");
         grunt.task.run('release');
     });
-    grunt.registerTask('validate', ['webpack:qunit', 'eslint', 'karma']);
+    grunt.registerTask('validate', ['webpack:qunit', 'eslint']);
     grunt.registerTask('build', ['bump:prerelease', 'clean', 'webpack:build', 'uglify']);
     grunt.registerTask('build:patch', ['bump:patch', 'clean', 'webpack:build', 'uglify']);
     grunt.registerTask('build:minor', ['bump:minor', 'clean', 'webpack:build', 'uglify']);

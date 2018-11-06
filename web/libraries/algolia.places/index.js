@@ -4,7 +4,7 @@ var _places = require('./src/places');
 
 var _places2 = _interopRequireDefault(_places);
 
-var _version = require('./src/version.js');
+var _version = require('./src/version');
 
 var _version2 = _interopRequireDefault(_version);
 

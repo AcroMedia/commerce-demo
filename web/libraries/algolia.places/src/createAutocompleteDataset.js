@@ -8,11 +8,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = createAutocompleteDataset;
 
-var _createAutocompleteSource = require('./createAutocompleteSource.js');
+var _createAutocompleteSource = require('./createAutocompleteSource');
 
 var _createAutocompleteSource2 = _interopRequireDefault(_createAutocompleteSource);
 
-var _defaultTemplates = require('./defaultTemplates.js');
+var _defaultTemplates = require('./defaultTemplates');
 
 var _defaultTemplates2 = _interopRequireDefault(_defaultTemplates);
 

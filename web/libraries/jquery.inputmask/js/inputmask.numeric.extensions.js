@@ -9,14 +9,15 @@
  */
 (function (factory) {
     if (typeof define === "function" && define.amd) {
-        define(["./dependencyLibs/inputmask.dependencyLib", "./inputmask"], factory);
+        define(["./inputmask"], factory);
     } else if (typeof exports === "object") {
-        module.exports = factory(require("./dependencyLibs/inputmask.dependencyLib"), require("./inputmask"));
+        module.exports = factory(require("./inputmask"));
     } else {
-        factory(window.dependencyLib || jQuery, window.Inputmask);
+        factory(window.Inputmask);
     }
 }
-(function ($, Inputmask, undefined) {
+(function (Inputmask) {
+    var $ = Inputmask.dependencyLib;
     function autoEscape(txt, opts) {
         var escapedTxt = "";
         for (var i = 0; i < txt.length; i++) {
@@ -160,7 +161,7 @@
                     opts.isNegative = opts.isNegative === undefined ? true : !opts.isNegative;
                     if (buffer.join("") === "") return true;
                     return {
-                        caret: pos,
+                        caret: maskset.validPositions[pos] ? pos : undefined,
                         dopost: true
                     };
                 }
@@ -178,7 +179,7 @@
 
                 return true;
             },
-            postValidation: function (buffer, currentResult, opts) {
+            postValidation: function (buffer, pos, currentResult, opts) {
                 function buildPostMask(buffer, opts) {
                     //define base for formatter
                     var postMask = "";
@@ -324,7 +325,7 @@
                 }
 
                 var rslt = {
-                    caret: (charAtPos === undefined || currentResult.pos !== undefined) ? caretPos + (opts.numericInput ? -1 : 1) : caretPos,
+                    caret: (charAtPos === undefined || currentResult.pos !== undefined) && caretPos !== undefined ? caretPos + (opts.numericInput ? -1 : 1) : caretPos,
                     buffer: processValue,
                     refreshFromBuffer: currentResult.dopost || buffer.join("") !== processValue.join("")
                 };
@@ -354,7 +355,7 @@
                 if (e) {
                     switch (e.type) {
                         case "keydown":
-                            return opts.postValidation(buffer, {
+                            return opts.postValidation(buffer, caretPos, {
                                 caret: caretPos,
                                 dopost: true
                             }, opts);
@@ -368,21 +369,21 @@
                                 }));
                                 if (opts.min !== null && unmasked < opts.min) {
                                     opts.isNegative = opts.min < 0;
-                                    return opts.postValidation(opts.min.toString().replace(".", opts.radixPoint).split(""), { //TODO needs fix for MIN_VALUE & MAX_VALUE
+                                    return opts.postValidation(opts.min.toString().replace(".", opts.radixPoint).split(""), caretPos, { //TODO needs fix for MIN_VALUE & MAX_VALUE
                                         caret: caretPos,
                                         dopost: true,
                                         placeholder: "0"
                                     }, opts);
                                 } else if (opts.max !== null && unmasked > opts.max) {
                                     opts.isNegative = opts.max < 0;
-                                    return opts.postValidation(opts.max.toString().replace(".", opts.radixPoint).split(""), { //TODO needs fix for MIN_VALUE & MAX_VALUE
+                                    return opts.postValidation(opts.max.toString().replace(".", opts.radixPoint).split(""), caretPos, { //TODO needs fix for MIN_VALUE & MAX_VALUE
                                         caret: caretPos,
                                         dopost: true,
                                         placeholder: "0"
                                     }, opts);
                                 }
                             }
-                            return opts.postValidation(buffer, {
+                            return opts.postValidation(buffer, caretPos, {
                                 caret: caretPos,
                                 // dopost: true,
                                 placeholder: "0",

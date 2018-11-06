@@ -3,4 +3,4 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '1.10.0';
+exports.default = '1.13.0';

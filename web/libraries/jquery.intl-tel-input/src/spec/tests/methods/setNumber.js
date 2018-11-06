@@ -4,14 +4,13 @@ describe("setNumber: init vanilla plugin (no utils) and call setNumber with a va
 
   beforeEach(function() {
     intlSetup();
-    input = $("<input>");
-    input.intlTelInput();
-    input.intlTelInput("setNumber", "+447733123456");
+    input = $("<input>").wrap("div");
+    iti = window.intlTelInput(input[0]);
+    iti.setNumber("+447733123456");
   });
 
   afterEach(function() {
-    input.intlTelInput("destroy");
-    input = null;
+    intlTeardown();
   });
 
   it("sets the input val to the given number (no formatting)", function() {
@@ -30,19 +29,18 @@ describe("setNumber: with utils", function() {
 
   beforeEach(function() {
     intlSetup(true);
-    input = $("<input>");
+    input = $("<input>").wrap("div");
   });
 
   afterEach(function() {
-    input.intlTelInput("destroy");
-    input = null;
+    intlTeardown();
   });
 
   describe("init plugin with nationalMode=true and call setNumber with a valid UK number", function() {
 
     beforeEach(function() {
-      input.intlTelInput();
-      input.intlTelInput("setNumber", "+447733123456");
+      iti = window.intlTelInput(input[0]);
+      iti.setNumber("+447733123456");
     });
 
     it("sets the input val to the given number, with ntl formatting", function() {
@@ -54,10 +52,10 @@ describe("setNumber: with utils", function() {
   describe("init plugin with nationalMode=false and call setNumber with a valid UK number", function() {
 
     beforeEach(function() {
-      input.intlTelInput({
+      iti = window.intlTelInput(input[0], {
         nationalMode: false
       });
-      input.intlTelInput("setNumber", "+447733123456");
+      iti.setNumber("+447733123456");
     });
 
     it("sets the input val to the given number, with intl formatting", function() {

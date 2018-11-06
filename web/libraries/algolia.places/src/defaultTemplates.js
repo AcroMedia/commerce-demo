@@ -4,11 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _formatInputValue = require('./formatInputValue.js');
+var _formatInputValue = require('./formatInputValue');
 
 var _formatInputValue2 = _interopRequireDefault(_formatInputValue);
 
-var _formatDropdownValue = require('./formatDropdownValue.js');
+var _formatDropdownValue = require('./formatDropdownValue');
 
 var _formatDropdownValue2 = _interopRequireDefault(_formatDropdownValue);
 

@@ -37,7 +37,7 @@ Thanks to [Jetbrains](https://www.jetbrains.com/) for providing a free license f
 
 ## Setup
 ### dependencyLibs
-Inputmask can run against different javascript libraries.  
+Inputmask can run against different javascript libraries.
 You can choose between:
 - inputmask.dependencyLib (vanilla)
 - inputmask.dependencyLib.jquery
@@ -51,9 +51,6 @@ If you want to include the Inputmask and all extensions. (with jQuery as depende
 ```html
 <script src="jquery.js"></script>
 <script src="dist/jquery.inputmask.bundle.js"></script>
-<script src="dist/inputmask/phone-codes/phone.js"></script>
-<script src="dist/inputmask/phone-codes/phone-be.js"></script>
-<script src="dist/inputmask/phone-codes/phone-ru.js"></script>
 ```
 For individual extensions. (with jQuery as dependencylib)
 ```html
@@ -62,11 +59,7 @@ For individual extensions. (with jQuery as dependencylib)
 <script src="dist/inputmask/inputmask.extensions.js"></script>
 <script src="dist/inputmask/inputmask.numeric.extensions.js"></script>
 <script src="dist/inputmask/inputmask.date.extensions.js"></script>
-<script src="dist/inputmask/inputmask.phone.extensions.js"></script>
 <script src="dist/inputmask/jquery.inputmask.js"></script>
-<script src="dist/inputmask/phone-codes/phone.js"></script>
-<script src="dist/inputmask/phone-codes/phone-be.js"></script>
-<script src="dist/inputmask/phone-codes/phone-ru.js"></script>
 ```
 
 For individual extensions. (with vanilla dependencylib)
@@ -76,10 +69,6 @@ For individual extensions. (with vanilla dependencylib)
 <script src="dist/inputmask/inputmask.extensions.js"></script>
 <script src="dist/inputmask/inputmask.numeric.extensions.js"></script>
 <script src="dist/inputmask/inputmask.date.extensions.js"></script>
-<script src="dist/inputmask/inputmask.phone.extensions.js"></script>
-<script src="dist/inputmask/phone-codes/phone.js"></script>
-<script src="dist/inputmask/phone-codes/phone-be.js"></script>
-<script src="dist/inputmask/phone-codes/phone-ru.js"></script>
 ```
 
 If you like to automatically bind the inputmask to the inputs marked with the data-inputmask- ... attributes you may also want to include the inputmask.binding.js
@@ -109,8 +98,8 @@ var Inputmask = require('inputmask');
 import Inputmask from "inputmask";
 ```
 
-For individual extensions.   
-Every extension exports the Inputmask, so you only need to import the extensions.  
+For individual extensions.
+Every extension exports the Inputmask, so you only need to import the extensions.
 See example.
 ```
 require("inputmask/dist/inputmask/inputmask.numeric.extensions");
@@ -141,13 +130,13 @@ var selector = document.getElementById("selector");
 
 var im = new Inputmask("99-9999999");
 im.mask(selector);
-  
+
 //or
-  
+
 Inputmask({"mask": "(999) 999-9999", .... other options .....}).mask(selector);
 Inputmask("9-a{1,3}9{1,3}").mask(selector);
 Inputmask("9", { repeat: 10 }).mask(selector);
-  
+
 Inputmask({ regex: "\\d*" }).mask(selector);
 Inputmask({ regex: String.raw`\d*` }).mask(selector);
 ```
@@ -267,9 +256,9 @@ The initial mask shown will be "**_**" instead of "**_**-____".
 ### Dynamic masks
 Dynamic masks can change during the input.  To define a dynamic part use { }.
 
-{n} => n repeats  
-{n|j} => n repeats, with j jitmasking  
-{n,m} => from n to m repeats  
+{n} => n repeats
+{n|j} => n repeats, with j jitmasking
+{n,m} => from n to m repeats
 {n,m|j} => from n to m repeats, with j jitmasking
 
 Also {+} and {*} is allowed. + start from 1 and * start from 0.
@@ -313,9 +302,9 @@ $(document).ready(function(){
 ### Alternator masks
 The alternator syntax is like an **OR** statement.  The mask can be one of the 3 choices specified in the alternator.
 
-To define an alternator use the |.  
-ex: "a|9" => a or 9  
-"(aaa)|(999)" => aaa or 999  
+To define an alternator use the |.
+ex: "a|9" => a or 9
+"(aaa)|(999)" => aaa or 999
 "(aaa|999|9AA)" => aaa or 999 or 9AA
 
 Also make sure to read about the keepStatic option.
@@ -451,12 +440,12 @@ Inputmask.extendAliases({
 });
 ```
 
-But if the property is defined within an alias you need to set it for the alias definition.  
+But if the property is defined within an alias you need to set it for the alias definition.
 This is also for default plugin options.  If the alias definitions extends on default options, you can only override it at alias level.
 
 ```javascript
 Inputmask.extendAliases({
-  'numeric': 
+  'numeric': {
     autoUnmask: true,
     allowPlus: false,
     allowMinus: false
@@ -617,17 +606,17 @@ $(selector).inputmask("getmetadata");
 ```
 
 ### setvalue
-The setvalue functionality is to set a value to the inputmask like you would do with jQuery.val, 
-BUT it will trigger the internal event used by the inputmask always, whatever the case. 
-This is particular usefull when cloning an inputmask with jQuery.clone.  Cloning an inputmask is not a fully functional clone.  
+The setvalue functionality is to set a value to the inputmask like you would do with jQuery.val,
+BUT it will trigger the internal event used by the inputmask always, whatever the case.
+This is particular usefull when cloning an inputmask with jQuery.clone.  Cloning an inputmask is not a fully functional clone.
 On the first event (mouseenter, focus, ...) the inputmask can detect if it where cloned and can reactivate the masking.  However when setting the value with jQuery.val there is none of the events triggered in that case.  The setvalue functionality does this for you.
 
 ```
-$(selector).inputmask("setvalue", value);  
-  
+$(selector).inputmask("setvalue", value);
+
 var selector = document.getElementById("selector");
-selector.inputmask.setValue(value);  
-  
+selector.inputmask.setValue(value);
+
 Inputmask.setValue(selector, value);
 ```
 
@@ -745,7 +734,7 @@ Inputmask({ regex: "[0-9]*" }).mask(selector);
 When using shorthands be aware that you need to double escape or use String.raw with a string literal.
 ```
 Inputmask({ regex: "\\d*" }).mask(selector);
-~  
+~
 Inputmask({ regex: String.raw`\d*` }).mask(selector);
 ```
 
@@ -1032,7 +1021,7 @@ $(selector).inputmask({
 ```
 
 ### postValidation
-Hook to postValidate the result from isValid.  Usefull for validating the entry as a whole.  Args => buffer, currentResult, opts<br>Return => true|false|command object
+Hook to postValidate the result from isValid.  Usefull for validating the entry as a whole.  Args => buffer, pos, currentResult, opts<br>Return => true|false|command object
 
 ### preValidation
 Hook to preValidate the input.  Useful for validating regardless the definition. Args => buffer, pos, char, isSelection, opts => return true/false/command object
@@ -1060,24 +1049,24 @@ Return nothing when the user hasn't entered anything.
 Default: true
 
 ### noValuePatching
-Disable value property patching  
+Disable value property patching
 Default: false
 
 ### positionCaretOnClick
-Positioning of the caret on click.   
+Positioning of the caret on click.
 
-Options: 
+Options:
  - none
  - lvp (based on the last valid position (default)
  - radixFocus (position caret to radixpoint on initial click)
  - select (select the whole input)
  - ignore (ignore the click and continue the mask)
- 
+
 Default: "lvp"
 
 ### casing
 Apply casing at the mask-level.
-Options: null, "upper", "lower" or "title"   
+Options: null, "upper", "lower" or "title"
 or callback args => elem, test, pos, validPositions return charValue
 
 ```
@@ -1107,19 +1096,19 @@ You can override the Inputmask.prototype.positionColorMask`if you need some cust
                 template.zIndex = input.zIndex - 1;
            }
 ```
- 
+
 ### disablePredictiveText
-Default: false  
-Disables predictive text on mobile devices.  
+Default: false
+Disables predictive text on mobile devices.
 
 What it does.
 - changes the input type to password => disables predictive text
-- enables the colorMask option which creates a div, which surrounds the input.  
+- enables the colorMask option which creates a div, which surrounds the input.
 So we type in the hidden password input and render the mask in the a created div.
 
 To use the colorMask, you need to include the inputmask.css you might need to add some css-tweaks to make it all visually correct in your page.
 
- 
+
 ### importDataAttributes
 Specify to use the data-inputmask attributes or to ignore them.
 
@@ -1245,7 +1234,6 @@ When cloning a inputmask, the inputmask reactivates on the first event (mouseent
 # jquery.inputmask extensions
 ## [date & datetime extensions](README_date.md)
 ## [numeric extensions](README_numeric.md)
-## [phone extensions](README_phone.md)
 ## [other extensions](README_other.md)
 
 [npm-url]: https://npmjs.org/package/inputmask

@@ -1,5 +1,28 @@
 # Change Log
 
+## [4.0.2 - 2018-09-14]
+
+(4.0.1 => 4.0.2 rebuild dist with newer version of uglify #2000)
+
+### Updates
+- <strong>remove phone alias</strong> (~ use https://github.com/RobinHerbots/inputmask.phone or https://github.com/andr-04/inputmask-multi instead) #1981
+- enhance gettests for jit enabled quantifiers
+- pass initial validation position to postvalidation, to allow prefills in the datetime alias
+- remove caret selection for insertMode => use inputmask.css for visualization
+- update nuget package
+- update dependencies
+
+### Fixed
+- When blur input, inputmask adds attr placeholder to input - #1992
+- Fix endless loop for quantifiers (see tests_dynamic.js - latest unittests) #1983
+- Element keeps the focus to itself in ie11 #1846
+- Changes for min/max options do not get picked up. #1931
+- Behaviour of v3 with hours not possible anymore #1918
+- Multiple alternators #1553
+- jquery.inputmask: clearIncomplete and placeholder don't appear to do anything when array of masks used #1892
+- Problem with delete masked date on iOS #1899
+- Autofill corrupts input on email mask #1908(gl)
+
 ## [4.0.0 - 2018-05-26]
 ### added
 - add support for beforeInput event with inputType (Input Events Level 2 - https://w3c.github.io/input-events/)

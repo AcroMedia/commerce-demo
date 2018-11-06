@@ -1,4 +1,4 @@
-/*!  1.10.0 | © Algolia | github.com/algolia/places */
+/*!  1.13.0 | © Algolia | github.com/algolia/places */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 82);
+/******/ 	return __webpack_require__(__webpack_require__.s = 83);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -982,10 +982,6 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -1014,7 +1010,7 @@ module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = '1.10.0';
+exports.default = '1.13.0';
 
 /***/ }),
 /* 14 */
@@ -1229,7 +1225,7 @@ function buildSearchMethod(queryParam, url) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function omit(obj, test) {
-  var keys = __webpack_require__(76);
+  var keys = __webpack_require__(75);
   var foreach = __webpack_require__(3);
 
   var filtered = {};
@@ -1360,6 +1356,7 @@ function createAutocompleteSource(_ref) {
       aroundLatLngViaIP = _ref.aroundLatLngViaIP,
       insideBoundingBox = _ref.insideBoundingBox,
       insidePolygon = _ref.insidePolygon,
+      getRankingInfo = _ref.getRankingInfo,
       countries = _ref.countries,
       formatInputValue = _ref.formatInputValue,
       _ref$computeQueryPara = _ref.computeQueryParams,
@@ -1415,6 +1412,10 @@ function createAutocompleteSource(_ref) {
 
   if (insidePolygon) {
     defaultQueryParams.insidePolygon = insidePolygon;
+  }
+
+  if (getRankingInfo) {
+    defaultQueryParams.getRankingInfo = getRankingInfo;
   }
 
   var userCoords = void 0;
@@ -1670,6 +1671,39 @@ function getBestHighlightedForm(highlightedValues) {
   return bestAttributes[0].index === 0 ? defaultValue + ' (' + highlightedValues[bestAttributes[1].index].value + ')' : highlightedValues[bestAttributes[0].index].value + ' (' + defaultValue + ')';
 }
 
+function getBestPostcode(postcodes, highlightedPostcodes) {
+  var defaultValue = highlightedPostcodes[0].value;
+  // collect all other matches
+  var bestAttributes = [];
+  for (var i = 1; i < highlightedPostcodes.length; ++i) {
+    if (highlightedPostcodes[i].matchLevel !== 'none') {
+      bestAttributes.push({
+        index: i,
+        words: highlightedPostcodes[i].matchedWords
+      });
+    }
+  }
+  // no matches in this attribute, retrieve first value
+  if (bestAttributes.length === 0) {
+    return { postcode: postcodes[0], highlightedPostcode: defaultValue };
+  }
+  // sort the matches by `desc(words)`
+  bestAttributes.sort(function (a, b) {
+    if (a.words > b.words) {
+      return -1;
+    } else if (a.words < b.words) {
+      return 1;
+    }
+    return a.index - b.index;
+  });
+
+  var postcode = postcodes[bestAttributes[0].index];
+  return {
+    postcode: postcode,
+    highlightedPostcode: highlightedPostcodes[bestAttributes[0].index].value
+  };
+}
+
 function formatHit(_ref) {
   var formatInputValue = _ref.formatInputValue,
       hit = _ref.hit,
@@ -1686,13 +1720,18 @@ function formatHit(_ref) {
 
     var county = hit.county && hit.county[0] !== name ? hit.county[0] : undefined;
 
+    var _ref2 = hit.postcode ? getBestPostcode(hit.postcode, hit._highlightResult.postcode) : { postcode: undefined, highlightedPostcode: undefined },
+        postcode = _ref2.postcode,
+        highlightedPostcode = _ref2.highlightedPostcode;
+
     var highlight = {
       name: getBestHighlightedForm(hit._highlightResult.locale_names),
       city: city ? getBestHighlightedForm(hit._highlightResult.city) : undefined,
       administrative: administrative ? getBestHighlightedForm(hit._highlightResult.administrative) : undefined,
       country: country ? hit._highlightResult.country.value : undefined,
       suburb: suburb ? getBestHighlightedForm(hit._highlightResult.suburb) : undefined,
-      county: county ? getBestHighlightedForm(hit._highlightResult.county) : undefined
+      county: county ? getBestHighlightedForm(hit._highlightResult.county) : undefined,
+      postcode: highlightedPostcode
     };
 
     var suggestion = {
@@ -1708,7 +1747,8 @@ function formatHit(_ref) {
         lat: hit._geoloc.lat,
         lng: hit._geoloc.lng
       },
-      postcode: hit.postcode && hit.postcode[0]
+      postcode: postcode,
+      postcodes: hit.postcode ? hit.postcode : undefined
     };
 
     // this is the value to put inside the <input value=
@@ -1847,7 +1887,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = places;
 
-var _events = __webpack_require__(75);
+var _events = __webpack_require__(79);
 
 var _events2 = _interopRequireDefault(_events);
 
@@ -1865,7 +1905,7 @@ var _createAutocompleteDataset = __webpack_require__(14);
 
 var _createAutocompleteDataset2 = _interopRequireDefault(_createAutocompleteDataset);
 
-var _clear = __webpack_require__(79);
+var _clear = __webpack_require__(78);
 
 var _clear2 = _interopRequireDefault(_clear);
 
@@ -3590,7 +3630,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
 
 module.exports = inlineHeaders;
 
-var encode = __webpack_require__(78);
+var encode = __webpack_require__(77);
 
 function inlineHeaders(url, headers) {
   if (/\?/.test(url)) {
@@ -7446,45 +7486,42 @@ function coerce(val) {
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process, global) {/*!
+/* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
  * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
  * @license   Licensed under MIT license
  *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
- * @version   v4.2.4+314e4831
+ * @version   4.1.0
  */
 
 (function (global, factory) {
-	 true ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.ES6Promise = factory());
+     true ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global.ES6Promise = factory());
 }(this, (function () { 'use strict';
 
 function objectOrFunction(x) {
-  var type = typeof x;
-  return x !== null && (type === 'object' || type === 'function');
+  return typeof x === 'function' || typeof x === 'object' && x !== null;
 }
 
 function isFunction(x) {
   return typeof x === 'function';
 }
 
-
-
-var _isArray = void 0;
-if (Array.isArray) {
-  _isArray = Array.isArray;
-} else {
+var _isArray = undefined;
+if (!Array.isArray) {
   _isArray = function (x) {
     return Object.prototype.toString.call(x) === '[object Array]';
   };
+} else {
+  _isArray = Array.isArray;
 }
 
 var isArray = _isArray;
 
 var len = 0;
-var vertxNext = void 0;
-var customSchedulerFn = void 0;
+var vertxNext = undefined;
+var customSchedulerFn = undefined;
 
 var asap = function asap(callback, arg) {
   queue[len] = callback;
@@ -7513,7 +7550,7 @@ function setAsap(asapFn) {
 var browserWindow = typeof window !== 'undefined' ? window : undefined;
 var browserGlobal = browserWindow || {};
 var BrowserMutationObserver = browserGlobal.MutationObserver || browserGlobal.WebKitMutationObserver;
-var isNode = typeof self === 'undefined' && typeof process !== 'undefined' && {}.toString.call(process) === '[object process]';
+var isNode = typeof self === 'undefined' && typeof process !== 'undefined' && ({}).toString.call(process) === '[object process]';
 
 // test for web worker but not in IE10
 var isWorker = typeof Uint8ClampedArray !== 'undefined' && typeof importScripts !== 'undefined' && typeof MessageChannel !== 'undefined';
@@ -7584,7 +7621,8 @@ function flush() {
 
 function attemptVertx() {
   try {
-    var vertx = Function('return this')().require('vertx');
+    var r = require;
+    var vertx = __webpack_require__(80);
     vertxNext = vertx.runOnLoop || vertx.runOnContext;
     return useVertxTimer();
   } catch (e) {
@@ -7592,7 +7630,7 @@ function attemptVertx() {
   }
 }
 
-var scheduleFlush = void 0;
+var scheduleFlush = undefined;
 // Decide what async method to use to triggering processing of queued callbacks:
 if (isNode) {
   scheduleFlush = useNextTick();
@@ -7607,6 +7645,8 @@ if (isNode) {
 }
 
 function then(onFulfillment, onRejection) {
+  var _arguments = arguments;
+
   var parent = this;
 
   var child = new this.constructor(noop);
@@ -7617,12 +7657,13 @@ function then(onFulfillment, onRejection) {
 
   var _state = parent._state;
 
-
   if (_state) {
-    var callback = arguments[_state - 1];
-    asap(function () {
-      return invokeCallback(_state, child, callback, parent._result);
-    });
+    (function () {
+      var callback = _arguments[_state - 1];
+      asap(function () {
+        return invokeCallback(_state, child, callback, parent._result);
+      });
+    })();
   } else {
     subscribe(parent, child, onFulfillment, onRejection);
   }
@@ -7661,7 +7702,7 @@ function then(onFulfillment, onRejection) {
   @return {Promise} a promise that will become fulfilled with the given
   `value`
 */
-function resolve$1(object) {
+function resolve(object) {
   /*jshint validthis:true */
   var Constructor = this;
 
@@ -7670,11 +7711,11 @@ function resolve$1(object) {
   }
 
   var promise = new Constructor(noop);
-  resolve(promise, object);
+  _resolve(promise, object);
   return promise;
 }
 
-var PROMISE_ID = Math.random().toString(36).substring(2);
+var PROMISE_ID = Math.random().toString(36).substring(16);
 
 function noop() {}
 
@@ -7682,7 +7723,7 @@ var PENDING = void 0;
 var FULFILLED = 1;
 var REJECTED = 2;
 
-var TRY_CATCH_ERROR = { error: null };
+var GET_THEN_ERROR = new ErrorObject();
 
 function selfFulfillment() {
   return new TypeError("You cannot resolve a promise with itself");
@@ -7696,29 +7737,29 @@ function getThen(promise) {
   try {
     return promise.then;
   } catch (error) {
-    TRY_CATCH_ERROR.error = error;
-    return TRY_CATCH_ERROR;
+    GET_THEN_ERROR.error = error;
+    return GET_THEN_ERROR;
   }
 }
 
-function tryThen(then$$1, value, fulfillmentHandler, rejectionHandler) {
+function tryThen(then, value, fulfillmentHandler, rejectionHandler) {
   try {
-    then$$1.call(value, fulfillmentHandler, rejectionHandler);
+    then.call(value, fulfillmentHandler, rejectionHandler);
   } catch (e) {
     return e;
   }
 }
 
-function handleForeignThenable(promise, thenable, then$$1) {
+function handleForeignThenable(promise, thenable, then) {
   asap(function (promise) {
     var sealed = false;
-    var error = tryThen(then$$1, thenable, function (value) {
+    var error = tryThen(then, thenable, function (value) {
       if (sealed) {
         return;
       }
       sealed = true;
       if (thenable !== value) {
-        resolve(promise, value);
+        _resolve(promise, value);
       } else {
         fulfill(promise, value);
       }
@@ -7728,12 +7769,12 @@ function handleForeignThenable(promise, thenable, then$$1) {
       }
       sealed = true;
 
-      reject(promise, reason);
+      _reject(promise, reason);
     }, 'Settle: ' + (promise._label || ' unknown promise'));
 
     if (!sealed && error) {
       sealed = true;
-      reject(promise, error);
+      _reject(promise, error);
     }
   }, promise);
 }
@@ -7742,36 +7783,36 @@ function handleOwnThenable(promise, thenable) {
   if (thenable._state === FULFILLED) {
     fulfill(promise, thenable._result);
   } else if (thenable._state === REJECTED) {
-    reject(promise, thenable._result);
+    _reject(promise, thenable._result);
   } else {
     subscribe(thenable, undefined, function (value) {
-      return resolve(promise, value);
+      return _resolve(promise, value);
     }, function (reason) {
-      return reject(promise, reason);
+      return _reject(promise, reason);
     });
   }
 }
 
-function handleMaybeThenable(promise, maybeThenable, then$$1) {
-  if (maybeThenable.constructor === promise.constructor && then$$1 === then && maybeThenable.constructor.resolve === resolve$1) {
+function handleMaybeThenable(promise, maybeThenable, then$$) {
+  if (maybeThenable.constructor === promise.constructor && then$$ === then && maybeThenable.constructor.resolve === resolve) {
     handleOwnThenable(promise, maybeThenable);
   } else {
-    if (then$$1 === TRY_CATCH_ERROR) {
-      reject(promise, TRY_CATCH_ERROR.error);
-      TRY_CATCH_ERROR.error = null;
-    } else if (then$$1 === undefined) {
+    if (then$$ === GET_THEN_ERROR) {
+      _reject(promise, GET_THEN_ERROR.error);
+      GET_THEN_ERROR.error = null;
+    } else if (then$$ === undefined) {
       fulfill(promise, maybeThenable);
-    } else if (isFunction(then$$1)) {
-      handleForeignThenable(promise, maybeThenable, then$$1);
+    } else if (isFunction(then$$)) {
+      handleForeignThenable(promise, maybeThenable, then$$);
     } else {
       fulfill(promise, maybeThenable);
     }
   }
 }
 
-function resolve(promise, value) {
+function _resolve(promise, value) {
   if (promise === value) {
-    reject(promise, selfFulfillment());
+    _reject(promise, selfFulfillment());
   } else if (objectOrFunction(value)) {
     handleMaybeThenable(promise, value, getThen(value));
   } else {
@@ -7800,7 +7841,7 @@ function fulfill(promise, value) {
   }
 }
 
-function reject(promise, reason) {
+function _reject(promise, reason) {
   if (promise._state !== PENDING) {
     return;
   }
@@ -7813,7 +7854,6 @@ function reject(promise, reason) {
 function subscribe(parent, child, onFulfillment, onRejection) {
   var _subscribers = parent._subscribers;
   var length = _subscribers.length;
-
 
   parent._onerror = null;
 
@@ -7834,8 +7874,8 @@ function publish(promise) {
     return;
   }
 
-  var child = void 0,
-      callback = void 0,
+  var child = undefined,
+      callback = undefined,
       detail = promise._result;
 
   for (var i = 0; i < subscribers.length; i += 3) {
@@ -7852,6 +7892,12 @@ function publish(promise) {
   promise._subscribers.length = 0;
 }
 
+function ErrorObject() {
+  this.error = null;
+}
+
+var TRY_CATCH_ERROR = new ErrorObject();
+
 function tryCatch(callback, detail) {
   try {
     return callback(detail);
@@ -7863,10 +7909,10 @@ function tryCatch(callback, detail) {
 
 function invokeCallback(settled, promise, callback, detail) {
   var hasCallback = isFunction(callback),
-      value = void 0,
-      error = void 0,
-      succeeded = void 0,
-      failed = void 0;
+      value = undefined,
+      error = undefined,
+      succeeded = undefined,
+      failed = undefined;
 
   if (hasCallback) {
     value = tryCatch(callback, detail);
@@ -7880,7 +7926,7 @@ function invokeCallback(settled, promise, callback, detail) {
     }
 
     if (promise === value) {
-      reject(promise, cannotReturnOwn());
+      _reject(promise, cannotReturnOwn());
       return;
     }
   } else {
@@ -7891,25 +7937,25 @@ function invokeCallback(settled, promise, callback, detail) {
   if (promise._state !== PENDING) {
     // noop
   } else if (hasCallback && succeeded) {
-    resolve(promise, value);
-  } else if (failed) {
-    reject(promise, error);
-  } else if (settled === FULFILLED) {
-    fulfill(promise, value);
-  } else if (settled === REJECTED) {
-    reject(promise, value);
-  }
+      _resolve(promise, value);
+    } else if (failed) {
+      _reject(promise, error);
+    } else if (settled === FULFILLED) {
+      fulfill(promise, value);
+    } else if (settled === REJECTED) {
+      _reject(promise, value);
+    }
 }
 
 function initializePromise(promise, resolver) {
   try {
     resolver(function resolvePromise(value) {
-      resolve(promise, value);
+      _resolve(promise, value);
     }, function rejectPromise(reason) {
-      reject(promise, reason);
+      _reject(promise, reason);
     });
   } catch (e) {
-    reject(promise, e);
+    _reject(promise, e);
   }
 }
 
@@ -7925,103 +7971,101 @@ function makePromise(promise) {
   promise._subscribers = [];
 }
 
-function validationError() {
-  return new Error('Array Methods must be provided an Array');
+function Enumerator(Constructor, input) {
+  this._instanceConstructor = Constructor;
+  this.promise = new Constructor(noop);
+
+  if (!this.promise[PROMISE_ID]) {
+    makePromise(this.promise);
+  }
+
+  if (isArray(input)) {
+    this._input = input;
+    this.length = input.length;
+    this._remaining = input.length;
+
+    this._result = new Array(this.length);
+
+    if (this.length === 0) {
+      fulfill(this.promise, this._result);
+    } else {
+      this.length = this.length || 0;
+      this._enumerate();
+      if (this._remaining === 0) {
+        fulfill(this.promise, this._result);
+      }
+    }
+  } else {
+    _reject(this.promise, validationError());
+  }
 }
 
-var Enumerator = function () {
-  function Enumerator(Constructor, input) {
-    this._instanceConstructor = Constructor;
-    this.promise = new Constructor(noop);
+function validationError() {
+  return new Error('Array Methods must be provided an Array');
+};
 
-    if (!this.promise[PROMISE_ID]) {
-      makePromise(this.promise);
-    }
+Enumerator.prototype._enumerate = function () {
+  var length = this.length;
+  var _input = this._input;
 
-    if (isArray(input)) {
-      this.length = input.length;
-      this._remaining = input.length;
+  for (var i = 0; this._state === PENDING && i < length; i++) {
+    this._eachEntry(_input[i], i);
+  }
+};
 
-      this._result = new Array(this.length);
+Enumerator.prototype._eachEntry = function (entry, i) {
+  var c = this._instanceConstructor;
+  var resolve$$ = c.resolve;
 
-      if (this.length === 0) {
-        fulfill(this.promise, this._result);
-      } else {
-        this.length = this.length || 0;
-        this._enumerate(input);
-        if (this._remaining === 0) {
-          fulfill(this.promise, this._result);
-        }
-      }
+  if (resolve$$ === resolve) {
+    var _then = getThen(entry);
+
+    if (_then === then && entry._state !== PENDING) {
+      this._settledAt(entry._state, i, entry._result);
+    } else if (typeof _then !== 'function') {
+      this._remaining--;
+      this._result[i] = entry;
+    } else if (c === Promise) {
+      var promise = new c(noop);
+      handleMaybeThenable(promise, entry, _then);
+      this._willSettleAt(promise, i);
     } else {
-      reject(this.promise, validationError());
+      this._willSettleAt(new c(function (resolve$$) {
+        return resolve$$(entry);
+      }), i);
+    }
+  } else {
+    this._willSettleAt(resolve$$(entry), i);
+  }
+};
+
+Enumerator.prototype._settledAt = function (state, i, value) {
+  var promise = this.promise;
+
+  if (promise._state === PENDING) {
+    this._remaining--;
+
+    if (state === REJECTED) {
+      _reject(promise, value);
+    } else {
+      this._result[i] = value;
     }
   }
 
-  Enumerator.prototype._enumerate = function _enumerate(input) {
-    for (var i = 0; this._state === PENDING && i < input.length; i++) {
-      this._eachEntry(input[i], i);
-    }
-  };
+  if (this._remaining === 0) {
+    fulfill(promise, this._result);
+  }
+};
 
-  Enumerator.prototype._eachEntry = function _eachEntry(entry, i) {
-    var c = this._instanceConstructor;
-    var resolve$$1 = c.resolve;
+Enumerator.prototype._willSettleAt = function (promise, i) {
+  var enumerator = this;
 
-
-    if (resolve$$1 === resolve$1) {
-      var _then = getThen(entry);
-
-      if (_then === then && entry._state !== PENDING) {
-        this._settledAt(entry._state, i, entry._result);
-      } else if (typeof _then !== 'function') {
-        this._remaining--;
-        this._result[i] = entry;
-      } else if (c === Promise$1) {
-        var promise = new c(noop);
-        handleMaybeThenable(promise, entry, _then);
-        this._willSettleAt(promise, i);
-      } else {
-        this._willSettleAt(new c(function (resolve$$1) {
-          return resolve$$1(entry);
-        }), i);
-      }
-    } else {
-      this._willSettleAt(resolve$$1(entry), i);
-    }
-  };
-
-  Enumerator.prototype._settledAt = function _settledAt(state, i, value) {
-    var promise = this.promise;
-
-
-    if (promise._state === PENDING) {
-      this._remaining--;
-
-      if (state === REJECTED) {
-        reject(promise, value);
-      } else {
-        this._result[i] = value;
-      }
-    }
-
-    if (this._remaining === 0) {
-      fulfill(promise, this._result);
-    }
-  };
-
-  Enumerator.prototype._willSettleAt = function _willSettleAt(promise, i) {
-    var enumerator = this;
-
-    subscribe(promise, undefined, function (value) {
-      return enumerator._settledAt(FULFILLED, i, value);
-    }, function (reason) {
-      return enumerator._settledAt(REJECTED, i, reason);
-    });
-  };
-
-  return Enumerator;
-}();
+  subscribe(promise, undefined, function (value) {
+    return enumerator._settledAt(FULFILLED, i, value);
+  }, function (reason) {
+    return enumerator._settledAt(REJECTED, i, reason);
+  });
+};
 
 /**
   `Promise.all` accepts an array of promises, and returns a new promise which
@@ -8191,11 +8235,11 @@ function race(entries) {
   Useful for tooling.
   @return {Promise} a promise rejected with the given `reason`.
 */
-function reject$1(reason) {
+function reject(reason) {
   /*jshint validthis:true */
   var Constructor = this;
   var promise = new Constructor(noop);
-  reject(promise, reason);
+  _reject(promise, reason);
   return promise;
 }
 
@@ -8306,324 +8350,299 @@ function needsNew() {
   ```
 
   @class Promise
-  @param {Function} resolver
+  @param {function} resolver
   Useful for tooling.
   @constructor
 */
+function Promise(resolver) {
+  this[PROMISE_ID] = nextId();
+  this._result = this._state = undefined;
+  this._subscribers = [];
 
-var Promise$1 = function () {
-  function Promise(resolver) {
-    this[PROMISE_ID] = nextId();
-    this._result = this._state = undefined;
-    this._subscribers = [];
-
-    if (noop !== resolver) {
-      typeof resolver !== 'function' && needsResolver();
-      this instanceof Promise ? initializePromise(this, resolver) : needsNew();
-    }
+  if (noop !== resolver) {
+    typeof resolver !== 'function' && needsResolver();
+    this instanceof Promise ? initializePromise(this, resolver) : needsNew();
   }
+}
+
+Promise.all = all;
+Promise.race = race;
+Promise.resolve = resolve;
+Promise.reject = reject;
+Promise._setScheduler = setScheduler;
+Promise._setAsap = setAsap;
+Promise._asap = asap;
+
+Promise.prototype = {
+  constructor: Promise,
 
   /**
-  The primary way of interacting with a promise is through its `then` method,
-  which registers callbacks to receive either a promise's eventual value or the
-  reason why the promise cannot be fulfilled.
-   ```js
-  findUser().then(function(user){
-    // user is available
-  }, function(reason){
-    // user is unavailable, and you are given the reason why
-  });
-  ```
-   Chaining
-  --------
-   The return value of `then` is itself a promise.  This second, 'downstream'
-  promise is resolved with the return value of the first promise's fulfillment
-  or rejection handler, or rejected if the handler throws an exception.
-   ```js
-  findUser().then(function (user) {
-    return user.name;
-  }, function (reason) {
-    return 'default name';
-  }).then(function (userName) {
-    // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
-    // will be `'default name'`
-  });
-   findUser().then(function (user) {
-    throw new Error('Found user, but still unhappy');
-  }, function (reason) {
-    throw new Error('`findUser` rejected and we're unhappy');
-  }).then(function (value) {
-    // never reached
-  }, function (reason) {
-    // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
-    // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
-  });
-  ```
-  If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
-   ```js
-  findUser().then(function (user) {
-    throw new PedagogicalException('Upstream error');
-  }).then(function (value) {
-    // never reached
-  }).then(function (value) {
-    // never reached
-  }, function (reason) {
-    // The `PedgagocialException` is propagated all the way down to here
-  });
-  ```
-   Assimilation
-  ------------
-   Sometimes the value you want to propagate to a downstream promise can only be
-  retrieved asynchronously. This can be achieved by returning a promise in the
-  fulfillment or rejection handler. The downstream promise will then be pending
-  until the returned promise is settled. This is called *assimilation*.
-   ```js
-  findUser().then(function (user) {
-    return findCommentsByAuthor(user);
-  }).then(function (comments) {
-    // The user's comments are now available
-  });
-  ```
-   If the assimliated promise rejects, then the downstream promise will also reject.
-   ```js
-  findUser().then(function (user) {
-    return findCommentsByAuthor(user);
-  }).then(function (comments) {
-    // If `findCommentsByAuthor` fulfills, we'll have the value here
-  }, function (reason) {
-    // If `findCommentsByAuthor` rejects, we'll have the reason here
-  });
-  ```
-   Simple Example
-  --------------
-   Synchronous Example
-   ```javascript
-  let result;
-   try {
-    result = findResult();
-    // success
-  } catch(reason) {
-    // failure
-  }
-  ```
-   Errback Example
-   ```js
-  findResult(function(result, err){
-    if (err) {
-      // failure
-    } else {
-      // success
-    }
-  });
-  ```
-   Promise Example;
-   ```javascript
-  findResult().then(function(result){
-    // success
-  }, function(reason){
-    // failure
-  });
-  ```
-   Advanced Example
-  --------------
-   Synchronous Example
-   ```javascript
-  let author, books;
-   try {
-    author = findAuthor();
-    books  = findBooksByAuthor(author);
-    // success
-  } catch(reason) {
-    // failure
-  }
-  ```
-   Errback Example
-   ```js
-   function foundBooks(books) {
-   }
-   function failure(reason) {
-   }
-   findAuthor(function(author, err){
-    if (err) {
-      failure(err);
-      // failure
-    } else {
-      try {
-        findBoooksByAuthor(author, function(books, err) {
-          if (err) {
-            failure(err);
-          } else {
-            try {
-              foundBooks(books);
-            } catch(reason) {
-              failure(reason);
-            }
-          }
-        });
-      } catch(error) {
-        failure(err);
-      }
-      // success
-    }
-  });
-  ```
-   Promise Example;
-   ```javascript
-  findAuthor().
-    then(findBooksByAuthor).
-    then(function(books){
-      // found books
-  }).catch(function(reason){
-    // something went wrong
-  });
-  ```
-   @method then
-  @param {Function} onFulfilled
-  @param {Function} onRejected
-  Useful for tooling.
-  @return {Promise}
-  */
-
-  /**
-  `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
-  as the catch block of a try/catch statement.
-  ```js
-  function findAuthor(){
-  throw new Error('couldn't find that author');
-  }
-  // synchronous
-  try {
-  findAuthor();
-  } catch(reason) {
-  // something went wrong
-  }
-  // async with promises
-  findAuthor().catch(function(reason){
-  // something went wrong
-  });
-  ```
-  @method catch
-  @param {Function} onRejection
-  Useful for tooling.
-  @return {Promise}
-  */
-
-
-  Promise.prototype.catch = function _catch(onRejection) {
-    return this.then(null, onRejection);
-  };
-
-  /**
-    `finally` will be invoked regardless of the promise's fate just as native
-    try/catch/finally behaves
-  
-    Synchronous example:
+    The primary way of interacting with a promise is through its `then` method,
+    which registers callbacks to receive either a promise's eventual value or the
+    reason why the promise cannot be fulfilled.
   
     ```js
-    findAuthor() {
-      if (Math.random() > 0.5) {
-        throw new Error();
-      }
-      return new Author();
-    }
-  
-    try {
-      return findAuthor(); // succeed or fail
-    } catch(error) {
-      return findOtherAuther();
-    } finally {
-      // always runs
-      // doesn't affect the return value
-    }
-    ```
-  
-    Asynchronous example:
-  
-    ```js
-    findAuthor().catch(function(reason){
-      return findOtherAuther();
-    }).finally(function(){
-      // author was either found, or not
+    findUser().then(function(user){
+      // user is available
+    }, function(reason){
+      // user is unavailable, and you are given the reason why
     });
     ```
   
-    @method finally
-    @param {Function} callback
+    Chaining
+    --------
+  
+    The return value of `then` is itself a promise.  This second, 'downstream'
+    promise is resolved with the return value of the first promise's fulfillment
+    or rejection handler, or rejected if the handler throws an exception.
+  
+    ```js
+    findUser().then(function (user) {
+      return user.name;
+    }, function (reason) {
+      return 'default name';
+    }).then(function (userName) {
+      // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
+      // will be `'default name'`
+    });
+  
+    findUser().then(function (user) {
+      throw new Error('Found user, but still unhappy');
+    }, function (reason) {
+      throw new Error('`findUser` rejected and we're unhappy');
+    }).then(function (value) {
+      // never reached
+    }, function (reason) {
+      // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
+      // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
+    });
+    ```
+    If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
+  
+    ```js
+    findUser().then(function (user) {
+      throw new PedagogicalException('Upstream error');
+    }).then(function (value) {
+      // never reached
+    }).then(function (value) {
+      // never reached
+    }, function (reason) {
+      // The `PedgagocialException` is propagated all the way down to here
+    });
+    ```
+  
+    Assimilation
+    ------------
+  
+    Sometimes the value you want to propagate to a downstream promise can only be
+    retrieved asynchronously. This can be achieved by returning a promise in the
+    fulfillment or rejection handler. The downstream promise will then be pending
+    until the returned promise is settled. This is called *assimilation*.
+  
+    ```js
+    findUser().then(function (user) {
+      return findCommentsByAuthor(user);
+    }).then(function (comments) {
+      // The user's comments are now available
+    });
+    ```
+  
+    If the assimliated promise rejects, then the downstream promise will also reject.
+  
+    ```js
+    findUser().then(function (user) {
+      return findCommentsByAuthor(user);
+    }).then(function (comments) {
+      // If `findCommentsByAuthor` fulfills, we'll have the value here
+    }, function (reason) {
+      // If `findCommentsByAuthor` rejects, we'll have the reason here
+    });
+    ```
+  
+    Simple Example
+    --------------
+  
+    Synchronous Example
+  
+    ```javascript
+    let result;
+  
+    try {
+      result = findResult();
+      // success
+    } catch(reason) {
+      // failure
+    }
+    ```
+  
+    Errback Example
+  
+    ```js
+    findResult(function(result, err){
+      if (err) {
+        // failure
+      } else {
+        // success
+      }
+    });
+    ```
+  
+    Promise Example;
+  
+    ```javascript
+    findResult().then(function(result){
+      // success
+    }, function(reason){
+      // failure
+    });
+    ```
+  
+    Advanced Example
+    --------------
+  
+    Synchronous Example
+  
+    ```javascript
+    let author, books;
+  
+    try {
+      author = findAuthor();
+      books  = findBooksByAuthor(author);
+      // success
+    } catch(reason) {
+      // failure
+    }
+    ```
+  
+    Errback Example
+  
+    ```js
+  
+    function foundBooks(books) {
+  
+    }
+  
+    function failure(reason) {
+  
+    }
+  
+    findAuthor(function(author, err){
+      if (err) {
+        failure(err);
+        // failure
+      } else {
+        try {
+          findBoooksByAuthor(author, function(books, err) {
+            if (err) {
+              failure(err);
+            } else {
+              try {
+                foundBooks(books);
+              } catch(reason) {
+                failure(reason);
+              }
+            }
+          });
+        } catch(error) {
+          failure(err);
+        }
+        // success
+      }
+    });
+    ```
+  
+    Promise Example;
+  
+    ```javascript
+    findAuthor().
+      then(findBooksByAuthor).
+      then(function(books){
+        // found books
+    }).catch(function(reason){
+      // something went wrong
+    });
+    ```
+  
+    @method then
+    @param {Function} onFulfilled
+    @param {Function} onRejected
+    Useful for tooling.
     @return {Promise}
   */
+  then: then,
 
-
-  Promise.prototype.finally = function _finally(callback) {
-    var promise = this;
-    var constructor = promise.constructor;
-
-    return promise.then(function (value) {
-      return constructor.resolve(callback()).then(function () {
-        return value;
-      });
-    }, function (reason) {
-      return constructor.resolve(callback()).then(function () {
-        throw reason;
-      });
+  /**
+    `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
+    as the catch block of a try/catch statement.
+  
+    ```js
+    function findAuthor(){
+      throw new Error('couldn't find that author');
+    }
+  
+    // synchronous
+    try {
+      findAuthor();
+    } catch(reason) {
+      // something went wrong
+    }
+  
+    // async with promises
+    findAuthor().catch(function(reason){
+      // something went wrong
     });
-  };
+    ```
+  
+    @method catch
+    @param {Function} onRejection
+    Useful for tooling.
+    @return {Promise}
+  */
+  'catch': function _catch(onRejection) {
+    return this.then(null, onRejection);
+  }
+};
 
-  return Promise;
-}();
-
-Promise$1.prototype.then = then;
-Promise$1.all = all;
-Promise$1.race = race;
-Promise$1.resolve = resolve$1;
-Promise$1.reject = reject$1;
-Promise$1._setScheduler = setScheduler;
-Promise$1._setAsap = setAsap;
-Promise$1._asap = asap;
-
-/*global self*/
 function polyfill() {
-  var local = void 0;
+    var local = undefined;
 
-  if (typeof global !== 'undefined') {
-    local = global;
-  } else if (typeof self !== 'undefined') {
-    local = self;
-  } else {
-    try {
-      local = Function('return this')();
-    } catch (e) {
-      throw new Error('polyfill failed because global object is unavailable in this environment');
-    }
-  }
-
-  var P = local.Promise;
-
-  if (P) {
-    var promiseToString = null;
-    try {
-      promiseToString = Object.prototype.toString.call(P.resolve());
-    } catch (e) {
-      // silently ignored
+    if (typeof global !== 'undefined') {
+        local = global;
+    } else if (typeof self !== 'undefined') {
+        local = self;
+    } else {
+        try {
+            local = Function('return this')();
+        } catch (e) {
+            throw new Error('polyfill failed because global object is unavailable in this environment');
+        }
     }
 
-    if (promiseToString === '[object Promise]' && !P.cast) {
-      return;
-    }
-  }
+    var P = local.Promise;
 
-  local.Promise = Promise$1;
+    if (P) {
+        var promiseToString = null;
+        try {
+            promiseToString = Object.prototype.toString.call(P.resolve());
+        } catch (e) {
+            // silently ignored
+        }
+
+        if (promiseToString === '[object Promise]' && !P.cast) {
+            return;
+        }
+    }
+
+    local.Promise = Promise;
 }
 
 // Strange compat..
-Promise$1.polyfill = polyfill;
-Promise$1.Promise = Promise$1;
+Promise.polyfill = polyfill;
+Promise.Promise = Promise;
 
-return Promise$1;
+return Promise;
 
 })));
-
-
-
 //# sourceMappingURL=es6-promise.map
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(4)))
@@ -9031,6 +9050,275 @@ function plural(ms, n, name) {
 
 /***/ }),
 /* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// modified from https://github.com/es-shims/es5-shim
+var has = Object.prototype.hasOwnProperty;
+var toStr = Object.prototype.toString;
+var slice = Array.prototype.slice;
+var isArgs = __webpack_require__(76);
+var isEnumerable = Object.prototype.propertyIsEnumerable;
+var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
+var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
+var dontEnums = [
+	'toString',
+	'toLocaleString',
+	'valueOf',
+	'hasOwnProperty',
+	'isPrototypeOf',
+	'propertyIsEnumerable',
+	'constructor'
+];
+var equalsConstructorPrototype = function (o) {
+	var ctor = o.constructor;
+	return ctor && ctor.prototype === o;
+};
+var excludedKeys = {
+	$console: true,
+	$external: true,
+	$frame: true,
+	$frameElement: true,
+	$frames: true,
+	$innerHeight: true,
+	$innerWidth: true,
+	$outerHeight: true,
+	$outerWidth: true,
+	$pageXOffset: true,
+	$pageYOffset: true,
+	$parent: true,
+	$scrollLeft: true,
+	$scrollTop: true,
+	$scrollX: true,
+	$scrollY: true,
+	$self: true,
+	$webkitIndexedDB: true,
+	$webkitStorageInfo: true,
+	$window: true
+};
+var hasAutomationEqualityBug = (function () {
+	/* global window */
+	if (typeof window === 'undefined') { return false; }
+	for (var k in window) {
+		try {
+			if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
+				try {
+					equalsConstructorPrototype(window[k]);
+				} catch (e) {
+					return true;
+				}
+			}
+		} catch (e) {
+			return true;
+		}
+	}
+	return false;
+}());
+var equalsConstructorPrototypeIfNotBuggy = function (o) {
+	/* global window */
+	if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
+		return equalsConstructorPrototype(o);
+	}
+	try {
+		return equalsConstructorPrototype(o);
+	} catch (e) {
+		return false;
+	}
+};
+
+var keysShim = function keys(object) {
+	var isObject = object !== null && typeof object === 'object';
+	var isFunction = toStr.call(object) === '[object Function]';
+	var isArguments = isArgs(object);
+	var isString = isObject && toStr.call(object) === '[object String]';
+	var theKeys = [];
+
+	if (!isObject && !isFunction && !isArguments) {
+		throw new TypeError('Object.keys called on a non-object');
+	}
+
+	var skipProto = hasProtoEnumBug && isFunction;
+	if (isString && object.length > 0 && !has.call(object, 0)) {
+		for (var i = 0; i < object.length; ++i) {
+			theKeys.push(String(i));
+		}
+	}
+
+	if (isArguments && object.length > 0) {
+		for (var j = 0; j < object.length; ++j) {
+			theKeys.push(String(j));
+		}
+	} else {
+		for (var name in object) {
+			if (!(skipProto && name === 'prototype') && has.call(object, name)) {
+				theKeys.push(String(name));
+			}
+		}
+	}
+
+	if (hasDontEnumBug) {
+		var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
+
+		for (var k = 0; k < dontEnums.length; ++k) {
+			if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
+				theKeys.push(dontEnums[k]);
+			}
+		}
+	}
+	return theKeys;
+};
+
+keysShim.shim = function shimObjectKeys() {
+	if (Object.keys) {
+		var keysWorksWithArguments = (function () {
+			// Safari 5.0 bug
+			return (Object.keys(arguments) || '').length === 2;
+		}(1, 2));
+		if (!keysWorksWithArguments) {
+			var originalKeys = Object.keys;
+			Object.keys = function keys(object) {
+				if (isArgs(object)) {
+					return originalKeys(slice.call(object));
+				} else {
+					return originalKeys(object);
+				}
+			};
+		}
+	} else {
+		Object.keys = keysShim;
+	}
+	return Object.keys || keysShim;
+};
+
+module.exports = keysShim;
+
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var toStr = Object.prototype.toString;
+
+module.exports = function isArguments(value) {
+	var str = toStr.call(value);
+	var isArgs = str === '[object Arguments]';
+	if (!isArgs) {
+		isArgs = str !== '[object Array]' &&
+			value !== null &&
+			typeof value === 'object' &&
+			typeof value.length === 'number' &&
+			value.length >= 0 &&
+			toStr.call(value.callee) === '[object Function]';
+	}
+	return isArgs;
+};
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+module.exports = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return map(objectKeys(obj), function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (isArray(obj[k])) {
+        return map(obj[k], function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+function map (xs, f) {
+  if (xs.map) return xs.map(f);
+  var res = [];
+  for (var i = 0; i < xs.length; i++) {
+    res.push(f(xs[i], i));
+  }
+  return res;
+}
+
+var objectKeys = Object.keys || function (obj) {
+  var res = [];
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
+  }
+  return res;
+};
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M.566 1.698L0 1.13 1.132 0l.565.566L6 4.868 10.302.566 10.868 0 12 1.132l-.566.565L7.132 6l4.302 4.3.566.568L10.868 12l-.565-.566L6 7.132l-4.3 4.302L1.13 12 0 10.868l.566-.565L4.868 6 .566 1.698z\"/></svg>\n"
+
+/***/ }),
+/* 79 */
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -9338,278 +9626,15 @@ function isUndefined(arg) {
 
 
 /***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// modified from https://github.com/es-shims/es5-shim
-var has = Object.prototype.hasOwnProperty;
-var toStr = Object.prototype.toString;
-var slice = Array.prototype.slice;
-var isArgs = __webpack_require__(77);
-var isEnumerable = Object.prototype.propertyIsEnumerable;
-var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
-var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
-var dontEnums = [
-	'toString',
-	'toLocaleString',
-	'valueOf',
-	'hasOwnProperty',
-	'isPrototypeOf',
-	'propertyIsEnumerable',
-	'constructor'
-];
-var equalsConstructorPrototype = function (o) {
-	var ctor = o.constructor;
-	return ctor && ctor.prototype === o;
-};
-var excludedKeys = {
-	$console: true,
-	$external: true,
-	$frame: true,
-	$frameElement: true,
-	$frames: true,
-	$innerHeight: true,
-	$innerWidth: true,
-	$outerHeight: true,
-	$outerWidth: true,
-	$pageXOffset: true,
-	$pageYOffset: true,
-	$parent: true,
-	$scrollLeft: true,
-	$scrollTop: true,
-	$scrollX: true,
-	$scrollY: true,
-	$self: true,
-	$webkitIndexedDB: true,
-	$webkitStorageInfo: true,
-	$window: true
-};
-var hasAutomationEqualityBug = (function () {
-	/* global window */
-	if (typeof window === 'undefined') { return false; }
-	for (var k in window) {
-		try {
-			if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
-				try {
-					equalsConstructorPrototype(window[k]);
-				} catch (e) {
-					return true;
-				}
-			}
-		} catch (e) {
-			return true;
-		}
-	}
-	return false;
-}());
-var equalsConstructorPrototypeIfNotBuggy = function (o) {
-	/* global window */
-	if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
-		return equalsConstructorPrototype(o);
-	}
-	try {
-		return equalsConstructorPrototype(o);
-	} catch (e) {
-		return false;
-	}
-};
-
-var keysShim = function keys(object) {
-	var isObject = object !== null && typeof object === 'object';
-	var isFunction = toStr.call(object) === '[object Function]';
-	var isArguments = isArgs(object);
-	var isString = isObject && toStr.call(object) === '[object String]';
-	var theKeys = [];
-
-	if (!isObject && !isFunction && !isArguments) {
-		throw new TypeError('Object.keys called on a non-object');
-	}
-
-	var skipProto = hasProtoEnumBug && isFunction;
-	if (isString && object.length > 0 && !has.call(object, 0)) {
-		for (var i = 0; i < object.length; ++i) {
-			theKeys.push(String(i));
-		}
-	}
-
-	if (isArguments && object.length > 0) {
-		for (var j = 0; j < object.length; ++j) {
-			theKeys.push(String(j));
-		}
-	} else {
-		for (var name in object) {
-			if (!(skipProto && name === 'prototype') && has.call(object, name)) {
-				theKeys.push(String(name));
-			}
-		}
-	}
-
-	if (hasDontEnumBug) {
-		var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
-
-		for (var k = 0; k < dontEnums.length; ++k) {
-			if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
-				theKeys.push(dontEnums[k]);
-			}
-		}
-	}
-	return theKeys;
-};
-
-keysShim.shim = function shimObjectKeys() {
-	if (Object.keys) {
-		var keysWorksWithArguments = (function () {
-			// Safari 5.0 bug
-			return (Object.keys(arguments) || '').length === 2;
-		}(1, 2));
-		if (!keysWorksWithArguments) {
-			var originalKeys = Object.keys;
-			Object.keys = function keys(object) {
-				if (isArgs(object)) {
-					return originalKeys(slice.call(object));
-				} else {
-					return originalKeys(object);
-				}
-			};
-		}
-	} else {
-		Object.keys = keysShim;
-	}
-	return Object.keys || keysShim;
-};
-
-module.exports = keysShim;
-
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var toStr = Object.prototype.toString;
-
-module.exports = function isArguments(value) {
-	var str = toStr.call(value);
-	var isArgs = str === '[object Arguments]';
-	if (!isArgs) {
-		isArgs = str !== '[object Array]' &&
-			value !== null &&
-			typeof value === 'object' &&
-			typeof value.length === 'number' &&
-			value.length >= 0 &&
-			toStr.call(value.callee) === '[object Function]';
-	}
-	return isArgs;
-};
-
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-var stringifyPrimitive = function(v) {
-  switch (typeof v) {
-    case 'string':
-      return v;
-
-    case 'boolean':
-      return v ? 'true' : 'false';
-
-    case 'number':
-      return isFinite(v) ? v : '';
-
-    default:
-      return '';
-  }
-};
-
-module.exports = function(obj, sep, eq, name) {
-  sep = sep || '&';
-  eq = eq || '=';
-  if (obj === null) {
-    obj = undefined;
-  }
-
-  if (typeof obj === 'object') {
-    return map(objectKeys(obj), function(k) {
-      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-      if (isArray(obj[k])) {
-        return map(obj[k], function(v) {
-          return ks + encodeURIComponent(stringifyPrimitive(v));
-        }).join(sep);
-      } else {
-        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-      }
-    }).join(sep);
-
-  }
-
-  if (!name) return '';
-  return encodeURIComponent(stringifyPrimitive(name)) + eq +
-         encodeURIComponent(stringifyPrimitive(obj));
-};
-
-var isArray = Array.isArray || function (xs) {
-  return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-function map (xs, f) {
-  if (xs.map) return xs.map(f);
-  var res = [];
-  for (var i = 0; i < xs.length; i++) {
-    res.push(f(xs[i], i));
-  }
-  return res;
-}
-
-var objectKeys = Object.keys || function (obj) {
-  var res = [];
-  for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
-  }
-  return res;
-};
-
-
-/***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
-module.exports = "<svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M.566 1.698L0 1.13 1.132 0l.565.566L6 4.868 10.302.566 10.868 0 12 1.132l-.566.565L7.132 6l4.302 4.3.566.568L10.868 12l-.565-.566L6 7.132l-4.3 4.302L1.13 12 0 10.868l.566-.565L4.868 6 .566 1.698z\"/></svg>\n"
+/* (ignored) */
 
 /***/ }),
-/* 80 */,
 /* 81 */,
-/* 82 */
+/* 82 */,
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

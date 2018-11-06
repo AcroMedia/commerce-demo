@@ -13,8 +13,9 @@ module.exports = function(grunt) {
   grunt.registerTask('css', ['sass', 'cssmin']);
   // just images
   grunt.registerTask('img', ['responsive_images:retina', 'exec:evenizer', 'responsive_images:regular', 'sprite', 'imagemin']);
-  // just javascript
-  grunt.registerTask('js', ['template:js', 'jshint', 'uglify', 'replace:one', 'replace:two', 'replace:three']);
+  // just javascript (babel must go before we add the wrapper, to keep it's generated methods inside, so not globals)
+  grunt.registerTask('js', ['eslint', 'template:jsAddVersion', 'babel', 'concat', 'uglify', 'replace']);
+
   // build examples
   grunt.registerTask('examples', ['template']);
   // Travis CI

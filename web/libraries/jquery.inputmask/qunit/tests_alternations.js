@@ -1,4 +1,5 @@
-export default function (qunit, $, Inputmask) {
+export default function (qunit, Inputmask) {
+    var $ = Inputmask.dependencyLib;
     qunit.module("Alternations");
 
     qunit.test("\"9{1,2}C|S A{1,3} 9{4}\" - ankitajain32", function (assert) {
@@ -363,5 +364,35 @@ export default function (qunit, $, Inputmask) {
         testmask.focus();
         $("#testmask").Type("1");
         assert.equal(testmask.inputmask._valueGet(), "1", "Result " + testmask.inputmask._valueGet());
+    });
+
+    qunit.test("([0]9)|(19)|(2f) - type 26 - ivaninDarpatov", function (assert) {
+        var $fixture = $("#qunit-fixture");
+        $fixture.append('<input type="text" id="testmask" />');
+        var testmask = document.getElementById("testmask");
+
+        Inputmask("([0]9)|(19)|(2f)", {
+            definitions: {
+                "f": {validator: "[0-3]"}
+            }
+        }).mask(testmask);
+        testmask.focus();
+        $("#testmask").Type("26");
+        assert.equal(testmask.inputmask._valueGet(), "2", "Result " + testmask.inputmask._valueGet());
+    });
+
+    qunit.test("(0{0,1}9)|(19)|(2f) - type 26 - ivaninDarpatov", function (assert) {
+        var $fixture = $("#qunit-fixture");
+        $fixture.append('<input type="text" id="testmask" />');
+        var testmask = document.getElementById("testmask");
+
+        Inputmask("(0{0,1}9)|(19)|(2f)", {
+            definitions: {
+                "f": {validator: "[0-3]"}
+            }
+        }).mask(testmask);
+        testmask.focus();
+        $("#testmask").Type("26");
+        assert.equal(testmask.inputmask._valueGet(), "2", "Result " + testmask.inputmask._valueGet());
     });
 };

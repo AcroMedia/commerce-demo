@@ -26,7 +26,7 @@ and use the places.js library.
 Our JavaScript library is available on the [jsDelivr CDN](http://www.jsdelivr.com) and also on  [cdnjs](https://cdnjs.com/libraries/places.js).
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/places.js@1.10.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.13.0"></script>
 ```
 
 [![Version][version-svg]][package-url] is the latest version.
@@ -38,6 +38,8 @@ Here's a small example using it:
 
 <script>
   var placesAutocomplete = places({
+    appId: <YOUR_PLACES_APP_ID>,
+    apiKey: <YOUR_PLACES_API_KEY>,
     container: document.querySelector('#address-input')
   });
 </script>
@@ -64,6 +66,8 @@ Initialize the places.js library:
 ```js
 var places = require('places.js');
 var placesAutocomplete = places({
+  appId: <YOUR_PLACES_APP_ID>,
+  apiKey: <YOUR_PLACES_API_KEY>,
   container: document.querySelector('#address-input')
 });
 ```

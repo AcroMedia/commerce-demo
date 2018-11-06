@@ -8,11 +8,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = createAutocompleteSource;
 
-var _formatHit = require('./formatHit.js');
+var _formatHit = require('./formatHit');
 
 var _formatHit2 = _interopRequireDefault(_formatHit);
 
-var _version = require('./version.js');
+var _version = require('./version');
 
 var _version2 = _interopRequireDefault(_version);
 
@@ -31,6 +31,7 @@ function createAutocompleteSource(_ref) {
       aroundLatLngViaIP = _ref.aroundLatLngViaIP,
       insideBoundingBox = _ref.insideBoundingBox,
       insidePolygon = _ref.insidePolygon,
+      getRankingInfo = _ref.getRankingInfo,
       countries = _ref.countries,
       formatInputValue = _ref.formatInputValue,
       _ref$computeQueryPara = _ref.computeQueryParams,
@@ -86,6 +87,10 @@ function createAutocompleteSource(_ref) {
 
   if (insidePolygon) {
     defaultQueryParams.insidePolygon = insidePolygon;
+  }
+
+  if (getRankingInfo) {
+    defaultQueryParams.getRankingInfo = getRankingInfo;
   }
 
   var userCoords = void 0;

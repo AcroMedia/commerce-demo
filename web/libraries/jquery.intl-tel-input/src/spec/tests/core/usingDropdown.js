@@ -6,24 +6,23 @@ describe("using dropdown: init plugin with nationalMode=false", function() {
     intlSetup();
     input = $("<input>").appendTo("body");
     // nationalMode=false because we're playing with dial codes
-    input.intlTelInput({
+    iti = window.intlTelInput(input[0], {
       nationalMode: false
     });
   });
 
   afterEach(function() {
-    input.intlTelInput("destroy").remove();
-    input = null;
+    intlTeardown();
   });
 
   it("normal input: clicking the selected flag opens the dropdown", function() {
-    getSelectedFlagContainer().click();
+    getSelectedFlagContainer()[0].click();
     expect(getListElement()).toBeVisible();
   });
 
   it("disabled input: clicking the selected flag does not open the dropdown", function() {
     input.prop("disabled", true);
-    getSelectedFlagContainer().click();
+    getSelectedFlagContainer()[0].click();
     expect(getListElement()).not.toBeVisible();
   });
 
@@ -32,7 +31,7 @@ describe("using dropdown: init plugin with nationalMode=false", function() {
   describe("clicking the selected flag to open the dropdown", function() {
 
     beforeEach(function() {
-      getSelectedFlagContainer().click();
+      getSelectedFlagContainer()[0].click();
     });
 
     it("opens the dropdown with the top item marked as active and highlighted", function() {
@@ -42,12 +41,12 @@ describe("using dropdown: init plugin with nationalMode=false", function() {
     });
 
     it("clicking it again closes the dropdown", function() {
-      getSelectedFlagContainer().click();
+      getSelectedFlagContainer()[0].click();
       expect(getListElement()).not.toBeVisible();
     });
 
     it("clicking off closes the dropdown", function() {
-      $("body").click();
+      $("body")[0].click();
       expect(getListElement()).not.toBeVisible();
     });
 
@@ -58,7 +57,7 @@ describe("using dropdown: init plugin with nationalMode=false", function() {
       var countryCode = "ca";
 
       beforeEach(function() {
-        getListElement().find("li[data-country-code='" + countryCode + "']").click();
+        getListElement().find("li[data-country-code='" + countryCode + "']")[0].click();
       });
 
       it("updates the selected flag", function() {

@@ -10,7 +10,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 exports.default = makeAlgoliaPlacesWidget;
 
-var _places = require('../places.js');
+var _places = require('../places');
 
 var _places2 = _interopRequireDefault(_places);
 
@@ -24,7 +24,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * The underlying structure for the Algolia Places instantsearch widget.
  */
 var AlgoliaPlacesWidget = function () {
-  function AlgoliaPlacesWidget(_ref) {
+  function AlgoliaPlacesWidget() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
     var defaultPosition = _ref.defaultPosition,
         placesOptions = _objectWithoutProperties(_ref, ['defaultPosition']);
 
@@ -38,6 +40,7 @@ var AlgoliaPlacesWidget = function () {
     this.placesAutocomplete = (0, _places2.default)(this.placesOptions);
 
     this.query = '';
+    this.initialLatLngViaIP = null;
   }
 
   _createClass(AlgoliaPlacesWidget, [{
@@ -46,8 +49,9 @@ var AlgoliaPlacesWidget = function () {
       var configuration = {};
 
       if (this.defaultPosition) {
-        configuration.aroundLatLng = this.defaultPosition;
         configuration.insideBoundingBox = undefined;
+        configuration.aroundLatLngViaIP = false;
+        configuration.aroundLatLng = this.defaultPosition;
       }
 
       return configuration;
@@ -59,6 +63,16 @@ var AlgoliaPlacesWidget = function () {
 
       var helper = _ref2.helper;
 
+      // Get the initial value only when it's not already set via URLSync
+      // see: getWidgetSearchParameters
+      if (this.initialLatLngViaIP === null) {
+        // The value is retrieved in the `init` rather than `getConfiguration`
+        // because the widget that set `aroundLatLngViaIP` might be registered
+        // after this one. We wait until we have the full configuration to save
+        // the initial value.
+        this.initialLatLngViaIP = helper.getQueryParameter('aroundLatLngViaIP');
+      }
+
       this.placesAutocomplete.on('change', function (opts) {
         var _opts$suggestion = opts.suggestion,
             _opts$suggestion$latl = _opts$suggestion.latlng,
@@ -68,12 +82,22 @@ var AlgoliaPlacesWidget = function () {
 
 
         _this.query = value;
-        helper.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLng', lat + ',' + lng).search();
+
+        helper.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLngViaIP', false).setQueryParameter('aroundLatLng', lat + ',' + lng).search();
       });
 
       this.placesAutocomplete.on('clear', function () {
         _this.query = '';
-        helper.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLng', _this.defaultPosition).search();
+
+        helper.setQueryParameter('insideBoundingBox');
+
+        if (_this.defaultPosition) {
+          helper.setQueryParameter('aroundLatLngViaIP', false).setQueryParameter('aroundLatLng', _this.defaultPosition);
+        } else {
+          helper.setQueryParameter('aroundLatLngViaIP', _this.initialLatLngViaIP).setQueryParameter('aroundLatLng');
+        }
+
+        helper.search();
       });
     }
   }, {
@@ -84,6 +108,7 @@ var AlgoliaPlacesWidget = function () {
       if (!uiState.places) {
         this.placesAutocomplete.setVal('');
         this.placesAutocomplete.close();
+
         return searchParameters;
       }
 
@@ -93,10 +118,12 @@ var AlgoliaPlacesWidget = function () {
 
 
       this.query = query;
+      this.initialLatLngViaIP = searchParameters.getQueryParameter('aroundLatLngViaIP');
+
       this.placesAutocomplete.setVal(query || '');
       this.placesAutocomplete.close();
 
-      return searchParameters.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLng', position);
+      return searchParameters.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLngViaIP', false).setQueryParameter('aroundLatLng', position);
     }
   }, {
     key: 'getWidgetState',

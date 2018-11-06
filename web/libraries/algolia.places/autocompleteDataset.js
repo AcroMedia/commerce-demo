@@ -1,8 +1,8 @@
 'use strict';
 
-require('./src/navigatorLanguage.js');
+require('./src/navigatorLanguage');
 
-var _createAutocompleteDataset = require('./src/createAutocompleteDataset.js');
+var _createAutocompleteDataset = require('./src/createAutocompleteDataset');
 
 var _createAutocompleteDataset2 = _interopRequireDefault(_createAutocompleteDataset);
 

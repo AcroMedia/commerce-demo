@@ -6,10 +6,11 @@ describe("getCountryData: use static method getCountryData", function() {
 
   beforeEach(function() {
     intlSetup();
-    countryData = $.fn.intlTelInput.getCountryData();
+    countryData = window.intlTelInputGlobals.getCountryData();
   });
 
   afterEach(function() {
+    intlTeardown();
     countryData = null;
   });
 

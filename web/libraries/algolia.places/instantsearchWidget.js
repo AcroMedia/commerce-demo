@@ -1,6 +1,6 @@
 'use strict';
 
-var _widget = require('./src/instantsearch/widget.js');
+var _widget = require('./src/instantsearch/widget');
 
 var _widget2 = _interopRequireDefault(_widget);
 

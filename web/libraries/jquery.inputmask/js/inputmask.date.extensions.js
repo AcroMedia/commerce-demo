@@ -9,14 +9,15 @@
  */
 (function (factory) {
     if (typeof define === "function" && define.amd) {
-        define(["./dependencyLibs/inputmask.dependencyLib", "./inputmask"], factory);
+        define(["./inputmask"], factory);
     } else if (typeof exports === "object") {
-        module.exports = factory(require("./dependencyLibs/inputmask.dependencyLib"), require("./inputmask"));
+        module.exports = factory(require("./inputmask"));
     } else {
-        factory(window.dependencyLib || jQuery, window.Inputmask);
+        factory(window.Inputmask);
     }
 }
-(function ($, Inputmask) {
+(function (Inputmask) {
+        var $ = Inputmask.dependencyLib;
         var //supported codes for formatting
             //http://blog.stevenlevithan.com/archives/date-time-format
             //https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings?view=netframework-4.7
@@ -125,7 +126,7 @@
 
         //parse the given format and return a mask pattern
         //when a dateObjValue is passed a datestring in the requested format is returned
-        function parse(format, dateObjValue, opts) {
+        function parse(format, dateObjValue, opts, raw) {
             //parse format to regex string
             var mask = "", match;
             while (match = getTokenizer(opts).exec(format)) {
@@ -147,8 +148,12 @@
                 }
                 else {
                     if (formatCode[match[0]]) {
-                        var getFn = formatCode[match[0]][3];
-                        mask += getFn.call(dateObjValue.date);
+                        if (raw !== true && formatCode[match[0]][3]) {
+                            var getFn = formatCode[match[0]][3];
+                            mask += getFn.call(dateObjValue.date);
+                        }
+                        else if (formatCode[match[0]][2]) mask += dateObjValue["raw" + formatCode[match[0]][2]];
+                        else mask += match[0];
                     }
                     else mask += match[0];
                 }
@@ -202,6 +207,8 @@
                 }
 
                 return dateObj;
+            } else if (mask && typeof mask === "object" && mask.hasOwnProperty("date")) {
+                return mask;
             }
             return undefined;
         }
@@ -216,8 +223,6 @@
                     opts.displayFormat = formatAlias[opts.displayFormat] || opts.displayFormat || opts.inputFormat; //resolve possible formatAkias
                     opts.outputFormat = formatAlias[opts.outputFormat] || opts.outputFormat || opts.inputFormat; //resolve possible formatAkias
                     opts.placeholder = opts.placeholder !== "" ? opts.placeholder : opts.inputFormat.replace(/[\[\]]/, "");
-                    opts.min = analyseMask(opts.min, opts.inputFormat, opts);
-                    opts.max = analyseMask(opts.max, opts.inputFormat, opts);
                     opts.regex = parse(opts.inputFormat, undefined, opts);
                     // console.log(opts.regex);
                     return null; //migrate to regex mask
@@ -240,11 +245,21 @@
                     ],
                     ordinalSuffix: ["st", "nd", "rd", "th"]
                 },
-                postValidation: function (buffer, currentResult, opts) {
+                postValidation: function (buffer, pos, currentResult, opts) {
+                    opts.min = analyseMask(opts.min, opts.inputFormat, opts);
+                    opts.max = analyseMask(opts.max, opts.inputFormat, opts);
+
                     var result = currentResult, dateParts = analyseMask(buffer.join(""), opts.inputFormat, opts);
                     if (result && dateParts.date.getTime() === dateParts.date.getTime()) { //check for a valid date ~ an invalid date returns NaN which isn't equal
                         result = isValidDate(dateParts, result);
                         result = result && isDateInRange(dateParts, opts);
+                    }
+
+                    if (pos && result && currentResult.pos !== pos) {
+                        return {
+                            buffer: parse(opts.inputFormat, dateParts, opts),
+                            refreshFromBuffer: {start: pos, end: currentResult.pos}
+                        };
                     }
 
                     return result;
@@ -271,7 +286,7 @@
                     }
                 },
                 onUnMask: function (maskedValue, unmaskedValue, opts) {
-                    return parse(opts.outputFormat, analyseMask(maskedValue, opts.inputFormat, opts), opts);
+                    return parse(opts.outputFormat, analyseMask(maskedValue, opts.inputFormat, opts), opts, true);
                 },
                 casing: function (elem, test, pos, validPositions) {
                     if (test.nativeDef.indexOf("[ap]") == 0) return elem.toLowerCase();

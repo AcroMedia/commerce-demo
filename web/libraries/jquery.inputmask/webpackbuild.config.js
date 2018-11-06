@@ -79,12 +79,13 @@ module.exports = {
             // sources naming
             moduleFilenameTemplate: '[absolute-resource-path]',
             fallbackModuleFilenameTemplate: '[absolute-resource-path]',
-        }),
-        new webpack.LoaderOptionsPlugin({
-            debug: true
+        // }),
+        // new webpack.LoaderOptionsPlugin({
+        //     debug: true
         })
     ],
     bail: true,
+    mode: "none"
     // devServer: {
     // 	publicPath: '/',
     // 	stats: {

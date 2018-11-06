@@ -7,8 +7,7 @@ describe("initial values:", function() {
   });
 
   afterEach(function() {
-    input.intlTelInput("destroy");
-    input = null;
+    intlTeardown();
   });
 
 
@@ -16,8 +15,8 @@ describe("initial values:", function() {
   describe("init vanilla plugin on empty input", function() {
 
     beforeEach(function() {
-      input = $("<input>");
-      input.intlTelInput();
+      input = $("<input>").wrap("div");
+      iti = window.intlTelInput(input[0]);
     });
 
     it("creates a container with the right class", function() {
@@ -44,7 +43,7 @@ describe("initial values:", function() {
 
     beforeEach(function() {
       input = $("<input value='+44 12345'>");
-      input.intlTelInput();
+      iti = window.intlTelInput(input[0]);
     });
 
     it("sets the state correctly: selected flag and active list item", function() {
@@ -65,7 +64,7 @@ describe("initial values:", function() {
     describe("init plugin with nationalMode enabled", function() {
 
       beforeEach(function() {
-        input.intlTelInput();
+        iti = window.intlTelInput(input[0]);
       });
 
       it("defaults to US flag", function() {
@@ -79,7 +78,7 @@ describe("initial values:", function() {
       var initialCountry = "ca";
 
       beforeEach(function() {
-        input.intlTelInput({
+        iti = window.intlTelInput(input[0], {
           initialCountry: initialCountry
         });
       });
@@ -98,7 +97,7 @@ describe("initial values:", function() {
 
     beforeEach(function() {
       input = $("<input value='+682 21 234'>");
-      input.intlTelInput();
+      iti = window.intlTelInput(input[0]);
     });
 
     // issue 520
@@ -114,7 +113,7 @@ describe("initial values:", function() {
 
     beforeEach(function() {
       input = $("<input value='+969999'>");
-      input.intlTelInput();
+      iti = window.intlTelInput(input[0]);
     });
 
     it("does not set the selected flag or the active list item", function() {
@@ -130,7 +129,7 @@ describe("initial values:", function() {
 
     beforeEach(function() {
       input = $("<input value='8'>");
-      input.intlTelInput();
+      iti = window.intlTelInput(input[0]);
     });
 
     it("does not set the selected flag or the active list item", function() {

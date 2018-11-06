@@ -7,25 +7,19 @@ describe("autoHideDialCode option:", function() {
   beforeEach(function() {
     intlSetup();
 
-    var form = $("<form></form>").appendTo("body");
-    form.on("submit", function (e) {
-      e.preventDefault();
-    });
-
     // must be in DOM for focus to work
-    input = $("<input>").appendTo(form);
+    input = $("<input>").appendTo("body");
   });
 
   afterEach(function() {
-    input.intlTelInput("destroy").remove();
-    input = null;
+    intlTeardown();
   });
 
 
   describe("init plugin with autoHideDialCode=true and nationalMode=false", function() {
 
     beforeEach(function() {
-      input.intlTelInput({
+      iti = window.intlTelInput(input[0], {
         autoHideDialCode: true,
         nationalMode: false
       });
@@ -38,7 +32,7 @@ describe("autoHideDialCode option:", function() {
     describe("focusing the input", function() {
 
       beforeEach(function() {
-        input.focus();
+        triggerInputEvent("focus");
       });
 
       it("adds the default dial code", function() {
@@ -54,12 +48,7 @@ describe("autoHideDialCode option:", function() {
       });
 
       it("blurring it removes it again", function() {
-        input.blur();
-        expect(getInputVal()).toEqual("");
-      });
-
-      it("submitting it removes it again", function() {
-        input.parent().submit();
+        triggerInputEvent("blur");
         expect(getInputVal()).toEqual("");
       });
 
@@ -76,9 +65,9 @@ describe("autoHideDialCode option:", function() {
       });
 
       it("focusing and blurring the input doesn't change it", function() {
-        input.focus();
+        triggerInputEvent("focus");
         expect(getInputVal()).toEqual(number);
-        input.blur();
+        triggerInputEvent("blur");
         expect(getInputVal()).toEqual(number);
       });
 
@@ -90,7 +79,7 @@ describe("autoHideDialCode option:", function() {
   describe("init plugin with autoHideDialCode=false and nationalMode=false", function() {
 
     beforeEach(function() {
-      input.intlTelInput({
+      iti = window.intlTelInput(input[0], {
         autoHideDialCode: false,
         nationalMode: false
       });
@@ -101,9 +90,9 @@ describe("autoHideDialCode option:", function() {
     });
 
     it("focusing and bluring the input dont change the val", function() {
-      input.focus();
+      triggerInputEvent("focus");
       expect(getInputVal()).toEqual(defaultDialCode);
-      input.blur();
+      triggerInputEvent("blur");
       expect(getInputVal()).toEqual(defaultDialCode);
     });
 
@@ -117,9 +106,9 @@ describe("autoHideDialCode option:", function() {
       });
 
       it("focusing and blurring the input doesn't change it", function() {
-        input.focus();
+        triggerInputEvent("focus");
         expect(getInputVal()).toEqual(number);
-        input.blur();
+        triggerInputEvent("blur");
         expect(getInputVal()).toEqual(number);
       });
 

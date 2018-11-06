@@ -97,7 +97,7 @@
                 ignorables: [8, 9, 13, 19, 27, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 93, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 0, 229],
                 isComplete: null, //override for isComplete - args => buffer, opts - return true || false
                 preValidation: null, //hook to preValidate the input.  Usefull for validating regardless the definition.	args => buffer, pos, char, isSelection, opts => return true/false/command object
-                postValidation: null, //hook to postValidate the result from isValid.	Usefull for validating the entry as a whole.	args => buffer, currentResult, opts => return true/false/json
+                postValidation: null, //hook to postValidate the result from isValid.	Usefull for validating the entry as a whole.	args => buffer, pos, currentResult, opts => return true/false/json
                 staticDefinitionSymbol: undefined, //specify a definitionSymbol for static content, used to make matches for alternators
                 jitMasking: false, //just in time masking ~ only mask while typing, can n (number), true or false
                 nullable: true, //return nothing instead of the buffertemplate when the user hasn't entered anything.
@@ -695,6 +695,7 @@
             X: 88,
             CONTROL: 17
         };
+        Inputmask.dependencyLib = $;
 
         function resolveAlias(aliasStr, options, opts) {
             var aliasDefinition = Inputmask.prototype.aliases[aliasStr];
@@ -815,6 +816,7 @@
         function maskScope(actionObj, maskset, opts) {
             maskset = maskset || this.maskset;
             opts = opts || this.opts;
+
             var inputmask = this,
                 el = this.el,
                 isRTL = this.isRTL,
@@ -826,17 +828,11 @@
                 maxLength,
                 mouseEnter = false,
                 colorMask,
-                jitPos,
-                jitOffset = 0;
+                originalPlaceholder;
 
             //maskset helperfunctions
             function getMaskTemplate(baseOnInput, minimalPos, includeMode, noJit, clearOptionalTail) {
                 //includeMode true => input, undefined => placeholder, false => mask
-
-                if (noJit !== true) {
-                    jitPos = undefined;
-                    jitOffset = 0;
-                }
 
                 var greedy = opts.greedy;
                 if (clearOptionalTail) opts.greedy = false;
@@ -859,11 +855,8 @@
                         test = testPos.match;
                         ndxIntlzr = testPos.locator.slice();
                         var jitMasking = noJit === true ? false : (opts.jitMasking !== false ? opts.jitMasking : test.jit);
-                        if (jitMasking === false || jitMasking === undefined || pos < lvp || (typeof jitMasking === "number" && isFinite(jitMasking) && jitMasking > pos)) {
+                        if (jitMasking === false || jitMasking === undefined /*|| pos < lvp*/ || (typeof jitMasking === "number" && isFinite(jitMasking) && jitMasking > pos)) {
                             maskTemplate.push(includeMode === false ? test.nativeDef : getPlaceholder(pos, test));
-                        } else if (test.jit && test.optionalQuantifier !== undefined) {
-                            jitPos = pos;
-                            jitOffset++;
                         }
                     }
                     if (opts.keepStatic === "auto") {
@@ -979,7 +972,8 @@
                     matches = [],
                     insertStop = false,
                     latestMatch,
-                    cacheDependency = ndxIntlzr ? ndxIntlzr.join("") : "";
+                    cacheDependency = ndxIntlzr ? ndxIntlzr.join("") : "",
+                    offset = 0;
 
                 function resolveTestFromToken(maskToken, ndxInitializer, loopNdx, quantifierRecurse) { //ndxInitializer contains a set of indexes to speedup searches in the mtokens
                     function handleMatch(match, loopNdx, quantifierRecurse) {
@@ -988,8 +982,7 @@
                             if (!firstMatch) {
                                 $.each(tokenGroup.matches, function (ndx, match) {
                                     if (match.isQuantifier === true) firstMatch = isFirstMatch(latestMatch, tokenGroup.matches[ndx - 1]);
-                                    else if (match.isOptional === true) firstMatch = isFirstMatch(latestMatch, match);
-                                    else if (match.isAlternate === true) firstMatch = isFirstMatch(latestMatch, match);
+                                    else if (match.hasOwnProperty("matches")) firstMatch = isFirstMatch(latestMatch, match);
                                     if (firstMatch) return false;
                                 });
                             }
@@ -1044,7 +1037,11 @@
                         }
 
                         function staticCanMatchDefinition(source, target) {
-                            return source.match.fn === null && target.match.fn !== null ? target.match.fn.test(source.match.def, getMaskSet(), pos, false, opts, false) : false;
+                            var sloc = source.locator.slice(source.alternation).join(""),
+                                tloc = target.locator.slice(target.alternation).join(""), canMatch = sloc == tloc,
+                                canMatch = canMatch && source.match.fn === null && target.match.fn !== null ? target.match.fn.test(source.match.def, getMaskSet(), pos, false, opts, false) : false;
+
+                            return canMatch;
                         }
 
                         //mergelocators for retrieving the correct locator match when merging
@@ -1070,7 +1067,7 @@
                             return false;
                         }
 
-                        if (testPos > 5000) {
+                        if (testPos > 500 && quantifierRecurse !== undefined) {
                             throw "Inputmask: There is probably an error in your mask definition or in the code. Create an issue on github with an example of the mask you are using. " + getMaskSet().mask;
                         }
                         if (testPos === pos && match.matches === undefined) {
@@ -1207,19 +1204,19 @@
                                         //TODO FIX RECURSIVE QUANTIFIERS
                                         latestMatch.optionalQuantifier = qndx > (qt.quantifier.min - 1);
                                         // console.log(pos + " " + qt.quantifier.min + " " + latestMatch.optionalQuantifier);
-                                        latestMatch.jit = qndx + tokenGroup.matches.indexOf(latestMatch) >= qt.quantifier.jit;
-                                        if (isFirstMatch(latestMatch, tokenGroup) && qndx > (qt.quantifier.min - 1)) {
+                                        latestMatch.jit = (qndx || 1) * tokenGroup.matches.indexOf(latestMatch) >= qt.quantifier.jit;
+                                        if (latestMatch.optionalQuantifier && isFirstMatch(latestMatch, tokenGroup)) {
                                             insertStop = true;
                                             testPos = pos; //match the position after the group
                                             break; //stop quantifierloop && search for next possible match
                                         }
-                                        if (qt.quantifier.jit !== undefined && isNaN(qt.quantifier.max) && latestMatch.optionalQuantifier && getMaskSet().validPositions[pos - 1] === undefined) {
-                                            matches.pop()
-                                            insertStop = true;
+                                        if (latestMatch.jit && !latestMatch.optionalQuantifier) {
+                                            offset = tokenGroup.matches.indexOf(latestMatch);
                                             testPos = pos; //match the position after the group
-                                            cacheDependency = undefined; //enforce revalidation when requested
+                                            insertStop = true;
                                             break; //stop quantifierloop && search for next possible match
                                         }
+
                                         return true;
                                     }
                                 }
@@ -1232,7 +1229,9 @@
                         }
                     }
 
-                    for (var tndx = (ndxInitializer.length > 0 ? ndxInitializer.shift() : 0); tndx < maskToken.matches.length; tndx++) {
+                    //the offset is set in the quantifierloop when git masking is used
+                    for (var tndx = (ndxInitializer.length > 0 ? ndxInitializer.shift() : 0); tndx < maskToken.matches.length; tndx = tndx + 1 + offset) {
+                        offset = 0; //reset offset
                         if (maskToken.matches[tndx].isQuantifier !== true) {
                             var match = handleMatch(maskToken.matches[tndx], [tndx].concat(loopNdx), quantifierRecurse);
                             if (match && testPos === pos) {
@@ -1614,7 +1613,7 @@
                     }
                 }
                 if ($.isFunction(opts.postValidation) && result !== false && !strict && fromSetValid !== true && validateOnly !== true) {
-                    var postResult = opts.postValidation(getBuffer(true), result, opts);
+                    var postResult = opts.postValidation(getBuffer(true), pos.begin !== undefined ? (isRTL ? pos.end : pos.begin) : pos, result, opts);
                     if (postResult !== undefined) {
                         if (postResult.refreshFromBuffer && postResult.buffer) {
                             var refresh = postResult.refreshFromBuffer;
@@ -1718,7 +1717,7 @@
                                 begin: begin,
                                 end: end
                             })))) {
-                            while (getTest(posMatch).match.def !== "") {
+                            while (getTest(posMatch).match.def !== "") { //loop needed to match further positions
                                 if (needsValidation === false && positionsClone[posMatch] && positionsClone[posMatch].match.nativeDef === t.match.nativeDef) { //obvious match
                                     getMaskSet().validPositions[posMatch] = $.extend(true, {}, positionsClone[posMatch]);
                                     getMaskSet().validPositions[posMatch].input = t.input;
@@ -1732,9 +1731,11 @@
                                     needsValidation = true;
                                 } else {
                                     valid = t.generatedInput === true || (t.input === opts.radixPoint && opts.numericInput === true);
-                                    if (!valid && getTest(posMatch).match.def === "") break;
                                 }
                                 if (valid) break;
+                                if (!valid && posMatch > end && isMask(posMatch, true) && (t.match.fn !== null || posMatch > getMaskSet().maskLength)) {
+                                    break;
+                                }
                                 posMatch++;
                             }
                             if (getTest(posMatch).match.def == "")
@@ -1973,7 +1974,6 @@
                     } else if (k === Inputmask.keyCode.END || k === Inputmask.keyCode.PAGE_DOWN) { //when END or PAGE_DOWN pressed set position at lastmatch
                         e.preventDefault();
                         var caretPos = seekNext(getLastValidPosition());
-                        if (!opts.insertMode && caretPos === getMaskSet().maskLength && !e.shiftKey) caretPos--;
                         caret(input, e.shiftKey ? pos.begin : caretPos, caretPos, true);
                     } else if ((k === Inputmask.keyCode.HOME && !e.shiftKey) || k === Inputmask.keyCode.PAGE_UP) { //Home or page_up
                         e.preventDefault();
@@ -1983,7 +1983,7 @@
                         $input.trigger("click");
                     } else if (k === Inputmask.keyCode.INSERT && !(e.shiftKey || e.ctrlKey)) { //insert
                         opts.insertMode = !opts.insertMode;
-                        caret(input, !opts.insertMode && pos.begin === getMaskSet().maskLength ? pos.begin - 1 : pos.begin);
+                        input.setAttribute("im-insert", opts.insertMode);
                     } else if (opts.tabThrough === true && k === Inputmask.keyCode.TAB) {
                         if (e.shiftKey === true) {
                             if (getTest(pos.begin).match.fn === null) {
@@ -1999,20 +1999,6 @@
                         if (pos.begin < getMaskSet().maskLength) {
                             e.preventDefault();
                             caret(input, pos.begin, pos.end);
-                        }
-                    } else if (!e.shiftKey) {
-                        if (opts.insertMode === false) {
-                            if (k === Inputmask.keyCode.RIGHT) {
-                                setTimeout(function () {
-                                    var caretPos = caret(input);
-                                    caret(input, caretPos.begin);
-                                }, 0);
-                            } else if (k === Inputmask.keyCode.LEFT) {
-                                setTimeout(function () {
-                                    var caretPos = caret(input);
-                                    caret(input, isRTL ? caretPos.begin + 1 : caretPos.begin - 1);
-                                }, 0);
-                            }
                         }
                     }
                     opts.onKeyDown.call(this, e, getBuffer(), caret(input).begin, opts);
@@ -2167,11 +2153,11 @@
                                 entries = "",
                                 isEntry = false;
                             if (frontPart !== frontBufferPart) {
-                                var fpl = (isEntry = frontPart.length >= frontBufferPart.length) ? frontPart.length : frontBufferPart.length
-                                for (var i = 0; frontPart.charAt(i) === frontBufferPart.charAt(i) && i < fpl; i++) {
-                                }
+                                var fpl = (isEntry = frontPart.length >= frontBufferPart.length) ? frontPart.length : frontBufferPart.length,
+                                    i;
+                                for (i = 0; frontPart.charAt(i) === frontBufferPart.charAt(i) && i < fpl; i++) ;
                                 if (isEntry) {
-                                    if (offset === 0) selection.begin = i;
+                                    selection.begin = i - offset;
                                     entries += frontPart.slice(i, selection.end);
                                 }
                             }
@@ -2214,10 +2200,6 @@
                                 var keydown = new $.Event("keydown");
                                 keydown.keyCode = opts.numericInput ? Inputmask.keyCode.BACKSPACE : Inputmask.keyCode.DELETE;
                                 EventHandlers.keydownEvent.call(input, keydown);
-
-                                if (!iphone && opts.insertMode === false) {
-                                    caret(input, caret(input).begin - 1);
-                                }
                             }
 
                             e.preventDefault();
@@ -2282,16 +2264,8 @@
                     var input = this;
                     mouseEnter = false;
                     if (opts.clearMaskOnLostFocus && document.activeElement !== input) {
-                        var buffer = getBuffer().slice(),
-                            nptValue = input.inputmask._valueGet();
-                        if (nptValue !== input.getAttribute("placeholder") && nptValue !== "") {
-                            if (getLastValidPosition() === -1 && nptValue === getBufferTemplate().join("")) {
-                                buffer = [];
-                            } else { //clearout optional tail of the mask
-                                clearOptionalTail(buffer);
-                            }
-                            writeBuffer(input, buffer);
-                        }
+                        input.placeholder = originalPlaceholder;
+                        if(input.placeholder === "") input.removeAttribute("placeholder");
                     }
                 },
                 clickEvent: function (e, tabbed) {
@@ -2384,6 +2358,8 @@
                     var $input = $(this),
                         input = this;
                     if (input.inputmask) {
+                        input.placeholder = originalPlaceholder;
+                        if(input.placeholder === "") input.removeAttribute("placeholder");
                         var nptValue = input.inputmask._valueGet(),
                             buffer = getBuffer().slice();
 
@@ -2422,9 +2398,7 @@
                     var input = this;
                     mouseEnter = true;
                     if (document.activeElement !== input && opts.showMaskOnHover) {
-                        if (input.inputmask._valueGet() !== getBuffer().join("")) {
-                            writeBuffer(input, getBuffer());
-                        }
+                        input.placeholder = (isRTL ? getBuffer().slice().reverse() : getBuffer()).join("");
                     }
                 },
                 submitEvent: function (e) { //trigger change on submit if any
@@ -2542,14 +2516,14 @@
                 return unmaskedValue;
             }
 
-            function translatePosition(pos) {
-                if (isRTL && typeof pos === "number" && (!opts.greedy || opts.placeholder !== "") && el) {
-                    pos = el.inputmask._valueGet().length - pos;
-                }
-                return pos;
-            }
-
             function caret(input, begin, end, notranslate) {
+                function translatePosition(pos) {
+                    if (isRTL && typeof pos === "number" && (!opts.greedy || opts.placeholder !== "") && el) {
+                        pos = el.inputmask._valueGet().length - pos;
+                    }
+                    return pos;
+                }
+
                 var range;
                 if (begin !== undefined) {
                     if ($.isArray(begin)) {
@@ -2571,40 +2545,40 @@
                         var scrollCalc = parseInt(((input.ownerDocument.defaultView || window).getComputedStyle ? (input.ownerDocument.defaultView || window).getComputedStyle(input, null) : input.currentStyle).fontSize) * end;
                         input.scrollLeft = scrollCalc > input.scrollWidth ? scrollCalc : 0;
 
-                        if (!iphone && opts.insertMode === false && begin === end) end++; //set visualization for insert/overwrite mode
-
                         input.inputmask.caretPos = {begin: begin, end: end}; //track caret internally
-                        if (input.setSelectionRange) {
-                            input.selectionStart = begin;
-                            input.selectionEnd = end;
-                        } else if (window.getSelection) {
-                            range = document.createRange();
-                            if (input.firstChild === undefined || input.firstChild === null) {
-                                var textNode = document.createTextNode("");
-                                input.appendChild(textNode);
+                        if (input === document.activeElement) {
+                            if ("selectionStart" in input) {
+                                input.selectionStart = begin;
+                                input.selectionEnd = end;
+                            } else if (window.getSelection) {
+                                range = document.createRange();
+                                if (input.firstChild === undefined || input.firstChild === null) {
+                                    var textNode = document.createTextNode("");
+                                    input.appendChild(textNode);
+                                }
+                                range.setStart(input.firstChild, begin < input.inputmask._valueGet().length ? begin : input.inputmask._valueGet().length);
+                                range.setEnd(input.firstChild, end < input.inputmask._valueGet().length ? end : input.inputmask._valueGet().length);
+                                range.collapse(true);
+                                var sel = window.getSelection();
+                                sel.removeAllRanges();
+                                sel.addRange(range);
+                                //input.focus();
+                            } else if (input.createTextRange) {
+                                range = input.createTextRange();
+                                range.collapse(true);
+                                range.moveEnd("character", end);
+                                range.moveStart("character", begin);
+                                range.select();
                             }
-                            range.setStart(input.firstChild, begin < input.inputmask._valueGet().length ? begin : input.inputmask._valueGet().length);
-                            range.setEnd(input.firstChild, end < input.inputmask._valueGet().length ? end : input.inputmask._valueGet().length);
-                            range.collapse(true);
-                            var sel = window.getSelection();
-                            sel.removeAllRanges();
-                            sel.addRange(range);
-                            //input.focus();
-                        } else if (input.createTextRange) {
-                            range = input.createTextRange();
-                            range.collapse(true);
-                            range.moveEnd("character", end);
-                            range.moveStart("character", begin);
-                            range.select();
 
+                            renderColorMask(input, {
+                                begin: begin,
+                                end: end
+                            });
                         }
-                        renderColorMask(input, {
-                            begin: begin,
-                            end: end
-                        });
                     }
                 } else {
-                    if (input.setSelectionRange) {
+                    if ("selectionStart" in input) {
                         begin = input.selectionStart;
                         end = input.selectionEnd;
                     } else if (window.getSelection) {
@@ -2710,13 +2684,10 @@
                     }
                 }
 
-                if (k === Inputmask.keyCode.BACKSPACE && (pos.end - pos.begin < 1 || opts.insertMode === false)) {
+                if (k === Inputmask.keyCode.BACKSPACE && (pos.end - pos.begin < 1)) {
                     pos.begin = seekPrevious(pos.begin);
                     if (getMaskSet().validPositions[pos.begin] !== undefined && getMaskSet().validPositions[pos.begin].input === opts.groupSeparator) {
                         pos.begin--;
-                    }
-                    if (opts.insertMode === false && pos.end !== getMaskSet().maskLength) {
-                        pos.end--;
                     }
                 } else if (k === Inputmask.keyCode.DELETE && pos.begin === pos.end) {
                     pos.end = isMask(pos.end, true) && (getMaskSet().validPositions[pos.end] && getMaskSet().validPositions[pos.end].input !== opts.radixPoint) ?
@@ -2814,13 +2785,6 @@
                 $(colorMask).on("click", function (e) {
                     caret(input, findCaretPos(e.clientX));
                     return EventHandlers.clickEvent.call(input, [e]);
-                });
-                $(input).on("keydown", function (e) {
-                    if (!e.shiftKey && opts.insertMode !== false) {
-                        setTimeout(function () {
-                            renderColorMask(input);
-                        }, 0);
-                    }
                 });
             }
 
@@ -3054,6 +3018,8 @@
                     el = elem;
                     $el = $(el);
 
+                    originalPlaceholder = el.placeholder;
+
                     //read maxlength prop from el
                     maxLength = el !== undefined ? el.maxLength : undefined;
                     if (maxLength === -1) maxLength = undefined;
@@ -3079,6 +3045,8 @@
                     }
 
                     if (isSupported === true) {
+                        el.setAttribute("im-insert", opts.insertMode);
+
                         //bind events
                         EventRuler.on(el, "submit", EventHandlers.submitEvent);
                         EventRuler.on(el, "reset", EventHandlers.resetEvent);

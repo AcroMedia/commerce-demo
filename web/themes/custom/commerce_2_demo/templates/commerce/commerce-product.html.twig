@@ -60,8 +60,8 @@
 {% elseif view_mode == 'image_for_pos' %}
 
   <div class="commerce-pos-autocomplete-results__image">
-    {% if product_variation_images.0.images.0.entity.uri.value %}
-      <img src="{{ product_variation_images.0.images.0.entity.uri.value|image_style('thumbnail') }}" alt="" />
+    {% if product_entity.field_catalog_image.entity.uri.value %}
+      <img src="{{ product_entity.field_catalog_image.entity.uri.value|image_style('thumbnail') }}" alt="" />
     {% else %}
       <img src="{{ base_path ~ directory }}/gfx/image-for-pos/image_placeholder.jpg" alt="" />
     {% endif %}

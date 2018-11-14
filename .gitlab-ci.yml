@@ -239,5 +239,5 @@ plus-demo-live-post:
   script:
     # Run first at a higher threshold to allow for cache generation, if it takes longer than this
     # thats a problem, an uncached page should take > 10 seconds
-    - loadtimer commerceplus.acromedia.com 10000
+    - loadtimer commerceplus.acromedia.com 15000
     - loadtimer commerceplus.acromedia.com 5000

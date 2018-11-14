@@ -12,7 +12,7 @@ index 496894a..52225a3 100644
    css:
 diff --git a/css/commerce_pos_custom.css b/css/commerce_pos_custom.css
 new file mode 100644
-index 0000000..a88facd
+index 0000000..3288522
 --- /dev/null
 +++ b/css/commerce_pos_custom.css
 @@ -0,0 +1,129 @@
@@ -144,4 +144,34 @@ index 0000000..a88facd
 +    display: none;
 +    visibility: hidden;
 +  }
++}
+diff --git a/modules/customer_display/commerce_pos_customer_display.libraries.yml b/modules/customer_display/commerce_pos_customer_display.libraries.yml
+index 78052c4..fe3ed11 100644
+--- a/modules/customer_display/commerce_pos_customer_display.libraries.yml
++++ b/modules/customer_display/commerce_pos_customer_display.libraries.yml
+@@ -5,6 +5,7 @@ display:
+   css:
+     layout:
+       css/commerce_pos_customer_display.css: {}
++      css/commerce_pos_customer_display_custom.css: {}
+ 
+ register:
+   version: VERSION
+diff --git a/modules/customer_display/css/commerce_pos_customer_display_custom.css b/modules/customer_display/css/commerce_pos_customer_display_custom.css
+new file mode 100644
+index 0000000..d9843dc
+--- /dev/null
++++ b/modules/customer_display/css/commerce_pos_customer_display_custom.css
+@@ -0,0 +1,12 @@
++/*
++ * Custom POS customer display styling.
++ *
++ * This stylesheet overrides the default Commerce POS customer display sub
++ * module styles.
++ *
++ */
++
++.commerce-pos-customer-display__items .commerce-pos-customer-display__item div[class^="product--variation-field--variation"] {
++  display: none;
++  visibility: hidden;
 +}

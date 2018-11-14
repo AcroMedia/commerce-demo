@@ -162,6 +162,10 @@
                 "#2952457: Removing user's profile causes fatal error with PackerManager::packToShipments()":
                 "https://www.drupal.org/files/issues/2018-08-07/commerce_shipping-fix_fatal_error_on_missing_profile-2952457-10-D8.patch"
             },
+            "drupal/commerce_pos": {
+                "Custom styling POS product searching":
+                "patches/commerce_pos-custom-styling_uh.patch"
+            },
             "drupal/menu_block": {
                 "#2809699: Menu parent as block title":
                 "https://www.drupal.org/files/issues/2018-05-07/menu_block-label_configuration-2809699-77.patch"

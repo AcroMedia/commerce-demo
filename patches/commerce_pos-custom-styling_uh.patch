@@ -1,0 +1,147 @@
+diff --git a/commerce_pos.libraries.yml b/commerce_pos.libraries.yml
+index 496894a..52225a3 100644
+--- a/commerce_pos.libraries.yml
++++ b/commerce_pos.libraries.yml
+@@ -3,6 +3,7 @@ global:
+   css:
+     layout:
+       css/commerce_pos_style.css: {}
++      css/commerce_pos_custom.css: {}
+ order_lookup:
+   version: VERSION
+   css:
+diff --git a/css/commerce_pos_custom.css b/css/commerce_pos_custom.css
+new file mode 100644
+index 0000000..a88facd
+--- /dev/null
++++ b/css/commerce_pos_custom.css
+@@ -0,0 +1,129 @@
++/*
++ * Custom POS styling.
++ *
++ * This stylesheet overrides the default Commerce POS module styles and works in
++ * tandem with a custom view mode (Image for POS) that has been added to the
++ * product variation types. There is also a theme template for this view mode
++ * in the theme's templates dir.
++ *
++ */
++
++/* POS autocomplete results. */
++
++.ui-menu-item {
++  clear: both;
++  padding: 0 5px;
++}
++.ui-menu-item::after {
++  clear: both;
++  content: '';
++  display: block;
++  border-bottom: 1px solid #ccc;
++  margin: -15px 0;
++}
++.ui-menu-item:last-of-type::after {
++  border-bottom: none;
++}
++
++.commerce-pos-autocomplete-results {
++  display: block;
++  padding: 10px;
++  min-height: 100px;
++}
++
++.commerce-pos-autocomplete-results:hover,
++.commerce-pos-autocomplete-results:focus,
++.commerce-pos-autocomplete-results:active {
++  background-color: #f0f0f0;
++  border-radius: 4px;
++}
++
++.commerce-pos-autocomplete-results .field {
++  padding-left: 120px;
++  color: #333;
++}
++
++.commerce-pos-autocomplete-results .field--name-title {
++  font-size: 18px;
++  font-weight: bold;
++}
++
++.commerce-pos-autocomplete-results__image {
++  position: absolute;
++  top: 10px;
++  left: 10px;
++  overflow: hidden;
++  padding-left: 0;
++  width: 100px;
++  height: 100px;
++  float: right;
++  clear: both;
++  border: 1px solid #ccc;
++  background-color: #fff;
++  /* Local project patches can't include images. "cweagans/composer-patches" doesn't allow it yet.  */
++  /* See: https://github.com/cweagans/composer-patches/issues/172#issuecomment-366056272 */
++  background: url(../../../../themes/custom/commerce_2_demo/gfx/image-for-pos/image_placeholder.jpg) center center no-repeat;
++
++  background-size: 100px 100px;
++}
++
++@media screen and (max-width: 600px) {
++  .commerce-pos-autocomplete-results .field {
++    padding-left: 0;
++  }
++
++  .commerce-pos-autocomplete-results__image {
++    display: none;
++  }
++}
++
++/* POS order item list. */
++
++table[id*="edit-order-items-target-id-order-items"] tbody>tr {
++  height: 120px;
++}
++
++table[id*="edit-order-items-target-id-order-items"] tbody>tr>td {
++  position: relative;
++}
++
++table[id*="edit-order-items-target-id-order-items"] tbody>tr>td > .field {
++  padding-left: 110px;
++}
++
++table[id*="edit-order-items-target-id-order-items"] tbody>tr>td .field.field--name-product-id {
++  position: absolute;
++  top: 15px;
++  left: 10px;
++  height: 90px;
++  width: 90px;
++  overflow: hidden;
++  padding-left: 0;
++  border: 1px solid #ccc;
++  background-color: #fff;
++  /* Local project patches can't include images. "cweagans/composer-patches" doesn't allow it yet.  */
++  /* See: https://github.com/cweagans/composer-patches/issues/172#issuecomment-366056272 */
++  background: url(../../../../themes/custom/commerce_2_demo/gfx/image-for-pos/image_placeholder.jpg) center center no-repeat;
++  background-size: 90px 90px;
++}
++
++table[id*="edit-order-items-target-id-order-items"] tbody>tr>td .field.field--name-product-id .field {
++  display: none;
++  visibility: hidden;
++}
++
++table[id*="edit-order-items-target-id-order-items"] tbody>tr>td .field.field--name-product-id .field.field--name-field-images {
++  display: block;
++  visibility: visible;
++}
++
++@media screen and (max-width: 1300px) {
++  table[id*="edit-order-items-target-id-order-items"] tbody>tr>td > .field {
++    padding-left: 0;
++  }
++
++  table[id*="edit-order-items-target-id-order-items"] tbody>tr>td .field.field--name-product-id {
++    display: none;
++    visibility: hidden;
++  }
++}

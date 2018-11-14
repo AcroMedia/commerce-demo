@@ -130,7 +130,7 @@ index 0000000..a88facd
 +  visibility: hidden;
 +}
 +
-+table[id*="edit-order-items-target-id-order-items"] tbody>tr>td .field.field--name-product-id .field.field--name-field-images {
++table[id*="edit-order-items-target-id-order-items"] tbody>tr>td .field.field--name-product-id .field.field--type-image {
 +  display: block;
 +  visibility: visible;
 +}

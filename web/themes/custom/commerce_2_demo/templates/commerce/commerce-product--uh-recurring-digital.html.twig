@@ -19,6 +19,8 @@
  * @ingroup themeable
  */
 #}
+
+{# Product teaser. #}
 {% if view_mode == 'teaser' %}
 
   {%
@@ -29,7 +31,6 @@
     ]
   %}
 
-  {# Product teaser. #}
   <a href="{{ product_url }}" {{ attributes.addClass(classesTeaser) }} aria-label="{{ product_entity.title.value }}">
     <div class="product__thumbnail">
       {% if product.field_catalog_image|render|trim is not empty %}
@@ -50,6 +51,18 @@
     {{ product.field_brand }}
   </a>
 
+{# Image for Point of Sale. #}
+{% elseif view_mode == 'image_for_pos' %}
+
+  <div class="commerce-pos-autocomplete-results__image">
+    {% if product_entity.field_catalog_image.entity.uri.value %}
+      <img src="{{ product_entity.field_catalog_image.entity.uri.value|image_style('thumbnail') }}" alt="" />
+    {% else %}
+      <img src="{{ base_path ~ directory }}/gfx/image-for-pos/image_placeholder.jpg" alt="" />
+    {% endif %}
+  </div>
+
+  {# Product full page (default). #}
 {% else %}
 
   {%

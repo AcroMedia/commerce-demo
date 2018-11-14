@@ -76,7 +76,6 @@
         "cboden/ratchet": "^0.4.1",
         "drupal/asset_injector": "^2.2",
         "DoersGuild/jQuery.print": "master",
-        "drupal/commerce_reports": "^1.0@beta",
         "drupal/commerce_pado": "^1.0@beta",
         "drupal/jsonapi": "1.x-dev",
         "drupal/jsonapi_extras": "^2.8",

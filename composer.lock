@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd8193e2fd1429475d5dcccf85b2a3c5",
+    "content-hash": "f1d805ff4f640fb88a428e33e9a2ad49",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -3122,80 +3122,6 @@
             "homepage": "https://www.drupal.org/project/commerce_recurring",
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce_recurring"
-            }
-        },
-        {
-            "name": "drupal/commerce_reports",
-            "version": "1.0.0-beta1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/commerce_reports",
-                "reference": "8.x-1.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_reports-8.x-1.0-beta1.zip",
-                "reference": "8.x-1.0-beta1",
-                "shasum": "855163322ddaed153691e01f2d8f344044c11927"
-            },
-            "require": {
-                "drupal/commerce": "^2",
-                "drupal/commerce_order": "*",
-                "drupal/commerce_price": "*",
-                "drupal/core": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-beta1",
-                    "datestamp": "1527793680",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "aidanlis",
-                    "homepage": "https://www.drupal.org/user/502018"
-                },
-                {
-                    "name": "cvangysel",
-                    "homepage": "https://www.drupal.org/user/868104"
-                },
-                {
-                    "name": "dpearcefl",
-                    "homepage": "https://www.drupal.org/user/436410"
-                },
-                {
-                    "name": "johnkennedy",
-                    "homepage": "https://www.drupal.org/user/1046660"
-                },
-                {
-                    "name": "mglaman",
-                    "homepage": "https://www.drupal.org/user/2416470"
-                },
-                {
-                    "name": "paul.linney",
-                    "homepage": "https://www.drupal.org/user/928636"
-                },
-                {
-                    "name": "strings6",
-                    "homepage": "https://www.drupal.org/user/317422"
-                }
-            ],
-            "description": "Provides reporting capabilities for sales, products, customers and payment gateways.",
-            "homepage": "http://drupal.org/project/commerce_reports",
-            "support": {
-                "source": "http://cgit.drupalcode.org/commerce_reports"
             }
         },
         {
@@ -11925,7 +11851,6 @@
         "drupal/physical": 5,
         "drupal/taxonomy_term_depth": 20,
         "drupal/comments_order": 10,
-        "drupal/commerce_reports": 10,
         "drupal/commerce_pado": 10,
         "drupal/jsonapi": 20,
         "drupal/better_exposed_filters": 15

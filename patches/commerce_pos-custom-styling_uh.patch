@@ -154,7 +154,7 @@ index 78052c4..fe3ed11 100644
      layout:
        css/commerce_pos_customer_display.css: {}
 +      css/commerce_pos_customer_display_custom.css: {}
- 
+
  register:
    version: VERSION
 diff --git a/modules/customer_display/css/commerce_pos_customer_display_custom.css b/modules/customer_display/css/commerce_pos_customer_display_custom.css
@@ -181,7 +181,7 @@ index 0000000..7cc7b87
 +}
 +
 +.commerce-pos-customer-display__items .commerce-pos-customer-display__item .field.field--name-title {
-+  color: #666;
++  color: #000;
 +}
 +
 +.commerce-pos-customer-display__items .commerce-pos-customer-display__item .field--name-sku {

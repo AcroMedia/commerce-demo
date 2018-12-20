@@ -760,7 +760,7 @@ $settings['file_scan_ignore_directories'] = [
  * Keep this code block at the end of this file to take full effect.
  */
 
-$settings['install_profile'] = 'drupalorange_profile';
+// $settings['install_profile'] = 'drupalorange_profile';
 $config_directories['sync'] = 'sites/default/files/config_OvgLypdQ-Nvetzr8zsdB2Wuo81Woe0F5NIC09rBuPKDavme_3cSF6yQYeREEx9QfKfBf_QZS-Q/sync';
 
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {

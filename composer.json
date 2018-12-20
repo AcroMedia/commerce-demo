@@ -83,7 +83,8 @@
         "drupal/mautic": "^1.1",
         "drupal/image_effects": "^2.1",
         "drupal/twig_tweak": "^2.1",
-        "drupal/better_exposed_filters": "^3.0@alpha"
+        "drupal/better_exposed_filters": "^3.0@alpha",
+        "drupal/big_pipe_sessionless": "^1.2"
     },
     "require-dev": {
         "behat/mink": "~1.7",

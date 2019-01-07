@@ -1,28 +1,28 @@
 {
-  "_from": "codemirror@5.41.0",
-  "_id": "codemirror@5.41.0",
+  "_from": "codemirror@5.42.0",
+  "_id": "codemirror@5.42.0",
   "_inBundle": false,
-  "_integrity": "sha512-mkCwbneCx2WHg1MNCYrI+8Zuq0KMMaZ5yTFpQlAZazy3yxME8bHcuSc9WUFzgPZ114WqWu1FIHlx8CavLzBDIg==",
+  "_integrity": "sha512-pbApC8zDzItP3HRphD6kQVwS976qB5Qi0hU3MZMixLk+AyugOW1RF+8XJEjeyl5yWsHNe88tDUxzeRh5AOxPRw==",
   "_location": "/codemirror",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "codemirror@5.41.0",
+    "raw": "codemirror@5.42.0",
     "name": "codemirror",
     "escapedName": "codemirror",
-    "rawSpec": "5.41.0",
+    "rawSpec": "5.42.0",
     "saveSpec": null,
-    "fetchSpec": "5.41.0"
+    "fetchSpec": "5.42.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.41.0.tgz",
-  "_shasum": "57e245be197643c39440d2840236d3edc4bb1162",
-  "_spec": "codemirror@5.41.0",
-  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.bakOdZjJ",
+  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.42.0.tgz",
+  "_shasum": "2d5b640ed009e89dee9ed8a2a778e2a25b65f9eb",
+  "_spec": "codemirror@5.42.0",
+  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.pN2XPNcK",
   "author": {
     "name": "Marijn Haverbeke",
     "email": "marijnh@gmail.com",
@@ -437,6 +437,9 @@
     },
     {
       "name": "Cheah Chu Yeow"
+    },
+    {
+      "name": "Chris Colborne"
     },
     {
       "name": "Chris Coyier"
@@ -985,6 +988,9 @@
       "name": "Jamie Morris"
     },
     {
+      "name": "Janice Leung"
+    },
+    {
       "name": "Jan Jongboom"
     },
     {
@@ -1113,6 +1119,9 @@
     },
     {
       "name": "Jonas Helfer"
+    },
+    {
+      "name": "Jonathan Dierksen"
     },
     {
       "name": "Jonathan Hart"
@@ -1392,6 +1401,9 @@
     },
     {
       "name": "Mark Anderson"
+    },
+    {
+      "name": "Mark Dalgleish"
     },
     {
       "name": "Mark Lentczner"
@@ -1709,6 +1721,9 @@
     },
     {
       "name": "Norman Rzepka"
+    },
+    {
+      "name": "Oleksandr Yakovenko"
     },
     {
       "name": "opl-"
@@ -2275,6 +2290,9 @@
       "name": "vtripolitakis"
     },
     {
+      "name": "wdouglashall"
+    },
+    {
       "name": "Weiyan Shao"
     },
     {
@@ -2392,5 +2410,5 @@
     "watch": "rollup -w -c"
   },
   "style": "lib/codemirror.css",
-  "version": "5.41.0"
+  "version": "5.42.0"
 }

@@ -1,20 +1,15 @@
-'use strict';
+"use strict";
 
-var _places = require('./src/places');
-
-var _places2 = _interopRequireDefault(_places);
-
-var _version = require('./src/version');
-
-var _version2 = _interopRequireDefault(_version);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// must use module.exports to be commonJS compatible
 // we need to export using commonjs for ease of usage in all
 // JavaScript environments
+// We therefore need to import in commonjs too. see:
+// https://github.com/webpack/webpack/issues/4039
 
 /* eslint-disable import/no-commonjs */
+var places = require('./src/places');
 
-module.exports = _places2.default;
-module.exports.version = _version2.default;
+var version = require('./src/version'); // must use module.exports to be commonJS compatible
+
+
+module.exports = places.default;
+module.exports.version = version.default;

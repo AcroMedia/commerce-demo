@@ -1,27 +1,25 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 exports.default = formatHit;
 
-var _findCountryCode = require('./findCountryCode');
+var _findCountryCode = _interopRequireDefault(require("./findCountryCode"));
 
-var _findCountryCode2 = _interopRequireDefault(_findCountryCode);
-
-var _findType = require('./findType');
-
-var _findType2 = _interopRequireDefault(_findType);
+var _findType = _interopRequireDefault(require("./findType"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function getBestHighlightedForm(highlightedValues) {
-  var defaultValue = highlightedValues[0].value;
-  // collect all other matches
+  var defaultValue = highlightedValues[0].value; // collect all other matches
+
   var bestAttributes = [];
+
   for (var i = 1; i < highlightedValues.length; ++i) {
     if (highlightedValues[i].matchLevel !== 'none') {
       bestAttributes.push({
@@ -29,28 +27,32 @@ function getBestHighlightedForm(highlightedValues) {
         words: highlightedValues[i].matchedWords
       });
     }
-  }
-  // no matches in this attribute, retrieve first value
+  } // no matches in this attribute, retrieve first value
+
+
   if (bestAttributes.length === 0) {
     return defaultValue;
-  }
-  // sort the matches by `desc(words), asc(index)`
+  } // sort the matches by `desc(words), asc(index)`
+
+
   bestAttributes.sort(function (a, b) {
     if (a.words > b.words) {
       return -1;
     } else if (a.words < b.words) {
       return 1;
     }
+
     return a.index - b.index;
-  });
-  // and append the best match to the first value
-  return bestAttributes[0].index === 0 ? defaultValue + ' (' + highlightedValues[bestAttributes[1].index].value + ')' : highlightedValues[bestAttributes[0].index].value + ' (' + defaultValue + ')';
+  }); // and append the best match to the first value
+
+  return bestAttributes[0].index === 0 ? "".concat(defaultValue, " (").concat(highlightedValues[bestAttributes[1].index].value, ")") : "".concat(highlightedValues[bestAttributes[0].index].value, " (").concat(defaultValue, ")");
 }
 
 function getBestPostcode(postcodes, highlightedPostcodes) {
-  var defaultValue = highlightedPostcodes[0].value;
-  // collect all other matches
+  var defaultValue = highlightedPostcodes[0].value; // collect all other matches
+
   var bestAttributes = [];
+
   for (var i = 1; i < highlightedPostcodes.length; ++i) {
     if (highlightedPostcodes[i].matchLevel !== 'none') {
       bestAttributes.push({
@@ -58,21 +60,26 @@ function getBestPostcode(postcodes, highlightedPostcodes) {
         words: highlightedPostcodes[i].matchedWords
       });
     }
-  }
-  // no matches in this attribute, retrieve first value
+  } // no matches in this attribute, retrieve first value
+
+
   if (bestAttributes.length === 0) {
-    return { postcode: postcodes[0], highlightedPostcode: defaultValue };
-  }
-  // sort the matches by `desc(words)`
+    return {
+      postcode: postcodes[0],
+      highlightedPostcode: defaultValue
+    };
+  } // sort the matches by `desc(words)`
+
+
   bestAttributes.sort(function (a, b) {
     if (a.words > b.words) {
       return -1;
     } else if (a.words < b.words) {
       return 1;
     }
+
     return a.index - b.index;
   });
-
   var postcode = postcodes[bestAttributes[0].index];
   return {
     postcode: postcode,
@@ -93,10 +100,12 @@ function formatHit(_ref) {
     var administrative = hit.administrative && hit.administrative[0] !== name ? hit.administrative[0] : undefined;
     var city = hit.city && hit.city[0] !== name ? hit.city[0] : undefined;
     var suburb = hit.suburb && hit.suburb[0] !== name ? hit.suburb[0] : undefined;
-
     var county = hit.county && hit.county[0] !== name ? hit.county[0] : undefined;
 
-    var _ref2 = hit.postcode ? getBestPostcode(hit.postcode, hit._highlightResult.postcode) : { postcode: undefined, highlightedPostcode: undefined },
+    var _ref2 = hit.postcode ? getBestPostcode(hit.postcode, hit._highlightResult.postcode) : {
+      postcode: undefined,
+      highlightedPostcode: undefined
+    },
         postcode = _ref2.postcode,
         highlightedPostcode = _ref2.highlightedPostcode;
 
@@ -109,7 +118,6 @@ function formatHit(_ref) {
       county: county ? getBestHighlightedForm(hit._highlightResult.county) : undefined,
       postcode: highlightedPostcode
     };
-
     var suggestion = {
       name: name,
       administrative: administrative,
@@ -117,20 +125,18 @@ function formatHit(_ref) {
       city: city,
       suburb: suburb,
       country: country,
-      countryCode: (0, _findCountryCode2.default)(hit._tags),
-      type: (0, _findType2.default)(hit._tags),
+      countryCode: (0, _findCountryCode.default)(hit._tags),
+      type: (0, _findType.default)(hit._tags),
       latlng: {
         lat: hit._geoloc.lat,
         lng: hit._geoloc.lng
       },
       postcode: postcode,
       postcodes: hit.postcode ? hit.postcode : undefined
-    };
+    }; // this is the value to put inside the <input value=
 
-    // this is the value to put inside the <input value=
     var value = formatInputValue(suggestion);
-
-    return _extends({}, suggestion, {
+    return _objectSpread({}, suggestion, {
       highlight: highlight,
       hit: hit,
       hitIndex: hitIndex,
@@ -143,6 +149,7 @@ function formatHit(_ref) {
     console.error('Could not parse object', hit);
     console.error(e);
     /* eslint-enable no-console */
+
     return {
       value: 'Could not parse object'
     };

@@ -1,6 +1,6 @@
 {
   "name": "inputmask",
-  "version": "4.0.2",
+  "version": "4.0.4",
   "main": [
 	  "./index.js",
     "./css/inputmask.css"
@@ -11,11 +11,8 @@
   "ignore": [
     "**/*",
     "!index.js",
-    "!css/*",
-    "!dist/*",
-    "!dist/inputmask/*",
-    "!dist/min/*",
-    "!dist/min/inputmask/*"
+    "!css/**/*",
+    "!dist/**/*"
   ],
   "dependencies": {
     "jquery": ">=1.7"

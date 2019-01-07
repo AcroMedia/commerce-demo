@@ -1,12 +1,11 @@
-'use strict';
+"use strict";
 
-var _widget = require('./src/instantsearch/widget');
-
-var _widget2 = _interopRequireDefault(_widget);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = _widget2.default; // we need to export using commonjs for ease of usage in all
+// we need to export using commonjs for ease of usage in all
 // JavaScript environments
+// We therefore need to import in commonjs too. see:
+// https://github.com/webpack/webpack/issues/4039
 
 /* eslint-disable import/no-commonjs */
+var widget = require('./src/instantsearch/widget');
+
+module.exports = widget.default;

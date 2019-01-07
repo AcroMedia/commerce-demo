@@ -173,16 +173,15 @@
             var dateObj = {"date": new Date(1, 0, 1)}, targetProp, mask = maskString, match, dateOperation, targetValidator;
 
             function extendProperty(value) {
-                var correctedValue;
-                if (opts.min && opts.min[targetProp] || opts.max && opts.max[targetProp]) {
-                    var min = opts.min && opts.min[targetProp] || opts.max[targetProp],
-                        max = opts.max && opts.max[targetProp] || opts.min[targetProp];
-                    correctedValue = value.replace(/[^0-9]/g, "");
-                    correctedValue += (min.indexOf(correctedValue) < max.indexOf(correctedValue) ? max : min).toString().substr(correctedValue.length);
-                    while (!(new RegExp(targetValidator)).test(correctedValue)) {
-                        correctedValue--;
-                    }
-                } else correctedValue = value.replace(/[^0-9]/g, "0");
+                var correctedValue = value.replace(/[^0-9]/g, "0");
+                if (correctedValue != value) { //only do correction on incomplete values
+                    //determine best validation match
+                    var enteredPart = value.replace(/[^0-9]/g, ""),
+                        min = (opts.min && opts.min[targetProp] || value).toString(),
+                        max = (opts.max && opts.max[targetProp] || value).toString();
+
+                    correctedValue = enteredPart + (enteredPart < min.slice(0, enteredPart.length) ? min.slice(enteredPart.length) : (enteredPart > max.slice(0, enteredPart.length) ? max.slice(enteredPart.length) : correctedValue.toString().slice(enteredPart.length)));
+                }
                 return correctedValue;
             }
 
@@ -219,9 +218,9 @@
                     //localize
                     formatCode.S = opts.i18n.ordinalSuffix.join("|");
 
-                    opts.inputFormat = formatAlias[opts.inputFormat] || opts.inputFormat; //resolve possible formatAkias
-                    opts.displayFormat = formatAlias[opts.displayFormat] || opts.displayFormat || opts.inputFormat; //resolve possible formatAkias
-                    opts.outputFormat = formatAlias[opts.outputFormat] || opts.outputFormat || opts.inputFormat; //resolve possible formatAkias
+                    opts.inputFormat = formatAlias[opts.inputFormat] || opts.inputFormat; //resolve possible formatAlias
+                    opts.displayFormat = formatAlias[opts.displayFormat] || opts.displayFormat || opts.inputFormat; //resolve possible formatAlias
+                    opts.outputFormat = formatAlias[opts.outputFormat] || opts.outputFormat || opts.inputFormat; //resolve possible formatAlias
                     opts.placeholder = opts.placeholder !== "" ? opts.placeholder : opts.inputFormat.replace(/[\[\]]/, "");
                     opts.regex = parse(opts.inputFormat, undefined, opts);
                     // console.log(opts.regex);
@@ -293,7 +292,8 @@
                     if (test.nativeDef.indexOf("[AP]") == 0) return elem.toUpperCase();
                     return elem;
                 },
-                insertMode: false
+                insertMode: false,
+                shiftPositions: false
             }
         });
 

@@ -241,3 +241,49 @@ plus-demo-live-post:
     # thats a problem, an uncached page should take > 10 seconds
     - loadtimer commerceplus.acromedia.com 20000
     - loadtimer commerceplus.acromedia.com 5000
+
+# Deploy plus demo to LIVE site (AWS).
+plus-demo-to-live-AWS:
+  stage: deploy
+
+  # add any other tags or branches you want here.
+  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
+  only:
+    - performance_update
+
+  environment:
+    name: commerceplus-new.acromedia.com
+    url: https://commerceplus-new.acromedia.com
+
+  script:
+    # Install ssh-agent if not already installed, it is required by Docker
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
+
+    # Add the fingerprint for the host to known hosts so we can verify it.
+    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
+    - mkdir -p ~/.ssh
+    - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
+
+    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ acromedia@commerceplus-new.acromedia.com:/home/acromedia/www/commerceplus/
+
+    # log into the site, reset settings.php permissions and run scripts.
+    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
+    - ssh acromedia@commerceplus-new.acromedia.com 'chown acromedia:acromedia-commerceplus-srv /home/acromedia/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live-AWS.sh
+
+plus-demo-live-post:
+  image: smmccabe/docker-loadtest
+  stage: post
+  dependencies:
+    - plus-demo-to-live-AWS
+  script:
+    # Run first at a higher threshold to allow for cache generation, if it takes longer than this
+    # thats a problem, an uncached page should take > 10 seconds
+    - loadtimer commerceplus-new.acromedia.com 20000
+    - loadtimer commerceplus-new.acromedia.com 5000

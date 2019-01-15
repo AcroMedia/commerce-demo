@@ -263,7 +263,7 @@ plus-demo-to-live-AWS:
     - eval $(ssh-agent -s)
 
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
+    - ssh-add <(echo "$DEPLOY_KEY_PRODUCTION")
 
     # Add the fingerprint for the host to known hosts so we can verify it.
     # To determine the fingerprint of a host, use `ssh-keyscan -H`.

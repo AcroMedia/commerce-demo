@@ -71,6 +71,7 @@ build:
   only:
     - master
     - UAT
+    - performance_update
 
   # this tells the build server to save these files between jobs, this keeps them to be deployed
   artifacts:

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ef411489aaababd0ec4e1eb1d6a7d4e",
+    "content-hash": "c5be063f1dfb8cb4821c02b9c0d62b3f",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -5905,45 +5905,54 @@
         },
         {
             "name": "drupal/search_api_solr",
-            "version": "1.2.0",
+            "version": "3.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/search_api_solr",
-                "reference": "8.x-1.2"
+                "reference": "8.x-3.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "cd77fc851d36ecfb04a0c29967c93e5c47e2d2c6"
+                "url": "https://ftp.drupal.org/files/projects/search_api_solr-8.x-3.0-alpha1.zip",
+                "reference": "8.x-3.0-alpha1",
+                "shasum": "c7379dd3a75621fde23c584376a95e2f7667e5bc"
             },
             "require": {
-                "drupal/core": "~8.0",
-                "drupal/search_api": "~1.3",
-                "solarium/solarium": "3.8.*"
+                "drupal/core": "^8.5",
+                "drupal/search_api": "~1.11",
+                "ext-json": "*",
+                "maennchen/zipstream-php": "0.4.*",
+                "php": "^7.0",
+                "solarium/solarium": "~4.2.0"
+            },
+            "conflict": {
+                "drupal/core": "<8.6",
+                "drupal/search_api_solr_multilingual": "*"
             },
             "require-dev": {
+                "drupal/devel": "*",
                 "drupal/facets": "1.x-dev",
                 "drupal/geofield": "1.x-dev",
                 "drupal/search_api_autocomplete": "1.x-dev",
                 "drupal/search_api_location": "1.x-dev",
-                "phayes/geophp": "dev-master"
+                "phayes/geophp": "^1.2"
             },
             "suggest": {
                 "drupal/facets": "Provides facetted search.",
-                "drupal/search_api_solr_multilingual": "Highly recommended if installation is multilingual or uses a language different than English."
+                "drupal/search_api_autocomplete": "Provides auto complete for search boxes.",
+                "drupal/search_api_location": "Provides location searches."
             },
             "type": "drupal-module",
             "extra": {
                 "branch-alias": {
-                    "dev-1.x": "1.x-dev"
+                    "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1529312013",
+                    "version": "8.x-3.0-alpha1",
+                    "datestamp": "1545411180",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -5982,7 +5991,7 @@
             "support": {
                 "source": "http://git.drupal.org/project/search_api_solr.git",
                 "issues": "https://www.drupal.org/project/issues/search_api_solr",
-                "irc": "irc://irc.freenode.org/drupal-search-api"
+                "irc": "https://drupalchat.me/channel/search"
             }
         },
         {
@@ -7641,6 +7650,58 @@
             "time": "2017-02-03T11:58:58+00:00"
         },
         {
+            "name": "maennchen/zipstream-php",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maennchen/ZipStream-PHP.git",
+                "reference": "89e0cdb3c9ecabef4da988852003781a7802afb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/89e0cdb3c9ecabef4da988852003781a7802afb7",
+                "reference": "89e0cdb3c9ecabef4da988852003781a7802afb7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">= 5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZipStream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Duncan",
+                    "email": "pabs@pablotron.org"
+                },
+                {
+                    "name": "Jesse Donat",
+                    "email": "donatj@gmail.com"
+                },
+                {
+                    "name": "Jonatan Männchen",
+                    "email": "jonatan@maennchen.ch"
+                }
+            ],
+            "description": "ZipStream is a library for dynamically streaming dynamic zip files from PHP without writing to the disk at all on the server.",
+            "keywords": [
+                "stream",
+                "zip"
+            ],
+            "time": "2016-09-13T10:29:17+00:00"
+        },
+        {
             "name": "masterminds/html5",
             "version": "2.5.0",
             "source": {
@@ -8591,28 +8652,28 @@
         },
         {
             "name": "solarium/solarium",
-            "version": "3.8.1",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/solariumphp/solarium.git",
-                "reference": "c353babec89fdbe8c64054bfec8e77bcb5da6705"
+                "reference": "20cf9e906a4e8e4a29c1ff48a2b145fa31d1064d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/solariumphp/solarium/zipball/c353babec89fdbe8c64054bfec8e77bcb5da6705",
-                "reference": "c353babec89fdbe8c64054bfec8e77bcb5da6705",
+                "url": "https://api.github.com/repos/solariumphp/solarium/zipball/20cf9e906a4e8e4a29c1ff48a2b145fa31d1064d",
+                "reference": "20cf9e906a4e8e4a29c1ff48a2b145fa31d1064d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "symfony/event-dispatcher": "~2.3|~3.0"
+                "php": "^7.0",
+                "symfony/event-dispatcher": "^2.7 || ^3.0 || ^4.0"
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "^3.8 || ^6.2",
-                "phpunit/phpunit": "~3.7",
-                "satooshi/php-coveralls": "~1.0",
-                "squizlabs/php_codesniffer": "~1.4",
-                "zendframework/zendframework1": "~1.12"
+                "php-coveralls/php-coveralls": "^1.0",
+                "phpunit/phpunit": "^6.5",
+                "squizlabs/php_codesniffer": "^1.4",
+                "zendframework/zendframework": "^3.0"
             },
             "suggest": {
                 "minimalcode/search": "Query builder compatible with Solarium, allows simplified solr-query handling"
@@ -8620,12 +8681,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "3.3.x-dev"
+                    "dev-master": "4.1.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Solarium\\": "library/"
+                "psr-4": {
+                    "Solarium\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -8645,7 +8706,7 @@
                 "search",
                 "solr"
             ],
-            "time": "2017-02-02T13:32:22+00:00"
+            "time": "2018-11-24T09:20:30+00:00"
         },
         {
             "name": "stack/builder",

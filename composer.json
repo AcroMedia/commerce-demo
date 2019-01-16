@@ -53,7 +53,7 @@
         "drupal/commerce_recurring": "^1.0@beta",
         "drupal/advancedqueue": "^1.0@beta",
         "drupal/search_api": "^1.0",
-        "drupal/search_api_solr": "^1.2",
+        "drupal/search_api_solr": "^3.0",
         "drupal/search_api_page": "^1.0-alpha11",
         "drupal/facets": "^1.0-beta1",
         "drupal/physical": "^1.0@RC",

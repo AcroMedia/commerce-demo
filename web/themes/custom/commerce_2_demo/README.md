@@ -11,3 +11,8 @@ This custom theme uses the Orange Framework as a base theme.
   - `npm install`
   - `gulp`
 - The CSS will be compiled to: `css/style.css`
+
+### SASS with PHP
+- From the project root run:
+  - `bin/robo build web/themes/custom/commerce_2_demo/sass/custom/style.scss web/themes/custom/commerce_2_demo/css/style.css`
+- The CSS will be compiled to: `css/style.css`

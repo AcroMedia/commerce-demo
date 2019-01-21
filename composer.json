@@ -84,7 +84,9 @@
         "drupal/image_effects": "^2.1",
         "drupal/twig_tweak": "^2.1",
         "drupal/better_exposed_filters": "^3.0@alpha",
-        "drupal/big_pipe_sessionless": "^1.2"
+        "drupal/big_pipe_sessionless": "^1.2",
+        "leafo/scssphp": "^0.7.7",
+        "css-crush/css-crush": "^2.4"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -94,9 +96,7 @@
         "mikey179/vfsStream": "~1.2",
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8",
-        "drupal/devel": "^1.2",
-        "leafo/scssphp": "^0.7.7",
-        "css-crush/css-crush": "^2.4"
+        "drupal/devel": "^1.2"
     },
     "conflict": {
         "drupal/drupal": "*"

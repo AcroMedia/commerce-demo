@@ -53,7 +53,6 @@
         "drupal/commerce_recurring": "^1.0@beta",
         "drupal/advancedqueue": "^1.0@beta",
         "drupal/search_api": "^1.0",
-        "drupal/search_api_solr": "^1.2",
         "drupal/search_api_page": "^1.0-alpha11",
         "drupal/facets": "^1.0-beta1",
         "drupal/physical": "^1.0@RC",
@@ -83,7 +82,15 @@
         "drupal/matomo": "^1.7",
         "drupal/mautic": "^1.1",
         "drupal/image_effects": "^2.1",
-        "drupal/twig_tweak": "^2.1"
+        "drupal/twig_tweak": "^2.1",
+        "drupal/redis": "^1.0",
+        "drupal/search_api_solr": "~2.2",
+        "drupal/purge": "^3.0@beta",
+        "drupal/s3fs": "^3.0@alpha",
+        "drupal/varnish_purge": "^1.11",
+        "drupal/renderviz": "^1.0@alpha",
+        "drupal/big_pipe_sessionless": "^1.2",
+        "drupal/memcache": "^2.0"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -149,9 +156,7 @@
                 "#2770731: Add a display name to promotions":
                 "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
                 "#2852207: Billing same as shipping":
-                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch",
-                "#2938760: Variation fields can permanently disappear during ajax replacement":
-                "https://www.drupal.org/files/issues/2018-06-29/2938760-add_variation_field_wrapper-13.patch"
+                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
@@ -167,8 +172,18 @@
             },
             "drupal/core": {
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
-                "https://www.drupal.org/files/issues/2018-05-08/drupalimage_ckeditor-2771837-27.patch"
-            }
+                "https://www.drupal.org/files/issues/2018-05-08/drupalimage_ckeditor-2771837-27.patch",
+                "#2966607: Invalidating broad cache tags early in a transation":
+                "https://www.drupal.org/files/issues/2018-11-25/2966607-79.patch"
+            },
+           "drupal/purge": {
+               "#2921309: Port purge_drush commands to Drush 9":
+               "https://www.drupal.org/files/issues/2921309-17-port-purge-drush-9.patch"
+           },
+           "drupal/redis": {
+               "#2900947: Implement initial RedisCluster client integration":
+               "https://www.drupal.org/files/issues/2018-08-18/redis-rediscluster_client_integration-2900947-12-D8.patch"
+           }
         }
     }
 }

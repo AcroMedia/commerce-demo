@@ -4,7 +4,7 @@
 # php 7.0 is the default on the server, and drush keeps hitting that instead of
 # the 7.1 that we need.
 
-# $HOME = /home/acromedia
+# $HOME = /home/acro
 
 function main () {
   # Make sure there is a bin dir in the home directory.
@@ -16,7 +16,7 @@ function main () {
 
   # Make sure Drush is the version we want.
   test -x $HOME/bin/drush && rm $HOME/bin/drush
-  ln -s $HOME/www/commerceplus/vendor/drush/drush/drush $HOME/bin/drush
+  ln -s $HOME/www/cpback/vendor/drush/drush/drush $HOME/bin/drush
 
   # Make sure our versions of Drush and our PHP are the first ones encountered by CLI tools.
   export PATH=$HOME/bin:$PATH
@@ -28,7 +28,7 @@ function main () {
   php -v
 
   # Time to do some work.
-  cd $HOME/www/commerceplus/web
+  cd $HOME/www/cpback/web
   drush updb -y
   drush entup -y
   drush cr

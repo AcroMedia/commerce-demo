@@ -58,11 +58,11 @@ codequality:
   artifacts:
     paths: [codeclimate.json]
 
-security_advisories:
-  stage: test
-  script:
+#security_advisories:
+#  stage: test
+#  script:
     # Run the SensioLabs security advisory checker. See security.sensiolabs.org.
-    - security-checker security:check composer.lock
+#    - security-checker security:check composer.lock
 
 build:
   stage: build

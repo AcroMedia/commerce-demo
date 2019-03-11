@@ -278,4 +278,4 @@ plus-demo-to-live-AWS:
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh acro@commerceplus-front.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live-AWS.sh
+    - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live-AWS.sh

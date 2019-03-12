@@ -3,8 +3,8 @@ exclude_patterns:
   - "**/**"
   - "!web/modules/custom"
   - "!web/themes/custom"
-  - "!wwwroot/sites/all/modules/SITENAME"
-  - "!wwwroot/sites/all/themes/SITENAME"
+  - "!wwwroot/sites/all/modules/custom/uh_commerce"
+  - "!wwwroot/sites/all/themes/custom/commerce_2_demo"
 plugins:
   phpcodesniffer:
     enabled: true

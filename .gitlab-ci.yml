@@ -44,6 +44,7 @@ codequality:
   except:
    - uat
    - master
+   - bigcommerce
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2

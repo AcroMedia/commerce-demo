@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e01cd9b468abc0dcd7f27dfdbcde8dfa",
+    "content-hash": "b4031df7301b8c0b0906adffcdb060a7",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -10438,16 +10438,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.38.1",
+            "version": "v1.37.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "88fc6d1454141680f7be8c0f6700a49c7c21637c"
+                "reference": "66be9366c76cbf23e82e7171d47cbfa54a057a62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/88fc6d1454141680f7be8c0f6700a49c7c21637c",
-                "reference": "88fc6d1454141680f7be8c0f6700a49c7c21637c",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/66be9366c76cbf23e82e7171d47cbfa54a057a62",
+                "reference": "66be9366c76cbf23e82e7171d47cbfa54a057a62",
                 "shasum": ""
             },
             "require": {
@@ -10462,7 +10462,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.38-dev"
+                    "dev-master": "1.37-dev"
                 }
             },
             "autoload": {
@@ -10500,7 +10500,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-03-12T15:43:04+00:00"
+            "time": "2019-01-14T14:59:29+00:00"
         },
         {
             "name": "typo3/phar-stream-wrapper",

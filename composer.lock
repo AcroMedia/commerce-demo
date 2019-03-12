@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66080e23e85a1a77abe8e282a515f0bd",
+    "content-hash": "e01cd9b468abc0dcd7f27dfdbcde8dfa",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2413,6 +2413,66 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/big_pipe_sessionless"
             }
+        },
+        {
+            "name": "drupal/bigcommerce",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/bigcommerce",
+                "reference": "b28ddc98348b6fc9d47bbe5342b9466f5c19b6ef"
+            },
+            "require": {
+                "drupal/commerce": "^2.12",
+                "drupal/commerce_cart": "*",
+                "drupal/commerce_product": "*",
+                "drupal/core": "*",
+                "moderntribe/bigcommerce-api-php-v3": "^1.7"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.x-dev",
+                    "datestamp": "1551984780",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "alexpott",
+                    "homepage": "https://www.drupal.org/user/157725"
+                },
+                {
+                    "name": "smccabe",
+                    "homepage": "https://www.drupal.org/user/289245"
+                },
+                {
+                    "name": "webadpro",
+                    "homepage": "https://www.drupal.org/user/708024"
+                }
+            ],
+            "description": "Integrates BigCommerce with Drupal",
+            "homepage": "https://www.drupal.org/project/bigcommerce",
+            "keywords": [
+                "BigCommerce",
+                "Commerce",
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/bigcommerce",
+                "issues": "https://www.drupal.org/project/issues/bigcommerce"
+            },
+            "time": "2019-03-08T14:50:17+00:00"
         },
         {
             "name": "drupal/color_field",
@@ -7597,6 +7657,56 @@
             "time": "2018-12-27T22:03:43+00:00"
         },
         {
+            "name": "moderntribe/bigcommerce-api-php-v3",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moderntribe/bigcommerce-api-php-v3.git",
+                "reference": "44de3a1e3494814f527c034831ae6f57c0c87692"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moderntribe/bigcommerce-api-php-v3/zipball/44de3a1e3494814f527c034831ae6f57c0c87692",
+                "reference": "44de3a1e3494814f527c034831ae6f57c0c87692",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8",
+                "satooshi/php-coveralls": "~1.0",
+                "squizlabs/php_codesniffer": "~2.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BigCommerce\\Api\\v3\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache v2"
+            ],
+            "authors": [
+                {
+                    "name": "Bigcommerce",
+                    "homepage": "https://developer.bigcommerce.com/api/v3/"
+                }
+            ],
+            "homepage": "https://developer.bigcommerce.com/api/v3/",
+            "keywords": [
+                "api",
+                "php",
+                "sdk",
+                "swagger"
+            ],
+            "time": "2019-03-06T16:51:28+00:00"
+        },
+        {
             "name": "nikic/php-parser",
             "version": "v4.2.1",
             "source": {
@@ -11693,6 +11803,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2015-10-02T06:51:40+00:00"
         },
         {
@@ -12138,7 +12249,8 @@
         "drupal/comments_order": 10,
         "drupal/commerce_pado": 10,
         "drupal/jsonapi": 20,
-        "drupal/better_exposed_filters": 15
+        "drupal/better_exposed_filters": 15,
+        "drupal/bigcommerce": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

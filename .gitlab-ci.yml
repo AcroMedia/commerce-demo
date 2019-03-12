@@ -71,6 +71,7 @@ build:
   only:
     - master
     - UAT
+    - bigcommerce
 
   # this tells the build server to save these files between jobs, this keeps them to be deployed
   artifacts:
@@ -89,53 +90,16 @@ build:
     # Remove the node_modules dir generated from npm install.
     - rm -rf node_modules
 
-# Deploy base demo to STAGING site (AWS1).
-base-demo-to-uat:
+deploy:
   stage: deploy
-  when: manual
 
   # add any other tags or branches you want here
   only:
-    - UAT
+    - bigcommerce
 
   environment:
-    name: uat
-    url: https://commerce-2-demo.aws1.acrobuild.com
-
-  script:
-    # Install ssh-agent if not already installed, it is required by Docker
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-
-    # Run ssh-agent (inside the build environment)
-    - eval $(ssh-agent -s)
-
-    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - ssh-add <(echo "$DEPLOY_KEY_UAT")
-
-    # Add the fingerprint for the host to known hosts so we can verify it.
-    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
-    - mkdir -p ~/.ssh
-    - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
-
-    #move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
-
-    # log into the site, reset settings.php permissions and run scripts.
-    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-uat.sh
-
-# Deploy plus demo to STAGING site (AWS1).
-plus-demo-to-uat:
-  stage: deploy
-  when: manual
-
-  # add any other tags or branches you want here
-  only:
-    - UAT
-
-  environment:
-    name: uat
-    url: https://commerceplus.aws1.acrobuild.com
+    name: bigcommerce
+    url: https://bigcommerce.aws1.acrobuild.com
 
   script:
     # Install ssh-agent if not already installed, it is required by Docker
@@ -153,91 +117,19 @@ plus-demo-to-uat:
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
     #move updated files up to deployment server, exclude .git since it's not needed.
-    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
+    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ bigcommerce@aws1.acrobuild.com:/home/bigcommerce/www/bigcommerce/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-uat.sh
+    - ssh bigcommerce@aws1.acrobuild.com 'chown bigcommerce:bigcommerce-bigcommerce-srv /home/bigcommerce/www/bigcommerce/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-uat.sh
 
-
-# Deploy base demo to LIVE site (CLOUD4).
-base-demo-to-live:
-  stage: deploy
-  when: manual
-
-  # add any other tags or branches you want here
-  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
-  only:
-    - master
-
-  environment:
-    name: cloud4
-    url: https://commercedemo.acromedia.com
-
-  script:
-    # Install ssh-agent if not already installed, it is required by Docker
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-
-    # Run ssh-agent (inside the build environment)
-    - eval $(ssh-agent -s)
-
-    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
-
-    # Add the fingerprint for the host to known hosts so we can verify it.
-    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
-    - mkdir -p ~/.ssh
-    - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
-
-    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
-
-    # log into the site, reset settings.php permissions and run scripts.
-    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-live.sh
-
-# Deploy plus demo to LIVE site (CLOUD4).
-plus-demo-to-live:
-  stage: deploy
-
-  # add any other tags or branches you want here.
-  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
-  only:
-    - master
-
-  environment:
-    name: cloud4.acromedia.com
-    url: https://demoplus.cloud4.acromedia.com
-
-  script:
-    # Install ssh-agent if not already installed, it is required by Docker
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-
-    # Run ssh-agent (inside the build environment)
-    - eval $(ssh-agent -s)
-
-    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
-
-    # Add the fingerprint for the host to known hosts so we can verify it.
-    # To determine the fingerprint of a host, use `ssh-keyscan -H`.
-    - mkdir -p ~/.ssh
-    - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
-
-    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
-
-    # log into the site, reset settings.php permissions and run scripts.
-    # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live.sh
-
-plus-demo-live-post:
+deploy-post:
   image: smmccabe/docker-loadtest
   stage: post
   dependencies:
-    - plus-demo-to-live
+    - deploy
   script:
     # Run first at a higher threshold to allow for cache generation, if it takes longer than this
     # thats a problem, an uncached page should take > 10 seconds
-    - loadtimer commerceplus.acromedia.com 20000
-    - loadtimer commerceplus.acromedia.com 5000
+    - loadtimer https://bigcommerce.aws1.acrobuild.com 20000
+    - loadtimer https://bigcommerce.aws1.acrobuild.com 5000

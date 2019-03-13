@@ -150,15 +150,15 @@
   $('select#edit-payment-information-add-payment-method-payment-details-expiration-month').val('10');
   $('select#edit-payment-information-add-payment-method-payment-details-expiration-year').val('2022');
   $('input#edit-payment-information-add-payment-method-payment-details-security-code').val('123');
-  $("div[id^='payment-information-wrapper'] select.country").val('US');
-  $("div[id^='payment-information-wrapper'] input.given-name").val('Charles');
-  $("div[id^='payment-information-wrapper'] input.family-name").val('Mound');
-  $("div[id^='payment-information-wrapper'] input.organization").val('');
-  $("div[id^='payment-information-wrapper'] input.address-line1").val('688 W Charles Mound Rd');
-  $("div[id^='payment-information-wrapper'] input.address-line2").val('');
-  $("div[id^='payment-information-wrapper'] input.locality").val('Scales Mound');
-  $("div[id^='payment-information-wrapper'] select.administrative-area").val('IL');
-  $("div[id^='payment-information-wrapper'] input.postal-code").val('61075');
+  $("div[id^='edit-payment-information'] select.country").val('US');
+  $("div[id^='edit-payment-information'] input.given-name").val('Charles');
+  $("div[id^='edit-payment-information'] input.family-name").val('Mound');
+  $("div[id^='edit-payment-information'] input.organization").val('');
+  $("div[id^='edit-payment-information'] input.address-line1").val('688 W Charles Mound Rd');
+  $("div[id^='edit-payment-information'] input.address-line2").val('');
+  $("div[id^='edit-payment-information'] input.locality").val('Scales Mound');
+  $("div[id^='edit-payment-information'] select.administrative-area").val('IL');
+  $("div[id^='edit-payment-information'] input.postal-code").val('61075');
 
   // Checkout form - Other payment options.
   // This basically does the same as above but for AJAX.
@@ -176,15 +176,15 @@
           $("select[id^='edit-payment-information-add-payment-method-payment-details-expiration-month").val('10');
           $("select[id^='edit-payment-information-add-payment-method-payment-details-expiration-year").val('2022');
           $("input[id^='edit-payment-information-add-payment-method-payment-details-security-code").val('123');
-          $("div[id^='payment-information-wrapper'] select.country").val('US');
-          $("div[id^='payment-information-wrapper'] input.given-name").val('Charles');
-          $("div[id^='payment-information-wrapper'] input.family-name").val('Mound');
-          $("div[id^='payment-information-wrapper'] input.organization").val('');
-          $("div[id^='payment-information-wrapper'] input.address-line1").val('688 W Charles Mound Rd');
-          $("div[id^='payment-information-wrapper'] input.address-line2").val('');
-          $("div[id^='payment-information-wrapper'] input.locality").val('Scales Mound');
-          $("div[id^='payment-information-wrapper'] select.administrative-area").val('IL');
-          $("div[id^='payment-information-wrapper'] input.postal-code").val('61075');
+          $("div[id^='edit-payment-information'] select.country").val('US');
+          $("div[id^='edit-payment-information'] input.given-name").val('Charles');
+          $("div[id^='edit-payment-information'] input.family-name").val('Mound');
+          $("div[id^='edit-payment-information'] input.organization").val('');
+          $("div[id^='edit-payment-information'] input.address-line1").val('688 W Charles Mound Rd');
+          $("div[id^='edit-payment-information'] input.address-line2").val('');
+          $("div[id^='edit-payment-information'] input.locality").val('Scales Mound');
+          $("div[id^='edit-payment-information'] select.administrative-area").val('IL');
+          $("div[id^='edit-payment-information'] input.postal-code").val('61075');
         }
       }
     });

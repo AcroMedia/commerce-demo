@@ -17,11 +17,11 @@
         "jqueryprint": {
             "type": "package",
             "package": {
-                "name": "DoersGuild/jQuery.print",
+                "name": "doersguild/jquery.print",
                 "version": "master",
                 "type": "drupal-library",
                 "source": {
-                    "url": "https://github.com/DoersGuild/jQuery.print.git",
+                    "url": "https://github.com/doersguild/jquery.print.git",
                     "type": "git",
                     "reference": "origin/master"
                 }
@@ -37,7 +37,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "^8.5.0",
+        "drupal/core": "^8.6.7",
         "drupal/console": "~1.0",
         "drupal/commerce": "^2.9",
         "drupal/swiftmailer": "1.x-dev",
@@ -75,7 +75,7 @@
         "drupal/contribute": "^1.0",
         "cboden/ratchet": "^0.4.1",
         "drupal/asset_injector": "^2.2",
-        "DoersGuild/jQuery.print": "master",
+        "doersguild/jquery.print": "master",
         "drupal/commerce_pado": "^1.0@beta",
         "drupal/jsonapi": "1.x-dev",
         "drupal/jsonapi_extras": "^2.8",
@@ -87,17 +87,18 @@
         "drupal/big_pipe_sessionless": "^1.2",
         "drupal/purge": "^3.0@beta",
         "drupal/varnish_purge": "^1.11",
-        "drupal/redis": "^1.1"
+        "drupal/redis": "^1.1",
+        "twig/twig": "1.37.1"
     },
     "require-dev": {
         "behat/mink": "~1.7",
         "behat/mink-goutte-driver": "~1.2",
         "jcalderonzumba/gastonjs": "~1.0.2",
         "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
-        "mikey179/vfsStream": "~1.2",
+        "mikey179/vfsstream": "~1.2",
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8",
-        "drupal/devel": "^1.2"
+        "drupal/devel": "^2.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -151,11 +152,7 @@
         "patches": {
             "drupal/commerce": {
                 "#2770731: Add a display name to promotions":
-                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
-                "#2852207: Billing same as shipping":
-                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch",
-                "#2938760: Variation fields can permanently disappear during ajax replacement":
-                "https://www.drupal.org/files/issues/2018-10-31/2938760-20.patch"
+                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
@@ -163,7 +160,7 @@
             },
             "drupal/commerce_shipping": {
                 "#2952457: Removing user's profile causes fatal error with PackerManager::packToShipments()":
-                "https://www.drupal.org/files/issues/2018-08-07/commerce_shipping-fix_fatal_error_on_missing_profile-2952457-10-D8.patch"
+                "https://www.drupal.org/files/issues/2019-02-06/2952457-23.SHOULD-FAIL.patch"
             },
             "drupal/commerce_pos": {
                 "Custom styling POS product searching":
@@ -177,7 +174,7 @@
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
                 "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
                 "#2802803: Temporary files whose files are missing on the disk result in never-ending error log messages":
-                "https://www.drupal.org/files/issues/2018-06-27/missing-temp-files-stuck-in-table-2802803-33.patch"
+                "https://www.drupal.org/files/issues/2019-03-09/missing-temp-files-stuck-in-table-2802803-43_0.patch"
             }
         }
     }

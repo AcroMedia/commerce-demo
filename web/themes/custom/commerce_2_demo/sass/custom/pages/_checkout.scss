@@ -1,20 +1,12 @@
 /**
  * Coupon redemption.
  */
-#sidebar-coupon_redemption-form-ajax-wrapper {
+.checkout-pane-coupon-redemption {
   position: relative;
   border: 1px solid #ccc;
   border-radius: $border-radius;
   padding: 15px 20px;
   margin: 30px 0;
-
-  // Fixes module issue where this ID is used within one of same name.
-  #sidebar-coupon_redemption-form-ajax-wrapper {
-    position: initial;
-    border: none;
-    padding: 0;
-    margin: 0;
-  }
 
   .form-item {
     display: inline-block;
@@ -528,4 +520,11 @@
     content: '\f15b';
     color: $c-body;
   }
+}
+
+.commerce-checkout-completion-register {
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+  padding: 0 20px 15px;
+  margin: 30px 0;
 }

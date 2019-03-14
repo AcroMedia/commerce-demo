@@ -190,6 +190,10 @@
     });
   });
 
+  // Commerce POS - prefill cashier login info.
+  $('.commerce-pos-cashier-login .user-login-form input#edit-name').val('cashier');
+  $('.commerce-pos-cashier-login .user-login-form input#edit-pass').val('cashier');
+
   // Open any YouTube links in a modal.
   $('.region-content a').each(function () {
     var url = $(this).attr('href');

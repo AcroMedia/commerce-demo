@@ -11575,7 +11575,8 @@
                 "source": "http://cgit.drupalcode.org/devel",
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
+            },
+            "time": "2019-03-12T00:46:53+00:00"
         },
         {
             "name": "fabpot/goutte",

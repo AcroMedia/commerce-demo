@@ -86,7 +86,8 @@
         "drupal/better_exposed_filters": "^3.0@alpha",
         "drupal/big_pipe_sessionless": "^1.2",
         "drupal/bigcommerce": "1.x-dev",
-        "twig/twig": "1.37.1"
+        "twig/twig": "1.37.1",
+        "drupal/migrate_tools": "^4.1"
     },
     "require-dev": {
         "behat/mink": "~1.7",

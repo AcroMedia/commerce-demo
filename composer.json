@@ -37,7 +37,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "^8.5.0",
+        "drupal/core": "^8.7-alpha1",
         "drupal/console": "~1.0",
         "drupal/commerce": "^2.9",
         "drupal/swiftmailer": "1.x-dev",
@@ -86,7 +86,6 @@
         "drupal/better_exposed_filters": "^3.0@alpha",
         "drupal/big_pipe_sessionless": "^1.2",
         "drupal/bigcommerce": "1.x-dev",
-        "twig/twig": "1.37.1",
         "drupal/migrate_tools": "^4.1"
     },
     "require-dev": {
@@ -175,7 +174,9 @@
             },
             "drupal/core": {
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
-                "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch"
+                "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
+                "#2655162: Fatal error when uninstalling/deleting an entity type after removing its class/definition from the codebase (which is the proper way to do it)":
+                "https://www.drupal.org/files/issues/2019-03-18/2655162-38-combined.patch"
             },
             "drupal/bigcommerce": {
                 "#3038329: Sync product entities":

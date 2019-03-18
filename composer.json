@@ -178,7 +178,9 @@
             },
             "drupal/bigcommerce": {
                 "#3038329: Sync product entities":
-                "https://www.drupal.org/files/issues/2019-03-14/3038329-11.patch"
+                "https://www.drupal.org/files/issues/2019-03-14/3038329-11.patch",
+                "#3036223: Manually trigger pull updated products from Drupal Commerce":
+                "https://www.drupal.org/files/issues/2019-03-14/3036223-5.patch"
             }
         }
     }

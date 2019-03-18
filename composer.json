@@ -175,6 +175,10 @@
             "drupal/core": {
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
                 "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch"
+            },
+            "drupal/bigcommerce": {
+                "#3038329: Sync product entities":
+                "https://www.drupal.org/files/issues/2019-03-14/3038329-11.patch"
             }
         }
     }

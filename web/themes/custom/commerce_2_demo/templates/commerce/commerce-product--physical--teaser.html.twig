@@ -1,0 +1,35 @@
+{%
+  set classesTeaser = [
+    'product',
+    'product--teaser',
+    'product--teaser--' ~ product_entity.title.value|clean_class
+  ]
+%}
+<a href="{{ product_url }}" {{ attributes.addClass(classesTeaser) }} aria-label="{{ product_entity.title.value }}">
+  <div class="product__thumbnail">
+    {% if product.field_add_on_products['#items'] %}
+      <div class="add-on-item__teaser-flag">
+        {{ 'Bundle<br>Available!'|t }}
+      </div>
+    {% endif %}
+
+    {% if product_variation_images %}
+      {% for product_variation_image in product_variation_images %}
+        {# Use first image of the first variation. #}
+        {% if loop.first %}
+          <img src="{{ product_variation_image.images.0.entity.uri.value|image_style('product_thumb') }}" alt="{{ product_variation_image.images.0.alt }}" class="product-teaser__thumbnail-image" />
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <img src="{{ base_path ~ directory }}/gfx/logo-icon.svg" class="no-product-thumbnail" alt="{{ product_entity.title.value }}" />
+    {% endif %}
+  </div>
+
+  {% if product.variation_field_original_price[0]['#markup'] %}
+    {{ product.variation_field_original_price }}
+  {% endif %}
+  {{ product.variation_list_price }}
+  {{ product.variation_price }}
+  {{ product.title }}
+  {{ product.field_product_brand }}
+</a>

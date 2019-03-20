@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ *
+ * Template for product color attribute values.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product_attribute_value: The rendered product attribute value fields.
+ *   Use 'product_attribute_value' to print them all, or print a subset such as
+ *   'product_attribute_value.name'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product_attribute_value|without('name') }}
+ *   @endcode
+ * - product_attribute_value_entity: The product attribute value entity.
+ *
+ * @ingroup themeable
+ */
+#}
+{% set item_attributes = create_attribute() %}
+{% set style_value = '' %}
+
+{# Set title attribute. #}
+{% if product_attribute_value.name.0['#context']['value'] %}
+  {% set attributes = attributes.setAttribute('title', product_attribute_value.name.0['#context']['value']) %}
+{% endif %}
+
+{# Set background color. #}
+{% if product_attribute_value_entity.field_color.color %}
+  {% set bg_color = product_attribute_value_entity.field_color.color %}
+  {% set style_value = style_value ~ 'background-color: ' ~ bg_color ~ ';' %}
+  {% set item_attributes = item_attributes.setAttribute('style', style_value) %}
+{% endif %}
+
+{# Set background image. #}
+{% if product_attribute_value_entity.field_image.entity.uri.value %}
+  {% set image_url = product_attribute_value_entity.field_image.entity.uri.value|image_style('color') %}
+  {% set style_value = style_value ~ 'background-image: url(' ~ image_url ~ ');' %}
+  {% set item_attributes = item_attributes.setAttribute('style', style_value) %}
+{% endif %}
+
+<div{{ attributes.addClass('color-attribute') }}>
+  <div{{ item_attributes.addClass('color-attribute__item') }}>
+    {{ product_attribute_value }}
+  </div>
+</div>

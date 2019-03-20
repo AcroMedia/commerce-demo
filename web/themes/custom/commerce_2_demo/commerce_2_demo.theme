@@ -546,6 +546,7 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
       $product = $variables['elements']['#commerce_product'];
       $product_variations = $product->getVariations();
 
+
       // Product Images.
       if (isset($product->field_image->entity)) {
         // Create array to feed images into.
@@ -571,7 +572,6 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
             }
           }
         }
-
         foreach ($product_variations as $key => $variation) {
           // If variation is active.
           if ($variation->status->value == '1') {
@@ -596,6 +596,22 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
         $variables['product_variation_images'] = $product_variation_images;
       }
       elseif (isset($product_images)) {
+        $variables['product_variation_images'] = $product_images;
+      }
+
+      // Physical product images.
+      if ($product->bundle() == 'physical') {
+        // Product Images.
+        if (isset($product->field_product_image->entity)) {
+          // Create array to feed images into.
+          $product_images = [];
+        }
+        if (isset($product->field_product_image->entity)) {
+          foreach ($product->field_product_image as $key => &$product_image) {
+            $product_images[$key]['variation_id'] = '';
+            $product_images[$key]['images'][$key] = $product_image;
+          }
+        }
         $variables['product_variation_images'] = $product_images;
       }
 

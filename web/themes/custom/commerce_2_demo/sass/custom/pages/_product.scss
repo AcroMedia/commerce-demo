@@ -1,4 +1,125 @@
+/**
+ * Products.
+ */
 
+// Rendered Attributes.
+product--rendered-attribute.fieldgroup {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.product--rendered-attribute {
+  margin-bottom: 22px;
+}
+.product--rendered-attribute .form-item {
+  display: inline-block;
+  margin: 2px 10px 4px 0;
+  padding: 0;
+  vertical-align: top;
+
+  label {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+
+    // Pseudo element.
+    &:before {
+      display: none;
+    }
+  }
+  .attribute-value {
+    display: inline-block;
+    margin: 0;
+    padding: 10px 18px;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.0;
+    color: $c-body;
+    background: #fff;
+    border: 1px solid $gray-border;
+    border-radius: $border-radius;
+    @include smooth-transition();
+  }
+  label:hover .attribute-value {
+    color: $c-body;
+    background: lighten($c-body, 55%);
+  }
+  // Active/checked state.
+  input[type="radio"]:checked + label {
+    .attribute-value {
+      color: #fff;
+      font-weight: normal;
+      background: $c-body;
+      border-color: $c-body;
+    }
+  }
+}
+.product--rendered-attribute__selected ~ label.option {
+  border: none;
+}
+
+// Color Attributes.
+.product--rendered-attribute .form-item[class*="attribute-color"] {
+  margin-left: 0;
+  margin-right: 0;
+
+  .color-attribute {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 4px;
+    vertical-align: top;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    box-shadow: none;
+    transition: all .2s ease-in-out;
+  }
+  .color-attribute__item {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: 1px 1px 8px 0 rgba(0,0,0,0.3);
+    @include button-hide-text();
+    transition: all .2s ease-in-out;
+  }
+  label {
+    margin: 0;
+    padding: 0;
+
+    &:hover,
+    &:focus {
+      .color-attribute {
+        border-color: #999;
+        transform: scale(0.95);
+      }
+      .color-attribute__item {
+        //box-shadow: 0 0 0 1px #ccc;
+      }
+    }
+    // Pseudo element.
+    &:before {
+      display: none;
+    }
+  }
+  // Active/checked state.
+  input[type="radio"]:checked + label {
+    .color-attribute {
+      border: 1px solid #666;
+      box-shadow: none;
+      transform: scale(1);
+      animation: shrink-bounce 200ms cubic-bezier(.4,.0,.23,1);
+    }
+    .color-attribute__item {
+
+    }
+  }
+}
 
 /**
  * Product page sorting.
@@ -169,6 +290,7 @@ a.product--teaser {
   }
 
   .field--name-field-brand,
+  .field--name-field-product-brand,
   .field--name-field-artist {
     .field__item {
       display: inline-block;
@@ -186,6 +308,10 @@ a.product--teaser {
         content: '';
       }
     }
+  }
+  .field--name-field-product-brand {
+    font-size: 12px;
+    font-weight: 700;
   }
 
   &:focus {
@@ -461,6 +587,7 @@ a.product--teaser {
     }
 
     .field--name-field-brand,
+    .field--name-field-product-brand,
     .field--name-field-artist {
       .field__item {
         display: inline-block;
@@ -478,7 +605,11 @@ a.product--teaser {
         }
       }
     }
-
+    .field--name-field-product-brand {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
     .page-title {
       @media (max-width: $screen-md-max) {
         font-size: 44px;
@@ -537,8 +668,6 @@ a.product--teaser {
       }
 
       .form-item {
-        margin-bottom: 0;
-
         .ajax-progress {
           display: none;
         }

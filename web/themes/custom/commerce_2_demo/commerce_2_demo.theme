@@ -545,8 +545,7 @@ function commerce_2_demo_preprocess(&$variables, $hook) {
       // Get product and variations.
       $product = $variables['elements']['#commerce_product'];
       $product_variations = $product->getVariations();
-
-
+      
       // Product Images.
       if (isset($product->field_image->entity)) {
         // Create array to feed images into.

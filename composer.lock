@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7351d20016e70b571f4db3a62c882a9",
+    "content-hash": "87ad2b4bba75ec20c72a6ed2f9815d9e",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -1153,21 +1153,21 @@
         },
         {
             "name": "consolidation/robo",
-            "version": "1.4.6",
+            "version": "1.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/Robo.git",
-                "reference": "d4805a1abbc730e9a6d64ede2eba56f91a2b4eb3"
+                "reference": "93338a571938debc66c79fcd994713af461357b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/Robo/zipball/d4805a1abbc730e9a6d64ede2eba56f91a2b4eb3",
-                "reference": "d4805a1abbc730e9a6d64ede2eba56f91a2b4eb3",
+                "url": "https://api.github.com/repos/consolidation/Robo/zipball/93338a571938debc66c79fcd994713af461357b9",
+                "reference": "93338a571938debc66c79fcd994713af461357b9",
                 "shasum": ""
             },
             "require": {
                 "consolidation/annotated-command": "^2.10.2",
-                "consolidation/config": "^1.0.10",
+                "consolidation/config": "^1.2",
                 "consolidation/log": "~1",
                 "consolidation/output-formatters": "^3.1.13",
                 "consolidation/self-update": "^1",
@@ -1257,7 +1257,7 @@
                 }
             ],
             "description": "Modern task runner",
-            "time": "2019-02-17T05:32:27+00:00"
+            "time": "2019-03-19T15:58:10+00:00"
         },
         {
             "name": "consolidation/self-update",
@@ -2620,7 +2620,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/bigcommerce",
-                "reference": "8829b416337b79e6a9aa3a7775a86d3e5ee4750f"
+                "reference": "e8cc54e16565c884bb8875663d0647e63d14a6ea"
             },
             "require": {
                 "drupal/color_field": "^2.0",
@@ -2639,16 +2639,13 @@
                 },
                 "drupal": {
                     "version": "8.x-1.x-dev",
-                    "datestamp": "1552567685",
+                    "datestamp": "1553168585",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
                     }
                 },
-                "patches_applied": {
-                    "#3038329: Sync product entities": "https://www.drupal.org/files/issues/2019-03-14/3038329-11.patch",
-                    "#3036223: Manually trigger pull updated products from Drupal Commerce": "https://www.drupal.org/files/issues/2019-03-14/3036223-5.patch"
-                }
+                "patches_applied": []
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
@@ -2679,7 +2676,7 @@
                 "source": "http://cgit.drupalcode.org/bigcommerce",
                 "issues": "https://www.drupal.org/project/issues/bigcommerce"
             },
-            "time": "2019-03-14T22:15:38+00:00"
+            "time": "2019-03-21T17:12:16+00:00"
         },
         {
             "name": "drupal/color_field",

@@ -150,11 +150,7 @@
         "patches": {
             "drupal/commerce": {
                 "#2770731: Add a display name to promotions":
-                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
-                "#2852207: Billing same as shipping":
-                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch",
-                "#2938760: Variation fields can permanently disappear during ajax replacement":
-                "https://www.drupal.org/files/issues/2018-10-31/2938760-20.patch"
+                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
@@ -179,8 +175,6 @@
                 "https://www.drupal.org/files/issues/2019-03-18/2655162-38-combined.patch"
             },
             "drupal/bigcommerce": {
-                "#3038329: Sync product entities":
-                "https://www.drupal.org/files/issues/2019-03-14/3038329-11.patch",
                 "#3036223: Manually trigger pull updated products from Drupal Commerce":
                 "https://www.drupal.org/files/issues/2019-03-14/3036223-5.patch"
             }

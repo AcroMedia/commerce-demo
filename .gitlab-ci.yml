@@ -10,7 +10,6 @@ stages:
   - test
   - build
   - deploy
-  - post
 
 code_standards:
   stage: test
@@ -61,8 +60,6 @@ codequality:
 
 security_advisories:
   stage: test
-  # temporary becaise twig 1.38.7 has a security issue but 1.40 is broken, so no viable option by default currently.
-  allow_failure: true
   script:
     # Run the SensioLabs security advisory checker. See security.sensiolabs.org.
     - security-checker security:check composer.lock
@@ -127,13 +124,3 @@ deploy:
     - ssh bigcommerce@aws1.acrobuild.com 'chown bigcommerce:bigcommerce-srv /home/bigcommerce/www/bigcommerce/web/sites/default/settings.php'
     - ssh bigcommerce@aws1.acrobuild.com 'cd /home/bigcommerce/www/bigcommerce/web && ../bin/drush updb -y && ../bin/drush cr'
 
-deploy-post:
-  image: smmccabe/docker-loadtest
-  stage: post
-  dependencies:
-    - deploy
-  script:
-    # Run first at a higher threshold to allow for cache generation, if it takes longer than this
-    # thats a problem, an uncached page should take > 10 seconds
-    - loadtimer https://bigcommerce.aws1.acrobuild.com 20000
-    - loadtimer https://bigcommerce.aws1.acrobuild.com 5000

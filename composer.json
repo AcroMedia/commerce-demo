@@ -37,12 +37,12 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "^8.6.7",
+        "drupal/core": "^8.6.13",
         "drupal/console": "~1.0",
         "drupal/commerce": "^2.9",
         "drupal/swiftmailer": "1.x-dev",
         "drupal/config_inspector": "1.x-dev",
-        "drupal/entity": "~1.0",
+        "drupal/entity": "^1.0",
         "acromedia/drupalorange_profile": "dev-8.x-1.x",
         "drupal/menu_block": "^1.4",
         "drupal/webform": "^5.0",
@@ -88,7 +88,7 @@
         "drupal/purge": "^3.0@beta",
         "drupal/varnish_purge": "^1.11",
         "drupal/redis": "^1.1",
-        "twig/twig": "1.37.1"
+        "twig/twig": "^1.38.2"
     },
     "require-dev": {
         "behat/mink": "~1.7",

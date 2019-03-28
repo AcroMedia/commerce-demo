@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "87ad2b4bba75ec20c72a6ed2f9815d9e",
+    "content-hash": "e4ae4bfb2446b8a641c7ed548e14035d",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -2274,6 +2274,10 @@
                     "homepage": "https://www.drupal.org/user/86106"
                 },
                 {
+                    "name": "dww",
+                    "homepage": "https://www.drupal.org/user/46549"
+                },
+                {
                     "name": "googletorp",
                     "homepage": "https://www.drupal.org/user/386230"
                 },
@@ -2402,7 +2406,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -2620,7 +2624,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/bigcommerce",
-                "reference": "e8cc54e16565c884bb8875663d0647e63d14a6ea"
+                "reference": "5aa37142930034fdd993b57ba23f49bc55334571"
             },
             "require": {
                 "drupal/color_field": "^2.0",
@@ -2630,6 +2634,7 @@
                 "drupal/core": "*",
                 "drupal/entity": "^1.0-rc1",
                 "drupal/migrate_file": "^1.1",
+                "drupal/migrate_tools": "^4.1",
                 "moderntribe/bigcommerce-api-php-v3": "^1.7"
             },
             "type": "drupal-module",
@@ -2639,7 +2644,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.x-dev",
-                    "datestamp": "1553168585",
+                    "datestamp": "1553553785",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2675,8 +2680,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/bigcommerce",
                 "issues": "https://www.drupal.org/project/issues/bigcommerce"
-            },
-            "time": "2019-03-21T17:12:16+00:00"
+            }
         },
         {
             "name": "drupal/color_field",
@@ -3225,7 +3229,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-beta2",
-                    "datestamp": "1524068884",
+                    "datestamp": "1553635981",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -3641,7 +3645,7 @@
                 },
                 "drupal": {
                     "version": "8.x-2.0-beta5",
-                    "datestamp": "1531922621",
+                    "datestamp": "1553099584",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -4508,7 +4512,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-rc1",
-                    "datestamp": "1539272769",
+                    "datestamp": "1553254684",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "RC releases are not covered by Drupal security advisories."
@@ -4706,6 +4710,10 @@
                 {
                     "name": "StryKaizer",
                     "homepage": "https://www.drupal.org/user/462700"
+                },
+                {
+                    "name": "Upchuk",
+                    "homepage": "https://www.drupal.org/user/1885838"
                 },
                 {
                     "name": "dasjo",
@@ -5174,6 +5182,10 @@
             ],
             "authors": [
                 {
+                    "name": "thalles",
+                    "homepage": "https://www.drupal.org/user/3589086"
+                },
+                {
                     "name": "ufku",
                     "homepage": "https://www.drupal.org/user/9910"
                 }
@@ -5446,7 +5458,11 @@
                 },
                 "drupal": {
                     "version": "8.x-4.1",
-                    "datestamp": "1467993646"
+                    "datestamp": "1467993646",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -5941,7 +5957,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.6",
-                    "datestamp": "1550692525",
+                    "datestamp": "1553087589",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6338,7 +6354,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.2",
-                    "datestamp": "1545483044",
+                    "datestamp": "1549962207",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6416,7 +6432,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -6458,7 +6474,7 @@
                 },
                 "drupal": {
                     "version": "8.x-2.12",
-                    "datestamp": "1523203180",
+                    "datestamp": "1542505221",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6898,7 +6914,11 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0",
-                    "datestamp": "1477741139"
+                    "datestamp": "1477741139",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -10282,7 +10302,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",

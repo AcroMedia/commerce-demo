@@ -175,8 +175,8 @@
                 "https://www.drupal.org/files/issues/2019-03-18/2655162-38-combined.patch"
             },
             "drupal/bigcommerce": {
-                "#3036223: Manually trigger pull updated products from Drupal Commerce":
-                "https://www.drupal.org/files/issues/2019-03-14/3036223-5.patch"
+                "#3042484: Expired or out of sync carts":
+                "https://www.drupal.org/files/issues/2019-03-27/3042484-18.bigcommerce.Expired-or-out-of-sync-carts.patch"
             }
         }
     }

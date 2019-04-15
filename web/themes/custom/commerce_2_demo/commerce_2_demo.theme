@@ -7,26 +7,10 @@
 
 use Drupal\node\NodeInterface;
 use Drupal\commerce_product\Entity\ProductAttributeValue;
-use Drupal\Core\Template\Attribute;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\commerce_product\Entity\Product;
-use Drupal\commerce_order\Entity;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\user\Entity\User;
-use Drupal\commerce_product\Entity\ProductInterface;
-use Drupal\commerce_product\Entity\ProductVariationInterface;
-use Drupal\commerce_product\Event;
-use Drupal\commerce_product\Entity\ProductVariation;
-use Drupal\commerce_product\Plugin\Field\FieldWidget\ProductVariationAttributesWidget;
-use Drupal\Core\Entity\ContentEntityForm;
-use Drupal\Core\Entity\Display\EntityFormDisplayInterface;
-use Drupal\Core\Entity\EntityManagerInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Drupal\Core\Entity\EntityTypeManager;
-use Drupal\comment\Entity\Comment;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -43,7 +27,6 @@ function commerce_2_demo_theme_suggestions_page_alter(array &$suggestions, array
 
   // Add taxonomy vocabulary suggestions.
   if ($term = \Drupal::request()->attributes->get('taxonomy_term')) {
-    $vocabulary_id = $term->getVocabularyId();
     array_splice($suggestions, 1, 0, 'page__taxonomy__' . $term->getVocabularyId());
   }
 

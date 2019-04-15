@@ -152,7 +152,7 @@
         "patches": {
             "drupal/commerce": {
                 "#2770731: Add a display name to promotions":
-                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch"
+                "https://www.drupal.org/files/issues/2019-04-15/adjustment-label-update-2770731-51.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
@@ -174,7 +174,7 @@
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
                 "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
                 "#2802803: Temporary files whose files are missing on the disk result in never-ending error log messages":
-                "https://www.drupal.org/files/issues/2019-03-09/missing-temp-files-stuck-in-table-2802803-43_0.patch"
+                "https://www.drupal.org/files/issues/2019-03-27/2802803-57.patch"
             }
         }
     }

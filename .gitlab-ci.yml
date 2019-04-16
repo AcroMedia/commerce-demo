@@ -101,6 +101,9 @@ base-demo-to-uat:
   only:
     - UAT
 
+  tags:
+    - Deploy
+
   environment:
     name: uat
     url: https://commerce-2-demo.aws1.acrobuild.com
@@ -135,6 +138,9 @@ plus-demo-to-uat:
   # add any other tags or branches you want here
   only:
     - UAT
+
+  tags:
+    - Deploy
 
   environment:
     name: uat
@@ -173,6 +179,9 @@ base-demo-to-live:
   only:
     - master
 
+  tags:
+    - DeployProduction
+
   environment:
     name: cloud4
     url: https://commercedemo.acromedia.com
@@ -208,6 +217,9 @@ plus-demo-to-live:
   only:
     - master
 
+  tags:
+    - DeployProduction
+
   environment:
     name: cloud4.acromedia.com
     url: https://demoplus.cloud4.acromedia.com
@@ -242,6 +254,9 @@ plus-demo-to-live-AWS:
   # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
   only:
     - performance_update
+
+  tags:
+    - DeployProduction
 
   environment:
     name: commerceplus-new.acromedia.com

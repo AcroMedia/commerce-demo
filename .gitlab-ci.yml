@@ -19,20 +19,6 @@ code_standards:
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
     - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files --ignore=*.css
 
-phpmd:
-  stage: test
-  script:
-    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files --ignore=*.css || true
-
-    - phpmd web/modules/custom text cleancode || true
-    - phpmd web/modules/custom text codesize || true
-    - phpmd web/modules/custom text controversial || true
-    - phpmd web/modules/custom text design || true
-    - phpmd web/modules/custom text naming || true
-    - phpmd web/modules/custom text unusedcode || true
-
-    - phpcpd web/modules/custom || true
-
 debt:
   stage: test
   script:
@@ -60,6 +46,7 @@ codequality:
 
 security_advisories:
   stage: test
+  allow_failure: true
   script:
     # Run the SensioLabs security advisory checker. See security.sensiolabs.org.
     - security-checker security:check composer.lock
@@ -234,8 +221,8 @@ plus-demo-to-live:
 plus-demo-live-post:
   image: smmccabe/docker
   stage: post
-  dependencies:
-    - plus-demo-to-live
+  #dependencies:
+  #  - plus-demo-to-live
   script:
     # Run first at a higher threshold to allow for cache generation, if it takes longer than this
     # thats a problem, an uncached page should take > 10 seconds

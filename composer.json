@@ -37,7 +37,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "^8.5.0",
+        "drupal/core": "^8.7.0",
         "drupal/console": "~1.0",
         "drupal/commerce": "^2.9",
         "drupal/swiftmailer": "1.x-dev",
@@ -75,10 +75,9 @@
         "drupal/contribute": "^1.0",
         "cboden/ratchet": "^0.4.1",
         "drupal/asset_injector": "^2.2",
-        "DoersGuild/jQuery.print": "master",
+        "doersguild/jquery.print": "master",
         "drupal/commerce_pado": "^1.0@beta",
-        "drupal/jsonapi": "1.x-dev",
-        "drupal/jsonapi_extras": "^2.8",
+        "drupal/jsonapi_extras": "^3.6",
         "drupal/matomo": "^1.7",
         "drupal/mautic": "^1.1",
         "drupal/image_effects": "^2.1",
@@ -91,7 +90,7 @@
         "behat/mink-goutte-driver": "~1.2",
         "jcalderonzumba/gastonjs": "~1.0.2",
         "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
-        "mikey179/vfsStream": "~1.2",
+        "mikey179/vfsstream": "~1.2",
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8",
         "drupal/devel": "^1.2"
@@ -148,11 +147,7 @@
         "patches": {
             "drupal/commerce": {
                 "#2770731: Add a display name to promotions":
-                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch",
-                "#2852207: Billing same as shipping":
-                "https://www.drupal.org/files/issues/2018-05-23/commerce_checkbox-same-as-billing_2852207_166.patch",
-                "#2938760: Variation fields can permanently disappear during ajax replacement":
-                "https://www.drupal.org/files/issues/2018-10-31/2938760-20.patch"
+                "https://www.drupal.org/files/issues/2019-04-15/adjustment-label-update-2770731-51.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":

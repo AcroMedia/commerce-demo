@@ -278,7 +278,7 @@ plus-demo-to-live-AWS:
     - echo "$PRODUCTION_FINGERPRINT_AWS" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - rsync -avq --omit-dir-times --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ acro@commerceplus-new.acromedia.com:/home/acro/www/cpback/
+    - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ acro@commerceplus-new.acromedia.com:/home/acro/www/cpback/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.

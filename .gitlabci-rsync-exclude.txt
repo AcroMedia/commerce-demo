@@ -5,6 +5,3 @@ database.sql
 web/sites/default/files
 web/sites/default/settings.local.php
 private
-
-web/modules/contrib/commerce_pos/modules/customer_display/conf.d
-web/modules/contrib/commerce_pos/modules/customer_display/supervisord.conf

@@ -58,11 +58,11 @@ codequality:
   artifacts:
     paths: [codeclimate.json]
 
-#security_advisories:
-#  stage: test
-#  script:
+security_advisories:
+  stage: test
+  script:
     # Run the SensioLabs security advisory checker. See security.sensiolabs.org.
-#    - security-checker security:check composer.lock
+    - security-checker security:check composer.lock
 
 build:
   stage: build
@@ -83,14 +83,12 @@ build:
   script:
     # Run Composer to build site (use --no-dev for production builds).
     - composer install --no-interaction --no-dev
+    # Remove the node_modules dir to rebuld/reinstall new versions.
+    - rm -rf node_modules
     # Compile Sass from theme using npm defined in our package.
     - cd web/themes/custom/commerce_2_demo
     - npm install
-    # Install natives separately to fix "ReferenceError: internalBinding is not define" as per https://github.com/nodejs/node/issues/25132.
-    - npm install natives@1.1.6
     - ./node_modules/gulp/bin/gulp.js sass
-    # Remove the node_modules dir generated from npm install.
-    - rm -rf node_modules
 
 # Deploy base demo to STAGING site (AWS1).
 base-demo-to-uat:
@@ -285,12 +283,12 @@ plus-demo-to-live-AWS:
     - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live-AWS.sh
 
 plus-demo-live-post:
-  image: smmccabe/docker-loadtest
+  image: smmccabe/docker
   stage: post
   dependencies:
     - plus-demo-to-live
   script:
-    # Run first at a higher threshold to allow for cache generation, if it takes longer than this
-    # thats a problem, an uncached page should take > 10 seconds
-    - loadtimer commerceplus.acromedia.com 20000
-    - loadtimer commerceplus.acromedia.com 5000
+    # Test initial page load.
+    - commercebot --headless --url https://commerceplus.acromedia.com --timer-only 5000
+    # Test flows as well.
+    - commercebot --headless --url https://commerceplus.acromedia.com

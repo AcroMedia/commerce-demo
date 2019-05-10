@@ -82,12 +82,12 @@ build:
   script:
     # Run Composer to build site (use --no-dev for production builds).
     - composer install --no-interaction --no-dev
+    # Remove the node_modules dir to rebuld/reinstall new versions.
+    - rm -rf node_modules
     # Compile Sass from theme using npm defined in our package.
     - cd web/themes/custom/commerce_2_demo
     - npm install
     - ./node_modules/gulp/bin/gulp.js sass
-    # Remove the node_modules dir generated from npm install.
-    - rm -rf node_modules
 
 # Deploy base demo to STAGING site (AWS1).
 base-demo-to-uat:

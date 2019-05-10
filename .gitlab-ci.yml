@@ -98,6 +98,9 @@ base-demo-to-uat:
   only:
     - UAT
 
+  tags:
+    - Deploy
+
   environment:
     name: uat
     url: https://commerce-2-demo.aws1.acrobuild.com
@@ -132,6 +135,9 @@ plus-demo-to-uat:
   # add any other tags or branches you want here
   only:
     - UAT
+
+  tags:
+    - Deploy
 
   environment:
     name: uat
@@ -170,6 +176,9 @@ base-demo-to-live:
   only:
     - master
 
+  tags:
+    - DeployProduction
+
   environment:
     name: cloud4
     url: https://commercedemo.acromedia.com
@@ -182,12 +191,12 @@ base-demo-to-live:
     - eval $(ssh-agent -s)
 
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
+    - ssh-add <(echo "$DEPLOY_KEY_PRODUCTION_CLOUD4")
 
     # Add the fingerprint for the host to known hosts so we can verify it.
     # To determine the fingerprint of a host, use `ssh-keyscan -H`.
     - mkdir -p ~/.ssh
-    - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
+    - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
@@ -205,6 +214,9 @@ plus-demo-to-live:
   only:
     - master
 
+  tags:
+    - DeployProduction
+
   environment:
     name: cloud4.acromedia.com
     url: https://demoplus.cloud4.acromedia.com
@@ -217,12 +229,12 @@ plus-demo-to-live:
     - eval $(ssh-agent -s)
 
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - ssh-add <(echo "$DEPLOY_KEY_CLIENT_DEMO")
+    - ssh-add <(echo "$DEPLOY_KEY_PRODUCTION_CLOUD4")
 
     # Add the fingerprint for the host to known hosts so we can verify it.
     # To determine the fingerprint of a host, use `ssh-keyscan -H`.
     - mkdir -p ~/.ssh
-    - echo "$PRODUCTION_FINGERPRINT" >> ~/.ssh/known_hosts
+    - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/

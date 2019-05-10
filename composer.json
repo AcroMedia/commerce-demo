@@ -153,6 +153,10 @@
                 "#2770731: Add a display name to promotions":
                 "https://www.drupal.org/files/issues/2019-04-15/adjustment-label-update-2770731-51.patch"
             },
+            "drupal/commerce_pado": {
+                "#2992041: Group add on items under generic variable":
+                "https://www.drupal.org/files/issues/2018-08-29/group_add_on_items_under_generic_variable-2992041-8.patch"
+            },
             "drupal/commerce_shipping": {
                 "#2952457: Removing user's profile causes fatal error with PackerManager::packToShipments()":
                 "https://www.drupal.org/files/issues/2019-02-06/2952457-23.SHOULD-FAIL.patch"

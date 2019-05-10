@@ -6,7 +6,7 @@ This is a full __Commerce 2__ demo website built on __Drupal 8__. It has been bu
 2. So that developers can install, trial and review code and configuration.
 3. So that the community can see and discuss what Drupal Commerce includes basically out of-the-box.
 
-__NOTE:__ This is __NOT__ intended to be a base for building a new project, for that we recommend generating your own composer files yourself or use the [Commerce Kickstart](https://www.commercekickstart.com).
+__NOTE:__ This is __NOT__ intended to be a base for building a new project, for that we recommend generating your own composer files or use the [Commerce Kickstart](https://www.commercekickstart.com).
 
 ## Welcome!
 
@@ -37,7 +37,7 @@ __Requirements__
 * PHP 7.1 or higher
 * MariaDB, MSQL, or equivalent
 * Apache, NGINX, or equivalent
-* Apache Solr 5.5
+* Apache Solr 7.x
 * General knowledge on how to setup a website server and use these tools
 
 __To setup the demo__
@@ -46,19 +46,23 @@ __To setup the demo__
 3. Extract `dumps/files.tar.gz` into `web/sites/default`.
 4. Create a database and import `dumps/database.sql`.
 5. Configure your `settings.php` or `local.settings.php` to use the newly created database.
-6. Setup Apache Solr cores for the site to use - one for product search and one for the Point of Sale search (use Solr 5.x).
+6. Setup Apache Solr cores for the site to use - one for product search and one for the Point of Sale search (use Solr 7.x).
 7. Get your hosting setup (local or otherwise). The web root is `/web`.
 8. View the site!
 9. Login with username and password as `demoadmin`.
-    - NOTE: demoadmin does have some restrictions. If you'd prefer to login as a full admin, use Drush from the `/web` root to get a one-time admin login. Drush 9.0 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
-10. Enter your Solr core within ‘Configure Standard Solr Connector’ at `yoursite.com/admin/config/search/search-api/server/solr_5/edit`.
-11. Reindex the products at `yoursite.com/admin/config/search/search-api/index/products`.
+    - NOTE: demoadmin does have some restrictions. If you'd prefer to login as a full admin, use Drush from the `/web` root to get a one-time admin login. Drush 9 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
+10. Enter your Solr cores within ‘Configure Standard Solr Connector’ at `yoursite.com/admin/config/search/search-api`.
+11. Reindex the product and point of sale indexes.
+12. Update site and store email addresses entered in the following locations:
+  - Site: `yoursite.com/admin/config/system/site-information`
+  - Stores (each store): `yoursite.com/admin/commerce/config/stores`
+  - Order types (each type): `yoursite.com/admin/commerce/config/order-types`
 
 ## Issues
 
 ### Bugs
 
-If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/commerce-demo/issues). We’ll do our best to keep on top of things.
+If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/commerce-demo/issues). We’ll do our best to keep on top of things. Any bugs found for specific modules should be directed to that modules issue queue on Drupal.org.
 
 ### Demo setup
 
@@ -69,6 +73,7 @@ Please note, our team is busy completing service work for clients, and thus, we 
 * Flush caches (i.e. through Drupal UI or run `../vendor/drush/drush/drush cr` from within `/web`)
 * Update entities (i.e. run `../vendor/drush/drush/drush entup` from within `/web`)
 * Update database (i.e. run `../vendor/drush/drush/drush updb` from within `/web`)
+* Solr server can be reached and indexes have been rebuilt?
 
 If those don’t help, Google the issue or submit an issue to our issue queue. Google will probably be your best friend :)
 

@@ -26,6 +26,7 @@ function createAutocompleteDataset(options) {
     source: source,
     templates: templates,
     displayKey: 'value',
-    name: 'places'
+    name: 'places',
+    cache: false
   };
 }

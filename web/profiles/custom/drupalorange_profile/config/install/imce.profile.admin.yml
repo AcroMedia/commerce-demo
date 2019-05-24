@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+id: admin
+label: 'Admin profile'
+description: 'Configuration for site administrators'
+conf:
+  extensions: 'jpg png gif pdf txt doc xls'
+  maxsize: !!float 30
+  quota: !!float 0
+  maxwidth: 0
+  maxheight: 0
+  replace: 0
+  folders:
+    -
+      path: .
+      permissions:
+        all: true

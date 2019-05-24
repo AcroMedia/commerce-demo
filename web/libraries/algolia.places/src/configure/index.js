@@ -43,7 +43,7 @@ var extractParams = function extractParams(_ref) {
     extracted.aroundLatLngViaIP = aroundLatLngViaIP;
   }
 
-  return Object.assign(extracted, {
+  return _objectSpread({}, extracted, {
     aroundRadius: aroundRadius,
     insideBoundingBox: insideBoundingBox,
     insidePolygon: insidePolygon,

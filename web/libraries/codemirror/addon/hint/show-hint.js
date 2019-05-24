@@ -46,6 +46,10 @@
     completion.update(true);
   });
 
+  CodeMirror.defineExtension("closeHint", function() {
+    if (this.state.completionActive) this.state.completionActive.close()
+  })
+
   function Completion(cm, options) {
     this.cm = cm;
     this.options = options;
@@ -163,6 +167,14 @@
       Tab: handle.pick,
       Esc: handle.close
     };
+
+    var mac = /Mac/.test(navigator.platform);
+
+    if (mac) {
+      baseMap["Ctrl-P"] = function() {handle.moveFocus(-1);};
+      baseMap["Ctrl-N"] = function() {handle.moveFocus(1);};
+    }
+
     var custom = completion.options.customKeys;
     var ourMap = custom ? {} : baseMap;
     function addBinding(key, val) {

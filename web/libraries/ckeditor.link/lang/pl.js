@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'pl', {
@@ -12,7 +12,7 @@ CKEDITOR.plugins.setLang( 'link', 'pl', {
 		menu: 'Właściwości kotwicy',
 		title: 'Właściwości kotwicy',
 		name: 'Nazwa kotwicy',
-		errorName: 'Wpisz nazwę kotwicy',
+		errorName: 'Podaj nazwę kotwicy.',
 		remove: 'Usuń kotwicę'
 	},
 	anchorId: 'Wg identyfikatora',
@@ -33,9 +33,11 @@ CKEDITOR.plugins.setLang( 'link', 'pl', {
 	menu: 'Edytuj odnośnik',
 	name: 'Nazwa',
 	noAnchors: '(W dokumencie nie zdefiniowano żadnych kotwic)',
-	noEmail: 'Podaj adres e-mail',
-	noUrl: 'Podaj adres URL',
+	noEmail: 'Podaj adres e-mail.',
+	noUrl: 'Podaj adres URL.',
+	noTel: 'Podaj numer telefonu.',
 	other: '<inny>',
+	phoneNumber: 'Numer telefonu',
 	popupDependent: 'Okno zależne (Netscape)',
 	popupFeatures: 'Właściwości wyskakującego okna',
 	popupFullScreen: 'Pełny ekran (IE)',
@@ -60,6 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'pl', {
 	toAnchor: 'Odnośnik wewnątrz strony (kotwica)',
 	toEmail: 'Adres e-mail',
 	toUrl: 'Adres URL',
+	toPhone: 'Telefon',
 	toolbar: 'Wstaw/edytuj odnośnik',
 	type: 'Typ odnośnika',
 	unlink: 'Usuń odnośnik',

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - menu_block
+  theme:
+    - orange_starter
+_core:
+id: mainnavigation
+theme: orange_starter
+region: page_sidebar
+weight: 0
+provider: null
+plugin: 'menu_block:main'
+settings:
+  id: 'menu_block:main'
+  label: 'Main Nav - Sub Nav'
+  provider: menu_block
+  label_display: '0'
+  level: 2
+  depth: 0
+  expand: 0
+  parent: 'main:'
+  suggestion: main
+visibility: {  }

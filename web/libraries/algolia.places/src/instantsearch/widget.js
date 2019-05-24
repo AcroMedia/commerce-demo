@@ -128,7 +128,8 @@ function () {
       }
 
       if (searchParameters.aroundLatLng === undefined && !this.query) {
-        var newUiState = Object.assign({}, uiState);
+        var newUiState = _objectSpread({}, uiState);
+
         delete newUiState.places;
         return newUiState;
       }

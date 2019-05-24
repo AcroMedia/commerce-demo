@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'lv', {
@@ -35,7 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'lv', {
 	noAnchors: '(Šajā dokumentā nav iezīmju)',
 	noEmail: 'Lūdzu norādi e-pasta adresi',
 	noUrl: 'Lūdzu norādi hipersaiti',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<cits>',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Atkarīgs (Netscape)',
 	popupFeatures: 'Uznirstošā loga nosaukums īpašības',
 	popupFullScreen: 'Pilnā ekrānā (IE)',
@@ -60,6 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'lv', {
 	toAnchor: 'Iezīme šajā lapā',
 	toEmail: 'E-pasts',
 	toUrl: 'Adrese',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Ievietot/Labot hipersaiti',
 	type: 'Hipersaites tips',
 	unlink: 'Noņemt hipersaiti',

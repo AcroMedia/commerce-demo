@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.listing
+    - field.field.node.blog_post.body
+    - field.field.node.blog_post.field_blog_category
+    - field.field.node.blog_post.field_blog_comments
+    - field.field.node.blog_post.field_blog_image
+    - field.field.node.blog_post.field_post_date
+    - node.type.blog_post
+  module:
+    - text
+    - user
+_core:
+id: node.blog_post.listing
+targetEntityType: node
+bundle: blog_post
+mode: listing
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_blog_category: true
+  field_blog_comments: true
+  field_blog_image: true
+  field_post_date: true
+  langcode: true

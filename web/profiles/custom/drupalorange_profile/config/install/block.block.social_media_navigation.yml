@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.social-media
+  module:
+    - menu_block
+  theme:
+    - orange_starter
+_core:
+id: social_media_navigation
+theme: orange_starter
+region: social_nav
+weight: 0
+provider: null
+plugin: 'menu_block:social-media'
+settings:
+  id: 'menu_block:social-media'
+  label: 'Social Media Navigation'
+  provider: menu_block
+  label_display: '0'
+  level: 1
+  depth: 1
+  expand: 0
+  parent: 'social-media:'
+  suggestion: social_media
+visibility: {  }

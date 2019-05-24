@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - menu_block
+  theme:
+    - orange_starter
+_core:
+id: footer_navigation
+theme: orange_starter
+region: footer_nav
+weight: -4
+provider: null
+plugin: 'menu_block:footer'
+settings:
+  id: 'menu_block:footer'
+  label: 'Footer Navigation'
+  provider: menu_block
+  label_display: '0'
+  level: 1
+  depth: 1
+  expand: 0
+  parent: 'footer:'
+  suggestion: footer
+visibility: {  }

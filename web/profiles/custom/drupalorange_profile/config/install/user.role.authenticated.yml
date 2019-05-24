@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access cart'
+  - 'access checkout'
+  - 'access comments'
+  - 'access content'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - 'post comments'
+  - 'search content'
+  - 'skip comment approval'
+  - 'use text format html'
+  - userprotect.account.edit
+  - userprotect.mail.edit
+  - userprotect.pass.edit

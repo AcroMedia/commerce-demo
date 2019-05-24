@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - orange_starter
+_core:
+id: pagetitle
+theme: orange_starter
+region: content
+weight: -1
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

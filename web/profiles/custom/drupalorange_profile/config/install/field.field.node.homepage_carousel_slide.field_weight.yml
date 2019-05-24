@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weight
+    - node.type.homepage_carousel_slide
+_core:
+id: node.homepage_carousel_slide.field_weight
+field_name: field_weight
+entity_type: node
+bundle: homepage_carousel_slide
+label: Weight
+description: 'The weight/order for this item. Items that weigh less (lower number) appear first, while items that weigh more (higher number) appear last.'
+required: true
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

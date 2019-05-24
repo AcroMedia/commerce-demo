@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.blog_post
+_core:
+id: node.blog_post
+target_entity_type_id: node
+target_bundle: blog_post
+default_langcode: site_default
+language_alterable: false

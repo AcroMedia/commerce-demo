@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.cta_homepage
+  module:
+    - text
+_core:
+id: node.cta_homepage.body
+field_name: body
+entity_type: node
+bundle: cta_homepage
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

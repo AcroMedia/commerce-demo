@@ -1,0 +1,10 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - comment
+_core:
+id: comment.full
+label: 'Full comment'
+targetEntityType: comment
+cache: true

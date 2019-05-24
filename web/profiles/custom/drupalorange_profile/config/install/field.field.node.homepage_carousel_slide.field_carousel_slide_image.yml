@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_carousel_slide_image
+    - node.type.homepage_carousel_slide
+  module:
+    - image
+_core:
+id: node.homepage_carousel_slide.field_carousel_slide_image
+field_name: field_carousel_slide_image
+entity_type: node
+bundle: homepage_carousel_slide
+label: 'Carousel Slide Image'
+description: 'The image that will be used as a background for this slide.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: homepage_carousel
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

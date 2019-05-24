@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: carousel_slides
+label: 'Carousel Slides'
+type: 'canonical_entities:node'
+pattern: 'carousel-slides/[node:title]'
+selection_criteria:
+  a9c56ff1-31b0-4395-afcb-1278f0a7c0b7:
+    id: node_type
+    bundles:
+      homepage_carousel_slide: homepage_carousel_slide
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a9c56ff1-31b0-4395-afcb-1278f0a7c0b7
+selection_logic: and
+weight: -9
+relationships: {  }

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+id: footer
+label: 'Footer Navigation'
+description: 'Site information links'
+locked: true

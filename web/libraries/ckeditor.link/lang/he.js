@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'he', {
@@ -35,7 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'he', {
 	noAnchors: '(אין עוגנים זמינים בדף)',
 	noEmail: 'יש להקליד את כתובת הדוא"ל',
 	noUrl: 'יש להקליד את כתובת הקישור (URL)',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<אחר>',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'תלוי (Netscape)',
 	popupFeatures: 'תכונות החלון הקופץ',
 	popupFullScreen: 'מסך מלא (IE)',
@@ -60,6 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'he', {
 	toAnchor: 'עוגן בעמוד זה',
 	toEmail: 'דוא"ל',
 	toUrl: 'כתובת (URL)',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'הוספת/עריכת קישור',
 	type: 'סוג קישור',
 	unlink: 'הסרת הקישור',

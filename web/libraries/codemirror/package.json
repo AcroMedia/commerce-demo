@@ -1,28 +1,28 @@
 {
-  "_from": "codemirror@5.42.0",
-  "_id": "codemirror@5.42.0",
+  "_from": "codemirror@5.44.0",
+  "_id": "codemirror@5.44.0",
   "_inBundle": false,
-  "_integrity": "sha512-pbApC8zDzItP3HRphD6kQVwS976qB5Qi0hU3MZMixLk+AyugOW1RF+8XJEjeyl5yWsHNe88tDUxzeRh5AOxPRw==",
+  "_integrity": "sha512-3l42syTNakCdCQuYeZJXTyxina6Y9i4V0ighSJXNCQtRbaCN76smKKLu1ZHPHQon3rnzC7l4i/0r4gp809K1wg==",
   "_location": "/codemirror",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "codemirror@5.42.0",
+    "raw": "codemirror@5.44.0",
     "name": "codemirror",
     "escapedName": "codemirror",
-    "rawSpec": "5.42.0",
+    "rawSpec": "5.44.0",
     "saveSpec": null,
-    "fetchSpec": "5.42.0"
+    "fetchSpec": "5.44.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.42.0.tgz",
-  "_shasum": "2d5b640ed009e89dee9ed8a2a778e2a25b65f9eb",
-  "_spec": "codemirror@5.42.0",
-  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.pN2XPNcK",
+  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.44.0.tgz",
+  "_shasum": "80dc2a231eeb7aab25ec2405cdca37e693ccf9cc",
+  "_spec": "codemirror@5.44.0",
+  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.nfNtHMBE",
   "author": {
     "name": "Marijn Haverbeke",
     "email": "marijnh@gmail.com",
@@ -439,6 +439,9 @@
       "name": "Cheah Chu Yeow"
     },
     {
+      "name": "Chhekur"
+    },
+    {
       "name": "Chris Colborne"
     },
     {
@@ -488,6 +491,9 @@
     },
     {
       "name": "Christopher Pfohl"
+    },
+    {
+      "name": "Christopher Wallis"
     },
     {
       "name": "Chunliang Lyu"
@@ -769,7 +775,14 @@
       "name": "Frank Wiegand"
     },
     {
+      "name": "fraxx001"
+    },
+    {
       "name": "Fredrik Borg"
+    },
+    {
+      "name": "FUJI Goro",
+      "url": "gfx"
     },
     {
       "name": "Gabriel Gheorghian"
@@ -809,6 +822,9 @@
     },
     {
       "name": "Gergely Hegykozi"
+    },
+    {
+      "name": "Germain Chazot"
     },
     {
       "name": "Giovanni Calò"
@@ -1027,6 +1043,9 @@
       "name": "Jason Grout"
     },
     {
+      "name": "Jason Heeris"
+    },
+    {
       "name": "Jason Johnston"
     },
     {
@@ -1089,6 +1108,9 @@
     },
     {
       "name": "joelpinheiro"
+    },
+    {
+      "name": "joewalsh"
     },
     {
       "name": "Johan Ask"
@@ -1166,6 +1188,9 @@
       "name": "jots"
     },
     {
+      "name": "Joy Zhong"
+    },
+    {
       "name": "jsoojeon"
     },
     {
@@ -1209,6 +1234,9 @@
     },
     {
       "name": "Kazuhito Hokamura"
+    },
+    {
+      "name": "Kenan Christian Dimas"
     },
     {
       "name": "Ken Newman"
@@ -1269,6 +1297,9 @@
     },
     {
       "name": "KyleMcNutt"
+    },
+    {
+      "name": "LaKing"
     },
     {
       "name": "Lanfei"
@@ -1541,6 +1572,9 @@
       "name": "Michael Lehenbauer"
     },
     {
+      "name": "Michael Wadman"
+    },
+    {
       "name": "Michael Walker"
     },
     {
@@ -1682,6 +1716,9 @@
     },
     {
       "name": "Nick Small"
+    },
+    {
+      "name": "Nicolas Chevobbe"
     },
     {
       "name": "Nicolas Kick"
@@ -1921,6 +1958,9 @@
       "name": "Robert Crossfield"
     },
     {
+      "name": "Robert Martin"
+    },
+    {
       "name": "Roberto Abdelkader Martínez Pérez"
     },
     {
@@ -2120,6 +2160,9 @@
     },
     {
       "name": "stoskov"
+    },
+    {
+      "name": "Stryder Crown"
     },
     {
       "name": "Stu Kennedy"
@@ -2341,6 +2384,9 @@
       "name": "YNH Webdev"
     },
     {
+      "name": "yoongu"
+    },
+    {
       "name": "Yunchi Luo"
     },
     {
@@ -2410,5 +2456,5 @@
     "watch": "rollup -w -c"
   },
   "style": "lib/codemirror.css",
-  "version": "5.42.0"
+  "version": "5.44.0"
 }

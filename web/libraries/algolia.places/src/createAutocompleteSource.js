@@ -80,11 +80,14 @@ function createAutocompleteSource(_ref) {
   }
 
   function searcher(query, cb) {
-    var searchParams = Object.assign({}, params, userCoords && {
-      aroundLatLng: userCoords
-    }, {
+    var searchParams = _objectSpread({}, params, {
       query: query
     });
+
+    if (userCoords) {
+      searchParams.aroundLatLng = userCoords;
+    }
+
     return placesClient.search(controls.computeQueryParams(searchParams)).then(function (content) {
       var hits = content.hits.map(function (hit, hitIndex) {
         return (0, _formatHit.default)({

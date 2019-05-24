@@ -1,9 +1,9 @@
 /*!
 * jquery.inputmask.bundle.js
 * https://github.com/RobinHerbots/Inputmask
-* Copyright (c) 2010 - 2018 Robin Herbots
+* Copyright (c) 2010 - 2019 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 4.0.4
+* Version: 4.0.6
 */
 
 (function(modules) {
@@ -1768,7 +1768,7 @@
             }
             function HandleNativePlaceholder(npt, value) {
                 if (ie) {
-                    if (npt.inputmask._valueGet() !== value) {
+                    if (npt.inputmask._valueGet() !== value && (npt.placeholder !== value || npt.placeholder === "")) {
                         var buffer = getBuffer().slice(), nptValue = npt.inputmask._valueGet();
                         if (nptValue !== value) {
                             var lvp = getLastValidPosition();
@@ -3009,15 +3009,14 @@
             } ],
             hhh: [ "[0-9]+", Date.prototype.setHours, "hours", Date.prototype.getHours ],
             H: [ "1?[0-9]|2[0-3]", Date.prototype.setHours, "hours", Date.prototype.getHours ],
-            HH: [ "[01][0-9]|2[0-3]", Date.prototype.setHours, "hours", function() {
+            HH: [ "0[0-9]|1[0-9]|2[0-3]", Date.prototype.setHours, "hours", function() {
                 return pad(Date.prototype.getHours.call(this), 2);
             } ],
             HHH: [ "[0-9]+", Date.prototype.setHours, "hours", Date.prototype.getHours ],
             M: [ "[1-5]?[0-9]", Date.prototype.setMinutes, "minutes", Date.prototype.getMinutes ],
-            MM: [ "[0-5][0-9]", Date.prototype.setMinutes, "minutes", function() {
+            MM: [ "0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]", Date.prototype.setMinutes, "minutes", function() {
                 return pad(Date.prototype.getMinutes.call(this), 2);
             } ],
-            s: [ "[1-5]?[0-9]", Date.prototype.setSeconds, "seconds", Date.prototype.getSeconds ],
             ss: [ "[0-5][0-9]", Date.prototype.setSeconds, "seconds", function() {
                 return pad(Date.prototype.getSeconds.call(this), 2);
             } ],

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65370694b325201cab0732f8d342ecf5",
+    "content-hash": "28b4b850384e9f4b5e0be7d76b2286a0",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -4951,147 +4951,6 @@
             "support": {
                 "source": "https://git.drupal.org/project/google_analytics.git",
                 "issues": "https://www.drupal.org/project/issues/google_analytics"
-            }
-        },
-        {
-            "name": "drupal/google_analytics_reports",
-            "version": "3.0.0-beta2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/google_analytics_reports.git",
-                "reference": "8.x-3.0-beta2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/google_analytics_reports-8.x-3.0-beta2.zip",
-                "reference": "8.x-3.0-beta2",
-                "shasum": "51635f28abd80f462baced969d45629c041ea53c"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/google_analytics_reports_api": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-3.0-beta2",
-                    "datestamp": "1550686146",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Mohammed J. Razem",
-                    "homepage": "https://www.drupal.org/user/255384"
-                },
-                {
-                    "name": "Plazik",
-                    "homepage": "https://www.drupal.org/user/982724"
-                },
-                {
-                    "name": "RajabNatshah",
-                    "homepage": "https://www.drupal.org/user/1414312"
-                },
-                {
-                    "name": "grendzy",
-                    "homepage": "https://www.drupal.org/user/96647"
-                },
-                {
-                    "name": "jantoine",
-                    "homepage": "https://www.drupal.org/user/192192"
-                },
-                {
-                    "name": "jkitching",
-                    "homepage": "https://www.drupal.org/user/159067"
-                },
-                {
-                    "name": "jojonaloha",
-                    "homepage": "https://www.drupal.org/user/1579186"
-                },
-                {
-                    "name": "raspberryman",
-                    "homepage": "https://www.drupal.org/user/71464"
-                }
-            ],
-            "description": "Display statistics from Google Analytics using Views.",
-            "homepage": "https://www.drupal.org/project/google_analytics_reports",
-            "support": {
-                "source": "https://git.drupalcode.org/project/google_analytics_reports"
-            }
-        },
-        {
-            "name": "drupal/google_analytics_reports_api",
-            "version": "3.0.0-beta2",
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/google_analytics_reports": "self.version"
-            },
-            "type": "metapackage",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-3.0-beta2",
-                    "datestamp": "1550686146",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Mohammed J. Razem",
-                    "homepage": "https://www.drupal.org/user/255384"
-                },
-                {
-                    "name": "Plazik",
-                    "homepage": "https://www.drupal.org/user/982724"
-                },
-                {
-                    "name": "RajabNatshah",
-                    "homepage": "https://www.drupal.org/user/1414312"
-                },
-                {
-                    "name": "grendzy",
-                    "homepage": "https://www.drupal.org/user/96647"
-                },
-                {
-                    "name": "jantoine",
-                    "homepage": "https://www.drupal.org/user/192192"
-                },
-                {
-                    "name": "jkitching",
-                    "homepage": "https://www.drupal.org/user/159067"
-                },
-                {
-                    "name": "jojonaloha",
-                    "homepage": "https://www.drupal.org/user/1579186"
-                },
-                {
-                    "name": "raspberryman",
-                    "homepage": "https://www.drupal.org/user/71464"
-                }
-            ],
-            "description": "API to access statistics from the <a href=\"https://developers.google.com/analytics/devguides/reporting/core/v3/\">Google Analytics Core Reporting API</a>.",
-            "homepage": "https://www.drupal.org/project/google_analytics_reports",
-            "support": {
-                "source": "https://git.drupalcode.org/project/google_analytics_reports"
             }
         },
         {
@@ -13736,7 +13595,6 @@
         "drupal/commerce_recurring": 10,
         "drupal/commerce_shipping": 20,
         "drupal/config_inspector": 20,
-        "drupal/google_analytics_reports": 10,
         "drupal/physical": 5,
         "drupal/purge": 10,
         "drupal/swiftmailer": 20,

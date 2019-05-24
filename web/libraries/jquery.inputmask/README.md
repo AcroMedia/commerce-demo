@@ -1,6 +1,6 @@
 # Inputmask
 
-Copyright (c) 2010 - 2018 Robin Herbots Licensed under the MIT license ([http://opensource.org/licenses/mit-license.php](http://opensource.org/licenses/mit-license.php))
+Copyright (c) 2010 - 2019 Robin Herbots Licensed under the MIT license ([http://opensource.org/licenses/mit-license.php](http://opensource.org/licenses/mit-license.php))
 
 [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZNR3EB6JTMMSS)
 
@@ -43,6 +43,8 @@ You can choose between:
 - inputmask.dependencyLib.jquery
 - inputmask.dependencyLib.jqlite
 - .... (others are welcome)
+
+**Warning**: Using any dependency library that relies on the `CustomEvent` object or the `document.createEvent` DOM API will have issues with updating values in disabled inputs, in Firefox 64 and older. This is caused by [an old Firefox bug](https://bugzilla.mozilla.org/show_bug.cgi?id=329509), that has been fixed in Firefox 65. Currently, this means that `inputmask.dependencyLib` and `inputmask.dependencyLib.jqlite` are affected by this bug. See #2045 for more details.
 
 ### Classic web with <script\> tag
 Include the js-files which you can find in the `dist` folder.
@@ -1114,6 +1116,13 @@ Specify to use the data-inputmask attributes or to ignore them.
 
 If you don't use data attributes you can disable the import by specifying importDataAttributes: false.
 
+
+Default: true
+
+### shiftPositions
+Shift position of the mask entries on entry and deletion.
+In some cases shift the mask enties isn't desired.  
+Ex. date masks.  Shifting month to day makes no sense
 
 Default: true
 

@@ -1,5 +1,40 @@
 # Change Log
 
+## [4.0.6 - 2019-01-09]
+### Fixed
+Original placeholder disappear when mouseout in IE #2047
+
+## [4.0.5 - 2018-12-21]
+### Fixed
+Behaviour of v3 with hours not possible anymore #1918
+
+## [4.0.4 - 2018-12-03]
+### Addition
+- add url as supported input type
+
+### Updates
+- rework jit enabled quantifiers
+
+### Fixed
+- restore greedy functionality
+- fix focus and mouseenter behavior in IE
+
+## [4.0.3 - 2018-11-07]
+
+### Addition
+- numeric.extensions - add inputType option to specify the type of initial value
+- README_numeric.md => Setting initial values
+
+### Updates
+- fix window.js for node
+
+### Fixed
+- digits: 3 - error on transform #2022
+- "Can not read property 'join' of undefined" when using Inputmask.format #2019
+- Inputmask numeric does no round up when digits is 0 #2018
+- Strange Calendar popup issue in IE Only when used with Daterangepicker #1965
+- incorrect work min max date - #2011, #2013
+
 ## [4.0.2 - 2018-09-14]
 
 (4.0.1 => 4.0.2 rebuild dist with newer version of uglify #2000)
@@ -24,7 +59,7 @@
 - Autofill corrupts input on email mask #1908(gl)
 
 ## [4.0.0 - 2018-05-26]
-### added
+### Addition
 - add support for beforeInput event with inputType (Input Events Level 2 - https://w3c.github.io/input-events/)
 - extend positionCaretOnClick with "ignore" to ignore the click in the input
 - jit enabled dynamic masks
@@ -90,8 +125,8 @@ while there are already many enhancements available.
 - Can't input character at the end if it's also a placeholder on Android #1648
 
 ## [3.3.8 - 2017-08-24]
-### added
-- added \uFF11-\uFF19 character range to 9 definition #1606
+### Addition
+- Addition \uFF11-\uFF19 character range to 9 definition #1606
 - importDataAttributes option #1633
 - add dot support in regex #1651
 
@@ -114,7 +149,7 @@ while there are already many enhancements available.
 - Cannot delete after fill up all the mask Android Chrome browser Jsfiddle #1637
 
 ## [3.3.7 - 2017-06-09]
-### added
+### Addition
 - allow custom operation in casing option by callback #1565
 
 ### Updates
@@ -132,7 +167,7 @@ while there are already many enhancements available.
 - ndxInitializer.shift is not a function
 
 ## [3.3.6 - 2017-05-11]
-### added
+### Addition
 - noValuePatching option #1276
 
 ### Updates
@@ -153,7 +188,7 @@ while there are already many enhancements available.
 - 29 february of non leap-year #1567
 
 ## [3.3.5 - 2017-04-10]
-### Added
+### Addition
 - add example webpack setup (thx to Kevin Suen)
 - build-in regex support without extension (WIP)
 
@@ -186,7 +221,7 @@ while there are already many enhancements available.
 - Form can`t submitted with input[name=disabled] #1473
 
 ## [3.3.4 - 2016-12-22]
-### Added
+### Addition
 - extra extension points: analyseMask
 - colorMask option ~ css styleable mask
 
@@ -233,7 +268,7 @@ while there are already many enhancements available.
 
 ## [3.3.2 - 2016-09-09]
 
-### Added
+### Addition
 - mask-level casing => #1352
 - 'casing': 'title' #1277
 - add quantifier syntax for digits option in numeric alias. #1374
@@ -283,7 +318,7 @@ while there are already many enhancements available.
 
 ## [3.3.0] - 2016-04-05
 
-### Added
+### Addition
 - nullable option => switch to return the placeholder or null when nothing is entered
 - VIN mask #1199
 
@@ -345,7 +380,7 @@ while there are already many enhancements available.
 - fixed "valids is not defined" error #1166
 
 ## [3.2.6] - 2016-01-25
-### Added
+### Addition
 - add jitMasking option
 - supportsInputType option
 - staticDefinitionSymbol (see readme)
@@ -409,7 +444,7 @@ while there are already many enhancements available.
 
 ## [3.2.3] - 2015-11-09
 
-### Added
+### Addition
 - Inputmask.remove
 - inputmask.binding => automated inputmask binding for html attributes
 - Add tooltip option
@@ -438,7 +473,7 @@ while there are already many enhancements available.
 
 ## [3.2.1] - 2015-10-07
 
-### Added
+### Addition
 - inputmask.dependencyLib.jquery
 - inputmask.dependencyLib.jqlite
 
@@ -464,7 +499,7 @@ while there are already many enhancements available.
 
 ## [3.2.0] - 2015-09-04
 
-### Added
+### Addition
 - add option command to set and retrieve options on an inputmask
 - dependencyLib wrapper around needed jQuery functionality
 - mac address alias #986
@@ -536,7 +571,7 @@ while there are already many enhancements available.
 - Script looping start when add '.' between decimal values #870 ('.' part)
 
 ## [3.1.63] - 2015-05-04
-### Added
+### Addition
 - Support for CommonJS (Browserify)
 
 ### Updates
@@ -558,7 +593,7 @@ while there are already many enhancements available.
 - Phone extention backspace problem #454
 
 ## [3.1.62] - 2015-03-26
-### Added
+### Addition
 - Numeric alias: add unmaskAsNumber option
 - import russian phone codes from inputmask-multi
 - enable masking the text content in a div

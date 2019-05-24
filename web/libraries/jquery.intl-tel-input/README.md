@@ -96,11 +96,15 @@ Automatically format the number as the user types. Unfortunately this had to be 
 
 **autoHideDialCode**  
 Type: `Boolean` Default: `true`  
-If there is just a dial code in the input: remove it on blur or submit, and re-add it on focus. This is to prevent just a dial code getting submitted with the form. Requires `nationalMode` to be set to `false`.
+If there is just a dial code in the input: remove it on blur or submit. This is to prevent just a dial code getting submitted with the form. Requires `nationalMode` to be set to `false`.
 
 **autoPlaceholder**  
 Type: `String` Default: `"polite"`  
 Set the input's placeholder to an example number for the selected country, and update it if the country changes. You can specify the number type using the `placeholderNumberType` option. By default it is set to `"polite"`, which means it will only set the placeholder if the input doesn't already have one. You can also set it to `"aggressive"`, which will replace any existing placeholder, or `"off"`. Requires the `utilsScript` option.
+
+**customContainer**  
+Type: `String` Default: `""`  
+Additional classes to add to the parent div.
 
 **customPlaceholder**  
 Type: `Function` Default: `null`  
@@ -299,6 +303,14 @@ Returns an array of country objects:
 }, ...]
 ```
 
+**getInstance**  
+After initialising the plugin, you can always access the instance again using this method, by just passing in the relevant input element.
+```js
+var input = document.querySelector('#phone');
+var iti = window.intlTelInputGlobals.getInstance(input);
+iti.isValidNumber(); // etc
+```
+
 **loadUtils**  
 _Note: this is only needed if you're lazy loading the plugin script itself (intlTelInput.js). If not then just use the `utilsScript` option._  
 Load the utils.js script (included in the lib directory) to enable formatting/validation etc. See [Utilities Script](#utilities-script) for more information. This method should only be called once per page. If the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) object is defined, one of those is returned so you can use `.then(callback)` to know when it's finished.
@@ -396,6 +408,6 @@ See the [contributing guide](https://github.com/jackocnr/intl-tel-input/blob/mas
 * Typescript type definitions are available in the [DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/intl-tel-input/intl-tel-input.d.ts) (more info [here](https://github.com/jackocnr/intl-tel-input/issues/433#issuecomment-228517623))
 
 <a href="https://www.browserstack.com">
-<img src="https://p3.zdusercontent.com/attachment/1015988/y0Sl6KKaxGxel8uLLhHApi2qm?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..hoHbaGv1_jq5R6TNcCFGIA.473ykDjNHc14lsbZiXZGif42ZDHhoPJNqdfU8b-ihD4tLIuUViVWg5946CdM3HN8K6OIBhLLRtLNlgqFo7a33Yqm7QPvWpOnVJMlAlqF_Po_UVift60eQWwCjjPgd9G8qML_yu5SqBJM6e5RrqmKHz6DBHD-w_VlmNyjNNi9ELmBH3rE-ukofrhD38UFvsSUVkMX_J7CpW7qhw63VWuMaDETGnL2Udd2tMoe512agY17jbY74WtA20VgfljcnZuvzdYu0_CLPnd54_mUs2_UxefRQ1Nhp1L24Dacf6BdUVc.dPdKrHesuyEMEjCWAC5cTA" width="200px"></a>
+<img src="https://p14.zdusercontent.com/attachment/1015988/y0Sl6KKaxGxel8uLLhHApi2qm?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tN0cDNWdP3tkoP03Sgjf9w.knp9cYYPDLOhhv5TEVpfKc86Ymt8a4FI72PrLSflve3XuXraQhMASa6acCMZpxdJytHHR68IKeY8uHvll1mv6YgcTojspO80PL1TywO2nOW8rENDqn_cfiR0ezRgzvQe_8iLEMya-oJYIAzW7i1-5wkgz27Qw0o2BaBJtBy-sVtriApV2gwAz7cB5yNQ2ZzKGcZKhBfdwsUVpGfOr17jGQtJ4L7QVP2rnuvYXcKZ5qCiIO4hGo66fSPoCH2vLhAAY8Cj1OdBPOt9RoN2fJFWgwDzNKaz3hL7SKep7Q-32OI.p3OapnE-H2lWYIH5lMsrmg" width="200px"></a>
 
 Tested on [BrowserStack](https://www.browserstack.com)

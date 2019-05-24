@@ -1,20 +1,21 @@
 /*!
 * dependencyLibs/inputmask.dependencyLib.jqlite.js
 * https://github.com/RobinHerbots/Inputmask
-* Copyright (c) 2010 - 2018 Robin Herbots
+* Copyright (c) 2010 - 2019 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 4.0.2
+* Version: 4.0.6
 */
 
 (function(factory) {
     if (typeof define === "function" && define.amd) {
-        define([ "jqlite", "../global/window", "../global/document" ], factory);
+        define([ "jqlite", "../global/window" ], factory);
     } else if (typeof exports === "object") {
-        module.exports = factory(require("jqlite"), require("../global/window"), require("../global/document"));
+        module.exports = factory(require("jqlite"), require("../global/window"));
     } else {
-        window.dependencyLib = factory(jqlite, window, document);
+        window.dependencyLib = factory(jqlite, window);
     }
-})(function($, window, document) {
+})(function($, window) {
+    var document = window.document;
     function indexOf(list, elem) {
         var i = 0, len = list.length;
         for (;i < len; i++) {

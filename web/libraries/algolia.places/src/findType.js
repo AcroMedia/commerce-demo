@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = findType;
+
 function findType(tags) {
   var types = {
     country: 'country',

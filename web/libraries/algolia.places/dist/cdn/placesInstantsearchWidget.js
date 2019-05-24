@@ -1,4 +1,4 @@
-/*!  1.13.0 | © Algolia | github.com/algolia/places */
+/*!  1.16.1 | © Algolia | github.com/algolia/places */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -8,7 +8,7 @@
 		exports["placesInstantsearchWidget"] = factory();
 	else
 		root["placesInstantsearchWidget"] = factory();
-})(this, function() {
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -44,18 +44,35 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -73,8 +90,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 84);
+/******/ 	return __webpack_require__(__webpack_require__.s = 79);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -84,7 +102,7 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
-var DOM = __webpack_require__(1);
+var DOM = __webpack_require__(2);
 
 function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
@@ -148,9 +166,8 @@ module.exports = {
       return result;
     }
     this.each(obj, function(val, key) {
-      result = test.call(null, val, key, obj);
-      if (!result) {
-        return false;
+      if (result) {
+        result = test.call(null, val, key, obj) && result;
       }
     });
     return !!result;
@@ -218,6 +235,96 @@ module.exports = {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var extractParams = function extractParams(_ref) {
+  var hitsPerPage = _ref.hitsPerPage,
+      aroundLatLng = _ref.aroundLatLng,
+      aroundRadius = _ref.aroundRadius,
+      aroundLatLngViaIP = _ref.aroundLatLngViaIP,
+      insideBoundingBox = _ref.insideBoundingBox,
+      insidePolygon = _ref.insidePolygon,
+      getRankingInfo = _ref.getRankingInfo,
+      countries = _ref.countries,
+      language = _ref.language,
+      type = _ref.type;
+  var extracted = {
+    countries: countries,
+    hitsPerPage: hitsPerPage || 5,
+    language: language || navigator.language.split('-')[0],
+    type: type
+  };
+
+  if (Array.isArray(countries)) {
+    extracted.countries = extracted.countries.map(function (country) {
+      return country.toLowerCase();
+    });
+  }
+
+  if (typeof extracted.language === 'string') {
+    extracted.language = extracted.language.toLowerCase();
+  }
+
+  if (aroundLatLng) {
+    extracted.aroundLatLng = aroundLatLng;
+  } else if (aroundLatLngViaIP !== undefined) {
+    extracted.aroundLatLngViaIP = aroundLatLngViaIP;
+  }
+
+  return _objectSpread({}, extracted, {
+    aroundRadius: aroundRadius,
+    insideBoundingBox: insideBoundingBox,
+    insidePolygon: insidePolygon,
+    getRankingInfo: getRankingInfo
+  });
+};
+
+var extractControls = function extractControls(_ref2) {
+  var _ref2$useDeviceLocati = _ref2.useDeviceLocation,
+      useDeviceLocation = _ref2$useDeviceLocati === void 0 ? false : _ref2$useDeviceLocati,
+      _ref2$computeQueryPar = _ref2.computeQueryParams,
+      computeQueryParams = _ref2$computeQueryPar === void 0 ? function (params) {
+    return params;
+  } : _ref2$computeQueryPar,
+      formatInputValue = _ref2.formatInputValue,
+      _ref2$onHits = _ref2.onHits,
+      onHits = _ref2$onHits === void 0 ? function () {} : _ref2$onHits,
+      _ref2$onError = _ref2.onError,
+      onError = _ref2$onError === void 0 ? function (e) {
+    throw e;
+  } : _ref2$onError,
+      onRateLimitReached = _ref2.onRateLimitReached;
+  return {
+    useDeviceLocation: useDeviceLocation,
+    computeQueryParams: computeQueryParams,
+    formatInputValue: formatInputValue,
+    onHits: onHits,
+    onError: onError,
+    onRateLimitReached: onRateLimitReached
+  };
+};
+
+var params = {};
+var controls = {};
+
+var configure = function configure(configuration) {
+  params = extractParams(_objectSpread({}, params, configuration));
+  controls = extractControls(_objectSpread({}, controls, configuration));
+  return {
+    params: params,
+    controls: controls
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (configure);
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -225,15 +332,6 @@ module.exports = {
 
 module.exports = {
   element: null
-};
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = function clone(obj) {
-  return JSON.parse(JSON.stringify(obj));
 };
 
 
@@ -269,6 +367,15 @@ module.exports = function forEach (obj, fn, ctx) {
 /* 4 */
 /***/ (function(module, exports) {
 
+module.exports = function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+};
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
 var g;
 
 // This works in non-strict mode
@@ -278,11 +385,10 @@ g = (function() {
 
 try {
 	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
+	g = g || new Function("return this")();
+} catch (e) {
 	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
+	if (typeof window === "object") g = window;
 }
 
 // g can still be undefined, but nothing to do about it...
@@ -293,523 +399,303 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
-
-/***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-// This file hosts our error definitions
-// We use custom error "types" so that we can act on them when we need it
-// e.g.: if error instanceof errors.UnparsableJSON then..
-
-var inherits = __webpack_require__(31);
-
-function AlgoliaSearchError(message, extraProperties) {
-  var forEach = __webpack_require__(3);
-
-  var error = this;
-
-  // try to get a stacktrace
-  if (typeof Error.captureStackTrace === 'function') {
-    Error.captureStackTrace(this, this.constructor);
-  } else {
-    error.stack = (new Error()).stack || 'Cannot get a stacktrace, browser is too old';
-  }
-
-  this.name = 'AlgoliaSearchError';
-  this.message = message || 'Unknown error';
-
-  if (extraProperties) {
-    forEach(extraProperties, function addToErrorObject(value, key) {
-      error[key] = value;
-    });
-  }
-}
-
-inherits(AlgoliaSearchError, Error);
-
-function createCustomError(name, message) {
-  function AlgoliaSearchCustomError() {
-    var args = Array.prototype.slice.call(arguments, 0);
-
-    // custom message not set, use default
-    if (typeof args[0] !== 'string') {
-      args.unshift(message);
-    }
-
-    AlgoliaSearchError.apply(this, args);
-    this.name = 'AlgoliaSearch' + name + 'Error';
-  }
-
-  inherits(AlgoliaSearchCustomError, AlgoliaSearchError);
-
-  return AlgoliaSearchCustomError;
-}
-
-// late exports to let various fn defs and inherits take place
-module.exports = {
-  AlgoliaSearchError: AlgoliaSearchError,
-  UnparsableJSON: createCustomError(
-    'UnparsableJSON',
-    'Could not parse the incoming response as JSON, see err.more for details'
-  ),
-  RequestTimeout: createCustomError(
-    'RequestTimeout',
-    'Request timedout before getting a response'
-  ),
-  Network: createCustomError(
-    'Network',
-    'Network issue, see err.more for details'
-  ),
-  JSONPScriptFail: createCustomError(
-    'JSONPScriptFail',
-    '<script> was loaded but did not call our provided callback'
-  ),
-  JSONPScriptError: createCustomError(
-    'JSONPScriptError',
-    '<script> unable to load due to an `error` event on it'
-  ),
-  Unknown: createCustomError(
-    'Unknown',
-    'Unknown error occured'
-  )
-};
-
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ('1.16.1');
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var foreach = __webpack_require__(3);
-
-module.exports = function map(arr, fn) {
-  var newArr = [];
-  foreach(arr, function(item, itemIndex) {
-    newArr.push(fn(item, itemIndex, arr));
-  });
-  return newArr;
-};
-
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 14 20\"><path d=\"M7 0C3.13 0 0 3.13 0 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5C5.62 9.5 4.5 8.38 4.5 7S5.62 4.5 7 4.5 9.5 5.62 9.5 7 8.38 9.5 7 9.5z\"/></svg>\n"
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * This is the web browser implementation of `debug()`.
- *
- * Expose `debug()` as the module.
- */
+"use strict";
 
-exports = module.exports = __webpack_require__(65);
-exports.log = log;
-exports.formatArgs = formatArgs;
-exports.save = save;
-exports.load = load;
-exports.useColors = useColors;
-exports.storage = 'undefined' != typeof chrome
-               && 'undefined' != typeof chrome.storage
-                  ? chrome.storage.local
-                  : localstorage();
-
-/**
- * Colors.
- */
-
-exports.colors = [
-  'lightseagreen',
-  'forestgreen',
-  'goldenrod',
-  'dodgerblue',
-  'darkorchid',
-  'crimson'
-];
-
-/**
- * Currently only WebKit-based Web Inspectors, Firefox >= v31,
- * and the Firebug extension (any Firefox version) are known
- * to support "%c" CSS customizations.
- *
- * TODO: add a `localStorage` variable to explicitly enable/disable colors
- */
-
-function useColors() {
-  // NB: In an Electron preload script, document will be defined but not fully
-  // initialized. Since we know we're in Chrome, we'll just detect this case
-  // explicitly
-  if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
-    return true;
-  }
-
-  // is webkit? http://stackoverflow.com/a/16459606/376773
-  // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
-  return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
-    // is firebug? http://stackoverflow.com/a/398120/376773
-    (typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
-    // is firefox >= v31?
-    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
-    (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
-    // double check webkit in userAgent just in case we are in a worker
-    (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+// CONCATENATED MODULE: ./src/formatInputValue.js
+function formatInputValue(_ref) {
+  var administrative = _ref.administrative,
+      city = _ref.city,
+      country = _ref.country,
+      name = _ref.name,
+      type = _ref.type;
+  var out = "".concat(name).concat(type !== 'country' && country !== undefined ? ',' : '', "\n ").concat(city ? "".concat(city, ",") : '', "\n ").concat(administrative ? "".concat(administrative, ",") : '', "\n ").concat(country ? country : '').replace(/\s*\n\s*/g, ' ').trim();
+  return out;
 }
+// EXTERNAL MODULE: ./src/icons/address.svg
+var address = __webpack_require__(7);
+var address_default = /*#__PURE__*/__webpack_require__.n(address);
 
-/**
- * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
- */
+// EXTERNAL MODULE: ./src/icons/city.svg
+var city = __webpack_require__(15);
+var city_default = /*#__PURE__*/__webpack_require__.n(city);
 
-exports.formatters.j = function(v) {
-  try {
-    return JSON.stringify(v);
-  } catch (err) {
-    return '[UnexpectedJSONParseError]: ' + err.message;
-  }
+// EXTERNAL MODULE: ./src/icons/country.svg
+var country = __webpack_require__(16);
+var country_default = /*#__PURE__*/__webpack_require__.n(country);
+
+// EXTERNAL MODULE: ./src/icons/bus.svg
+var bus = __webpack_require__(17);
+var bus_default = /*#__PURE__*/__webpack_require__.n(bus);
+
+// EXTERNAL MODULE: ./src/icons/train.svg
+var train = __webpack_require__(18);
+var train_default = /*#__PURE__*/__webpack_require__.n(train);
+
+// EXTERNAL MODULE: ./src/icons/townhall.svg
+var townhall = __webpack_require__(19);
+var townhall_default = /*#__PURE__*/__webpack_require__.n(townhall);
+
+// EXTERNAL MODULE: ./src/icons/plane.svg
+var plane = __webpack_require__(20);
+var plane_default = /*#__PURE__*/__webpack_require__.n(plane);
+
+// CONCATENATED MODULE: ./src/formatDropdownValue.js
+
+
+
+
+
+
+
+var icons = {
+  address: address_default.a,
+  city: city_default.a,
+  country: country_default.a,
+  busStop: bus_default.a,
+  trainStation: train_default.a,
+  townhall: townhall_default.a,
+  airport: plane_default.a
 };
-
-
-/**
- * Colorize log arguments if enabled.
- *
- * @api public
- */
-
-function formatArgs(args) {
-  var useColors = this.useColors;
-
-  args[0] = (useColors ? '%c' : '')
-    + this.namespace
-    + (useColors ? ' %c' : ' ')
-    + args[0]
-    + (useColors ? '%c ' : ' ')
-    + '+' + exports.humanize(this.diff);
-
-  if (!useColors) return;
-
-  var c = 'color: ' + this.color;
-  args.splice(1, 0, c, 'color: inherit')
-
-  // the final "%c" is somewhat tricky, because there could be other
-  // arguments passed either before or after the %c, so we need to
-  // figure out the correct index to insert the CSS into
-  var index = 0;
-  var lastC = 0;
-  args[0].replace(/%[a-zA-Z%]/g, function(match) {
-    if ('%%' === match) return;
-    index++;
-    if ('%c' === match) {
-      // we only are interested in the *last* %c
-      // (the user may have provided their own)
-      lastC = index;
-    }
-  });
-
-  args.splice(lastC, 0, c);
+function formatDropdownValue(_ref) {
+  var type = _ref.type,
+      highlight = _ref.highlight;
+  var name = highlight.name,
+      administrative = highlight.administrative,
+      city = highlight.city,
+      country = highlight.country;
+  var out = "<span class=\"ap-suggestion-icon\">".concat(icons[type].trim(), "</span>\n<span class=\"ap-name\">").concat(name, "</span>\n<span class=\"ap-address\">\n  ").concat([city, administrative, country].filter(function (token) {
+    return token !== undefined;
+  }).join(', '), "</span>").replace(/\s*\n\s*/g, ' ');
+  return out;
 }
+// EXTERNAL MODULE: ./src/icons/algolia.svg
+var algolia = __webpack_require__(21);
+var algolia_default = /*#__PURE__*/__webpack_require__.n(algolia);
 
-/**
- * Invokes `console.log()` when available.
- * No-op when `console.log` is not a "function".
- *
- * @api public
- */
+// EXTERNAL MODULE: ./src/icons/osm.svg
+var osm = __webpack_require__(22);
+var osm_default = /*#__PURE__*/__webpack_require__.n(osm);
 
-function log() {
-  // this hackery is required for IE8/9, where
-  // the `console.log` function doesn't have 'apply'
-  return 'object' === typeof console
-    && console.log
-    && Function.prototype.apply.call(console.log, console, arguments);
-}
+// CONCATENATED MODULE: ./src/defaultTemplates.js
 
-/**
- * Save `namespaces`.
- *
- * @param {String} namespaces
- * @api private
- */
 
-function save(namespaces) {
-  try {
-    if (null == namespaces) {
-      exports.storage.removeItem('debug');
-    } else {
-      exports.storage.debug = namespaces;
-    }
-  } catch(e) {}
-}
 
-/**
- * Load `namespaces`.
- *
- * @return {String} returns the previously persisted debug modes
- * @api private
- */
 
-function load() {
-  var r;
-  try {
-    r = exports.storage.debug;
-  } catch(e) {}
-
-  // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-  if (!r && typeof process !== 'undefined' && 'env' in process) {
-    r = __webpack_require__.i({"NODE_ENV":"production"}).DEBUG;
-  }
-
-  return r;
-}
-
-/**
- * Enable namespaces listed in `localStorage.debug` initially.
- */
-
-exports.enable(load());
-
-/**
- * Localstorage attempts to return the localstorage.
- *
- * This is necessary because safari throws
- * when a user disables cookies/localstorage
- * and you attempt to access it.
- *
- * @return {LocalStorage}
- * @api private
- */
-
-function localstorage() {
-  try {
-    return window.localStorage;
-  } catch (e) {}
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* harmony default export */ var defaultTemplates = __webpack_exports__["a"] = ({
+  footer: "<div class=\"ap-footer\">\n  <a href=\"https://www.algolia.com/places\" title=\"Search by Algolia\" class=\"ap-footer-algolia\">".concat(algolia_default.a.trim(), "</a>\n  using <a href=\"https://community.algolia.com/places/documentation.html#license\" class=\"ap-footer-osm\" title=\"Algolia Places data \xA9 OpenStreetMap contributors\">").concat(osm_default.a.trim(), " <span>data</span></a>\n  </div>"),
+  value: formatInputValue,
+  suggestion: formatDropdownValue
+});
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
+// CONCATENATED MODULE: ./src/findCountryCode.js
+function findCountryCode(tags) {
+  for (var tagIndex = 0; tagIndex < tags.length; tagIndex++) {
+    var tag = tags[tagIndex];
+    var find = tag.match(/country\/(.*)?/);
 
-var _ = __webpack_require__(0);
-
-var css = {
-  wrapper: {
-    position: 'relative',
-    display: 'inline-block'
-  },
-  hint: {
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    borderColor: 'transparent',
-    boxShadow: 'none',
-    // #741: fix hint opacity issue on iOS
-    opacity: '1'
-  },
-  input: {
-    position: 'relative',
-    verticalAlign: 'top',
-    backgroundColor: 'transparent'
-  },
-  inputWithNoHint: {
-    position: 'relative',
-    verticalAlign: 'top'
-  },
-  dropdown: {
-    position: 'absolute',
-    top: '100%',
-    left: '0',
-    zIndex: '100',
-    display: 'none'
-  },
-  suggestions: {
-    display: 'block'
-  },
-  suggestion: {
-    whiteSpace: 'nowrap',
-    cursor: 'pointer'
-  },
-  suggestionChild: {
-    whiteSpace: 'normal'
-  },
-  ltr: {
-    left: '0',
-    right: 'auto'
-  },
-  rtl: {
-    left: 'auto',
-    right: '0'
-  },
-  defaultClasses: {
-    root: 'algolia-autocomplete',
-    prefix: 'aa',
-    noPrefix: false,
-    dropdownMenu: 'dropdown-menu',
-    input: 'input',
-    hint: 'hint',
-    suggestions: 'suggestions',
-    suggestion: 'suggestion',
-    cursor: 'cursor',
-    dataset: 'dataset',
-    empty: 'empty'
-  },
-  // will be merged with the default ones if appendTo is used
-  appendTo: {
-    wrapper: {
-      position: 'absolute',
-      zIndex: '100',
-      display: 'none'
-    },
-    input: {},
-    inputWithNoHint: {},
-    dropdown: {
-      display: 'block'
+    if (find) {
+      return find[1];
     }
   }
-};
 
-// ie specific styling
-if (_.isMsie()) {
-  // ie6-8 (and 9?) doesn't fire hover and click events for elements with
-  // transparent backgrounds, for a workaround, use 1x1 transparent gif
-  _.mixin(css.input, {
-    backgroundImage: 'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)'
+  return undefined;
+}
+// CONCATENATED MODULE: ./src/findType.js
+function findType(tags) {
+  var types = {
+    country: 'country',
+    city: 'city',
+    'amenity/bus_station': 'busStop',
+    'amenity/townhall': 'townhall',
+    'railway/station': 'trainStation',
+    'aeroway/aerodrome': 'airport',
+    'aeroway/terminal': 'airport',
+    'aeroway/gate': 'airport'
+  };
+
+  for (var t in types) {
+    if (tags.indexOf(t) !== -1) {
+      return types[t];
+    }
+  }
+
+  return 'address';
+}
+// CONCATENATED MODULE: ./src/formatHit.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return formatHit; });
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+function getBestHighlightedForm(highlightedValues) {
+  var defaultValue = highlightedValues[0].value; // collect all other matches
+
+  var bestAttributes = [];
+
+  for (var i = 1; i < highlightedValues.length; ++i) {
+    if (highlightedValues[i].matchLevel !== 'none') {
+      bestAttributes.push({
+        index: i,
+        words: highlightedValues[i].matchedWords
+      });
+    }
+  } // no matches in this attribute, retrieve first value
+
+
+  if (bestAttributes.length === 0) {
+    return defaultValue;
+  } // sort the matches by `desc(words), asc(index)`
+
+
+  bestAttributes.sort(function (a, b) {
+    if (a.words > b.words) {
+      return -1;
+    } else if (a.words < b.words) {
+      return 1;
+    }
+
+    return a.index - b.index;
+  }); // and append the best match to the first value
+
+  return bestAttributes[0].index === 0 ? "".concat(defaultValue, " (").concat(highlightedValues[bestAttributes[1].index].value, ")") : "".concat(highlightedValues[bestAttributes[0].index].value, " (").concat(defaultValue, ")");
+}
+
+function getBestPostcode(postcodes, highlightedPostcodes) {
+  var defaultValue = highlightedPostcodes[0].value; // collect all other matches
+
+  var bestAttributes = [];
+
+  for (var i = 1; i < highlightedPostcodes.length; ++i) {
+    if (highlightedPostcodes[i].matchLevel !== 'none') {
+      bestAttributes.push({
+        index: i,
+        words: highlightedPostcodes[i].matchedWords
+      });
+    }
+  } // no matches in this attribute, retrieve first value
+
+
+  if (bestAttributes.length === 0) {
+    return {
+      postcode: postcodes[0],
+      highlightedPostcode: defaultValue
+    };
+  } // sort the matches by `desc(words)`
+
+
+  bestAttributes.sort(function (a, b) {
+    if (a.words > b.words) {
+      return -1;
+    } else if (a.words < b.words) {
+      return 1;
+    }
+
+    return a.index - b.index;
   });
+  var postcode = postcodes[bestAttributes[0].index];
+  return {
+    postcode: postcode,
+    highlightedPostcode: highlightedPostcodes[bestAttributes[0].index].value
+  };
 }
 
-// ie7 and under specific styling
-if (_.isMsie() && _.isMsie() <= 7) {
-  // if someone can tell me why this is necessary to align
-  // the hint with the query in ie7, i'll send you $5 - @JakeHarding
-  _.mixin(css.input, {marginTop: '-1px'});
+function formatHit(_ref) {
+  var formatInputValue = _ref.formatInputValue,
+      hit = _ref.hit,
+      hitIndex = _ref.hitIndex,
+      query = _ref.query,
+      rawAnswer = _ref.rawAnswer;
+
+  try {
+    var name = hit.locale_names[0];
+    var country = hit.country;
+    var administrative = hit.administrative && hit.administrative[0] !== name ? hit.administrative[0] : undefined;
+    var city = hit.city && hit.city[0] !== name ? hit.city[0] : undefined;
+    var suburb = hit.suburb && hit.suburb[0] !== name ? hit.suburb[0] : undefined;
+    var county = hit.county && hit.county[0] !== name ? hit.county[0] : undefined;
+
+    var _ref2 = hit.postcode ? getBestPostcode(hit.postcode, hit._highlightResult.postcode) : {
+      postcode: undefined,
+      highlightedPostcode: undefined
+    },
+        postcode = _ref2.postcode,
+        highlightedPostcode = _ref2.highlightedPostcode;
+
+    var highlight = {
+      name: getBestHighlightedForm(hit._highlightResult.locale_names),
+      city: city ? getBestHighlightedForm(hit._highlightResult.city) : undefined,
+      administrative: administrative ? getBestHighlightedForm(hit._highlightResult.administrative) : undefined,
+      country: country ? hit._highlightResult.country.value : undefined,
+      suburb: suburb ? getBestHighlightedForm(hit._highlightResult.suburb) : undefined,
+      county: county ? getBestHighlightedForm(hit._highlightResult.county) : undefined,
+      postcode: highlightedPostcode
+    };
+    var suggestion = {
+      name: name,
+      administrative: administrative,
+      county: county,
+      city: city,
+      suburb: suburb,
+      country: country,
+      countryCode: findCountryCode(hit._tags),
+      type: findType(hit._tags),
+      latlng: {
+        lat: hit._geoloc.lat,
+        lng: hit._geoloc.lng
+      },
+      postcode: postcode,
+      postcodes: hit.postcode ? hit.postcode : undefined
+    }; // this is the value to put inside the <input value=
+
+    var value = formatInputValue(suggestion);
+    return _objectSpread({}, suggestion, {
+      highlight: highlight,
+      hit: hit,
+      hitIndex: hitIndex,
+      query: query,
+      rawAnswer: rawAnswer,
+      value: value
+    });
+  } catch (e) {
+    /* eslint-disable no-console */
+    console.error('Could not parse object', hit);
+    console.error(e);
+    /* eslint-enable no-console */
+
+    return {
+      value: 'Could not parse object'
+    };
+  }
 }
-
-module.exports = css;
-
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var immediate = __webpack_require__(68);
-var splitter = /\s+/;
-
-module.exports = {
-  onSync: onSync,
-  onAsync: onAsync,
-  off: off,
-  trigger: trigger
-};
-
-function on(method, types, cb, context) {
-  var type;
-
-  if (!cb) {
-    return this;
-  }
-
-  types = types.split(splitter);
-  cb = context ? bindContext(cb, context) : cb;
-
-  this._callbacks = this._callbacks || {};
-
-  while (type = types.shift()) {
-    this._callbacks[type] = this._callbacks[type] || {sync: [], async: []};
-    this._callbacks[type][method].push(cb);
-  }
-
-  return this;
-}
-
-function onAsync(types, cb, context) {
-  return on.call(this, 'async', types, cb, context);
-}
-
-function onSync(types, cb, context) {
-  return on.call(this, 'sync', types, cb, context);
-}
-
-function off(types) {
-  var type;
-
-  if (!this._callbacks) {
-    return this;
-  }
-
-  types = types.split(splitter);
-
-  while (type = types.shift()) {
-    delete this._callbacks[type];
-  }
-
-  return this;
-}
-
-function trigger(types) {
-  var type;
-  var callbacks;
-  var args;
-  var syncFlush;
-  var asyncFlush;
-
-  if (!this._callbacks) {
-    return this;
-  }
-
-  types = types.split(splitter);
-  args = [].slice.call(arguments, 1);
-
-  while ((type = types.shift()) && (callbacks = this._callbacks[type])) { // eslint-disable-line
-    syncFlush = getFlush(callbacks.sync, this, [type].concat(args));
-    asyncFlush = getFlush(callbacks.async, this, [type].concat(args));
-
-    if (syncFlush()) {
-      immediate(asyncFlush);
-    }
-  }
-
-  return this;
-}
-
-function getFlush(callbacks, context, args) {
-  return flush;
-
-  function flush() {
-    var cancelled;
-
-    for (var i = 0, len = callbacks.length; !cancelled && i < len; i += 1) {
-      // only cancel if the callback explicitly returns false
-      cancelled = callbacks[i].apply(context, args) === false;
-    }
-
-    return !cancelled;
-  }
-}
-
-function bindContext(fn, context) {
-  return fn.bind ?
-    fn.bind(context) :
-    function() { fn.apply(context, [].slice.call(arguments, 0)); };
-}
-
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -982,6 +868,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -995,90 +885,577 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// This file hosts our error definitions
+// We use custom error "types" so that we can act on them when we need it
+// e.g.: if error instanceof errors.UnparsableJSON then..
+
+var inherits = __webpack_require__(29);
+
+function AlgoliaSearchError(message, extraProperties) {
+  var forEach = __webpack_require__(3);
+
+  var error = this;
+
+  // try to get a stacktrace
+  if (typeof Error.captureStackTrace === 'function') {
+    Error.captureStackTrace(this, this.constructor);
+  } else {
+    error.stack = (new Error()).stack || 'Cannot get a stacktrace, browser is too old';
+  }
+
+  this.name = 'AlgoliaSearchError';
+  this.message = message || 'Unknown error';
+
+  if (extraProperties) {
+    forEach(extraProperties, function addToErrorObject(value, key) {
+      error[key] = value;
+    });
+  }
+}
+
+inherits(AlgoliaSearchError, Error);
+
+function createCustomError(name, message) {
+  function AlgoliaSearchCustomError() {
+    var args = Array.prototype.slice.call(arguments, 0);
+
+    // custom message not set, use default
+    if (typeof args[0] !== 'string') {
+      args.unshift(message);
+    }
+
+    AlgoliaSearchError.apply(this, args);
+    this.name = 'AlgoliaSearch' + name + 'Error';
+  }
+
+  inherits(AlgoliaSearchCustomError, AlgoliaSearchError);
+
+  return AlgoliaSearchCustomError;
+}
+
+// late exports to let various fn defs and inherits take place
+module.exports = {
+  AlgoliaSearchError: AlgoliaSearchError,
+  UnparsableJSON: createCustomError(
+    'UnparsableJSON',
+    'Could not parse the incoming response as JSON, see err.more for details'
+  ),
+  RequestTimeout: createCustomError(
+    'RequestTimeout',
+    'Request timedout before getting a response'
+  ),
+  Network: createCustomError(
+    'Network',
+    'Network issue, see err.more for details'
+  ),
+  JSONPScriptFail: createCustomError(
+    'JSONPScriptFail',
+    '<script> was loaded but did not call our provided callback'
+  ),
+  JSONPScriptError: createCustomError(
+    'JSONPScriptError',
+    '<script> unable to load due to an `error` event on it'
+  ),
+  Unknown: createCustomError(
+    'Unknown',
+    'Unknown error occured'
+  )
+};
+
+
+/***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 14 20\"><path d=\"M7 0C3.13 0 0 3.13 0 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5C5.62 9.5 4.5 8.38 4.5 7S5.62 4.5 7 4.5 9.5 5.62 9.5 7 8.38 9.5 7 9.5z\"/></svg>\n"
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
 
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+var foreach = __webpack_require__(3);
 
+module.exports = function map(arr, fn) {
+  var newArr = [];
+  foreach(arr, function(item, itemIndex) {
+    newArr.push(fn(item, itemIndex, arr));
+  });
+  return newArr;
+};
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = '1.13.0';
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * This is the web browser implementation of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
 
+exports = module.exports = __webpack_require__(51);
+exports.log = log;
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = 'undefined' != typeof chrome
+               && 'undefined' != typeof chrome.storage
+                  ? chrome.storage.local
+                  : localstorage();
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+/**
+ * Colors.
+ */
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+exports.colors = [
+  'lightseagreen',
+  'forestgreen',
+  'goldenrod',
+  'dodgerblue',
+  'darkorchid',
+  'crimson'
+];
 
-exports.default = createAutocompleteDataset;
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
 
-var _createAutocompleteSource = __webpack_require__(24);
+function useColors() {
+  // NB: In an Electron preload script, document will be defined but not fully
+  // initialized. Since we know we're in Chrome, we'll just detect this case
+  // explicitly
+  if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
+    return true;
+  }
 
-var _createAutocompleteSource2 = _interopRequireDefault(_createAutocompleteSource);
-
-var _defaultTemplates = __webpack_require__(25);
-
-var _defaultTemplates2 = _interopRequireDefault(_defaultTemplates);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function createAutocompleteDataset(options) {
-  var templates = _extends({}, _defaultTemplates2.default, options.templates);
-
-  var source = (0, _createAutocompleteSource2.default)(_extends({}, options, {
-    formatInputValue: templates.value,
-    templates: undefined
-  }));
-
-  return {
-    source: source,
-    templates: templates,
-    displayKey: 'value',
-    name: 'places'
-  };
+  // is webkit? http://stackoverflow.com/a/16459606/376773
+  // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+  return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
+    // is firebug? http://stackoverflow.com/a/398120/376773
+    (typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
+    // is firefox >= v31?
+    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+    (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
+    // double check webkit in userAgent just in case we are in a worker
+    (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
 }
+
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+exports.formatters.j = function(v) {
+  try {
+    return JSON.stringify(v);
+  } catch (err) {
+    return '[UnexpectedJSONParseError]: ' + err.message;
+  }
+};
+
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs(args) {
+  var useColors = this.useColors;
+
+  args[0] = (useColors ? '%c' : '')
+    + this.namespace
+    + (useColors ? ' %c' : ' ')
+    + args[0]
+    + (useColors ? '%c ' : ' ')
+    + '+' + exports.humanize(this.diff);
+
+  if (!useColors) return;
+
+  var c = 'color: ' + this.color;
+  args.splice(1, 0, c, 'color: inherit')
+
+  // the final "%c" is somewhat tricky, because there could be other
+  // arguments passed either before or after the %c, so we need to
+  // figure out the correct index to insert the CSS into
+  var index = 0;
+  var lastC = 0;
+  args[0].replace(/%[a-zA-Z%]/g, function(match) {
+    if ('%%' === match) return;
+    index++;
+    if ('%c' === match) {
+      // we only are interested in the *last* %c
+      // (the user may have provided their own)
+      lastC = index;
+    }
+  });
+
+  args.splice(lastC, 0, c);
+}
+
+/**
+ * Invokes `console.log()` when available.
+ * No-op when `console.log` is not a "function".
+ *
+ * @api public
+ */
+
+function log() {
+  // this hackery is required for IE8/9, where
+  // the `console.log` function doesn't have 'apply'
+  return 'object' === typeof console
+    && console.log
+    && Function.prototype.apply.call(console.log, console, arguments);
+}
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+
+function save(namespaces) {
+  try {
+    if (null == namespaces) {
+      exports.storage.removeItem('debug');
+    } else {
+      exports.storage.debug = namespaces;
+    }
+  } catch(e) {}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+
+function load() {
+  var r;
+  try {
+    r = exports.storage.debug;
+  } catch(e) {}
+
+  // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+  if (!r && typeof process !== 'undefined' && 'env' in process) {
+    r = process.env.DEBUG;
+  }
+
+  return r;
+}
+
+/**
+ * Enable namespaces listed in `localStorage.debug` initially.
+ */
+
+exports.enable(load());
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage() {
+  try {
+    return window.localStorage;
+  } catch (e) {}
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(10)))
 
 /***/ }),
 /* 15 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 18 19\"><path d=\"M12 9V3L9 0 6 3v2H0v14h18V9h-6zm-8 8H2v-2h2v2zm0-4H2v-2h2v2zm0-4H2V7h2v2zm6 8H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V7h2v2zm0-4H8V3h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\"/></svg>\n"
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\">\n  <path d=\"M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zM9 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L7 13v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H6V8h2c.55 0 1-.45 1-1V5h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z\"/>\n</svg>\n"
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 54.9 50.5\"><path d=\"M9.6 12.7H8.5c-2.3 0-4.1 1.9-4.1 4.1v1.1c0 2.2 1.8 4 4 4.1v21.7h-.7c-1.3 0-2.3 1-2.3 2.3h7.1c0-1.3-1-2.3-2.3-2.3h-.5V22.1c2.2-.1 4-1.9 4-4.1v-1.1c0-2.3-1.8-4.2-4.1-4.2zM46 7.6h-7.5c0-1.8-1.5-3.3-3.3-3.3h-3.6c-1.8 0-3.3 1.5-3.3 3.3H21c-2.5 0-4.6 2-4.6 4.6v26.3c0 1.7 1.3 3.1 3 3.1h.8v1.6c0 1.7 1.4 3.1 3.1 3.1 1.7 0 3-1.4 3-3.1v-1.6h14.3v1.6c0 1.7 1.4 3.1 3.1 3.1 1.7 0 3.1-1.4 3.1-3.1v-1.6h.8c1.7 0 3.1-1.4 3.1-3.1V12.2c-.2-2.5-2.2-4.6-4.7-4.6zm-27.4 4.6c0-1.3 1.1-2.4 2.4-2.4h25c1.3 0 2.4 1.1 2.4 2.4v.3c0 1.3-1.1 2.4-2.4 2.4H21c-1.3 0-2.4-1.1-2.4-2.4v-.3zM21 38c-1.5 0-2.7-1.2-2.7-2.7 0-1.5 1.2-2.7 2.7-2.7 1.5 0 2.7 1.2 2.7 2.7 0 1.5-1.2 2.7-2.7 2.7zm0-10.1c-1.3 0-2.4-1.1-2.4-2.4v-6.6c0-1.3 1.1-2.4 2.4-2.4h25c1.3 0 2.4 1.1 2.4 2.4v6.6c0 1.3-1.1 2.4-2.4 2.4H21zm24.8 10c-1.5 0-2.7-1.2-2.7-2.7 0-1.5 1.2-2.7 2.7-2.7 1.5 0 2.7 1.2 2.7 2.7 0 1.5-1.2 2.7-2.7 2.7z\"/></svg>\n"
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 15 20\">\n  <path d=\"M13.105 20l-2.366-3.354H4.26L1.907 20H0l3.297-4.787c-1.1-.177-2.196-1.287-2.194-2.642V2.68C1.1 1.28 2.317-.002 3.973 0h7.065c1.647-.002 2.863 1.28 2.86 2.676v9.895c.003 1.36-1.094 2.47-2.194 2.647L15 20h-1.895zM6.11 2h2.78c.264 0 .472-.123.472-.27v-.46c0-.147-.22-.268-.472-.27H6.11c-.252.002-.47.123-.47.27v.46c0 .146.206.27.47.27zm6.26 3.952V4.175c-.004-.74-.5-1.387-1.436-1.388H4.066c-.936 0-1.43.648-1.436 1.388v1.777c-.002.86.644 1.384 1.436 1.388h6.868c.793-.004 1.44-.528 1.436-1.388zm-8.465 5.386c-.69-.003-1.254.54-1.252 1.21-.002.673.56 1.217 1.252 1.222.697-.006 1.26-.55 1.262-1.22-.002-.672-.565-1.215-1.262-1.212zm8.42 1.21c-.005-.67-.567-1.213-1.265-1.21-.69-.003-1.253.54-1.25 1.21-.003.673.56 1.217 1.25 1.222.698-.006 1.26-.55 1.264-1.22z\"/>\n</svg>\n"
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\"><path d=\"M12 .6L2.5 6.9h18.9L12 .6zM3.8 8.2c-.7 0-1.3.6-1.3 1.3v8.8L.3 22.1c-.2.3-.3.5-.3.6 0 .6.8.6 1.3.6h21.5c.4 0 1.3 0 1.3-.6 0-.2-.1-.3-.3-.6l-2.2-3.8V9.5c0-.7-.6-1.3-1.3-1.3H3.8zm2.5 2.5c.7 0 1.1.6 1.3 1.3v7.6H5.1V12c0-.7.5-1.3 1.2-1.3zm5.7 0c.7 0 1.3.6 1.3 1.3v7.6h-2.5V12c-.1-.7.5-1.3 1.2-1.3zm5.7 0c.7 0 1.3.6 1.3 1.3v7.6h-2.5V12c-.1-.7.5-1.3 1.2-1.3z\"/></svg>\n"
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\"><path d=\"M22.9 1.1s1.3.3-4.3 6.5l.7 3.8.2-.2c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l-1.2 1.2.3 1.7.1-.1c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l-1.1 1.1c.2 1.9.3 3.6.1 4.5 0 0-1.2 1.2-1.8.5 0 0-2.3-7.7-3.8-11.1-5.9 6-6.4 5.6-6.4 5.6s1.2 3.8-.2 5.2l-2.3-4.3h.1l-4.3-2.3c1.3-1.3 5.2-.2 5.2-.2s-.5-.4 5.6-6.3C8.9 7.7 1.2 5.5 1.2 5.5c-.7-.7.5-1.8.5-1.8.9-.2 2.6-.1 4.5.1l1.1-1.1c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l1.7.3 1.2-1.2c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l-.2.2 3.8.7c6.2-5.5 6.5-4.2 6.5-4.2z\"/></svg>\n"
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"117\" height=\"17\" viewBox=\"0 0 130 19\"><g fill=\"none\" fill-rule=\"evenodd\"><g fill-rule=\"nonzero\"><path fill=\"#5468FF\" d=\"M59.399.044h13.299a2.372 2.372 0 0 1 2.377 2.364v13.234a2.372 2.372 0 0 1-2.377 2.364H59.399a2.372 2.372 0 0 1-2.377-2.364V2.403A2.368 2.368 0 0 1 59.399.044z\"/><path fill=\"#FFF\" d=\"M66.257 4.582c-2.815 0-5.1 2.272-5.1 5.078 0 2.806 2.284 5.072 5.1 5.072 2.815 0 5.1-2.272 5.1-5.078 0-2.806-2.279-5.072-5.1-5.072zm0 8.652c-1.983 0-3.593-1.602-3.593-3.574 0-1.972 1.61-3.574 3.593-3.574 1.983 0 3.593 1.602 3.593 3.574a3.582 3.582 0 0 1-3.593 3.574zm0-6.418V9.48c0 .076.082.131.153.093l2.377-1.226c.055-.027.071-.093.044-.147a2.96 2.96 0 0 0-2.465-1.487c-.055 0-.11.044-.11.104h.001zm-3.33-1.956l-.312-.31a.783.783 0 0 0-1.106 0l-.372.37a.773.773 0 0 0 0 1.1l.307.305c.049.05.121.038.164-.01.181-.246.378-.48.597-.698.225-.223.455-.42.707-.599.055-.033.06-.109.016-.158h-.001zm5.001-.806v-.616a.781.781 0 0 0-.783-.779h-1.824a.78.78 0 0 0-.783.78v.631c0 .071.066.12.137.104a5.736 5.736 0 0 1 1.588-.223c.52 0 1.035.071 1.534.207a.106.106 0 0 0 .131-.104z\"/><path fill=\"#252C61\" d=\"M5.027 10.246c0 .698-.252 1.246-.757 1.644-.505.397-1.201.596-2.089.596-.888 0-1.615-.138-2.181-.414v-1.214c.358.168.739.301 1.141.397.403.097.778.145 1.125.145.508 0 .884-.097 1.125-.29a.945.945 0 0 0 .363-.779.978.978 0 0 0-.333-.747c-.222-.204-.68-.446-1.375-.725C1.33 8.57.825 8.24.531 7.865c-.294-.372-.44-.82-.44-1.343 0-.655.233-1.17.698-1.547.465-.376 1.09-.564 1.875-.564.752 0 1.5.165 2.245.494l-.408 1.047c-.698-.294-1.321-.44-1.869-.44-.415 0-.73.09-.945.271a.89.89 0 0 0-.322.717c0 .204.043.38.129.524.086.145.227.282.424.411.197.13.551.3 1.063.51.577.24.999.464 1.268.671.269.208.465.442.591.704.125.261.188.57.188.924l-.001.002zm3.98 2.24c-.924 0-1.646-.269-2.167-.808-.521-.539-.781-1.28-.781-2.226 0-.97.242-1.733.725-2.288.483-.555 1.148-.833 1.993-.833.784 0 1.404.238 1.858.714.455.476.682 1.132.682 1.966v.682H7.359c.018.577.174 1.02.467 1.33.294.31.707.464 1.241.464.351 0 .678-.033.98-.099a5.1 5.1 0 0 0 .975-.33v1.026a3.865 3.865 0 0 1-.935.312 5.723 5.723 0 0 1-1.08.091zm7.46-.107l-.252-.827h-.043c-.286.362-.575.608-.865.74-.29.13-.662.195-1.117.195-.584 0-1.039-.158-1.367-.473-.328-.315-.491-.76-.491-1.337 0-.612.227-1.074.682-1.386.455-.312 1.148-.482 2.079-.51l1.026-.032v-.317c0-.38-.089-.663-.266-.85-.177-.189-.452-.283-.824-.283-.304 0-.596.045-.875.134a6.68 6.68 0 0 0-.806.317l-.408-.902a4.414 4.414 0 0 1 1.058-.384 4.856 4.856 0 0 1 1.085-.132c.756 0 1.326.165 1.711.494.385.33.577.847.577 1.552v4.001h-.904zm5.677-6.048c.254 0 .464.018.628.054l-.124 1.176a2.383 2.383 0 0 0-.559-.064c-.505 0-.914.165-1.227.494-.313.33-.47.757-.47 1.284v3.104H19.13V6.44h.988l.167 1.047h.064c.197-.354.454-.636.771-.843a1.83 1.83 0 0 1 1.023-.312h.001zm4.125 6.155c-.899 0-1.582-.262-2.049-.787-.467-.525-.701-1.277-.701-2.259 0-.999.244-1.767.733-2.304.489-.537 1.195-.806 2.119-.806.627 0 1.191.116 1.692.35l-.381 1.014c-.534-.208-.974-.312-1.321-.312-1.028 0-1.542.682-1.542 2.046 0 .666.128 1.166.384 1.501.256.335.631.502 1.125.502a3.23 3.23 0 0 0 1.595-.419v1.101a2.53 2.53 0 0 1-.722.285 4.356 4.356 0 0 1-.932.086v.002zm8.277-.107h-1.268V8.727c0-.458-.092-.8-.277-1.026-.184-.226-.477-.338-.878-.338-.53 0-.919.158-1.168.475-.249.317-.373.848-.373 1.593v2.95H29.32V4.022h1.262v2.122c0 .34-.021.704-.064 1.09h.081a1.76 1.76 0 0 1 .717-.666c.306-.158.663-.236 1.072-.236 1.439 0 2.159.725 2.159 2.175v3.873l-.001-.002zm7.648-6.048c.741 0 1.319.27 1.732.806.414.537.62 1.291.62 2.261 0 .974-.209 1.732-.628 2.275-.419.542-1.001.814-1.746.814-.752 0-1.336-.27-1.751-.81h-.086l-.231.703h-.945V4.023h1.262V6.01l-.021.655-.032.553h.054c.401-.59.992-.886 1.772-.886zm2.917.107h1.375l1.208 3.368c.183.48.304.931.365 1.354h.043c.032-.197.091-.436.177-.717.086-.28.541-1.616 1.364-4.004h1.364l-2.541 6.73c-.462 1.235-1.232 1.853-2.31 1.853-.279 0-.551-.03-.816-.09v-1c.19.043.406.064.65.064.609 0 1.037-.353 1.284-1.058l.22-.559-2.385-5.94h.002zm-3.244.924c-.508 0-.875.15-1.098.448-.224.3-.339.8-.346 1.501v.086c0 .723.115 1.247.344 1.571.229.324.603.486 1.123.486.448 0 .787-.177 1.018-.532.231-.354.346-.867.346-1.536 0-1.35-.462-2.025-1.386-2.025l-.001.001zm-27.28 4.157c.458 0 .826-.128 1.104-.384.278-.256.416-.615.416-1.077v-.516l-.763.032c-.594.021-1.027.121-1.297.298s-.406.448-.406.814c0 .265.079.47.236.615.158.145.394.218.709.218h.001zM8.775 7.287c-.401 0-.722.127-.964.381s-.386.625-.432 1.112h2.696c-.007-.49-.125-.862-.354-1.115-.229-.252-.544-.379-.945-.379l-.001.001z\"/></g><path fill=\"#5468FF\" d=\"M102.162 13.784c0 1.455-.372 2.517-1.123 3.193-.75.676-1.895 1.013-3.44 1.013-.564 0-1.736-.109-2.673-.316l.345-1.689c.783.163 1.819.207 2.361.207.86 0 1.473-.174 1.84-.523.367-.349.548-.866.548-1.553v-.349a6.374 6.374 0 0 1-.838.316 4.151 4.151 0 0 1-1.194.158 4.515 4.515 0 0 1-1.616-.278 3.385 3.385 0 0 1-1.254-.817 3.744 3.744 0 0 1-.811-1.35c-.192-.54-.29-1.505-.29-2.213 0-.665.104-1.498.307-2.054a3.925 3.925 0 0 1 .904-1.433 4.124 4.124 0 0 1 1.441-.926 5.31 5.31 0 0 1 1.945-.365c.696 0 1.337.087 1.961.191a15.86 15.86 0 0 1 1.588.332v8.456h-.001zm-5.955-4.206c0 .893.197 1.885.592 2.3.394.413.904.62 1.528.62.34 0 .663-.049.964-.142a2.75 2.75 0 0 0 .734-.332v-5.29a8.531 8.531 0 0 0-1.413-.18c-.778-.022-1.369.294-1.786.801-.411.507-.619 1.395-.619 2.223zm16.121 0c0 .72-.104 1.264-.318 1.858a4.389 4.389 0 0 1-.904 1.52c-.389.42-.854.746-1.402.975-.548.23-1.391.36-1.813.36-.422-.005-1.26-.125-1.802-.36a4.088 4.088 0 0 1-1.397-.975 4.486 4.486 0 0 1-.909-1.52 5.037 5.037 0 0 1-.329-1.858c0-.719.099-1.41.318-1.999.219-.588.526-1.09.92-1.509.394-.42.865-.74 1.402-.97a4.547 4.547 0 0 1 1.786-.338 4.69 4.69 0 0 1 1.791.338c.548.23 1.019.55 1.402.97.389.42.69.921.909 1.51.23.587.345 1.28.345 1.998h.001zm-2.192.005c0-.92-.203-1.689-.597-2.223-.394-.539-.948-.806-1.654-.806-.707 0-1.26.267-1.654.806-.394.54-.586 1.302-.586 2.223 0 .932.197 1.558.592 2.098.394.545.948.812 1.654.812.707 0 1.26-.272 1.654-.812.394-.545.592-1.166.592-2.098h-.001zm6.963 4.708c-3.511.016-3.511-2.822-3.511-3.274L113.583.95l2.142-.338v10.003c0 .256 0 1.88 1.375 1.885v1.793h-.001zM120.873 14.291h-2.153V5.095l2.153-.338zM119.794 3.75c.718 0 1.304-.579 1.304-1.292 0-.714-.581-1.29-1.304-1.29-.723 0-1.304.577-1.304 1.29 0 .714.586 1.291 1.304 1.291zm6.431 1.012c.707 0 1.304.087 1.786.262.482.174.871.42 1.156.73.285.311.488.735.608 1.182.126.447.186.937.186 1.476v5.481a25.24 25.24 0 0 1-1.495.251c-.668.098-1.419.147-2.251.147a6.829 6.829 0 0 1-1.517-.158 3.213 3.213 0 0 1-1.178-.507 2.455 2.455 0 0 1-.761-.904c-.181-.37-.274-.893-.274-1.438 0-.523.104-.855.307-1.215.208-.36.487-.654.838-.883a3.609 3.609 0 0 1 1.227-.49 7.073 7.073 0 0 1 2.202-.103c.263.027.537.076.833.147v-.349c0-.245-.027-.479-.088-.697a1.486 1.486 0 0 0-.307-.583c-.148-.169-.34-.3-.581-.392a2.536 2.536 0 0 0-.915-.163c-.493 0-.942.06-1.353.131-.411.071-.75.153-1.008.245l-.257-1.749c.268-.093.668-.185 1.183-.278a9.335 9.335 0 0 1 1.66-.142h-.001zm.179 7.73c.657 0 1.145-.038 1.484-.104V10.22a5.097 5.097 0 0 0-1.978-.104c-.241.033-.46.098-.652.191a1.167 1.167 0 0 0-.466.392c-.121.17-.175.267-.175.523 0 .501.175.79.493.981.323.196.75.29 1.293.29h.001zM84.108 4.816c.707 0 1.304.087 1.786.262.482.174.871.42 1.156.73.29.316.487.735.608 1.182.126.447.186.937.186 1.476v5.481a25.24 25.24 0 0 1-1.495.251c-.668.098-1.419.147-2.251.147a6.829 6.829 0 0 1-1.517-.158 3.213 3.213 0 0 1-1.178-.507 2.455 2.455 0 0 1-.761-.904c-.181-.37-.274-.893-.274-1.438 0-.523.104-.855.307-1.215.208-.36.487-.654.838-.883a3.609 3.609 0 0 1 1.227-.49 7.073 7.073 0 0 1 2.202-.103c.257.027.537.076.833.147v-.349c0-.245-.027-.479-.088-.697a1.486 1.486 0 0 0-.307-.583c-.148-.169-.34-.3-.581-.392a2.536 2.536 0 0 0-.915-.163c-.493 0-.942.06-1.353.131-.411.071-.75.153-1.008.245l-.257-1.749c.268-.093.668-.185 1.183-.278a8.89 8.89 0 0 1 1.66-.142h-.001zm.185 7.736c.657 0 1.145-.038 1.484-.104V10.28a5.097 5.097 0 0 0-1.978-.104c-.241.033-.46.098-.652.191a1.167 1.167 0 0 0-.466.392c-.121.17-.175.267-.175.523 0 .501.175.79.493.981.318.191.75.29 1.293.29h.001zm8.683 1.738c-3.511.016-3.511-2.822-3.511-3.274L89.46.948 91.602.61v10.003c0 .256 0 1.88 1.375 1.885v1.793h-.001z\"/></g></svg>"
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\">\n  <path fill=\"#797979\" fill-rule=\"evenodd\" d=\"M6.577.5L5.304.005 2.627 1.02 0 0l.992 2.767-.986 2.685.998 2.76-1 2.717.613.22 3.39-3.45.563.06.726-.69s-.717-.92-.91-1.86c.193-.146.184-.14.355-.285C4.1 1.93 6.58.5 6.58.5zm-4.17 11.354l.22.12 2.68-1.05 2.62 1.04 2.644-1.03 1.02-2.717-.33-.944s-1.13 1.26-3.44.878c-.174.29-.25.37-.25.37s-1.11-.31-1.683-.89c-.573.58-.795.71-.795.71l.08.634-2.76 2.89zm6.26-4.395c1.817 0 3.29-1.53 3.29-3.4 0-1.88-1.473-3.4-3.29-3.4s-3.29 1.52-3.29 3.4c0 1.87 1.473 3.4 3.29 3.4z\"/>\n</svg>\n"
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-// polyfill for navigator.language (IE <= 10)
-// not polyfilled by https://cdn.polyfill.io/v2/docs/
+var immediate = __webpack_require__(66);
+var splitter = /\s+/;
 
-// Defined: http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#navigatorlanguage
-//   with allowable values at http://www.ietf.org/rfc/bcp/bcp47.txt
-// Note that the HTML spec suggests that anonymizing services return "en-US" by default for
-//   user privacy (so your app may wish to provide a means of changing the locale)
-if (!('language' in navigator)) {
-  navigator.language =
-  // IE 10 in IE8 mode on Windows 7 uses upper-case in
-  // navigator.userLanguage country codes but per
-  // http://msdn.microsoft.com/en-us/library/ie/ms533052.aspx (via
-  // http://msdn.microsoft.com/en-us/library/ie/ms534713.aspx), they
-  // appear to be in lower case, so we bring them into harmony with navigator.language.
-  navigator.userLanguage && navigator.userLanguage.replace(/-[a-z]{2}$/, String.prototype.toUpperCase) || 'en-US'; // Default for anonymizing services: http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#navigatorlanguage
+module.exports = {
+  onSync: onSync,
+  onAsync: onAsync,
+  off: off,
+  trigger: trigger
+};
+
+function on(method, types, cb, context) {
+  var type;
+
+  if (!cb) {
+    return this;
+  }
+
+  types = types.split(splitter);
+  cb = context ? bindContext(cb, context) : cb;
+
+  this._callbacks = this._callbacks || {};
+
+  while (type = types.shift()) {
+    this._callbacks[type] = this._callbacks[type] || {sync: [], async: []};
+    this._callbacks[type][method].push(cb);
+  }
+
+  return this;
 }
 
+function onAsync(types, cb, context) {
+  return on.call(this, 'async', types, cb, context);
+}
+
+function onSync(types, cb, context) {
+  return on.call(this, 'sync', types, cb, context);
+}
+
+function off(types) {
+  var type;
+
+  if (!this._callbacks) {
+    return this;
+  }
+
+  types = types.split(splitter);
+
+  while (type = types.shift()) {
+    delete this._callbacks[type];
+  }
+
+  return this;
+}
+
+function trigger(types) {
+  var type;
+  var callbacks;
+  var args;
+  var syncFlush;
+  var asyncFlush;
+
+  if (!this._callbacks) {
+    return this;
+  }
+
+  types = types.split(splitter);
+  args = [].slice.call(arguments, 1);
+
+  while ((type = types.shift()) && (callbacks = this._callbacks[type])) { // eslint-disable-line
+    syncFlush = getFlush(callbacks.sync, this, [type].concat(args));
+    asyncFlush = getFlush(callbacks.async, this, [type].concat(args));
+
+    if (syncFlush()) {
+      immediate(asyncFlush);
+    }
+  }
+
+  return this;
+}
+
+function getFlush(callbacks, context, args) {
+  return flush;
+
+  function flush() {
+    var cancelled;
+
+    for (var i = 0, len = callbacks.length; !cancelled && i < len; i += 1) {
+      // only cancel if the callback explicitly returns false
+      cancelled = callbacks[i].apply(context, args) === false;
+    }
+
+    return !cancelled;
+  }
+}
+
+function bindContext(fn, context) {
+  return fn.bind ?
+    fn.bind(context) :
+    function() { fn.apply(context, [].slice.call(arguments, 0)); };
+}
+
+
 /***/ }),
-/* 16 */
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _ = __webpack_require__(0);
+
+var css = {
+  wrapper: {
+    position: 'relative',
+    display: 'inline-block'
+  },
+  hint: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    borderColor: 'transparent',
+    boxShadow: 'none',
+    // #741: fix hint opacity issue on iOS
+    opacity: '1'
+  },
+  input: {
+    position: 'relative',
+    verticalAlign: 'top',
+    backgroundColor: 'transparent'
+  },
+  inputWithNoHint: {
+    position: 'relative',
+    verticalAlign: 'top'
+  },
+  dropdown: {
+    position: 'absolute',
+    top: '100%',
+    left: '0',
+    zIndex: '100',
+    display: 'none'
+  },
+  suggestions: {
+    display: 'block'
+  },
+  suggestion: {
+    whiteSpace: 'nowrap',
+    cursor: 'pointer'
+  },
+  suggestionChild: {
+    whiteSpace: 'normal'
+  },
+  ltr: {
+    left: '0',
+    right: 'auto'
+  },
+  rtl: {
+    left: 'auto',
+    right: '0'
+  },
+  defaultClasses: {
+    root: 'algolia-autocomplete',
+    prefix: 'aa',
+    noPrefix: false,
+    dropdownMenu: 'dropdown-menu',
+    input: 'input',
+    hint: 'hint',
+    suggestions: 'suggestions',
+    suggestion: 'suggestion',
+    cursor: 'cursor',
+    dataset: 'dataset',
+    empty: 'empty'
+  },
+  // will be merged with the default ones if appendTo is used
+  appendTo: {
+    wrapper: {
+      position: 'absolute',
+      zIndex: '100',
+      display: 'none'
+    },
+    input: {},
+    inputWithNoHint: {},
+    dropdown: {
+      display: 'block'
+    }
+  }
+};
+
+// ie specific styling
+if (_.isMsie()) {
+  // ie6-8 (and 9?) doesn't fire hover and click events for elements with
+  // transparent backgrounds, for a workaround, use 1x1 transparent gif
+  _.mixin(css.input, {
+    backgroundImage: 'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)'
+  });
+}
+
+// ie7 and under specific styling
+if (_.isMsie() && _.isMsie() <= 7) {
+  // if someone can tell me why this is necessary to align
+  // the hint with the query in ie7, i'll send you $5 - @JakeHarding
+  _.mixin(css.input, {marginTop: '-1px'});
+}
+
+module.exports = css;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+module.exports = ".algolia-places {\n  width: 100%;\n}\n\n.ap-input, .ap-hint {\n  width: 100%;\n  padding-right: 35px;\n  padding-left: 16px;\n  line-height: 40px;\n  height: 40px;\n  border: 1px solid #CCC;\n  border-radius: 3px;\n  outline: none;\n  font: inherit;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n\n.ap-input::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n.ap-input::-ms-clear {\n  display: none;\n}\n\n.ap-input:hover ~ .ap-input-icon svg,\n.ap-input:focus ~ .ap-input-icon svg,\n.ap-input-icon:hover svg {\n  fill: #aaaaaa;\n}\n\n.ap-dropdown-menu {\n  width: 100%;\n  background: #ffffff;\n  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n  border-radius: 3px;\n  margin-top: 3px;\n  overflow: hidden;\n}\n\n.ap-suggestion {\n  cursor: pointer;\n  height: 46px;\n  line-height: 46px;\n  padding-left: 18px;\n  overflow: hidden;\n}\n\n.ap-suggestion em {\n  font-weight: bold;\n  font-style: normal;\n}\n\n.ap-address {\n  font-size: smaller;\n  margin-left: 12px;\n  color: #aaaaaa;\n}\n\n.ap-suggestion-icon {\n  margin-right: 10px;\n  width: 14px;\n  height: 20px;\n  vertical-align: middle;\n}\n\n.ap-suggestion-icon svg {\n  -webkit-transform: scale(0.9) translateY(2px);\n          transform: scale(0.9) translateY(2px);\n  fill: #cfcfcf;\n}\n\n.ap-input-icon {\n  border: 0;\n  background: transparent;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 16px;\n  outline: none;\n}\n\n.ap-input-icon.ap-icon-pin {\n  cursor: initial;\n}\n\n.ap-input-icon svg {\n  fill: #cfcfcf;\n  position: absolute;\n  top: 50%;\n  right: 0;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n\n.ap-cursor {\n  background: #efefef;\n}\n\n.ap-cursor .ap-suggestion-icon svg {\n  -webkit-transform: scale(1) translateY(2px);\n          transform: scale(1) translateY(2px);\n  fill: #aaaaaa;\n}\n\n.ap-footer {\n  opacity: .8;\n  text-align: right;\n  padding: .5em 1em .5em 0;\n  font-size: 12px;\n  line-height: 12px;\n}\n\n.ap-footer a {\n  color: inherit;\n  text-decoration: none;\n}\n\n.ap-footer a svg {\n  vertical-align: middle;\n}\n\n.ap-footer:hover {\n  opacity: 1;\n}\n"
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports) {
 
 var containers = []; // will store container HTMLElement references
@@ -1142,18 +1519,221 @@ module.exports.insertCss = insertCss;
 
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports) {
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = ".algolia-places {\n  width: 100%;\n}\n\n.ap-input, .ap-hint {\n  width: 100%;\n  padding-right: 35px;\n  padding-left: 16px;\n  line-height: 40px;\n  height: 40px;\n  border: 1px solid #CCC;\n  border-radius: 3px;\n  outline: none;\n  font: inherit;\n  appearance: none;\n  -webkit-appearance: none;\n  box-sizing: border-box;\n}\n\n.ap-input::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n.ap-input::-ms-clear {\n  display: none;\n}\n\n.ap-input:hover ~ .ap-input-icon svg,\n.ap-input:focus ~ .ap-input-icon svg,\n.ap-input-icon:hover svg {\n  fill: #aaaaaa;\n}\n\n.ap-dropdown-menu {\n  width: 100%;\n  background: #ffffff;\n  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n  border-radius: 3px;\n  margin-top: 3px;\n  overflow: hidden;\n}\n\n.ap-suggestion {\n  cursor: pointer;\n  height: 46px;\n  line-height: 46px;\n  padding-left: 18px;\n  overflow: hidden;\n}\n\n.ap-suggestion em {\n  font-weight: bold;\n  font-style: normal;\n}\n\n.ap-address {\n  font-size: smaller;\n  margin-left: 12px;\n  color: #aaaaaa;\n}\n\n.ap-suggestion-icon {\n  margin-right: 10px;\n  width: 14px;\n  height: 20px;\n  vertical-align: middle;\n}\n\n.ap-suggestion-icon svg {\n  -webkit-transform: scale(0.9) translateY(2px);\n          transform: scale(0.9) translateY(2px);\n  fill: #cfcfcf;\n}\n\n.ap-input-icon {\n  border: 0;\n  background: transparent;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 16px;\n  outline: none;\n}\n\n.ap-input-icon.ap-icon-pin {\n  cursor: initial;\n}\n\n.ap-input-icon svg {\n  fill: #cfcfcf;\n  position: absolute;\n  top: 50%;\n  right: 0;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n\n.ap-cursor {\n  background: #efefef;\n}\n\n.ap-cursor .ap-suggestion-icon svg {\n  -webkit-transform: scale(1) translateY(2px);\n          transform: scale(1) translateY(2px);\n  fill: #aaaaaa;\n}\n\n.ap-footer {\n  opacity: .8;\n  text-align: right;\n  padding: .5em 1em .5em 0;\n  font-size: 12px;\n  line-height: 12px;\n}\n\n.ap-footer a {\n  color: inherit;\n  text-decoration: none;\n}\n\n.ap-footer a svg {\n  vertical-align: text-bottom;\n  max-width: 60px;\n}\n\n.ap-footer:hover {\n  opacity: 1;\n}\n"
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./src/configure/index.js
+var configure = __webpack_require__(1);
+
+// EXTERNAL MODULE: ./src/formatHit.js + 2 modules
+var formatHit = __webpack_require__(9);
+
+// EXTERNAL MODULE: ./src/version.js
+var version = __webpack_require__(6);
+
+// CONCATENATED MODULE: ./src/createAutocompleteSource.js
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+function createAutocompleteSource(_ref) {
+  var algoliasearch = _ref.algoliasearch,
+      clientOptions = _ref.clientOptions,
+      apiKey = _ref.apiKey,
+      appId = _ref.appId,
+      hitsPerPage = _ref.hitsPerPage,
+      aroundLatLng = _ref.aroundLatLng,
+      aroundRadius = _ref.aroundRadius,
+      aroundLatLngViaIP = _ref.aroundLatLngViaIP,
+      insideBoundingBox = _ref.insideBoundingBox,
+      insidePolygon = _ref.insidePolygon,
+      getRankingInfo = _ref.getRankingInfo,
+      countries = _ref.countries,
+      formatInputValue = _ref.formatInputValue,
+      _ref$computeQueryPara = _ref.computeQueryParams,
+      computeQueryParams = _ref$computeQueryPara === void 0 ? function (params) {
+    return params;
+  } : _ref$computeQueryPara,
+      _ref$useDeviceLocatio = _ref.useDeviceLocation,
+      useDeviceLocation = _ref$useDeviceLocatio === void 0 ? false : _ref$useDeviceLocatio,
+      _ref$language = _ref.language,
+      language = _ref$language === void 0 ? navigator.language.split('-')[0] : _ref$language,
+      _ref$onHits = _ref.onHits,
+      onHits = _ref$onHits === void 0 ? function () {} : _ref$onHits,
+      _ref$onError = _ref.onError,
+      onError = _ref$onError === void 0 ? function (e) {
+    throw e;
+  } : _ref$onError,
+      onRateLimitReached = _ref.onRateLimitReached,
+      type = _ref.type;
+  var placesClient = algoliasearch.initPlaces(appId, apiKey, clientOptions);
+  placesClient.as.addAlgoliaAgent("Algolia Places ".concat(version["default"]));
+  var configuration = Object(configure["a" /* default */])({
+    hitsPerPage: hitsPerPage,
+    type: type,
+    countries: countries,
+    language: language,
+    aroundLatLng: aroundLatLng,
+    aroundRadius: aroundRadius,
+    aroundLatLngViaIP: aroundLatLngViaIP,
+    insideBoundingBox: insideBoundingBox,
+    insidePolygon: insidePolygon,
+    getRankingInfo: getRankingInfo,
+    formatInputValue: formatInputValue,
+    computeQueryParams: computeQueryParams,
+    useDeviceLocation: useDeviceLocation,
+    onHits: onHits,
+    onError: onError,
+    onRateLimitReached: onRateLimitReached
+  });
+  var params = configuration.params;
+  var controls = configuration.controls;
+  var userCoords;
+  var tracker = null;
+
+  if (controls.useDeviceLocation) {
+    tracker = navigator.geolocation.watchPosition(function (_ref2) {
+      var coords = _ref2.coords;
+      userCoords = "".concat(coords.latitude, ",").concat(coords.longitude);
+    });
+  }
+
+  function searcher(query, cb) {
+    var searchParams = _objectSpread({}, params, {
+      query: query
+    });
+
+    if (userCoords) {
+      searchParams.aroundLatLng = userCoords;
+    }
+
+    return placesClient.search(controls.computeQueryParams(searchParams)).then(function (content) {
+      var hits = content.hits.map(function (hit, hitIndex) {
+        return Object(formatHit["a" /* default */])({
+          formatInputValue: controls.formatInputValue,
+          hit: hit,
+          hitIndex: hitIndex,
+          query: query,
+          rawAnswer: content
+        });
+      });
+      controls.onHits({
+        hits: hits,
+        query: query,
+        rawAnswer: content
+      });
+      return hits;
+    }).then(cb).catch(function (e) {
+      if (e.statusCode === 429) {
+        controls.onRateLimitReached();
+        return;
+      }
+
+      controls.onError(e);
+    });
+  }
+
+  searcher.configure = function (partial) {
+    var updated = Object(configure["a" /* default */])(_objectSpread({}, params, controls, partial));
+    params = updated.params;
+    controls = updated.controls;
+
+    if (controls.useDeviceLocation && tracker === null) {
+      tracker = navigator.geolocation.watchPosition(function (_ref3) {
+        var coords = _ref3.coords;
+        userCoords = "".concat(coords.latitude, ",").concat(coords.longitude);
+      });
+    } else if (!controls.useDeviceLocation && tracker !== null) {
+      navigator.geolocation.clearWatch(tracker);
+      tracker = null;
+      userCoords = null;
+    }
+  };
+
+  return searcher;
+}
+// EXTERNAL MODULE: ./src/defaultTemplates.js + 2 modules
+var defaultTemplates = __webpack_require__(8);
+
+// CONCATENATED MODULE: ./src/createAutocompleteDataset.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createAutocompleteDataset; });
+function createAutocompleteDataset_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { createAutocompleteDataset_defineProperty(target, key, source[key]); }); } return target; }
+
+function createAutocompleteDataset_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function createAutocompleteDataset(options) {
+  var templates = createAutocompleteDataset_objectSpread({}, defaultTemplates["a" /* default */], options.templates);
+
+  var source = createAutocompleteSource(createAutocompleteDataset_objectSpread({}, options, {
+    formatInputValue: templates.value,
+    templates: undefined
+  }));
+  return {
+    source: source,
+    templates: templates,
+    displayKey: 'value',
+    name: 'places',
+    cache: false
+  };
+}
 
 /***/ }),
-/* 18 */
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var AlgoliaSearchCore = __webpack_require__(42);
+var createAlgoliasearch = __webpack_require__(53);
+
+module.exports = createAlgoliasearch(AlgoliaSearchCore, '(lite) ');
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = buildSearchMethod;
 
-var errors = __webpack_require__(6);
+var errors = __webpack_require__(11);
 
 /**
  * Creates a search method to be used in clients
@@ -1221,11 +1801,11 @@ function buildSearchMethod(queryParam, url) {
 
 
 /***/ }),
-/* 19 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function omit(obj, test) {
-  var keys = __webpack_require__(75);
+  var keys = __webpack_require__(48);
   var foreach = __webpack_require__(3);
 
   var filtered = {};
@@ -1241,7 +1821,99 @@ module.exports = function omit(obj, test) {
 
 
 /***/ }),
-/* 20 */
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+module.exports = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return map(objectKeys(obj), function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (isArray(obj[k])) {
+        return map(obj[k], function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+function map (xs, f) {
+  if (xs.map) return xs.map(f);
+  var res = [];
+  for (var i = 0; i < xs.length; i++) {
+    res.push(f(xs[i], i));
+  }
+  return res;
+}
+
+var objectKeys = Object.keys || function (obj) {
+  var res = [];
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
+  }
+  return res;
+};
+
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1250,7 +1922,7 @@ module.exports = function omit(obj, test) {
 var namespace = 'autocomplete:';
 
 var _ = __webpack_require__(0);
-var DOM = __webpack_require__(1);
+var DOM = __webpack_require__(2);
 
 // constructor
 // -----------
@@ -1270,11 +1942,9 @@ _.mixin(EventBus.prototype, {
 
   // ### public
 
-  trigger: function(type) {
-    var args = [].slice.call(arguments, 1);
-
+  trigger: function(type, suggestion, dataset, context) {
     var event = _.Event(namespace + type);
-    this.$el.trigger(event, args);
+    this.$el.trigger(event, [suggestion, dataset, context]);
     return event;
   }
 });
@@ -1283,7 +1953,7 @@ module.exports = EventBus;
 
 
 /***/ }),
-/* 21 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1299,7 +1969,14 @@ module.exports = {
 
 
 /***/ }),
-/* 22 */
+/* 35 */
+/***/ (function(module, exports) {
+
+module.exports = "0.36.0";
+
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1312,666 +1989,738 @@ module.exports = function parseAlgoliaClientVersion(agent) {
 
 
 /***/ }),
-/* 23 */
+/* 37 */
 /***/ (function(module, exports) {
 
-module.exports = "0.31.0";
+// polyfill for navigator.language (IE <= 10)
+// not polyfilled by https://cdn.polyfill.io/v2/docs/
+// Defined: http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#navigatorlanguage
+//   with allowable values at http://www.ietf.org/rfc/bcp/bcp47.txt
+// Note that the HTML spec suggests that anonymizing services return "en-US" by default for
+//   user privacy (so your app may wish to provide a means of changing the locale)
+if (!('language' in navigator)) {
+  navigator.language = // IE 10 in IE8 mode on Windows 7 uses upper-case in
+  // navigator.userLanguage country codes but per
+  // http://msdn.microsoft.com/en-us/library/ie/ms533052.aspx (via
+  // http://msdn.microsoft.com/en-us/library/ie/ms534713.aspx), they
+  // appear to be in lower case, so we bring them into harmony with navigator.language.
+  navigator.userLanguage && navigator.userLanguage.replace(/-[a-z]{2}$/, String.prototype.toUpperCase) || 'en-US'; // Default for anonymizing services: http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html#navigatorlanguage
+}
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var R = typeof Reflect === 'object' ? Reflect : null
+var ReflectApply = R && typeof R.apply === 'function'
+  ? R.apply
+  : function ReflectApply(target, receiver, args) {
+    return Function.prototype.apply.call(target, receiver, args);
+  }
+
+var ReflectOwnKeys
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target)
+      .concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+}
+
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+var defaultMaxListeners = 10;
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function() {
+    return defaultMaxListeners;
+  },
+  set: function(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+    defaultMaxListeners = arg;
+  }
+});
+
+EventEmitter.init = function() {
+
+  if (this._events === undefined ||
+      this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+};
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
+  this._maxListeners = n;
+  return this;
+};
+
+function $getMaxListeners(that) {
+  if (that._maxListeners === undefined)
+    return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
+
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return $getMaxListeners(this);
+};
+
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+  var doError = (type === 'error');
+
+  var events = this._events;
+  if (events !== undefined)
+    doError = (doError && events.error === undefined);
+  else if (!doError)
+    return false;
+
+  // If there is no 'error' event listener then throw.
+  if (doError) {
+    var er;
+    if (args.length > 0)
+      er = args[0];
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
+    }
+    // At least give some kind of context to the user
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
+
+  var handler = events[type];
+
+  if (handler === undefined)
+    return false;
+
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i)
+      ReflectApply(listeners[i], this, args);
+  }
+
+  return true;
+};
+
+function _addListener(target, type, listener, prepend) {
+  var m;
+  var events;
+  var existing;
+
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+
+  events = target._events;
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type,
+                  listener.listener ? listener.listener : listener);
+
+      // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+      events = target._events;
+    }
+    existing = events[type];
+  }
+
+  if (existing === undefined) {
+    // Optimize the case of one listener. Don't need the extra array object.
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] =
+        prepend ? [listener, existing] : [existing, listener];
+      // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
+    } else {
+      existing.push(listener);
+    }
+
+    // Check for listener leak
+    m = $getMaxListeners(target);
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true;
+      // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+      var w = new Error('Possible EventEmitter memory leak detected. ' +
+                          existing.length + ' ' + String(type) + ' listeners ' +
+                          'added. Use emitter.setMaxListeners() to ' +
+                          'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
+    }
+  }
+
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.prependListener =
+    function prependListener(type, listener) {
+      return _addListener(this, type, listener, true);
+    };
+
+function onceWrapper() {
+  var args = [];
+  for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
+    ReflectApply(this.listener, this.target, args);
+  }
+}
+
+function _onceWrap(target, type, listener) {
+  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
+
+EventEmitter.prototype.once = function once(type, listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+  this.on(type, _onceWrap(this, type, listener));
+  return this;
+};
+
+EventEmitter.prototype.prependOnceListener =
+    function prependOnceListener(type, listener) {
+      if (typeof listener !== 'function') {
+        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+      }
+      this.prependListener(type, _onceWrap(this, type, listener));
+      return this;
+    };
+
+// Emits a 'removeListener' event if and only if the listener was removed.
+EventEmitter.prototype.removeListener =
+    function removeListener(type, listener) {
+      var list, events, position, i, originalListener;
+
+      if (typeof listener !== 'function') {
+        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+      }
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      list = events[type];
+      if (list === undefined)
+        return this;
+
+      if (list === listener || list.listener === listener) {
+        if (--this._eventsCount === 0)
+          this._events = Object.create(null);
+        else {
+          delete events[type];
+          if (events.removeListener)
+            this.emit('removeListener', type, list.listener || listener);
+        }
+      } else if (typeof list !== 'function') {
+        position = -1;
+
+        for (i = list.length - 1; i >= 0; i--) {
+          if (list[i] === listener || list[i].listener === listener) {
+            originalListener = list[i].listener;
+            position = i;
+            break;
+          }
+        }
+
+        if (position < 0)
+          return this;
+
+        if (position === 0)
+          list.shift();
+        else {
+          spliceOne(list, position);
+        }
+
+        if (list.length === 1)
+          events[type] = list[0];
+
+        if (events.removeListener !== undefined)
+          this.emit('removeListener', type, originalListener || listener);
+      }
+
+      return this;
+    };
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners =
+    function removeAllListeners(type) {
+      var listeners, events, i;
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      // not listening for removeListener, no need to emit
+      if (events.removeListener === undefined) {
+        if (arguments.length === 0) {
+          this._events = Object.create(null);
+          this._eventsCount = 0;
+        } else if (events[type] !== undefined) {
+          if (--this._eventsCount === 0)
+            this._events = Object.create(null);
+          else
+            delete events[type];
+        }
+        return this;
+      }
+
+      // emit removeListener for all listeners on all events
+      if (arguments.length === 0) {
+        var keys = Object.keys(events);
+        var key;
+        for (i = 0; i < keys.length; ++i) {
+          key = keys[i];
+          if (key === 'removeListener') continue;
+          this.removeAllListeners(key);
+        }
+        this.removeAllListeners('removeListener');
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+        return this;
+      }
+
+      listeners = events[type];
+
+      if (typeof listeners === 'function') {
+        this.removeListener(type, listeners);
+      } else if (listeners !== undefined) {
+        // LIFO order
+        for (i = listeners.length - 1; i >= 0; i--) {
+          this.removeListener(type, listeners[i]);
+        }
+      }
+
+      return this;
+    };
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+
+  if (events === undefined)
+    return [];
+
+  var evlistener = events[type];
+  if (evlistener === undefined)
+    return [];
+
+  if (typeof evlistener === 'function')
+    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+
+  return unwrap ?
+    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
+};
+
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+};
+
+EventEmitter.prototype.listenerCount = listenerCount;
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
+}
+
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i)
+    copy[i] = arr[i];
+  return copy;
+}
+
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++)
+    list[index] = list[index + 1];
+  list.pop();
+}
+
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+  return ret;
+}
 
 
 /***/ }),
-/* 24 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+module.exports = __webpack_require__(62);
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M.566 1.698L0 1.13 1.132 0l.565.566L6 4.868 10.302.566 10.868 0 12 1.132l-.566.565L7.132 6l4.302 4.3.566.568L10.868 12l-.565-.566L6 7.132l-4.3 4.302L1.13 12 0 10.868l.566-.565L4.868 6 .566 1.698z\"/></svg>\n"
+
+/***/ }),
+/* 41 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/events/events.js
+var events = __webpack_require__(38);
+var events_default = /*#__PURE__*/__webpack_require__.n(events);
+
+// EXTERNAL MODULE: ./node_modules/algoliasearch/src/browser/builds/algoliasearchLite.js
+var algoliasearchLite = __webpack_require__(28);
+var algoliasearchLite_default = /*#__PURE__*/__webpack_require__.n(algoliasearchLite);
+
+// EXTERNAL MODULE: ./node_modules/autocomplete.js/index.js
+var autocomplete_js = __webpack_require__(39);
+var autocomplete_js_default = /*#__PURE__*/__webpack_require__.n(autocomplete_js);
+
+// EXTERNAL MODULE: ./src/navigatorLanguage.js
+var navigatorLanguage = __webpack_require__(37);
+
+// EXTERNAL MODULE: ./src/createAutocompleteDataset.js + 1 modules
+var createAutocompleteDataset = __webpack_require__(27);
+
+// EXTERNAL MODULE: ./src/icons/clear.svg
+var icons_clear = __webpack_require__(40);
+var clear_default = /*#__PURE__*/__webpack_require__.n(icons_clear);
+
+// EXTERNAL MODULE: ./src/icons/address.svg
+var address = __webpack_require__(7);
+var address_default = /*#__PURE__*/__webpack_require__.n(address);
+
+// EXTERNAL MODULE: ./src/places.css
+var places = __webpack_require__(25);
+var places_default = /*#__PURE__*/__webpack_require__.n(places);
+
+// EXTERNAL MODULE: ./node_modules/insert-css/index.js
+var insert_css = __webpack_require__(26);
+var insert_css_default = /*#__PURE__*/__webpack_require__.n(insert_css);
+
+// CONCATENATED MODULE: ./src/errors.js
+/* harmony default export */ var errors = ({
+  multiContainers: "Algolia Places: 'container' must point to a single <input> element.\nExample: instantiate the library twice if you want to bind two <inputs>.\n\nSee https://community.algolia.com/places/documentation.html#api-options-container",
+  badContainer: "Algolia Places: 'container' must point to an <input> element.\n\nSee https://community.algolia.com/places/documentation.html#api-options-container",
+  rateLimitReached: "Algolia Places: Current rate limit reached.\n\nSign up for a free 100,000 queries/month account at\nhttps://www.algolia.com/users/sign_up/places.\n\nOr upgrade your 100,000 queries/month plan by contacting us at\nhttps://community.algolia.com/places/contact.html."
 });
+// EXTERNAL MODULE: ./src/configure/index.js
+var configure = __webpack_require__(1);
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+// EXTERNAL MODULE: ./src/formatHit.js + 2 modules
+var formatHit = __webpack_require__(9);
 
-exports.default = createAutocompleteSource;
+// EXTERNAL MODULE: ./src/version.js
+var version = __webpack_require__(6);
 
-var _formatHit = __webpack_require__(29);
+// EXTERNAL MODULE: ./src/defaultTemplates.js + 2 modules
+var defaultTemplates = __webpack_require__(8);
 
-var _formatHit2 = _interopRequireDefault(_formatHit);
-
-var _version = __webpack_require__(13);
-
-var _version2 = _interopRequireDefault(_version);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// CONCATENATED MODULE: ./src/createReverseGeocodingSource.js
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function createAutocompleteSource(_ref) {
+
+
+
+
+
+var filterApplicableParams = function filterApplicableParams(params) {
+  var hitsPerPage = params.hitsPerPage,
+      aroundLatLng = params.aroundLatLng,
+      getRankingInfo = params.getRankingInfo,
+      language = params.language;
+  var filtered = {};
+
+  if (typeof hitsPerPage === 'number') {
+    filtered.hitsPerPage = hitsPerPage;
+  }
+
+  if (typeof language === 'string') {
+    filtered.language = language;
+  }
+
+  if (typeof getRankingInfo === 'boolean') {
+    filtered.getRankingInfo = getRankingInfo;
+  }
+
+  if (typeof aroundLatLng === 'string') {
+    filtered.aroundLatLng = aroundLatLng;
+  }
+
+  return filtered;
+};
+
+var createReverseGeocodingSource_createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
   var algoliasearch = _ref.algoliasearch,
       clientOptions = _ref.clientOptions,
       apiKey = _ref.apiKey,
       appId = _ref.appId,
       hitsPerPage = _ref.hitsPerPage,
       aroundLatLng = _ref.aroundLatLng,
-      aroundRadius = _ref.aroundRadius,
-      aroundLatLngViaIP = _ref.aroundLatLngViaIP,
-      insideBoundingBox = _ref.insideBoundingBox,
-      insidePolygon = _ref.insidePolygon,
       getRankingInfo = _ref.getRankingInfo,
-      countries = _ref.countries,
-      formatInputValue = _ref.formatInputValue,
-      _ref$computeQueryPara = _ref.computeQueryParams,
-      computeQueryParams = _ref$computeQueryPara === undefined ? function (params) {
-    return params;
-  } : _ref$computeQueryPara,
-      _ref$useDeviceLocatio = _ref.useDeviceLocation,
-      useDeviceLocation = _ref$useDeviceLocatio === undefined ? false : _ref$useDeviceLocatio,
+      _ref$formatInputValue = _ref.formatInputValue,
+      formatInputValue = _ref$formatInputValue === void 0 ? defaultTemplates["a" /* default */].value : _ref$formatInputValue,
       _ref$language = _ref.language,
-      language = _ref$language === undefined ? navigator.language.split('-')[0] : _ref$language,
+      language = _ref$language === void 0 ? navigator.language.split('-')[0] : _ref$language,
       _ref$onHits = _ref.onHits,
-      onHits = _ref$onHits === undefined ? function () {} : _ref$onHits,
+      onHits = _ref$onHits === void 0 ? function () {} : _ref$onHits,
       _ref$onError = _ref.onError,
-      onError = _ref$onError === undefined ? function (e) {
+      onError = _ref$onError === void 0 ? function (e) {
     throw e;
   } : _ref$onError,
-      onRateLimitReached = _ref.onRateLimitReached,
-      type = _ref.type;
-
+      onRateLimitReached = _ref.onRateLimitReached;
   var placesClient = algoliasearch.initPlaces(appId, apiKey, clientOptions);
-  placesClient.as.addAlgoliaAgent('Algolia Places ' + _version2.default);
-
-  var defaultQueryParams = {
-    countries: countries,
-    hitsPerPage: hitsPerPage || 5,
+  placesClient.as.addAlgoliaAgent("Algolia Places ".concat(version["default"]));
+  var configuration = Object(configure["a" /* default */])({
+    apiKey: apiKey,
+    appId: appId,
+    hitsPerPage: hitsPerPage,
+    aroundLatLng: aroundLatLng,
+    getRankingInfo: getRankingInfo,
     language: language,
-    type: type
-  };
+    formatInputValue: formatInputValue,
+    onHits: onHits,
+    onError: onError,
+    onRateLimitReached: onRateLimitReached
+  });
+  var params = filterApplicableParams(configuration.params);
+  var controls = configuration.controls;
 
-  if (Array.isArray(defaultQueryParams.countries)) {
-    defaultQueryParams.countries = defaultQueryParams.countries.map(function (country) {
-      return country.toLowerCase();
-    });
-  }
+  var searcher = function searcher(queryAroundLatLng, cb) {
+    var finalAroundLatLng = queryAroundLatLng || params.aroundLatLng;
 
-  if (typeof defaultQueryParams.language === 'string') {
-    defaultQueryParams.language = defaultQueryParams.language.toLowerCase();
-  }
+    if (!finalAroundLatLng) {
+      var error = new Error('A location must be provided for reverse geocoding');
+      return Promise.reject(error);
+    }
 
-  if (aroundLatLng) {
-    defaultQueryParams.aroundLatLng = aroundLatLng;
-  } else if (aroundLatLngViaIP !== undefined) {
-    defaultQueryParams.aroundLatLngViaIP = aroundLatLngViaIP;
-  }
-
-  if (aroundRadius) {
-    defaultQueryParams.aroundRadius = aroundRadius;
-  }
-
-  if (insideBoundingBox) {
-    defaultQueryParams.insideBoundingBox = insideBoundingBox;
-  }
-
-  if (insidePolygon) {
-    defaultQueryParams.insidePolygon = insidePolygon;
-  }
-
-  if (getRankingInfo) {
-    defaultQueryParams.getRankingInfo = getRankingInfo;
-  }
-
-  var userCoords = void 0;
-  if (useDeviceLocation) {
-    navigator.geolocation.watchPosition(function (_ref2) {
-      var coords = _ref2.coords;
-
-      userCoords = coords.latitude + ',' + coords.longitude;
-    });
-  }
-
-  return function (query, cb) {
-    var _extends2;
-
-    return placesClient.search(computeQueryParams(_extends({}, defaultQueryParams, (_extends2 = {}, _defineProperty(_extends2, userCoords ? 'aroundLatLng' : undefined, userCoords), _defineProperty(_extends2, 'query', query), _extends2)))).then(function (content) {
+    return placesClient.reverse(_objectSpread({}, params, {
+      aroundLatLng: finalAroundLatLng
+    })).then(function (content) {
       var hits = content.hits.map(function (hit, hitIndex) {
-        return (0, _formatHit2.default)({
-          formatInputValue: formatInputValue,
+        return Object(formatHit["a" /* default */])({
+          formatInputValue: controls.formatInputValue,
           hit: hit,
           hitIndex: hitIndex,
-          query: query,
+          query: finalAroundLatLng,
           rawAnswer: content
         });
       });
-
-      onHits({
+      controls.onHits({
         hits: hits,
-        query: query,
+        query: finalAroundLatLng,
         rawAnswer: content
       });
-
       return hits;
     }).then(cb).catch(function (e) {
       if (e.statusCode === 429) {
-        onRateLimitReached();
+        controls.onRateLimitReached();
         return;
       }
 
-      onError(e);
+      controls.onError(e);
     });
   };
-}
 
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
+  searcher.configure = function (partial) {
+    var updated = Object(configure["a" /* default */])(_objectSpread({}, params, controls, partial));
+    params = filterApplicableParams(updated.params);
+    controls = updated.controls;
+    return searcher;
+  };
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _formatInputValue = __webpack_require__(30);
-
-var _formatInputValue2 = _interopRequireDefault(_formatInputValue);
-
-var _formatDropdownValue = __webpack_require__(28);
-
-var _formatDropdownValue2 = _interopRequireDefault(_formatDropdownValue);
-
-var _algolia = __webpack_require__(32);
-
-var _algolia2 = _interopRequireDefault(_algolia);
-
-var _osm = __webpack_require__(36);
-
-var _osm2 = _interopRequireDefault(_osm);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  footer: '<div class="ap-footer">\n  Built by <a href="https://www.algolia.com/places" title="Search by Algolia" class="ap-footer-algolia">' + _algolia2.default.trim() + '</a>\n  using <a href="https://community.algolia.com/places/documentation.html#license" class="ap-footer-osm" title="Algolia Places data \xA9 OpenStreetMap contributors">' + _osm2.default.trim() + ' <span>data</span></a>\n  </div>',
-  value: _formatInputValue2.default,
-  suggestion: _formatDropdownValue2.default
+  return searcher;
 };
 
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
+/* harmony default export */ var src_createReverseGeocodingSource = (createReverseGeocodingSource_createReverseGeocodingSource);
+// CONCATENATED MODULE: ./src/places.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return places_places; });
+function places_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { places_defineProperty(target, key, source[key]); }); } return target; }
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = findCountryCode;
-function findCountryCode(tags) {
-  for (var tagIndex = 0; tagIndex < tags.length; tagIndex++) {
-    var tag = tags[tagIndex];
-    var find = tag.match(/country\/(.*)?/);
-    if (find) {
-      return find[1];
-    }
-  }
-
-  return undefined;
-}
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
+function places_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = findType;
-function findType(tags) {
-  var types = {
-    country: 'country',
-    city: 'city',
-    'amenity/bus_station': 'busStop',
-    'amenity/townhall': 'townhall',
-    'railway/station': 'trainStation',
-    'aeroway/aerodrome': 'airport',
-    'aeroway/terminal': 'airport',
-    'aeroway/gate': 'airport'
-  };
-
-  for (var t in types) {
-    if (tags.indexOf(t) !== -1) {
-      return types[t];
-    }
-  }
-
-  return 'address';
-}
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = formatDropdownValue;
-
-var _address = __webpack_require__(12);
-
-var _address2 = _interopRequireDefault(_address);
-
-var _city = __webpack_require__(34);
-
-var _city2 = _interopRequireDefault(_city);
-
-var _country = __webpack_require__(35);
-
-var _country2 = _interopRequireDefault(_country);
-
-var _bus = __webpack_require__(33);
-
-var _bus2 = _interopRequireDefault(_bus);
-
-var _train = __webpack_require__(39);
-
-var _train2 = _interopRequireDefault(_train);
-
-var _townhall = __webpack_require__(38);
-
-var _townhall2 = _interopRequireDefault(_townhall);
-
-var _plane = __webpack_require__(37);
-
-var _plane2 = _interopRequireDefault(_plane);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var icons = {
-  address: _address2.default,
-  city: _city2.default,
-  country: _country2.default,
-  busStop: _bus2.default,
-  trainStation: _train2.default,
-  townhall: _townhall2.default,
-  airport: _plane2.default
-};
-
-function formatDropdownValue(_ref) {
-  var type = _ref.type,
-      highlight = _ref.highlight;
-  var name = highlight.name,
-      administrative = highlight.administrative,
-      city = highlight.city,
-      country = highlight.country;
 
 
-  var out = ('<span class="ap-suggestion-icon">' + icons[type].trim() + '</span>\n<span class="ap-name">' + name + '</span>\n<span class="ap-address">\n  ' + [city, administrative, country].filter(function (token) {
-    return token !== undefined;
-  }).join(', ') + '</span>').replace(/\s*\n\s*/g, ' ');
-
-  return out;
-}
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+
+
+insert_css_default()(places_default.a, {
+  prepend: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-exports.default = formatHit;
-
-var _findCountryCode = __webpack_require__(26);
-
-var _findCountryCode2 = _interopRequireDefault(_findCountryCode);
-
-var _findType = __webpack_require__(27);
-
-var _findType2 = _interopRequireDefault(_findType);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getBestHighlightedForm(highlightedValues) {
-  var defaultValue = highlightedValues[0].value;
-  // collect all other matches
-  var bestAttributes = [];
-  for (var i = 1; i < highlightedValues.length; ++i) {
-    if (highlightedValues[i].matchLevel !== 'none') {
-      bestAttributes.push({
-        index: i,
-        words: highlightedValues[i].matchedWords
-      });
-    }
-  }
-  // no matches in this attribute, retrieve first value
-  if (bestAttributes.length === 0) {
-    return defaultValue;
-  }
-  // sort the matches by `desc(words), asc(index)`
-  bestAttributes.sort(function (a, b) {
-    if (a.words > b.words) {
-      return -1;
-    } else if (a.words < b.words) {
-      return 1;
-    }
-    return a.index - b.index;
-  });
-  // and append the best match to the first value
-  return bestAttributes[0].index === 0 ? defaultValue + ' (' + highlightedValues[bestAttributes[1].index].value + ')' : highlightedValues[bestAttributes[0].index].value + ' (' + defaultValue + ')';
-}
-
-function getBestPostcode(postcodes, highlightedPostcodes) {
-  var defaultValue = highlightedPostcodes[0].value;
-  // collect all other matches
-  var bestAttributes = [];
-  for (var i = 1; i < highlightedPostcodes.length; ++i) {
-    if (highlightedPostcodes[i].matchLevel !== 'none') {
-      bestAttributes.push({
-        index: i,
-        words: highlightedPostcodes[i].matchedWords
-      });
-    }
-  }
-  // no matches in this attribute, retrieve first value
-  if (bestAttributes.length === 0) {
-    return { postcode: postcodes[0], highlightedPostcode: defaultValue };
-  }
-  // sort the matches by `desc(words)`
-  bestAttributes.sort(function (a, b) {
-    if (a.words > b.words) {
-      return -1;
-    } else if (a.words < b.words) {
-      return 1;
-    }
-    return a.index - b.index;
-  });
-
-  var postcode = postcodes[bestAttributes[0].index];
-  return {
-    postcode: postcode,
-    highlightedPostcode: highlightedPostcodes[bestAttributes[0].index].value
-  };
-}
-
-function formatHit(_ref) {
-  var formatInputValue = _ref.formatInputValue,
-      hit = _ref.hit,
-      hitIndex = _ref.hitIndex,
-      query = _ref.query,
-      rawAnswer = _ref.rawAnswer;
-
-  try {
-    var name = hit.locale_names[0];
-    var country = hit.country;
-    var administrative = hit.administrative && hit.administrative[0] !== name ? hit.administrative[0] : undefined;
-    var city = hit.city && hit.city[0] !== name ? hit.city[0] : undefined;
-    var suburb = hit.suburb && hit.suburb[0] !== name ? hit.suburb[0] : undefined;
-
-    var county = hit.county && hit.county[0] !== name ? hit.county[0] : undefined;
-
-    var _ref2 = hit.postcode ? getBestPostcode(hit.postcode, hit._highlightResult.postcode) : { postcode: undefined, highlightedPostcode: undefined },
-        postcode = _ref2.postcode,
-        highlightedPostcode = _ref2.highlightedPostcode;
-
-    var highlight = {
-      name: getBestHighlightedForm(hit._highlightResult.locale_names),
-      city: city ? getBestHighlightedForm(hit._highlightResult.city) : undefined,
-      administrative: administrative ? getBestHighlightedForm(hit._highlightResult.administrative) : undefined,
-      country: country ? hit._highlightResult.country.value : undefined,
-      suburb: suburb ? getBestHighlightedForm(hit._highlightResult.suburb) : undefined,
-      county: county ? getBestHighlightedForm(hit._highlightResult.county) : undefined,
-      postcode: highlightedPostcode
-    };
-
-    var suggestion = {
-      name: name,
-      administrative: administrative,
-      county: county,
-      city: city,
-      suburb: suburb,
-      country: country,
-      countryCode: (0, _findCountryCode2.default)(hit._tags),
-      type: (0, _findType2.default)(hit._tags),
-      latlng: {
-        lat: hit._geoloc.lat,
-        lng: hit._geoloc.lng
-      },
-      postcode: postcode,
-      postcodes: hit.postcode ? hit.postcode : undefined
-    };
-
-    // this is the value to put inside the <input value=
-    var value = formatInputValue(suggestion);
-
-    return _extends({}, suggestion, {
-      highlight: highlight,
-      hit: hit,
-      hitIndex: hitIndex,
-      query: query,
-      rawAnswer: rawAnswer,
-      value: value
-    });
-  } catch (e) {
-    /* eslint-disable no-console */
-    console.error('Could not parse object', hit);
-    console.error(e);
-    /* eslint-enable no-console */
-    return {
-      value: 'Could not parse object'
-    };
-  }
-}
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = formatInputValue;
-function formatInputValue(_ref) {
-  var administrative = _ref.administrative,
-      city = _ref.city,
-      country = _ref.country,
-      name = _ref.name,
-      type = _ref.type;
-
-  var out = ('' + name + (type !== 'country' && country !== undefined ? ',' : '') + '\n ' + (city ? city + ',' : '') + '\n ' + (administrative ? administrative + ',' : '') + '\n ' + (country ? country : '')).replace(/\s*\n\s*/g, ' ').trim();
-  return out;
-}
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"Layer_1\" baseProfile=\"basic\" viewBox=\"0 0 1366 362\">\n  <linearGradient id=\"SVGID_1_\" x1=\"428.2578\" x2=\"434.1453\" y1=\"404.1504\" y2=\"409.8504\" gradientUnits=\"userSpaceOnUse\" gradientTransform=\"matrix(94.045 0 0 -94.072 -40381.527 38479.52)\">\n    <stop offset=\"0\" stop-color=\"#00AEFF\"/>\n    <stop offset=\"1\" stop-color=\"#3369E7\"/>\n  </linearGradient>\n  <path d=\"M61.8 15.4h242.8c23.9 0 43.4 19.4 43.4 43.4v242.9c0 23.9-19.4 43.4-43.4 43.4H61.8c-23.9 0-43.4-19.4-43.4-43.4v-243c0-23.9 19.4-43.3 43.4-43.3z\" fill=\"url(#SVGID_1_)\"/>\n  <path d=\"M187 98.7c-51.4 0-93.1 41.7-93.1 93.2S135.6 285 187 285s93.1-41.7 93.1-93.2-41.6-93.1-93.1-93.1zm0 158.8c-36.2 0-65.6-29.4-65.6-65.6s29.4-65.6 65.6-65.6 65.6 29.4 65.6 65.6-29.3 65.6-65.6 65.6zm0-117.8v48.9c0 1.4 1.5 2.4 2.8 1.7l43.4-22.5c1-.5 1.3-1.7.8-2.7-9-15.8-25.7-26.6-45-27.3-1 0-2 .8-2 1.9zm-60.8-35.9l-5.7-5.7c-5.6-5.6-14.6-5.6-20.2 0l-6.8 6.8c-5.6 5.6-5.6 14.6 0 20.2l5.6 5.6c.9.9 2.2.7 3-.2 3.3-4.5 6.9-8.8 10.9-12.8 4.1-4.1 8.3-7.7 12.9-11 1-.6 1.1-2 .3-2.9zM217.5 89V77.7c0-7.9-6.4-14.3-14.3-14.3h-33.3c-7.9 0-14.3 6.4-14.3 14.3v11.6c0 1.3 1.2 2.2 2.5 1.9 9.3-2.7 19.1-4.1 29-4.1 9.5 0 18.9 1.3 28 3.8 1.2.3 2.4-.6 2.4-1.9z\" fill=\"#FFFFFF\"/>\n  <path d=\"M842.5 267.6c0 26.7-6.8 46.2-20.5 58.6-13.7 12.4-34.6 18.6-62.8 18.6-10.3 0-31.7-2-48.8-5.8l6.3-31c14.3 3 33.2 3.8 43.1 3.8 15.7 0 26.9-3.2 33.6-9.6s10-15.9 10-28.5v-6.4c-3.9 1.9-9 3.8-15.3 5.8-6.3 1.9-13.6 2.9-21.8 2.9-10.8 0-20.6-1.7-29.5-5.1-8.9-3.4-16.6-8.4-22.9-15-6.3-6.6-11.3-14.9-14.8-24.8s-5.3-27.6-5.3-40.6c0-12.2 1.9-27.5 5.6-37.7 3.8-10.2 9.2-19 16.5-26.3 7.2-7.3 16-12.9 26.3-17s22.4-6.7 35.5-6.7c12.7 0 24.4 1.6 35.8 3.5 11.4 1.9 21.1 3.9 29 6.1v155.2zm-108.7-77.2c0 16.4 3.6 34.6 10.8 42.2 7.2 7.6 16.5 11.4 27.9 11.4 6.2 0 12.1-.9 17.6-2.6 5.5-1.7 9.9-3.7 13.4-6.1v-97.1c-2.8-.6-14.5-3-25.8-3.3-14.2-.4-25 5.4-32.6 14.7-7.5 9.3-11.3 25.6-11.3 40.8zm294.3 0c0 13.2-1.9 23.2-5.8 34.1s-9.4 20.2-16.5 27.9c-7.1 7.7-15.6 13.7-25.6 17.9s-25.4 6.6-33.1 6.6c-7.7-.1-23-2.3-32.9-6.6-9.9-4.3-18.4-10.2-25.5-17.9-7.1-7.7-12.6-17-16.6-27.9s-6-20.9-6-34.1c0-13.2 1.8-25.9 5.8-36.7 4-10.8 9.6-20 16.8-27.7s15.8-13.6 25.6-17.8c9.9-4.2 20.8-6.2 32.6-6.2s22.7 2.1 32.7 6.2c10 4.2 18.6 10.1 25.6 17.8 7.1 7.7 12.6 16.9 16.6 27.7 4.2 10.8 6.3 23.5 6.3 36.7zm-40 .1c0-16.9-3.7-31-10.9-40.8-7.2-9.9-17.3-14.8-30.2-14.8-12.9 0-23 4.9-30.2 14.8-7.2 9.9-10.7 23.9-10.7 40.8 0 17.1 3.6 28.6 10.8 38.5 7.2 10 17.3 14.9 30.2 14.9 12.9 0 23-5 30.2-14.9 7.2-10 10.8-21.4 10.8-38.5zm127.1 86.4c-64.1.3-64.1-51.8-64.1-60.1L1051 32l39.1-6.2v183.6c0 4.7 0 34.5 25.1 34.6v32.9zm68.9 0h-39.3V108.1l39.3-6.2v175zm-19.7-193.5c13.1 0 23.8-10.6 23.8-23.7S1177.6 36 1164.4 36s-23.8 10.6-23.8 23.7 10.7 23.7 23.8 23.7zm117.4 18.6c12.9 0 23.8 1.6 32.6 4.8 8.8 3.2 15.9 7.7 21.1 13.4s8.9 13.5 11.1 21.7c2.3 8.2 3.4 17.2 3.4 27.1v100.6c-6 1.3-15.1 2.8-27.3 4.6s-25.9 2.7-41.1 2.7c-10.1 0-19.4-1-27.7-2.9-8.4-1.9-15.5-5-21.5-9.3-5.9-4.3-10.5-9.8-13.9-16.6-3.3-6.8-5-16.4-5-26.4 0-9.6 1.9-15.7 5.6-22.3 3.8-6.6 8.9-12 15.3-16.2 6.5-4.2 13.9-7.2 22.4-9s17.4-2.7 26.6-2.7c4.3 0 8.8.3 13.6.8s9.8 1.4 15.2 2.7v-6.4c0-4.5-.5-8.8-1.6-12.8-1.1-4.1-3-7.6-5.6-10.7-2.7-3.1-6.2-5.5-10.6-7.2s-10-3-16.7-3c-9 0-17.2 1.1-24.7 2.4-7.5 1.3-13.7 2.8-18.4 4.5l-4.7-32.1c4.9-1.7 12.2-3.4 21.6-5.1s19.5-2.6 30.3-2.6zm3.3 141.9c12 0 20.9-.7 27.1-1.9v-39.8c-2.2-.6-5.3-1.3-9.4-1.9-4.1-.6-8.6-1-13.6-1-4.3 0-8.7.3-13.1 1-4.4.6-8.4 1.8-11.9 3.5s-6.4 4.1-8.5 7.2c-2.2 3.1-3.2 4.9-3.2 9.6 0 9.2 3.2 14.5 9 18 5.9 3.6 13.7 5.3 23.6 5.3zM512.9 103c12.9 0 23.8 1.6 32.6 4.8 8.8 3.2 15.9 7.7 21.1 13.4 5.3 5.8 8.9 13.5 11.1 21.7 2.3 8.2 3.4 17.2 3.4 27.1v100.6c-6 1.3-15.1 2.8-27.3 4.6-12.2 1.8-25.9 2.7-41.1 2.7-10.1 0-19.4-1-27.7-2.9-8.4-1.9-15.5-5-21.5-9.3-5.9-4.3-10.5-9.8-13.9-16.6-3.3-6.8-5-16.4-5-26.4 0-9.6 1.9-15.7 5.6-22.3 3.8-6.6 8.9-12 15.3-16.2 6.5-4.2 13.9-7.2 22.4-9s17.4-2.7 26.6-2.7c4.3 0 8.8.3 13.6.8 4.7.5 9.8 1.4 15.2 2.7v-6.4c0-4.5-.5-8.8-1.6-12.8-1.1-4.1-3-7.6-5.6-10.7-2.7-3.1-6.2-5.5-10.6-7.2-4.4-1.7-10-3-16.7-3-9 0-17.2 1.1-24.7 2.4-7.5 1.3-13.7 2.8-18.4 4.5l-4.7-32.1c4.9-1.7 12.2-3.4 21.6-5.1 9.4-1.8 19.5-2.6 30.3-2.6zm3.4 142c12 0 20.9-.7 27.1-1.9v-39.8c-2.2-.6-5.3-1.3-9.4-1.9-4.1-.6-8.6-1-13.6-1-4.3 0-8.7.3-13.1 1-4.4.6-8.4 1.8-11.9 3.5s-6.4 4.1-8.5 7.2c-2.2 3.1-3.2 4.9-3.2 9.6 0 9.2 3.2 14.5 9 18s13.7 5.3 23.6 5.3zm158.5 31.9c-64.1.3-64.1-51.8-64.1-60.1L610.6 32l39.1-6.2v183.6c0 4.7 0 34.5 25.1 34.6v32.9z\" fill=\"#182359\"/></svg>"
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 54.9 50.5\"><path d=\"M9.6 12.7H8.5c-2.3 0-4.1 1.9-4.1 4.1v1.1c0 2.2 1.8 4 4 4.1v21.7h-.7c-1.3 0-2.3 1-2.3 2.3h7.1c0-1.3-1-2.3-2.3-2.3h-.5V22.1c2.2-.1 4-1.9 4-4.1v-1.1c0-2.3-1.8-4.2-4.1-4.2zM46 7.6h-7.5c0-1.8-1.5-3.3-3.3-3.3h-3.6c-1.8 0-3.3 1.5-3.3 3.3H21c-2.5 0-4.6 2-4.6 4.6v26.3c0 1.7 1.3 3.1 3 3.1h.8v1.6c0 1.7 1.4 3.1 3.1 3.1 1.7 0 3-1.4 3-3.1v-1.6h14.3v1.6c0 1.7 1.4 3.1 3.1 3.1 1.7 0 3.1-1.4 3.1-3.1v-1.6h.8c1.7 0 3.1-1.4 3.1-3.1V12.2c-.2-2.5-2.2-4.6-4.7-4.6zm-27.4 4.6c0-1.3 1.1-2.4 2.4-2.4h25c1.3 0 2.4 1.1 2.4 2.4v.3c0 1.3-1.1 2.4-2.4 2.4H21c-1.3 0-2.4-1.1-2.4-2.4v-.3zM21 38c-1.5 0-2.7-1.2-2.7-2.7 0-1.5 1.2-2.7 2.7-2.7 1.5 0 2.7 1.2 2.7 2.7 0 1.5-1.2 2.7-2.7 2.7zm0-10.1c-1.3 0-2.4-1.1-2.4-2.4v-6.6c0-1.3 1.1-2.4 2.4-2.4h25c1.3 0 2.4 1.1 2.4 2.4v6.6c0 1.3-1.1 2.4-2.4 2.4H21zm24.8 10c-1.5 0-2.7-1.2-2.7-2.7 0-1.5 1.2-2.7 2.7-2.7 1.5 0 2.7 1.2 2.7 2.7 0 1.5-1.2 2.7-2.7 2.7z\"/></svg>\n"
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 18 19\"><path d=\"M12 9V3L9 0 6 3v2H0v14h18V9h-6zm-8 8H2v-2h2v2zm0-4H2v-2h2v2zm0-4H2V7h2v2zm6 8H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V7h2v2zm0-4H8V3h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\"/></svg>\n"
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\">\n  <path d=\"M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zM9 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L7 13v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H6V8h2c.55 0 1-.45 1-1V5h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z\"/>\n</svg>\n"
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\">\n  <path fill=\"#797979\" fill-rule=\"evenodd\" d=\"M6.577.5L5.304.005 2.627 1.02 0 0l.992 2.767-.986 2.685.998 2.76-1 2.717.613.22 3.39-3.45.563.06.726-.69s-.717-.92-.91-1.86c.193-.146.184-.14.355-.285C4.1 1.93 6.58.5 6.58.5zm-4.17 11.354l.22.12 2.68-1.05 2.62 1.04 2.644-1.03 1.02-2.717-.33-.944s-1.13 1.26-3.44.878c-.174.29-.25.37-.25.37s-1.11-.31-1.683-.89c-.573.58-.795.71-.795.71l.08.634-2.76 2.89zm6.26-4.395c1.817 0 3.29-1.53 3.29-3.4 0-1.88-1.473-3.4-3.29-3.4s-3.29 1.52-3.29 3.4c0 1.87 1.473 3.4 3.29 3.4z\"/>\n</svg>\n"
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\"><path d=\"M22.9 1.1s1.3.3-4.3 6.5l.7 3.8.2-.2c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l-1.2 1.2.3 1.7.1-.1c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l-1.1 1.1c.2 1.9.3 3.6.1 4.5 0 0-1.2 1.2-1.8.5 0 0-2.3-7.7-3.8-11.1-5.9 6-6.4 5.6-6.4 5.6s1.2 3.8-.2 5.2l-2.3-4.3h.1l-4.3-2.3c1.3-1.3 5.2-.2 5.2-.2s-.5-.4 5.6-6.3C8.9 7.7 1.2 5.5 1.2 5.5c-.7-.7.5-1.8.5-1.8.9-.2 2.6-.1 4.5.1l1.1-1.1c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l1.7.3 1.2-1.2c.4-.4 1-.4 1.3 0 .4.4.4 1 0 1.3l-.2.2 3.8.7c6.2-5.5 6.5-4.2 6.5-4.2z\"/></svg>\n"
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\"><path d=\"M12 .6L2.5 6.9h18.9L12 .6zM3.8 8.2c-.7 0-1.3.6-1.3 1.3v8.8L.3 22.1c-.2.3-.3.5-.3.6 0 .6.8.6 1.3.6h21.5c.4 0 1.3 0 1.3-.6 0-.2-.1-.3-.3-.6l-2.2-3.8V9.5c0-.7-.6-1.3-1.3-1.3H3.8zm2.5 2.5c.7 0 1.1.6 1.3 1.3v7.6H5.1V12c0-.7.5-1.3 1.2-1.3zm5.7 0c.7 0 1.3.6 1.3 1.3v7.6h-2.5V12c-.1-.7.5-1.3 1.2-1.3zm5.7 0c.7 0 1.3.6 1.3 1.3v7.6h-2.5V12c-.1-.7.5-1.3 1.2-1.3z\"/></svg>\n"
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 15 20\">\n  <path d=\"M13.105 20l-2.366-3.354H4.26L1.907 20H0l3.297-4.787c-1.1-.177-2.196-1.287-2.194-2.642V2.68C1.1 1.28 2.317-.002 3.973 0h7.065c1.647-.002 2.863 1.28 2.86 2.676v9.895c.003 1.36-1.094 2.47-2.194 2.647L15 20h-1.895zM6.11 2h2.78c.264 0 .472-.123.472-.27v-.46c0-.147-.22-.268-.472-.27H6.11c-.252.002-.47.123-.47.27v.46c0 .146.206.27.47.27zm6.26 3.952V4.175c-.004-.74-.5-1.387-1.436-1.388H4.066c-.936 0-1.43.648-1.436 1.388v1.777c-.002.86.644 1.384 1.436 1.388h6.868c.793-.004 1.44-.528 1.436-1.388zm-8.465 5.386c-.69-.003-1.254.54-1.252 1.21-.002.673.56 1.217 1.252 1.222.697-.006 1.26-.55 1.262-1.22-.002-.672-.565-1.215-1.262-1.212zm8.42 1.21c-.005-.67-.567-1.213-1.265-1.21-.69-.003-1.253.54-1.25 1.21-.003.673.56 1.217 1.25 1.222.698-.006 1.26-.55 1.264-1.22z\"/>\n</svg>\n"
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports.default = places;
-
-var _events = __webpack_require__(79);
-
-var _events2 = _interopRequireDefault(_events);
-
-var _algoliasearchLite = __webpack_require__(43);
-
-var _algoliasearchLite2 = _interopRequireDefault(_algoliasearchLite);
-
-var _autocomplete = __webpack_require__(54);
-
-var _autocomplete2 = _interopRequireDefault(_autocomplete);
-
-__webpack_require__(15);
-
-var _createAutocompleteDataset = __webpack_require__(14);
-
-var _createAutocompleteDataset2 = _interopRequireDefault(_createAutocompleteDataset);
-
-var _clear = __webpack_require__(78);
-
-var _clear2 = _interopRequireDefault(_clear);
-
-var _address = __webpack_require__(12);
-
-var _address2 = _interopRequireDefault(_address);
-
-var _places = __webpack_require__(17);
-
-var _places2 = _interopRequireDefault(_places);
-
-var _insertCss = __webpack_require__(16);
-
-var _insertCss2 = _interopRequireDefault(_insertCss);
-
-var _errors = __webpack_require__(64);
-
-var _errors2 = _interopRequireDefault(_errors);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(0, _insertCss2.default)(_places2.default, { prepend: true });
-
-function places(options) {
+function places_places(options) {
   var container = options.container,
       style = options.style,
       _options$autocomplete = options.autocompleteOptions,
-      userAutocompleteOptions = _options$autocomplete === undefined ? {} : _options$autocomplete;
-
-  // multiple DOM elements targeted
+      userAutocompleteOptions = _options$autocomplete === void 0 ? {} : _options$autocomplete; // multiple DOM elements targeted
 
   if (container instanceof NodeList) {
     if (container.length > 1) {
-      throw new Error(_errors2.default.multiContainers);
-    }
+      throw new Error(errors.multiContainers);
+    } // if single node NodeList received, resolve to the first one
 
-    // if single node NodeList received, resolve to the first one
-    return places(_extends({}, options, { container: container[0] }));
-  }
 
-  // container sent as a string, resolve it for multiple DOM elements issue
+    return places_places(places_objectSpread({}, options, {
+      container: container[0]
+    }));
+  } // container sent as a string, resolve it for multiple DOM elements issue
+
+
   if (typeof container === 'string') {
     var resolvedContainer = document.querySelectorAll(container);
-    return places(_extends({}, options, { container: resolvedContainer }));
-  }
+    return places_places(places_objectSpread({}, options, {
+      container: resolvedContainer
+    }));
+  } // if not an <input>, error
 
-  // if not an <input>, error
+
   if (!(container instanceof HTMLInputElement)) {
-    throw new Error(_errors2.default.badContainer);
+    throw new Error(errors.badContainer);
   }
 
-  var placesInstance = new _events2.default();
-  var prefix = 'ap' + (style === false ? '-nostyle' : '');
+  var placesInstance = new events_default.a();
+  var prefix = "ap".concat(style === false ? '-nostyle' : '');
 
-  var autocompleteOptions = _extends({
+  var autocompleteOptions = places_objectSpread({
     autoselect: true,
     hint: false,
     cssClasses: {
-      root: 'algolia-places' + (style === false ? '-nostyle' : ''),
+      root: "algolia-places".concat(style === false ? '-nostyle' : ''),
       prefix: prefix
     },
     debug: "production" === 'development'
   }, userAutocompleteOptions);
 
-  var autocompleteDataset = (0, _createAutocompleteDataset2.default)(_extends({}, options, {
-    algoliasearch: _algoliasearchLite2.default,
+  var autocompleteDataset = Object(createAutocompleteDataset["default"])(places_objectSpread({}, options, {
+    algoliasearch: algoliasearchLite_default.a,
     onHits: function onHits(_ref) {
       var hits = _ref.hits,
           rawAnswer = _ref.rawAnswer,
@@ -1987,23 +2736,24 @@ function places(options) {
     },
     onRateLimitReached: function onRateLimitReached() {
       var listeners = placesInstance.listenerCount('limit');
+
       if (listeners === 0) {
-        console.log(_errors2.default.rateLimitReached); // eslint-disable-line
+        console.log(errors.rateLimitReached); // eslint-disable-line
+
         return;
       }
 
-      placesInstance.emit('limit', { message: _errors2.default.rateLimitReached });
+      placesInstance.emit('limit', {
+        message: errors.rateLimitReached
+      });
     },
     container: undefined
   }));
-
-  var autocompleteInstance = (0, _autocomplete2.default)(container, autocompleteOptions, autocompleteDataset);
+  var autocompleteInstance = autocomplete_js_default()(container, autocompleteOptions, autocompleteDataset);
   var autocompleteContainer = container.parentNode;
-
   var autocompleteChangeEvents = ['selected', 'autocompleted'];
-
   autocompleteChangeEvents.forEach(function (eventName) {
-    autocompleteInstance.on('autocomplete:' + eventName, function (_, suggestion) {
+    autocompleteInstance.on("autocomplete:".concat(eventName), function (_, suggestion) {
       placesInstance.emit('change', {
         rawAnswer: suggestion.rawAnswer,
         query: suggestion.query,
@@ -2020,26 +2770,26 @@ function places(options) {
       suggestionIndex: suggestion.hitIndex
     });
   });
-
   var clear = document.createElement('button');
   clear.setAttribute('type', 'button');
   clear.setAttribute('aria-label', 'clear');
-  clear.classList.add(prefix + '-input-icon');
-  clear.classList.add(prefix + '-icon-clear');
-  clear.innerHTML = _clear2.default;
+  clear.classList.add("".concat(prefix, "-input-icon"));
+  clear.classList.add("".concat(prefix, "-icon-clear"));
+  clear.innerHTML = clear_default.a;
   autocompleteContainer.appendChild(clear);
   clear.style.display = 'none';
-
   var pin = document.createElement('button');
   pin.setAttribute('type', 'button');
   pin.setAttribute('aria-label', 'focus');
-  pin.classList.add(prefix + '-input-icon');
-  pin.classList.add(prefix + '-icon-pin');
-  pin.innerHTML = _address2.default;
+  pin.classList.add("".concat(prefix, "-input-icon"));
+  pin.classList.add("".concat(prefix, "-icon-pin"));
+  pin.innerHTML = address_default.a;
   autocompleteContainer.appendChild(pin);
-
   pin.addEventListener('click', function () {
-    return autocompleteInstance.focus();
+    autocompleteDataset.source.configure({
+      useDeviceLocation: true
+    });
+    autocompleteInstance.focus();
   });
   clear.addEventListener('click', function () {
     autocompleteInstance.autocomplete.setVal('');
@@ -2048,14 +2798,15 @@ function places(options) {
     pin.style.display = '';
     placesInstance.emit('clear');
   });
-
   var previousQuery = '';
 
   var inputListener = function inputListener() {
     var query = autocompleteInstance.val();
+
     if (query === '') {
       pin.style.display = '';
       clear.style.display = 'none';
+
       if (previousQuery !== query) {
         placesInstance.emit('clear');
       }
@@ -2063,11 +2814,11 @@ function places(options) {
       clear.style.display = '';
       pin.style.display = 'none';
     }
+
     previousQuery = query;
   };
 
-  autocompleteContainer.querySelector('.' + prefix + '-input').addEventListener('input', inputListener);
-
+  autocompleteContainer.querySelector(".".concat(prefix, "-input")).addEventListener('input', inputListener);
   var autocompleteIsomorphicMethods = ['open', 'close', 'getVal'];
   autocompleteIsomorphicMethods.forEach(function (methodName) {
     placesInstance[methodName] = function () {
@@ -2080,7 +2831,7 @@ function places(options) {
   placesInstance.destroy = function () {
     var _autocompleteInstance2;
 
-    autocompleteContainer.querySelector('.' + prefix + '-input').removeEventListener('input', inputListener);
+    autocompleteContainer.querySelector(".".concat(prefix, "-input")).removeEventListener('input', inputListener);
 
     (_autocompleteInstance2 = autocompleteInstance.autocomplete).destroy.apply(_autocompleteInstance2, arguments);
   };
@@ -2089,31 +2840,80 @@ function places(options) {
     var _autocompleteInstance3;
 
     previousQuery = arguments.length <= 0 ? undefined : arguments[0];
+
     (_autocompleteInstance3 = autocompleteInstance.autocomplete).setVal.apply(_autocompleteInstance3, arguments);
   };
 
   placesInstance.autocomplete = autocompleteInstance;
 
+  placesInstance.search = function () {
+    var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    return new Promise(function (resolve) {
+      autocompleteDataset.source(query, resolve);
+    });
+  };
+
+  placesInstance.configure = function (configuration) {
+    var safeConfig = places_objectSpread({}, configuration);
+
+    delete safeConfig.onHits;
+    delete safeConfig.onError;
+    delete safeConfig.onRateLimitReached;
+    delete safeConfig.templates;
+    autocompleteDataset.source.configure(safeConfig);
+    return placesInstance;
+  };
+
+  placesInstance.reverse = src_createReverseGeocodingSource(places_objectSpread({}, options, {
+    algoliasearch: algoliasearchLite_default.a,
+    formatInputValue: (options.templates || {}).value,
+    onHits: function onHits(_ref2) {
+      var hits = _ref2.hits,
+          rawAnswer = _ref2.rawAnswer,
+          query = _ref2.query;
+      return placesInstance.emit('reverse', {
+        rawAnswer: rawAnswer,
+        query: query,
+        suggestions: hits
+      });
+    },
+    onError: function onError(e) {
+      return placesInstance.emit('error', e);
+    },
+    onRateLimitReached: function onRateLimitReached() {
+      var listeners = placesInstance.listenerCount('limit');
+
+      if (listeners === 0) {
+        console.log(errors.rateLimitReached); // eslint-disable-line
+
+        return;
+      }
+
+      placesInstance.emit('limit', {
+        message: errors.rateLimitReached
+      });
+    }
+  }));
   return placesInstance;
 }
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = AlgoliaSearchCore;
+/* WEBPACK VAR INJECTION */(function(process) {module.exports = AlgoliaSearchCore;
 
-var errors = __webpack_require__(6);
-var exitPromise = __webpack_require__(49);
-var IndexCore = __webpack_require__(42);
-var store = __webpack_require__(52);
+var errors = __webpack_require__(11);
+var exitPromise = __webpack_require__(43);
+var IndexCore = __webpack_require__(44);
+var store = __webpack_require__(50);
 
 // We will always put the API KEY in the JSON body in case of too long API KEY,
 // to avoid query string being too long and failing in various conditions (our server limit, browser limit,
 // proxies limit)
 var MAX_API_KEY_LENGTH = 500;
 var RESET_APP_DATA_TIMER =
-  __webpack_require__.i({"NODE_ENV":"production"}).RESET_APP_DATA_TIMER && parseInt(__webpack_require__.i({"NODE_ENV":"production"}).RESET_APP_DATA_TIMER, 10) ||
+  process.env.RESET_APP_DATA_TIMER && parseInt(process.env.RESET_APP_DATA_TIMER, 10) ||
   60 * 2 * 1000; // after 2 minutes reset to first host
 
 /*
@@ -2141,11 +2941,11 @@ var RESET_APP_DATA_TIMER =
  *           If you provide them, you will less benefit from our HA implementation
  */
 function AlgoliaSearchCore(applicationID, apiKey, opts) {
-  var debug = __webpack_require__(8)('algoliasearch');
+  var debug = __webpack_require__(14)('algoliasearch');
 
-  var clone = __webpack_require__(2);
-  var isArray = __webpack_require__(5);
-  var map = __webpack_require__(7);
+  var clone = __webpack_require__(4);
+  var isArray = __webpack_require__(12);
+  var map = __webpack_require__(13);
 
   var usage = 'Usage: algoliasearch(applicationID, apiKey, opts)';
 
@@ -2221,6 +3021,7 @@ function AlgoliaSearchCore(applicationID, apiKey, opts) {
 
   this._ua = opts._ua;
   this._useCache = opts._useCache === undefined || opts._cache ? true : opts._useCache;
+  this._useRequestCache = this._useCache && opts._useRequestCache;
   this._useFallback = opts.useFallback === undefined ? true : opts.useFallback;
 
   this._setTimeout = opts._setTimeout;
@@ -2284,9 +3085,11 @@ AlgoliaSearchCore.prototype.addAlgoliaAgent = function(algoliaAgent) {
 AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
   this._checkAppIdData();
 
-  var requestDebug = __webpack_require__(8)('algoliasearch:' + initialOpts.url);
+  var requestDebug = __webpack_require__(14)('algoliasearch:' + initialOpts.url);
+
 
   var body;
+  var cacheID;
   var additionalUA = initialOpts.additionalUA || '';
   var cache = initialOpts.cache;
   var client = this;
@@ -2321,26 +3124,33 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
   requestDebug('request start');
   var debugData = [];
 
+
   function doRequest(requester, reqOpts) {
     client._checkAppIdData();
 
     var startTime = new Date();
-    var cacheID;
 
-    if (client._useCache) {
+    if (client._useCache && !client._useRequestCache) {
       cacheID = initialOpts.url;
     }
 
     // as we sometime use POST requests to pass parameters (like query='aa'),
     // the cacheID must also include the body to be different between calls
-    if (client._useCache && body) {
+    if (client._useCache && !client._useRequestCache && body) {
       cacheID += '_body_' + reqOpts.body;
     }
 
     // handle cache existence
-    if (client._useCache && cache && cache[cacheID] !== undefined) {
+    if (isCacheValidWithCurrentID(!client._useRequestCache, cache, cacheID)) {
       requestDebug('serving response from cache');
-      return client._promise.resolve(JSON.parse(cache[cacheID]));
+
+      var responseText = cache[cacheID];
+
+      // Cache response must match the type of the original one
+      return client._promise.resolve({
+        body: JSON.parse(responseText),
+        responseText: responseText
+      });
     }
 
     // if we reached max tries
@@ -2388,7 +3198,8 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
       method: reqOpts.method,
       headers: headers,
       timeouts: reqOpts.timeouts,
-      debug: requestDebug
+      debug: requestDebug,
+      forceAuthHeaders: reqOpts.forceAuthHeaders
     };
 
     requestDebug('method: %s, url: %s, headers: %j, timeouts: %d',
@@ -2444,11 +3255,14 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
       });
 
       if (httpResponseOk) {
-        if (client._useCache && cache) {
+        if (client._useCache && !client._useRequestCache && cache) {
           cache[cacheID] = httpResponse.responseText;
         }
 
-        return httpResponse.body;
+        return {
+          responseText: httpResponse.responseText,
+          body: httpResponse.body
+        };
       }
 
       var shouldRetry = Math.floor(status / 100) !== 4;
@@ -2541,31 +3355,90 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
     }
   }
 
-  var promise = doRequest(
+  function isCacheValidWithCurrentID(
+    useRequestCache,
+    currentCache,
+    currentCacheID
+  ) {
+    return (
+      client._useCache &&
+      useRequestCache &&
+      currentCache &&
+      currentCache[currentCacheID] !== undefined
+    );
+  }
+
+
+  function interopCallbackReturn(request, callback) {
+    if (isCacheValidWithCurrentID(client._useRequestCache, cache, cacheID)) {
+      request.catch(function() {
+        // Release the cache on error
+        delete cache[cacheID];
+      });
+    }
+
+    if (typeof initialOpts.callback === 'function') {
+      // either we have a callback
+      request.then(function okCb(content) {
+        exitPromise(function() {
+          initialOpts.callback(null, callback(content));
+        }, client._setTimeout || setTimeout);
+      }, function nookCb(err) {
+        exitPromise(function() {
+          initialOpts.callback(err);
+        }, client._setTimeout || setTimeout);
+      });
+    } else {
+      // either we are using promises
+      return request.then(callback);
+    }
+  }
+
+  if (client._useCache && client._useRequestCache) {
+    cacheID = initialOpts.url;
+  }
+
+  // as we sometime use POST requests to pass parameters (like query='aa'),
+  // the cacheID must also include the body to be different between calls
+  if (client._useCache && client._useRequestCache && body) {
+    cacheID += '_body_' + body;
+  }
+
+  if (isCacheValidWithCurrentID(client._useRequestCache, cache, cacheID)) {
+    requestDebug('serving request from cache');
+
+    var maybePromiseForCache = cache[cacheID];
+
+    // In case the cache is warmup with value that is not a promise
+    var promiseForCache = typeof maybePromiseForCache.then !== 'function'
+      ? client._promise.resolve({responseText: maybePromiseForCache})
+      : maybePromiseForCache;
+
+    return interopCallbackReturn(promiseForCache, function(content) {
+      // In case of the cache request, return the original value
+      return JSON.parse(content.responseText);
+    });
+  }
+
+  var request = doRequest(
     client._request, {
       url: initialOpts.url,
       method: initialOpts.method,
       body: body,
       jsonBody: initialOpts.body,
-      timeouts: client._getTimeoutsForRequest(initialOpts.hostType)
+      timeouts: client._getTimeoutsForRequest(initialOpts.hostType),
+      forceAuthHeaders: initialOpts.forceAuthHeaders
     }
   );
 
-  // either we have a callback
-  // either we are using promises
-  if (typeof initialOpts.callback === 'function') {
-    promise.then(function okCb(content) {
-      exitPromise(function() {
-        initialOpts.callback(null, content);
-      }, client._setTimeout || setTimeout);
-    }, function nookCb(err) {
-      exitPromise(function() {
-        initialOpts.callback(err);
-      }, client._setTimeout || setTimeout);
-    });
-  } else {
-    return promise;
+  if (client._useCache && client._useRequestCache && cache) {
+    cache[cacheID] = request;
   }
+
+  return interopCallbackReturn(request, function(content) {
+    // In case of the first request, return the JSON value
+    return content.body;
+  });
 };
 
 /*
@@ -2645,8 +3518,8 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(options) {
  * @return {Promise|undefined} Returns a promise if no callback given
  */
 AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
-  var isArray = __webpack_require__(5);
-  var map = __webpack_require__(7);
+  var isArray = __webpack_require__(12);
+  var map = __webpack_require__(13);
 
   var usage = 'Usage: client.search(arrayOfQueries[, callback])';
 
@@ -2692,7 +3565,7 @@ AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
   var url = '/1/indexes/*/queries';
 
   if (opts.strategy !== undefined) {
-    url += '?strategy=' + opts.strategy;
+    postObj.strategy = opts.strategy;
   }
 
   return this._jsonRequest({
@@ -2728,8 +3601,8 @@ AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
 * Pagination is not supported. The page and hitsPerPage parameters will be ignored.
 */
 AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
-  var isArray = __webpack_require__(5);
-  var map = __webpack_require__(7);
+  var isArray = __webpack_require__(12);
+  var map = __webpack_require__(13);
 
   var usage = 'Usage: client.searchForFacetValues([{indexName, params: {facetName, facetQuery, ...params}}, ...queries])'; // eslint-disable-line max-len
 
@@ -2749,8 +3622,8 @@ AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
       throw new Error(usage);
     }
 
-    var clone = __webpack_require__(2);
-    var omit = __webpack_require__(19);
+    var clone = __webpack_require__(4);
+    var omit = __webpack_require__(31);
 
     var indexName = query.indexName;
     var params = query.params;
@@ -2902,7 +3775,7 @@ AlgoliaSearchCore.prototype._getHostIndexByType = function(hostType) {
 };
 
 AlgoliaSearchCore.prototype._setHostIndexByType = function(hostIndex, hostType) {
-  var clone = __webpack_require__(2);
+  var clone = __webpack_require__(4);
   var newHostIndexes = clone(this._hostIndexes);
   newHostIndexes[hostType] = hostIndex;
   this._partialAppIdDataUpdate({hostIndexes: newHostIndexes});
@@ -2995,14 +3868,28 @@ function removeCredentials(headers) {
   return newHeaders;
 }
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(10)))
 
 /***/ }),
-/* 42 */
+/* 43 */
+/***/ (function(module, exports) {
+
+// Parse cloud does not supports setTimeout
+// We do not store a setTimeout reference in the client everytime
+// We only fallback to a fake setTimeout when not available
+// setTimeout cannot be override globally sadly
+module.exports = function exitPromise(fn, _setTimeout) {
+  _setTimeout(fn, 0);
+};
+
+
+/***/ }),
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var buildSearchMethod = __webpack_require__(18);
-var deprecate = __webpack_require__(47);
-var deprecatedMessage = __webpack_require__(48);
+var buildSearchMethod = __webpack_require__(30);
+var deprecate = __webpack_require__(45);
+var deprecatedMessage = __webpack_require__(46);
 
 module.exports = IndexCore;
 
@@ -3134,7 +4021,13 @@ IndexCore.prototype.search = buildSearchMethod('query');
 *   All search parameters are supported (see search function), restrictSearchableAttributes and facetFilters
 *   are the two most useful to restrict the similar results and get more relevant content
 */
-IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
+IndexCore.prototype.similarSearch = deprecate(
+  buildSearchMethod('similarQuery'),
+  deprecatedMessage(
+    'index.similarSearch(query[, callback])',
+    'index.search({ similarQuery: query }[, callback])'
+  )
+);
 
 /*
 * Browse index content. The response content will have a `cursor` property that you can use
@@ -3154,7 +4047,7 @@ IndexCore.prototype.similarSearch = buildSearchMethod('similarQuery');
 * @see {@link https://www.algolia.com/doc/rest_api#Browse|Algolia REST API Documentation}
 */
 IndexCore.prototype.browse = function(query, queryParameters, callback) {
-  var merge = __webpack_require__(50);
+  var merge = __webpack_require__(47);
 
   var indexObj = this;
 
@@ -3249,8 +4142,8 @@ IndexCore.prototype.browseFrom = function(cursor, callback) {
 * @param callback (optional)
 */
 IndexCore.prototype.searchForFacetValues = function(params, callback) {
-  var clone = __webpack_require__(2);
-  var omit = __webpack_require__(19);
+  var clone = __webpack_require__(4);
+  var omit = __webpack_require__(31);
   var usage = 'Usage: index.searchForFacetValues({facetName, facetQuery, ...params}[, callback])';
 
   if (params.facetName === undefined || params.facetQuery === undefined) {
@@ -3339,8 +4232,8 @@ IndexCore.prototype.getObject = function(objectID, attrs, callback) {
 * @param objectIDs the array of unique identifier of objects to retrieve
 */
 IndexCore.prototype.getObjects = function(objectIDs, attributesToRetrieve, callback) {
-  var isArray = __webpack_require__(5);
-  var map = __webpack_require__(7);
+  var isArray = __webpack_require__(12);
+  var map = __webpack_require__(13);
 
   var usage = 'Usage: index.getObjects(arrayOfObjectIDs[, callback])';
 
@@ -3386,45 +4279,720 @@ IndexCore.prototype.typeAheadValueOption = null;
 
 
 /***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 45 */
+/***/ (function(module, exports) {
 
-"use strict";
+module.exports = function deprecate(fn, message) {
+  var warned = false;
 
+  function deprecated() {
+    if (!warned) {
+      /* eslint no-console:0 */
+      console.warn(message);
+      warned = true;
+    }
 
-var AlgoliaSearchCore = __webpack_require__(41);
-var createAlgoliasearch = __webpack_require__(44);
+    return fn.apply(this, arguments);
+  }
 
-module.exports = createAlgoliasearch(AlgoliaSearchCore, '(lite) ');
+  return deprecated;
+};
 
 
 /***/ }),
-/* 44 */
+/* 46 */
+/***/ (function(module, exports) {
+
+module.exports = function deprecatedMessage(previousUsage, newUsage) {
+  var githubAnchorLink = previousUsage.toLowerCase()
+    .replace(/[\.\(\)]/g, '');
+
+  return 'algoliasearch: `' + previousUsage + '` was replaced by `' + newUsage +
+    '`. Please see https://github.com/algolia/algoliasearch-client-javascript/wiki/Deprecated#' + githubAnchorLink;
+};
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var foreach = __webpack_require__(3);
+
+module.exports = function merge(destination/* , sources */) {
+  var sources = Array.prototype.slice.call(arguments);
+
+  foreach(sources, function(source) {
+    for (var keyName in source) {
+      if (source.hasOwnProperty(keyName)) {
+        if (typeof destination[keyName] === 'object' && typeof source[keyName] === 'object') {
+          destination[keyName] = merge({}, destination[keyName], source[keyName]);
+        } else if (source[keyName] !== undefined) {
+          destination[keyName] = source[keyName];
+        }
+      }
+    }
+  });
+
+  return destination;
+};
+
+
+/***/ }),
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var global = __webpack_require__(67);
-var Promise = global.Promise || __webpack_require__(66).Promise;
+// modified from https://github.com/es-shims/es5-shim
+var has = Object.prototype.hasOwnProperty;
+var toStr = Object.prototype.toString;
+var slice = Array.prototype.slice;
+var isArgs = __webpack_require__(49);
+var isEnumerable = Object.prototype.propertyIsEnumerable;
+var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
+var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
+var dontEnums = [
+	'toString',
+	'toLocaleString',
+	'valueOf',
+	'hasOwnProperty',
+	'isPrototypeOf',
+	'propertyIsEnumerable',
+	'constructor'
+];
+var equalsConstructorPrototype = function (o) {
+	var ctor = o.constructor;
+	return ctor && ctor.prototype === o;
+};
+var excludedKeys = {
+	$applicationCache: true,
+	$console: true,
+	$external: true,
+	$frame: true,
+	$frameElement: true,
+	$frames: true,
+	$innerHeight: true,
+	$innerWidth: true,
+	$outerHeight: true,
+	$outerWidth: true,
+	$pageXOffset: true,
+	$pageYOffset: true,
+	$parent: true,
+	$scrollLeft: true,
+	$scrollTop: true,
+	$scrollX: true,
+	$scrollY: true,
+	$self: true,
+	$webkitIndexedDB: true,
+	$webkitStorageInfo: true,
+	$window: true
+};
+var hasAutomationEqualityBug = (function () {
+	/* global window */
+	if (typeof window === 'undefined') { return false; }
+	for (var k in window) {
+		try {
+			if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
+				try {
+					equalsConstructorPrototype(window[k]);
+				} catch (e) {
+					return true;
+				}
+			}
+		} catch (e) {
+			return true;
+		}
+	}
+	return false;
+}());
+var equalsConstructorPrototypeIfNotBuggy = function (o) {
+	/* global window */
+	if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
+		return equalsConstructorPrototype(o);
+	}
+	try {
+		return equalsConstructorPrototype(o);
+	} catch (e) {
+		return false;
+	}
+};
+
+var keysShim = function keys(object) {
+	var isObject = object !== null && typeof object === 'object';
+	var isFunction = toStr.call(object) === '[object Function]';
+	var isArguments = isArgs(object);
+	var isString = isObject && toStr.call(object) === '[object String]';
+	var theKeys = [];
+
+	if (!isObject && !isFunction && !isArguments) {
+		throw new TypeError('Object.keys called on a non-object');
+	}
+
+	var skipProto = hasProtoEnumBug && isFunction;
+	if (isString && object.length > 0 && !has.call(object, 0)) {
+		for (var i = 0; i < object.length; ++i) {
+			theKeys.push(String(i));
+		}
+	}
+
+	if (isArguments && object.length > 0) {
+		for (var j = 0; j < object.length; ++j) {
+			theKeys.push(String(j));
+		}
+	} else {
+		for (var name in object) {
+			if (!(skipProto && name === 'prototype') && has.call(object, name)) {
+				theKeys.push(String(name));
+			}
+		}
+	}
+
+	if (hasDontEnumBug) {
+		var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
+
+		for (var k = 0; k < dontEnums.length; ++k) {
+			if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
+				theKeys.push(dontEnums[k]);
+			}
+		}
+	}
+	return theKeys;
+};
+
+keysShim.shim = function shimObjectKeys() {
+	if (Object.keys) {
+		var keysWorksWithArguments = (function () {
+			// Safari 5.0 bug
+			return (Object.keys(arguments) || '').length === 2;
+		}(1, 2));
+		if (!keysWorksWithArguments) {
+			var originalKeys = Object.keys;
+			Object.keys = function keys(object) { // eslint-disable-line func-name-matching
+				if (isArgs(object)) {
+					return originalKeys(slice.call(object));
+				} else {
+					return originalKeys(object);
+				}
+			};
+		}
+	} else {
+		Object.keys = keysShim;
+	}
+	return Object.keys || keysShim;
+};
+
+module.exports = keysShim;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var toStr = Object.prototype.toString;
+
+module.exports = function isArguments(value) {
+	var str = toStr.call(value);
+	var isArgs = str === '[object Arguments]';
+	if (!isArgs) {
+		isArgs = str !== '[object Array]' &&
+			value !== null &&
+			typeof value === 'object' &&
+			typeof value.length === 'number' &&
+			value.length >= 0 &&
+			toStr.call(value.callee) === '[object Function]';
+	}
+	return isArgs;
+};
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var debug = __webpack_require__(14)('algoliasearch:src/hostIndexState.js');
+var localStorageNamespace = 'algoliasearch-client-js';
+
+var store;
+var moduleStore = {
+  state: {},
+  set: function(key, data) {
+    this.state[key] = data;
+    return this.state[key];
+  },
+  get: function(key) {
+    return this.state[key] || null;
+  }
+};
+
+var localStorageStore = {
+  set: function(key, data) {
+    moduleStore.set(key, data); // always replicate localStorageStore to moduleStore in case of failure
+
+    try {
+      var namespace = JSON.parse(global.localStorage[localStorageNamespace]);
+      namespace[key] = data;
+      global.localStorage[localStorageNamespace] = JSON.stringify(namespace);
+      return namespace[key];
+    } catch (e) {
+      return localStorageFailure(key, e);
+    }
+  },
+  get: function(key) {
+    try {
+      return JSON.parse(global.localStorage[localStorageNamespace])[key] || null;
+    } catch (e) {
+      return localStorageFailure(key, e);
+    }
+  }
+};
+
+function localStorageFailure(key, e) {
+  debug('localStorage failed with', e);
+  cleanup();
+  store = moduleStore;
+  return store.get(key);
+}
+
+store = supportsLocalStorage() ? localStorageStore : moduleStore;
+
+module.exports = {
+  get: getOrSet,
+  set: getOrSet,
+  supportsLocalStorage: supportsLocalStorage
+};
+
+function getOrSet(key, data) {
+  if (arguments.length === 1) {
+    return store.get(key);
+  }
+
+  return store.set(key, data);
+}
+
+function supportsLocalStorage() {
+  try {
+    if ('localStorage' in global &&
+      global.localStorage !== null) {
+      if (!global.localStorage[localStorageNamespace]) {
+        // actual creation of the namespace
+        global.localStorage.setItem(localStorageNamespace, JSON.stringify({}));
+      }
+      return true;
+    }
+
+    return false;
+  } catch (_) {
+    return false;
+  }
+}
+
+// In case of any error on localStorage, we clean our own namespace, this should handle
+// quota errors when a lot of keys + data are used
+function cleanup() {
+  try {
+    global.localStorage.removeItem(localStorageNamespace);
+  } catch (_) {
+    // nothing to do
+  }
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
+
+exports = module.exports = createDebug.debug = createDebug['default'] = createDebug;
+exports.coerce = coerce;
+exports.disable = disable;
+exports.enable = enable;
+exports.enabled = enabled;
+exports.humanize = __webpack_require__(52);
+
+/**
+ * The currently active debug mode names, and names to skip.
+ */
+
+exports.names = [];
+exports.skips = [];
+
+/**
+ * Map of special "%n" handling functions, for the debug "format" argument.
+ *
+ * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+ */
+
+exports.formatters = {};
+
+/**
+ * Previous log timestamp.
+ */
+
+var prevTime;
+
+/**
+ * Select a color.
+ * @param {String} namespace
+ * @return {Number}
+ * @api private
+ */
+
+function selectColor(namespace) {
+  var hash = 0, i;
+
+  for (i in namespace) {
+    hash  = ((hash << 5) - hash) + namespace.charCodeAt(i);
+    hash |= 0; // Convert to 32bit integer
+  }
+
+  return exports.colors[Math.abs(hash) % exports.colors.length];
+}
+
+/**
+ * Create a debugger with the given `namespace`.
+ *
+ * @param {String} namespace
+ * @return {Function}
+ * @api public
+ */
+
+function createDebug(namespace) {
+
+  function debug() {
+    // disabled?
+    if (!debug.enabled) return;
+
+    var self = debug;
+
+    // set `diff` timestamp
+    var curr = +new Date();
+    var ms = curr - (prevTime || curr);
+    self.diff = ms;
+    self.prev = prevTime;
+    self.curr = curr;
+    prevTime = curr;
+
+    // turn the `arguments` into a proper Array
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+
+    args[0] = exports.coerce(args[0]);
+
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
+    }
+
+    // apply any `formatters` transformations
+    var index = 0;
+    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
+      index++;
+      var formatter = exports.formatters[format];
+      if ('function' === typeof formatter) {
+        var val = args[index];
+        match = formatter.call(self, val);
+
+        // now we need to remove `args[index]` since it's inlined in the `format`
+        args.splice(index, 1);
+        index--;
+      }
+      return match;
+    });
+
+    // apply env-specific formatting (colors, etc.)
+    exports.formatArgs.call(self, args);
+
+    var logFn = debug.log || exports.log || console.log.bind(console);
+    logFn.apply(self, args);
+  }
+
+  debug.namespace = namespace;
+  debug.enabled = exports.enabled(namespace);
+  debug.useColors = exports.useColors();
+  debug.color = selectColor(namespace);
+
+  // env-specific initialization logic for debug instances
+  if ('function' === typeof exports.init) {
+    exports.init(debug);
+  }
+
+  return debug;
+}
+
+/**
+ * Enables a debug mode by namespaces. This can include modes
+ * separated by a colon and wildcards.
+ *
+ * @param {String} namespaces
+ * @api public
+ */
+
+function enable(namespaces) {
+  exports.save(namespaces);
+
+  exports.names = [];
+  exports.skips = [];
+
+  var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+  var len = split.length;
+
+  for (var i = 0; i < len; i++) {
+    if (!split[i]) continue; // ignore empty strings
+    namespaces = split[i].replace(/\*/g, '.*?');
+    if (namespaces[0] === '-') {
+      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+    } else {
+      exports.names.push(new RegExp('^' + namespaces + '$'));
+    }
+  }
+}
+
+/**
+ * Disable debug output.
+ *
+ * @api public
+ */
+
+function disable() {
+  exports.enable('');
+}
+
+/**
+ * Returns true if the given mode name is enabled, false otherwise.
+ *
+ * @param {String} name
+ * @return {Boolean}
+ * @api public
+ */
+
+function enabled(name) {
+  var i, len;
+  for (i = 0, len = exports.skips.length; i < len; i++) {
+    if (exports.skips[i].test(name)) {
+      return false;
+    }
+  }
+  for (i = 0, len = exports.names.length; i < len; i++) {
+    if (exports.names[i].test(name)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Coerce `val`.
+ *
+ * @param {Mixed} val
+ * @return {Mixed}
+ * @api private
+ */
+
+function coerce(val) {
+  if (val instanceof Error) return val.stack || val.message;
+  return val;
+}
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+/**
+ * Helpers.
+ */
+
+var s = 1000;
+var m = s * 60;
+var h = m * 60;
+var d = h * 24;
+var y = d * 365.25;
+
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} [options]
+ * @throws {Error} throw an error if val is not a non-empty string or a number
+ * @return {String|Number}
+ * @api public
+ */
+
+module.exports = function(val, options) {
+  options = options || {};
+  var type = typeof val;
+  if (type === 'string' && val.length > 0) {
+    return parse(val);
+  } else if (type === 'number' && isNaN(val) === false) {
+    return options.long ? fmtLong(val) : fmtShort(val);
+  }
+  throw new Error(
+    'val is not a non-empty string or a valid number. val=' +
+      JSON.stringify(val)
+  );
+};
+
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function parse(str) {
+  str = String(str);
+  if (str.length > 100) {
+    return;
+  }
+  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(
+    str
+  );
+  if (!match) {
+    return;
+  }
+  var n = parseFloat(match[1]);
+  var type = (match[2] || 'ms').toLowerCase();
+  switch (type) {
+    case 'years':
+    case 'year':
+    case 'yrs':
+    case 'yr':
+    case 'y':
+      return n * y;
+    case 'days':
+    case 'day':
+    case 'd':
+      return n * d;
+    case 'hours':
+    case 'hour':
+    case 'hrs':
+    case 'hr':
+    case 'h':
+      return n * h;
+    case 'minutes':
+    case 'minute':
+    case 'mins':
+    case 'min':
+    case 'm':
+      return n * m;
+    case 'seconds':
+    case 'second':
+    case 'secs':
+    case 'sec':
+    case 's':
+      return n * s;
+    case 'milliseconds':
+    case 'millisecond':
+    case 'msecs':
+    case 'msec':
+    case 'ms':
+      return n;
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtShort(ms) {
+  if (ms >= d) {
+    return Math.round(ms / d) + 'd';
+  }
+  if (ms >= h) {
+    return Math.round(ms / h) + 'h';
+  }
+  if (ms >= m) {
+    return Math.round(ms / m) + 'm';
+  }
+  if (ms >= s) {
+    return Math.round(ms / s) + 's';
+  }
+  return ms + 'ms';
+}
+
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtLong(ms) {
+  return plural(ms, d, 'day') ||
+    plural(ms, h, 'hour') ||
+    plural(ms, m, 'minute') ||
+    plural(ms, s, 'second') ||
+    ms + ' ms';
+}
+
+/**
+ * Pluralization helper.
+ */
+
+function plural(ms, n, name) {
+  if (ms < n) {
+    return;
+  }
+  if (ms < n * 1.5) {
+    return Math.floor(ms / n) + ' ' + name;
+  }
+  return Math.ceil(ms / n) + ' ' + name + 's';
+}
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var global = __webpack_require__(54);
+var Promise = global.Promise || __webpack_require__(55).Promise;
 
 // This is the standalone browser build entry point
 // Browser implementation of the Algolia Search JavaScript client,
 // using XMLHttpRequest, XDomainRequest and JSONP as fallback
 module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
-  var inherits = __webpack_require__(31);
-  var errors = __webpack_require__(6);
-  var inlineHeaders = __webpack_require__(45);
-  var jsonpRequest = __webpack_require__(46);
-  var places = __webpack_require__(51);
+  var inherits = __webpack_require__(29);
+  var errors = __webpack_require__(11);
+  var inlineHeaders = __webpack_require__(56);
+  var jsonpRequest = __webpack_require__(57);
+  var places = __webpack_require__(58);
   uaSuffix = uaSuffix || '';
 
-  if (false) {
-    require('debug').enable('algoliasearch*');
-  }
+  if (false) {}
 
   function algoliasearch(applicationID, apiKey, opts) {
-    var cloneDeep = __webpack_require__(2);
+    var cloneDeep = __webpack_require__(4);
 
     opts = cloneDeep(opts || {});
 
@@ -3433,14 +5001,14 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
     return new AlgoliaSearchBrowser(applicationID, apiKey, opts);
   }
 
-  algoliasearch.version = __webpack_require__(53);
+  algoliasearch.version = __webpack_require__(61);
   algoliasearch.ua = 'Algolia for vanilla JavaScript ' + uaSuffix + algoliasearch.version;
   algoliasearch.initPlaces = places(algoliasearch);
 
   // we expose into window no matter how we are used, this will allow
   // us to easily debug any website running algolia
   global.__algolia = {
-    debug: __webpack_require__(8),
+    debug: __webpack_require__(14),
     algoliasearch: algoliasearch
   };
 
@@ -3492,6 +5060,19 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
       // breaks it and set it to false by default
       if (req instanceof XMLHttpRequest) {
         req.open(opts.method, url, true);
+
+        // The Analytics API never accepts Auth headers as query string
+        // this option exists specifically for them.
+        if (opts.forceAuthHeaders) {
+          req.setRequestHeader(
+            'x-algolia-application-id',
+            opts.headers['x-algolia-application-id']
+          );
+          req.setRequestHeader(
+            'x-algolia-api-key',
+            opts.headers['x-algolia-api-key']
+          );
+        }
       } else {
         req.open(opts.method, url);
       }
@@ -3509,7 +5090,11 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
         req.setRequestHeader('accept', 'application/json');
       }
 
-      req.send(body);
+      if (body) {
+        req.send(body);
+      } else {
+        req.send();
+      }
 
       // event object not received in IE8, at least
       // but we do not use it, still important to note
@@ -3622,7 +5207,1216 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
 
 
 /***/ }),
-/* 45 */
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var win;
+
+if (typeof window !== "undefined") {
+    win = window;
+} else if (typeof global !== "undefined") {
+    win = global;
+} else if (typeof self !== "undefined"){
+    win = self;
+} else {
+    win = {};
+}
+
+module.exports = win;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process, global) {/*!
+ * @overview es6-promise - a tiny implementation of Promises/A+.
+ * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+ * @license   Licensed under MIT license
+ *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+ * @version   v4.2.5+7f2b526d
+ */
+
+(function (global, factory) {
+	 true ? module.exports = factory() :
+	undefined;
+}(this, (function () { 'use strict';
+
+function objectOrFunction(x) {
+  var type = typeof x;
+  return x !== null && (type === 'object' || type === 'function');
+}
+
+function isFunction(x) {
+  return typeof x === 'function';
+}
+
+
+
+var _isArray = void 0;
+if (Array.isArray) {
+  _isArray = Array.isArray;
+} else {
+  _isArray = function (x) {
+    return Object.prototype.toString.call(x) === '[object Array]';
+  };
+}
+
+var isArray = _isArray;
+
+var len = 0;
+var vertxNext = void 0;
+var customSchedulerFn = void 0;
+
+var asap = function asap(callback, arg) {
+  queue[len] = callback;
+  queue[len + 1] = arg;
+  len += 2;
+  if (len === 2) {
+    // If len is 2, that means that we need to schedule an async flush.
+    // If additional callbacks are queued before the queue is flushed, they
+    // will be processed by this flush that we are scheduling.
+    if (customSchedulerFn) {
+      customSchedulerFn(flush);
+    } else {
+      scheduleFlush();
+    }
+  }
+};
+
+function setScheduler(scheduleFn) {
+  customSchedulerFn = scheduleFn;
+}
+
+function setAsap(asapFn) {
+  asap = asapFn;
+}
+
+var browserWindow = typeof window !== 'undefined' ? window : undefined;
+var browserGlobal = browserWindow || {};
+var BrowserMutationObserver = browserGlobal.MutationObserver || browserGlobal.WebKitMutationObserver;
+var isNode = typeof self === 'undefined' && typeof process !== 'undefined' && {}.toString.call(process) === '[object process]';
+
+// test for web worker but not in IE10
+var isWorker = typeof Uint8ClampedArray !== 'undefined' && typeof importScripts !== 'undefined' && typeof MessageChannel !== 'undefined';
+
+// node
+function useNextTick() {
+  // node version 0.10.x displays a deprecation warning when nextTick is used recursively
+  // see https://github.com/cujojs/when/issues/410 for details
+  return function () {
+    return process.nextTick(flush);
+  };
+}
+
+// vertx
+function useVertxTimer() {
+  if (typeof vertxNext !== 'undefined') {
+    return function () {
+      vertxNext(flush);
+    };
+  }
+
+  return useSetTimeout();
+}
+
+function useMutationObserver() {
+  var iterations = 0;
+  var observer = new BrowserMutationObserver(flush);
+  var node = document.createTextNode('');
+  observer.observe(node, { characterData: true });
+
+  return function () {
+    node.data = iterations = ++iterations % 2;
+  };
+}
+
+// web worker
+function useMessageChannel() {
+  var channel = new MessageChannel();
+  channel.port1.onmessage = flush;
+  return function () {
+    return channel.port2.postMessage(0);
+  };
+}
+
+function useSetTimeout() {
+  // Store setTimeout reference so es6-promise will be unaffected by
+  // other code modifying setTimeout (like sinon.useFakeTimers())
+  var globalSetTimeout = setTimeout;
+  return function () {
+    return globalSetTimeout(flush, 1);
+  };
+}
+
+var queue = new Array(1000);
+function flush() {
+  for (var i = 0; i < len; i += 2) {
+    var callback = queue[i];
+    var arg = queue[i + 1];
+
+    callback(arg);
+
+    queue[i] = undefined;
+    queue[i + 1] = undefined;
+  }
+
+  len = 0;
+}
+
+function attemptVertx() {
+  try {
+    var vertx = Function('return this')().require('vertx');
+    vertxNext = vertx.runOnLoop || vertx.runOnContext;
+    return useVertxTimer();
+  } catch (e) {
+    return useSetTimeout();
+  }
+}
+
+var scheduleFlush = void 0;
+// Decide what async method to use to triggering processing of queued callbacks:
+if (isNode) {
+  scheduleFlush = useNextTick();
+} else if (BrowserMutationObserver) {
+  scheduleFlush = useMutationObserver();
+} else if (isWorker) {
+  scheduleFlush = useMessageChannel();
+} else if (browserWindow === undefined && "function" === 'function') {
+  scheduleFlush = attemptVertx();
+} else {
+  scheduleFlush = useSetTimeout();
+}
+
+function then(onFulfillment, onRejection) {
+  var parent = this;
+
+  var child = new this.constructor(noop);
+
+  if (child[PROMISE_ID] === undefined) {
+    makePromise(child);
+  }
+
+  var _state = parent._state;
+
+
+  if (_state) {
+    var callback = arguments[_state - 1];
+    asap(function () {
+      return invokeCallback(_state, child, callback, parent._result);
+    });
+  } else {
+    subscribe(parent, child, onFulfillment, onRejection);
+  }
+
+  return child;
+}
+
+/**
+  `Promise.resolve` returns a promise that will become resolved with the
+  passed `value`. It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    resolve(1);
+  });
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.resolve(1);
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  @method resolve
+  @static
+  @param {Any} value value that the returned promise will be resolved with
+  Useful for tooling.
+  @return {Promise} a promise that will become fulfilled with the given
+  `value`
+*/
+function resolve$1(object) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (object && typeof object === 'object' && object.constructor === Constructor) {
+    return object;
+  }
+
+  var promise = new Constructor(noop);
+  resolve(promise, object);
+  return promise;
+}
+
+var PROMISE_ID = Math.random().toString(36).substring(2);
+
+function noop() {}
+
+var PENDING = void 0;
+var FULFILLED = 1;
+var REJECTED = 2;
+
+var TRY_CATCH_ERROR = { error: null };
+
+function selfFulfillment() {
+  return new TypeError("You cannot resolve a promise with itself");
+}
+
+function cannotReturnOwn() {
+  return new TypeError('A promises callback cannot return that same promise.');
+}
+
+function getThen(promise) {
+  try {
+    return promise.then;
+  } catch (error) {
+    TRY_CATCH_ERROR.error = error;
+    return TRY_CATCH_ERROR;
+  }
+}
+
+function tryThen(then$$1, value, fulfillmentHandler, rejectionHandler) {
+  try {
+    then$$1.call(value, fulfillmentHandler, rejectionHandler);
+  } catch (e) {
+    return e;
+  }
+}
+
+function handleForeignThenable(promise, thenable, then$$1) {
+  asap(function (promise) {
+    var sealed = false;
+    var error = tryThen(then$$1, thenable, function (value) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+      if (thenable !== value) {
+        resolve(promise, value);
+      } else {
+        fulfill(promise, value);
+      }
+    }, function (reason) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+
+      reject(promise, reason);
+    }, 'Settle: ' + (promise._label || ' unknown promise'));
+
+    if (!sealed && error) {
+      sealed = true;
+      reject(promise, error);
+    }
+  }, promise);
+}
+
+function handleOwnThenable(promise, thenable) {
+  if (thenable._state === FULFILLED) {
+    fulfill(promise, thenable._result);
+  } else if (thenable._state === REJECTED) {
+    reject(promise, thenable._result);
+  } else {
+    subscribe(thenable, undefined, function (value) {
+      return resolve(promise, value);
+    }, function (reason) {
+      return reject(promise, reason);
+    });
+  }
+}
+
+function handleMaybeThenable(promise, maybeThenable, then$$1) {
+  if (maybeThenable.constructor === promise.constructor && then$$1 === then && maybeThenable.constructor.resolve === resolve$1) {
+    handleOwnThenable(promise, maybeThenable);
+  } else {
+    if (then$$1 === TRY_CATCH_ERROR) {
+      reject(promise, TRY_CATCH_ERROR.error);
+      TRY_CATCH_ERROR.error = null;
+    } else if (then$$1 === undefined) {
+      fulfill(promise, maybeThenable);
+    } else if (isFunction(then$$1)) {
+      handleForeignThenable(promise, maybeThenable, then$$1);
+    } else {
+      fulfill(promise, maybeThenable);
+    }
+  }
+}
+
+function resolve(promise, value) {
+  if (promise === value) {
+    reject(promise, selfFulfillment());
+  } else if (objectOrFunction(value)) {
+    handleMaybeThenable(promise, value, getThen(value));
+  } else {
+    fulfill(promise, value);
+  }
+}
+
+function publishRejection(promise) {
+  if (promise._onerror) {
+    promise._onerror(promise._result);
+  }
+
+  publish(promise);
+}
+
+function fulfill(promise, value) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+
+  promise._result = value;
+  promise._state = FULFILLED;
+
+  if (promise._subscribers.length !== 0) {
+    asap(publish, promise);
+  }
+}
+
+function reject(promise, reason) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+  promise._state = REJECTED;
+  promise._result = reason;
+
+  asap(publishRejection, promise);
+}
+
+function subscribe(parent, child, onFulfillment, onRejection) {
+  var _subscribers = parent._subscribers;
+  var length = _subscribers.length;
+
+
+  parent._onerror = null;
+
+  _subscribers[length] = child;
+  _subscribers[length + FULFILLED] = onFulfillment;
+  _subscribers[length + REJECTED] = onRejection;
+
+  if (length === 0 && parent._state) {
+    asap(publish, parent);
+  }
+}
+
+function publish(promise) {
+  var subscribers = promise._subscribers;
+  var settled = promise._state;
+
+  if (subscribers.length === 0) {
+    return;
+  }
+
+  var child = void 0,
+      callback = void 0,
+      detail = promise._result;
+
+  for (var i = 0; i < subscribers.length; i += 3) {
+    child = subscribers[i];
+    callback = subscribers[i + settled];
+
+    if (child) {
+      invokeCallback(settled, child, callback, detail);
+    } else {
+      callback(detail);
+    }
+  }
+
+  promise._subscribers.length = 0;
+}
+
+function tryCatch(callback, detail) {
+  try {
+    return callback(detail);
+  } catch (e) {
+    TRY_CATCH_ERROR.error = e;
+    return TRY_CATCH_ERROR;
+  }
+}
+
+function invokeCallback(settled, promise, callback, detail) {
+  var hasCallback = isFunction(callback),
+      value = void 0,
+      error = void 0,
+      succeeded = void 0,
+      failed = void 0;
+
+  if (hasCallback) {
+    value = tryCatch(callback, detail);
+
+    if (value === TRY_CATCH_ERROR) {
+      failed = true;
+      error = value.error;
+      value.error = null;
+    } else {
+      succeeded = true;
+    }
+
+    if (promise === value) {
+      reject(promise, cannotReturnOwn());
+      return;
+    }
+  } else {
+    value = detail;
+    succeeded = true;
+  }
+
+  if (promise._state !== PENDING) {
+    // noop
+  } else if (hasCallback && succeeded) {
+    resolve(promise, value);
+  } else if (failed) {
+    reject(promise, error);
+  } else if (settled === FULFILLED) {
+    fulfill(promise, value);
+  } else if (settled === REJECTED) {
+    reject(promise, value);
+  }
+}
+
+function initializePromise(promise, resolver) {
+  try {
+    resolver(function resolvePromise(value) {
+      resolve(promise, value);
+    }, function rejectPromise(reason) {
+      reject(promise, reason);
+    });
+  } catch (e) {
+    reject(promise, e);
+  }
+}
+
+var id = 0;
+function nextId() {
+  return id++;
+}
+
+function makePromise(promise) {
+  promise[PROMISE_ID] = id++;
+  promise._state = undefined;
+  promise._result = undefined;
+  promise._subscribers = [];
+}
+
+function validationError() {
+  return new Error('Array Methods must be provided an Array');
+}
+
+var Enumerator = function () {
+  function Enumerator(Constructor, input) {
+    this._instanceConstructor = Constructor;
+    this.promise = new Constructor(noop);
+
+    if (!this.promise[PROMISE_ID]) {
+      makePromise(this.promise);
+    }
+
+    if (isArray(input)) {
+      this.length = input.length;
+      this._remaining = input.length;
+
+      this._result = new Array(this.length);
+
+      if (this.length === 0) {
+        fulfill(this.promise, this._result);
+      } else {
+        this.length = this.length || 0;
+        this._enumerate(input);
+        if (this._remaining === 0) {
+          fulfill(this.promise, this._result);
+        }
+      }
+    } else {
+      reject(this.promise, validationError());
+    }
+  }
+
+  Enumerator.prototype._enumerate = function _enumerate(input) {
+    for (var i = 0; this._state === PENDING && i < input.length; i++) {
+      this._eachEntry(input[i], i);
+    }
+  };
+
+  Enumerator.prototype._eachEntry = function _eachEntry(entry, i) {
+    var c = this._instanceConstructor;
+    var resolve$$1 = c.resolve;
+
+
+    if (resolve$$1 === resolve$1) {
+      var _then = getThen(entry);
+
+      if (_then === then && entry._state !== PENDING) {
+        this._settledAt(entry._state, i, entry._result);
+      } else if (typeof _then !== 'function') {
+        this._remaining--;
+        this._result[i] = entry;
+      } else if (c === Promise$1) {
+        var promise = new c(noop);
+        handleMaybeThenable(promise, entry, _then);
+        this._willSettleAt(promise, i);
+      } else {
+        this._willSettleAt(new c(function (resolve$$1) {
+          return resolve$$1(entry);
+        }), i);
+      }
+    } else {
+      this._willSettleAt(resolve$$1(entry), i);
+    }
+  };
+
+  Enumerator.prototype._settledAt = function _settledAt(state, i, value) {
+    var promise = this.promise;
+
+
+    if (promise._state === PENDING) {
+      this._remaining--;
+
+      if (state === REJECTED) {
+        reject(promise, value);
+      } else {
+        this._result[i] = value;
+      }
+    }
+
+    if (this._remaining === 0) {
+      fulfill(promise, this._result);
+    }
+  };
+
+  Enumerator.prototype._willSettleAt = function _willSettleAt(promise, i) {
+    var enumerator = this;
+
+    subscribe(promise, undefined, function (value) {
+      return enumerator._settledAt(FULFILLED, i, value);
+    }, function (reason) {
+      return enumerator._settledAt(REJECTED, i, reason);
+    });
+  };
+
+  return Enumerator;
+}();
+
+/**
+  `Promise.all` accepts an array of promises, and returns a new promise which
+  is fulfilled with an array of fulfillment values for the passed promises, or
+  rejected with the reason of the first passed promise to be rejected. It casts all
+  elements of the passed iterable to promises as it runs this algorithm.
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = resolve(2);
+  let promise3 = resolve(3);
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // The array here would be [ 1, 2, 3 ];
+  });
+  ```
+
+  If any of the `promises` given to `all` are rejected, the first promise
+  that is rejected will be given as an argument to the returned promises's
+  rejection handler. For example:
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = reject(new Error("2"));
+  let promise3 = reject(new Error("3"));
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // Code here never runs because there are rejected promises!
+  }, function(error) {
+    // error.message === "2"
+  });
+  ```
+
+  @method all
+  @static
+  @param {Array} entries array of promises
+  @param {String} label optional string for labeling the promise.
+  Useful for tooling.
+  @return {Promise} promise that is fulfilled when all `promises` have been
+  fulfilled, or rejected if any of them become rejected.
+  @static
+*/
+function all(entries) {
+  return new Enumerator(this, entries).promise;
+}
+
+/**
+  `Promise.race` returns a new promise which is settled in the same way as the
+  first passed promise to settle.
+
+  Example:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 2');
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // result === 'promise 2' because it was resolved before promise1
+    // was resolved.
+  });
+  ```
+
+  `Promise.race` is deterministic in that only the state of the first
+  settled promise matters. For example, even if other promises given to the
+  `promises` array argument are resolved, but the first settled promise has
+  become rejected before the other promises became fulfilled, the returned
+  promise will become rejected:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      reject(new Error('promise 2'));
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // Code here never runs
+  }, function(reason){
+    // reason.message === 'promise 2' because promise 2 became rejected before
+    // promise 1 became fulfilled
+  });
+  ```
+
+  An example real-world use case is implementing timeouts:
+
+  ```javascript
+  Promise.race([ajax('foo.json'), timeout(5000)])
+  ```
+
+  @method race
+  @static
+  @param {Array} promises array of promises to observe
+  Useful for tooling.
+  @return {Promise} a promise which settles in the same way as the first passed
+  promise to settle.
+*/
+function race(entries) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (!isArray(entries)) {
+    return new Constructor(function (_, reject) {
+      return reject(new TypeError('You must pass an array to race.'));
+    });
+  } else {
+    return new Constructor(function (resolve, reject) {
+      var length = entries.length;
+      for (var i = 0; i < length; i++) {
+        Constructor.resolve(entries[i]).then(resolve, reject);
+      }
+    });
+  }
+}
+
+/**
+  `Promise.reject` returns a promise rejected with the passed `reason`.
+  It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    reject(new Error('WHOOPS'));
+  });
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.reject(new Error('WHOOPS'));
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  @method reject
+  @static
+  @param {Any} reason value that the returned promise will be rejected with.
+  Useful for tooling.
+  @return {Promise} a promise rejected with the given `reason`.
+*/
+function reject$1(reason) {
+  /*jshint validthis:true */
+  var Constructor = this;
+  var promise = new Constructor(noop);
+  reject(promise, reason);
+  return promise;
+}
+
+function needsResolver() {
+  throw new TypeError('You must pass a resolver function as the first argument to the promise constructor');
+}
+
+function needsNew() {
+  throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
+}
+
+/**
+  Promise objects represent the eventual result of an asynchronous operation. The
+  primary way of interacting with a promise is through its `then` method, which
+  registers callbacks to receive either a promise's eventual value or the reason
+  why the promise cannot be fulfilled.
+
+  Terminology
+  -----------
+
+  - `promise` is an object or function with a `then` method whose behavior conforms to this specification.
+  - `thenable` is an object or function that defines a `then` method.
+  - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
+  - `exception` is a value that is thrown using the throw statement.
+  - `reason` is a value that indicates why a promise was rejected.
+  - `settled` the final resting state of a promise, fulfilled or rejected.
+
+  A promise can be in one of three states: pending, fulfilled, or rejected.
+
+  Promises that are fulfilled have a fulfillment value and are in the fulfilled
+  state.  Promises that are rejected have a rejection reason and are in the
+  rejected state.  A fulfillment value is never a thenable.
+
+  Promises can also be said to *resolve* a value.  If this value is also a
+  promise, then the original promise's settled state will match the value's
+  settled state.  So a promise that *resolves* a promise that rejects will
+  itself reject, and a promise that *resolves* a promise that fulfills will
+  itself fulfill.
+
+
+  Basic Usage:
+  ------------
+
+  ```js
+  let promise = new Promise(function(resolve, reject) {
+    // on success
+    resolve(value);
+
+    // on failure
+    reject(reason);
+  });
+
+  promise.then(function(value) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Advanced Usage:
+  ---------------
+
+  Promises shine when abstracting away asynchronous interactions such as
+  `XMLHttpRequest`s.
+
+  ```js
+  function getJSON(url) {
+    return new Promise(function(resolve, reject){
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('GET', url);
+      xhr.onreadystatechange = handler;
+      xhr.responseType = 'json';
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.send();
+
+      function handler() {
+        if (this.readyState === this.DONE) {
+          if (this.status === 200) {
+            resolve(this.response);
+          } else {
+            reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
+          }
+        }
+      };
+    });
+  }
+
+  getJSON('/posts.json').then(function(json) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Unlike callbacks, promises are great composable primitives.
+
+  ```js
+  Promise.all([
+    getJSON('/posts'),
+    getJSON('/comments')
+  ]).then(function(values){
+    values[0] // => postsJSON
+    values[1] // => commentsJSON
+
+    return values;
+  });
+  ```
+
+  @class Promise
+  @param {Function} resolver
+  Useful for tooling.
+  @constructor
+*/
+
+var Promise$1 = function () {
+  function Promise(resolver) {
+    this[PROMISE_ID] = nextId();
+    this._result = this._state = undefined;
+    this._subscribers = [];
+
+    if (noop !== resolver) {
+      typeof resolver !== 'function' && needsResolver();
+      this instanceof Promise ? initializePromise(this, resolver) : needsNew();
+    }
+  }
+
+  /**
+  The primary way of interacting with a promise is through its `then` method,
+  which registers callbacks to receive either a promise's eventual value or the
+  reason why the promise cannot be fulfilled.
+   ```js
+  findUser().then(function(user){
+    // user is available
+  }, function(reason){
+    // user is unavailable, and you are given the reason why
+  });
+  ```
+   Chaining
+  --------
+   The return value of `then` is itself a promise.  This second, 'downstream'
+  promise is resolved with the return value of the first promise's fulfillment
+  or rejection handler, or rejected if the handler throws an exception.
+   ```js
+  findUser().then(function (user) {
+    return user.name;
+  }, function (reason) {
+    return 'default name';
+  }).then(function (userName) {
+    // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
+    // will be `'default name'`
+  });
+   findUser().then(function (user) {
+    throw new Error('Found user, but still unhappy');
+  }, function (reason) {
+    throw new Error('`findUser` rejected and we're unhappy');
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
+    // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
+  });
+  ```
+  If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
+   ```js
+  findUser().then(function (user) {
+    throw new PedagogicalException('Upstream error');
+  }).then(function (value) {
+    // never reached
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // The `PedgagocialException` is propagated all the way down to here
+  });
+  ```
+   Assimilation
+  ------------
+   Sometimes the value you want to propagate to a downstream promise can only be
+  retrieved asynchronously. This can be achieved by returning a promise in the
+  fulfillment or rejection handler. The downstream promise will then be pending
+  until the returned promise is settled. This is called *assimilation*.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // The user's comments are now available
+  });
+  ```
+   If the assimliated promise rejects, then the downstream promise will also reject.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // If `findCommentsByAuthor` fulfills, we'll have the value here
+  }, function (reason) {
+    // If `findCommentsByAuthor` rejects, we'll have the reason here
+  });
+  ```
+   Simple Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let result;
+   try {
+    result = findResult();
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+  findResult(function(result, err){
+    if (err) {
+      // failure
+    } else {
+      // success
+    }
+  });
+  ```
+   Promise Example;
+   ```javascript
+  findResult().then(function(result){
+    // success
+  }, function(reason){
+    // failure
+  });
+  ```
+   Advanced Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let author, books;
+   try {
+    author = findAuthor();
+    books  = findBooksByAuthor(author);
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+   function foundBooks(books) {
+   }
+   function failure(reason) {
+   }
+   findAuthor(function(author, err){
+    if (err) {
+      failure(err);
+      // failure
+    } else {
+      try {
+        findBoooksByAuthor(author, function(books, err) {
+          if (err) {
+            failure(err);
+          } else {
+            try {
+              foundBooks(books);
+            } catch(reason) {
+              failure(reason);
+            }
+          }
+        });
+      } catch(error) {
+        failure(err);
+      }
+      // success
+    }
+  });
+  ```
+   Promise Example;
+   ```javascript
+  findAuthor().
+    then(findBooksByAuthor).
+    then(function(books){
+      // found books
+  }).catch(function(reason){
+    // something went wrong
+  });
+  ```
+   @method then
+  @param {Function} onFulfilled
+  @param {Function} onRejected
+  Useful for tooling.
+  @return {Promise}
+  */
+
+  /**
+  `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
+  as the catch block of a try/catch statement.
+  ```js
+  function findAuthor(){
+  throw new Error('couldn't find that author');
+  }
+  // synchronous
+  try {
+  findAuthor();
+  } catch(reason) {
+  // something went wrong
+  }
+  // async with promises
+  findAuthor().catch(function(reason){
+  // something went wrong
+  });
+  ```
+  @method catch
+  @param {Function} onRejection
+  Useful for tooling.
+  @return {Promise}
+  */
+
+
+  Promise.prototype.catch = function _catch(onRejection) {
+    return this.then(null, onRejection);
+  };
+
+  /**
+    `finally` will be invoked regardless of the promise's fate just as native
+    try/catch/finally behaves
+  
+    Synchronous example:
+  
+    ```js
+    findAuthor() {
+      if (Math.random() > 0.5) {
+        throw new Error();
+      }
+      return new Author();
+    }
+  
+    try {
+      return findAuthor(); // succeed or fail
+    } catch(error) {
+      return findOtherAuther();
+    } finally {
+      // always runs
+      // doesn't affect the return value
+    }
+    ```
+  
+    Asynchronous example:
+  
+    ```js
+    findAuthor().catch(function(reason){
+      return findOtherAuther();
+    }).finally(function(){
+      // author was either found, or not
+    });
+    ```
+  
+    @method finally
+    @param {Function} callback
+    @return {Promise}
+  */
+
+
+  Promise.prototype.finally = function _finally(callback) {
+    var promise = this;
+    var constructor = promise.constructor;
+
+    if (isFunction(callback)) {
+      return promise.then(function (value) {
+        return constructor.resolve(callback()).then(function () {
+          return value;
+        });
+      }, function (reason) {
+        return constructor.resolve(callback()).then(function () {
+          throw reason;
+        });
+      });
+    }
+
+    return promise.then(callback, callback);
+  };
+
+  return Promise;
+}();
+
+Promise$1.prototype.then = then;
+Promise$1.all = all;
+Promise$1.race = race;
+Promise$1.resolve = resolve$1;
+Promise$1.reject = reject$1;
+Promise$1._setScheduler = setScheduler;
+Promise$1._setAsap = setAsap;
+Promise$1._asap = asap;
+
+/*global self*/
+function polyfill() {
+  var local = void 0;
+
+  if (typeof global !== 'undefined') {
+    local = global;
+  } else if (typeof self !== 'undefined') {
+    local = self;
+  } else {
+    try {
+      local = Function('return this')();
+    } catch (e) {
+      throw new Error('polyfill failed because global object is unavailable in this environment');
+    }
+  }
+
+  var P = local.Promise;
+
+  if (P) {
+    var promiseToString = null;
+    try {
+      promiseToString = Object.prototype.toString.call(P.resolve());
+    } catch (e) {
+      // silently ignored
+    }
+
+    if (promiseToString === '[object Promise]' && !P.cast) {
+      return;
+    }
+  }
+
+  local.Promise = Promise$1;
+}
+
+// Strange compat..
+Promise$1.polyfill = polyfill;
+Promise$1.Promise = Promise$1;
+
+return Promise$1;
+
+})));
+
+
+
+//# sourceMappingURL=es6-promise.map
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(10), __webpack_require__(5)))
+
+/***/ }),
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3630,7 +6424,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
 
 module.exports = inlineHeaders;
 
-var encode = __webpack_require__(77);
+var encode = __webpack_require__(32);
 
 function inlineHeaders(url, headers) {
   if (/\?/.test(url)) {
@@ -3644,7 +6438,7 @@ function inlineHeaders(url, headers) {
 
 
 /***/ }),
-/* 46 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3652,7 +6446,7 @@ function inlineHeaders(url, headers) {
 
 module.exports = jsonpRequest;
 
-var errors = __webpack_require__(6);
+var errors = __webpack_require__(11);
 
 var JSONPCounter = 0;
 
@@ -3686,7 +6480,8 @@ function jsonpRequest(url, opts, cb) {
     clean();
 
     cb(null, {
-      body: data/* ,
+      body: data,
+      responseText: JSON.stringify(data)/* ,
       // We do not send the statusCode, there's no statusCode in JSONP, it will be
       // computed using data.status && data.message like with XDR
       statusCode*/
@@ -3776,88 +6571,17 @@ function jsonpRequest(url, opts, cb) {
 
 
 /***/ }),
-/* 47 */
-/***/ (function(module, exports) {
-
-module.exports = function deprecate(fn, message) {
-  var warned = false;
-
-  function deprecated() {
-    if (!warned) {
-      /* eslint no-console:0 */
-      console.warn(message);
-      warned = true;
-    }
-
-    return fn.apply(this, arguments);
-  }
-
-  return deprecated;
-};
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports) {
-
-module.exports = function deprecatedMessage(previousUsage, newUsage) {
-  var githubAnchorLink = previousUsage.toLowerCase()
-    .replace(/[\.\(\)]/g, '');
-
-  return 'algoliasearch: `' + previousUsage + '` was replaced by `' + newUsage +
-    '`. Please see https://github.com/algolia/algoliasearch-client-javascript/wiki/Deprecated#' + githubAnchorLink;
-};
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports) {
-
-// Parse cloud does not supports setTimeout
-// We do not store a setTimeout reference in the client everytime
-// We only fallback to a fake setTimeout when not available
-// setTimeout cannot be override globally sadly
-module.exports = function exitPromise(fn, _setTimeout) {
-  _setTimeout(fn, 0);
-};
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var foreach = __webpack_require__(3);
-
-module.exports = function merge(destination/* , sources */) {
-  var sources = Array.prototype.slice.call(arguments);
-
-  foreach(sources, function(source) {
-    for (var keyName in source) {
-      if (source.hasOwnProperty(keyName)) {
-        if (typeof destination[keyName] === 'object' && typeof source[keyName] === 'object') {
-          destination[keyName] = merge({}, destination[keyName], source[keyName]);
-        } else if (source[keyName] !== undefined) {
-          destination[keyName] = source[keyName];
-        }
-      }
-    }
-  });
-
-  return destination;
-};
-
-
-/***/ }),
-/* 51 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = createPlacesClient;
 
-var buildSearchMethod = __webpack_require__(18);
+var qs3 = __webpack_require__(59);
+var buildSearchMethod = __webpack_require__(30);
 
 function createPlacesClient(algoliasearch) {
   return function places(appID, apiKey, opts) {
-    var cloneDeep = __webpack_require__(2);
+    var cloneDeep = __webpack_require__(4);
 
     opts = opts && cloneDeep(opts) || {};
     opts.hosts = opts.hosts || [
@@ -3877,6 +6601,17 @@ function createPlacesClient(algoliasearch) {
     var client = algoliasearch(appID, apiKey, opts);
     var index = client.initIndex('places');
     index.search = buildSearchMethod('query', '/1/places/query');
+    index.reverse = function(options, callback) {
+      var encoded = qs3.encode(options);
+
+      return this.as._jsonRequest({
+        method: 'GET',
+        url: '/1/places/reverse?' + encoded,
+        hostType: 'read',
+        callback: callback
+      });
+    };
+
     index.getObject = function(objectID, callback) {
       return this.as._jsonRequest({
         method: 'GET',
@@ -3891,1851 +6626,14 @@ function createPlacesClient(algoliasearch) {
 
 
 /***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var debug = __webpack_require__(8)('algoliasearch:src/hostIndexState.js');
-var localStorageNamespace = 'algoliasearch-client-js';
-
-var store;
-var moduleStore = {
-  state: {},
-  set: function(key, data) {
-    this.state[key] = data;
-    return this.state[key];
-  },
-  get: function(key) {
-    return this.state[key] || null;
-  }
-};
-
-var localStorageStore = {
-  set: function(key, data) {
-    moduleStore.set(key, data); // always replicate localStorageStore to moduleStore in case of failure
-
-    try {
-      var namespace = JSON.parse(global.localStorage[localStorageNamespace]);
-      namespace[key] = data;
-      global.localStorage[localStorageNamespace] = JSON.stringify(namespace);
-      return namespace[key];
-    } catch (e) {
-      return localStorageFailure(key, e);
-    }
-  },
-  get: function(key) {
-    try {
-      return JSON.parse(global.localStorage[localStorageNamespace])[key] || null;
-    } catch (e) {
-      return localStorageFailure(key, e);
-    }
-  }
-};
-
-function localStorageFailure(key, e) {
-  debug('localStorage failed with', e);
-  cleanup();
-  store = moduleStore;
-  return store.get(key);
-}
-
-store = supportsLocalStorage() ? localStorageStore : moduleStore;
-
-module.exports = {
-  get: getOrSet,
-  set: getOrSet,
-  supportsLocalStorage: supportsLocalStorage
-};
-
-function getOrSet(key, data) {
-  if (arguments.length === 1) {
-    return store.get(key);
-  }
-
-  return store.set(key, data);
-}
-
-function supportsLocalStorage() {
-  try {
-    if ('localStorage' in global &&
-      global.localStorage !== null) {
-      if (!global.localStorage[localStorageNamespace]) {
-        // actual creation of the namespace
-        global.localStorage.setItem(localStorageNamespace, JSON.stringify({}));
-      }
-      return true;
-    }
-
-    return false;
-  } catch (_) {
-    return false;
-  }
-}
-
-// In case of any error on localStorage, we clean our own namespace, this should handle
-// quota errors when a lot of keys + data are used
-function cleanup() {
-  try {
-    global.localStorage.removeItem(localStorageNamespace);
-  } catch (_) {
-    // nothing to do
-  }
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = '3.27.1';
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(62);
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var datasetKey = 'aaDataset';
-var valueKey = 'aaValue';
-var datumKey = 'aaDatum';
-
-var _ = __webpack_require__(0);
-var DOM = __webpack_require__(1);
-var html = __webpack_require__(21);
-var css = __webpack_require__(9);
-var EventEmitter = __webpack_require__(10);
-
-// constructor
-// -----------
-
-function Dataset(o) {
-  o = o || {};
-  o.templates = o.templates || {};
-
-  if (!o.source) {
-    _.error('missing source');
-  }
-
-  if (o.name && !isValidName(o.name)) {
-    _.error('invalid dataset name: ' + o.name);
-  }
-
-  // tracks the last query the dataset was updated for
-  this.query = null;
-  this._isEmpty = true;
-
-  this.highlight = !!o.highlight;
-  this.name = typeof o.name === 'undefined' || o.name === null ? _.getUniqueId() : o.name;
-
-  this.source = o.source;
-  this.displayFn = getDisplayFn(o.display || o.displayKey);
-
-  this.debounce = o.debounce;
-
-  this.templates = getTemplates(o.templates, this.displayFn);
-
-  this.css = _.mixin({}, css, o.appendTo ? css.appendTo : {});
-  this.cssClasses = o.cssClasses = _.mixin({}, css.defaultClasses, o.cssClasses || {});
-  this.cssClasses.prefix =
-    o.cssClasses.formattedPrefix || _.formatPrefix(this.cssClasses.prefix, this.cssClasses.noPrefix);
-
-  var clazz = _.className(this.cssClasses.prefix, this.cssClasses.dataset);
-  this.$el = o.$menu && o.$menu.find(clazz + '-' + this.name).length > 0 ?
-    DOM.element(o.$menu.find(clazz + '-' + this.name)[0]) :
-    DOM.element(
-      html.dataset.replace('%CLASS%', this.name)
-        .replace('%PREFIX%', this.cssClasses.prefix)
-        .replace('%DATASET%', this.cssClasses.dataset)
-    );
-
-  this.$menu = o.$menu;
-  this.clearCachedSuggestions();
-}
-
-// static methods
-// --------------
-
-Dataset.extractDatasetName = function extractDatasetName(el) {
-  return DOM.element(el).data(datasetKey);
-};
-
-Dataset.extractValue = function extractValue(el) {
-  return DOM.element(el).data(valueKey);
-};
-
-Dataset.extractDatum = function extractDatum(el) {
-  var datum = DOM.element(el).data(datumKey);
-  if (typeof datum === 'string') {
-    // Zepto has an automatic deserialization of the
-    // JSON encoded data attribute
-    datum = JSON.parse(datum);
-  }
-  return datum;
-};
-
-// instance methods
-// ----------------
-
-_.mixin(Dataset.prototype, EventEmitter, {
-
-  // ### private
-
-  _render: function render(query, suggestions) {
-    if (!this.$el) {
-      return;
-    }
-    var that = this;
-
-    var hasSuggestions;
-    var renderArgs = [].slice.call(arguments, 2);
-    this.$el.empty();
-
-    hasSuggestions = suggestions && suggestions.length;
-    this._isEmpty = !hasSuggestions;
-
-    if (!hasSuggestions && this.templates.empty) {
-      this.$el
-        .html(getEmptyHtml.apply(this, renderArgs))
-        .prepend(that.templates.header ? getHeaderHtml.apply(this, renderArgs) : null)
-        .append(that.templates.footer ? getFooterHtml.apply(this, renderArgs) : null);
-    } else if (hasSuggestions) {
-      this.$el
-        .html(getSuggestionsHtml.apply(this, renderArgs))
-        .prepend(that.templates.header ? getHeaderHtml.apply(this, renderArgs) : null)
-        .append(that.templates.footer ? getFooterHtml.apply(this, renderArgs) : null);
-    }
-
-    if (this.$menu) {
-      this.$menu.addClass(
-        this.cssClasses.prefix + (hasSuggestions ? 'with' : 'without') + '-' + this.name
-      ).removeClass(
-        this.cssClasses.prefix + (hasSuggestions ? 'without' : 'with') + '-' + this.name
-      );
-    }
-
-    this.trigger('rendered', query);
-
-    function getEmptyHtml() {
-      var args = [].slice.call(arguments, 0);
-      args = [{query: query, isEmpty: true}].concat(args);
-      return that.templates.empty.apply(this, args);
-    }
-
-    function getSuggestionsHtml() {
-      var args = [].slice.call(arguments, 0);
-      var $suggestions;
-      var nodes;
-      var self = this;
-
-      var suggestionsHtml = html.suggestions.
-        replace('%PREFIX%', this.cssClasses.prefix).
-        replace('%SUGGESTIONS%', this.cssClasses.suggestions);
-      $suggestions = DOM
-        .element(suggestionsHtml)
-        .css(this.css.suggestions);
-
-      // jQuery#append doesn't support arrays as the first argument
-      // until version 1.8, see http://bugs.jquery.com/ticket/11231
-      nodes = _.map(suggestions, getSuggestionNode);
-      $suggestions.append.apply($suggestions, nodes);
-
-      return $suggestions;
-
-      function getSuggestionNode(suggestion) {
-        var $el;
-
-        var suggestionHtml = html.suggestion.
-          replace('%PREFIX%', self.cssClasses.prefix).
-          replace('%SUGGESTION%', self.cssClasses.suggestion);
-        $el = DOM.element(suggestionHtml)
-          .attr({
-            role: 'option',
-            id: ['option', Math.floor(Math.random() * 100000000)].join('-')
-          })
-          .append(that.templates.suggestion.apply(this, [suggestion].concat(args)));
-
-        $el.data(datasetKey, that.name);
-        $el.data(valueKey, that.displayFn(suggestion) || undefined); // this led to undefined return value
-        $el.data(datumKey, JSON.stringify(suggestion));
-        $el.children().each(function() { DOM.element(this).css(self.css.suggestionChild); });
-
-        return $el;
-      }
-    }
-
-    function getHeaderHtml() {
-      var args = [].slice.call(arguments, 0);
-      args = [{query: query, isEmpty: !hasSuggestions}].concat(args);
-      return that.templates.header.apply(this, args);
-    }
-
-    function getFooterHtml() {
-      var args = [].slice.call(arguments, 0);
-      args = [{query: query, isEmpty: !hasSuggestions}].concat(args);
-      return that.templates.footer.apply(this, args);
-    }
-  },
-
-  // ### public
-
-  getRoot: function getRoot() {
-    return this.$el;
-  },
-
-  update: function update(query) {
-    function handleSuggestions(suggestions) {
-      // if the update has been canceled or if the query has changed
-      // do not render the suggestions as they've become outdated
-      if (!this.canceled && query === this.query) {
-        // concat all the other arguments that could have been passed
-        // to the render function, and forward them to _render
-        var extraArgs = [].slice.call(arguments, 1);
-        this.cacheSuggestions(query, suggestions, extraArgs);
-        this._render.apply(this, [query, suggestions].concat(extraArgs));
-      }
-    }
-
-    this.query = query;
-    this.canceled = false;
-
-    if (this.shouldFetchFromCache(query)) {
-      handleSuggestions.apply(this, [this.cachedSuggestions].concat(this.cachedRenderExtraArgs));
-    } else {
-      var that = this;
-      var execSource = function() {
-        // When the call is debounced the condition avoid to do a useless
-        // request with the last character when the input has been cleared
-        if (!that.canceled) {
-          that.source(query, handleSuggestions.bind(that));
-        }
-      };
-
-      if (this.debounce) {
-        var later = function() {
-          that.debounceTimeout = null;
-          execSource();
-        };
-        clearTimeout(this.debounceTimeout);
-        this.debounceTimeout = setTimeout(later, this.debounce);
-      } else {
-        execSource();
-      }
-    }
-  },
-
-  cacheSuggestions: function cacheSuggestions(query, suggestions, extraArgs) {
-    this.cachedQuery = query;
-    this.cachedSuggestions = suggestions;
-    this.cachedRenderExtraArgs = extraArgs;
-  },
-
-  shouldFetchFromCache: function shouldFetchFromCache(query) {
-    return this.cachedQuery === query && this.cachedSuggestions && this.cachedSuggestions.length;
-  },
-
-  clearCachedSuggestions: function clearCachedSuggestions() {
-    delete this.cachedQuery;
-    delete this.cachedSuggestions;
-    delete this.cachedRenderExtraArgs;
-  },
-
-  cancel: function cancel() {
-    this.canceled = true;
-  },
-
-  clear: function clear() {
-    this.cancel();
-    this.$el.empty();
-    this.trigger('rendered', '');
-  },
-
-  isEmpty: function isEmpty() {
-    return this._isEmpty;
-  },
-
-  destroy: function destroy() {
-    this.clearCachedSuggestions();
-    this.$el = null;
-  }
-});
-
-// helper functions
-// ----------------
-
-function getDisplayFn(display) {
-  display = display || 'value';
-
-  return _.isFunction(display) ? display : displayFn;
-
-  function displayFn(obj) {
-    return obj[display];
-  }
-}
-
-function getTemplates(templates, displayFn) {
-  return {
-    empty: templates.empty && _.templatify(templates.empty),
-    header: templates.header && _.templatify(templates.header),
-    footer: templates.footer && _.templatify(templates.footer),
-    suggestion: templates.suggestion || suggestionTemplate
-  };
-
-  function suggestionTemplate(context) {
-    return '<p>' + displayFn(context) + '</p>';
-  }
-}
-
-function isValidName(str) {
-  // dashes, underscores, letters, and numbers
-  return (/^[_a-zA-Z0-9-]+$/).test(str);
-}
-
-module.exports = Dataset;
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _ = __webpack_require__(0);
-var DOM = __webpack_require__(1);
-var EventEmitter = __webpack_require__(10);
-var Dataset = __webpack_require__(55);
-var css = __webpack_require__(9);
-
-// constructor
-// -----------
-
-function Dropdown(o) {
-  var that = this;
-  var onSuggestionClick;
-  var onSuggestionMouseEnter;
-  var onSuggestionMouseLeave;
-
-  o = o || {};
-
-  if (!o.menu) {
-    _.error('menu is required');
-  }
-
-  if (!_.isArray(o.datasets) && !_.isObject(o.datasets)) {
-    _.error('1 or more datasets required');
-  }
-  if (!o.datasets) {
-    _.error('datasets is required');
-  }
-
-  this.isOpen = false;
-  this.isEmpty = true;
-  this.minLength = o.minLength || 0;
-  this.templates = {};
-  this.appendTo = o.appendTo || false;
-  this.css = _.mixin({}, css, o.appendTo ? css.appendTo : {});
-  this.cssClasses = o.cssClasses = _.mixin({}, css.defaultClasses, o.cssClasses || {});
-  this.cssClasses.prefix =
-    o.cssClasses.formattedPrefix || _.formatPrefix(this.cssClasses.prefix, this.cssClasses.noPrefix);
-
-  // bound functions
-  onSuggestionClick = _.bind(this._onSuggestionClick, this);
-  onSuggestionMouseEnter = _.bind(this._onSuggestionMouseEnter, this);
-  onSuggestionMouseLeave = _.bind(this._onSuggestionMouseLeave, this);
-
-  var cssClass = _.className(this.cssClasses.prefix, this.cssClasses.suggestion);
-  this.$menu = DOM.element(o.menu)
-    .on('mouseenter.aa', cssClass, onSuggestionMouseEnter)
-    .on('mouseleave.aa', cssClass, onSuggestionMouseLeave)
-    .on('click.aa', cssClass, onSuggestionClick);
-
-  this.$container = o.appendTo ? o.wrapper : this.$menu;
-
-  if (o.templates && o.templates.header) {
-    this.templates.header = _.templatify(o.templates.header);
-    this.$menu.prepend(this.templates.header());
-  }
-
-  if (o.templates && o.templates.empty) {
-    this.templates.empty = _.templatify(o.templates.empty);
-    this.$empty = DOM.element('<div class="' +
-      _.className(this.cssClasses.prefix, this.cssClasses.empty, true) + '">' +
-      '</div>');
-    this.$menu.append(this.$empty);
-    this.$empty.hide();
-  }
-
-  this.datasets = _.map(o.datasets, function(oDataset) {
-    return initializeDataset(that.$menu, oDataset, o.cssClasses);
-  });
-  _.each(this.datasets, function(dataset) {
-    var root = dataset.getRoot();
-    if (root && root.parent().length === 0) {
-      that.$menu.append(root);
-    }
-    dataset.onSync('rendered', that._onRendered, that);
-  });
-
-  if (o.templates && o.templates.footer) {
-    this.templates.footer = _.templatify(o.templates.footer);
-    this.$menu.append(this.templates.footer());
-  }
-
-  var self = this;
-  DOM.element(window).resize(function() {
-    self._redraw();
-  });
-}
-
-// instance methods
-// ----------------
-
-_.mixin(Dropdown.prototype, EventEmitter, {
-
-  // ### private
-
-  _onSuggestionClick: function onSuggestionClick($e) {
-    this.trigger('suggestionClicked', DOM.element($e.currentTarget));
-  },
-
-  _onSuggestionMouseEnter: function onSuggestionMouseEnter($e) {
-    var elt = DOM.element($e.currentTarget);
-    if (elt.hasClass(_.className(this.cssClasses.prefix, this.cssClasses.cursor, true))) {
-      // we're already on the cursor
-      // => we're probably entering it again after leaving it for a nested div
-      return;
-    }
-    this._removeCursor();
-
-    // Fixes iOS double tap behaviour, by modifying the DOM right before the
-    // native href clicks happens, iOS will requires another tap to follow
-    // a suggestion that has an <a href> element inside
-    // https://www.google.com/search?q=ios+double+tap+bug+href
-    var suggestion = this;
-    setTimeout(function() {
-      // this exact line, when inside the main loop, will trigger a double tap bug
-      // on iOS devices
-      suggestion._setCursor(elt, false);
-    }, 0);
-  },
-
-  _onSuggestionMouseLeave: function onSuggestionMouseLeave($e) {
-    // $e.relatedTarget is the `EventTarget` the pointing device entered to
-    if ($e.relatedTarget) {
-      var elt = DOM.element($e.relatedTarget);
-      if (elt.closest('.' + _.className(this.cssClasses.prefix, this.cssClasses.cursor, true)).length > 0) {
-        // our father is a cursor
-        // => it means we're just leaving the suggestion for a nested div
-        return;
-      }
-    }
-    this._removeCursor();
-    this.trigger('cursorRemoved');
-  },
-
-  _onRendered: function onRendered(e, query) {
-    this.isEmpty = _.every(this.datasets, isDatasetEmpty);
-
-    if (this.isEmpty) {
-      if (query.length >= this.minLength) {
-        this.trigger('empty');
-      }
-
-      if (this.$empty) {
-        if (query.length < this.minLength) {
-          this._hide();
-        } else {
-          var html = this.templates.empty({
-            query: this.datasets[0] && this.datasets[0].query
-          });
-          this.$empty.html(html);
-          this.$empty.show();
-          this._show();
-        }
-      } else if (_.any(this.datasets, hasEmptyTemplate)) {
-        if (query.length < this.minLength) {
-          this._hide();
-        } else {
-          this._show();
-        }
-      } else {
-        this._hide();
-      }
-    } else if (this.isOpen) {
-      if (this.$empty) {
-        this.$empty.empty();
-        this.$empty.hide();
-      }
-
-      if (query.length >= this.minLength) {
-        this._show();
-      } else {
-        this._hide();
-      }
-    }
-
-    this.trigger('datasetRendered');
-
-    function isDatasetEmpty(dataset) {
-      return dataset.isEmpty();
-    }
-
-    function hasEmptyTemplate(dataset) {
-      return dataset.templates && dataset.templates.empty;
-    }
-  },
-
-  _hide: function() {
-    this.$container.hide();
-  },
-
-  _show: function() {
-    // can't use jQuery#show because $menu is a span element we want
-    // display: block; not dislay: inline;
-    this.$container.css('display', 'block');
-
-    this._redraw();
-
-    this.trigger('shown');
-  },
-
-  _redraw: function redraw() {
-    if (!this.isOpen || !this.appendTo) return;
-
-    this.trigger('redrawn');
-  },
-
-  _getSuggestions: function getSuggestions() {
-    return this.$menu.find(_.className(this.cssClasses.prefix, this.cssClasses.suggestion));
-  },
-
-  _getCursor: function getCursor() {
-    return this.$menu.find(_.className(this.cssClasses.prefix, this.cssClasses.cursor)).first();
-  },
-
-  _setCursor: function setCursor($el, updateInput) {
-    $el.first()
-      .addClass(_.className(this.cssClasses.prefix, this.cssClasses.cursor, true))
-      .attr('aria-selected', 'true');
-    this.trigger('cursorMoved', updateInput);
-  },
-
-  _removeCursor: function removeCursor() {
-    this._getCursor()
-      .removeClass(_.className(this.cssClasses.prefix, this.cssClasses.cursor, true))
-      .removeAttr('aria-selected');
-  },
-
-  _moveCursor: function moveCursor(increment) {
-    var $suggestions;
-    var $oldCursor;
-    var newCursorIndex;
-    var $newCursor;
-
-    if (!this.isOpen) {
-      return;
-    }
-
-    $oldCursor = this._getCursor();
-    $suggestions = this._getSuggestions();
-
-    this._removeCursor();
-
-    // shifting before and after modulo to deal with -1 index
-    newCursorIndex = $suggestions.index($oldCursor) + increment;
-    newCursorIndex = (newCursorIndex + 1) % ($suggestions.length + 1) - 1;
-
-    if (newCursorIndex === -1) {
-      this.trigger('cursorRemoved');
-
-      return;
-    } else if (newCursorIndex < -1) {
-      newCursorIndex = $suggestions.length - 1;
-    }
-
-    this._setCursor($newCursor = $suggestions.eq(newCursorIndex), true);
-
-    // in the case of scrollable overflow
-    // make sure the cursor is visible in the menu
-    this._ensureVisible($newCursor);
-  },
-
-  _ensureVisible: function ensureVisible($el) {
-    var elTop;
-    var elBottom;
-    var menuScrollTop;
-    var menuHeight;
-
-    elTop = $el.position().top;
-    elBottom = elTop + $el.height() +
-      parseInt($el.css('margin-top'), 10) +
-      parseInt($el.css('margin-bottom'), 10);
-    menuScrollTop = this.$menu.scrollTop();
-    menuHeight = this.$menu.height() +
-      parseInt(this.$menu.css('padding-top'), 10) +
-      parseInt(this.$menu.css('padding-bottom'), 10);
-
-    if (elTop < 0) {
-      this.$menu.scrollTop(menuScrollTop + elTop);
-    } else if (menuHeight < elBottom) {
-      this.$menu.scrollTop(menuScrollTop + (elBottom - menuHeight));
-    }
-  },
-
-  // ### public
-
-  close: function close() {
-    if (this.isOpen) {
-      this.isOpen = false;
-
-      this._removeCursor();
-      this._hide();
-
-      this.trigger('closed');
-    }
-  },
-
-  open: function open() {
-    if (!this.isOpen) {
-      this.isOpen = true;
-
-      if (!this.isEmpty) {
-        this._show();
-      }
-
-      this.trigger('opened');
-    }
-  },
-
-  setLanguageDirection: function setLanguageDirection(dir) {
-    this.$menu.css(dir === 'ltr' ? this.css.ltr : this.css.rtl);
-  },
-
-  moveCursorUp: function moveCursorUp() {
-    this._moveCursor(-1);
-  },
-
-  moveCursorDown: function moveCursorDown() {
-    this._moveCursor(+1);
-  },
-
-  getDatumForSuggestion: function getDatumForSuggestion($el) {
-    var datum = null;
-
-    if ($el.length) {
-      datum = {
-        raw: Dataset.extractDatum($el),
-        value: Dataset.extractValue($el),
-        datasetName: Dataset.extractDatasetName($el)
-      };
-    }
-
-    return datum;
-  },
-
-  getCurrentCursor: function getCurrentCursor() {
-    return this._getCursor().first();
-  },
-
-  getDatumForCursor: function getDatumForCursor() {
-    return this.getDatumForSuggestion(this._getCursor().first());
-  },
-
-  getDatumForTopSuggestion: function getDatumForTopSuggestion() {
-    return this.getDatumForSuggestion(this._getSuggestions().first());
-  },
-
-  cursorTopSuggestion: function cursorTopSuggestion() {
-    this._setCursor(this._getSuggestions().first(), false);
-  },
-
-  update: function update(query) {
-    _.each(this.datasets, updateDataset);
-
-    function updateDataset(dataset) {
-      dataset.update(query);
-    }
-  },
-
-  empty: function empty() {
-    _.each(this.datasets, clearDataset);
-    this.isEmpty = true;
-
-    function clearDataset(dataset) {
-      dataset.clear();
-    }
-  },
-
-  isVisible: function isVisible() {
-    return this.isOpen && !this.isEmpty;
-  },
-
-  destroy: function destroy() {
-    this.$menu.off('.aa');
-
-    this.$menu = null;
-
-    _.each(this.datasets, destroyDataset);
-
-    function destroyDataset(dataset) {
-      dataset.destroy();
-    }
-  }
-});
-
-// helper functions
-// ----------------
-Dropdown.Dataset = Dataset;
-
-function initializeDataset($menu, oDataset, cssClasses) {
-  return new Dropdown.Dataset(_.mixin({$menu: $menu, cssClasses: cssClasses}, oDataset));
-}
-
-module.exports = Dropdown;
-
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var specialKeyCodeMap;
-
-specialKeyCodeMap = {
-  9: 'tab',
-  27: 'esc',
-  37: 'left',
-  39: 'right',
-  13: 'enter',
-  38: 'up',
-  40: 'down'
-};
-
-var _ = __webpack_require__(0);
-var DOM = __webpack_require__(1);
-var EventEmitter = __webpack_require__(10);
-
-// constructor
-// -----------
-
-function Input(o) {
-  var that = this;
-  var onBlur;
-  var onFocus;
-  var onKeydown;
-  var onInput;
-
-  o = o || {};
-
-  if (!o.input) {
-    _.error('input is missing');
-  }
-
-  // bound functions
-  onBlur = _.bind(this._onBlur, this);
-  onFocus = _.bind(this._onFocus, this);
-  onKeydown = _.bind(this._onKeydown, this);
-  onInput = _.bind(this._onInput, this);
-
-  this.$hint = DOM.element(o.hint);
-  this.$input = DOM.element(o.input)
-    .on('blur.aa', onBlur)
-    .on('focus.aa', onFocus)
-    .on('keydown.aa', onKeydown);
-
-  // if no hint, noop all the hint related functions
-  if (this.$hint.length === 0) {
-    this.setHint = this.getHint = this.clearHint = this.clearHintIfInvalid = _.noop;
-  }
-
-  // ie7 and ie8 don't support the input event
-  // ie9 doesn't fire the input event when characters are removed
-  // not sure if ie10 is compatible
-  if (!_.isMsie()) {
-    this.$input.on('input.aa', onInput);
-  } else {
-    this.$input.on('keydown.aa keypress.aa cut.aa paste.aa', function($e) {
-      // if a special key triggered this, ignore it
-      if (specialKeyCodeMap[$e.which || $e.keyCode]) {
-        return;
-      }
-
-      // give the browser a chance to update the value of the input
-      // before checking to see if the query changed
-      _.defer(_.bind(that._onInput, that, $e));
-    });
-  }
-
-  // the query defaults to whatever the value of the input is
-  // on initialization, it'll most likely be an empty string
-  this.query = this.$input.val();
-
-  // helps with calculating the width of the input's value
-  this.$overflowHelper = buildOverflowHelper(this.$input);
-}
-
-// static methods
-// --------------
-
-Input.normalizeQuery = function(str) {
-  // strips leading whitespace and condenses all whitespace
-  return (str || '').replace(/^\s*/g, '').replace(/\s{2,}/g, ' ');
-};
-
-// instance methods
-// ----------------
-
-_.mixin(Input.prototype, EventEmitter, {
-
-  // ### private
-
-  _onBlur: function onBlur() {
-    this.resetInputValue();
-    this.$input.removeAttr('aria-activedescendant');
-    this.trigger('blurred');
-  },
-
-  _onFocus: function onFocus() {
-    this.trigger('focused');
-  },
-
-  _onKeydown: function onKeydown($e) {
-    // which is normalized and consistent (but not for ie)
-    var keyName = specialKeyCodeMap[$e.which || $e.keyCode];
-
-    this._managePreventDefault(keyName, $e);
-    if (keyName && this._shouldTrigger(keyName, $e)) {
-      this.trigger(keyName + 'Keyed', $e);
-    }
-  },
-
-  _onInput: function onInput() {
-    this._checkInputValue();
-  },
-
-  _managePreventDefault: function managePreventDefault(keyName, $e) {
-    var preventDefault;
-    var hintValue;
-    var inputValue;
-
-    switch (keyName) {
-    case 'tab':
-      hintValue = this.getHint();
-      inputValue = this.getInputValue();
-
-      preventDefault = hintValue &&
-        hintValue !== inputValue &&
-        !withModifier($e);
-      break;
-
-    case 'up':
-    case 'down':
-      preventDefault = !withModifier($e);
-      break;
-
-    default:
-      preventDefault = false;
-    }
-
-    if (preventDefault) {
-      $e.preventDefault();
-    }
-  },
-
-  _shouldTrigger: function shouldTrigger(keyName, $e) {
-    var trigger;
-
-    switch (keyName) {
-    case 'tab':
-      trigger = !withModifier($e);
-      break;
-
-    default:
-      trigger = true;
-    }
-
-    return trigger;
-  },
-
-  _checkInputValue: function checkInputValue() {
-    var inputValue;
-    var areEquivalent;
-    var hasDifferentWhitespace;
-
-    inputValue = this.getInputValue();
-    areEquivalent = areQueriesEquivalent(inputValue, this.query);
-    hasDifferentWhitespace = areEquivalent && this.query ?
-      this.query.length !== inputValue.length : false;
-
-    this.query = inputValue;
-
-    if (!areEquivalent) {
-      this.trigger('queryChanged', this.query);
-    } else if (hasDifferentWhitespace) {
-      this.trigger('whitespaceChanged', this.query);
-    }
-  },
-
-  // ### public
-
-  focus: function focus() {
-    this.$input.focus();
-  },
-
-  blur: function blur() {
-    this.$input.blur();
-  },
-
-  getQuery: function getQuery() {
-    return this.query;
-  },
-
-  setQuery: function setQuery(query) {
-    this.query = query;
-  },
-
-  getInputValue: function getInputValue() {
-    return this.$input.val();
-  },
-
-  setInputValue: function setInputValue(value, silent) {
-    if (typeof value === 'undefined') {
-      value = this.query;
-    }
-    this.$input.val(value);
-
-    // silent prevents any additional events from being triggered
-    if (silent) {
-      this.clearHint();
-    } else {
-      this._checkInputValue();
-    }
-  },
-
-  expand: function expand() {
-    this.$input.attr('aria-expanded', 'true');
-  },
-
-  collapse: function collapse() {
-    this.$input.attr('aria-expanded', 'false');
-  },
-
-  setActiveDescendant: function setActiveDescendant(activedescendantId) {
-    this.$input.attr('aria-activedescendant', activedescendantId);
-  },
-
-  removeActiveDescendant: function removeActiveDescendant() {
-    this.$input.removeAttr('aria-activedescendant');
-  },
-
-  resetInputValue: function resetInputValue() {
-    this.setInputValue(this.query, true);
-  },
-
-  getHint: function getHint() {
-    return this.$hint.val();
-  },
-
-  setHint: function setHint(value) {
-    this.$hint.val(value);
-  },
-
-  clearHint: function clearHint() {
-    this.setHint('');
-  },
-
-  clearHintIfInvalid: function clearHintIfInvalid() {
-    var val;
-    var hint;
-    var valIsPrefixOfHint;
-    var isValid;
-
-    val = this.getInputValue();
-    hint = this.getHint();
-    valIsPrefixOfHint = val !== hint && hint.indexOf(val) === 0;
-    isValid = val !== '' && valIsPrefixOfHint && !this.hasOverflow();
-
-    if (!isValid) {
-      this.clearHint();
-    }
-  },
-
-  getLanguageDirection: function getLanguageDirection() {
-    return (this.$input.css('direction') || 'ltr').toLowerCase();
-  },
-
-  hasOverflow: function hasOverflow() {
-    // 2 is arbitrary, just picking a small number to handle edge cases
-    var constraint = this.$input.width() - 2;
-
-    this.$overflowHelper.text(this.getInputValue());
-
-    return this.$overflowHelper.width() >= constraint;
-  },
-
-  isCursorAtEnd: function() {
-    var valueLength;
-    var selectionStart;
-    var range;
-
-    valueLength = this.$input.val().length;
-    selectionStart = this.$input[0].selectionStart;
-
-    if (_.isNumber(selectionStart)) {
-      return selectionStart === valueLength;
-    } else if (document.selection) {
-      // NOTE: this won't work unless the input has focus, the good news
-      // is this code should only get called when the input has focus
-      range = document.selection.createRange();
-      range.moveStart('character', -valueLength);
-
-      return valueLength === range.text.length;
-    }
-
-    return true;
-  },
-
-  destroy: function destroy() {
-    this.$hint.off('.aa');
-    this.$input.off('.aa');
-
-    this.$hint = this.$input = this.$overflowHelper = null;
-  }
-});
-
-// helper functions
-// ----------------
-
-function buildOverflowHelper($input) {
-  return DOM.element('<pre aria-hidden="true"></pre>')
-    .css({
-      // position helper off-screen
-      position: 'absolute',
-      visibility: 'hidden',
-      // avoid line breaks and whitespace collapsing
-      whiteSpace: 'pre',
-      // use same font css as input to calculate accurate width
-      fontFamily: $input.css('font-family'),
-      fontSize: $input.css('font-size'),
-      fontStyle: $input.css('font-style'),
-      fontVariant: $input.css('font-variant'),
-      fontWeight: $input.css('font-weight'),
-      wordSpacing: $input.css('word-spacing'),
-      letterSpacing: $input.css('letter-spacing'),
-      textIndent: $input.css('text-indent'),
-      textRendering: $input.css('text-rendering'),
-      textTransform: $input.css('text-transform')
-    })
-    .insertAfter($input);
-}
-
-function areQueriesEquivalent(a, b) {
-  return Input.normalizeQuery(a) === Input.normalizeQuery(b);
-}
-
-function withModifier($e) {
-  return $e.altKey || $e.ctrlKey || $e.metaKey || $e.shiftKey;
-}
-
-module.exports = Input;
-
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var attrsKey = 'aaAttrs';
-
-var _ = __webpack_require__(0);
-var DOM = __webpack_require__(1);
-var EventBus = __webpack_require__(20);
-var Input = __webpack_require__(57);
-var Dropdown = __webpack_require__(56);
-var html = __webpack_require__(21);
-var css = __webpack_require__(9);
-
-// constructor
-// -----------
-
-// THOUGHT: what if datasets could dynamically be added/removed?
-function Typeahead(o) {
-  var $menu;
-  var $hint;
-
-  o = o || {};
-
-  if (!o.input) {
-    _.error('missing input');
-  }
-
-  this.isActivated = false;
-  this.debug = !!o.debug;
-  this.autoselect = !!o.autoselect;
-  this.autoselectOnBlur = !!o.autoselectOnBlur;
-  this.openOnFocus = !!o.openOnFocus;
-  this.minLength = _.isNumber(o.minLength) ? o.minLength : 1;
-  this.autoWidth = (o.autoWidth === undefined) ? true : !!o.autoWidth;
-  this.clearOnSelected = !!o.clearOnSelected;
-
-  o.hint = !!o.hint;
-
-  if (o.hint && o.appendTo) {
-    throw new Error('[autocomplete.js] hint and appendTo options can\'t be used at the same time');
-  }
-
-  this.css = o.css = _.mixin({}, css, o.appendTo ? css.appendTo : {});
-  this.cssClasses = o.cssClasses = _.mixin({}, css.defaultClasses, o.cssClasses || {});
-  this.cssClasses.prefix =
-    o.cssClasses.formattedPrefix = _.formatPrefix(this.cssClasses.prefix, this.cssClasses.noPrefix);
-  this.listboxId = o.listboxId = [this.cssClasses.root, 'listbox', _.getUniqueId()].join('-');
-
-  var domElts = buildDom(o);
-
-  this.$node = domElts.wrapper;
-  var $input = this.$input = domElts.input;
-  $menu = domElts.menu;
-  $hint = domElts.hint;
-
-  if (o.dropdownMenuContainer) {
-    DOM.element(o.dropdownMenuContainer)
-      .css('position', 'relative') // ensure the container has a relative position
-      .append($menu.css('top', '0')); // override the top: 100%
-  }
-
-  // #705: if there's scrollable overflow, ie doesn't support
-  // blur cancellations when the scrollbar is clicked
-  //
-  // #351: preventDefault won't cancel blurs in ie <= 8
-  $input.on('blur.aa', function($e) {
-    var active = document.activeElement;
-    if (_.isMsie() && ($menu[0] === active || $menu[0].contains(active))) {
-      $e.preventDefault();
-      // stop immediate in order to prevent Input#_onBlur from
-      // getting exectued
-      $e.stopImmediatePropagation();
-      _.defer(function() { $input.focus(); });
-    }
-  });
-
-  // #351: prevents input blur due to clicks within dropdown menu
-  $menu.on('mousedown.aa', function($e) { $e.preventDefault(); });
-
-  this.eventBus = o.eventBus || new EventBus({el: $input});
-
-  this.dropdown = new Typeahead.Dropdown({
-    appendTo: o.appendTo,
-    wrapper: this.$node,
-    menu: $menu,
-    datasets: o.datasets,
-    templates: o.templates,
-    cssClasses: o.cssClasses,
-    minLength: this.minLength
-  })
-    .onSync('suggestionClicked', this._onSuggestionClicked, this)
-    .onSync('cursorMoved', this._onCursorMoved, this)
-    .onSync('cursorRemoved', this._onCursorRemoved, this)
-    .onSync('opened', this._onOpened, this)
-    .onSync('closed', this._onClosed, this)
-    .onSync('shown', this._onShown, this)
-    .onSync('empty', this._onEmpty, this)
-    .onSync('redrawn', this._onRedrawn, this)
-    .onAsync('datasetRendered', this._onDatasetRendered, this);
-
-  this.input = new Typeahead.Input({input: $input, hint: $hint})
-    .onSync('focused', this._onFocused, this)
-    .onSync('blurred', this._onBlurred, this)
-    .onSync('enterKeyed', this._onEnterKeyed, this)
-    .onSync('tabKeyed', this._onTabKeyed, this)
-    .onSync('escKeyed', this._onEscKeyed, this)
-    .onSync('upKeyed', this._onUpKeyed, this)
-    .onSync('downKeyed', this._onDownKeyed, this)
-    .onSync('leftKeyed', this._onLeftKeyed, this)
-    .onSync('rightKeyed', this._onRightKeyed, this)
-    .onSync('queryChanged', this._onQueryChanged, this)
-    .onSync('whitespaceChanged', this._onWhitespaceChanged, this);
-
-  this._bindKeyboardShortcuts(o);
-
-  this._setLanguageDirection();
-}
-
-// instance methods
-// ----------------
-
-_.mixin(Typeahead.prototype, {
-  // ### private
-
-  _bindKeyboardShortcuts: function(options) {
-    if (!options.keyboardShortcuts) {
-      return;
-    }
-    var $input = this.$input;
-    var keyboardShortcuts = [];
-    _.each(options.keyboardShortcuts, function(key) {
-      if (typeof key === 'string') {
-        key = key.toUpperCase().charCodeAt(0);
-      }
-      keyboardShortcuts.push(key);
-    });
-    DOM.element(document).keydown(function(event) {
-      var elt = (event.target || event.srcElement);
-      var tagName = elt.tagName;
-      if (elt.isContentEditable || tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
-        // already in an input
-        return;
-      }
-
-      var which = event.which || event.keyCode;
-      if (keyboardShortcuts.indexOf(which) === -1) {
-        // not the right shortcut
-        return;
-      }
-
-      $input.focus();
-      event.stopPropagation();
-      event.preventDefault();
-    });
-  },
-
-  _onSuggestionClicked: function onSuggestionClicked(type, $el) {
-    var datum;
-
-    if (datum = this.dropdown.getDatumForSuggestion($el)) {
-      this._select(datum);
-    }
-  },
-
-  _onCursorMoved: function onCursorMoved(event, updateInput) {
-    var datum = this.dropdown.getDatumForCursor();
-    var currentCursorId = this.dropdown.getCurrentCursor().attr('id');
-    this.input.setActiveDescendant(currentCursorId);
-
-    if (datum) {
-      if (updateInput) {
-        this.input.setInputValue(datum.value, true);
-      }
-
-      this.eventBus.trigger('cursorchanged', datum.raw, datum.datasetName);
-    }
-  },
-
-  _onCursorRemoved: function onCursorRemoved() {
-    this.input.resetInputValue();
-    this._updateHint();
-    this.eventBus.trigger('cursorremoved');
-  },
-
-  _onDatasetRendered: function onDatasetRendered() {
-    this._updateHint();
-
-    this.eventBus.trigger('updated');
-  },
-
-  _onOpened: function onOpened() {
-    this._updateHint();
-    this.input.expand();
-
-    this.eventBus.trigger('opened');
-  },
-
-  _onEmpty: function onEmpty() {
-    this.eventBus.trigger('empty');
-  },
-
-  _onRedrawn: function onRedrawn() {
-    this.$node.css('top', 0 + 'px');
-    this.$node.css('left', 0 + 'px');
-
-    var inputRect = this.$input[0].getBoundingClientRect();
-
-    if (this.autoWidth) {
-      this.$node.css('width', inputRect.width + 'px');
-    }
-
-    var wrapperRect = this.$node[0].getBoundingClientRect();
-
-    var top = inputRect.bottom - wrapperRect.top;
-    this.$node.css('top', top + 'px');
-    var left = inputRect.left - wrapperRect.left;
-    this.$node.css('left', left + 'px');
-
-    this.eventBus.trigger('redrawn');
-  },
-
-  _onShown: function onShown() {
-    this.eventBus.trigger('shown');
-    if (this.autoselect) {
-      this.dropdown.cursorTopSuggestion();
-    }
-  },
-
-  _onClosed: function onClosed() {
-    this.input.clearHint();
-    this.input.removeActiveDescendant();
-    this.input.collapse();
-
-    this.eventBus.trigger('closed');
-  },
-
-  _onFocused: function onFocused() {
-    this.isActivated = true;
-
-    if (this.openOnFocus) {
-      var query = this.input.getQuery();
-      if (query.length >= this.minLength) {
-        this.dropdown.update(query);
-      } else {
-        this.dropdown.empty();
-      }
-
-      this.dropdown.open();
-    }
-  },
-
-  _onBlurred: function onBlurred() {
-    var cursorDatum;
-    var topSuggestionDatum;
-
-    cursorDatum = this.dropdown.getDatumForCursor();
-    topSuggestionDatum = this.dropdown.getDatumForTopSuggestion();
-
-    if (!this.debug) {
-      if (this.autoselectOnBlur && cursorDatum) {
-        this._select(cursorDatum);
-      } else if (this.autoselectOnBlur && topSuggestionDatum) {
-        this._select(topSuggestionDatum);
-      } else {
-        this.isActivated = false;
-        this.dropdown.empty();
-        this.dropdown.close();
-      }
-    }
-  },
-
-  _onEnterKeyed: function onEnterKeyed(type, $e) {
-    var cursorDatum;
-    var topSuggestionDatum;
-
-    cursorDatum = this.dropdown.getDatumForCursor();
-    topSuggestionDatum = this.dropdown.getDatumForTopSuggestion();
-
-    if (cursorDatum) {
-      this._select(cursorDatum);
-      $e.preventDefault();
-    } else if (this.autoselect && topSuggestionDatum) {
-      this._select(topSuggestionDatum);
-      $e.preventDefault();
-    }
-  },
-
-  _onTabKeyed: function onTabKeyed(type, $e) {
-    var datum;
-
-    if (datum = this.dropdown.getDatumForCursor()) {
-      this._select(datum);
-      $e.preventDefault();
-    } else {
-      this._autocomplete(true);
-    }
-  },
-
-  _onEscKeyed: function onEscKeyed() {
-    this.dropdown.close();
-    this.input.resetInputValue();
-  },
-
-  _onUpKeyed: function onUpKeyed() {
-    var query = this.input.getQuery();
-
-    if (this.dropdown.isEmpty && query.length >= this.minLength) {
-      this.dropdown.update(query);
-    } else {
-      this.dropdown.moveCursorUp();
-    }
-
-    this.dropdown.open();
-  },
-
-  _onDownKeyed: function onDownKeyed() {
-    var query = this.input.getQuery();
-
-    if (this.dropdown.isEmpty && query.length >= this.minLength) {
-      this.dropdown.update(query);
-    } else {
-      this.dropdown.moveCursorDown();
-    }
-
-    this.dropdown.open();
-  },
-
-  _onLeftKeyed: function onLeftKeyed() {
-    if (this.dir === 'rtl') {
-      this._autocomplete();
-    }
-  },
-
-  _onRightKeyed: function onRightKeyed() {
-    if (this.dir === 'ltr') {
-      this._autocomplete();
-    }
-  },
-
-  _onQueryChanged: function onQueryChanged(e, query) {
-    this.input.clearHintIfInvalid();
-
-    if (query.length >= this.minLength) {
-      this.dropdown.update(query);
-    } else {
-      this.dropdown.empty();
-    }
-
-    this.dropdown.open();
-    this._setLanguageDirection();
-  },
-
-  _onWhitespaceChanged: function onWhitespaceChanged() {
-    this._updateHint();
-    this.dropdown.open();
-  },
-
-  _setLanguageDirection: function setLanguageDirection() {
-    var dir = this.input.getLanguageDirection();
-
-    if (this.dir !== dir) {
-      this.dir = dir;
-      this.$node.css('direction', dir);
-      this.dropdown.setLanguageDirection(dir);
-    }
-  },
-
-  _updateHint: function updateHint() {
-    var datum;
-    var val;
-    var query;
-    var escapedQuery;
-    var frontMatchRegEx;
-    var match;
-
-    datum = this.dropdown.getDatumForTopSuggestion();
-
-    if (datum && this.dropdown.isVisible() && !this.input.hasOverflow()) {
-      val = this.input.getInputValue();
-      query = Input.normalizeQuery(val);
-      escapedQuery = _.escapeRegExChars(query);
-
-      // match input value, then capture trailing text
-      frontMatchRegEx = new RegExp('^(?:' + escapedQuery + ')(.+$)', 'i');
-      match = frontMatchRegEx.exec(datum.value);
-
-      // clear hint if there's no trailing text
-      if (match) {
-        this.input.setHint(val + match[1]);
-      } else {
-        this.input.clearHint();
-      }
-    } else {
-      this.input.clearHint();
-    }
-  },
-
-  _autocomplete: function autocomplete(laxCursor) {
-    var hint;
-    var query;
-    var isCursorAtEnd;
-    var datum;
-
-    hint = this.input.getHint();
-    query = this.input.getQuery();
-    isCursorAtEnd = laxCursor || this.input.isCursorAtEnd();
-
-    if (hint && query !== hint && isCursorAtEnd) {
-      datum = this.dropdown.getDatumForTopSuggestion();
-      if (datum) {
-        this.input.setInputValue(datum.value);
-      }
-
-      this.eventBus.trigger('autocompleted', datum.raw, datum.datasetName);
-    }
-  },
-
-  _select: function select(datum) {
-    if (typeof datum.value !== 'undefined') {
-      this.input.setQuery(datum.value);
-    }
-    if (this.clearOnSelected) {
-      this.setVal('');
-    } else {
-      this.input.setInputValue(datum.value, true);
-    }
-
-    this._setLanguageDirection();
-
-    var event = this.eventBus.trigger('selected', datum.raw, datum.datasetName);
-    if (event.isDefaultPrevented() === false) {
-      this.dropdown.close();
-
-      // #118: allow click event to bubble up to the body before removing
-      // the suggestions otherwise we break event delegation
-      _.defer(_.bind(this.dropdown.empty, this.dropdown));
-    }
-  },
-
-  // ### public
-
-  open: function open() {
-    // if the menu is not activated yet, we need to update
-    // the underlying dropdown menu to trigger the search
-    // otherwise we're not gonna see anything
-    if (!this.isActivated) {
-      var query = this.input.getInputValue();
-      if (query.length >= this.minLength) {
-        this.dropdown.update(query);
-      } else {
-        this.dropdown.empty();
-      }
-    }
-    this.dropdown.open();
-  },
-
-  close: function close() {
-    this.dropdown.close();
-  },
-
-  setVal: function setVal(val) {
-    // expect val to be a string, so be safe, and coerce
-    val = _.toStr(val);
-
-    if (this.isActivated) {
-      this.input.setInputValue(val);
-    } else {
-      this.input.setQuery(val);
-      this.input.setInputValue(val, true);
-    }
-
-    this._setLanguageDirection();
-  },
-
-  getVal: function getVal() {
-    return this.input.getQuery();
-  },
-
-  destroy: function destroy() {
-    this.input.destroy();
-    this.dropdown.destroy();
-
-    destroyDomStructure(this.$node, this.cssClasses);
-
-    this.$node = null;
-  },
-
-  getWrapper: function getWrapper() {
-    return this.dropdown.$container[0];
-  }
-});
-
-function buildDom(options) {
-  var $input;
-  var $wrapper;
-  var $dropdown;
-  var $hint;
-
-  $input = DOM.element(options.input);
-  $wrapper = DOM
-    .element(html.wrapper.replace('%ROOT%', options.cssClasses.root))
-    .css(options.css.wrapper);
-
-  // override the display property with the table-cell value
-  // if the parent element is a table and the original input was a block
-  //  -> https://github.com/algolia/autocomplete.js/issues/16
-  if (!options.appendTo && $input.css('display') === 'block' && $input.parent().css('display') === 'table') {
-    $wrapper.css('display', 'table-cell');
-  }
-  var dropdownHtml = html.dropdown.
-    replace('%PREFIX%', options.cssClasses.prefix).
-    replace('%DROPDOWN_MENU%', options.cssClasses.dropdownMenu);
-  $dropdown = DOM.element(dropdownHtml)
-    .css(options.css.dropdown)
-    .attr({
-      role: 'listbox',
-      id: options.listboxId
-    });
-  if (options.templates && options.templates.dropdownMenu) {
-    $dropdown.html(_.templatify(options.templates.dropdownMenu)());
-  }
-  $hint = $input.clone().css(options.css.hint).css(getBackgroundStyles($input));
-
-  $hint
-    .val('')
-    .addClass(_.className(options.cssClasses.prefix, options.cssClasses.hint, true))
-    .removeAttr('id name placeholder required')
-    .prop('readonly', true)
-    .attr({
-      'aria-hidden': 'true',
-      autocomplete: 'off',
-      spellcheck: 'false',
-      tabindex: -1
-    });
-  if ($hint.removeData) {
-    $hint.removeData();
-  }
-
-  // store the original values of the attrs that get modified
-  // so modifications can be reverted on destroy
-  $input.data(attrsKey, {
-    'aria-autocomplete': $input.attr('aria-autocomplete'),
-    'aria-expanded': $input.attr('aria-expanded'),
-    'aria-owns': $input.attr('aria-owns'),
-    autocomplete: $input.attr('autocomplete'),
-    dir: $input.attr('dir'),
-    role: $input.attr('role'),
-    spellcheck: $input.attr('spellcheck'),
-    style: $input.attr('style'),
-    type: $input.attr('type')
-  });
-
-  $input
-    .addClass(_.className(options.cssClasses.prefix, options.cssClasses.input, true))
-    .attr({
-      autocomplete: 'off',
-      spellcheck: false,
-
-      // Accessibility features
-      // Give the field a presentation of a "select".
-      // Combobox is the combined presentation of a single line textfield
-      // with a listbox popup.
-      // https://www.w3.org/WAI/PF/aria/roles#combobox
-      role: 'combobox',
-      // Let the screen reader know the field has an autocomplete
-      // feature to it.
-      'aria-autocomplete': (options.datasets &&
-        options.datasets[0] && options.datasets[0].displayKey ? 'both' : 'list'),
-      // Indicates whether the dropdown it controls is currently expanded or collapsed
-      'aria-expanded': 'false',
-      'aria-label': options.ariaLabel,
-      // Explicitly point to the listbox,
-      // which is a list of suggestions (aka options)
-      'aria-owns': options.listboxId
-    })
-    .css(options.hint ? options.css.input : options.css.inputWithNoHint);
-
-  // ie7 does not like it when dir is set to auto
-  try {
-    if (!$input.attr('dir')) {
-      $input.attr('dir', 'auto');
-    }
-  } catch (e) {
-    // ignore
-  }
-
-  $wrapper = options.appendTo
-    ? $wrapper.appendTo(DOM.element(options.appendTo).eq(0)).eq(0)
-    : $input.wrap($wrapper).parent();
-
-  $wrapper
-    .prepend(options.hint ? $hint : null)
-    .append($dropdown);
-
-  return {
-    wrapper: $wrapper,
-    input: $input,
-    hint: $hint,
-    menu: $dropdown
-  };
-}
-
-function getBackgroundStyles($el) {
-  return {
-    backgroundAttachment: $el.css('background-attachment'),
-    backgroundClip: $el.css('background-clip'),
-    backgroundColor: $el.css('background-color'),
-    backgroundImage: $el.css('background-image'),
-    backgroundOrigin: $el.css('background-origin'),
-    backgroundPosition: $el.css('background-position'),
-    backgroundRepeat: $el.css('background-repeat'),
-    backgroundSize: $el.css('background-size')
-  };
-}
-
-function destroyDomStructure($node, cssClasses) {
-  var $input = $node.find(_.className(cssClasses.prefix, cssClasses.input));
-
-  // need to remove attrs that weren't previously defined and
-  // revert attrs that originally had a value
-  _.each($input.data(attrsKey), function(val, key) {
-    if (val === undefined) {
-      $input.removeAttr(key);
-    } else {
-      $input.attr(key, val);
-    }
-  });
-
-  $input
-    .detach()
-    .removeClass(_.className(cssClasses.prefix, cssClasses.input, true))
-    .insertAfter($node);
-  if ($input.removeData) {
-    $input.removeData(attrsKey);
-  }
-
-  $node.remove();
-}
-
-Typeahead.Dropdown = Dropdown;
-Typeahead.Input = Input;
-Typeahead.sources = __webpack_require__(60);
-
-module.exports = Typeahead;
-
-
-/***/ }),
 /* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ = __webpack_require__(0);
-var version = __webpack_require__(23);
-var parseAlgoliaClientVersion = __webpack_require__(22);
-
-module.exports = function search(index, params) {
-  var algoliaVersion = parseAlgoliaClientVersion(index.as._ua);
-  if (algoliaVersion && algoliaVersion[0] >= 3 && algoliaVersion[1] > 20) {
-    params = params || {};
-    params.additionalUA = 'autocomplete.js ' + version;
-  }
-  return sourceFn;
-
-  function sourceFn(query, cb) {
-    index.search(query, params, function(error, content) {
-      if (error) {
-        _.error(error.message);
-        return;
-      }
-      cb(content.hits, content);
-    });
-  }
-};
+exports.decode = exports.parse = __webpack_require__(60);
+exports.encode = exports.stringify = __webpack_require__(32);
 
 
 /***/ }),
@@ -5743,11 +6641,89 @@ module.exports = function search(index, params) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-module.exports = {
-  hits: __webpack_require__(59),
-  popularIn: __webpack_require__(61)
+
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+module.exports = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
+
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty(obj, k)) {
+      obj[k] = v;
+    } else if (isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
 
@@ -5758,89 +6734,7 @@ module.exports = {
 "use strict";
 
 
-var _ = __webpack_require__(0);
-var version = __webpack_require__(23);
-var parseAlgoliaClientVersion = __webpack_require__(22);
-
-module.exports = function popularIn(index, params, details, options) {
-  var algoliaVersion = parseAlgoliaClientVersion(index.as._ua);
-  if (algoliaVersion && algoliaVersion[0] >= 3 && algoliaVersion[1] > 20) {
-    params = params || {};
-    params.additionalUA = 'autocomplete.js ' + version;
-  }
-  if (!details.source) {
-    return _.error("Missing 'source' key");
-  }
-  var source = _.isFunction(details.source) ? details.source : function(hit) { return hit[details.source]; };
-
-  if (!details.index) {
-    return _.error("Missing 'index' key");
-  }
-  var detailsIndex = details.index;
-
-  options = options || {};
-
-  return sourceFn;
-
-  function sourceFn(query, cb) {
-    index.search(query, params, function(error, content) {
-      if (error) {
-        _.error(error.message);
-        return;
-      }
-
-      if (content.hits.length > 0) {
-        var first = content.hits[0];
-
-        var detailsParams = _.mixin({hitsPerPage: 0}, details);
-        delete detailsParams.source; // not a query parameter
-        delete detailsParams.index; // not a query parameter
-
-        var detailsAlgoliaVersion = parseAlgoliaClientVersion(detailsIndex.as._ua);
-        if (detailsAlgoliaVersion && detailsAlgoliaVersion[0] >= 3 && detailsAlgoliaVersion[1] > 20) {
-          params.additionalUA = 'autocomplete.js ' + version;
-        }
-
-        detailsIndex.search(source(first), detailsParams, function(error2, content2) {
-          if (error2) {
-            _.error(error2.message);
-            return;
-          }
-
-          var suggestions = [];
-
-          // add the 'all department' entry before others
-          if (options.includeAll) {
-            var label = options.allTitle || 'All departments';
-            suggestions.push(_.mixin({
-              facet: {value: label, count: content2.nbHits}
-            }, _.cloneDeep(first)));
-          }
-
-          // enrich the first hit iterating over the facets
-          _.each(content2.facets, function(values, facet) {
-            _.each(values, function(count, value) {
-              suggestions.push(_.mixin({
-                facet: {facet: facet, value: value, count: count}
-              }, _.cloneDeep(first)));
-            });
-          });
-
-          // append all other hits
-          for (var i = 1; i < content.hits.length; ++i) {
-            suggestions.push(content.hits[i]);
-          }
-
-          cb(suggestions, content);
-        });
-
-        return;
-      }
-
-      cb([]);
-    });
-  }
-};
+module.exports = '3.32.0';
 
 
 /***/ }),
@@ -5854,7 +6748,7 @@ module.exports = function popularIn(index, params, details, options) {
 var zepto = __webpack_require__(63);
 
 // setup DOM element
-var DOM = __webpack_require__(1);
+var DOM = __webpack_require__(2);
 DOM.element = zepto;
 
 // setup utils functions
@@ -5875,8 +6769,8 @@ _.mixin = zepto.extend;
 _.Event = zepto.Event;
 
 var typeaheadKey = 'aaAutocomplete';
-var Typeahead = __webpack_require__(58);
-var EventBus = __webpack_require__(20);
+var Typeahead = __webpack_require__(64);
+var EventBus = __webpack_require__(33);
 
 function autocomplete(selector, options, datasets, typeaheadObject) {
   datasets = _.isArray(datasets) ? datasets : [].slice.call(arguments, 2);
@@ -5892,6 +6786,7 @@ function autocomplete(selector, options, datasets, typeaheadObject) {
       minLength: options.minLength,
       autoselect: options.autoselect,
       autoselectOnBlur: options.autoselectOnBlur,
+      tabAutocomplete: options.tabAutocomplete,
       openOnFocus: options.openOnFocus,
       templates: options.templates,
       debug: options.debug,
@@ -5900,7 +6795,8 @@ function autocomplete(selector, options, datasets, typeaheadObject) {
       datasets: datasets,
       keyboardShortcuts: options.keyboardShortcuts,
       appendTo: options.appendTo,
-      autoWidth: options.autoWidth
+      autoWidth: options.autoWidth,
+      ariaLabel: options.ariaLabel || input.getAttribute('aria-label')
     });
     $input.data(typeaheadKey, typeahead);
   });
@@ -5947,7 +6843,7 @@ module.exports = autocomplete;
 /* Zepto v1.2.0 - zepto event assets data - zeptojs.com/license */
 (function(global, factory) {
   module.exports = factory(global);
-}(/* this ##### UPDATED: here we want to use window/global instead of this which is the current file context ##### */ window, function(window) {  
+}(/* this ##### UPDATED: here we want to use window/global instead of this which is the current file context ##### */ window, function(window) {
   var Zepto = (function() {
   var undefined, key, $, classList, emptyArray = [], concat = emptyArray.concat, filter = emptyArray.filter, slice = emptyArray.slice,
     document = window.document,
@@ -6944,7 +7840,11 @@ module.exports = autocomplete;
       handler.proxy = function(e){
         e = compatible(e)
         if (e.isImmediatePropagationStopped()) return
-        e.data = data
+        try {
+          var dataPropDescriptor = Object.getOwnPropertyDescriptor(e, 'data')
+          if (!dataPropDescriptor || dataPropDescriptor.writable)
+            e.data = data
+        } catch (e) {} // when using strict mode dataPropDescriptor will be undefined when e is InputEvent (even though data property exists). So we surround with try/catch
         var result = callback.apply(element, e._args == undefined ? [e] : [e].concat(e._args))
         if (result === false) e.preventDefault(), e.stopPropagation()
         return result
@@ -7265,1420 +8165,1020 @@ module.exports = autocomplete;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+var attrsKey = 'aaAttrs';
+
+var _ = __webpack_require__(0);
+var DOM = __webpack_require__(2);
+var EventBus = __webpack_require__(33);
+var Input = __webpack_require__(65);
+var Dropdown = __webpack_require__(72);
+var html = __webpack_require__(34);
+var css = __webpack_require__(24);
+
+// constructor
+// -----------
+
+// THOUGHT: what if datasets could dynamically be added/removed?
+function Typeahead(o) {
+  var $menu;
+  var $hint;
+
+  o = o || {};
+
+  if (!o.input) {
+    _.error('missing input');
+  }
+
+  this.isActivated = false;
+  this.debug = !!o.debug;
+  this.autoselect = !!o.autoselect;
+  this.autoselectOnBlur = !!o.autoselectOnBlur;
+  this.openOnFocus = !!o.openOnFocus;
+  this.minLength = _.isNumber(o.minLength) ? o.minLength : 1;
+  this.autoWidth = (o.autoWidth === undefined) ? true : !!o.autoWidth;
+  this.clearOnSelected = !!o.clearOnSelected;
+  this.tabAutocomplete = (o.tabAutocomplete === undefined) ? true : !!o.tabAutocomplete;
+
+  o.hint = !!o.hint;
+
+  if (o.hint && o.appendTo) {
+    throw new Error('[autocomplete.js] hint and appendTo options can\'t be used at the same time');
+  }
+
+  this.css = o.css = _.mixin({}, css, o.appendTo ? css.appendTo : {});
+  this.cssClasses = o.cssClasses = _.mixin({}, css.defaultClasses, o.cssClasses || {});
+  this.cssClasses.prefix =
+    o.cssClasses.formattedPrefix = _.formatPrefix(this.cssClasses.prefix, this.cssClasses.noPrefix);
+  this.listboxId = o.listboxId = [this.cssClasses.root, 'listbox', _.getUniqueId()].join('-');
+
+  var domElts = buildDom(o);
+
+  this.$node = domElts.wrapper;
+  var $input = this.$input = domElts.input;
+  $menu = domElts.menu;
+  $hint = domElts.hint;
+
+  if (o.dropdownMenuContainer) {
+    DOM.element(o.dropdownMenuContainer)
+      .css('position', 'relative') // ensure the container has a relative position
+      .append($menu.css('top', '0')); // override the top: 100%
+  }
+
+  // #705: if there's scrollable overflow, ie doesn't support
+  // blur cancellations when the scrollbar is clicked
+  //
+  // #351: preventDefault won't cancel blurs in ie <= 8
+  $input.on('blur.aa', function($e) {
+    var active = document.activeElement;
+    if (_.isMsie() && ($menu[0] === active || $menu[0].contains(active))) {
+      $e.preventDefault();
+      // stop immediate in order to prevent Input#_onBlur from
+      // getting exectued
+      $e.stopImmediatePropagation();
+      _.defer(function() { $input.focus(); });
+    }
+  });
+
+  // #351: prevents input blur due to clicks within dropdown menu
+  $menu.on('mousedown.aa', function($e) { $e.preventDefault(); });
+
+  this.eventBus = o.eventBus || new EventBus({el: $input});
+
+  this.dropdown = new Typeahead.Dropdown({
+    appendTo: o.appendTo,
+    wrapper: this.$node,
+    menu: $menu,
+    datasets: o.datasets,
+    templates: o.templates,
+    cssClasses: o.cssClasses,
+    minLength: this.minLength
+  })
+    .onSync('suggestionClicked', this._onSuggestionClicked, this)
+    .onSync('cursorMoved', this._onCursorMoved, this)
+    .onSync('cursorRemoved', this._onCursorRemoved, this)
+    .onSync('opened', this._onOpened, this)
+    .onSync('closed', this._onClosed, this)
+    .onSync('shown', this._onShown, this)
+    .onSync('empty', this._onEmpty, this)
+    .onSync('redrawn', this._onRedrawn, this)
+    .onAsync('datasetRendered', this._onDatasetRendered, this);
+
+  this.input = new Typeahead.Input({input: $input, hint: $hint})
+    .onSync('focused', this._onFocused, this)
+    .onSync('blurred', this._onBlurred, this)
+    .onSync('enterKeyed', this._onEnterKeyed, this)
+    .onSync('tabKeyed', this._onTabKeyed, this)
+    .onSync('escKeyed', this._onEscKeyed, this)
+    .onSync('upKeyed', this._onUpKeyed, this)
+    .onSync('downKeyed', this._onDownKeyed, this)
+    .onSync('leftKeyed', this._onLeftKeyed, this)
+    .onSync('rightKeyed', this._onRightKeyed, this)
+    .onSync('queryChanged', this._onQueryChanged, this)
+    .onSync('whitespaceChanged', this._onWhitespaceChanged, this);
+
+  this._bindKeyboardShortcuts(o);
+
+  this._setLanguageDirection();
+}
+
+// instance methods
+// ----------------
+
+_.mixin(Typeahead.prototype, {
+  // ### private
+
+  _bindKeyboardShortcuts: function(options) {
+    if (!options.keyboardShortcuts) {
+      return;
+    }
+    var $input = this.$input;
+    var keyboardShortcuts = [];
+    _.each(options.keyboardShortcuts, function(key) {
+      if (typeof key === 'string') {
+        key = key.toUpperCase().charCodeAt(0);
+      }
+      keyboardShortcuts.push(key);
+    });
+    DOM.element(document).keydown(function(event) {
+      var elt = (event.target || event.srcElement);
+      var tagName = elt.tagName;
+      if (elt.isContentEditable || tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
+        // already in an input
+        return;
+      }
+
+      var which = event.which || event.keyCode;
+      if (keyboardShortcuts.indexOf(which) === -1) {
+        // not the right shortcut
+        return;
+      }
+
+      $input.focus();
+      event.stopPropagation();
+      event.preventDefault();
+    });
+  },
+
+  _onSuggestionClicked: function onSuggestionClicked(type, $el) {
+    var datum;
+    var context = {selectionMethod: 'click'};
+
+    if (datum = this.dropdown.getDatumForSuggestion($el)) {
+      this._select(datum, context);
+    }
+  },
+
+  _onCursorMoved: function onCursorMoved(event, updateInput) {
+    var datum = this.dropdown.getDatumForCursor();
+    var currentCursorId = this.dropdown.getCurrentCursor().attr('id');
+    this.input.setActiveDescendant(currentCursorId);
+
+    if (datum) {
+      if (updateInput) {
+        this.input.setInputValue(datum.value, true);
+      }
+
+      this.eventBus.trigger('cursorchanged', datum.raw, datum.datasetName);
+    }
+  },
+
+  _onCursorRemoved: function onCursorRemoved() {
+    this.input.resetInputValue();
+    this._updateHint();
+    this.eventBus.trigger('cursorremoved');
+  },
+
+  _onDatasetRendered: function onDatasetRendered() {
+    this._updateHint();
+
+    this.eventBus.trigger('updated');
+  },
+
+  _onOpened: function onOpened() {
+    this._updateHint();
+    this.input.expand();
+
+    this.eventBus.trigger('opened');
+  },
+
+  _onEmpty: function onEmpty() {
+    this.eventBus.trigger('empty');
+  },
+
+  _onRedrawn: function onRedrawn() {
+    this.$node.css('top', 0 + 'px');
+    this.$node.css('left', 0 + 'px');
+
+    var inputRect = this.$input[0].getBoundingClientRect();
+
+    if (this.autoWidth) {
+      this.$node.css('width', inputRect.width + 'px');
+    }
+
+    var wrapperRect = this.$node[0].getBoundingClientRect();
+
+    var top = inputRect.bottom - wrapperRect.top;
+    this.$node.css('top', top + 'px');
+    var left = inputRect.left - wrapperRect.left;
+    this.$node.css('left', left + 'px');
+
+    this.eventBus.trigger('redrawn');
+  },
+
+  _onShown: function onShown() {
+    this.eventBus.trigger('shown');
+    if (this.autoselect) {
+      this.dropdown.cursorTopSuggestion();
+    }
+  },
+
+  _onClosed: function onClosed() {
+    this.input.clearHint();
+    this.input.removeActiveDescendant();
+    this.input.collapse();
+
+    this.eventBus.trigger('closed');
+  },
+
+  _onFocused: function onFocused() {
+    this.isActivated = true;
+
+    if (this.openOnFocus) {
+      var query = this.input.getQuery();
+      if (query.length >= this.minLength) {
+        this.dropdown.update(query);
+      } else {
+        this.dropdown.empty();
+      }
+
+      this.dropdown.open();
+    }
+  },
+
+  _onBlurred: function onBlurred() {
+    var cursorDatum;
+    var topSuggestionDatum;
+
+    cursorDatum = this.dropdown.getDatumForCursor();
+    topSuggestionDatum = this.dropdown.getDatumForTopSuggestion();
+    var context = {selectionMethod: 'blur'};
+
+    if (!this.debug) {
+      if (this.autoselectOnBlur && cursorDatum) {
+        this._select(cursorDatum, context);
+      } else if (this.autoselectOnBlur && topSuggestionDatum) {
+        this._select(topSuggestionDatum, context);
+      } else {
+        this.isActivated = false;
+        this.dropdown.empty();
+        this.dropdown.close();
+      }
+    }
+  },
+
+  _onEnterKeyed: function onEnterKeyed(type, $e) {
+    var cursorDatum;
+    var topSuggestionDatum;
+
+    cursorDatum = this.dropdown.getDatumForCursor();
+    topSuggestionDatum = this.dropdown.getDatumForTopSuggestion();
+    var context = {selectionMethod: 'enterKey'};
+
+    if (cursorDatum) {
+      this._select(cursorDatum, context);
+      $e.preventDefault();
+    } else if (this.autoselect && topSuggestionDatum) {
+      this._select(topSuggestionDatum, context);
+      $e.preventDefault();
+    }
+  },
+
+  _onTabKeyed: function onTabKeyed(type, $e) {
+    if (!this.tabAutocomplete) {
+      // Closing the dropdown enables further tabbing
+      this.dropdown.close();
+      return;
+    }
+
+    var datum;
+    var context = {selectionMethod: 'tabKey'};
+
+    if (datum = this.dropdown.getDatumForCursor()) {
+      this._select(datum, context);
+      $e.preventDefault();
+    } else {
+      this._autocomplete(true);
+    }
+  },
+
+  _onEscKeyed: function onEscKeyed() {
+    this.dropdown.close();
+    this.input.resetInputValue();
+  },
+
+  _onUpKeyed: function onUpKeyed() {
+    var query = this.input.getQuery();
+
+    if (this.dropdown.isEmpty && query.length >= this.minLength) {
+      this.dropdown.update(query);
+    } else {
+      this.dropdown.moveCursorUp();
+    }
+
+    this.dropdown.open();
+  },
+
+  _onDownKeyed: function onDownKeyed() {
+    var query = this.input.getQuery();
+
+    if (this.dropdown.isEmpty && query.length >= this.minLength) {
+      this.dropdown.update(query);
+    } else {
+      this.dropdown.moveCursorDown();
+    }
+
+    this.dropdown.open();
+  },
+
+  _onLeftKeyed: function onLeftKeyed() {
+    if (this.dir === 'rtl') {
+      this._autocomplete();
+    }
+  },
+
+  _onRightKeyed: function onRightKeyed() {
+    if (this.dir === 'ltr') {
+      this._autocomplete();
+    }
+  },
+
+  _onQueryChanged: function onQueryChanged(e, query) {
+    this.input.clearHintIfInvalid();
+
+    if (query.length >= this.minLength) {
+      this.dropdown.update(query);
+    } else {
+      this.dropdown.empty();
+    }
+
+    this.dropdown.open();
+    this._setLanguageDirection();
+  },
+
+  _onWhitespaceChanged: function onWhitespaceChanged() {
+    this._updateHint();
+    this.dropdown.open();
+  },
+
+  _setLanguageDirection: function setLanguageDirection() {
+    var dir = this.input.getLanguageDirection();
+
+    if (this.dir !== dir) {
+      this.dir = dir;
+      this.$node.css('direction', dir);
+      this.dropdown.setLanguageDirection(dir);
+    }
+  },
+
+  _updateHint: function updateHint() {
+    var datum;
+    var val;
+    var query;
+    var escapedQuery;
+    var frontMatchRegEx;
+    var match;
+
+    datum = this.dropdown.getDatumForTopSuggestion();
+
+    if (datum && this.dropdown.isVisible() && !this.input.hasOverflow()) {
+      val = this.input.getInputValue();
+      query = Input.normalizeQuery(val);
+      escapedQuery = _.escapeRegExChars(query);
+
+      // match input value, then capture trailing text
+      frontMatchRegEx = new RegExp('^(?:' + escapedQuery + ')(.+$)', 'i');
+      match = frontMatchRegEx.exec(datum.value);
+
+      // clear hint if there's no trailing text
+      if (match) {
+        this.input.setHint(val + match[1]);
+      } else {
+        this.input.clearHint();
+      }
+    } else {
+      this.input.clearHint();
+    }
+  },
+
+  _autocomplete: function autocomplete(laxCursor) {
+    var hint;
+    var query;
+    var isCursorAtEnd;
+    var datum;
+
+    hint = this.input.getHint();
+    query = this.input.getQuery();
+    isCursorAtEnd = laxCursor || this.input.isCursorAtEnd();
+
+    if (hint && query !== hint && isCursorAtEnd) {
+      datum = this.dropdown.getDatumForTopSuggestion();
+      if (datum) {
+        this.input.setInputValue(datum.value);
+      }
+
+      this.eventBus.trigger('autocompleted', datum.raw, datum.datasetName);
+    }
+  },
+
+  _select: function select(datum, context) {
+    if (typeof datum.value !== 'undefined') {
+      this.input.setQuery(datum.value);
+    }
+    if (this.clearOnSelected) {
+      this.setVal('');
+    } else {
+      this.input.setInputValue(datum.value, true);
+    }
+
+    this._setLanguageDirection();
+
+    var event = this.eventBus.trigger('selected', datum.raw, datum.datasetName, context);
+    if (event.isDefaultPrevented() === false) {
+      this.dropdown.close();
+
+      // #118: allow click event to bubble up to the body before removing
+      // the suggestions otherwise we break event delegation
+      _.defer(_.bind(this.dropdown.empty, this.dropdown));
+    }
+  },
+
+  // ### public
+
+  open: function open() {
+    // if the menu is not activated yet, we need to update
+    // the underlying dropdown menu to trigger the search
+    // otherwise we're not gonna see anything
+    if (!this.isActivated) {
+      var query = this.input.getInputValue();
+      if (query.length >= this.minLength) {
+        this.dropdown.update(query);
+      } else {
+        this.dropdown.empty();
+      }
+    }
+    this.dropdown.open();
+  },
+
+  close: function close() {
+    this.dropdown.close();
+  },
+
+  setVal: function setVal(val) {
+    // expect val to be a string, so be safe, and coerce
+    val = _.toStr(val);
+
+    if (this.isActivated) {
+      this.input.setInputValue(val);
+    } else {
+      this.input.setQuery(val);
+      this.input.setInputValue(val, true);
+    }
+
+    this._setLanguageDirection();
+  },
+
+  getVal: function getVal() {
+    return this.input.getQuery();
+  },
+
+  destroy: function destroy() {
+    this.input.destroy();
+    this.dropdown.destroy();
+
+    destroyDomStructure(this.$node, this.cssClasses);
+
+    this.$node = null;
+  },
+
+  getWrapper: function getWrapper() {
+    return this.dropdown.$container[0];
+  }
 });
-exports.default = {
-  multiContainers: "Algolia Places: 'container' must point to a single <input> element.\nExample: instantiate the library twice if you want to bind two <inputs>.\n\nSee https://community.algolia.com/places/documentation.html#api-options-container",
-  badContainer: "Algolia Places: 'container' must point to an <input> element.\n\nSee https://community.algolia.com/places/documentation.html#api-options-container",
-  rateLimitReached: "Algolia Places: Current rate limit reached.\n\nSign up for a free 100,000 queries/month account at\nhttps://www.algolia.com/users/sign_up/places.\n\nOr upgrade your 100,000 queries/month plan by contacting us at\nhttps://community.algolia.com/places/contact.html."
-};
+
+function buildDom(options) {
+  var $input;
+  var $wrapper;
+  var $dropdown;
+  var $hint;
+
+  $input = DOM.element(options.input);
+  $wrapper = DOM
+    .element(html.wrapper.replace('%ROOT%', options.cssClasses.root))
+    .css(options.css.wrapper);
+
+  // override the display property with the table-cell value
+  // if the parent element is a table and the original input was a block
+  //  -> https://github.com/algolia/autocomplete.js/issues/16
+  if (!options.appendTo && $input.css('display') === 'block' && $input.parent().css('display') === 'table') {
+    $wrapper.css('display', 'table-cell');
+  }
+  var dropdownHtml = html.dropdown.
+    replace('%PREFIX%', options.cssClasses.prefix).
+    replace('%DROPDOWN_MENU%', options.cssClasses.dropdownMenu);
+  $dropdown = DOM.element(dropdownHtml)
+    .css(options.css.dropdown)
+    .attr({
+      role: 'listbox',
+      id: options.listboxId
+    });
+  if (options.templates && options.templates.dropdownMenu) {
+    $dropdown.html(_.templatify(options.templates.dropdownMenu)());
+  }
+  $hint = $input.clone().css(options.css.hint).css(getBackgroundStyles($input));
+
+  $hint
+    .val('')
+    .addClass(_.className(options.cssClasses.prefix, options.cssClasses.hint, true))
+    .removeAttr('id name placeholder required')
+    .prop('readonly', true)
+    .attr({
+      'aria-hidden': 'true',
+      autocomplete: 'off',
+      spellcheck: 'false',
+      tabindex: -1
+    });
+  if ($hint.removeData) {
+    $hint.removeData();
+  }
+
+  // store the original values of the attrs that get modified
+  // so modifications can be reverted on destroy
+  $input.data(attrsKey, {
+    'aria-autocomplete': $input.attr('aria-autocomplete'),
+    'aria-expanded': $input.attr('aria-expanded'),
+    'aria-owns': $input.attr('aria-owns'),
+    autocomplete: $input.attr('autocomplete'),
+    dir: $input.attr('dir'),
+    role: $input.attr('role'),
+    spellcheck: $input.attr('spellcheck'),
+    style: $input.attr('style'),
+    type: $input.attr('type')
+  });
+
+  $input
+    .addClass(_.className(options.cssClasses.prefix, options.cssClasses.input, true))
+    .attr({
+      autocomplete: 'off',
+      spellcheck: false,
+
+      // Accessibility features
+      // Give the field a presentation of a "select".
+      // Combobox is the combined presentation of a single line textfield
+      // with a listbox popup.
+      // https://www.w3.org/WAI/PF/aria/roles#combobox
+      role: 'combobox',
+      // Let the screen reader know the field has an autocomplete
+      // feature to it.
+      'aria-autocomplete': (options.datasets &&
+        options.datasets[0] && options.datasets[0].displayKey ? 'both' : 'list'),
+      // Indicates whether the dropdown it controls is currently expanded or collapsed
+      'aria-expanded': 'false',
+      'aria-label': options.ariaLabel,
+      // Explicitly point to the listbox,
+      // which is a list of suggestions (aka options)
+      'aria-owns': options.listboxId
+    })
+    .css(options.hint ? options.css.input : options.css.inputWithNoHint);
+
+  // ie7 does not like it when dir is set to auto
+  try {
+    if (!$input.attr('dir')) {
+      $input.attr('dir', 'auto');
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  $wrapper = options.appendTo
+    ? $wrapper.appendTo(DOM.element(options.appendTo).eq(0)).eq(0)
+    : $input.wrap($wrapper).parent();
+
+  $wrapper
+    .prepend(options.hint ? $hint : null)
+    .append($dropdown);
+
+  return {
+    wrapper: $wrapper,
+    input: $input,
+    hint: $hint,
+    menu: $dropdown
+  };
+}
+
+function getBackgroundStyles($el) {
+  return {
+    backgroundAttachment: $el.css('background-attachment'),
+    backgroundClip: $el.css('background-clip'),
+    backgroundColor: $el.css('background-color'),
+    backgroundImage: $el.css('background-image'),
+    backgroundOrigin: $el.css('background-origin'),
+    backgroundPosition: $el.css('background-position'),
+    backgroundRepeat: $el.css('background-repeat'),
+    backgroundSize: $el.css('background-size')
+  };
+}
+
+function destroyDomStructure($node, cssClasses) {
+  var $input = $node.find(_.className(cssClasses.prefix, cssClasses.input));
+
+  // need to remove attrs that weren't previously defined and
+  // revert attrs that originally had a value
+  _.each($input.data(attrsKey), function(val, key) {
+    if (val === undefined) {
+      $input.removeAttr(key);
+    } else {
+      $input.attr(key, val);
+    }
+  });
+
+  $input
+    .detach()
+    .removeClass(_.className(cssClasses.prefix, cssClasses.input, true))
+    .insertAfter($node);
+  if ($input.removeData) {
+    $input.removeData(attrsKey);
+  }
+
+  $node.remove();
+}
+
+Typeahead.Dropdown = Dropdown;
+Typeahead.Input = Input;
+Typeahead.sources = __webpack_require__(74);
+
+module.exports = Typeahead;
+
 
 /***/ }),
 /* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-/**
- * This is the common logic for both the Node.js and web browser
- * implementations of `debug()`.
- *
- * Expose `debug()` as the module.
- */
 
-exports = module.exports = createDebug.debug = createDebug['default'] = createDebug;
-exports.coerce = coerce;
-exports.disable = disable;
-exports.enable = enable;
-exports.enabled = enabled;
-exports.humanize = __webpack_require__(74);
+var specialKeyCodeMap;
 
-/**
- * The currently active debug mode names, and names to skip.
- */
+specialKeyCodeMap = {
+  9: 'tab',
+  27: 'esc',
+  37: 'left',
+  39: 'right',
+  13: 'enter',
+  38: 'up',
+  40: 'down'
+};
 
-exports.names = [];
-exports.skips = [];
+var _ = __webpack_require__(0);
+var DOM = __webpack_require__(2);
+var EventEmitter = __webpack_require__(23);
 
-/**
- * Map of special "%n" handling functions, for the debug "format" argument.
- *
- * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
- */
+// constructor
+// -----------
 
-exports.formatters = {};
+function Input(o) {
+  var that = this;
+  var onBlur;
+  var onFocus;
+  var onKeydown;
+  var onInput;
 
-/**
- * Previous log timestamp.
- */
+  o = o || {};
 
-var prevTime;
-
-/**
- * Select a color.
- * @param {String} namespace
- * @return {Number}
- * @api private
- */
-
-function selectColor(namespace) {
-  var hash = 0, i;
-
-  for (i in namespace) {
-    hash  = ((hash << 5) - hash) + namespace.charCodeAt(i);
-    hash |= 0; // Convert to 32bit integer
+  if (!o.input) {
+    _.error('input is missing');
   }
 
-  return exports.colors[Math.abs(hash) % exports.colors.length];
-}
+  // bound functions
+  onBlur = _.bind(this._onBlur, this);
+  onFocus = _.bind(this._onFocus, this);
+  onKeydown = _.bind(this._onKeydown, this);
+  onInput = _.bind(this._onInput, this);
 
-/**
- * Create a debugger with the given `namespace`.
- *
- * @param {String} namespace
- * @return {Function}
- * @api public
- */
+  this.$hint = DOM.element(o.hint);
+  this.$input = DOM.element(o.input)
+    .on('blur.aa', onBlur)
+    .on('focus.aa', onFocus)
+    .on('keydown.aa', onKeydown);
 
-function createDebug(namespace) {
+  // if no hint, noop all the hint related functions
+  if (this.$hint.length === 0) {
+    this.setHint = this.getHint = this.clearHint = this.clearHintIfInvalid = _.noop;
+  }
 
-  function debug() {
-    // disabled?
-    if (!debug.enabled) return;
-
-    var self = debug;
-
-    // set `diff` timestamp
-    var curr = +new Date();
-    var ms = curr - (prevTime || curr);
-    self.diff = ms;
-    self.prev = prevTime;
-    self.curr = curr;
-    prevTime = curr;
-
-    // turn the `arguments` into a proper Array
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-
-    args[0] = exports.coerce(args[0]);
-
-    if ('string' !== typeof args[0]) {
-      // anything else let's inspect with %O
-      args.unshift('%O');
-    }
-
-    // apply any `formatters` transformations
-    var index = 0;
-    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      // if we encounter an escaped % then don't increase the array index
-      if (match === '%%') return match;
-      index++;
-      var formatter = exports.formatters[format];
-      if ('function' === typeof formatter) {
-        var val = args[index];
-        match = formatter.call(self, val);
-
-        // now we need to remove `args[index]` since it's inlined in the `format`
-        args.splice(index, 1);
-        index--;
+  // ie7 and ie8 don't support the input event
+  // ie9 doesn't fire the input event when characters are removed
+  // not sure if ie10 is compatible
+  if (!_.isMsie()) {
+    this.$input.on('input.aa', onInput);
+  } else {
+    this.$input.on('keydown.aa keypress.aa cut.aa paste.aa', function($e) {
+      // if a special key triggered this, ignore it
+      if (specialKeyCodeMap[$e.which || $e.keyCode]) {
+        return;
       }
-      return match;
+
+      // give the browser a chance to update the value of the input
+      // before checking to see if the query changed
+      _.defer(_.bind(that._onInput, that, $e));
     });
-
-    // apply env-specific formatting (colors, etc.)
-    exports.formatArgs.call(self, args);
-
-    var logFn = debug.log || exports.log || console.log.bind(console);
-    logFn.apply(self, args);
   }
 
-  debug.namespace = namespace;
-  debug.enabled = exports.enabled(namespace);
-  debug.useColors = exports.useColors();
-  debug.color = selectColor(namespace);
+  // the query defaults to whatever the value of the input is
+  // on initialization, it'll most likely be an empty string
+  this.query = this.$input.val();
 
-  // env-specific initialization logic for debug instances
-  if ('function' === typeof exports.init) {
-    exports.init(debug);
-  }
-
-  return debug;
+  // helps with calculating the width of the input's value
+  this.$overflowHelper = buildOverflowHelper(this.$input);
 }
 
-/**
- * Enables a debug mode by namespaces. This can include modes
- * separated by a colon and wildcards.
- *
- * @param {String} namespaces
- * @api public
- */
+// static methods
+// --------------
 
-function enable(namespaces) {
-  exports.save(namespaces);
+Input.normalizeQuery = function(str) {
+  // strips leading whitespace and condenses all whitespace
+  return (str || '').replace(/^\s*/g, '').replace(/\s{2,}/g, ' ');
+};
 
-  exports.names = [];
-  exports.skips = [];
+// instance methods
+// ----------------
 
-  var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
-  var len = split.length;
+_.mixin(Input.prototype, EventEmitter, {
 
-  for (var i = 0; i < len; i++) {
-    if (!split[i]) continue; // ignore empty strings
-    namespaces = split[i].replace(/\*/g, '.*?');
-    if (namespaces[0] === '-') {
-      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+  // ### private
+
+  _onBlur: function onBlur() {
+    this.resetInputValue();
+    this.$input.removeAttr('aria-activedescendant');
+    this.trigger('blurred');
+  },
+
+  _onFocus: function onFocus() {
+    this.trigger('focused');
+  },
+
+  _onKeydown: function onKeydown($e) {
+    // which is normalized and consistent (but not for ie)
+    var keyName = specialKeyCodeMap[$e.which || $e.keyCode];
+
+    this._managePreventDefault(keyName, $e);
+    if (keyName && this._shouldTrigger(keyName, $e)) {
+      this.trigger(keyName + 'Keyed', $e);
+    }
+  },
+
+  _onInput: function onInput() {
+    this._checkInputValue();
+  },
+
+  _managePreventDefault: function managePreventDefault(keyName, $e) {
+    var preventDefault;
+    var hintValue;
+    var inputValue;
+
+    switch (keyName) {
+    case 'tab':
+      hintValue = this.getHint();
+      inputValue = this.getInputValue();
+
+      preventDefault = hintValue &&
+        hintValue !== inputValue &&
+        !withModifier($e);
+      break;
+
+    case 'up':
+    case 'down':
+      preventDefault = !withModifier($e);
+      break;
+
+    default:
+      preventDefault = false;
+    }
+
+    if (preventDefault) {
+      $e.preventDefault();
+    }
+  },
+
+  _shouldTrigger: function shouldTrigger(keyName, $e) {
+    var trigger;
+
+    switch (keyName) {
+    case 'tab':
+      trigger = !withModifier($e);
+      break;
+
+    default:
+      trigger = true;
+    }
+
+    return trigger;
+  },
+
+  _checkInputValue: function checkInputValue() {
+    var inputValue;
+    var areEquivalent;
+    var hasDifferentWhitespace;
+
+    inputValue = this.getInputValue();
+    areEquivalent = areQueriesEquivalent(inputValue, this.query);
+    hasDifferentWhitespace = areEquivalent && this.query ?
+      this.query.length !== inputValue.length : false;
+
+    this.query = inputValue;
+
+    if (!areEquivalent) {
+      this.trigger('queryChanged', this.query);
+    } else if (hasDifferentWhitespace) {
+      this.trigger('whitespaceChanged', this.query);
+    }
+  },
+
+  // ### public
+
+  focus: function focus() {
+    this.$input.focus();
+  },
+
+  blur: function blur() {
+    this.$input.blur();
+  },
+
+  getQuery: function getQuery() {
+    return this.query;
+  },
+
+  setQuery: function setQuery(query) {
+    this.query = query;
+  },
+
+  getInputValue: function getInputValue() {
+    return this.$input.val();
+  },
+
+  setInputValue: function setInputValue(value, silent) {
+    if (typeof value === 'undefined') {
+      value = this.query;
+    }
+    this.$input.val(value);
+
+    // silent prevents any additional events from being triggered
+    if (silent) {
+      this.clearHint();
     } else {
-      exports.names.push(new RegExp('^' + namespaces + '$'));
+      this._checkInputValue();
     }
-  }
-}
+  },
 
-/**
- * Disable debug output.
- *
- * @api public
- */
+  expand: function expand() {
+    this.$input.attr('aria-expanded', 'true');
+  },
 
-function disable() {
-  exports.enable('');
-}
+  collapse: function collapse() {
+    this.$input.attr('aria-expanded', 'false');
+  },
 
-/**
- * Returns true if the given mode name is enabled, false otherwise.
- *
- * @param {String} name
- * @return {Boolean}
- * @api public
- */
+  setActiveDescendant: function setActiveDescendant(activedescendantId) {
+    this.$input.attr('aria-activedescendant', activedescendantId);
+  },
 
-function enabled(name) {
-  var i, len;
-  for (i = 0, len = exports.skips.length; i < len; i++) {
-    if (exports.skips[i].test(name)) {
-      return false;
+  removeActiveDescendant: function removeActiveDescendant() {
+    this.$input.removeAttr('aria-activedescendant');
+  },
+
+  resetInputValue: function resetInputValue() {
+    this.setInputValue(this.query, true);
+  },
+
+  getHint: function getHint() {
+    return this.$hint.val();
+  },
+
+  setHint: function setHint(value) {
+    this.$hint.val(value);
+  },
+
+  clearHint: function clearHint() {
+    this.setHint('');
+  },
+
+  clearHintIfInvalid: function clearHintIfInvalid() {
+    var val;
+    var hint;
+    var valIsPrefixOfHint;
+    var isValid;
+
+    val = this.getInputValue();
+    hint = this.getHint();
+    valIsPrefixOfHint = val !== hint && hint.indexOf(val) === 0;
+    isValid = val !== '' && valIsPrefixOfHint && !this.hasOverflow();
+
+    if (!isValid) {
+      this.clearHint();
     }
-  }
-  for (i = 0, len = exports.names.length; i < len; i++) {
-    if (exports.names[i].test(name)) {
-      return true;
+  },
+
+  getLanguageDirection: function getLanguageDirection() {
+    return (this.$input.css('direction') || 'ltr').toLowerCase();
+  },
+
+  hasOverflow: function hasOverflow() {
+    // 2 is arbitrary, just picking a small number to handle edge cases
+    var constraint = this.$input.width() - 2;
+
+    this.$overflowHelper.text(this.getInputValue());
+
+    return this.$overflowHelper.width() >= constraint;
+  },
+
+  isCursorAtEnd: function() {
+    var valueLength;
+    var selectionStart;
+    var range;
+
+    valueLength = this.$input.val().length;
+    selectionStart = this.$input[0].selectionStart;
+
+    if (_.isNumber(selectionStart)) {
+      return selectionStart === valueLength;
+    } else if (document.selection) {
+      // NOTE: this won't work unless the input has focus, the good news
+      // is this code should only get called when the input has focus
+      range = document.selection.createRange();
+      range.moveStart('character', -valueLength);
+
+      return valueLength === range.text.length;
     }
+
+    return true;
+  },
+
+  destroy: function destroy() {
+    this.$hint.off('.aa');
+    this.$input.off('.aa');
+
+    this.$hint = this.$input = this.$overflowHelper = null;
   }
-  return false;
+});
+
+// helper functions
+// ----------------
+
+function buildOverflowHelper($input) {
+  return DOM.element('<pre aria-hidden="true"></pre>')
+    .css({
+      // position helper off-screen
+      position: 'absolute',
+      visibility: 'hidden',
+      // avoid line breaks and whitespace collapsing
+      whiteSpace: 'pre',
+      // use same font css as input to calculate accurate width
+      fontFamily: $input.css('font-family'),
+      fontSize: $input.css('font-size'),
+      fontStyle: $input.css('font-style'),
+      fontVariant: $input.css('font-variant'),
+      fontWeight: $input.css('font-weight'),
+      wordSpacing: $input.css('word-spacing'),
+      letterSpacing: $input.css('letter-spacing'),
+      textIndent: $input.css('text-indent'),
+      textRendering: $input.css('text-rendering'),
+      textTransform: $input.css('text-transform')
+    })
+    .insertAfter($input);
 }
 
-/**
- * Coerce `val`.
- *
- * @param {Mixed} val
- * @return {Mixed}
- * @api private
- */
-
-function coerce(val) {
-  if (val instanceof Error) return val.stack || val.message;
-  return val;
+function areQueriesEquivalent(a, b) {
+  return Input.normalizeQuery(a) === Input.normalizeQuery(b);
 }
+
+function withModifier($e) {
+  return $e.altKey || $e.ctrlKey || $e.metaKey || $e.shiftKey;
+}
+
+module.exports = Input;
 
 
 /***/ }),
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
- * @overview es6-promise - a tiny implementation of Promises/A+.
- * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
- * @license   Licensed under MIT license
- *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
- * @version   4.1.0
- */
-
-(function (global, factory) {
-     true ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global.ES6Promise = factory());
-}(this, (function () { 'use strict';
-
-function objectOrFunction(x) {
-  return typeof x === 'function' || typeof x === 'object' && x !== null;
-}
-
-function isFunction(x) {
-  return typeof x === 'function';
-}
-
-var _isArray = undefined;
-if (!Array.isArray) {
-  _isArray = function (x) {
-    return Object.prototype.toString.call(x) === '[object Array]';
-  };
-} else {
-  _isArray = Array.isArray;
-}
-
-var isArray = _isArray;
-
-var len = 0;
-var vertxNext = undefined;
-var customSchedulerFn = undefined;
-
-var asap = function asap(callback, arg) {
-  queue[len] = callback;
-  queue[len + 1] = arg;
-  len += 2;
-  if (len === 2) {
-    // If len is 2, that means that we need to schedule an async flush.
-    // If additional callbacks are queued before the queue is flushed, they
-    // will be processed by this flush that we are scheduling.
-    if (customSchedulerFn) {
-      customSchedulerFn(flush);
-    } else {
-      scheduleFlush();
-    }
-  }
-};
-
-function setScheduler(scheduleFn) {
-  customSchedulerFn = scheduleFn;
-}
-
-function setAsap(asapFn) {
-  asap = asapFn;
-}
-
-var browserWindow = typeof window !== 'undefined' ? window : undefined;
-var browserGlobal = browserWindow || {};
-var BrowserMutationObserver = browserGlobal.MutationObserver || browserGlobal.WebKitMutationObserver;
-var isNode = typeof self === 'undefined' && typeof process !== 'undefined' && ({}).toString.call(process) === '[object process]';
-
-// test for web worker but not in IE10
-var isWorker = typeof Uint8ClampedArray !== 'undefined' && typeof importScripts !== 'undefined' && typeof MessageChannel !== 'undefined';
-
-// node
-function useNextTick() {
-  // node version 0.10.x displays a deprecation warning when nextTick is used recursively
-  // see https://github.com/cujojs/when/issues/410 for details
-  return function () {
-    return process.nextTick(flush);
-  };
-}
-
-// vertx
-function useVertxTimer() {
-  if (typeof vertxNext !== 'undefined') {
-    return function () {
-      vertxNext(flush);
-    };
-  }
-
-  return useSetTimeout();
-}
-
-function useMutationObserver() {
-  var iterations = 0;
-  var observer = new BrowserMutationObserver(flush);
-  var node = document.createTextNode('');
-  observer.observe(node, { characterData: true });
-
-  return function () {
-    node.data = iterations = ++iterations % 2;
-  };
-}
-
-// web worker
-function useMessageChannel() {
-  var channel = new MessageChannel();
-  channel.port1.onmessage = flush;
-  return function () {
-    return channel.port2.postMessage(0);
-  };
-}
-
-function useSetTimeout() {
-  // Store setTimeout reference so es6-promise will be unaffected by
-  // other code modifying setTimeout (like sinon.useFakeTimers())
-  var globalSetTimeout = setTimeout;
-  return function () {
-    return globalSetTimeout(flush, 1);
-  };
-}
-
-var queue = new Array(1000);
-function flush() {
-  for (var i = 0; i < len; i += 2) {
-    var callback = queue[i];
-    var arg = queue[i + 1];
-
-    callback(arg);
-
-    queue[i] = undefined;
-    queue[i + 1] = undefined;
-  }
-
-  len = 0;
-}
-
-function attemptVertx() {
-  try {
-    var r = require;
-    var vertx = __webpack_require__(80);
-    vertxNext = vertx.runOnLoop || vertx.runOnContext;
-    return useVertxTimer();
-  } catch (e) {
-    return useSetTimeout();
-  }
-}
-
-var scheduleFlush = undefined;
-// Decide what async method to use to triggering processing of queued callbacks:
-if (isNode) {
-  scheduleFlush = useNextTick();
-} else if (BrowserMutationObserver) {
-  scheduleFlush = useMutationObserver();
-} else if (isWorker) {
-  scheduleFlush = useMessageChannel();
-} else if (browserWindow === undefined && "function" === 'function') {
-  scheduleFlush = attemptVertx();
-} else {
-  scheduleFlush = useSetTimeout();
-}
-
-function then(onFulfillment, onRejection) {
-  var _arguments = arguments;
-
-  var parent = this;
-
-  var child = new this.constructor(noop);
-
-  if (child[PROMISE_ID] === undefined) {
-    makePromise(child);
-  }
-
-  var _state = parent._state;
-
-  if (_state) {
-    (function () {
-      var callback = _arguments[_state - 1];
-      asap(function () {
-        return invokeCallback(_state, child, callback, parent._result);
-      });
-    })();
-  } else {
-    subscribe(parent, child, onFulfillment, onRejection);
-  }
-
-  return child;
-}
-
-/**
-  `Promise.resolve` returns a promise that will become resolved with the
-  passed `value`. It is shorthand for the following:
-
-  ```javascript
-  let promise = new Promise(function(resolve, reject){
-    resolve(1);
-  });
-
-  promise.then(function(value){
-    // value === 1
-  });
-  ```
-
-  Instead of writing the above, your code now simply becomes the following:
-
-  ```javascript
-  let promise = Promise.resolve(1);
-
-  promise.then(function(value){
-    // value === 1
-  });
-  ```
-
-  @method resolve
-  @static
-  @param {Any} value value that the returned promise will be resolved with
-  Useful for tooling.
-  @return {Promise} a promise that will become fulfilled with the given
-  `value`
-*/
-function resolve(object) {
-  /*jshint validthis:true */
-  var Constructor = this;
-
-  if (object && typeof object === 'object' && object.constructor === Constructor) {
-    return object;
-  }
-
-  var promise = new Constructor(noop);
-  _resolve(promise, object);
-  return promise;
-}
-
-var PROMISE_ID = Math.random().toString(36).substring(16);
-
-function noop() {}
-
-var PENDING = void 0;
-var FULFILLED = 1;
-var REJECTED = 2;
-
-var GET_THEN_ERROR = new ErrorObject();
-
-function selfFulfillment() {
-  return new TypeError("You cannot resolve a promise with itself");
-}
-
-function cannotReturnOwn() {
-  return new TypeError('A promises callback cannot return that same promise.');
-}
-
-function getThen(promise) {
-  try {
-    return promise.then;
-  } catch (error) {
-    GET_THEN_ERROR.error = error;
-    return GET_THEN_ERROR;
-  }
-}
-
-function tryThen(then, value, fulfillmentHandler, rejectionHandler) {
-  try {
-    then.call(value, fulfillmentHandler, rejectionHandler);
-  } catch (e) {
-    return e;
-  }
-}
-
-function handleForeignThenable(promise, thenable, then) {
-  asap(function (promise) {
-    var sealed = false;
-    var error = tryThen(then, thenable, function (value) {
-      if (sealed) {
-        return;
-      }
-      sealed = true;
-      if (thenable !== value) {
-        _resolve(promise, value);
-      } else {
-        fulfill(promise, value);
-      }
-    }, function (reason) {
-      if (sealed) {
-        return;
-      }
-      sealed = true;
-
-      _reject(promise, reason);
-    }, 'Settle: ' + (promise._label || ' unknown promise'));
-
-    if (!sealed && error) {
-      sealed = true;
-      _reject(promise, error);
-    }
-  }, promise);
-}
-
-function handleOwnThenable(promise, thenable) {
-  if (thenable._state === FULFILLED) {
-    fulfill(promise, thenable._result);
-  } else if (thenable._state === REJECTED) {
-    _reject(promise, thenable._result);
-  } else {
-    subscribe(thenable, undefined, function (value) {
-      return _resolve(promise, value);
-    }, function (reason) {
-      return _reject(promise, reason);
-    });
-  }
-}
-
-function handleMaybeThenable(promise, maybeThenable, then$$) {
-  if (maybeThenable.constructor === promise.constructor && then$$ === then && maybeThenable.constructor.resolve === resolve) {
-    handleOwnThenable(promise, maybeThenable);
-  } else {
-    if (then$$ === GET_THEN_ERROR) {
-      _reject(promise, GET_THEN_ERROR.error);
-      GET_THEN_ERROR.error = null;
-    } else if (then$$ === undefined) {
-      fulfill(promise, maybeThenable);
-    } else if (isFunction(then$$)) {
-      handleForeignThenable(promise, maybeThenable, then$$);
-    } else {
-      fulfill(promise, maybeThenable);
-    }
-  }
-}
-
-function _resolve(promise, value) {
-  if (promise === value) {
-    _reject(promise, selfFulfillment());
-  } else if (objectOrFunction(value)) {
-    handleMaybeThenable(promise, value, getThen(value));
-  } else {
-    fulfill(promise, value);
-  }
-}
-
-function publishRejection(promise) {
-  if (promise._onerror) {
-    promise._onerror(promise._result);
-  }
-
-  publish(promise);
-}
-
-function fulfill(promise, value) {
-  if (promise._state !== PENDING) {
-    return;
-  }
-
-  promise._result = value;
-  promise._state = FULFILLED;
-
-  if (promise._subscribers.length !== 0) {
-    asap(publish, promise);
-  }
-}
-
-function _reject(promise, reason) {
-  if (promise._state !== PENDING) {
-    return;
-  }
-  promise._state = REJECTED;
-  promise._result = reason;
-
-  asap(publishRejection, promise);
-}
-
-function subscribe(parent, child, onFulfillment, onRejection) {
-  var _subscribers = parent._subscribers;
-  var length = _subscribers.length;
-
-  parent._onerror = null;
-
-  _subscribers[length] = child;
-  _subscribers[length + FULFILLED] = onFulfillment;
-  _subscribers[length + REJECTED] = onRejection;
-
-  if (length === 0 && parent._state) {
-    asap(publish, parent);
-  }
-}
-
-function publish(promise) {
-  var subscribers = promise._subscribers;
-  var settled = promise._state;
-
-  if (subscribers.length === 0) {
-    return;
-  }
-
-  var child = undefined,
-      callback = undefined,
-      detail = promise._result;
-
-  for (var i = 0; i < subscribers.length; i += 3) {
-    child = subscribers[i];
-    callback = subscribers[i + settled];
-
-    if (child) {
-      invokeCallback(settled, child, callback, detail);
-    } else {
-      callback(detail);
-    }
-  }
-
-  promise._subscribers.length = 0;
-}
-
-function ErrorObject() {
-  this.error = null;
-}
-
-var TRY_CATCH_ERROR = new ErrorObject();
-
-function tryCatch(callback, detail) {
-  try {
-    return callback(detail);
-  } catch (e) {
-    TRY_CATCH_ERROR.error = e;
-    return TRY_CATCH_ERROR;
-  }
-}
-
-function invokeCallback(settled, promise, callback, detail) {
-  var hasCallback = isFunction(callback),
-      value = undefined,
-      error = undefined,
-      succeeded = undefined,
-      failed = undefined;
-
-  if (hasCallback) {
-    value = tryCatch(callback, detail);
-
-    if (value === TRY_CATCH_ERROR) {
-      failed = true;
-      error = value.error;
-      value.error = null;
-    } else {
-      succeeded = true;
-    }
-
-    if (promise === value) {
-      _reject(promise, cannotReturnOwn());
-      return;
-    }
-  } else {
-    value = detail;
-    succeeded = true;
-  }
-
-  if (promise._state !== PENDING) {
-    // noop
-  } else if (hasCallback && succeeded) {
-      _resolve(promise, value);
-    } else if (failed) {
-      _reject(promise, error);
-    } else if (settled === FULFILLED) {
-      fulfill(promise, value);
-    } else if (settled === REJECTED) {
-      _reject(promise, value);
-    }
-}
-
-function initializePromise(promise, resolver) {
-  try {
-    resolver(function resolvePromise(value) {
-      _resolve(promise, value);
-    }, function rejectPromise(reason) {
-      _reject(promise, reason);
-    });
-  } catch (e) {
-    _reject(promise, e);
-  }
-}
-
-var id = 0;
-function nextId() {
-  return id++;
-}
-
-function makePromise(promise) {
-  promise[PROMISE_ID] = id++;
-  promise._state = undefined;
-  promise._result = undefined;
-  promise._subscribers = [];
-}
-
-function Enumerator(Constructor, input) {
-  this._instanceConstructor = Constructor;
-  this.promise = new Constructor(noop);
-
-  if (!this.promise[PROMISE_ID]) {
-    makePromise(this.promise);
-  }
-
-  if (isArray(input)) {
-    this._input = input;
-    this.length = input.length;
-    this._remaining = input.length;
-
-    this._result = new Array(this.length);
-
-    if (this.length === 0) {
-      fulfill(this.promise, this._result);
-    } else {
-      this.length = this.length || 0;
-      this._enumerate();
-      if (this._remaining === 0) {
-        fulfill(this.promise, this._result);
-      }
-    }
-  } else {
-    _reject(this.promise, validationError());
-  }
-}
-
-function validationError() {
-  return new Error('Array Methods must be provided an Array');
-};
-
-Enumerator.prototype._enumerate = function () {
-  var length = this.length;
-  var _input = this._input;
-
-  for (var i = 0; this._state === PENDING && i < length; i++) {
-    this._eachEntry(_input[i], i);
-  }
-};
-
-Enumerator.prototype._eachEntry = function (entry, i) {
-  var c = this._instanceConstructor;
-  var resolve$$ = c.resolve;
-
-  if (resolve$$ === resolve) {
-    var _then = getThen(entry);
-
-    if (_then === then && entry._state !== PENDING) {
-      this._settledAt(entry._state, i, entry._result);
-    } else if (typeof _then !== 'function') {
-      this._remaining--;
-      this._result[i] = entry;
-    } else if (c === Promise) {
-      var promise = new c(noop);
-      handleMaybeThenable(promise, entry, _then);
-      this._willSettleAt(promise, i);
-    } else {
-      this._willSettleAt(new c(function (resolve$$) {
-        return resolve$$(entry);
-      }), i);
-    }
-  } else {
-    this._willSettleAt(resolve$$(entry), i);
-  }
-};
-
-Enumerator.prototype._settledAt = function (state, i, value) {
-  var promise = this.promise;
-
-  if (promise._state === PENDING) {
-    this._remaining--;
-
-    if (state === REJECTED) {
-      _reject(promise, value);
-    } else {
-      this._result[i] = value;
-    }
-  }
-
-  if (this._remaining === 0) {
-    fulfill(promise, this._result);
-  }
-};
-
-Enumerator.prototype._willSettleAt = function (promise, i) {
-  var enumerator = this;
-
-  subscribe(promise, undefined, function (value) {
-    return enumerator._settledAt(FULFILLED, i, value);
-  }, function (reason) {
-    return enumerator._settledAt(REJECTED, i, reason);
-  });
-};
-
-/**
-  `Promise.all` accepts an array of promises, and returns a new promise which
-  is fulfilled with an array of fulfillment values for the passed promises, or
-  rejected with the reason of the first passed promise to be rejected. It casts all
-  elements of the passed iterable to promises as it runs this algorithm.
-
-  Example:
-
-  ```javascript
-  let promise1 = resolve(1);
-  let promise2 = resolve(2);
-  let promise3 = resolve(3);
-  let promises = [ promise1, promise2, promise3 ];
-
-  Promise.all(promises).then(function(array){
-    // The array here would be [ 1, 2, 3 ];
-  });
-  ```
-
-  If any of the `promises` given to `all` are rejected, the first promise
-  that is rejected will be given as an argument to the returned promises's
-  rejection handler. For example:
-
-  Example:
-
-  ```javascript
-  let promise1 = resolve(1);
-  let promise2 = reject(new Error("2"));
-  let promise3 = reject(new Error("3"));
-  let promises = [ promise1, promise2, promise3 ];
-
-  Promise.all(promises).then(function(array){
-    // Code here never runs because there are rejected promises!
-  }, function(error) {
-    // error.message === "2"
-  });
-  ```
-
-  @method all
-  @static
-  @param {Array} entries array of promises
-  @param {String} label optional string for labeling the promise.
-  Useful for tooling.
-  @return {Promise} promise that is fulfilled when all `promises` have been
-  fulfilled, or rejected if any of them become rejected.
-  @static
-*/
-function all(entries) {
-  return new Enumerator(this, entries).promise;
-}
-
-/**
-  `Promise.race` returns a new promise which is settled in the same way as the
-  first passed promise to settle.
-
-  Example:
-
-  ```javascript
-  let promise1 = new Promise(function(resolve, reject){
-    setTimeout(function(){
-      resolve('promise 1');
-    }, 200);
-  });
-
-  let promise2 = new Promise(function(resolve, reject){
-    setTimeout(function(){
-      resolve('promise 2');
-    }, 100);
-  });
-
-  Promise.race([promise1, promise2]).then(function(result){
-    // result === 'promise 2' because it was resolved before promise1
-    // was resolved.
-  });
-  ```
-
-  `Promise.race` is deterministic in that only the state of the first
-  settled promise matters. For example, even if other promises given to the
-  `promises` array argument are resolved, but the first settled promise has
-  become rejected before the other promises became fulfilled, the returned
-  promise will become rejected:
-
-  ```javascript
-  let promise1 = new Promise(function(resolve, reject){
-    setTimeout(function(){
-      resolve('promise 1');
-    }, 200);
-  });
-
-  let promise2 = new Promise(function(resolve, reject){
-    setTimeout(function(){
-      reject(new Error('promise 2'));
-    }, 100);
-  });
-
-  Promise.race([promise1, promise2]).then(function(result){
-    // Code here never runs
-  }, function(reason){
-    // reason.message === 'promise 2' because promise 2 became rejected before
-    // promise 1 became fulfilled
-  });
-  ```
-
-  An example real-world use case is implementing timeouts:
-
-  ```javascript
-  Promise.race([ajax('foo.json'), timeout(5000)])
-  ```
-
-  @method race
-  @static
-  @param {Array} promises array of promises to observe
-  Useful for tooling.
-  @return {Promise} a promise which settles in the same way as the first passed
-  promise to settle.
-*/
-function race(entries) {
-  /*jshint validthis:true */
-  var Constructor = this;
-
-  if (!isArray(entries)) {
-    return new Constructor(function (_, reject) {
-      return reject(new TypeError('You must pass an array to race.'));
-    });
-  } else {
-    return new Constructor(function (resolve, reject) {
-      var length = entries.length;
-      for (var i = 0; i < length; i++) {
-        Constructor.resolve(entries[i]).then(resolve, reject);
-      }
-    });
-  }
-}
-
-/**
-  `Promise.reject` returns a promise rejected with the passed `reason`.
-  It is shorthand for the following:
-
-  ```javascript
-  let promise = new Promise(function(resolve, reject){
-    reject(new Error('WHOOPS'));
-  });
-
-  promise.then(function(value){
-    // Code here doesn't run because the promise is rejected!
-  }, function(reason){
-    // reason.message === 'WHOOPS'
-  });
-  ```
-
-  Instead of writing the above, your code now simply becomes the following:
-
-  ```javascript
-  let promise = Promise.reject(new Error('WHOOPS'));
-
-  promise.then(function(value){
-    // Code here doesn't run because the promise is rejected!
-  }, function(reason){
-    // reason.message === 'WHOOPS'
-  });
-  ```
-
-  @method reject
-  @static
-  @param {Any} reason value that the returned promise will be rejected with.
-  Useful for tooling.
-  @return {Promise} a promise rejected with the given `reason`.
-*/
-function reject(reason) {
-  /*jshint validthis:true */
-  var Constructor = this;
-  var promise = new Constructor(noop);
-  _reject(promise, reason);
-  return promise;
-}
-
-function needsResolver() {
-  throw new TypeError('You must pass a resolver function as the first argument to the promise constructor');
-}
-
-function needsNew() {
-  throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
-}
-
-/**
-  Promise objects represent the eventual result of an asynchronous operation. The
-  primary way of interacting with a promise is through its `then` method, which
-  registers callbacks to receive either a promise's eventual value or the reason
-  why the promise cannot be fulfilled.
-
-  Terminology
-  -----------
-
-  - `promise` is an object or function with a `then` method whose behavior conforms to this specification.
-  - `thenable` is an object or function that defines a `then` method.
-  - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
-  - `exception` is a value that is thrown using the throw statement.
-  - `reason` is a value that indicates why a promise was rejected.
-  - `settled` the final resting state of a promise, fulfilled or rejected.
-
-  A promise can be in one of three states: pending, fulfilled, or rejected.
-
-  Promises that are fulfilled have a fulfillment value and are in the fulfilled
-  state.  Promises that are rejected have a rejection reason and are in the
-  rejected state.  A fulfillment value is never a thenable.
-
-  Promises can also be said to *resolve* a value.  If this value is also a
-  promise, then the original promise's settled state will match the value's
-  settled state.  So a promise that *resolves* a promise that rejects will
-  itself reject, and a promise that *resolves* a promise that fulfills will
-  itself fulfill.
-
-
-  Basic Usage:
-  ------------
-
-  ```js
-  let promise = new Promise(function(resolve, reject) {
-    // on success
-    resolve(value);
-
-    // on failure
-    reject(reason);
-  });
-
-  promise.then(function(value) {
-    // on fulfillment
-  }, function(reason) {
-    // on rejection
-  });
-  ```
-
-  Advanced Usage:
-  ---------------
-
-  Promises shine when abstracting away asynchronous interactions such as
-  `XMLHttpRequest`s.
-
-  ```js
-  function getJSON(url) {
-    return new Promise(function(resolve, reject){
-      let xhr = new XMLHttpRequest();
-
-      xhr.open('GET', url);
-      xhr.onreadystatechange = handler;
-      xhr.responseType = 'json';
-      xhr.setRequestHeader('Accept', 'application/json');
-      xhr.send();
-
-      function handler() {
-        if (this.readyState === this.DONE) {
-          if (this.status === 200) {
-            resolve(this.response);
-          } else {
-            reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
-          }
-        }
-      };
-    });
-  }
-
-  getJSON('/posts.json').then(function(json) {
-    // on fulfillment
-  }, function(reason) {
-    // on rejection
-  });
-  ```
-
-  Unlike callbacks, promises are great composable primitives.
-
-  ```js
-  Promise.all([
-    getJSON('/posts'),
-    getJSON('/comments')
-  ]).then(function(values){
-    values[0] // => postsJSON
-    values[1] // => commentsJSON
-
-    return values;
-  });
-  ```
-
-  @class Promise
-  @param {function} resolver
-  Useful for tooling.
-  @constructor
-*/
-function Promise(resolver) {
-  this[PROMISE_ID] = nextId();
-  this._result = this._state = undefined;
-  this._subscribers = [];
-
-  if (noop !== resolver) {
-    typeof resolver !== 'function' && needsResolver();
-    this instanceof Promise ? initializePromise(this, resolver) : needsNew();
-  }
-}
-
-Promise.all = all;
-Promise.race = race;
-Promise.resolve = resolve;
-Promise.reject = reject;
-Promise._setScheduler = setScheduler;
-Promise._setAsap = setAsap;
-Promise._asap = asap;
-
-Promise.prototype = {
-  constructor: Promise,
-
-  /**
-    The primary way of interacting with a promise is through its `then` method,
-    which registers callbacks to receive either a promise's eventual value or the
-    reason why the promise cannot be fulfilled.
-  
-    ```js
-    findUser().then(function(user){
-      // user is available
-    }, function(reason){
-      // user is unavailable, and you are given the reason why
-    });
-    ```
-  
-    Chaining
-    --------
-  
-    The return value of `then` is itself a promise.  This second, 'downstream'
-    promise is resolved with the return value of the first promise's fulfillment
-    or rejection handler, or rejected if the handler throws an exception.
-  
-    ```js
-    findUser().then(function (user) {
-      return user.name;
-    }, function (reason) {
-      return 'default name';
-    }).then(function (userName) {
-      // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
-      // will be `'default name'`
-    });
-  
-    findUser().then(function (user) {
-      throw new Error('Found user, but still unhappy');
-    }, function (reason) {
-      throw new Error('`findUser` rejected and we're unhappy');
-    }).then(function (value) {
-      // never reached
-    }, function (reason) {
-      // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
-      // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
-    });
-    ```
-    If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
-  
-    ```js
-    findUser().then(function (user) {
-      throw new PedagogicalException('Upstream error');
-    }).then(function (value) {
-      // never reached
-    }).then(function (value) {
-      // never reached
-    }, function (reason) {
-      // The `PedgagocialException` is propagated all the way down to here
-    });
-    ```
-  
-    Assimilation
-    ------------
-  
-    Sometimes the value you want to propagate to a downstream promise can only be
-    retrieved asynchronously. This can be achieved by returning a promise in the
-    fulfillment or rejection handler. The downstream promise will then be pending
-    until the returned promise is settled. This is called *assimilation*.
-  
-    ```js
-    findUser().then(function (user) {
-      return findCommentsByAuthor(user);
-    }).then(function (comments) {
-      // The user's comments are now available
-    });
-    ```
-  
-    If the assimliated promise rejects, then the downstream promise will also reject.
-  
-    ```js
-    findUser().then(function (user) {
-      return findCommentsByAuthor(user);
-    }).then(function (comments) {
-      // If `findCommentsByAuthor` fulfills, we'll have the value here
-    }, function (reason) {
-      // If `findCommentsByAuthor` rejects, we'll have the reason here
-    });
-    ```
-  
-    Simple Example
-    --------------
-  
-    Synchronous Example
-  
-    ```javascript
-    let result;
-  
-    try {
-      result = findResult();
-      // success
-    } catch(reason) {
-      // failure
-    }
-    ```
-  
-    Errback Example
-  
-    ```js
-    findResult(function(result, err){
-      if (err) {
-        // failure
-      } else {
-        // success
-      }
-    });
-    ```
-  
-    Promise Example;
-  
-    ```javascript
-    findResult().then(function(result){
-      // success
-    }, function(reason){
-      // failure
-    });
-    ```
-  
-    Advanced Example
-    --------------
-  
-    Synchronous Example
-  
-    ```javascript
-    let author, books;
-  
-    try {
-      author = findAuthor();
-      books  = findBooksByAuthor(author);
-      // success
-    } catch(reason) {
-      // failure
-    }
-    ```
-  
-    Errback Example
-  
-    ```js
-  
-    function foundBooks(books) {
-  
-    }
-  
-    function failure(reason) {
-  
-    }
-  
-    findAuthor(function(author, err){
-      if (err) {
-        failure(err);
-        // failure
-      } else {
-        try {
-          findBoooksByAuthor(author, function(books, err) {
-            if (err) {
-              failure(err);
-            } else {
-              try {
-                foundBooks(books);
-              } catch(reason) {
-                failure(reason);
-              }
-            }
-          });
-        } catch(error) {
-          failure(err);
-        }
-        // success
-      }
-    });
-    ```
-  
-    Promise Example;
-  
-    ```javascript
-    findAuthor().
-      then(findBooksByAuthor).
-      then(function(books){
-        // found books
-    }).catch(function(reason){
-      // something went wrong
-    });
-    ```
-  
-    @method then
-    @param {Function} onFulfilled
-    @param {Function} onRejected
-    Useful for tooling.
-    @return {Promise}
-  */
-  then: then,
-
-  /**
-    `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
-    as the catch block of a try/catch statement.
-  
-    ```js
-    function findAuthor(){
-      throw new Error('couldn't find that author');
-    }
-  
-    // synchronous
-    try {
-      findAuthor();
-    } catch(reason) {
-      // something went wrong
-    }
-  
-    // async with promises
-    findAuthor().catch(function(reason){
-      // something went wrong
-    });
-    ```
-  
-    @method catch
-    @param {Function} onRejection
-    Useful for tooling.
-    @return {Promise}
-  */
-  'catch': function _catch(onRejection) {
-    return this.then(null, onRejection);
-  }
-};
-
-function polyfill() {
-    var local = undefined;
-
-    if (typeof global !== 'undefined') {
-        local = global;
-    } else if (typeof self !== 'undefined') {
-        local = self;
-    } else {
-        try {
-            local = Function('return this')();
-        } catch (e) {
-            throw new Error('polyfill failed because global object is unavailable in this environment');
-        }
-    }
-
-    var P = local.Promise;
-
-    if (P) {
-        var promiseToString = null;
-        try {
-            promiseToString = Object.prototype.toString.call(P.resolve());
-        } catch (e) {
-            // silently ignored
-        }
-
-        if (promiseToString === '[object Promise]' && !P.cast) {
-            return;
-        }
-    }
-
-    local.Promise = Promise;
-}
-
-// Strange compat..
-Promise.polyfill = polyfill;
-Promise.Promise = Promise;
-
-return Promise;
-
-})));
-//# sourceMappingURL=es6-promise.map
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11), __webpack_require__(4)))
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var win;
-
-if (typeof window !== "undefined") {
-    win = window;
-} else if (typeof global !== "undefined") {
-    win = global;
-} else if (typeof self !== "undefined"){
-    win = self;
-} else {
-    win = {};
-}
-
-module.exports = win;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 var types = [
-  __webpack_require__(71),
-  __webpack_require__(70),
+  __webpack_require__(67),
+  __webpack_require__(68),
   __webpack_require__(69),
-  __webpack_require__(72),
-  __webpack_require__(73)
+  __webpack_require__(70),
+  __webpack_require__(71)
 ];
 var draining;
 var currentQueue;
@@ -8771,32 +9271,26 @@ function immediate(task) {
 
 
 /***/ }),
-/* 69 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
+/* WEBPACK VAR INJECTION */(function(process) {
 exports.test = function () {
-  if (global.setImmediate) {
-    // we can only get here in IE10
-    // which doesn't handel postMessage well
-    return false;
-  }
-  return typeof global.MessageChannel !== 'undefined';
+  // Don't get fooled by e.g. browserify environments.
+  return (typeof process !== 'undefined') && !process.browser;
 };
 
 exports.install = function (func) {
-  var channel = new global.MessageChannel();
-  channel.port1.onmessage = func;
   return function () {
-    channel.port2.postMessage(0);
+    process.nextTick(func);
   };
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(10)))
 
 /***/ }),
-/* 70 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8822,29 +9316,35 @@ exports.install = function (handle) {
     element.data = (called = ++called % 2);
   };
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
 
 /***/ }),
-/* 71 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+/* WEBPACK VAR INJECTION */(function(global) {
+
 exports.test = function () {
-  // Don't get fooled by e.g. browserify environments.
-  return (typeof process !== 'undefined') && !process.browser;
+  if (global.setImmediate) {
+    // we can only get here in IE10
+    // which doesn't handel postMessage well
+    return false;
+  }
+  return typeof global.MessageChannel !== 'undefined';
 };
 
 exports.install = function (func) {
+  var channel = new global.MessageChannel();
+  channel.port1.onmessage = func;
   return function () {
-    process.nextTick(func);
+    channel.port2.postMessage(0);
   };
 };
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
 
 /***/ }),
-/* 72 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8872,10 +9372,10 @@ exports.install = function (handle) {
     return handle;
   };
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(5)))
 
 /***/ }),
-/* 73 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8891,161 +9391,729 @@ exports.install = function (t) {
 };
 
 /***/ }),
-/* 74 */
-/***/ (function(module, exports) {
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Helpers.
- */
+"use strict";
 
-var s = 1000;
-var m = s * 60;
-var h = m * 60;
-var d = h * 24;
-var y = d * 365.25;
 
-/**
- * Parse or format the given `val`.
- *
- * Options:
- *
- *  - `long` verbose formatting [false]
- *
- * @param {String|Number} val
- * @param {Object} [options]
- * @throws {Error} throw an error if val is not a non-empty string or a number
- * @return {String|Number}
- * @api public
- */
+var _ = __webpack_require__(0);
+var DOM = __webpack_require__(2);
+var EventEmitter = __webpack_require__(23);
+var Dataset = __webpack_require__(73);
+var css = __webpack_require__(24);
 
-module.exports = function(val, options) {
-  options = options || {};
-  var type = typeof val;
-  if (type === 'string' && val.length > 0) {
-    return parse(val);
-  } else if (type === 'number' && isNaN(val) === false) {
-    return options.long ? fmtLong(val) : fmtShort(val);
+// constructor
+// -----------
+
+function Dropdown(o) {
+  var that = this;
+  var onSuggestionClick;
+  var onSuggestionMouseEnter;
+  var onSuggestionMouseLeave;
+
+  o = o || {};
+
+  if (!o.menu) {
+    _.error('menu is required');
   }
-  throw new Error(
-    'val is not a non-empty string or a valid number. val=' +
-      JSON.stringify(val)
-  );
+
+  if (!_.isArray(o.datasets) && !_.isObject(o.datasets)) {
+    _.error('1 or more datasets required');
+  }
+  if (!o.datasets) {
+    _.error('datasets is required');
+  }
+
+  this.isOpen = false;
+  this.isEmpty = true;
+  this.minLength = o.minLength || 0;
+  this.templates = {};
+  this.appendTo = o.appendTo || false;
+  this.css = _.mixin({}, css, o.appendTo ? css.appendTo : {});
+  this.cssClasses = o.cssClasses = _.mixin({}, css.defaultClasses, o.cssClasses || {});
+  this.cssClasses.prefix =
+    o.cssClasses.formattedPrefix || _.formatPrefix(this.cssClasses.prefix, this.cssClasses.noPrefix);
+
+  // bound functions
+  onSuggestionClick = _.bind(this._onSuggestionClick, this);
+  onSuggestionMouseEnter = _.bind(this._onSuggestionMouseEnter, this);
+  onSuggestionMouseLeave = _.bind(this._onSuggestionMouseLeave, this);
+
+  var cssClass = _.className(this.cssClasses.prefix, this.cssClasses.suggestion);
+  this.$menu = DOM.element(o.menu)
+    .on('mouseenter.aa', cssClass, onSuggestionMouseEnter)
+    .on('mouseleave.aa', cssClass, onSuggestionMouseLeave)
+    .on('click.aa', cssClass, onSuggestionClick);
+
+  this.$container = o.appendTo ? o.wrapper : this.$menu;
+
+  if (o.templates && o.templates.header) {
+    this.templates.header = _.templatify(o.templates.header);
+    this.$menu.prepend(this.templates.header());
+  }
+
+  if (o.templates && o.templates.empty) {
+    this.templates.empty = _.templatify(o.templates.empty);
+    this.$empty = DOM.element('<div class="' +
+      _.className(this.cssClasses.prefix, this.cssClasses.empty, true) + '">' +
+      '</div>');
+    this.$menu.append(this.$empty);
+    this.$empty.hide();
+  }
+
+  this.datasets = _.map(o.datasets, function(oDataset) {
+    return initializeDataset(that.$menu, oDataset, o.cssClasses);
+  });
+  _.each(this.datasets, function(dataset) {
+    var root = dataset.getRoot();
+    if (root && root.parent().length === 0) {
+      that.$menu.append(root);
+    }
+    dataset.onSync('rendered', that._onRendered, that);
+  });
+
+  if (o.templates && o.templates.footer) {
+    this.templates.footer = _.templatify(o.templates.footer);
+    this.$menu.append(this.templates.footer());
+  }
+
+  var self = this;
+  DOM.element(window).resize(function() {
+    self._redraw();
+  });
+}
+
+// instance methods
+// ----------------
+
+_.mixin(Dropdown.prototype, EventEmitter, {
+
+  // ### private
+
+  _onSuggestionClick: function onSuggestionClick($e) {
+    this.trigger('suggestionClicked', DOM.element($e.currentTarget));
+  },
+
+  _onSuggestionMouseEnter: function onSuggestionMouseEnter($e) {
+    var elt = DOM.element($e.currentTarget);
+    if (elt.hasClass(_.className(this.cssClasses.prefix, this.cssClasses.cursor, true))) {
+      // we're already on the cursor
+      // => we're probably entering it again after leaving it for a nested div
+      return;
+    }
+    this._removeCursor();
+
+    // Fixes iOS double tap behaviour, by modifying the DOM right before the
+    // native href clicks happens, iOS will requires another tap to follow
+    // a suggestion that has an <a href> element inside
+    // https://www.google.com/search?q=ios+double+tap+bug+href
+    var suggestion = this;
+    setTimeout(function() {
+      // this exact line, when inside the main loop, will trigger a double tap bug
+      // on iOS devices
+      suggestion._setCursor(elt, false);
+    }, 0);
+  },
+
+  _onSuggestionMouseLeave: function onSuggestionMouseLeave($e) {
+    // $e.relatedTarget is the `EventTarget` the pointing device entered to
+    if ($e.relatedTarget) {
+      var elt = DOM.element($e.relatedTarget);
+      if (elt.closest('.' + _.className(this.cssClasses.prefix, this.cssClasses.cursor, true)).length > 0) {
+        // our father is a cursor
+        // => it means we're just leaving the suggestion for a nested div
+        return;
+      }
+    }
+    this._removeCursor();
+    this.trigger('cursorRemoved');
+  },
+
+  _onRendered: function onRendered(e, query) {
+    this.isEmpty = _.every(this.datasets, isDatasetEmpty);
+
+    if (this.isEmpty) {
+      if (query.length >= this.minLength) {
+        this.trigger('empty');
+      }
+
+      if (this.$empty) {
+        if (query.length < this.minLength) {
+          this._hide();
+        } else {
+          var html = this.templates.empty({
+            query: this.datasets[0] && this.datasets[0].query
+          });
+          this.$empty.html(html);
+          this.$empty.show();
+          this._show();
+        }
+      } else if (_.any(this.datasets, hasEmptyTemplate)) {
+        if (query.length < this.minLength) {
+          this._hide();
+        } else {
+          this._show();
+        }
+      } else {
+        this._hide();
+      }
+    } else if (this.isOpen) {
+      if (this.$empty) {
+        this.$empty.empty();
+        this.$empty.hide();
+      }
+
+      if (query.length >= this.minLength) {
+        this._show();
+      } else {
+        this._hide();
+      }
+    }
+
+    this.trigger('datasetRendered');
+
+    function isDatasetEmpty(dataset) {
+      return dataset.isEmpty();
+    }
+
+    function hasEmptyTemplate(dataset) {
+      return dataset.templates && dataset.templates.empty;
+    }
+  },
+
+  _hide: function() {
+    this.$container.hide();
+  },
+
+  _show: function() {
+    // can't use jQuery#show because $menu is a span element we want
+    // display: block; not dislay: inline;
+    this.$container.css('display', 'block');
+
+    this._redraw();
+
+    this.trigger('shown');
+  },
+
+  _redraw: function redraw() {
+    if (!this.isOpen || !this.appendTo) return;
+
+    this.trigger('redrawn');
+  },
+
+  _getSuggestions: function getSuggestions() {
+    return this.$menu.find(_.className(this.cssClasses.prefix, this.cssClasses.suggestion));
+  },
+
+  _getCursor: function getCursor() {
+    return this.$menu.find(_.className(this.cssClasses.prefix, this.cssClasses.cursor)).first();
+  },
+
+  _setCursor: function setCursor($el, updateInput) {
+    $el.first()
+      .addClass(_.className(this.cssClasses.prefix, this.cssClasses.cursor, true))
+      .attr('aria-selected', 'true');
+    this.trigger('cursorMoved', updateInput);
+  },
+
+  _removeCursor: function removeCursor() {
+    this._getCursor()
+      .removeClass(_.className(this.cssClasses.prefix, this.cssClasses.cursor, true))
+      .removeAttr('aria-selected');
+  },
+
+  _moveCursor: function moveCursor(increment) {
+    var $suggestions;
+    var $oldCursor;
+    var newCursorIndex;
+    var $newCursor;
+
+    if (!this.isOpen) {
+      return;
+    }
+
+    $oldCursor = this._getCursor();
+    $suggestions = this._getSuggestions();
+
+    this._removeCursor();
+
+    // shifting before and after modulo to deal with -1 index
+    newCursorIndex = $suggestions.index($oldCursor) + increment;
+    newCursorIndex = (newCursorIndex + 1) % ($suggestions.length + 1) - 1;
+
+    if (newCursorIndex === -1) {
+      this.trigger('cursorRemoved');
+
+      return;
+    } else if (newCursorIndex < -1) {
+      newCursorIndex = $suggestions.length - 1;
+    }
+
+    this._setCursor($newCursor = $suggestions.eq(newCursorIndex), true);
+
+    // in the case of scrollable overflow
+    // make sure the cursor is visible in the menu
+    this._ensureVisible($newCursor);
+  },
+
+  _ensureVisible: function ensureVisible($el) {
+    var elTop;
+    var elBottom;
+    var menuScrollTop;
+    var menuHeight;
+
+    elTop = $el.position().top;
+    elBottom = elTop + $el.height() +
+      parseInt($el.css('margin-top'), 10) +
+      parseInt($el.css('margin-bottom'), 10);
+    menuScrollTop = this.$menu.scrollTop();
+    menuHeight = this.$menu.height() +
+      parseInt(this.$menu.css('padding-top'), 10) +
+      parseInt(this.$menu.css('padding-bottom'), 10);
+
+    if (elTop < 0) {
+      this.$menu.scrollTop(menuScrollTop + elTop);
+    } else if (menuHeight < elBottom) {
+      this.$menu.scrollTop(menuScrollTop + (elBottom - menuHeight));
+    }
+  },
+
+  // ### public
+
+  close: function close() {
+    if (this.isOpen) {
+      this.isOpen = false;
+
+      this._removeCursor();
+      this._hide();
+
+      this.trigger('closed');
+    }
+  },
+
+  open: function open() {
+    if (!this.isOpen) {
+      this.isOpen = true;
+
+      if (!this.isEmpty) {
+        this._show();
+      }
+
+      this.trigger('opened');
+    }
+  },
+
+  setLanguageDirection: function setLanguageDirection(dir) {
+    this.$menu.css(dir === 'ltr' ? this.css.ltr : this.css.rtl);
+  },
+
+  moveCursorUp: function moveCursorUp() {
+    this._moveCursor(-1);
+  },
+
+  moveCursorDown: function moveCursorDown() {
+    this._moveCursor(+1);
+  },
+
+  getDatumForSuggestion: function getDatumForSuggestion($el) {
+    var datum = null;
+
+    if ($el.length) {
+      datum = {
+        raw: Dataset.extractDatum($el),
+        value: Dataset.extractValue($el),
+        datasetName: Dataset.extractDatasetName($el)
+      };
+    }
+
+    return datum;
+  },
+
+  getCurrentCursor: function getCurrentCursor() {
+    return this._getCursor().first();
+  },
+
+  getDatumForCursor: function getDatumForCursor() {
+    return this.getDatumForSuggestion(this._getCursor().first());
+  },
+
+  getDatumForTopSuggestion: function getDatumForTopSuggestion() {
+    return this.getDatumForSuggestion(this._getSuggestions().first());
+  },
+
+  cursorTopSuggestion: function cursorTopSuggestion() {
+    this._setCursor(this._getSuggestions().first(), false);
+  },
+
+  update: function update(query) {
+    _.each(this.datasets, updateDataset);
+
+    function updateDataset(dataset) {
+      dataset.update(query);
+    }
+  },
+
+  empty: function empty() {
+    _.each(this.datasets, clearDataset);
+    this.isEmpty = true;
+
+    function clearDataset(dataset) {
+      dataset.clear();
+    }
+  },
+
+  isVisible: function isVisible() {
+    return this.isOpen && !this.isEmpty;
+  },
+
+  destroy: function destroy() {
+    this.$menu.off('.aa');
+
+    this.$menu = null;
+
+    _.each(this.datasets, destroyDataset);
+
+    function destroyDataset(dataset) {
+      dataset.destroy();
+    }
+  }
+});
+
+// helper functions
+// ----------------
+Dropdown.Dataset = Dataset;
+
+function initializeDataset($menu, oDataset, cssClasses) {
+  return new Dropdown.Dataset(_.mixin({$menu: $menu, cssClasses: cssClasses}, oDataset));
+}
+
+module.exports = Dropdown;
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var datasetKey = 'aaDataset';
+var valueKey = 'aaValue';
+var datumKey = 'aaDatum';
+
+var _ = __webpack_require__(0);
+var DOM = __webpack_require__(2);
+var html = __webpack_require__(34);
+var css = __webpack_require__(24);
+var EventEmitter = __webpack_require__(23);
+
+// constructor
+// -----------
+
+function Dataset(o) {
+  o = o || {};
+  o.templates = o.templates || {};
+
+  if (!o.source) {
+    _.error('missing source');
+  }
+
+  if (o.name && !isValidName(o.name)) {
+    _.error('invalid dataset name: ' + o.name);
+  }
+
+  // tracks the last query the dataset was updated for
+  this.query = null;
+  this._isEmpty = true;
+
+  this.highlight = !!o.highlight;
+  this.name = typeof o.name === 'undefined' || o.name === null ? _.getUniqueId() : o.name;
+
+  this.source = o.source;
+  this.displayFn = getDisplayFn(o.display || o.displayKey);
+
+  this.debounce = o.debounce;
+
+  this.cache = o.cache !== false;
+
+  this.templates = getTemplates(o.templates, this.displayFn);
+
+  this.css = _.mixin({}, css, o.appendTo ? css.appendTo : {});
+  this.cssClasses = o.cssClasses = _.mixin({}, css.defaultClasses, o.cssClasses || {});
+  this.cssClasses.prefix =
+    o.cssClasses.formattedPrefix || _.formatPrefix(this.cssClasses.prefix, this.cssClasses.noPrefix);
+
+  var clazz = _.className(this.cssClasses.prefix, this.cssClasses.dataset);
+  this.$el = o.$menu && o.$menu.find(clazz + '-' + this.name).length > 0 ?
+    DOM.element(o.$menu.find(clazz + '-' + this.name)[0]) :
+    DOM.element(
+      html.dataset.replace('%CLASS%', this.name)
+        .replace('%PREFIX%', this.cssClasses.prefix)
+        .replace('%DATASET%', this.cssClasses.dataset)
+    );
+
+  this.$menu = o.$menu;
+  this.clearCachedSuggestions();
+}
+
+// static methods
+// --------------
+
+Dataset.extractDatasetName = function extractDatasetName(el) {
+  return DOM.element(el).data(datasetKey);
 };
 
-/**
- * Parse the given `str` and return milliseconds.
- *
- * @param {String} str
- * @return {Number}
- * @api private
- */
+Dataset.extractValue = function extractValue(el) {
+  return DOM.element(el).data(valueKey);
+};
 
-function parse(str) {
-  str = String(str);
-  if (str.length > 100) {
-    return;
+Dataset.extractDatum = function extractDatum(el) {
+  var datum = DOM.element(el).data(datumKey);
+  if (typeof datum === 'string') {
+    // Zepto has an automatic deserialization of the
+    // JSON encoded data attribute
+    datum = JSON.parse(datum);
   }
-  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(
-    str
-  );
-  if (!match) {
-    return;
+  return datum;
+};
+
+// instance methods
+// ----------------
+
+_.mixin(Dataset.prototype, EventEmitter, {
+
+  // ### private
+
+  _render: function render(query, suggestions) {
+    if (!this.$el) {
+      return;
+    }
+    var that = this;
+
+    var hasSuggestions;
+    var renderArgs = [].slice.call(arguments, 2);
+    this.$el.empty();
+
+    hasSuggestions = suggestions && suggestions.length;
+    this._isEmpty = !hasSuggestions;
+
+    if (!hasSuggestions && this.templates.empty) {
+      this.$el
+        .html(getEmptyHtml.apply(this, renderArgs))
+        .prepend(that.templates.header ? getHeaderHtml.apply(this, renderArgs) : null)
+        .append(that.templates.footer ? getFooterHtml.apply(this, renderArgs) : null);
+    } else if (hasSuggestions) {
+      this.$el
+        .html(getSuggestionsHtml.apply(this, renderArgs))
+        .prepend(that.templates.header ? getHeaderHtml.apply(this, renderArgs) : null)
+        .append(that.templates.footer ? getFooterHtml.apply(this, renderArgs) : null);
+    } else if (suggestions && !Array.isArray(suggestions)) {
+      throw new TypeError('suggestions must be an array');
+    }
+
+    if (this.$menu) {
+      this.$menu.addClass(
+        this.cssClasses.prefix + (hasSuggestions ? 'with' : 'without') + '-' + this.name
+      ).removeClass(
+        this.cssClasses.prefix + (hasSuggestions ? 'without' : 'with') + '-' + this.name
+      );
+    }
+
+    this.trigger('rendered', query);
+
+    function getEmptyHtml() {
+      var args = [].slice.call(arguments, 0);
+      args = [{query: query, isEmpty: true}].concat(args);
+      return that.templates.empty.apply(this, args);
+    }
+
+    function getSuggestionsHtml() {
+      var args = [].slice.call(arguments, 0);
+      var $suggestions;
+      var nodes;
+      var self = this;
+
+      var suggestionsHtml = html.suggestions.
+        replace('%PREFIX%', this.cssClasses.prefix).
+        replace('%SUGGESTIONS%', this.cssClasses.suggestions);
+      $suggestions = DOM
+        .element(suggestionsHtml)
+        .css(this.css.suggestions);
+
+      // jQuery#append doesn't support arrays as the first argument
+      // until version 1.8, see http://bugs.jquery.com/ticket/11231
+      nodes = _.map(suggestions, getSuggestionNode);
+      $suggestions.append.apply($suggestions, nodes);
+
+      return $suggestions;
+
+      function getSuggestionNode(suggestion) {
+        var $el;
+
+        var suggestionHtml = html.suggestion.
+          replace('%PREFIX%', self.cssClasses.prefix).
+          replace('%SUGGESTION%', self.cssClasses.suggestion);
+        $el = DOM.element(suggestionHtml)
+          .attr({
+            role: 'option',
+            id: ['option', Math.floor(Math.random() * 100000000)].join('-')
+          })
+          .append(that.templates.suggestion.apply(this, [suggestion].concat(args)));
+
+        $el.data(datasetKey, that.name);
+        $el.data(valueKey, that.displayFn(suggestion) || undefined); // this led to undefined return value
+        $el.data(datumKey, JSON.stringify(suggestion));
+        $el.children().each(function() { DOM.element(this).css(self.css.suggestionChild); });
+
+        return $el;
+      }
+    }
+
+    function getHeaderHtml() {
+      var args = [].slice.call(arguments, 0);
+      args = [{query: query, isEmpty: !hasSuggestions}].concat(args);
+      return that.templates.header.apply(this, args);
+    }
+
+    function getFooterHtml() {
+      var args = [].slice.call(arguments, 0);
+      args = [{query: query, isEmpty: !hasSuggestions}].concat(args);
+      return that.templates.footer.apply(this, args);
+    }
+  },
+
+  // ### public
+
+  getRoot: function getRoot() {
+    return this.$el;
+  },
+
+  update: function update(query) {
+    function handleSuggestions(suggestions) {
+      // if the update has been canceled or if the query has changed
+      // do not render the suggestions as they've become outdated
+      if (!this.canceled && query === this.query) {
+        // concat all the other arguments that could have been passed
+        // to the render function, and forward them to _render
+        var extraArgs = [].slice.call(arguments, 1);
+        this.cacheSuggestions(query, suggestions, extraArgs);
+        this._render.apply(this, [query, suggestions].concat(extraArgs));
+      }
+    }
+
+    this.query = query;
+    this.canceled = false;
+
+    if (this.shouldFetchFromCache(query)) {
+      handleSuggestions.apply(this, [this.cachedSuggestions].concat(this.cachedRenderExtraArgs));
+    } else {
+      var that = this;
+      var execSource = function() {
+        // When the call is debounced the condition avoid to do a useless
+        // request with the last character when the input has been cleared
+        if (!that.canceled) {
+          that.source(query, handleSuggestions.bind(that));
+        }
+      };
+
+      if (this.debounce) {
+        var later = function() {
+          that.debounceTimeout = null;
+          execSource();
+        };
+        clearTimeout(this.debounceTimeout);
+        this.debounceTimeout = setTimeout(later, this.debounce);
+      } else {
+        execSource();
+      }
+    }
+  },
+
+  cacheSuggestions: function cacheSuggestions(query, suggestions, extraArgs) {
+    this.cachedQuery = query;
+    this.cachedSuggestions = suggestions;
+    this.cachedRenderExtraArgs = extraArgs;
+  },
+
+  shouldFetchFromCache: function shouldFetchFromCache(query) {
+    return this.cache &&
+      this.cachedQuery === query &&
+      this.cachedSuggestions &&
+      this.cachedSuggestions.length;
+  },
+
+  clearCachedSuggestions: function clearCachedSuggestions() {
+    delete this.cachedQuery;
+    delete this.cachedSuggestions;
+    delete this.cachedRenderExtraArgs;
+  },
+
+  cancel: function cancel() {
+    this.canceled = true;
+  },
+
+  clear: function clear() {
+    this.cancel();
+    this.$el.empty();
+    this.trigger('rendered', '');
+  },
+
+  isEmpty: function isEmpty() {
+    return this._isEmpty;
+  },
+
+  destroy: function destroy() {
+    this.clearCachedSuggestions();
+    this.$el = null;
   }
-  var n = parseFloat(match[1]);
-  var type = (match[2] || 'ms').toLowerCase();
-  switch (type) {
-    case 'years':
-    case 'year':
-    case 'yrs':
-    case 'yr':
-    case 'y':
-      return n * y;
-    case 'days':
-    case 'day':
-    case 'd':
-      return n * d;
-    case 'hours':
-    case 'hour':
-    case 'hrs':
-    case 'hr':
-    case 'h':
-      return n * h;
-    case 'minutes':
-    case 'minute':
-    case 'mins':
-    case 'min':
-    case 'm':
-      return n * m;
-    case 'seconds':
-    case 'second':
-    case 'secs':
-    case 'sec':
-    case 's':
-      return n * s;
-    case 'milliseconds':
-    case 'millisecond':
-    case 'msecs':
-    case 'msec':
-    case 'ms':
-      return n;
-    default:
-      return undefined;
+});
+
+// helper functions
+// ----------------
+
+function getDisplayFn(display) {
+  display = display || 'value';
+
+  return _.isFunction(display) ? display : displayFn;
+
+  function displayFn(obj) {
+    return obj[display];
   }
 }
 
-/**
- * Short format for `ms`.
- *
- * @param {Number} ms
- * @return {String}
- * @api private
- */
+function getTemplates(templates, displayFn) {
+  return {
+    empty: templates.empty && _.templatify(templates.empty),
+    header: templates.header && _.templatify(templates.header),
+    footer: templates.footer && _.templatify(templates.footer),
+    suggestion: templates.suggestion || suggestionTemplate
+  };
 
-function fmtShort(ms) {
-  if (ms >= d) {
-    return Math.round(ms / d) + 'd';
+  function suggestionTemplate(context) {
+    return '<p>' + displayFn(context) + '</p>';
   }
-  if (ms >= h) {
-    return Math.round(ms / h) + 'h';
-  }
-  if (ms >= m) {
-    return Math.round(ms / m) + 'm';
-  }
-  if (ms >= s) {
-    return Math.round(ms / s) + 's';
-  }
-  return ms + 'ms';
 }
 
-/**
- * Long format for `ms`.
- *
- * @param {Number} ms
- * @return {String}
- * @api private
- */
-
-function fmtLong(ms) {
-  return plural(ms, d, 'day') ||
-    plural(ms, h, 'hour') ||
-    plural(ms, m, 'minute') ||
-    plural(ms, s, 'second') ||
-    ms + ' ms';
+function isValidName(str) {
+  // dashes, underscores, letters, and numbers
+  return (/^[_a-zA-Z0-9-]+$/).test(str);
 }
 
-/**
- * Pluralization helper.
- */
+module.exports = Dataset;
 
-function plural(ms, n, name) {
-  if (ms < n) {
-    return;
-  }
-  if (ms < n * 1.5) {
-    return Math.floor(ms / n) + ' ' + name;
-  }
-  return Math.ceil(ms / n) + ' ' + name + 's';
-}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  hits: __webpack_require__(75),
+  popularIn: __webpack_require__(76)
+};
 
 
 /***/ }),
@@ -9055,144 +10123,28 @@ function plural(ms, n, name) {
 "use strict";
 
 
-// modified from https://github.com/es-shims/es5-shim
-var has = Object.prototype.hasOwnProperty;
-var toStr = Object.prototype.toString;
-var slice = Array.prototype.slice;
-var isArgs = __webpack_require__(76);
-var isEnumerable = Object.prototype.propertyIsEnumerable;
-var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
-var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
-var dontEnums = [
-	'toString',
-	'toLocaleString',
-	'valueOf',
-	'hasOwnProperty',
-	'isPrototypeOf',
-	'propertyIsEnumerable',
-	'constructor'
-];
-var equalsConstructorPrototype = function (o) {
-	var ctor = o.constructor;
-	return ctor && ctor.prototype === o;
+var _ = __webpack_require__(0);
+var version = __webpack_require__(35);
+var parseAlgoliaClientVersion = __webpack_require__(36);
+
+module.exports = function search(index, params) {
+  var algoliaVersion = parseAlgoliaClientVersion(index.as._ua);
+  if (algoliaVersion && algoliaVersion[0] >= 3 && algoliaVersion[1] > 20) {
+    params = params || {};
+    params.additionalUA = 'autocomplete.js ' + version;
+  }
+  return sourceFn;
+
+  function sourceFn(query, cb) {
+    index.search(query, params, function(error, content) {
+      if (error) {
+        _.error(error.message);
+        return;
+      }
+      cb(content.hits, content);
+    });
+  }
 };
-var excludedKeys = {
-	$console: true,
-	$external: true,
-	$frame: true,
-	$frameElement: true,
-	$frames: true,
-	$innerHeight: true,
-	$innerWidth: true,
-	$outerHeight: true,
-	$outerWidth: true,
-	$pageXOffset: true,
-	$pageYOffset: true,
-	$parent: true,
-	$scrollLeft: true,
-	$scrollTop: true,
-	$scrollX: true,
-	$scrollY: true,
-	$self: true,
-	$webkitIndexedDB: true,
-	$webkitStorageInfo: true,
-	$window: true
-};
-var hasAutomationEqualityBug = (function () {
-	/* global window */
-	if (typeof window === 'undefined') { return false; }
-	for (var k in window) {
-		try {
-			if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
-				try {
-					equalsConstructorPrototype(window[k]);
-				} catch (e) {
-					return true;
-				}
-			}
-		} catch (e) {
-			return true;
-		}
-	}
-	return false;
-}());
-var equalsConstructorPrototypeIfNotBuggy = function (o) {
-	/* global window */
-	if (typeof window === 'undefined' || !hasAutomationEqualityBug) {
-		return equalsConstructorPrototype(o);
-	}
-	try {
-		return equalsConstructorPrototype(o);
-	} catch (e) {
-		return false;
-	}
-};
-
-var keysShim = function keys(object) {
-	var isObject = object !== null && typeof object === 'object';
-	var isFunction = toStr.call(object) === '[object Function]';
-	var isArguments = isArgs(object);
-	var isString = isObject && toStr.call(object) === '[object String]';
-	var theKeys = [];
-
-	if (!isObject && !isFunction && !isArguments) {
-		throw new TypeError('Object.keys called on a non-object');
-	}
-
-	var skipProto = hasProtoEnumBug && isFunction;
-	if (isString && object.length > 0 && !has.call(object, 0)) {
-		for (var i = 0; i < object.length; ++i) {
-			theKeys.push(String(i));
-		}
-	}
-
-	if (isArguments && object.length > 0) {
-		for (var j = 0; j < object.length; ++j) {
-			theKeys.push(String(j));
-		}
-	} else {
-		for (var name in object) {
-			if (!(skipProto && name === 'prototype') && has.call(object, name)) {
-				theKeys.push(String(name));
-			}
-		}
-	}
-
-	if (hasDontEnumBug) {
-		var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
-
-		for (var k = 0; k < dontEnums.length; ++k) {
-			if (!(skipConstructor && dontEnums[k] === 'constructor') && has.call(object, dontEnums[k])) {
-				theKeys.push(dontEnums[k]);
-			}
-		}
-	}
-	return theKeys;
-};
-
-keysShim.shim = function shimObjectKeys() {
-	if (Object.keys) {
-		var keysWorksWithArguments = (function () {
-			// Safari 5.0 bug
-			return (Object.keys(arguments) || '').length === 2;
-		}(1, 2));
-		if (!keysWorksWithArguments) {
-			var originalKeys = Object.keys;
-			Object.keys = function keys(object) {
-				if (isArgs(object)) {
-					return originalKeys(slice.call(object));
-				} else {
-					return originalKeys(object);
-				}
-			};
-		}
-	} else {
-		Object.keys = keysShim;
-	}
-	return Object.keys || keysShim;
-};
-
-module.exports = keysShim;
 
 
 /***/ }),
@@ -9202,471 +10154,141 @@ module.exports = keysShim;
 "use strict";
 
 
-var toStr = Object.prototype.toString;
+var _ = __webpack_require__(0);
+var version = __webpack_require__(35);
+var parseAlgoliaClientVersion = __webpack_require__(36);
 
-module.exports = function isArguments(value) {
-	var str = toStr.call(value);
-	var isArgs = str === '[object Arguments]';
-	if (!isArgs) {
-		isArgs = str !== '[object Array]' &&
-			value !== null &&
-			typeof value === 'object' &&
-			typeof value.length === 'number' &&
-			value.length >= 0 &&
-			toStr.call(value.callee) === '[object Function]';
-	}
-	return isArgs;
+module.exports = function popularIn(index, params, details, options) {
+  var algoliaVersion = parseAlgoliaClientVersion(index.as._ua);
+  if (algoliaVersion && algoliaVersion[0] >= 3 && algoliaVersion[1] > 20) {
+    params = params || {};
+    params.additionalUA = 'autocomplete.js ' + version;
+  }
+  if (!details.source) {
+    return _.error("Missing 'source' key");
+  }
+  var source = _.isFunction(details.source) ? details.source : function(hit) { return hit[details.source]; };
+
+  if (!details.index) {
+    return _.error("Missing 'index' key");
+  }
+  var detailsIndex = details.index;
+
+  options = options || {};
+
+  return sourceFn;
+
+  function sourceFn(query, cb) {
+    index.search(query, params, function(error, content) {
+      if (error) {
+        _.error(error.message);
+        return;
+      }
+
+      if (content.hits.length > 0) {
+        var first = content.hits[0];
+
+        var detailsParams = _.mixin({hitsPerPage: 0}, details);
+        delete detailsParams.source; // not a query parameter
+        delete detailsParams.index; // not a query parameter
+
+        var detailsAlgoliaVersion = parseAlgoliaClientVersion(detailsIndex.as._ua);
+        if (detailsAlgoliaVersion && detailsAlgoliaVersion[0] >= 3 && detailsAlgoliaVersion[1] > 20) {
+          params.additionalUA = 'autocomplete.js ' + version;
+        }
+
+        detailsIndex.search(source(first), detailsParams, function(error2, content2) {
+          if (error2) {
+            _.error(error2.message);
+            return;
+          }
+
+          var suggestions = [];
+
+          // add the 'all department' entry before others
+          if (options.includeAll) {
+            var label = options.allTitle || 'All departments';
+            suggestions.push(_.mixin({
+              facet: {value: label, count: content2.nbHits}
+            }, _.cloneDeep(first)));
+          }
+
+          // enrich the first hit iterating over the facets
+          _.each(content2.facets, function(values, facet) {
+            _.each(values, function(count, value) {
+              suggestions.push(_.mixin({
+                facet: {facet: facet, value: value, count: count}
+              }, _.cloneDeep(first)));
+            });
+          });
+
+          // append all other hits
+          for (var i = 1; i < content.hits.length; ++i) {
+            suggestions.push(content.hits[i]);
+          }
+
+          cb(suggestions, content);
+        });
+
+        return;
+      }
+
+      cb([]);
+    });
+  }
 };
 
 
 /***/ }),
-/* 77 */
+/* 77 */,
+/* 78 */,
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-var stringifyPrimitive = function(v) {
-  switch (typeof v) {
-    case 'string':
-      return v;
-
-    case 'boolean':
-      return v ? 'true' : 'false';
-
-    case 'number':
-      return isFinite(v) ? v : '';
-
-    default:
-      return '';
-  }
-};
-
-module.exports = function(obj, sep, eq, name) {
-  sep = sep || '&';
-  eq = eq || '=';
-  if (obj === null) {
-    obj = undefined;
-  }
-
-  if (typeof obj === 'object') {
-    return map(objectKeys(obj), function(k) {
-      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-      if (isArray(obj[k])) {
-        return map(obj[k], function(v) {
-          return ks + encodeURIComponent(stringifyPrimitive(v));
-        }).join(sep);
-      } else {
-        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-      }
-    }).join(sep);
-
-  }
-
-  if (!name) return '';
-  return encodeURIComponent(stringifyPrimitive(name)) + eq +
-         encodeURIComponent(stringifyPrimitive(obj));
-};
-
-var isArray = Array.isArray || function (xs) {
-  return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-function map (xs, f) {
-  if (xs.map) return xs.map(f);
-  var res = [];
-  for (var i = 0; i < xs.length; i++) {
-    res.push(f(xs[i], i));
-  }
-  return res;
-}
-
-var objectKeys = Object.keys || function (obj) {
-  var res = [];
-  for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
-  }
-  return res;
-};
-
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M.566 1.698L0 1.13 1.132 0l.565.566L6 4.868 10.302.566 10.868 0 12 1.132l-.566.565L7.132 6l4.302 4.3.566.568L10.868 12l-.565-.566L6 7.132l-4.3 4.302L1.13 12 0 10.868l.566-.565L4.868 6 .566 1.698z\"/></svg>\n"
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports) {
-
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-function EventEmitter() {
-  this._events = this._events || {};
-  this._maxListeners = this._maxListeners || undefined;
-}
-module.exports = EventEmitter;
-
-// Backwards-compat with node 0.10.x
-EventEmitter.EventEmitter = EventEmitter;
-
-EventEmitter.prototype._events = undefined;
-EventEmitter.prototype._maxListeners = undefined;
-
-// By default EventEmitters will print a warning if more than 10 listeners are
-// added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;
-
-// Obviously not all Emitters should be limited to 10. This function allows
-// that to be increased. Set to zero for unlimited.
-EventEmitter.prototype.setMaxListeners = function(n) {
-  if (!isNumber(n) || n < 0 || isNaN(n))
-    throw TypeError('n must be a positive number');
-  this._maxListeners = n;
-  return this;
-};
-
-EventEmitter.prototype.emit = function(type) {
-  var er, handler, len, args, i, listeners;
-
-  if (!this._events)
-    this._events = {};
-
-  // If there is no 'error' event listener then throw.
-  if (type === 'error') {
-    if (!this._events.error ||
-        (isObject(this._events.error) && !this._events.error.length)) {
-      er = arguments[1];
-      if (er instanceof Error) {
-        throw er; // Unhandled 'error' event
-      } else {
-        // At least give some kind of context to the user
-        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
-        err.context = er;
-        throw err;
-      }
-    }
-  }
-
-  handler = this._events[type];
-
-  if (isUndefined(handler))
-    return false;
-
-  if (isFunction(handler)) {
-    switch (arguments.length) {
-      // fast cases
-      case 1:
-        handler.call(this);
-        break;
-      case 2:
-        handler.call(this, arguments[1]);
-        break;
-      case 3:
-        handler.call(this, arguments[1], arguments[2]);
-        break;
-      // slower
-      default:
-        args = Array.prototype.slice.call(arguments, 1);
-        handler.apply(this, args);
-    }
-  } else if (isObject(handler)) {
-    args = Array.prototype.slice.call(arguments, 1);
-    listeners = handler.slice();
-    len = listeners.length;
-    for (i = 0; i < len; i++)
-      listeners[i].apply(this, args);
-  }
-
-  return true;
-};
-
-EventEmitter.prototype.addListener = function(type, listener) {
-  var m;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events)
-    this._events = {};
-
-  // To avoid recursion in the case that type === "newListener"! Before
-  // adding it to the listeners, first emit "newListener".
-  if (this._events.newListener)
-    this.emit('newListener', type,
-              isFunction(listener.listener) ?
-              listener.listener : listener);
-
-  if (!this._events[type])
-    // Optimize the case of one listener. Don't need the extra array object.
-    this._events[type] = listener;
-  else if (isObject(this._events[type]))
-    // If we've already got an array, just append.
-    this._events[type].push(listener);
-  else
-    // Adding the second element, need to change to array.
-    this._events[type] = [this._events[type], listener];
-
-  // Check for listener leak
-  if (isObject(this._events[type]) && !this._events[type].warned) {
-    if (!isUndefined(this._maxListeners)) {
-      m = this._maxListeners;
-    } else {
-      m = EventEmitter.defaultMaxListeners;
-    }
-
-    if (m && m > 0 && this._events[type].length > m) {
-      this._events[type].warned = true;
-      console.error('(node) warning: possible EventEmitter memory ' +
-                    'leak detected. %d listeners added. ' +
-                    'Use emitter.setMaxListeners() to increase limit.',
-                    this._events[type].length);
-      if (typeof console.trace === 'function') {
-        // not supported in IE 10
-        console.trace();
-      }
-    }
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-
-EventEmitter.prototype.once = function(type, listener) {
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  var fired = false;
-
-  function g() {
-    this.removeListener(type, g);
-
-    if (!fired) {
-      fired = true;
-      listener.apply(this, arguments);
-    }
-  }
-
-  g.listener = listener;
-  this.on(type, g);
-
-  return this;
-};
-
-// emits a 'removeListener' event iff the listener was removed
-EventEmitter.prototype.removeListener = function(type, listener) {
-  var list, position, length, i;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events || !this._events[type])
-    return this;
-
-  list = this._events[type];
-  length = list.length;
-  position = -1;
-
-  if (list === listener ||
-      (isFunction(list.listener) && list.listener === listener)) {
-    delete this._events[type];
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-
-  } else if (isObject(list)) {
-    for (i = length; i-- > 0;) {
-      if (list[i] === listener ||
-          (list[i].listener && list[i].listener === listener)) {
-        position = i;
-        break;
-      }
-    }
-
-    if (position < 0)
-      return this;
-
-    if (list.length === 1) {
-      list.length = 0;
-      delete this._events[type];
-    } else {
-      list.splice(position, 1);
-    }
-
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.removeAllListeners = function(type) {
-  var key, listeners;
-
-  if (!this._events)
-    return this;
-
-  // not listening for removeListener, no need to emit
-  if (!this._events.removeListener) {
-    if (arguments.length === 0)
-      this._events = {};
-    else if (this._events[type])
-      delete this._events[type];
-    return this;
-  }
-
-  // emit removeListener for all listeners on all events
-  if (arguments.length === 0) {
-    for (key in this._events) {
-      if (key === 'removeListener') continue;
-      this.removeAllListeners(key);
-    }
-    this.removeAllListeners('removeListener');
-    this._events = {};
-    return this;
-  }
-
-  listeners = this._events[type];
-
-  if (isFunction(listeners)) {
-    this.removeListener(type, listeners);
-  } else if (listeners) {
-    // LIFO order
-    while (listeners.length)
-      this.removeListener(type, listeners[listeners.length - 1]);
-  }
-  delete this._events[type];
-
-  return this;
-};
-
-EventEmitter.prototype.listeners = function(type) {
-  var ret;
-  if (!this._events || !this._events[type])
-    ret = [];
-  else if (isFunction(this._events[type]))
-    ret = [this._events[type]];
-  else
-    ret = this._events[type].slice();
-  return ret;
-};
-
-EventEmitter.prototype.listenerCount = function(type) {
-  if (this._events) {
-    var evlistener = this._events[type];
-
-    if (isFunction(evlistener))
-      return 1;
-    else if (evlistener)
-      return evlistener.length;
-  }
-  return 0;
-};
-
-EventEmitter.listenerCount = function(emitter, type) {
-  return emitter.listenerCount(type);
-};
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-
+// we need to export using commonjs for ease of usage in all
+// JavaScript environments
+// We therefore need to import in commonjs too. see:
+// https://github.com/webpack/webpack/issues/4039
+
+/* eslint-disable import/no-commonjs */
+var widget = __webpack_require__(80);
+
+module.exports = widget.default;
 
 /***/ }),
 /* 80 */
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return makeAlgoliaPlacesWidget; });
+/* harmony import */ var _places__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-exports.default = makeAlgoliaPlacesWidget;
-
-var _places = __webpack_require__(40);
-
-var _places2 = _interopRequireDefault(_places);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 /**
  * The underlying structure for the Algolia Places instantsearch widget.
  */
-var AlgoliaPlacesWidget = function () {
-  function AlgoliaPlacesWidget() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    var defaultPosition = _ref.defaultPosition,
-        placesOptions = _objectWithoutProperties(_ref, ['defaultPosition']);
+var AlgoliaPlacesWidget =
+/*#__PURE__*/
+function () {
+  function AlgoliaPlacesWidget() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        defaultPosition = _ref.defaultPosition,
+        placesOptions = _objectWithoutProperties(_ref, ["defaultPosition"]);
 
     _classCallCheck(this, AlgoliaPlacesWidget);
 
@@ -9675,14 +10297,13 @@ var AlgoliaPlacesWidget = function () {
     }
 
     this.placesOptions = placesOptions;
-    this.placesAutocomplete = (0, _places2.default)(this.placesOptions);
-
+    this.placesAutocomplete = Object(_places__WEBPACK_IMPORTED_MODULE_0__["default"])(this.placesOptions);
     this.query = '';
     this.initialLatLngViaIP = null;
   }
 
   _createClass(AlgoliaPlacesWidget, [{
-    key: 'getConfiguration',
+    key: "getConfiguration",
     value: function getConfiguration() {
       var configuration = {};
 
@@ -9695,7 +10316,7 @@ var AlgoliaPlacesWidget = function () {
       return configuration;
     }
   }, {
-    key: 'init',
+    key: "init",
     value: function init(_ref2) {
       var _this = this;
 
@@ -9717,16 +10338,11 @@ var AlgoliaPlacesWidget = function () {
             lat = _opts$suggestion$latl.lat,
             lng = _opts$suggestion$latl.lng,
             value = _opts$suggestion.value;
-
-
         _this.query = value;
-
-        helper.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLngViaIP', false).setQueryParameter('aroundLatLng', lat + ',' + lng).search();
+        helper.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLngViaIP', false).setQueryParameter('aroundLatLng', "".concat(lat, ",").concat(lng)).search();
       });
-
       this.placesAutocomplete.on('clear', function () {
         _this.query = '';
-
         helper.setQueryParameter('insideBoundingBox');
 
         if (_this.defaultPosition) {
@@ -9739,32 +10355,27 @@ var AlgoliaPlacesWidget = function () {
       });
     }
   }, {
-    key: 'getWidgetSearchParameters',
+    key: "getWidgetSearchParameters",
     value: function getWidgetSearchParameters(searchParameters, _ref3) {
       var uiState = _ref3.uiState;
 
       if (!uiState.places) {
         this.placesAutocomplete.setVal('');
         this.placesAutocomplete.close();
-
         return searchParameters;
       }
 
       var _uiState$places = uiState.places,
           query = _uiState$places.query,
           position = _uiState$places.position;
-
-
       this.query = query;
       this.initialLatLngViaIP = searchParameters.getQueryParameter('aroundLatLngViaIP');
-
       this.placesAutocomplete.setVal(query || '');
       this.placesAutocomplete.close();
-
       return searchParameters.setQueryParameter('insideBoundingBox').setQueryParameter('aroundLatLngViaIP', false).setQueryParameter('aroundLatLng', position);
     }
   }, {
-    key: 'getWidgetState',
+    key: "getWidgetState",
     value: function getWidgetState(uiState, _ref4) {
       var searchParameters = _ref4.searchParameters;
 
@@ -9773,12 +10384,13 @@ var AlgoliaPlacesWidget = function () {
       }
 
       if (searchParameters.aroundLatLng === undefined && !this.query) {
-        var newUiState = Object.assign({}, uiState);
+        var newUiState = _objectSpread({}, uiState);
+
         delete newUiState.places;
         return newUiState;
       }
 
-      return _extends({}, uiState, {
+      return _objectSpread({}, uiState, {
         places: {
           query: this.query,
           position: searchParameters.aroundLatLng
@@ -9789,7 +10401,6 @@ var AlgoliaPlacesWidget = function () {
 
   return AlgoliaPlacesWidget;
 }();
-
 /**
  * Creates a new instance of the Algolia Places widget. This widget
  * sets the geolocation value for the search based on the selected
@@ -9805,26 +10416,6 @@ var AlgoliaPlacesWidget = function () {
 function makeAlgoliaPlacesWidget(opts) {
   return new AlgoliaPlacesWidget(opts);
 }
-
-/***/ }),
-/* 82 */,
-/* 83 */,
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _widget = __webpack_require__(81);
-
-var _widget2 = _interopRequireDefault(_widget);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = _widget2.default; // we need to export using commonjs for ease of usage in all
-// JavaScript environments
-
-/* eslint-disable import/no-commonjs */
 
 /***/ })
 /******/ ]);

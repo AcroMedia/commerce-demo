@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'fa', {
@@ -35,7 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'fa', {
 	noAnchors: '(در این سند لنگری دردسترس نیست)',
 	noEmail: 'لطفا نشانی پست الکترونیکی را بنویسید',
 	noUrl: 'لطفا URL پیوند را بنویسید',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<سایر>',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'وابسته (Netscape)',
 	popupFeatures: 'ویژگی​های پنجرهٴ پاپاپ',
 	popupFullScreen: 'تمام صفحه (IE)',
@@ -60,6 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'fa', {
 	toAnchor: 'لنگر در همین صفحه',
 	toEmail: 'پست الکترونیکی',
 	toUrl: 'URL',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'گنجاندن/ویرایش پیوند',
 	type: 'نوع پیوند',
 	unlink: 'برداشتن پیوند',

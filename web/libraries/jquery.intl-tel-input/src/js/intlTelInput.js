@@ -1,4 +1,8 @@
 window.intlTelInputGlobals = {
+  getInstance: (input) => {
+    const id = input.getAttribute('data-intl-tel-input-id');
+    return window.intlTelInputGlobals.instances[id];
+  },
   instances: {},
 };
 
@@ -7,10 +11,12 @@ let id = 0;
 const defaults = {
   // whether or not to allow the dropdown
   allowDropdown: true,
-  // if there is just a dial code in the input: remove it on blur, and re-add it on focus
+  // if there is just a dial code in the input: remove it on blur
   autoHideDialCode: true,
   // add a placeholder in the input with an example number for the selected country
   autoPlaceholder: 'polite',
+  // modify the parentClass
+  customContainer: '',
   // modify the auto placeholder
   customPlaceholder: null,
   // append menu to specified element
@@ -279,6 +285,10 @@ class Iti {
     let parentClass = 'intl-tel-input';
     if (this.options.allowDropdown) parentClass += ' allow-dropdown';
     if (this.options.separateDialCode) parentClass += ' separate-dial-code';
+    if (this.options.customContainer) {
+      parentClass += ' ';
+      parentClass += this.options.customContainer;
+    }
 
     const wrapper = this._createEl('div', { class: parentClass });
     this.telInput.parentNode.insertBefore(wrapper, this.telInput);
@@ -421,7 +431,7 @@ class Iti {
   // initialise the main event listeners: input keyup, and click selected flag
   _initListeners() {
     this._initKeyListeners();
-    if (this.options.autoHideDialCode) this._initFocusListeners();
+    if (this.options.autoHideDialCode) this._initBlurListeners();
     if (this.options.allowDropdown) this._initDropdownListeners();
     if (this.hiddenInput) this._initHiddenInputListener();
   }
@@ -562,45 +572,8 @@ class Iti {
   }
 
 
-  // listen for mousedown, focus and blur (for autoHideDialCode feature)
-  _initFocusListeners() {
-    // mousedown decides where the cursor goes, so if we're focusing we must preventDefault as
-    // we'll be inserting the dial code, and we want the cursor to be at the end no matter where
-    // they click
-    this._handleMousedownFocusEvent = (e) => {
-      if (this.telInput !== document.activeElement && !this.telInput.value) {
-        e.preventDefault();
-        // but this also cancels the focus, so we must trigger that manually
-        this.telInput.focus();
-      }
-    };
-    this.telInput.addEventListener('mousedown', this._handleMousedownFocusEvent);
-
-    this._handleKeypressPlusEvent = (e) => {
-      if (e.key === '+') this.telInput.value = '';
-    };
-
-    // on focus: if empty, insert the dial code for the currently selected flag
-    this._handleFocusEvent = () => {
-      if (!this.telInput.value && !this.telInput.readOnly && this.selectedCountryData.dialCode) {
-        // insert the dial code
-        this.telInput.value = `+${this.selectedCountryData.dialCode}`;
-        // after auto-inserting a dial code, if the first key they hit is '+' then assume they are
-        // entering a new number, so remove the dial code. use keypress instead of keydown because
-        // keydown gets triggered for the shift key (required to hit the + key), and instead of
-        // keyup because that shows the new '+' before removing the old one
-        this.telInput.addEventListener('keypress', this._handleKeypressPlusEvent);
-
-        // after tabbing in, make sure the cursor is at the end we must use setTimeout to get
-        // outside of the focus handler as it seems the selection happens after that
-        setTimeout(() => {
-          const len = this.telInput.value.length;
-          this.telInput.setSelectionRange(len, len);
-        });
-      }
-    };
-    this.telInput.addEventListener('focus', this._handleFocusEvent);
-
+  // listen for blur/submit (for autoHideDialCode feature)
+  _initBlurListeners() {
     // on blur or form submit: if just a dial code then remove it
     this._handleSubmitOrBlurEvent = () => {
       this._removeEmptyDialCode();
@@ -613,20 +586,18 @@ class Iti {
     // want it to be displayed.
   }
 
-  _removeEmptyDialCode() {
-    const startsPlus = (this.telInput.value.charAt(0) === '+');
 
-    if (startsPlus) {
+  // clear the input if it just contains a dial code
+  _removeEmptyDialCode() {
+    if (this.telInput.value.charAt(0) === '+') {
       const numeric = this._getNumeric(this.telInput.value);
       // if just a plus, or if just a dial code
       if (!numeric || this.selectedCountryData.dialCode === numeric) {
         this.telInput.value = '';
       }
     }
-
-    // remove the keypress listener we added on focus
-    this.telInput.removeEventListener('keypress', this._handleKeypressPlusEvent);
   }
+
 
   // extract the numeric digits from the given string
   _getNumeric(s) {
@@ -687,7 +658,7 @@ class Iti {
       const dropdownHeight = this.countryList.offsetHeight;
       // dropdownFitsBelow = (dropdownBottom < windowBottom)
       const dropdownFitsBelow = (inputTop + this.telInput.offsetHeight + dropdownHeight
-        < windowTop + window.innerHeight);
+        < (windowTop + window.innerHeight));
       const dropdownFitsAbove = (inputTop - dropdownHeight > windowTop);
 
       // by default, the dropdown will be below the input. If we want to position it above the
@@ -956,14 +927,9 @@ class Iti {
 
     if (this.options.separateDialCode) {
       const dialCode = (this.selectedCountryData.dialCode) ? `+${this.selectedCountryData.dialCode}` : '';
-      const parent = this.telInput.parentNode;
-      if (prevCountry.dialCode) {
-        parent.classList.remove(`iti-sdc-${prevCountry.dialCode.length + 1}`);
-      }
-      if (dialCode) {
-        parent.classList.add(`iti-sdc-${dialCode.length}`);
-      }
       this.selectedDialCode.innerHTML = dialCode;
+      // add 6px of padding after the grey selected-dial-code box, as this is what we use in the css
+      this.telInput.style.paddingLeft = `${this.selectedFlag.offsetWidth + 6}px`;
     }
 
     // and the input's placeholder
@@ -1155,7 +1121,7 @@ class Iti {
 
     // normalized means ensure starts with a 1, so we can match against the full dial code
     const normalizedVal = (numericVal.charAt(0) === '1') ? numericVal : `1${numericVal}`;
-    if (this.options.separateDialCode) {
+    if (this.options.separateDialCode && val.charAt(0) !== '+') {
       // when using separateDialCode, it is visible so is effectively part of the typed number
       prefix = `+${dialCode}`;
     } else if (val && val.charAt(0) !== '+' && val.charAt(0) !== '1' && dialCode && dialCode.charAt(0) === '1' && dialCode.length === 4 && dialCode !== normalizedVal.substr(0, 4)) {
@@ -1259,16 +1225,17 @@ class Iti {
 
     // unbind autoHideDialCode listeners
     if (this.options.autoHideDialCode) {
-      this.telInput.removeEventListener('mousedown', this._handleMousedownFocusEvent);
-      this.telInput.removeEventListener('focus', this._handleFocusEvent);
       if (form) form.removeEventListener('submit', this._handleSubmitOrBlurEvent);
       this.telInput.removeEventListener('blur', this._handleSubmitOrBlurEvent);
     }
 
-    // unbind all events: key events, and focus/blur events if autoHideDialCode=true
+    // unbind key events, and cut/paste events
     this.telInput.removeEventListener('keyup', this._handleKeyupEvent);
     this.telInput.removeEventListener('cut', this._handleClipboardEvent);
     this.telInput.removeEventListener('paste', this._handleClipboardEvent);
+
+    // remove attribute of id instance: data-intl-tel-input-id
+    this.telInput.removeAttribute('data-intl-tel-input-id');
 
     // remove markup (but leave the original input)
     const wrapper = this.telInput.parentNode;

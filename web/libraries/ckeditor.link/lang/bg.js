@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'link', 'bg', {
@@ -35,7 +35,9 @@ CKEDITOR.plugins.setLang( 'link', 'bg', {
 	noAnchors: '(Няма котви в текущия документ)',
 	noEmail: 'Моля въведете имейл адрес',
 	noUrl: 'Моля въведете URL адрес',
+	noTel: 'Please type the phone number', // MISSING
 	other: '<друго>',
+	phoneNumber: 'Phone number', // MISSING
 	popupDependent: 'Зависимост (Netscape)',
 	popupFeatures: 'Функции на изкачащ прозорец',
 	popupFullScreen: 'Цял екран (IE)',
@@ -60,6 +62,7 @@ CKEDITOR.plugins.setLang( 'link', 'bg', {
 	toAnchor: 'Връзка към котва в текста',
 	toEmail: 'Имейл',
 	toUrl: 'Уеб адрес',
+	toPhone: 'Phone', // MISSING
 	toolbar: 'Връзка',
 	type: 'Тип на връзката',
 	unlink: 'Премахни връзката',

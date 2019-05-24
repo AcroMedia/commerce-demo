@@ -18,6 +18,7 @@
 }
 (function (Inputmask) {
     var $ = Inputmask.dependencyLib;
+
     function autoEscape(txt, opts) {
         var escapedTxt = "";
         for (var i = 0; i < txt.length; i++) {
@@ -36,14 +37,14 @@
         return escapedTxt;
     }
 
-    function alignDigits(buffer, opts) {
-        if (opts.numericInput) {
+    function alignDigits(buffer, digits, opts) {
+        if (digits > 0) {
             var radixPosition = $.inArray(opts.radixPoint, buffer);
             if (radixPosition === -1) {
                 buffer.push(opts.radixPoint);
                 radixPosition = buffer.length - 1;
             }
-            for (var i = 1; i <= opts.digits; i++) {
+            for (var i = 1; i <= digits; i++) {
                 buffer[radixPosition + i] = buffer[radixPosition + i] || "0";
             }
         }
@@ -154,6 +155,7 @@
             insertMode: true,
             autoUnmask: false,
             unmaskAsNumber: false,
+            inputType: "text", //number ~ indicates whether the value passed for initialization is text or a number
             inputmode: "numeric",
             preValidation: function (buffer, pos, c, isSelection, opts, maskset) {
                 if (c === "-" || c === opts.negationSymbol.front) {
@@ -538,61 +540,40 @@
             },
             onBeforeMask: function (initialValue, opts) {
                 opts.isNegative = undefined;
+                var radixPoint = opts.radixPoint || ",";
 
-                if (typeof initialValue == "number" && opts.radixPoint !== "") {
-                    initialValue = initialValue.toString().replace(".", opts.radixPoint);
+                if ((typeof initialValue == "number" || opts.inputType === "number") && radixPoint !== "") {
+                    initialValue = initialValue.toString().replace(".", radixPoint);
                 }
 
-                initialValue = initialValue.toString().charAt(initialValue.length - 1) === opts.radixPoint ?
-                    initialValue.toString().substr(0, initialValue.length - 1) : initialValue.toString();
+                var valueParts = initialValue.split(radixPoint),
+                    integerPart = valueParts[0].replace(/[^\-0-9]/g, ""),
+                    decimalPart = valueParts.length > 1 ? valueParts[1].replace(/[^0-9]/g, "") : "";
 
-                if (opts.radixPoint !== "" && isFinite(initialValue)) {
-                    var vs = initialValue.split("."),
-                        groupSize = opts.groupSeparator !== "" ? parseInt(opts.groupSize) : 0;
-                    if (vs.length === 2 && (vs[0].length > groupSize || vs[1].length > groupSize || (vs[0].length <= groupSize && vs[1].length < groupSize))) {
-                        initialValue = initialValue.replace(".", opts.radixPoint);
-                    }
-                }
-                var kommaMatches = initialValue.match(/,/g);
-                var dotMatches = initialValue.match(/\./g);
-                if (dotMatches && kommaMatches) {
-                    if (dotMatches.length > kommaMatches.length) {
-                        initialValue = initialValue.replace(/\./g, "");
-                        initialValue = initialValue.replace(",", opts.radixPoint);
-                    } else if (kommaMatches.length > dotMatches.length) {
-                        initialValue = initialValue.replace(/,/g, "");
-                        initialValue = initialValue.replace(".", opts.radixPoint);
-                    } else { //equal
-                        initialValue = initialValue.indexOf(".") < initialValue.indexOf(",") ? initialValue.replace(/\./g, "") : initialValue.replace(/,/g, "");
-                    }
-                } else {
-                    initialValue = initialValue.replace(new RegExp(Inputmask.escapeRegex(opts.groupSeparator), "g"), "");
-                }
+                initialValue = integerPart + (decimalPart !== "" ? radixPoint + decimalPart : decimalPart);
 
-                if (opts.digits === 0) {
-                    if (initialValue.indexOf(".") !== -1) {
-                        initialValue = initialValue.substring(0, initialValue.indexOf("."));
-                    } else if (initialValue.indexOf(",") !== -1) {
-                        initialValue = initialValue.substring(0, initialValue.indexOf(","));
-                    }
-                }
-
-                if (opts.radixPoint !== "" && isFinite(opts.digits)) {
-                    if (initialValue.indexOf(opts.radixPoint) !== -1) {
-                        var valueParts = initialValue.split(opts.radixPoint),
-                            decPart = valueParts[1].match(new RegExp("\\d*"))[0];
-                        if (parseInt(opts.digits) < decPart.toString().length) {
-                            var digitsFactor = Math.pow(10, parseInt(opts.digits));
-                            //make the initialValue a valid javascript number for the parsefloat
-                            initialValue = initialValue.replace(Inputmask.escapeRegex(opts.radixPoint), ".");
-                            initialValue = Math.round(parseFloat(initialValue) * digitsFactor) / digitsFactor;
-                            initialValue = initialValue.toString().replace(".", opts.radixPoint);
+                var digits = 0;
+                if (radixPoint !== "") {
+                    digits = decimalPart.length;
+                    if (decimalPart !== "") {
+                        var digitsFactor = Math.pow(10, digits || 1);
+                        if (isFinite(opts.digits)) {
+                            digits = parseInt(opts.digits);
+                            digitsFactor = Math.pow(10, digits);
                         }
+
+                        //make the initialValue a valid javascript number for the parsefloat
+                        initialValue = initialValue.replace(Inputmask.escapeRegex(radixPoint), ".");
+                        if (isFinite(initialValue))
+                            initialValue = Math.round(parseFloat(initialValue) * digitsFactor) / digitsFactor;
+                        initialValue = initialValue.toString().replace(".", radixPoint);
                     }
-
-
                 }
-                return alignDigits(initialValue.toString().split(""), opts).join("");
+                //this needs to be in a separate part and not directly in decimalPart to allow rounding
+                if (opts.digits === 0 && initialValue.indexOf(Inputmask.escapeRegex(radixPoint)) !== -1) {
+                    initialValue = initialValue.substring(0, initialValue.indexOf(Inputmask.escapeRegex(radixPoint)));
+                }
+                return alignDigits(initialValue.toString().split(""), digits, opts).join("");
             },
             onKeyDown: function (e, buffer, caretPos, opts) {
                 //TODO FIXME

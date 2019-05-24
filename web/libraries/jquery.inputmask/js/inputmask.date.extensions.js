@@ -48,15 +48,14 @@
                 }], //Hours; leading zero for single-digit hours (12-hour clock).
                 hhh: ["[0-9]+", Date.prototype.setHours, "hours", Date.prototype.getHours], //Hours; no limit
                 H: ["1?[0-9]|2[0-3]", Date.prototype.setHours, "hours", Date.prototype.getHours], //Hours; no leading zero for single-digit hours (24-hour clock).
-                HH: ["[01][0-9]|2[0-3]", Date.prototype.setHours, "hours", function () {
+                HH: ["0[0-9]|1[0-9]|2[0-3]", Date.prototype.setHours, "hours", function () {
                     return pad(Date.prototype.getHours.call(this), 2);
                 }], //Hours; leading zero for single-digit hours (24-hour clock).
                 HHH: ["[0-9]+", Date.prototype.setHours, "hours", Date.prototype.getHours], //Hours; no limit
                 M: ["[1-5]?[0-9]", Date.prototype.setMinutes, "minutes", Date.prototype.getMinutes], //Minutes; no leading zero for single-digit minutes. Uppercase M unlike CF timeFormat's m to avoid conflict with months.
-                MM: ["[0-5][0-9]", Date.prototype.setMinutes, "minutes", function () {
+                MM: ["0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]", Date.prototype.setMinutes, "minutes", function () {
                     return pad(Date.prototype.getMinutes.call(this), 2);
-                }], //Minutes; leading zero for single-digit minutes. Uppercase MM unlike CF timeFormat's mm to avoid conflict with months.
-                s: ["[1-5]?[0-9]", Date.prototype.setSeconds, "seconds", Date.prototype.getSeconds], //Seconds; no leading zero for single-digit seconds.
+                }], //Minutes; leading zero for single-digit minutes. Uppercase MM unlike CF timeFormat's mm to avoid conflict with months.  s: ["[1-5]?[0-9]", Date.prototype.setSeconds, "seconds", Date.prototype.getSeconds], //Seconds; no leading zero for single-digit seconds.
                 ss: ["[0-5][0-9]", Date.prototype.setSeconds, "seconds", function () {
                     return pad(Date.prototype.getSeconds.call(this), 2);
                 }], //Seconds; leading zero for single-digit seconds.
@@ -173,16 +172,15 @@
             var dateObj = {"date": new Date(1, 0, 1)}, targetProp, mask = maskString, match, dateOperation, targetValidator;
 
             function extendProperty(value) {
-                var correctedValue;
-                if (opts.min && opts.min[targetProp] || opts.max && opts.max[targetProp]) {
-                    var min = opts.min && opts.min[targetProp] || opts.max[targetProp],
-                        max = opts.max && opts.max[targetProp] || opts.min[targetProp];
-                    correctedValue = value.replace(/[^0-9]/g, "");
-                    correctedValue += (min.indexOf(correctedValue) < max.indexOf(correctedValue) ? max : min).toString().substr(correctedValue.length);
-                    while (!(new RegExp(targetValidator)).test(correctedValue)) {
-                        correctedValue--;
-                    }
-                } else correctedValue = value.replace(/[^0-9]/g, "0");
+                var correctedValue = value.replace(/[^0-9]/g, "0");
+                if (correctedValue != value) { //only do correction on incomplete values
+                    //determine best validation match
+                    var enteredPart = value.replace(/[^0-9]/g, ""),
+                        min = (opts.min && opts.min[targetProp] || value).toString(),
+                        max = (opts.max && opts.max[targetProp] || value).toString();
+
+                    correctedValue = enteredPart + (enteredPart < min.slice(0, enteredPart.length) ? min.slice(enteredPart.length) : (enteredPart > max.slice(0, enteredPart.length) ? max.slice(enteredPart.length) : correctedValue.toString().slice(enteredPart.length)));
+                }
                 return correctedValue;
             }
 
@@ -219,9 +217,9 @@
                     //localize
                     formatCode.S = opts.i18n.ordinalSuffix.join("|");
 
-                    opts.inputFormat = formatAlias[opts.inputFormat] || opts.inputFormat; //resolve possible formatAkias
-                    opts.displayFormat = formatAlias[opts.displayFormat] || opts.displayFormat || opts.inputFormat; //resolve possible formatAkias
-                    opts.outputFormat = formatAlias[opts.outputFormat] || opts.outputFormat || opts.inputFormat; //resolve possible formatAkias
+                    opts.inputFormat = formatAlias[opts.inputFormat] || opts.inputFormat; //resolve possible formatAlias
+                    opts.displayFormat = formatAlias[opts.displayFormat] || opts.displayFormat || opts.inputFormat; //resolve possible formatAlias
+                    opts.outputFormat = formatAlias[opts.outputFormat] || opts.outputFormat || opts.inputFormat; //resolve possible formatAlias
                     opts.placeholder = opts.placeholder !== "" ? opts.placeholder : opts.inputFormat.replace(/[\[\]]/, "");
                     opts.regex = parse(opts.inputFormat, undefined, opts);
                     // console.log(opts.regex);
@@ -293,7 +291,8 @@
                     if (test.nativeDef.indexOf("[AP]") == 0) return elem.toUpperCase();
                     return elem;
                 },
-                insertMode: false
+                insertMode: false,
+                shiftPositions: false
             }
         });
 

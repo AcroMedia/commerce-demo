@@ -25,9 +25,11 @@
 
     },
     "require": {
-        "acromedia/orange_starter": "dev-8.x-1.x",
-        "acromedia/orange_framework": "dev-8.x-1.x",
+        "ext-curl": "*",
         "acromedia/acro_live_css": "dev-8.x-1.x",
+        "acromedia/orange_framework": "dev-8.x-1.x",
+        "acromedia/orange_starter": "dev-8.x-1.x",
+        "cboden/ratchet": "^0.4.1",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
         "doctrine/cache": "~1.6.2",
@@ -49,12 +51,12 @@
         "drupal/commerce_paypal": "~1.0",
         "drupal/commerce_pos": "^2.0",
         "drupal/commerce_recurring": "^1.0@beta",
-        "drupal/commerce_shipping": "~2.0-beta3",
+        "drupal/commerce_shipping": "2.x-dev",
         "drupal/config_inspector": "1.x-dev",
         "drupal/console": "^1.0.2",
         "drupal/contribute": "^1.0",
         "drupal/core": "^8.7.0",
-        "drupal/entity": "~1.0",
+        "drupal/entity": "^1.0",
         "drupal/facets": "^1.0-beta1",
         "drupal/facets_pretty_paths": "^1.0-alpha1",
         "drupal/field_group": "^3.0",
@@ -72,9 +74,11 @@
         "drupal/paragraphs": "^1.1",
         "drupal/pathauto": "^1",
         "drupal/physical": "^1.0@RC",
+        "drupal/purge": "^3.0@beta",
+        "drupal/redis": "^1.1",
         "drupal/search_api": "^1.0",
         "drupal/search_api_page": "^1.0-alpha11",
-        "drupal/search_api_solr": "^1.2",
+        "drupal/search_api_solr": "^3.0",
         "drupal/simple_gmap": "^1.3",
         "drupal/swiftmailer": "1.x-dev",
         "drupal/taxonomy_menu": "^3",
@@ -82,11 +86,11 @@
         "drupal/token": "^1",
         "drupal/twig_tweak": "^2.1",
         "drupal/userprotect": "^1",
+        "drupal/varnish_purge": "^1.11",
         "drupal/webform": "^5.0",
         "drush/drush": "^9.5",
-        "cboden/ratchet": "^0.4.1",
-        "ext-curl": "*",
         "phpdocumentor/reflection-docblock": "^2.0",
+        "twig/twig": "^1.38.2",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "zaporylie/composer-drupal-optimizations": "^1.0"
@@ -178,7 +182,7 @@
             },
             "drupal/commerce_shipping": {
                 "#2952457: Removing user's profile causes fatal error with PackerManager::packToShipments()":
-                "https://www.drupal.org/files/issues/2018-08-07/commerce_shipping-fix_fatal_error_on_missing_profile-2952457-10-D8.patch"
+                "https://www.drupal.org/files/issues/2019-02-06/2952457-23.SHOULD-FAIL.patch"
             },
             "drupal/commerce_pos": {
                 "Custom styling POS product searching":

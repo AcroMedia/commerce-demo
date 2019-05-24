@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - webform
+_core:
+id: webform_submission_make_unsticky_action
+label: 'Unstar/unflag submission'
+type: webform_submission
+plugin: webform_submission_make_unsticky_action
+configuration: {  }

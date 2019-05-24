@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_carousel_slide_title
+    - node.type.homepage_carousel_slide
+_core:
+id: node.homepage_carousel_slide.field_carousel_slide_title
+field_name: field_carousel_slide_title
+entity_type: node
+bundle: homepage_carousel_slide
+label: 'Carousel Slide Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

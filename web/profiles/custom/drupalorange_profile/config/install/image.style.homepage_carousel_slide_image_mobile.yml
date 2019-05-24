@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+name: homepage_carousel_slide_image_mobile
+label: 'Homepage Carousel Slide Image - Mobile'
+effects:
+  1e722073-2cdf-41c5-ab13-a9b557f51781:
+    uuid: 1e722073-2cdf-41c5-ab13-a9b557f51781
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 565

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+id: en
+label: English
+direction: ltr
+weight: 0
+locked: false

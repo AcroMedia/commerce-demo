@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+id: header
+label: 'Header Navigation'
+description: 'The header navigation.'
+locked: false

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+name: homepage_carousel_slide_image
+label: 'Homepage Carousel Slide Image'
+effects:
+  d3baba85-04ee-4671-a14c-10a79f8d687b:
+    uuid: d3baba85-04ee-4671-a14c-10a79f8d687b
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1600
+      height: 565

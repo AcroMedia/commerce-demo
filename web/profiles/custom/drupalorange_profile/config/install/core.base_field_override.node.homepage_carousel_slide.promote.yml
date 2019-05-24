@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.homepage_carousel_slide
+_core:
+id: node.homepage_carousel_slide.promote
+field_name: promote
+entity_type: node
+bundle: homepage_carousel_slide
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

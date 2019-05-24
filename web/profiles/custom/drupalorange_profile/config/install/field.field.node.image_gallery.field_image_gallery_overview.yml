@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_gallery_overview
+    - node.type.image_gallery
+  module:
+    - text
+_core:
+id: node.image_gallery.field_image_gallery_overview
+field_name: field_image_gallery_overview
+entity_type: node
+bundle: image_gallery
+label: Overview
+description: 'The Overview body text will be displayed above the Image Gallery. Example: A short introduction paragraph.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

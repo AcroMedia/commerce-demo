@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - footer
+      - header
+      - main
+    parent: 'main:'
+_core:
+name: 'Image Gallery'
+type: image_gallery
+description: 'An Image Gallery displaying multiple images in a rich media element.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

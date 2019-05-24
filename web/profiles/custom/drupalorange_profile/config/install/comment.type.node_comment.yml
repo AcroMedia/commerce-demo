@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+id: node_comment
+label: 'Node Comment'
+target_entity_type_id: node
+description: ''

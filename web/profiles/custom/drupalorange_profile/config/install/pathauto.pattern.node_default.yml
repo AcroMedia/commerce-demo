@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+id: node_default
+label: 'Node Default'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: -8
+relationships: {  }

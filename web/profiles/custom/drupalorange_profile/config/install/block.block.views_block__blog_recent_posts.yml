@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.blog
+  module:
+    - views
+  theme:
+    - orange_starter
+_core:
+id: views_block__blog_recent_posts
+theme: orange_starter
+region: blog_sidebar
+weight: 0
+provider: null
+plugin: 'views_block:blog-recent_posts'
+settings:
+  id: 'views_block:blog-recent_posts'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

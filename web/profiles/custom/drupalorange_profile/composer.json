@@ -1,0 +1,25 @@
+{
+  "name": "acromedia/drupalorange_profile",
+  "type": "drupal-profile",
+  "description": "Acro Media's Orange installation profile",
+  "homepage": "https://github.com/AcroMedia/drupalorange_profile",
+  "license": "GPL-2.0+",
+  "require": {
+    "drupal/admin_toolbar": "^1",
+    "drupal/field_group": "^1",
+    "drupal/google_analytics": "^2",
+    "drupal/honeypot": "^1",
+    "drupal/imce": "^1",
+    "drupal/menu_block": "^1",
+    "drupal/metatag": "^1",
+    "drupal/pathauto": "^1",
+    "drupal/simple_sitemap": "^2",
+    "drupal/taxonomy_menu": "^3",
+    "drupal/token": "^1",
+    "drupal/userprotect": "^1",
+    "drupal/webform": "^5",
+    "acromedia/orange_starter": "dev-8.x-1.x",
+    "acromedia/orange_framework": "dev-8.x-1.x",
+    "acromedia/acro_live_css": "dev-8.x-1.x"
+  }
+}

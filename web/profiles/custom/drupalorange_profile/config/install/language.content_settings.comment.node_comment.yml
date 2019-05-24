@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.node_comment
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+_core:
+id: comment.node_comment
+target_entity_type_id: comment
+target_bundle: node_comment
+default_langcode: site_default
+language_alterable: false

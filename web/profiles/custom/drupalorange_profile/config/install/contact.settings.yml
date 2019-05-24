@@ -1,0 +1,6 @@
+default_form: feedback
+flood:
+  limit: 5
+  interval: 3600
+user_default_enabled: false
+_core:

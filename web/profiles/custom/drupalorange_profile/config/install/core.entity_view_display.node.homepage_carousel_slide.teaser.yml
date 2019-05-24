@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.homepage_carousel_slide.field_carousel_slide_body
+    - field.field.node.homepage_carousel_slide.field_carousel_slide_image
+    - field.field.node.homepage_carousel_slide.field_carousel_slide_image_sml
+    - field.field.node.homepage_carousel_slide.field_carousel_slide_link
+    - field.field.node.homepage_carousel_slide.field_carousel_slide_title
+    - field.field.node.homepage_carousel_slide.field_weight
+    - node.type.homepage_carousel_slide
+  module:
+    - user
+_core:
+id: node.homepage_carousel_slide.teaser
+targetEntityType: node
+bundle: homepage_carousel_slide
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_carousel_slide_body: true
+  field_carousel_slide_image: true
+  field_carousel_slide_image_sml: true
+  field_carousel_slide_link: true
+  field_carousel_slide_title: true
+  field_weight: true
+  langcode: true

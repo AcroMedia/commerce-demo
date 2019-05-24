@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.image_gallery
+  module:
+    - text
+_core:
+id: node.image_gallery.body
+field_name: body
+entity_type: node
+bundle: image_gallery
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

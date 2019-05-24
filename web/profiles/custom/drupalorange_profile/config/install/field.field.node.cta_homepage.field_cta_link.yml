@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cta_link
+    - node.type.cta_homepage
+  module:
+    - link
+_core:
+id: node.cta_homepage.field_cta_link
+field_name: field_cta_link
+entity_type: node
+bundle: cta_homepage
+label: 'CTA Link'
+description: 'The link you want to use for this CTA.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

@@ -1,0 +1,8 @@
+definitions:
+  contact__site_page:
+    enabled: false
+    menu_name: footer
+    parent: ''
+    weight: -48
+    expanded: false
+_core:

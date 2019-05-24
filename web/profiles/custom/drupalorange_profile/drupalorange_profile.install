@@ -1,0 +1,240 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the drupalorange_profile installation profile.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\user\RoleInterface;
+use Drupal\node\Entity\Node;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function drupalorange_profile_install() {
+  // First, do everything in standard profile.
+  include_once DRUPAL_ROOT . '/core/profiles/standard/standard.install';
+  standard_install();
+
+  // Create Homepage page.
+  $node_homepage = Node::create([
+    'type' => 'page',
+    'uid' => 1,
+    'revision' => 0,
+    'status' => TRUE,
+    'promote' => 0,
+    'created' => time(),
+    'langcode' => 'en',
+    'title' => 'Welcome',
+  ]);
+
+  $node_homepage->set('body', [
+    'value' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque placerat dictum. <a href="/">Phasellus commodo</a> nisl eu enim fringilla, consequat venenatis lectus tempor. Morbi semper eget tortor eget porta. In nec nibh ex. Sed eu sagittis mi, non feugiat ex. Mauris tristique cursus ipsum in laoreet.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque placerat dictum. Phasellus commodo nisl eu enim fringilla, consequat venenatis lectus tempor. Morbi semper eget tortor eget porta. In nec nibh ex. Sed eu sagittis mi, non feugiat ex. Mauris tristique cursus ipsum in laoreet.</p>',
+    'format' => 'html'
+  ]);
+
+  $node_homepage->save();
+
+  $source_homepage = '/node/' . $node_homepage->get('nid')->value;
+  \Drupal::service('path.alias_storage')->save($source_homepage, '/homepage', 'en');
+
+  // Set Drupal front to homepage page.
+  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/homepage')->save(TRUE);
+
+  $menu_link_homepage = MenuLinkContent::create([
+    'title' => 'Home',
+    'link' => ['uri' => 'internal:/node/' . $node_homepage->get('nid')->value],
+    'menu_name' => 'main',
+    'expanded' => FALSE,
+    'weight' => 0,
+  ]);
+  $menu_link_homepage->save();
+
+  // Create 404 page.
+  $node_404 = Node::create([
+    'type' => 'page',
+    'uid' => 1,
+    'revision' => 0,
+    'status' => TRUE,
+    'promote' => 0,
+    'created' => time(),
+    'langcode' => 'en',
+    'title' => 'Page Not Found',
+  ]);
+
+  $node_404->set('body', [
+    'value' => '<p>The requested document was not found on our server.</p><p>If you are using a bookmarked page, the page may have been deleted or moved. If you believe you have received this message in error, please <a href="/contact-us">contact us</a> regarding the page. Please remember to include the URL.</p>',
+    'format' => 'html'
+  ]);
+
+  $node_404->save();
+
+  $source_404 = '/node/' . $node_404->get('nid')->value;
+  \Drupal::service('path.alias_storage')->save($source_404, '/page-not-found', 'en');
+
+  // Create 403 page.
+  $node_403 = Node::create([
+    'type' => 'page',
+    'uid' => 1,
+    'revision' => 0,
+    'status' => TRUE,
+    'promote' => 0,
+    'created' => time(),
+    'langcode' => 'en',
+    'title' => 'Access Denied',
+  ]);
+
+  $node_403->set('body', [
+    'value' => '<p>Access to this page has been denied.</p><p>If you are using a bookmarked page, the page may have been deleted or moved. If you believe you have received this message in error, please <a href="/contact-us">contact us</a> regarding the page. Please remember to include the URL.</p>',
+    'format' => 'html'
+  ]);
+
+  $node_403->save();
+
+  $source_403 = '/node/' . $node_403->get('nid')->value;
+  \Drupal::service('path.alias_storage')->save($source_403, '/access-denied', 'en');
+
+  // Create Blog page.
+  $node_blog = Node::create([
+    'type' => 'page',
+    'uid' => 1,
+    'revision' => 0,
+    'status' => TRUE,
+    'promote' => 0,
+    'created' => time(),
+    'langcode' => 'en',
+    'title' => 'Blog',
+  ]);
+
+  $node_blog->set('body', [
+    'value' => '',
+    'format' => 'html'
+  ]);
+
+  $node_blog->save();
+
+  $source_blog = '/node/' . $node_blog->get('nid')->value;
+  \Drupal::service('path.alias_storage')->save($source_blog, '/blog', 'en');
+
+  $menu_link_blog = MenuLinkContent::create([
+    'title' => 'Blog',
+    'link' => ['uri' => 'internal:/node/' . $node_blog->get('nid')->value],
+    'menu_name' => 'main',
+    'expanded' => FALSE,
+    'weight' => 1,
+  ]);
+  $menu_link_blog->save();
+
+  // Create Contact Us page.
+  $node_contact_us = Node::create([
+    'type' => 'page',
+    'uid' => 1,
+    'revision' => 0,
+    'status' => TRUE,
+    'promote' => 0,
+    'created' => time(),
+    'langcode' => 'en',
+    'title' => 'Contact Us',
+  ]);
+
+  $node_contact_us->set('body', [
+    'value' => '<h3>Questions? Send us a message!</h3><p>All fields required, unless indicated.</p>',
+    'format' => 'html'
+  ]);
+  $node_contact_us->set('field_attach_webform', [
+    'target_id' => 'contact',
+    'status' => 'open'
+  ]);
+
+  $node_contact_us->save();
+
+  $source_contact_us = '/node/' . $node_contact_us->get('nid')->value;
+  \Drupal::service('path.alias_storage')->save($source_contact_us, '/contact-us', 'en');
+
+  $menu_link_contact_us = MenuLinkContent::create([
+    'title' => 'Contact Us',
+    'link' => ['uri' => 'internal:/node/' . $node_contact_us->get('nid')->value],
+    'menu_name' => 'main',
+    'expanded' => FALSE,
+    'weight' => 2,
+  ]);
+  $menu_link_contact_us->save();
+
+  $menu_link_header_contact_us = MenuLinkContent::create([
+    'title' => 'Contact Us',
+    'link' => ['uri' => 'internal:/node/' . $node_contact_us->get('nid')->value],
+    'menu_name' => 'header',
+    'expanded' => FALSE,
+    'weight' => 0,
+  ]);
+  $menu_link_header_contact_us->save();
+
+  $menu_link_footer_contact_us = MenuLinkContent::create([
+    'title' => 'Contact Us',
+    'link' => ['uri' => 'internal:/node/' . $node_contact_us->get('nid')->value],
+    'menu_name' => 'footer',
+    'expanded' => FALSE,
+    'weight' => 0,
+  ]);
+  $menu_link_footer_contact_us->save();
+
+  // Create Privacy Policy page.
+  $node_privacy_policy = Node::create([
+    'type' => 'page',
+    'uid' => 1,
+    'revision' => 0,
+    'status' => TRUE,
+    'promote' => 0,
+    'created' => time(),
+    'langcode' => 'en',
+    'title' => 'Privacy Policy',
+  ]);
+
+  $node_privacy_policy->set('body', [
+    'value' => "<p>We recognize that you may be concerned about our use and disclosure of your personal information. Your privacy is very important to us, and the following will inform you of the information that we may collect from you, and how it is used. By using our Web site, you are accepting the practices described in this policy.</p> <h2>1. What information are you collecting?</h2> <p>We collect personal information that can be used to identify you individually, such as your name, mailing address, phone number, email address, credit card number, and financial information.</p> <p>We also collect non-personal information, such as a domain name and IP Address. The domain name and IP address reveal nothing personal about you other than the IP address from which you have accessed our site. We also collect information about the type of Internet browser you are using, operating system, as well as which of our Web pages you have accessed.</p> <h2>2. How and when do you collect this information?</h2> <p>We collect personal information from you when you provide it to us. For example, if you purchase a product sold through our online store, we may collect your name, mailing address, telephone number, credit card number, and email address. If you create an account, we may collect your name, mailing address, email address, and other information that we request in the registration process.</p> <p>If you communicate with us regarding our Web site or our services, we will collect any information that you provide to us in any such communication.</p> <h2>3. How is my information used?</h2> <p>We use personal information primarily for our own internal purposes, such as providing, maintaining, evaluating, and improving our services and Web site, fulfilling requests for information, producing and shipping the products that you order, and providing customer support.</p> <p>We use non-personal information for internal purposes, such as maintaining, evaluating, and improving our services and Web site. From time to time we may also use non-personal information for online marketing efforts.</p> <h2>4. Security</h2> <p>The security of your personal information is important to us. When you enter sensitive information such as a credit card number on our registration or order forms, we encrypt that information using secure socket layer technology (SSL).</p> <p>We follow generally accepted industry standards to protect the Personal Information submitted to us, both during transmission and once we receive it. However, no method of transmission over the Internet, or method of electronic storage, is 100% secure. Therefore, while we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p> <h2>5. Do you use cookies?</h2> <p>Yes. A cookie is a small piece of data that is sent to your Internet browser from a Web server and stored on your computer's hard drive. Cookies are often used to provide you with a customized experience. At no time is any personal information stored within one of our cookies. Accepting cookies through your browser is a personal choice. You can still enjoy our Web site if you choose not to accept cookies.</p> <h2>6. Will you disclose the information you collect to outside third parties?</h2> <p>We will not sell or otherwise provide the information we collect to outside third parties for the purpose of direct or indirect mass email marketing.</p> <p>We will disclose personal information and/or an IP address, when required by law or in the good-faith belief that such action is necessary to:</p> <ul> <li>Cooperate with the investigations of purported unlawful activities and conform to the edicts of the law or comply with legal process served on our company,</li> <li>Protect and defend the rights or property of our Web site and related properties</li> <li>Identify persons who may be violating the law, the rights of third parties, or otherwise misusing the our Web site or its related properties</li> </ul> <h2>7. Does this Privacy Policy apply when I access third party Web sites?</h2> <p>You may be able to access third-party Web sites directly from our Web site. This Privacy Policy does not apply when you access such Web sites. We cannot control how third parties may use personal information you disclose to them, so you should carefully review the privacy policy of any third-party Web site you visit before using it or disclosing your personal information to its provider.</p> <h2>8. What safeguards are in place?</h2> <p>We are obligated to protect your personal information by making reasonable security arrangements against such risks as unauthorized access, use, collection, disclosure or disposal. Security measures have been integrated into the design, implementation and day-to-day operating practices as part of our commitment to protect the personal information it holds.</p> <h2>9. What else should I know about my privacy when online?</h2> <p>Please keep in mind that whenever you voluntarily disclose personal information online - for example through e-mail, discussion boards, or elsewhere - that information can be collected and used by others. In short, if you post personal information online that is accessible to the public, you may receive unsolicited messages from other parties in return.</p> <p>Ultimately, you are solely responsible for maintaining the secrecy of your personal information. Please be careful and responsible whenever you are online.</p> <p>Consent to this Agreement</p> <p>By using this Web site, you consent to the collection and use of information as specified above. If we make changes to our Privacy Policy, we will post those changes on this page. Please review this page frequently to remain up-to-date with the information we collect, how we use it, and under what circumstances we disclose it. You must review the new Privacy Policy carefully to make sure you understand our practices and procedures.</p>",
+    'format' => 'html'
+  ]);
+
+  $node_privacy_policy->save();
+
+  $source_privacy_policy = '/node/' . $node_privacy_policy->get('nid')->value;
+  \Drupal::service('path.alias_storage')->save($source_privacy_policy, '/privacy-policy', 'en');
+
+  $menu_link_privacy_policy = MenuLinkContent::create([
+    'title' => 'Privacy Policy',
+    'link' => ['uri' => 'internal:/node/' . $node_privacy_policy->get('nid')->value],
+    'menu_name' => 'footer',
+    'expanded' => FALSE,
+    'weight' => 1,
+  ]);
+  $menu_link_privacy_policy->save();
+
+  // Social Media links.
+  $menu_link_social_facebook = MenuLinkContent::create([
+    'title' => 'Facebook',
+    'link' => ['uri' => 'http://www.facebook.com'],
+    'menu_name' => 'social-media',
+    'expanded' => FALSE,
+    'weight' => 0,
+  ]);
+  $menu_link_social_facebook->save();
+
+  $menu_link_social_twitter = MenuLinkContent::create([
+    'title' => 'Twitter',
+    'link' => ['uri' => 'http://www.twitter.com'],
+    'menu_name' => 'social-media',
+    'expanded' => FALSE,
+    'weight' => 1,
+  ]);
+  $menu_link_social_twitter->save();
+
+  // Disable the contact link in the footer menu.
+  $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+  $menu_link_manager->updateDefinition('contact.site_page', array('enabled' => FALSE));
+}

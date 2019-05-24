@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.homepage_carousel_slide
+_core:
+id: node.homepage_carousel_slide
+target_entity_type_id: node
+target_bundle: homepage_carousel_slide
+default_langcode: site_default
+language_alterable: false

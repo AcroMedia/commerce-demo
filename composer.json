@@ -191,6 +191,10 @@
             "drupal/core": {
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
                 "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch"
+            },
+            "drupal/paragraphs" : {
+                "#2907094: Make paragraphs module working with field_group version 3.x":
+                "https://www.drupal.org/files/issues/2907094_7_field_group_support.patch"
             }
         }
     }

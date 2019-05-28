@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c63b04cd5b1cdd72eee3df18144a452",
+    "content-hash": "9d2e8e5a7e49ba5f1e43a4fe8f322c95",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",
@@ -5625,6 +5625,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "#2907094: Make paragraphs module working with field_group version 3.x": "https://www.drupal.org/files/issues/2907094_7_field_group_support.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

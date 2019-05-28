@@ -27,6 +27,7 @@ use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\comment\Entity\Comment;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().

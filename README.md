@@ -57,6 +57,7 @@ __To setup the demo__
   - Site: `yoursite.com/admin/config/system/site-information`
   - Stores (each store): `yoursite.com/admin/commerce/config/stores`
   - Order types (each type): `yoursite.com/admin/commerce/config/order-types`
+  - Webforms (each form): `yoursite.com/admin/structure/webform`
 
 ## Issues
 

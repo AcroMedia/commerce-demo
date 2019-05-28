@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28b4b850384e9f4b5e0be7d76b2286a0",
+    "content-hash": "313e60a6c8d42f9be9e7ef5777c7d2eb",
     "packages": [
         {
             "name": "DoersGuild/jQuery.print",

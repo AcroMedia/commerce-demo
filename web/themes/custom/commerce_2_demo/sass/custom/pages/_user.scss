@@ -1,15 +1,64 @@
 /**
- * User.
+ * User Account.
+ *
+ * NOTE: Order table view styling is in _order.scss.
  */
-.path-user {
-  // Orders.
-  .field--type-email,
-  .field--name-shipping-method,
-  .field--name-placed {
-    padding-bottom: 20px;
+
+// Dashboard link.
+.dashboard__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media (min-width: $screen-lg-min) {
+    display: block;
   }
 
-  // Address book.
+  .dashboard__account-link {
+    flex: 0 100%;
+    width: 100%;
+    padding: 20px 25px 20px;
+    margin: 0 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    color: $c-body;
+    @include smooth-transition();
+
+    &:hover,
+    &:focus {
+      border: 1px solid $c-link;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      flex: 0 48%;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      display: inline-block;
+      width: auto;
+      min-width: 180px;
+      margin: 0 20px 20px 0;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    .dashboard__account-link__title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .dashboard__account-link__description {
+      font-size: 14px;
+    }
+  }
+}
+
+// Address book.
+.path-user {
   .view-profiles {
     padding-top: 20px;
 

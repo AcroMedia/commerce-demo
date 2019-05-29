@@ -5,6 +5,7 @@
  * Functions to support theming.
  */
 
+use Drupal\Core\Render\Markup;
 use Drupal\node\NodeInterface;
 use Drupal\commerce_product\Entity\ProductAttributeValue;
 use Drupal\image\Entity\ImageStyle;
@@ -704,4 +705,22 @@ function commerce_2_demo_preprocess_swiftmailer(&$variables) {
 
   $variables['base_path'] = base_path();
   $variables['site_path'] = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+}
+
+/**
+ * Implements hook_preprocess_user(&$variables).
+ */
+function orange_ecom_starter_preprocess_user(&$variables) {
+  // Base path variable.
+  $variables['base_path'] = base_path();
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task(&$variables).
+ */
+function commerce_2_demo_preprocess_menu_local_task(&$variables) {
+  $url = $variables['link']['#url'];
+  if ($url instanceof Url && $url->getRouteName() == 'entity.user.canonical') {
+    $variables["link"]["#title"] = t('Dashboard');
+  }
 }

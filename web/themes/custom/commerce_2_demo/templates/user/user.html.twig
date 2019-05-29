@@ -1,0 +1,61 @@
+{#
+/**
+ * @file
+ * Theme override to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ */
+#}
+<article{{ attributes.addClass('profile dashboard') }}>
+  <h1 class="page-title">{{ 'Dashboard'|t }}</h1>
+
+  {{ drupal_view('user_orders_uhplus', 'dashboard', user.id ) }}
+
+  <div class="dashboard__links">
+    {% if user.hasPermission('userprotect.account.edit') %}
+    <a href="{{ base_path }}/user/{{ user.id }}/edit" class="dashboard__account-link dashboard__account-link--account-details">
+      <div class="dashboard__account-link__title">{{ 'Account details'|t }}</div>
+      <div class="dashboard__account-link__description">{{ 'Update password and other stuff'|t }}</div>
+    </a>
+    {% endif %}
+    {% if user.hasPermission('manage own commerce_payment_method') %}
+    <a href="{{ base_path }}/user/{{ user.id }}/payment-methods" class="dashboard__account-link dashboard__account-link--payment-methods">
+      <div class="dashboard__account-link__title">{{ 'Payment methods'|t }}</div>
+      <div class="dashboard__account-link__description">{{ 'Manage your payment types'|t }}</div>
+    </a>
+    {% endif %}
+    {% if user.hasPermission('view own commerce_order') %}
+    <a href="{{ base_path }}/user/{{ user.id }}/orders" class="dashboard__account-link dashboard__account-link--orders">
+      <div class="dashboard__account-link__title">{{ 'Orders'|t }}</div>
+      <div class="dashboard__account-link__description">{{ 'Order history'|t }}</div>
+    </a>
+    {% endif %}
+    {% if user.hasPermission('view own profile') %}
+    <a href="{{ base_path }}/user/{{ user.id }}/customer" class="dashboard__account-link dashboard__account-link--address-book">
+      <div class="dashboard__account-link__title">{{ 'Address book'|t }}</div>
+      <div class="dashboard__account-link__description">{{ 'Edit shipping & billing addresses'|t }}</div>
+    </a>
+    {% endif %}
+  </div>
+
+  <div class="dashboard__footer-message">
+    {% trans %}
+    <h3>Need a hand?</h3>
+    <p>
+      Check out our: <a href="{{ base_path }}/faq">frequently asked questions</a><br>
+      Email us: <a href="mailto:customerservice@dexample.com">customerservice@example.com</a><br>
+      Call us toll free: <a href="tel:18005555555">1-800-555-5555</a>
+    </p>
+    {% endtrans %}
+  </div>
+</article>

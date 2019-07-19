@@ -30,7 +30,6 @@ function main () {
   # Time to do some work.
   cd $HOME/www/demoplus/web
   drush updb -y
-  drush entup -y
   drush cr
 }
 

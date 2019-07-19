@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+.DS_Store
+.idea
+
+# Test
+tests/reports
+tests/results
+.nyc_output
+coverage
+cypress/videos
+cypress/screenshots

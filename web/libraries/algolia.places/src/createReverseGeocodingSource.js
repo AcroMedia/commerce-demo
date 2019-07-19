@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _configure = _interopRequireDefault(require("./configure"));
 
@@ -13,7 +13,7 @@ var _version = _interopRequireDefault(require("./version"));
 
 var _defaultTemplates = _interopRequireDefault(require("./defaultTemplates"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -54,7 +54,7 @@ var createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
       aroundLatLng = _ref.aroundLatLng,
       getRankingInfo = _ref.getRankingInfo,
       _ref$formatInputValue = _ref.formatInputValue,
-      formatInputValue = _ref$formatInputValue === void 0 ? _defaultTemplates.default.value : _ref$formatInputValue,
+      formatInputValue = _ref$formatInputValue === void 0 ? _defaultTemplates["default"].value : _ref$formatInputValue,
       _ref$language = _ref.language,
       language = _ref$language === void 0 ? navigator.language.split('-')[0] : _ref$language,
       _ref$onHits = _ref.onHits,
@@ -63,10 +63,11 @@ var createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
       onError = _ref$onError === void 0 ? function (e) {
     throw e;
   } : _ref$onError,
-      onRateLimitReached = _ref.onRateLimitReached;
+      onRateLimitReached = _ref.onRateLimitReached,
+      onInvalidCredentials = _ref.onInvalidCredentials;
   var placesClient = algoliasearch.initPlaces(appId, apiKey, clientOptions);
-  placesClient.as.addAlgoliaAgent("Algolia Places ".concat(_version.default));
-  var configuration = (0, _configure.default)({
+  placesClient.as.addAlgoliaAgent("Algolia Places ".concat(_version["default"]));
+  var configuration = (0, _configure["default"])({
     apiKey: apiKey,
     appId: appId,
     hitsPerPage: hitsPerPage,
@@ -76,7 +77,8 @@ var createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
     formatInputValue: formatInputValue,
     onHits: onHits,
     onError: onError,
-    onRateLimitReached: onRateLimitReached
+    onRateLimitReached: onRateLimitReached,
+    onInvalidCredentials: onInvalidCredentials
   });
   var params = filterApplicableParams(configuration.params);
   var controls = configuration.controls;
@@ -93,7 +95,7 @@ var createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
       aroundLatLng: finalAroundLatLng
     })).then(function (content) {
       var hits = content.hits.map(function (hit, hitIndex) {
-        return (0, _formatHit.default)({
+        return (0, _formatHit["default"])({
           formatInputValue: controls.formatInputValue,
           hit: hit,
           hitIndex: hitIndex,
@@ -107,8 +109,11 @@ var createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
         rawAnswer: content
       });
       return hits;
-    }).then(cb).catch(function (e) {
-      if (e.statusCode === 429) {
+    }).then(cb)["catch"](function (e) {
+      if (e.statusCode === 403 && e.message === 'Invalid Application-ID or API key') {
+        controls.onInvalidCredentials();
+        return;
+      } else if (e.statusCode === 429) {
         controls.onRateLimitReached();
         return;
       }
@@ -118,7 +123,7 @@ var createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
   };
 
   searcher.configure = function (partial) {
-    var updated = (0, _configure.default)(_objectSpread({}, params, controls, partial));
+    var updated = (0, _configure["default"])(_objectSpread({}, params, controls, partial));
     params = filterApplicableParams(updated.params);
     controls = updated.controls;
     return searcher;
@@ -128,4 +133,4 @@ var createReverseGeocodingSource = function createReverseGeocodingSource(_ref) {
 };
 
 var _default = createReverseGeocodingSource;
-exports.default = _default;
+exports["default"] = _default;

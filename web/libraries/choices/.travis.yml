@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - 10
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+install:
+  - npm ci
+jobs:
+  include:
+    - stage: Judging bundle size
+      script: npm run bundlesize
+
+    - stage: Linting code
+      script: npm run lint
+
+    - stage: Running tests
+      script: npm run test

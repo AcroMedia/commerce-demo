@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = createAutocompleteSource;
+exports["default"] = createAutocompleteSource;
 
 var _configure = _interopRequireDefault(require("./configure"));
 
@@ -11,7 +11,7 @@ var _formatHit = _interopRequireDefault(require("./formatHit"));
 
 var _version = _interopRequireDefault(require("./version"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -46,10 +46,11 @@ function createAutocompleteSource(_ref) {
     throw e;
   } : _ref$onError,
       onRateLimitReached = _ref.onRateLimitReached,
+      onInvalidCredentials = _ref.onInvalidCredentials,
       type = _ref.type;
   var placesClient = algoliasearch.initPlaces(appId, apiKey, clientOptions);
-  placesClient.as.addAlgoliaAgent("Algolia Places ".concat(_version.default));
-  var configuration = (0, _configure.default)({
+  placesClient.as.addAlgoliaAgent("Algolia Places ".concat(_version["default"]));
+  var configuration = (0, _configure["default"])({
     hitsPerPage: hitsPerPage,
     type: type,
     countries: countries,
@@ -65,7 +66,8 @@ function createAutocompleteSource(_ref) {
     useDeviceLocation: useDeviceLocation,
     onHits: onHits,
     onError: onError,
-    onRateLimitReached: onRateLimitReached
+    onRateLimitReached: onRateLimitReached,
+    onInvalidCredentials: onInvalidCredentials
   });
   var params = configuration.params;
   var controls = configuration.controls;
@@ -90,7 +92,7 @@ function createAutocompleteSource(_ref) {
 
     return placesClient.search(controls.computeQueryParams(searchParams)).then(function (content) {
       var hits = content.hits.map(function (hit, hitIndex) {
-        return (0, _formatHit.default)({
+        return (0, _formatHit["default"])({
           formatInputValue: controls.formatInputValue,
           hit: hit,
           hitIndex: hitIndex,
@@ -104,8 +106,11 @@ function createAutocompleteSource(_ref) {
         rawAnswer: content
       });
       return hits;
-    }).then(cb).catch(function (e) {
-      if (e.statusCode === 429) {
+    }).then(cb)["catch"](function (e) {
+      if (e.statusCode === 403 && e.message === 'Invalid Application-ID or API key') {
+        controls.onInvalidCredentials();
+        return;
+      } else if (e.statusCode === 429) {
         controls.onRateLimitReached();
         return;
       }
@@ -115,7 +120,7 @@ function createAutocompleteSource(_ref) {
   }
 
   searcher.configure = function (partial) {
-    var updated = (0, _configure.default)(_objectSpread({}, params, controls, partial));
+    var updated = (0, _configure["default"])(_objectSpread({}, params, controls, partial));
     params = updated.params;
     controls = updated.controls;
 

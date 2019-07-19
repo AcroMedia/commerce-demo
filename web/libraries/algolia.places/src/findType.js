@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = findType;
+exports["default"] = findType;
 
 function findType(tags) {
   var types = {

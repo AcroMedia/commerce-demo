@@ -1,0 +1,132 @@
+{
+  "name": "choices.js",
+  "version": "7.0.0",
+  "description": "A vanilla JS customisable text input/select box plugin",
+  "main": "./public/assets/scripts/choices.min.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "start": "run-p js:watch css:watch",
+    "build": "npm run js:build && npm run css:build",
+    "lint": "eslint $(find src -name '*.js')",
+    "coverage": "nyc npm run test:unit",
+    "bundlesize": "bundlesize",
+    "cypress:run": "$(npm bin)/cypress run",
+    "cypress:open": "$(npm bin)/cypress open",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "mocha --require ./config/jsdom.js --require @babel/register $(find src -name '*.test.js') --exit",
+    "test:unit:watch": "npm run test:unit -- --watch --inspect=5556",
+    "test:e2e": "run-p --race start cypress:run",
+    "js:watch": "NODE_ENV=development node server.js",
+    "js:build": "webpack --config webpack.config.prod.js",
+    "css:watch": "nodemon -e scss -x \"npm run css:build\"",
+    "css:build": "run-p css:sass css:prefix css:min",
+    "css:sass": "node-sass --output-style expanded --include-path  scss src/styles/base.scss public/assets/styles/base.css && node-sass --output-style expanded --include-path scss src/styles/choices.scss public/assets/styles/choices.css",
+    "css:prefix": "postcss --use autoprefixer -b 'last 2 versions' public/assets/styles/*.css -d public/assets/styles",
+    "css:min": "csso public/assets/styles/base.css public/assets/styles/base.min.css && csso public/assets/styles/choices.css public/assets/styles/choices.min.css",
+    "bump-cache": "node bump-cache.js --current $npm_package_version",
+    "deploy": "git subtree push --prefix public origin gh-pages",
+    "postversion": "npm run js:build && npm run bump-cache",
+    "prepush": "run-p lint test:unit && npm run bundlesize"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jshjohnson/Choices.git"
+  },
+  "author": "Josh Johnson",
+  "license": "MIT",
+  "files": [
+    "public/assets/scripts",
+    "public/assets/styles",
+    "src",
+    "types"
+  ],
+  "bugs": {
+    "url": "https://github.com/jshjohnson/Choices/issues"
+  },
+  "homepage": "https://github.com/jshjohnson/Choices#readme",
+  "keywords": [
+    "customisable",
+    "input",
+    "select",
+    "vanilla",
+    "plugin",
+    "js"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/plugin-transform-spread": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "autoprefixer": "^6.3.3",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^8.0.5",
+    "bundlesize": "^0.17.1",
+    "chai": "^4.2.0",
+    "csso": "^1.8.2",
+    "cypress": "^3.1.5",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-prettier": "^2.10.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-cypress": "^2.2.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-prettier": "^2.7.0",
+    "eslint-plugin-react": "^7.12.4",
+    "express": "^4.16.4",
+    "husky": "^0.14.3",
+    "jsdom": "^11.12.0",
+    "mocha": "^5.2.0",
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.18.10",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^11.9.0",
+    "opn": "^5.4.0",
+    "postcss-cli": "^2.5.1",
+    "prettier": "^1.16.4",
+    "sinon": "^2.4.0",
+    "unminified-webpack-plugin": "^2.0.0",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-middleware": "^3.5.2",
+    "webpack-hot-middleware": "^2.24.3",
+    "whatwg-fetch": "^1.0.0",
+    "wrapper-webpack-plugin": "^2.1.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "deepmerge": "^2.2.1",
+    "fuse.js": "3.4.2",
+    "redux": "^3.3.1"
+  },
+  "npmName": "choices.js",
+  "npmFileMap": [
+    {
+      "files": [
+        "public/assets/scripts/*",
+        "public/assets/styles/*",
+        "src/icons/*"
+      ]
+    }
+  ],
+  "nyc": {
+    "include": [
+      "src/scripts/**/**/*.js"
+    ],
+    "exclude": [
+      "src/scripts/**/**/*.test.js"
+    ]
+  },
+  "bundlesize": [
+    {
+      "path": "public/assets/scripts/choices.min.js",
+      "maxSize": "25 kB"
+    },
+    {
+      "path": "public/assets/styles/choices.min.css",
+      "maxSize": "2 kB"
+    }
+  ]
+}

@@ -6,9 +6,9 @@
 /* eslint-disable import/no-commonjs */
 require('./src/navigatorLanguage');
 
-var createAutocompleteDataset = require('./src/createAutocompleteDataset').default;
+var createAutocompleteDataset = require('./src/createAutocompleteDataset')["default"];
 
-var css = require('./src/places.css');
+var css = require('./src/places.css')["default"];
 
 var insertCss = require('insert-css');
 

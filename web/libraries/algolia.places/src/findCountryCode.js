@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = findCountryCode;
+exports["default"] = findCountryCode;
 
 function findCountryCode(tags) {
   for (var tagIndex = 0; tagIndex < tags.length; tagIndex++) {

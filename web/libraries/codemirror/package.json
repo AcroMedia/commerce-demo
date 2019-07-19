@@ -1,28 +1,28 @@
 {
-  "_from": "codemirror@5.44.0",
-  "_id": "codemirror@5.44.0",
+  "_from": "codemirror@5.47.0",
+  "_id": "codemirror@5.47.0",
   "_inBundle": false,
-  "_integrity": "sha512-3l42syTNakCdCQuYeZJXTyxina6Y9i4V0ighSJXNCQtRbaCN76smKKLu1ZHPHQon3rnzC7l4i/0r4gp809K1wg==",
+  "_integrity": "sha512-kV49Fr+NGFHFc/Imsx6g180hSlkGhuHxTSDDmDHOuyln0MQYFLixDY4+bFkBVeCEiepYfDimAF/e++9jPJk4QA==",
   "_location": "/codemirror",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "codemirror@5.44.0",
+    "raw": "codemirror@5.47.0",
     "name": "codemirror",
     "escapedName": "codemirror",
-    "rawSpec": "5.44.0",
+    "rawSpec": "5.47.0",
     "saveSpec": null,
-    "fetchSpec": "5.44.0"
+    "fetchSpec": "5.47.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.44.0.tgz",
-  "_shasum": "80dc2a231eeb7aab25ec2405cdca37e693ccf9cc",
-  "_spec": "codemirror@5.44.0",
-  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.nfNtHMBE",
+  "_resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.47.0.tgz",
+  "_shasum": "c13a521ae5660d3acc655af252f4955065293789",
+  "_spec": "codemirror@5.47.0",
+  "_where": "/private/var/folders/9p/clj0fc754y35m01btd46043c0000gn/T/tmp.j6FoFc5x",
   "author": {
     "name": "Marijn Haverbeke",
     "email": "marijnh@gmail.com",
@@ -71,6 +71,9 @@
     },
     {
       "name": "Adán Lobato"
+    },
+    {
+      "name": "Aditya Toshniwal"
     },
     {
       "name": "Adrian Aichner"
@@ -502,6 +505,9 @@
       "name": "ciaranj"
     },
     {
+      "name": "clso"
+    },
+    {
       "name": "CodeAnimal"
     },
     {
@@ -622,6 +628,9 @@
       "name": "Deep Thought"
     },
     {
+      "name": "Denis Ovsienko"
+    },
+    {
       "name": "Devin Abbott"
     },
     {
@@ -629,6 +638,9 @@
     },
     {
       "name": "Dick Choi"
+    },
+    {
+      "name": "Diego Fernandez"
     },
     {
       "name": "dignifiedquire"
@@ -703,10 +715,16 @@
       "name": "Eric Bogard"
     },
     {
+      "name": "Erik Demaine"
+    },
+    {
       "name": "Erik Welander"
     },
     {
       "name": "eustas"
+    },
+    {
+      "name": "Evan Minsk"
     },
     {
       "name": "Fabien Dubosson"
@@ -757,10 +775,10 @@
       "name": "Florian Felten"
     },
     {
-      "name": "ForbesLindesay"
+      "name": "Forbes Lindesay"
     },
     {
-      "name": "Forbes Lindesay"
+      "name": "ForbesLindesay"
     },
     {
       "name": "Ford_Lawnmower"
@@ -882,6 +900,9 @@
     },
     {
       "name": "Hans Engel"
+    },
+    {
+      "name": "Hanzhao Deng"
     },
     {
       "name": "Harald Schilly"
@@ -1236,6 +1257,9 @@
       "name": "Kazuhito Hokamura"
     },
     {
+      "name": "Kees de Kooter"
+    },
+    {
       "name": "Kenan Christian Dimas"
     },
     {
@@ -1320,6 +1344,9 @@
       "name": "Lemmon"
     },
     {
+      "name": "Leo Baschy"
+    },
+    {
       "name": "Leonid Khachaturov"
     },
     {
@@ -1363,6 +1390,9 @@
     },
     {
       "name": "Luciano Longo"
+    },
+    {
+      "name": "Luciano Santana"
     },
     {
       "name": "Lu Fangjian"
@@ -1533,6 +1563,9 @@
       "name": "Max Schaefer"
     },
     {
+      "name": "Max Wu"
+    },
+    {
       "name": "Max Xiantu"
     },
     {
@@ -1660,10 +1693,10 @@
       "name": "mtaran-google"
     },
     {
-      "name": "Mu-An Chiou"
+      "name": "Mu-An ✌️ Chiou"
     },
     {
-      "name": "Mu-An ✌️ Chiou"
+      "name": "Mu-An Chiou"
     },
     {
       "name": "mzabuawala"
@@ -1758,6 +1791,9 @@
     },
     {
       "name": "Norman Rzepka"
+    },
+    {
+      "name": "Nouzbe"
     },
     {
       "name": "Oleksandr Yakovenko"
@@ -2021,6 +2057,9 @@
       "name": "Sascha Peilicke"
     },
     {
+      "name": "Sasha Varlamov"
+    },
+    {
       "name": "satamas"
     },
     {
@@ -2040,6 +2079,9 @@
     },
     {
       "name": "Scott Aikin"
+    },
+    {
+      "name": "Scott Feeney"
     },
     {
       "name": "Scott Goodhew"
@@ -2228,6 +2270,9 @@
       "name": "Thomas Kluyver"
     },
     {
+      "name": "thomasmaclean"
+    },
+    {
       "name": "Thomas Schmid"
     },
     {
@@ -2282,6 +2327,9 @@
       "name": "tophf"
     },
     {
+      "name": "Torgeir Thoresen"
+    },
+    {
       "name": "totalamd"
     },
     {
@@ -2304,6 +2352,9 @@
     },
     {
       "name": "Tyler Long"
+    },
+    {
+      "name": "Vadim Dyachenko"
     },
     {
       "name": "Vadzim Ramanenka"
@@ -2355,6 +2406,9 @@
     },
     {
       "name": "Will Dean"
+    },
+    {
+      "name": "William Desportes"
     },
     {
       "name": "William Jamieson"
@@ -2456,5 +2510,5 @@
     "watch": "rollup -w -c"
   },
   "style": "lib/codemirror.css",
-  "version": "5.44.0"
+  "version": "5.47.0"
 }

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = formatInputValue;
+exports["default"] = formatInputValue;
 
 function formatInputValue(_ref) {
   var administrative = _ref.administrative,

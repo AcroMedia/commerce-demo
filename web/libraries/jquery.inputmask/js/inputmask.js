@@ -135,7 +135,7 @@ Inputmask.prototype = {
             if (opts.importDataAttributes === true) {
                 var attrOptions = npt.getAttribute(dataAttribute), option, dataoptions, optionData, p;
 
-                function importOption(option, optionData) {
+                var importOption = function (option, optionData) {
                     optionData = optionData !== undefined ? optionData : npt.getAttribute(dataAttribute + "-" + option);
                     if (optionData !== null) {
                         if (typeof optionData === "string") {
@@ -145,7 +145,7 @@ Inputmask.prototype = {
                         }
                         userOptions[option] = optionData;
                     }
-                }
+                };
 
                 if (attrOptions && attrOptions !== "") {
                     attrOptions = attrOptions.replace(/'/g, '"');
@@ -575,13 +575,13 @@ Inputmask.prototype = {
                     break;
                 case opts.alternatormarker:
 
-                function groupQuantifier(matches) {
+                var groupQuantifier = function (matches) {
                     var lastMatch = matches.pop();
                     if (lastMatch.isQuantifier) {
                         lastMatch = groupify([matches.pop(), lastMatch]);
                     }
                     return lastMatch;
-                }
+                };
 
                     if (openenings.length > 0) {
                         currentOpeningToken = openenings[openenings.length - 1];
@@ -633,6 +633,9 @@ Inputmask.prototype = {
         }
         // console.log(JSON.stringify(maskTokens));
         return maskTokens;
+    },
+    positionColorMask: function (input, template) {
+        input.style.left = template.offsetLeft + "px";
     }
 };
 
@@ -835,7 +838,7 @@ function maskScope(actionObj, maskset, opts) {
         originalPlaceholder;
 
     //maskset helperfunctions
-    function getMaskTemplate(baseOnInput, minimalPos, includeMode, noJit, clearOptionalTail) {
+    var getMaskTemplate = function (baseOnInput, minimalPos, includeMode, noJit, clearOptionalTail) {
         //includeMode true => input, undefined => placeholder, false => mask
 
         var greedy = opts.greedy;
@@ -880,7 +883,7 @@ function maskScope(actionObj, maskset, opts) {
 
         opts.greedy = greedy;
         return maskTemplate;
-    }
+    };
 
     function getMaskSet() {
         return maskset;
@@ -2261,7 +2264,7 @@ function maskScope(actionObj, maskset, opts) {
                 value = value || input.inputmask._valueGet(true);
 
             if ($.isFunction(opts.onBeforeMask)) value = opts.onBeforeMask.call(inputmask, value, opts) || value;
-            value = value.split("");
+            value = value.toString().split("");
             checkVal(input, true, false, value);
             undoValue = getBuffer().join("");
             if ((opts.clearMaskOnLostFocus || opts.clearIncomplete) && input.inputmask._valueGet() === getBufferTemplate().join("")) {
@@ -2807,10 +2810,6 @@ function maskScope(actionObj, maskset, opts) {
             caret(input, findCaretPos(e.clientX));
             return EventHandlers.clickEvent.call(input, [e]);
         });
-    }
-
-    Inputmask.prototype.positionColorMask = function (input, template) {
-        input.style.left = template.offsetLeft + "px";
     }
 
     function renderColorMask(input, caretPos, clear) {

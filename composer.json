@@ -37,7 +37,7 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "^8.7-alpha1",
+        "drupal/core": "^8.7.5",
         "drupal/console": "~1.0",
         "drupal/commerce": "^2.9",
         "drupal/swiftmailer": "1.x-dev",
@@ -76,15 +76,13 @@
         "drupal/asset_injector": "^2.2",
         "doersguild/jquery.print": "master",
         "drupal/commerce_pado": "^1.0@beta",
-        "drupal/jsonapi": "1.x-dev",
-        "drupal/jsonapi_extras": "^2.8",
         "drupal/matomo": "^1.7",
         "drupal/mautic": "^1.1",
         "drupal/image_effects": "^2.1",
         "drupal/twig_tweak": "^2.1",
         "drupal/better_exposed_filters": "^3.0@alpha",
         "drupal/big_pipe_sessionless": "^1.2",
-        "drupal/bigcommerce": "1.0-alpha2",
+        "drupal/bigcommerce": "^1.0-alpha2",
         "drupal/migrate_tools": "^4.1"
     },
     "require-dev": {
@@ -149,7 +147,7 @@
         "patches": {
             "drupal/commerce": {
                 "#2770731: Add a display name to promotions":
-                "https://www.drupal.org/files/issues/2018-07-23/adjustment_label-2770731-44.patch"
+                "https://www.drupal.org/files/issues/2019-04-15/adjustment-label-update-2770731-51.patch"
             },
             "drupal/commerce_pado": {
                 "#2992041: Group add on items under generic variable":
@@ -169,9 +167,7 @@
             },
             "drupal/core": {
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
-                "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
-                "#2655162: Fatal error when uninstalling/deleting an entity type after removing its class/definition from the codebase (which is the proper way to do it)":
-                "https://www.drupal.org/files/issues/2019-03-18/2655162-38-combined.patch"
+                "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch"
             }
         }
     }

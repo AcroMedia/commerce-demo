@@ -46,7 +46,6 @@
         "acromedia/drupalorange_profile": "dev-8.x-1.x",
         "drupal/menu_block": "^1.4",
         "drupal/webform": "^5.0",
-        "drupal/field_group": "~1.0-rc6",
         "drupal/commerce_paypal": "~1.0",
         "drupal/commerce_authnet": "^1.0",
         "drupal/commerce_shipping": "~2.0-beta3",

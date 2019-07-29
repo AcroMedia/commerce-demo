@@ -85,7 +85,7 @@
         "drupal/twig_tweak": "^2.1",
         "drupal/better_exposed_filters": "^3.0@alpha",
         "drupal/big_pipe_sessionless": "^1.2",
-        "drupal/bigcommerce": "1.x-dev",
+        "drupal/bigcommerce": "1.0-alpha2",
         "drupal/migrate_tools": "^4.1"
     },
     "require-dev": {
@@ -173,10 +173,6 @@
                 "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
                 "#2655162: Fatal error when uninstalling/deleting an entity type after removing its class/definition from the codebase (which is the proper way to do it)":
                 "https://www.drupal.org/files/issues/2019-03-18/2655162-38-combined.patch"
-            },
-            "drupal/bigcommerce": {
-                "#3042484: Expired or out of sync carts":
-                "https://www.drupal.org/files/issues/2019-03-27/3042484-18.bigcommerce.Expired-or-out-of-sync-carts.patch"
             }
         }
     }

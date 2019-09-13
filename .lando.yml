@@ -3,7 +3,7 @@ recipe: drupal8
 config:
   webroot: web
 services:
-  solr:
+  localhost:
     type: solr:5.5
     portforward: true
     core: drupalcommerce_demo

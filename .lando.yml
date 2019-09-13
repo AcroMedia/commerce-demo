@@ -1,0 +1,5 @@
+name: acromedia-commerce-demo
+recipe: drupal8
+config:
+  webroot: web
+

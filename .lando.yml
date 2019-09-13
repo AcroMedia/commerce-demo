@@ -2,4 +2,11 @@ name: acromedia-commerce-demo
 recipe: drupal8
 config:
   webroot: web
+services:
+  solr:
+    type: solr:5.5
+    portforward: true
+    core: drupalcommerce_demo
+    config:
+      dir: web/modules/contrib/search_api_solr/solr-conf/5.x
 

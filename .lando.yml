@@ -1,0 +1,72 @@
+name: uh
+recipe: drupal8
+config:
+  php: 7.2
+  via: nginx
+  webroot: web
+  xdebug: true
+
+services:
+  solr:
+    type: solr
+    core: drupalcommerce_demo
+    portforward: true
+    config:
+      dir: solr-conf/7.x
+
+  node:
+    type: node
+    run:
+      - cd $LANDO_MOUNT
+      - npm install gulp gulp-sass gulp-sourcemaps gulp-rename
+      - npm install gulp-postcss postcss-easysprites autoprefixer gulp-cli
+
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+    portforward: true
+
+proxy:
+  solr:
+    - solr.uh.lndo.site:8983
+  mailhog:
+    - mail.uh.lndo.site
+
+tooling:
+  tooling:
+    phpcs:
+      service: appserver
+      description: 'Run phpcs: lando phpcs'
+      cmd:
+        - 'phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md'
+
+    phpcbf:
+      service: appserver
+      description: 'Run phpcbf: lando phpcbf'
+      cmd:
+        - 'phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md'
+
+    phpdebt:
+      service: appserver
+      description: 'Run phpdebt: lando phpdebt'
+      cmd:
+        - 'phpdebt'
+
+    phpunit:
+      service: appserver
+      description: "Run PHP Unit tests: lando phpunit \nCan run --filter testFunctionName ClassNameTest /path/to/class"
+      cmd:
+        - '/app/bin/phpunit --debug --configuration /app/phpunit.xml'
+
+    node:
+      service: node
+
+    gulp:
+      service: node
+
+    npm:
+      service: node
+      description: 'Run npm: lando npm'
+      cmd:
+        - 'npm'

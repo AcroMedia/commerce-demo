@@ -38,7 +38,7 @@
         "doctrine/instantiator": "~1.0.5",
         "doersguild/jquery.print": "master",
         "drupal-composer/drupal-scaffold": "^2.5",
-        "drupal/admin_toolbar": "^1",
+        "drupal/admin_toolbar": "^2.0",
         "drupal/advancedqueue": "^1.0@beta",
         "drupal/asset_injector": "^2.2",
         "drupal/better_exposed_filters": "^3.0@alpha",
@@ -81,7 +81,7 @@
         "drupal/redis": "^1.1",
         "drupal/search_api": "^1.0",
         "drupal/search_api_page": "^1.0-alpha11",
-        "drupal/search_api_solr": "^1.2",
+        "drupal/search_api_solr": "^3.7",
         "drupal/simple_gmap": "^1.3",
         "drupal/swiftmailer": "1.x-dev",
         "drupal/taxonomy_menu": "^3",
@@ -93,6 +93,7 @@
         "drupal/webform": "^5.0",
         "drush/drush": "^9.5",
         "phpdocumentor/reflection-docblock": "^2.0",
+        "symfony/event-dispatcher": "4.3.4 as 3.4.99",
         "twig/twig": "^1.38.2",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
@@ -193,11 +194,13 @@
             },
             "drupal/core": {
                 "#2771837: drupalimage CKEditor plugin should not require data-entity-uuid and data-entity-type when image upload is disabled":
-                "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch"
+                "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
+                "#3072602: Error uninstalling storage field":
+                "https://www.drupal.org/files/issues/2019-09-20/3072602-14.patch"
             },
-            "drupal/paragraphs" : {
-                "#2907094: Make paragraphs module working with field_group version 3.x":
-                "https://www.drupal.org/files/issues/2907094_7_field_group_support.patch"
+            "drupal/google_tag": {
+                "#3081007: Removes false Container Config error from Status report until next release":
+                "https://git.drupalcode.org/project/google_tag/commit/b90f166.patch"
             }
         }
     }

@@ -14,7 +14,7 @@ The Urban Hipster demo site has been designed, built and maintained by [__Acro M
 
 __Please understand that while we strive to keep the site and its components updated to the latest versions, there may be times where we lag behind a bit.__
 
-If you notice any bugs, please submit an issue. We’ll do our best to keep on top of things.
+If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/commerce-demo/issues/new). We’ll do our best to keep on top of things.
 
 ## Where to start?
 
@@ -42,7 +42,7 @@ __To setup the demo__
 1. Cd into the cloned repo and run `lando start`.
 1. Once Lando has finished spinning up the environment, run `lando composer install`.
 1. Extract `dumps/files.tar.gz` into `web/sites/default`.
-1. Extract `dumps/database.sql` and run `lando db-import dataase.sql`.
+1. Extract `dumps/database.sql` and run `lando db-import database.sql`.
 1. Configure your `settings.php` or `local.settings.php` to include the following:
     ```
     $databases['default']['default'] = array(
@@ -102,7 +102,7 @@ __To setup the demo__
 
 ### Bugs
 
-If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/commerce-demo/issues). We’ll do our best to keep on top of things. Any bugs found for specific modules should be directed to that modules issue queue on Drupal.org.
+If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/commerce-demo/issues). We’ll do our best to keep on top of things. Any bugs found for specific modules should be directed to that modules issue queue on [Drupal.org](https://www.drupal.org/).
 
 ### Demo setup
 
@@ -120,7 +120,7 @@ If those don’t help, Google the issue or submit an issue to our issue queue. G
 
 ### Let us set it up for you (and other stuff)
 
-If you’re a business and interested in having Acro Media setup the demo for you, or if you’d like to talk to us about something else, [contact us!](https://www.acromedia.com/contact-us)
+If you’re a business and interested in having [Acro Media](https://www.acromedia.com/) setup the demo for you, or if you’d like to talk to us about something else, [contact us!](https://www.acromedia.com/contact-us)
 
 ## Photo Credits
 

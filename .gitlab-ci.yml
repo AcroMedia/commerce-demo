@@ -68,7 +68,7 @@ build:
 
   script:
     # Run Composer to build site (use --no-dev for production builds).
-    - composer install --no-interaction --no-dev
+    - composer install --no-interaction
     # Remove the node_modules dir to rebuld/reinstall new versions.
     - rm -rf node_modules
     # Compile Sass from theme using npm defined in our package.

@@ -7,8 +7,8 @@ variables:
 
 # jobs do not need to be present for all stages, if a stage has no jobs it will just be ignored
 stages:
-  - test
   - build
+  - test
   - deploy
   - post
 

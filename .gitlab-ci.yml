@@ -201,6 +201,7 @@ base-demo-to-live:
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
+    - rsync -avq --no-perms --no-owner --no-group ./dumps/demo.database.sql drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/database.sql
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
@@ -239,6 +240,7 @@ plus-demo-to-live:
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
+    - rsync -avq --no-perms --no-owner --no-group ./dumps/demoplus.database.sql drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/database.sql
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.

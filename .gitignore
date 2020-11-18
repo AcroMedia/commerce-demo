@@ -22,3 +22,4 @@ web/sites/default/settings.local.php
 
 # Ignore web/vender folder if composer accidentally run within web
 /web/vendor/
+node_modules

@@ -185,10 +185,6 @@
                 "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
                 "#3072602: Error uninstalling storage field":
                 "https://www.drupal.org/files/issues/2019-09-20/3072602-14.patch"
-            },
-            "drupal/google_tag": {
-                "#3081007: Removes false Container Config error from Status report until next release":
-                "https://git.drupalcode.org/project/google_tag/commit/b90f166.patch"
             }
         }
     }

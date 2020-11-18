@@ -10,12 +10,17 @@ def start(c):
     c.run('lando start')
 
 @task
-def update(c):
+def update(c, site='demoplus'):
     """
     Pull down and update all content, including database and files.
     """
-    c.run('lando db-import dumps/demoplus.database.sql')
+    c.run('lando db-import dumps/{}.database.sql'.format(site))
     drush(c, 'cr')
+
+@task
+def savedb(c, site='demoplus'):
+    c.run('lando db-export dumps/{}.database.sql'.format(site))
+    c.run('gunzip -f dumps/{}.database.sql.gz'.format(site))
 
 @task(post=[start, update])
 def setup(c):

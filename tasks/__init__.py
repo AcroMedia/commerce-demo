@@ -24,6 +24,7 @@ def savedb(c, site='demoplus'):
 
 @task(post=[start, update])
 def setup(c):
+    c.run('lando composer install')
     c.run('cp web/sites/default/example.settings.local.php web/sites/default/settings.local.php')
 
 @task(help={

@@ -32,32 +32,14 @@ If you’d like to have one of our experts go through the site with you and disc
 
 If you’d like to setup a copy of the demo yourself, follow these instructions.
 
-#### Option A: Lando dev environment
+#### Lando
 __Requirements__
 * [Lando](https://docs.lando.dev/)
 * General knowledge on how to use this tool
 
 __To setup the demo__
 1. Clone or download the files.
-1. Cd into the cloned repo and run `lando start`.
-1. Once Lando has finished spinning up the environment, run `lando composer install`.
-1. Extract `dumps/files.tar.gz` into `web/sites/default`.
-1. Extract `dumps/database.sql` and run `lando db-import dataase.sql`.
-1. Configure your `settings.php` or `local.settings.php` to include the following:
-    ```
-    $databases['default']['default'] = array(
-      'driver' => 'mysql',
-      'host' => 'database',
-      'username' => 'drupal8',
-      'password' => 'drupal8',
-      'database' => 'drupal8',
-      'prefix' => '',
-   );
-
-   $settings['trusted_host_patterns'] = array(
-      '^uh\.lndo\.site$',
-   );
-   ```
+1. Cd into the cloned repo and run `inv setup`
 1. View the site!
 1. Login with username and password as `demoadmin`.
     - NOTE: demoadmin does have some restrictions. If you'd prefer to login as a full admin, use Drush from the `/web` root to get a one-time admin login. Drush 9 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
@@ -69,34 +51,11 @@ __To setup the demo__
     - Stores (each store): `yoursite.com/admin/commerce/config/stores`
     - Order types (each type): `yoursite.com/admin/commerce/config/order-types`
     - Webforms (each form): `yoursite.com/admin/structure/webform`
+1. If you wish to switch to a different sample site, run 'inv update sitename' the 3 options are `demo`, `demoplus` and `pos`
 
-#### Option B: Local dev environment
-__Requirements__
-* [Composer](http://getcomposer.org/)
-* PHP 7.1 or higher
-* MariaDB, MSQL, or equivalent
-* Apache, NGINX, or equivalent
-* Apache Solr 7.x
-* General knowledge on how to setup a website server and use these tools
+#### Update a saved database
 
-__To setup the demo__
-1. Clone or download the files.
-1. Cd into the cloned repo and run `composer install`.
-1. Extract `dumps/files.tar.gz` into `web/sites/default`.
-1. Create a database and import `dumps/database.sql`.
-1. Configure your `settings.php` or `local.settings.php` to use the newly created database.
-1. Setup Apache Solr cores for the site to use - one for product search and one for the Point of Sale search (use Solr 7.x).
-1. Get your hosting setup (local or otherwise). The web root is `/web`.
-1. View the site!
-1. Login with username and password as `demoadmin`.
-    - NOTE: demoadmin does have some restrictions. If you'd prefer to login as a full admin, use Drush from the `/web` root to get a one-time admin login. Drush 9 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
-1. Enter your Solr cores within ‘Configure Standard Solr Connector’ at `yoursite.com/admin/config/search/search-api`.
-1. Reindex the product and point of sale indexes.
-1. Update site and store email addresses entered in the following locations:
-    - Site: `yoursite.com/admin/config/system/site-information`
-    - Stores (each store): `yoursite.com/admin/commerce/config/stores`
-    - Order types (each type): `yoursite.com/admin/commerce/config/order-types`
-    - Webforms (each form): `yoursite.com/admin/structure/webform`
+1. `inv savedb` - this will default to demoplus, if you want to save a different db just pass it as a parameter `inv savedb demo`
 
 ## Issues
 
@@ -104,7 +63,7 @@ __To setup the demo__
 
 If you notice any bugs, please [submit an issue](https://github.com/AcroMedia/commerce-demo/issues). We’ll do our best to keep on top of things. Any bugs found for specific modules should be directed to that modules issue queue on Drupal.org.
 
-### Demo setup
+### Troubleshooting
 
 Please note, our team is busy completing service work for clients, and thus, we will not be able to help you with setting up the demo on your own. If you’re having trouble, some things that could cause your issue are:
 

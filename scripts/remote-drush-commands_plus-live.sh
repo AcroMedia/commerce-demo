@@ -1,8 +1,7 @@
 #!/bin/bash -ue
 
 # We run our drush commands here instead of in the .gitlab-ci.yml file because
-# php 7.0 is the default on the server, and drush keeps hitting that instead of
-# the 7.1 that we need.
+# the default version of php on the server doesn't always match the version we need.
 
 # $HOME = /home/drupalcommerce
 
@@ -12,7 +11,7 @@ function main () {
 
   # Make sure PHP is the version we want.
   test -x $HOME/bin/php && rm $HOME/bin/php
-  ln -s /usr/bin/php7.1 $HOME/bin/php
+  ln -s /usr/bin/php7.2 $HOME/bin/php
 
   # Make sure Drush is the version we want.
   test -x $HOME/bin/drush && rm $HOME/bin/drush

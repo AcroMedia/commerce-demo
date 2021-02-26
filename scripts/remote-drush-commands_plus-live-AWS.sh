@@ -1,8 +1,7 @@
 #!/bin/bash -ue
 
 # We run our drush commands here instead of in the .gitlab-ci.yml file because
-# php 7.0 is the default on the server, and drush keeps hitting that instead of
-# the 7.1 that we need.
+# the default version of php on the server doesn't always match the version we need.
 
 # $HOME = /home/acro
 

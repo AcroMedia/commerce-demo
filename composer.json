@@ -38,7 +38,6 @@
         "doctrine/common": "~2.7.3",
         "doctrine/instantiator": "~1.0.5",
         "doersguild/jquery.print": "master",
-        "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/admin_toolbar": "^2.0",
         "drupal/advancedqueue": "^1.0@beta",
         "drupal/asset_injector": "^2.2",
@@ -60,7 +59,7 @@
         "drupal/config_inspector": "1.x-dev",
         "drupal/console": "^1.0.2",
         "drupal/contribute": "^1.0",
-        "drupal/core": "^8.9.0",
+        "drupal/core-dev": "^8.9.0",
         "drupal/entity": "^1.0",
         "drupal/facets": "^1.0-beta1",
         "drupal/facets_pretty_paths": "^1.0-alpha1",
@@ -102,9 +101,6 @@
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "zaporylie/composer-drupal-optimizations": "^1.0"
-    },
-    "require-dev": {
-        "webflo/drupal-core-require-dev": "^8.7.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -166,9 +162,8 @@
             ]
         },
         "drupal-scaffold": {
-            "initial": {
-                ".editorconfig": "../.editorconfig",
-                ".gitattributes": "../.gitattributes"
+            "locations": {
+                "web-root": "web/"
             }
         },
         "patches": {

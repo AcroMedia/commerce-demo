@@ -51,7 +51,7 @@ __To setup the demo__
     - Stores (each store): `yoursite.com/admin/commerce/config/stores`
     - Order types (each type): `yoursite.com/admin/commerce/config/order-types`
     - Webforms (each form): `yoursite.com/admin/structure/webform`
-1. If you wish to switch to a different sample site, run 'inv update sitename' the 3 options are `demo`, `demoplus` and `pos`
+1. If you wish to switch to a different sample site, run 'inv update sitename' the 2 options are `demo` and `demoplus`.
 
 #### Update a saved database
 
@@ -84,3 +84,4 @@ If you’re a business and interested in having Acro Media setup the demo for yo
 ## Photo Credits
 
 The photos used in this website have been provided by the generous community of photographers at [Unsplash](https://unsplash.com) ([view license](https://unsplash.com/license)).
+

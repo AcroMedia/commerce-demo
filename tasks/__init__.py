@@ -18,9 +18,23 @@ def update(c, site='demoplus'):
     drush(c, 'cr')
 
 @task
-def savedb(c, site='demoplus'):
+def savedb(c, site='demoplus', dirty=False):
+    if not dirty:
+        sanitizedb(c)
     c.run('lando db-export dumps/{}.database.sql'.format(site))
     c.run('gunzip -f dumps/{}.database.sql.gz'.format(site))
+
+@task
+def sanitizedb(c):
+    drush(c, 'updb -y')
+    drush(c, 'cex --destination=/tmp/config-export -y')
+    c.run('lando ssh -c "find /tmp/config-export -type f -name \'*.yml\' -exec sed -i \'s/@acromedia\\|@acromediainc/@example/g\' {} ;"')
+    drush(c, 'cim --source=/tmp/config-export --partial -y')
+    c.run('lando ssh -c "rm -rf /tmp/config-export"')
+    drush(c, 'sqlq "update commerce_order set mail = \'admin@example.com\' where mail like \'%@acromedia%\';"')
+    drush(c, 'sqlq "update commerce_store_field_data set mail = \'admin@example.com\' where mail like \'%@acromedia%\';"')
+    drush(c, 'sqlq "update users_field_data set mail = \'admin@example.com\' where mail like \'%@acromedia%\';"')
+    drush(c, 'cr')
 
 @task(post=[start, update])
 def setup(c):

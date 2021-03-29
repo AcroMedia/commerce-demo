@@ -54,12 +54,6 @@ security_advisories:
 build:
   stage: build
 
-  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
-  only:
-    - master
-    - UAT
-    - performance_update
-
   # this tells the build server to save these files between jobs, this keeps them to be deployed
   artifacts:
     paths:
@@ -274,6 +268,10 @@ plus-demo-to-live-AWS:
 plus-demo-live-post:
   image: smmccabe/docker
   stage: post
+  only:
+    - UAT
+    - master
+    - performance_update
   dependencies:
     - plus-demo-to-live
   script:

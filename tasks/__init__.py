@@ -26,6 +26,7 @@ def savedb(c, site='demoplus'):
 def setup(c):
     c.run('lando composer install')
     c.run('cp web/sites/default/example.settings.local.php web/sites/default/settings.local.php')
+    c.run('tar -xzf dumps/files.tar.gz -C web/sites/default')
 
 @task(help={
     'command':'The command to run through drush. Multiple parameters can be passed in quotes. Example : `inv drush "updb -y"`'

@@ -15,25 +15,26 @@ def update(c, site='demoplus'):
     Pull down and update all content, including database and files.
     """
     c.run('lando db-import dumps/{}.database.sql'.format(site))
+    drush(c, 'updb -y')
     drush(c, 'cr')
 
 @task
-def savedb(c, site='demoplus', dirty=False):
-    if not dirty:
-        sanitizedb(c)
+def savedb(c, site='demoplus', sanitize=True):
+    if sanitize:
+        sanitize_config(c)
     c.run('lando db-export dumps/{}.database.sql'.format(site))
     c.run('gunzip -f dumps/{}.database.sql.gz'.format(site))
+    if sanitize:
+        c.run('sed -i "s/@acromedia\\(inc\\)\\?/@example/g"\
+           ./dumps/{}.database.sql'.format(site))
 
 @task
-def sanitizedb(c):
-    drush(c, 'updb -y')
+def sanitize_config(c):
     drush(c, 'cex --destination=/tmp/config-export -y')
-    c.run('lando ssh -c "find /tmp/config-export -type f -name \'*.yml\' -exec sed -i \'s/@acromedia\\|@acromediainc/@example/g\' {} ;"')
+    c.run('lando ssh -c "find /tmp/config-export -type f -name \'*.yml\' -exec\
+           sed -i \'s/@acromedia\\(inc\\)\\?/@example/g\' {} ;"')
     drush(c, 'cim --source=/tmp/config-export --partial -y')
     c.run('lando ssh -c "rm -rf /tmp/config-export"')
-    drush(c, 'sqlq "update commerce_order set mail = \'admin@example.com\' where mail like \'%@acromedia%\';"')
-    drush(c, 'sqlq "update commerce_store_field_data set mail = \'admin@example.com\' where mail like \'%@acromedia%\';"')
-    drush(c, 'sqlq "update users_field_data set mail = \'admin@example.com\' where mail like \'%@acromedia%\';"')
     drush(c, 'cr')
 
 @task(post=[start, update])
@@ -61,4 +62,3 @@ def solrconfig(c):
     c.run("touch solr-config/protwords.txt")
     c.run("lando ssh -s search -c 'solr create_core -c orange -d solr-config'")
     c.run("rm solr-config -rf")
-

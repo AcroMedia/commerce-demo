@@ -5,6 +5,8 @@ description: 'Acro Media eCommerce install profile.'
 
 distribution:
   name: 'Orange'
+  install:
+    theme: commerce_2_demo
 
 dependencies:
   # Standard.
@@ -81,18 +83,22 @@ dependencies:
   - imce
   - menu_block
   - metatag
+  - magnific_popup
   - pathauto
   #- simple_sitemap
   - taxonomy_menu
   - token
+  - twig_tweak
   - userprotect
   - webform
   - webform_ui
 
   # Custom.
   - acro_live_css
+  - uh_commerce
 
 themes:
   - seven
   - orange_starter
   - orange_framework
+  - commerce_2_demo

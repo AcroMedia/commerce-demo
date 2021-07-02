@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - orange_starter
+    - commerce_2_demo
 _core:
 id: tabs
-theme: orange_starter
+theme: commerce_2_demo
 region: content
 weight: 0
 provider: null

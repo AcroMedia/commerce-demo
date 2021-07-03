@@ -37,12 +37,15 @@ __Requirements__
 * [Lando](https://docs.lando.dev/)
 * General knowledge on how to use this tool
 
-__To setup the demo__
+__To setup the site__
 1. Clone or download the files.
 1. Cd into the cloned repo and run `inv setup`
+1. Go through the Drupal 8 install process.
+    - Enter `drupal8` as the database name, username and password.
+    - Click on "Advanced Options" and enter `database` as the host.
 1. View the site!
-1. Login with username and password as `demoadmin`.
-    - NOTE: demoadmin does have some restrictions. If you'd prefer to login as a full admin, use Drush from the `/web` root to get a one-time admin login. Drush 9 is included in the vendor dir, so run `../vendor/drush/drush/drush uli`.
+
+__To setup Solr search__
 1. Go to `yoursite.com/admin/config/search/search-api` and edit the server named `Solr`.
 1. Change `Solr host` to `solr` and save. 
 1. Reindex the Product and POS indexes.
@@ -51,11 +54,6 @@ __To setup the demo__
     - Stores (each store): `yoursite.com/admin/commerce/config/stores`
     - Order types (each type): `yoursite.com/admin/commerce/config/order-types`
     - Webforms (each form): `yoursite.com/admin/structure/webform`
-1. If you wish to switch to a different sample site, run 'inv update sitename' the 3 options are `demo`, `demoplus` and `pos`
-
-#### Update a saved database
-
-1. `inv savedb` - this will default to demoplus, if you want to save a different db just pass it as a parameter `inv savedb demo`
 
 ## Issues
 

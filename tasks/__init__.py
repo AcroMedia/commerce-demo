@@ -33,3 +33,12 @@ def solrconfig(c):
     c.run("touch solr-config/protwords.txt")
     c.run("lando ssh -s search -c 'solr create_core -c orange -d solr-config'")
     c.run("rm solr-config -rf")
+
+@task
+def devconfig(c, site='demoplus'):
+    uhc = 'https://git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git'
+    c.run('git clone {}'.format(uhc))
+    c.run('tar -xzf urban-hipster-config/files.tar.gz -C web/sites/default')
+    c.run('lando db-import dumps/{}.database.sql'.format(site))
+    drush(c, 'updb -y')
+    drush(c, 'cr')

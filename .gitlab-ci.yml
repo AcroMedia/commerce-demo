@@ -74,7 +74,6 @@ build:
 # Deploy base demo to STAGING site (AWS1).
 base-demo-to-uat:
   stage: deploy
-  when: manual
 
   # add any other tags or branches you want here
   only:
@@ -113,7 +112,6 @@ base-demo-to-uat:
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:
   stage: deploy
-  when: manual
 
   # add any other tags or branches you want here
   only:
@@ -153,7 +151,6 @@ plus-demo-to-uat:
 # Deploy base demo to LIVE site (CLOUD4).
 base-demo-to-live:
   stage: deploy
-  when: manual
 
   # add any other tags or branches you want here
   # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo

@@ -26,10 +26,28 @@ function main () {
   which php
   php -v
 
-  # Time to do some work.
+  # Update the database.
   cd $HOME/www/demoplus/web
-  drush updb -y
-  drush cr
+  drush state:set system.maintenance_mode 1 --input-format=integer
+  cd ../dumps
+  git pull
+  cd ..
+  db_md5_old=($(cat "database.sql.md5"))
+  db_md5_new=($(md5sum "dumps/demoplus.database.sql"))
+  if [[ "$db_old" != "$db_new" ]]; then
+    mv database.sql db_backups/database_$(date +%Y-%m-%d).sql
+    cp dumps/demoplus.database.sql database.sql
+    md5sum database.sql
+    cd web
+    drush sql-drop -y
+    drush sql-cli < ../database.sql
+    drush state:set system.maintenance_mode 1 --input-format=integer
+    drush updb -y
+    drush cr
+  else
+    cd web
+  fi
+  drush state:set system.maintenance_mode 0 --input-format=integer
 }
 
 # Waiting until now to execute the script ensures that the whole thing arrives before anything gets attempted.

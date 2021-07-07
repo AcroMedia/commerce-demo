@@ -27,23 +27,18 @@ function main () {
   # Update the database.
   cd $HOME/www/$2/web
   drush state:set system.maintenance_mode 1 --input-format=integer
-  cd ../dumps
-  git pull
-  cd ..
-  db_md5_old=($(cat "database.sql.md5"))
-  db_md5_new=($(md5sum "dumps/$3.database.sql"))
-  if [[ "$db_old" != "$db_new" ]]; then
-    mv database.sql db_backups/database_$(date +%Y-%m-%d).sql
-    cp dumps/$3.database.sql database.sql
-    md5sum database.sql
-    cd web
+  git -C ../dumps/ pull
+  db_md5_old=($(cat "../database.sql.md5"))
+  db_md5_new=($(md5sum "../dumps/$3.database.sql"))
+  if [[ "$db_md5_old" != "$db_md5_new" ]]; then
+    mv ../database.sql ../db_backups/database_$(date +%Y-%m-%d).sql
+    cp ../dumps/$3.database.sql ../database.sql
+    md5sum ../database.sql > ../database.sql.md5
     drush sql-drop -y
     drush sql-cli < ../database.sql
     drush state:set system.maintenance_mode 1 --input-format=integer
     drush updb -y
     drush cr
-  else
-    cd web
   fi
   drush state:set system.maintenance_mode 0 --input-format=integer
 }

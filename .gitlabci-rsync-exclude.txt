@@ -1,3 +1,4 @@
+dumps
 data
 db_backups
 database.sql

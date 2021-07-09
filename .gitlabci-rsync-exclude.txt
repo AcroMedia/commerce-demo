@@ -1,8 +1,6 @@
-dumps
 data
-db_backups
 database.sql
-database.sql.md5
+db_backups
 web/sites/default/files
 web/sites/default/settings.local.php
 private

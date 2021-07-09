@@ -7,8 +7,8 @@ variables:
 
 # jobs do not need to be present for all stages, if a stage has no jobs it will just be ignored
 stages:
-  - test
   - build
+  - test
   - deploy
   - post
 
@@ -17,21 +17,8 @@ code_standards:
   script:
     # runs the Drupal code standards checks on our custom code
     # the Drupal Code Standards come from the Coder module, which is automatically part of the base testing image
-    - phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files --ignore=*.css
-
-phpmd:
-  stage: test
-  script:
-    - phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files --ignore=*.css || true
-
-    - phpmd web/modules/custom text cleancode || true
-    - phpmd web/modules/custom text codesize || true
-    - phpmd web/modules/custom text controversial || true
-    - phpmd web/modules/custom text design || true
-    - phpmd web/modules/custom text naming || true
-    - phpmd web/modules/custom text unusedcode || true
-
-    - phpcpd web/modules/custom || true
+    - rm web/themes/custom/commerce_2_demo/node_modules -rf
+    - ./bin/phpcs --standard=Drupal -n --extensions=php,module,inc,install,test,profile,theme,info,txt,md --file-list=.phpcs-files --ignore=*.css
 
 debt:
   stage: test
@@ -67,12 +54,6 @@ security_advisories:
 build:
   stage: build
 
-  # NOTE: Master is also pushed to public accessible GitHub repo: https://github.com/AcroMedia/commerce-demo
-  only:
-    - master
-    - UAT
-    - performance_update
-
   # this tells the build server to save these files between jobs, this keeps them to be deployed
   artifacts:
     paths:
@@ -82,7 +63,7 @@ build:
 
   script:
     # Run Composer to build site (use --no-dev for production builds).
-    - composer install --no-interaction --no-dev
+    - composer install --no-interaction
     # Remove the node_modules dir to rebuld/reinstall new versions.
     - rm -rf node_modules
     # Compile Sass from theme using npm defined in our package.
@@ -122,11 +103,12 @@ base-demo-to-uat:
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
     #move updated files up to deployment server, exclude .git since it's not needed
+    - git clone git@git.acromedia.com:teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-uat.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s commerce-2-demo demo demo' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:
@@ -160,11 +142,12 @@ plus-demo-to-uat:
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
     #move updated files up to deployment server, exclude .git since it's not needed.
+    - git clone git@git.acromedia.com:teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-uat.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s commerceplus demoplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 
 # Deploy base demo to LIVE site (CLOUD4).
@@ -200,11 +183,12 @@ base-demo-to-live:
     - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - git clone git@git.acromedia.com:teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-live.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s demo demo demo' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to LIVE site (CLOUD4).
 plus-demo-to-live:
@@ -238,11 +222,12 @@ plus-demo-to-live:
     - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - git clone git@git.acromedia.com:teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s demoplus demoplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to LIVE site (AWS).
 plus-demo-to-live-AWS:
@@ -276,15 +261,20 @@ plus-demo-to-live-AWS:
     - echo "$PRODUCTION_FINGERPRINT_AWS" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - git clone git@git.acromedia.com:teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ acro@commerceplus-new.acromedia.com:/home/acro/www/cpback/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live-AWS.sh
+    - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s cpback cpback demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 plus-demo-live-post:
   image: smmccabe/docker
   stage: post
+  only:
+    - UAT
+    - master
+    - performance_update
   dependencies:
     - plus-demo-to-live
   script:

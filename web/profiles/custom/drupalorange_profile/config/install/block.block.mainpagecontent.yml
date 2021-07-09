@@ -4,10 +4,10 @@ dependencies:
   module:
     - system
   theme:
-    - orange_starter
+    - commerce_2_demo
 _core:
 id: mainpagecontent
-theme: orange_starter
+theme: commerce_2_demo
 region: content
 weight: 1
 provider: null

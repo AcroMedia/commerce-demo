@@ -4,10 +4,10 @@ dependencies:
   module:
     - search
   theme:
-    - orange_starter
+    - commerce_2_demo
 _core:
 id: searchform
-theme: orange_starter
+theme: commerce_2_demo
 region: site_search
 weight: 0
 provider: null

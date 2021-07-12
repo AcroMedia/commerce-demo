@@ -25,13 +25,13 @@ function main () {
   php -v
 
   # Update the database.
-  cd $HOME/www/$2/web
+  cd $HOME/www/$1/web
   drush state:set system.maintenance_mode 1 --input-format=integer
   db_md5_old=($(md5sum "../database.sql"))
-  db_md5_new=($(md5sum "../dumps/$3.database.sql"))
+  db_md5_new=($(md5sum "../dumps/$2.database.sql"))
   if [[ "$db_md5_old" != "$db_md5_new" ]]; then
     mv ../database.sql ../db_backups/database_$(date +%Y-%m-%d).sql
-    cp ../dumps/$3.database.sql ../database.sql
+    cp ../dumps/$2.database.sql ../database.sql
     drush sql-drop -y
     drush sql-cli < ../database.sql
     drush state:set system.maintenance_mode 1 --input-format=integer

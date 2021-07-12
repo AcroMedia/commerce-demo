@@ -108,7 +108,7 @@ base-demo-to-uat:
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s commerce-2-demo demo demo' < ./scripts/remote-drush-commands_deploy.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s commerce-2-demo demo' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:
@@ -147,7 +147,7 @@ plus-demo-to-uat:
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s commerceplus demoplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s commerceplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 
 # Deploy base demo to LIVE site (CLOUD4).
@@ -188,7 +188,7 @@ base-demo-to-live:
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s demo demo demo' < ./scripts/remote-drush-commands_deploy.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s demo demo' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to LIVE site (CLOUD4).
 plus-demo-to-live:
@@ -227,7 +227,7 @@ plus-demo-to-live:
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s demoplus demoplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s demoplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to LIVE site (AWS).
 plus-demo-to-live-AWS:
@@ -266,7 +266,7 @@ plus-demo-to-live-AWS:
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s cpback cpback demoplus' < ./scripts/remote-drush-commands_deploy.sh
+    - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s cpback demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 plus-demo-live-post:
   image: smmccabe/docker

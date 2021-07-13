@@ -9,24 +9,10 @@ def start(c):
     """
     c.run('lando start')
 
-@task
-def update(c, site='demoplus'):
-    """
-    Pull down and update all content, including database and files.
-    """
-    c.run('lando db-import dumps/{}.database.sql'.format(site))
-    drush(c, 'cr')
-
-@task
-def savedb(c, site='demoplus'):
-    c.run('lando db-export dumps/{}.database.sql'.format(site))
-    c.run('gunzip -f dumps/{}.database.sql.gz'.format(site))
-
-@task(post=[start, update])
+@task(post=[start])
 def setup(c):
     c.run('lando composer install')
     c.run('cp web/sites/default/example.settings.local.php web/sites/default/settings.local.php')
-    c.run('tar -xzf dumps/files.tar.gz -C web/sites/default')
 
 @task(help={
     'command':'The command to run through drush. Multiple parameters can be passed in quotes. Example : `inv drush "updb -y"`'
@@ -48,3 +34,11 @@ def solrconfig(c):
     c.run("lando ssh -s search -c 'solr create_core -c orange -d solr-config'")
     c.run("rm solr-config -rf")
 
+@task
+def devconfig(c, site='demoplus'):
+    uhc = 'https://git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git'
+    c.run('git clone {}'.format(uhc))
+    c.run('tar -xzf urban-hipster-config/files.tar.gz -C web/sites/default')
+    c.run('lando db-import dumps/{}.database.sql'.format(site))
+    drush(c, 'updb -y')
+    drush(c, 'cr')

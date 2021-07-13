@@ -6,10 +6,10 @@ dependencies:
   module:
     - views
   theme:
-    - orange_starter
+    - commerce_2_demo
 _core:
 id: views_block__blog_recent_posts
-theme: orange_starter
+theme: commerce_2_demo
 region: blog_sidebar
 weight: 0
 provider: null

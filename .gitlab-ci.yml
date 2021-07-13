@@ -103,11 +103,12 @@ base-demo-to-uat:
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
     #move updated files up to deployment server, exclude .git since it's not needed
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-uat.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-d-srv /home/commerce-2-demo/www/commerce-2-demo/web/sites/default/settings.php && /bin/bash -u -e -s commerce-2-demo demo' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to STAGING site (AWS1).
 plus-demo-to-uat:
@@ -141,11 +142,12 @@ plus-demo-to-uat:
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
     #move updated files up to deployment server, exclude .git since it's not needed.
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-uat.sh
+    - ssh commerce-2-demo@aws1.acrobuild.com 'chown commerce-2-demo:commerce-2-dem-commerceplus-srv /home/commerce-2-demo/www/commerceplus/web/sites/default/settings.php && /bin/bash -u -e -s commerceplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 
 # Deploy base demo to LIVE site (CLOUD4).
@@ -181,12 +183,12 @@ base-demo-to-live:
     - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
-    - rsync -avq --no-perms --no-owner --no-group ./dumps/demo.database.sql drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/database.sql
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_base-live.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demo-srv /home/drupalcommerce/www/demo/web/sites/default/settings.php && /bin/bash -u -e -s demo demo' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to LIVE site (CLOUD4).
 plus-demo-to-live:
@@ -220,12 +222,12 @@ plus-demo-to-live:
     - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
-    - rsync -avq --no-perms --no-owner --no-group ./dumps/demoplus.database.sql drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/database.sql
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live.sh
+    - ssh drupalcommerce@cloud4.acromedia.com 'chown drupalcommerce:drupalcommerce-demoplus-srv /home/drupalcommerce/www/demoplus/web/sites/default/settings.php && /bin/bash -u -e -s demoplus demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 # Deploy plus demo to LIVE site (AWS).
 plus-demo-to-live-AWS:
@@ -259,11 +261,12 @@ plus-demo-to-live-AWS:
     - echo "$PRODUCTION_FINGERPRINT_AWS" >> ~/.ssh/known_hosts
 
     # Install composer and move updated files up to deployment server, exclude .git since it's not needed
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ acro@commerceplus-new.acromedia.com:/home/acro/www/cpback/
 
     # log into the site, reset settings.php permissions and run scripts.
     # IMPORTANT: Drupal 8.4 and Drush need PHP 7.1 but server defaults to 7.0. Need script to check PHP version and use the right one.
-    - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s' < ./scripts/remote-drush-commands_plus-live-AWS.sh
+    - ssh acro@commerceplus-new.acromedia.com 'chown acro:acro-cpback-srv /home/acro/www/cpback/web/sites/default/settings.php && /bin/bash -u -e -s cpback demoplus' < ./scripts/remote-drush-commands_deploy.sh
 
 plus-demo-live-post:
   image: smmccabe/docker

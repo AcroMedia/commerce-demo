@@ -6,10 +6,10 @@ dependencies:
   module:
     - menu_block
   theme:
-    - orange_starter
+    - commerce_2_demo
 _core:
 id: mainnavigation
-theme: orange_starter
+theme: commerce_2_demo
 region: page_sidebar
 weight: 0
 provider: null

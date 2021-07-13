@@ -7,10 +7,10 @@ dependencies:
     - system
     - views
   theme:
-    - orange_starter
+    - commerce_2_demo
 _core:
 id: views_block__blog_listing
-theme: orange_starter
+theme: commerce_2_demo
 region: below_content
 weight: 0
 provider: null

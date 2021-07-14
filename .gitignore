@@ -24,5 +24,6 @@ web/sites/default/settings.local.php
 /web/vendor/
 node_modules
 
-# Ignore config repository
+# Ignore sensitive configuration files
 urban-hipster-config
+dumps

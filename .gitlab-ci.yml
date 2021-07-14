@@ -102,8 +102,8 @@ base-demo-to-uat:
     - mkdir -p ~/.ssh
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
-    #move updated files up to deployment server, exclude .git since it's not needed
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
+    # Download configuration files and sync changes with deployment server, excluding .git since it's not needed.
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerce-2-demo/
 
     # log into the site, reset settings.php permissions and run scripts.
@@ -141,8 +141,8 @@ plus-demo-to-uat:
     - mkdir -p ~/.ssh
     - echo "$UAT_FINGERPRINT" >> ~/.ssh/known_hosts
 
-    #move updated files up to deployment server, exclude .git since it's not needed.
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
+    # Download configuration files and sync changes with deployment server, excluding .git since it's not needed.
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ commerce-2-demo@aws1.acrobuild.com:/home/commerce-2-demo/www/commerceplus/
 
     # log into the site, reset settings.php permissions and run scripts.
@@ -182,8 +182,8 @@ base-demo-to-live:
     - mkdir -p ~/.ssh
     - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
-    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
+    # Download configuration files and sync changes with deployment server, excluding .git since it's not needed.
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git dumps
     - rsync -av --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demo/
 
     # log into the site, reset settings.php permissions and run scripts.
@@ -221,8 +221,8 @@ plus-demo-to-live:
     - mkdir -p ~/.ssh
     - echo "$PRODUCTION_FINGERPRINT_CLOUD4" >> ~/.ssh/known_hosts
 
-    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
+    # Download configuration files and sync changes with deployment server, excluding .git since it's not needed.
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git dumps
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ drupalcommerce@cloud4.acromedia.com:/home/drupalcommerce/www/demoplus/
 
     # log into the site, reset settings.php permissions and run scripts.
@@ -260,8 +260,8 @@ plus-demo-to-live-AWS:
     - mkdir -p ~/.ssh
     - echo "$PRODUCTION_FINGERPRINT_AWS" >> ~/.ssh/known_hosts
 
-    # Install composer and move updated files up to deployment server, exclude .git since it's not needed
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git && mv urban-hipster-config dumps
+    # Download configuration files and sync changes with deployment server, excluding .git since it's not needed.
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.acromedia.com/teams/marketing/urban-hipster/urban-hipster-config.git dumps
     - rsync -avq --no-perms --no-owner --no-group --exclude-from '.gitlabci-rsync-exclude.txt' --exclude '.git' --delete ./ acro@commerceplus-new.acromedia.com:/home/acro/www/cpback/
 
     # log into the site, reset settings.php permissions and run scripts.

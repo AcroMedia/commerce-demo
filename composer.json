@@ -179,6 +179,10 @@
                 "https://www.drupal.org/files/issues/2018-09-13/drupalimage_ckeditor-2771837-34.patch",
                 "#3072602: Error uninstalling storage field":
                 "https://www.drupal.org/files/issues/2019-09-20/3072602-14.patch"
+            },
+            "drupal/jsonapi_extras": {
+                "default_include_all":
+                "patches/json_api_default_include_all.patch"
             }
         }
     }

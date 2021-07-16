@@ -1,0 +1,163 @@
+diff --git a/modules/jsonapi_defaults/jsonapi_defaults.module b/modules/jsonapi_defaults/jsonapi_defaults.module
+index e755f0e..debe32e 100644
+--- a/modules/jsonapi_defaults/jsonapi_defaults.module
++++ b/modules/jsonapi_defaults/jsonapi_defaults.module
+@@ -41,6 +41,10 @@ function _jsonapi_defaults_form_alter(array &$form, FormStateInterface $form_sta
+     'jsonapi_defaults',
+     'default_include'
+   );
++  $include_all = $config_resource->getThirdPartySetting(
++    'jsonapi_defaults',
++    'default_include_all'
++  );
+   $sorting = _jsonapi_defaults_convert_value(
+     $config_resource->getThirdPartySetting('jsonapi_defaults', 'default_sorting')
+   );
+@@ -63,6 +67,13 @@ function _jsonapi_defaults_form_alter(array &$form, FormStateInterface $form_sta
+     '#default_value' => $includes ? implode("\n", $includes) : '',
+     '#description' => t('Specify includes here (For example uid or field_image). Enter one include per line. If a request contains an "include" query string parameter this defaults will be ignored.'),
+   ];
++
++  $form['bundle_wrapper']['fields_wrapper']['defaults']['default_include_all'] = [
++    '#type' => 'checkbox',
++    '#title' => 'Default include all',
++    '#default_value' => $include_all ?? false,
++    '#description' => t('Recursively pull all entity reference includes, works for individual calls only'),
++  ];
+
+   $form['bundle_wrapper']['fields_wrapper']['defaults']['default_filter'] = [
+     '#type' => 'textarea',
+@@ -128,6 +139,12 @@ function jsonapi_defaults_form_jsonapi_resource_config_form_builder($entity_type
+     $config_resource->unsetThirdPartySetting('jsonapi_defaults', 'default_include');
+   }
+
++  if ($include_all = $form_state->getValue('default_include_all')) {
++    $config_resource->setThirdPartySetting('jsonapi_defaults', 'default_include_all', $include_all);
++  } else {
++    $config_resource->unsetThirdPartySetting('jsonapi_defaults', 'default_include_all');
++  }
++
+   if ($page_limit = $form_state->getValue('page_limit')) {
+     $config_resource->setThirdPartySetting('jsonapi_defaults', 'page_limit', $page_limit);
+   }
+diff --git a/modules/jsonapi_defaults/src/Controller/EntityResource.php b/modules/jsonapi_defaults/src/Controller/EntityResource.php
+index a5293ba..457cec3 100644
+--- a/modules/jsonapi_defaults/src/Controller/EntityResource.php
++++ b/modules/jsonapi_defaults/src/Controller/EntityResource.php
+@@ -3,7 +3,9 @@
+ namespace Drupal\jsonapi_defaults\Controller;
+
+ use Drupal\Component\Serialization\Json;
++use Drupal\Core\Entity\EntityInterface;
+ use Drupal\jsonapi\Controller\EntityResource as JsonApiEntityResourse;
++use Drupal\jsonapi\Exception\EntityAccessDeniedHttpException;
+ use Drupal\jsonapi\Query\OffsetPage;
+ use Drupal\jsonapi\ResourceType\ResourceType;
+ use Drupal\jsonapi\Routing\Routes;
+@@ -16,6 +18,47 @@ use Symfony\Component\HttpFoundation\Request;
+  */
+ class EntityResource extends JsonApiEntityResourse {
+
++  /**
++   * {@inheritdoc}
++   */
++  public function getIndividual(EntityInterface $entity, Request $request) {
++    $resource_type = $request->get(Routes::RESOURCE_TYPE_KEY);
++
++    if (
++      !$resource_type || !($resource_type instanceof ConfigurableResourceType)
++      || $request->get('_on_relationship')
++    ) {
++      try {
++        $resource_type = static::correctResourceTypeOnRelated($request->get('related'), $resource_type);
++      } catch (\LengthException $e) {
++        watchdog_exception('jsonapi_defaults', $e);
++        return parent::getIndividual($entity, $request);
++      }
++    }
++
++    if (!$resource_type instanceof ConfigurableResourceType) {
++      return parent::getIndividual($entity, $request);
++    }
++    $resource_config = $resource_type->getJsonapiResourceConfig();
++    if (!$resource_config instanceof JsonapiResourceConfig) {
++      return parent::getIndividual($entity, $request);
++    }
++    $default_include_all = $resource_config->getThirdPartySetting(
++      'jsonapi_defaults',
++      'default_include_all',
++      false
++    );
++    if (!$default_include_all || $request->query->get('include') !== NULL) {
++      return parent::getIndividual($entity, $request);
++    }
++
++    $includes = $this->recursiveIncludes($entity);
++
++    $request->query->set('include', implode(',', $includes));
++
++    return parent::getIndividual($entity, $request);
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+@@ -236,4 +279,58 @@ class EntityResource extends JsonApiEntityResourse {
+     }
+   }
+
++  /**
++   * Loops down through all the Entity References to build a full list of includes
++   *
++   * @param \Drupal\Core\Entity\EntityInterface $entity
++   *   The loaded entity.
++   *
++   * @return array
++   */
++  private function recursiveIncludes($entity) {
++    $includes = [];
++
++    $resource_object = $this->entityAccessChecker->getAccessCheckedResourceObject($entity);
++    if ($resource_object instanceof EntityAccessDeniedHttpException) {
++      return $includes;
++    }
++
++    $resource_type = $resource_object->getResourceType();
++    $fields = $resource_object->getFields();
++
++    foreach ($fields as $field) {
++      if (!is_object($field)) {
++        continue;
++      }
++
++      $name = $field->getName();
++
++      $relatable_resource_types = $resource_type->getRelatableResourceTypesByField($name);
++      if (empty($relatable_resource_types)) {
++        continue;
++      }
++
++      $includes[] = $name;
++
++      $type = $field->getFieldDefinition()->getType();
++      if ($type != 'entity_reference' && $type != 'entity_reference_revisions') {
++        continue;
++      }
++
++      foreach ($entity->get($name) as $sub_field) {
++        $target = $sub_field->get('entity')->getTarget();
++
++        if(!$target) {
++          continue;
++        }
++
++        $sub_includes = $this->recursiveIncludes($target->getValue());
++        foreach ($sub_includes as $sub_include) {
++          $includes[] = $name . '.' . $sub_include;
++        }
++      }
++    }
++
++    return $includes;
++  }
+ }
